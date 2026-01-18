@@ -21,19 +21,11 @@ class CameraService: NSObject, ObservableObject {
     private var lastProcessingTime = Date()
     private let processingInterval: TimeInterval = 1.0
     
-    private lazy var classificationRequest: VNCoreMLRequest? = {
-        do {
-            let config = MLModelConfiguration()
-            let model = try VNCoreMLModel(for: MobileNetV2(configuration: config).model)
-            let request = VNCoreMLRequest(model: model) { [weak self] request, error in
-                self?.processClassifications(for: request, error: error)
-            }
-            request.imageCropAndScaleOption = .centerCrop
-            return request
-        } catch {
-            print("Failed to load ML model: \(error)")
-            return nil
+    private lazy var classificationRequest: VNClassifyImageRequest = {
+        let request = VNClassifyImageRequest { [weak self] request, error in
+            self?.processClassifications(for: request, error: error)
         }
+        return request
     }()
     
     override init() {
@@ -110,15 +102,9 @@ class CameraService: NSObject, ObservableObject {
         capturedImage = image
         
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        let request = classificationRequest
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let request = self?.classificationRequest else {
-                DispatchQueue.main.async {
-                    self?.isProcessing = false
-                }
-                return
-            }
-            
             do {
                 try handler.perform([request])
             } catch {
@@ -168,10 +154,10 @@ extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard currentTime.timeIntervalSince(lastProcessingTime) >= processingInterval else { return }
         lastProcessingTime = currentTime
         
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-              let request = classificationRequest else { return }
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
+        let request = classificationRequest
         
         do {
             try handler.perform([request])
