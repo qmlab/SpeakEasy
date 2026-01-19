@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "speakeasy-backend"
+version = "0.1.0"
+description = "Backend API for SpeakEasy iOS app"
+authors = ["SpeakEasy Team"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.128.0"}
+uvicorn = "^0.40.0"
+sqlalchemy = "^2.0.45"
+pydantic = "^2.12.5"
+python-multipart = "^0.0.21"
+aiofiles = "^25.1.0"
+levenshtein = "^0.27.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
