@@ -1,6 +1,13 @@
 from datetime import datetime
 from typing import List, Optional
+from enum import Enum
 from pydantic import BaseModel, Field
+
+
+class ImageType(str, Enum):
+    FLASHCARD = "flashcard"
+    FIND_OBJECT = "find_object"
+    THUMBNAIL = "thumbnail"
 
 
 class BoundingBoxCreate(BaseModel):
@@ -25,6 +32,7 @@ class BoundingBoxResponse(BaseModel):
 
 class ObjectImageCreate(BaseModel):
     image_url: str
+    image_type: ImageType = ImageType.FLASHCARD
     bounding_boxes: Optional[List[BoundingBoxCreate]] = None
 
 
@@ -32,6 +40,7 @@ class ObjectImageResponse(BaseModel):
     id: str
     object_id: str
     image_url: str
+    image_type: str
     created_at: datetime
     bounding_boxes: List[BoundingBoxResponse] = []
 

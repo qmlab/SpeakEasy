@@ -1,8 +1,15 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime, ForeignKey, Float
+from sqlalchemy import Column, String, DateTime, ForeignKey, Float, Enum
 from sqlalchemy.orm import relationship
+import enum
 from app.database import Base
+
+
+class ImageType(str, enum.Enum):
+    FLASHCARD = "flashcard"
+    FIND_OBJECT = "find_object"
+    THUMBNAIL = "thumbnail"
 
 
 class Object(Base):
@@ -23,6 +30,7 @@ class ObjectImage(Base):
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     object_id = Column(String, ForeignKey("objects.id"), nullable=False)
     image_url = Column(String, nullable=False)
+    image_type = Column(String, nullable=False, default=ImageType.FLASHCARD.value)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     object = relationship("Object", back_populates="images")

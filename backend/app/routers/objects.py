@@ -1,5 +1,5 @@
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from typing import List, Optional
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Query
 from sqlalchemy.orm import Session
 import os
 import uuid
@@ -7,9 +7,10 @@ import aiofiles
 
 from app.database import get_db
 from app.models import Object, ObjectImage, BoundingBox
+from app.models.object import ImageType as ModelImageType
 from app.schemas.object import (
     ObjectCreate, ObjectResponse, ObjectImageCreate, ObjectImageResponse,
-    BoundingBoxCreate, BoundingBoxResponse, ObjectListResponse
+    BoundingBoxCreate, BoundingBoxResponse, ObjectListResponse, ImageType
 )
 
 router = APIRouter(prefix="/objects", tags=["objects"])
@@ -91,7 +92,11 @@ def add_object_image(
     if not obj:
         raise HTTPException(status_code=404, detail="Object not found")
     
-    db_image = ObjectImage(object_id=object_id, image_url=image_data.image_url)
+    db_image = ObjectImage(
+        object_id=object_id,
+        image_url=image_data.image_url,
+        image_type=image_data.image_type.value
+    )
     db.add(db_image)
     db.commit()
     db.refresh(db_image)
@@ -112,10 +117,29 @@ def add_object_image(
     return db_image
 
 
+@router.get("/{object_id}/images", response_model=List[ObjectImageResponse])
+def get_object_images(
+    object_id: str,
+    image_type: Optional[ImageType] = Query(None, description="Filter by image type"),
+    db: Session = Depends(get_db)
+):
+    obj = db.query(Object).filter(Object.id == object_id).first()
+    if not obj:
+        raise HTTPException(status_code=404, detail="Object not found")
+    
+    query = db.query(ObjectImage).filter(ObjectImage.object_id == object_id)
+    
+    if image_type:
+        query = query.filter(ObjectImage.image_type == image_type.value)
+    
+    return query.all()
+
+
 @router.post("/{object_id}/images/upload", response_model=ObjectImageResponse)
 async def upload_object_image(
     object_id: str,
     file: UploadFile = File(...),
+    image_type: ImageType = Query(ImageType.FLASHCARD, description="Type of image"),
     db: Session = Depends(get_db)
 ):
     obj = db.query(Object).filter(Object.id == object_id).first()
@@ -132,7 +156,11 @@ async def upload_object_image(
         content = await file.read()
         await f.write(content)
     
-    db_image = ObjectImage(object_id=object_id, image_url=f"/uploads/{file_name}")
+    db_image = ObjectImage(
+        object_id=object_id,
+        image_url=f"/uploads/{file_name}",
+        image_type=image_type.value
+    )
     db.add(db_image)
     db.commit()
     db.refresh(db_image)
