@@ -2,11 +2,24 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import text, inspect
 
 from app.database import engine, Base
 from app.routers import players_router, objects_router, game_router
 
 Base.metadata.create_all(bind=engine)
+
+def run_migrations():
+    inspector = inspect(engine)
+    if 'object_images' in inspector.get_table_names():
+        columns = [col['name'] for col in inspector.get_columns('object_images')]
+        if 'image_type' not in columns:
+            with engine.connect() as conn:
+                conn.execute(text("ALTER TABLE object_images ADD COLUMN image_type VARCHAR(20) DEFAULT 'flashcard'"))
+                conn.commit()
+                print("Migration: Added image_type column to object_images table")
+
+run_migrations()
 
 app = FastAPI(
     title="SpeakEasy API",
