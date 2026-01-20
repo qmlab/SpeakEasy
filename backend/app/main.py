@@ -5,8 +5,14 @@ from fastapi.staticfiles import StaticFiles
 
 from app.database import engine, Base
 from app.routers import players_router, objects_router, game_router
+from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
+
+if cloudinary_service.configure_from_env():
+    print("Cloudinary configured successfully")
+else:
+    print("Cloudinary not configured - image uploads will use local storage")
 
 app = FastAPI(
     title="SpeakEasy API",

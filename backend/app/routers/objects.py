@@ -12,6 +12,7 @@ from app.schemas.object import (
     ObjectCreate, ObjectResponse, ObjectImageCreate, ObjectImageResponse,
     BoundingBoxCreate, BoundingBoxResponse, ObjectListResponse, ImageType
 )
+from app.services import cloudinary_service
 
 router = APIRouter(prefix="/objects", tags=["objects"])
 
@@ -146,19 +147,35 @@ async def upload_object_image(
     if not obj:
         raise HTTPException(status_code=404, detail="Object not found")
     
-    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    content = await file.read()
     
-    file_ext = os.path.splitext(file.filename)[1] if file.filename else ".jpg"
-    file_name = f"{uuid.uuid4()}{file_ext}"
-    file_path = os.path.join(UPLOAD_DIR, file_name)
-    
-    async with aiofiles.open(file_path, "wb") as f:
-        content = await file.read()
-        await f.write(content)
+    if cloudinary_service.is_configured:
+        folder = f"speakeasy/{obj.category}/{image_type.value}"
+        public_id = f"{obj.name.lower().replace(' ', '_')}_{uuid.uuid4().hex[:8]}"
+        
+        try:
+            result = cloudinary_service.upload_image(
+                file_data=content,
+                folder=folder,
+                public_id=public_id
+            )
+            image_url = result["url"]
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Failed to upload to Cloudinary: {str(e)}")
+    else:
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        file_ext = os.path.splitext(file.filename)[1] if file.filename else ".jpg"
+        file_name = f"{uuid.uuid4()}{file_ext}"
+        file_path = os.path.join(UPLOAD_DIR, file_name)
+        
+        async with aiofiles.open(file_path, "wb") as f:
+            await f.write(content)
+        
+        image_url = f"/uploads/{file_name}"
     
     db_image = ObjectImage(
         object_id=object_id,
-        image_url=f"/uploads/{file_name}",
+        image_url=image_url,
         image_type=image_type.value
     )
     db.add(db_image)
