@@ -102,9 +102,14 @@ struct ObjectCard: View {
                     .fill(object.color.opacity(0.2))
                     .frame(width: 80, height: 80)
                 
-                Image(systemName: iconForObject(object))
-                    .font(.system(size: 35))
-                    .foregroundColor(object.color)
+                RemoteImageView(
+                    objectName: object.name,
+                    imageType: .thumbnail,
+                    fallbackIcon: iconForObject(object),
+                    iconColor: object.color,
+                    size: 70
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 15))
                 
                 if progressManager.isLearned(object) {
                     VStack {

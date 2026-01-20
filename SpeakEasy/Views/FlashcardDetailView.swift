@@ -63,18 +63,23 @@ struct FlashcardDetailView: View {
             ZStack {
                 Circle()
                     .fill(object.color.opacity(0.2))
-                    .frame(width: 200, height: 200)
+                    .frame(width: 220, height: 220)
                     .scaleEffect(isAnimating ? 1.1 : 1.0)
                     .animation(
                         Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true),
                         value: isAnimating
                     )
                 
-                Image(systemName: iconForObject(object))
-                    .font(.system(size: 100))
-                    .foregroundColor(object.color)
-                    .scaleEffect(speechService.isSpeaking ? 1.2 : 1.0)
-                    .animation(.spring(), value: speechService.isSpeaking)
+                RemoteImageView(
+                    objectName: object.name,
+                    imageType: .flashcard,
+                    fallbackIcon: iconForObject(object),
+                    iconColor: object.color,
+                    size: 180
+                )
+                .clipShape(Circle())
+                .scaleEffect(speechService.isSpeaking ? 1.1 : 1.0)
+                .animation(.spring(), value: speechService.isSpeaking)
             }
             .onAppear {
                 isAnimating = true
