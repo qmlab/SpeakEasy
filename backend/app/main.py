@@ -6,9 +6,14 @@ from sqlalchemy import text, inspect
 
 from app.database import engine, Base
 from app.routers import players_router, objects_router, game_router
+from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
 
+if cloudinary_service.configure_from_env():
+    print("Cloudinary configured successfully")
+else:
+    print("Cloudinary not configured - image uploads will use local storage")
 def run_migrations():
     inspector = inspect(engine)
     if 'object_images' in inspector.get_table_names():
