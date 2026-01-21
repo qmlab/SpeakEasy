@@ -338,6 +338,25 @@ struct APIFlashcardDetailView: View {
     @State private var currentRating: Double = 0.0
     @State private var showRatingResult = false
     @State private var recognizedText: String = ""
+    @State private var showHelpMode = false
+    @State private var encouragementMessage: String = ""
+    @State private var showEncouragement = false
+    
+    private let encouragementMessages = [
+        "Great try! You're doing awesome!",
+        "Keep going! You can do it!",
+        "Almost there! Try again!",
+        "You're learning so well!",
+        "Wonderful effort! Keep practicing!"
+    ]
+    
+    private let successMessages = [
+        "Amazing! You did it!",
+        "Perfect! Great job!",
+        "Wonderful! You're a star!",
+        "Excellent! So proud of you!",
+        "Fantastic! Keep it up!"
+    ]
     
     var body: some View {
         ZStack {
@@ -423,31 +442,59 @@ struct APIFlashcardDetailView: View {
             
             StarRatingView(rating: currentRating, starSize: 32, filledColor: .yellow, emptyColor: .gray.opacity(0.3))
             
-            if showRatingResult {
-                VStack(spacing: 8) {
-                    Text(String(format: "%.1f / 5.0 stars", currentRating))
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .foregroundColor(ratingColor)
+                        if showRatingResult {
+                            VStack(spacing: 8) {
+                                Text(String(format: "%.1f / 5.0 stars", currentRating))
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                                    .foregroundColor(ratingColor)
                     
-                    if !recognizedText.isEmpty {
-                        Text("You said: \"\(recognizedText)\"")
-                            .font(.system(size: 14, weight: .medium, design: .rounded))
-                            .foregroundColor(.gray)
-                    }
+                                if !recognizedText.isEmpty {
+                                    Text("You said: \"\(recognizedText)\"")
+                                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                                        .foregroundColor(.gray)
+                                }
                     
-                    Text(ratingMessage)
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(ratingColor)
-                }
-            } else if progressManager.isLearnedById(object.id) {
-                Text("You learned this!")
-                    .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .foregroundColor(.green)
-            } else {
-                Text("Tap 'Say It!' and speak the word")
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.gray)
-            }
+                                if showEncouragement {
+                                    HStack(spacing: 8) {
+                                        if currentRating >= 4.0 {
+                                            Image(systemName: "star.fill")
+                                                .foregroundColor(.yellow)
+                                                .font(.system(size: 24))
+                                        } else if showHelpMode {
+                                            Image(systemName: "hand.wave.fill")
+                                                .foregroundColor(.blue)
+                                                .font(.system(size: 24))
+                                        } else {
+                                            Image(systemName: "heart.fill")
+                                                .foregroundColor(.pink)
+                                                .font(.system(size: 24))
+                                        }
+                            
+                                        Text(encouragementMessage)
+                                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                                            .foregroundColor(currentRating >= 4.0 ? .green : (showHelpMode ? .blue : .orange))
+                                            .multilineTextAlignment(.center)
+                                    }
+                                    .padding(.top, 8)
+                                    .transition(.scale.combined(with: .opacity))
+                                }
+                    
+                                if showHelpMode && currentRating < 4.0 {
+                                    Text("Listen and repeat: \(object.name)")
+                                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.blue)
+                                        .padding(.top, 4)
+                                }
+                            }
+                        } else if progressManager.isLearnedById(object.id) {
+                            Text("You learned this!")
+                                .font(.system(size: 18, weight: .medium, design: .rounded))
+                                .foregroundColor(.green)
+                        } else {
+                            Text("Tap 'Say It!' and speak the word")
+                                .font(.system(size: 16, weight: .medium, design: .rounded))
+                                .foregroundColor(.gray)
+                        }
         }
         .padding(40)
         .background(
@@ -483,65 +530,109 @@ struct APIFlashcardDetailView: View {
         }
     }
     
-    private var actionButtons: some View {
-        VStack(spacing: 15) {
-            Button(action: {
-                if speechService.isListening {
-                    speechService.stopListening()
-                } else {
-                    speechService.speak(object.name)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        speechService.startListening(targetWord: object.name) { rating in
-                            self.currentRating = rating
-                            self.recognizedText = speechService.recognizedText
-                            self.showRatingResult = true
-                            
-                            progressManager.recordRating(id: object.id, name: object.name, rating: rating)
-                            
-                            if rating >= 4.0 {
-                                showConfetti = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    showConfetti = false
-                                }
-                            }
-                        }
-                    }
-                }
-            }) {
-                HStack(spacing: 10) {
-                    Image(systemName: speechService.isListening ? "mic.fill" : "speaker.wave.3.fill")
-                        .font(.title2)
-                    Text(speechService.isListening ? "Listening..." : "Say It!")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 40)
-                .padding(.vertical, 20)
-                .background(
-                    Capsule()
-                        .fill(speechService.isListening ? Color.red : object.color)
-                        .shadow(color: (speechService.isListening ? Color.red : object.color).opacity(0.5), radius: 10)
-                )
-            }
-            .scaleEffect(speechService.isSpeaking || speechService.isListening ? 0.95 : 1.0)
-            .animation(.spring(), value: speechService.isSpeaking)
-            .animation(.spring(), value: speechService.isListening)
-            .disabled(speechService.isSpeaking)
-            
-            if showRatingResult {
+        private var actionButtons: some View {
+            VStack(spacing: 15) {
                 Button(action: {
-                    showRatingResult = false
-                    currentRating = 0
-                    recognizedText = ""
+                    if speechService.isListening {
+                        speechService.stopListening()
+                    } else {
+                        handleSayItTapped()
+                    }
                 }) {
-                    Text("Try Again")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        .foregroundColor(object.color)
+                    HStack(spacing: 10) {
+                        Image(systemName: speechService.isListening ? "mic.fill" : "speaker.wave.3.fill")
+                            .font(.title2)
+                        Text(speechService.isListening ? "Listening..." : "Say It!")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 40)
+                    .padding(.vertical, 20)
+                    .background(
+                        Capsule()
+                            .fill(speechService.isListening ? Color.red : object.color)
+                            .shadow(color: (speechService.isListening ? Color.red : object.color).opacity(0.5), radius: 10)
+                    )
+                }
+                .scaleEffect(speechService.isSpeaking || speechService.isListening ? 0.95 : 1.0)
+                .animation(.spring(), value: speechService.isSpeaking)
+                .animation(.spring(), value: speechService.isListening)
+                .disabled(speechService.isSpeaking)
+            
+                if showRatingResult {
+                    Button(action: {
+                        showRatingResult = false
+                        showEncouragement = false
+                        showHelpMode = false
+                        currentRating = 0
+                        recognizedText = ""
+                    }) {
+                        Text("Try Again")
+                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .foregroundColor(object.color)
+                    }
                 }
             }
         }
-    }
+    
+        private func handleSayItTapped() {
+            speechService.speak(object.name)
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                speechService.startListening(targetWord: object.name) { rating in
+                    self.currentRating = rating
+                    self.recognizedText = speechService.recognizedText
+                    self.showRatingResult = true
+                
+                    progressManager.recordRating(id: object.id, name: object.name, rating: rating)
+                
+                    if rating >= 4.0 {
+                        handleSuccess()
+                    } else {
+                        handleFailedAttempt()
+                    }
+                }
+            }
+        }
+    
+        private func handleSuccess() {
+            showConfetti = true
+            showHelpMode = false
+            let message = successMessages.randomElement() ?? "Great job!"
+            encouragementMessage = message
+            showEncouragement = true
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                speechService.speak(message)
+            }
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                showConfetti = false
+            }
+        }
+    
+        private func handleFailedAttempt() {
+            let failedAttempts = progressManager.consecutiveFailedAttemptsForId(object.id)
+        
+            if failedAttempts >= 3 {
+                showHelpMode = true
+                let helpMessage = "Let me help you. The word is \(object.name). Now you say \(object.name)."
+                encouragementMessage = "Let me help you!"
+                showEncouragement = true
+            
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    speechService.speak(helpMessage)
+                }
+            } else {
+                let message = encouragementMessages.randomElement() ?? "Keep trying!"
+                encouragementMessage = message
+                showEncouragement = true
+            
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    speechService.speak(message)
+                }
+            }
+        }
     
     private func iconForObject(_ name: String) -> String {
         switch name.lowercased() {

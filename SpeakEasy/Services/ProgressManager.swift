@@ -7,16 +7,18 @@ import Foundation
 import SwiftUI
 
 class ProgressManager: ObservableObject {
-    @Published var learnedObjectIds: Set<String> = []
-    @Published var totalStars: Int = 0
-    @Published var practiceCountById: [String: Int] = [:]
-    @Published var lastRatingById: [String: Double] = [:]
-    @Published var showCelebration = false
+        @Published var learnedObjectIds: Set<String> = []
+        @Published var totalStars: Int = 0
+        @Published var practiceCountById: [String: Int] = [:]
+        @Published var lastRatingById: [String: Double] = [:]
+        @Published var consecutiveFailedAttemptsById: [String: Int] = [:]
+        @Published var showCelebration = false
     
-    private let learnedObjectsKey = "learnedObjectIds"
-    private let totalStarsKey = "totalStars"
-    private let practiceCountKey = "practiceCountById"
-    private let lastRatingKey = "lastRatingById"
+        private let learnedObjectsKey = "learnedObjectIds"
+        private let totalStarsKey = "totalStars"
+        private let practiceCountKey = "practiceCountById"
+        private let lastRatingKey = "lastRatingById"
+        private let consecutiveFailedAttemptsKey = "consecutiveFailedAttemptsById"
     
     init() {
         loadProgress()
@@ -35,17 +37,32 @@ class ProgressManager: ObservableObject {
         }
     }
     
-    func recordRating(id: String, name: String, rating: Double) {
-        lastRatingById[id] = rating
-        let currentCount = practiceCountById[id] ?? 0
-        practiceCountById[id] = currentCount + 1
+        func recordRating(id: String, name: String, rating: Double) {
+            lastRatingById[id] = rating
+            let currentCount = practiceCountById[id] ?? 0
+            practiceCountById[id] = currentCount + 1
         
-        if rating >= 4.0 && !learnedObjectIds.contains(id) {
-            markAsLearnedById(id)
+            if rating >= 4.0 {
+                consecutiveFailedAttemptsById[id] = 0
+                if !learnedObjectIds.contains(id) {
+                    markAsLearnedById(id)
+                }
+            } else {
+                let currentFailed = consecutiveFailedAttemptsById[id] ?? 0
+                consecutiveFailedAttemptsById[id] = currentFailed + 1
+            }
+        
+            saveProgress()
         }
-        
-        saveProgress()
-    }
+    
+        func consecutiveFailedAttemptsForId(_ objectId: String) -> Int {
+            consecutiveFailedAttemptsById[objectId] ?? 0
+        }
+    
+        func resetConsecutiveFailedAttempts(id: String) {
+            consecutiveFailedAttemptsById[id] = 0
+            saveProgress()
+        }
     
     func lastRatingForId(_ objectId: String) -> Double {
         lastRatingById[objectId] ?? 0.0
@@ -79,37 +96,43 @@ class ProgressManager: ObservableObject {
         return totalObjectCount == 0 ? 0 : Double(learnedObjectIds.count) / Double(totalObjectCount)
     }
     
-    private func saveProgress() {
-        let learnedArray = Array(learnedObjectIds)
-        UserDefaults.standard.set(learnedArray, forKey: learnedObjectsKey)
-        UserDefaults.standard.set(totalStars, forKey: totalStarsKey)
-        UserDefaults.standard.set(practiceCountById, forKey: practiceCountKey)
-        UserDefaults.standard.set(lastRatingById, forKey: lastRatingKey)
-    }
+        private func saveProgress() {
+            let learnedArray = Array(learnedObjectIds)
+            UserDefaults.standard.set(learnedArray, forKey: learnedObjectsKey)
+            UserDefaults.standard.set(totalStars, forKey: totalStarsKey)
+            UserDefaults.standard.set(practiceCountById, forKey: practiceCountKey)
+            UserDefaults.standard.set(lastRatingById, forKey: lastRatingKey)
+            UserDefaults.standard.set(consecutiveFailedAttemptsById, forKey: consecutiveFailedAttemptsKey)
+        }
     
-    private func loadProgress() {
-        if let learnedArray = UserDefaults.standard.stringArray(forKey: learnedObjectsKey) {
-            learnedObjectIds = Set(learnedArray)
-        }
+        private func loadProgress() {
+            if let learnedArray = UserDefaults.standard.stringArray(forKey: learnedObjectsKey) {
+                learnedObjectIds = Set(learnedArray)
+            }
         
-        totalStars = UserDefaults.standard.integer(forKey: totalStarsKey)
+            totalStars = UserDefaults.standard.integer(forKey: totalStarsKey)
         
-        if let practiceDict = UserDefaults.standard.dictionary(forKey: practiceCountKey) as? [String: Int] {
-            practiceCountById = practiceDict
-        }
+            if let practiceDict = UserDefaults.standard.dictionary(forKey: practiceCountKey) as? [String: Int] {
+                practiceCountById = practiceDict
+            }
         
-        if let ratingDict = UserDefaults.standard.dictionary(forKey: lastRatingKey) as? [String: Double] {
-            lastRatingById = ratingDict
+            if let ratingDict = UserDefaults.standard.dictionary(forKey: lastRatingKey) as? [String: Double] {
+                lastRatingById = ratingDict
+            }
+        
+            if let failedDict = UserDefaults.standard.dictionary(forKey: consecutiveFailedAttemptsKey) as? [String: Int] {
+                consecutiveFailedAttemptsById = failedDict
+            }
         }
-    }
     
-    func resetProgress() {
-        learnedObjectIds.removeAll()
-        totalStars = 0
-        practiceCountById.removeAll()
-        lastRatingById.removeAll()
-        saveProgress()
-    }
+        func resetProgress() {
+            learnedObjectIds.removeAll()
+            totalStars = 0
+            practiceCountById.removeAll()
+            lastRatingById.removeAll()
+            consecutiveFailedAttemptsById.removeAll()
+            saveProgress()
+        }
     
     func markAsLearned(_ object: ObjectItem) {
         markAsLearnedById(object.id.uuidString)
