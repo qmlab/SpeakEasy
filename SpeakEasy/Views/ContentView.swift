@@ -32,7 +32,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             
-            ProgressView()
+            ProgressTrackerView()
                 .tabItem {
                     Image(systemName: "star.fill")
                     Text("Progress")

@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct ProgressView: View {
+struct ProgressTrackerView: View {
     @EnvironmentObject var progressManager: ProgressManager
     @StateObject private var speechService = SpeechService()
     @State private var allObjects: [ObjectListResponse] = []
@@ -287,9 +287,9 @@ struct APILearnedObjectBadge: View {
     }
 }
 
-struct ProgressView_Previews: PreviewProvider {
+struct ProgressTrackerView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgressView()
+        ProgressTrackerView()
             .environmentObject(ProgressManager())
     }
 }
