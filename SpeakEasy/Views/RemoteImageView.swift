@@ -15,7 +15,10 @@ struct RemoteImageView: View {
     private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
     
     private static let knownObjects: Set<String> = [
-        "apple", "ball", "banana", "car", "cat", "chair", "dog", "hand", "shirt", "teddy_bear", "tree"
+        "apple", "ball", "banana", "bicycle", "boat", "car", "cat", "chair", "dog", "doll",
+        "ear", "elephant", "eye", "flower", "foot", "gloves", "grapes", "hand", "hat", "lamp",
+        "mirror", "motorcycle", "mushroom", "orange", "puzzle", "rabbit", "rock", "shirt",
+        "socks", "table", "teddy_bear", "tomato", "tree", "yo_yo"
     ]
     
     var body: some View {
