@@ -69,6 +69,8 @@ class ObjectListResponse(BaseModel):
     name: str
     category: str
     image_count: int
+    thumbnail_url: Optional[str] = None
+    flashcard_url: Optional[str] = None
 
     class Config:
         from_attributes = True

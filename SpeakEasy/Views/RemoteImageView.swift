@@ -11,11 +11,12 @@ struct RemoteImageView: View {
     let fallbackIcon: String
     let iconColor: Color
     let size: CGFloat
+    var directURL: String? = nil
     
     private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
     
     var body: some View {
-        AsyncImage(url: directCloudinaryURL) { phase in
+        AsyncImage(url: imageURL) { phase in
             switch phase {
             case .empty:
                 ProgressView()
@@ -34,7 +35,14 @@ struct RemoteImageView: View {
         }
     }
     
-    private var directCloudinaryURL: URL? {
+    private var imageURL: URL? {
+        if let directURL = directURL, let url = URL(string: directURL) {
+            return url
+        }
+        return constructedCloudinaryURL
+    }
+    
+    private var constructedCloudinaryURL: URL? {
         let normalizedName = objectName.lowercased().replacingOccurrences(of: " ", with: "_")
         
         let folder: String

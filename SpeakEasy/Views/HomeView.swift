@@ -8,6 +8,9 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var progressManager: ProgressManager
     @StateObject private var speechService = SpeechService()
+    @State private var featuredObjects: [ObjectListResponse] = []
+    @State private var totalObjectCount = 0
+    @State private var isLoading = true
     
     var body: some View {
         NavigationView {
@@ -32,6 +35,24 @@ struct HomeView: View {
                 .ignoresSafeArea()
             )
             .navigationTitle("SpeakEasy")
+            .task {
+                await loadFeaturedObjects()
+            }
+        }
+    }
+    
+    private func loadFeaturedObjects() async {
+        do {
+            let objects = try await APIService.shared.getObjects()
+            await MainActor.run {
+                self.featuredObjects = Array(objects.prefix(8))
+                self.totalObjectCount = objects.count
+                self.isLoading = false
+            }
+        } catch {
+            await MainActor.run {
+                self.isLoading = false
+            }
         }
     }
     
@@ -57,7 +78,8 @@ struct HomeView: View {
     }
     
     private var progressSection: some View {
-        VStack(spacing: 15) {
+        let progress = progressManager.overallProgressById(totalObjectCount: totalObjectCount)
+        return VStack(spacing: 15) {
             HStack {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
@@ -69,7 +91,7 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                Text("\(Int(progressManager.overallProgress() * 100))%")
+                Text("\(Int(progress * 100))%")
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
                     .foregroundColor(.green)
             }
@@ -88,8 +110,8 @@ struct HomeView: View {
                                 endPoint: .trailing
                             )
                         )
-                        .frame(width: geometry.size.width * progressManager.overallProgress(), height: 20)
-                        .animation(.spring(), value: progressManager.overallProgress())
+                        .frame(width: geometry.size.width * progress, height: 20)
+                        .animation(.spring(), value: progress)
                 }
             }
             .frame(height: 20)
@@ -136,10 +158,24 @@ struct HomeView: View {
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundColor(.purple)
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    ForEach(ObjectData.allObjects.prefix(8)) { object in
-                        FeaturedObjectCard(object: object, speechService: speechService)
+            if isLoading {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                .padding()
+            } else if featuredObjects.isEmpty {
+                Text("No objects available")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(featuredObjects) { object in
+                            APIFeaturedObjectCard(object: object, speechService: speechService)
+                        }
                     }
                 }
             }
@@ -228,6 +264,99 @@ struct FeaturedObjectCard: View {
         case "ball": return "circle.fill"
         case "book": return "book.fill"
         case "cup": return "cup.and.saucer.fill"
+        default: return "photo.fill"
+        }
+    }
+}
+
+struct APIFeaturedObjectCard: View {
+    let object: ObjectListResponse
+    @ObservedObject var speechService: SpeechService
+    @EnvironmentObject var progressManager: ProgressManager
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            ZStack {
+                Circle()
+                    .fill(object.color.opacity(0.2))
+                    .frame(width: 80, height: 80)
+                
+                RemoteImageView(
+                    objectName: object.name,
+                    imageType: .thumbnail,
+                    fallbackIcon: iconForObject(object.name),
+                    iconColor: object.color,
+                    size: 60,
+                    directURL: object.thumbnailUrl
+                )
+                .clipShape(Circle())
+            }
+            
+            Text(object.name)
+                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                .foregroundColor(.primary)
+            
+            if progressManager.isLearnedById(object.id) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.white)
+                .shadow(color: .gray.opacity(0.2), radius: 5)
+        )
+        .onTapGesture {
+            speechService.speak(object.name)
+            progressManager.incrementPracticeForObject(id: object.id, name: object.name)
+        }
+    }
+    
+    private func iconForObject(_ name: String) -> String {
+        switch name.lowercased() {
+        case "dog": return "dog.fill"
+        case "cat": return "cat.fill"
+        case "bird": return "bird.fill"
+        case "fish": return "fish.fill"
+        case "rabbit": return "hare.fill"
+        case "elephant": return "tortoise.fill"
+        case "apple": return "apple.logo"
+        case "banana": return "leaf.fill"
+        case "orange": return "circle.fill"
+        case "grapes": return "circle.grid.2x2.fill"
+        case "mushroom": return "leaf.fill"
+        case "tomato": return "circle.fill"
+        case "car": return "car.fill"
+        case "bicycle": return "bicycle"
+        case "motorcycle": return "bicycle"
+        case "boat": return "ferry.fill"
+        case "sun": return "sun.max.fill"
+        case "moon": return "moon.fill"
+        case "star": return "star.fill"
+        case "tree": return "tree.fill"
+        case "flower": return "camera.macro"
+        case "rock": return "mountain.2.fill"
+        case "house": return "house.fill"
+        case "ball": return "circle.fill"
+        case "teddy bear": return "teddybear.fill"
+        case "doll": return "person.fill"
+        case "puzzle": return "puzzlepiece.fill"
+        case "yo yo": return "circle.fill"
+        case "book": return "book.fill"
+        case "chair": return "chair.fill"
+        case "table": return "rectangle.fill"
+        case "lamp": return "lamp.desk.fill"
+        case "mirror": return "rectangle.portrait.fill"
+        case "cup": return "cup.and.saucer.fill"
+        case "hand": return "hand.raised.fill"
+        case "foot": return "figure.walk"
+        case "eye": return "eye.fill"
+        case "ear": return "ear.fill"
+        case "shirt": return "tshirt.fill"
+        case "hat": return "hat.widebrim.fill"
+        case "socks": return "shoe.fill"
+        case "gloves": return "hand.raised.fill"
         default: return "photo.fill"
         }
     }

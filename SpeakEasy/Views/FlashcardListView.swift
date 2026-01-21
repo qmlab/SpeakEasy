@@ -159,7 +159,8 @@ struct APIObjectCard: View {
                     imageType: .thumbnail,
                     fallbackIcon: iconForObject(object.name),
                     iconColor: object.color,
-                    size: 70
+                    size: 70,
+                    directURL: object.thumbnailUrl
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 

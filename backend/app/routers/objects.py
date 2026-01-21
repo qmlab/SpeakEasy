@@ -48,11 +48,21 @@ def list_objects(
     
     result = []
     for obj in objects:
+        thumbnail_url = None
+        flashcard_url = None
+        for img in obj.images:
+            if img.image_type == "thumbnail" and not thumbnail_url:
+                thumbnail_url = img.image_url
+            elif img.image_type == "flashcard" and not flashcard_url:
+                flashcard_url = img.image_url
+        
         result.append(ObjectListResponse(
             id=obj.id,
             name=obj.name,
             category=obj.category,
-            image_count=len(obj.images)
+            image_count=len(obj.images),
+            thumbnail_url=thumbnail_url,
+            flashcard_url=flashcard_url
         ))
     
     return result
