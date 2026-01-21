@@ -14,43 +14,28 @@ struct RemoteImageView: View {
     
     private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
     
-    private static let knownObjects: Set<String> = [
-        "apple", "ball", "banana", "bicycle", "boat", "car", "cat", "chair", "dog", "doll",
-        "ear", "elephant", "eye", "flower", "foot", "gloves", "grapes", "hand", "hat", "lamp",
-        "mirror", "motorcycle", "mushroom", "orange", "puzzle", "rabbit", "rock", "shirt",
-        "socks", "table", "teddy_bear", "tomato", "tree", "yo_yo"
-    ]
-    
     var body: some View {
-        if let url = directCloudinaryURL {
-            AsyncImage(url: url) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: size, height: size)
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size, height: size)
-                        .clipped()
-                case .failure:
-                    fallbackImage
-                @unknown default:
-                    fallbackImage
-                }
+        AsyncImage(url: directCloudinaryURL) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+                    .frame(width: size, height: size)
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: size, height: size)
+                    .clipped()
+            case .failure:
+                fallbackImage
+            @unknown default:
+                fallbackImage
             }
-        } else {
-            fallbackImage
         }
     }
     
     private var directCloudinaryURL: URL? {
         let normalizedName = objectName.lowercased().replacingOccurrences(of: " ", with: "_")
-        
-        guard Self.knownObjects.contains(normalizedName) else {
-            return nil
-        }
         
         let folder: String
         switch imageType {

@@ -7,22 +7,22 @@ import Foundation
 import SwiftUI
 
 class ProgressManager: ObservableObject {
-    @Published var learnedObjects: Set<UUID> = []
+    @Published var learnedObjectIds: Set<String> = []
     @Published var totalStars: Int = 0
-    @Published var practiceCount: [UUID: Int] = [:]
+    @Published var practiceCountById: [String: Int] = [:]
     @Published var showCelebration = false
     
-    private let learnedObjectsKey = "learnedObjects"
+    private let learnedObjectsKey = "learnedObjectIds"
     private let totalStarsKey = "totalStars"
-    private let practiceCountKey = "practiceCount"
+    private let practiceCountKey = "practiceCountById"
     
     init() {
         loadProgress()
     }
     
-    func markAsLearned(_ object: ObjectItem) {
-        if !learnedObjects.contains(object.id) {
-            learnedObjects.insert(object.id)
+    func markAsLearnedById(_ objectId: String) {
+        if !learnedObjectIds.contains(objectId) {
+            learnedObjectIds.insert(objectId)
             totalStars += 1
             showCelebration = true
             saveProgress()
@@ -33,67 +33,84 @@ class ProgressManager: ObservableObject {
         }
     }
     
-    func incrementPractice(for object: ObjectItem) {
-        let currentCount = practiceCount[object.id] ?? 0
-        practiceCount[object.id] = currentCount + 1
+    func incrementPracticeForObject(id: String, name: String) {
+        let currentCount = practiceCountById[id] ?? 0
+        practiceCountById[id] = currentCount + 1
         
-        if currentCount + 1 >= 3 && !learnedObjects.contains(object.id) {
-            markAsLearned(object)
+        if currentCount + 1 >= 3 && !learnedObjectIds.contains(id) {
+            markAsLearnedById(id)
         }
         
         saveProgress()
     }
     
-    func isLearned(_ object: ObjectItem) -> Bool {
-        learnedObjects.contains(object.id)
+    func isLearnedById(_ objectId: String) -> Bool {
+        learnedObjectIds.contains(objectId)
     }
     
-    func practiceCountFor(_ object: ObjectItem) -> Int {
-        practiceCount[object.id] ?? 0
+    func practiceCountForId(_ objectId: String) -> Int {
+        practiceCountById[objectId] ?? 0
     }
     
-    func progressForCategory(_ category: ObjectCategory) -> Double {
-        let categoryObjects = ObjectData.objects(for: category)
-        let learnedCount = categoryObjects.filter { learnedObjects.contains($0.id) }.count
-        return categoryObjects.isEmpty ? 0 : Double(learnedCount) / Double(categoryObjects.count)
+    func progressForCategoryById(_ category: ObjectCategory, objectIds: [String]) -> Double {
+        let learnedCount = objectIds.filter { learnedObjectIds.contains($0) }.count
+        return objectIds.isEmpty ? 0 : Double(learnedCount) / Double(objectIds.count)
     }
     
-    func overallProgress() -> Double {
-        let totalObjects = ObjectData.allObjects.count
-        return totalObjects == 0 ? 0 : Double(learnedObjects.count) / Double(totalObjects)
+    func overallProgressById(totalObjectCount: Int) -> Double {
+        return totalObjectCount == 0 ? 0 : Double(learnedObjectIds.count) / Double(totalObjectCount)
     }
     
     private func saveProgress() {
-        let learnedArray = learnedObjects.map { $0.uuidString }
+        let learnedArray = Array(learnedObjectIds)
         UserDefaults.standard.set(learnedArray, forKey: learnedObjectsKey)
         UserDefaults.standard.set(totalStars, forKey: totalStarsKey)
-        
-        let practiceDict = practiceCount.reduce(into: [String: Int]()) { result, pair in
-            result[pair.key.uuidString] = pair.value
-        }
-        UserDefaults.standard.set(practiceDict, forKey: practiceCountKey)
+        UserDefaults.standard.set(practiceCountById, forKey: practiceCountKey)
     }
     
     private func loadProgress() {
         if let learnedArray = UserDefaults.standard.stringArray(forKey: learnedObjectsKey) {
-            learnedObjects = Set(learnedArray.compactMap { UUID(uuidString: $0) })
+            learnedObjectIds = Set(learnedArray)
         }
         
         totalStars = UserDefaults.standard.integer(forKey: totalStarsKey)
         
         if let practiceDict = UserDefaults.standard.dictionary(forKey: practiceCountKey) as? [String: Int] {
-            practiceCount = practiceDict.reduce(into: [UUID: Int]()) { result, pair in
-                if let uuid = UUID(uuidString: pair.key) {
-                    result[uuid] = pair.value
-                }
-            }
+            practiceCountById = practiceDict
         }
     }
     
     func resetProgress() {
-        learnedObjects.removeAll()
+        learnedObjectIds.removeAll()
         totalStars = 0
-        practiceCount.removeAll()
+        practiceCountById.removeAll()
         saveProgress()
+    }
+    
+    func markAsLearned(_ object: ObjectItem) {
+        markAsLearnedById(object.id.uuidString)
+    }
+    
+    func incrementPractice(for object: ObjectItem) {
+        incrementPracticeForObject(id: object.id.uuidString, name: object.name)
+    }
+    
+    func isLearned(_ object: ObjectItem) -> Bool {
+        isLearnedById(object.id.uuidString)
+    }
+    
+    func practiceCountFor(_ object: ObjectItem) -> Int {
+        practiceCountForId(object.id.uuidString)
+    }
+    
+    func progressForCategory(_ category: ObjectCategory) -> Double {
+        let categoryObjects = ObjectData.objects(for: category)
+        let objectIds = categoryObjects.map { $0.id.uuidString }
+        return progressForCategoryById(category, objectIds: objectIds)
+    }
+    
+    func overallProgress() -> Double {
+        let totalObjects = ObjectData.allObjects.count
+        return overallProgressById(totalObjectCount: totalObjects)
     }
 }

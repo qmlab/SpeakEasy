@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class APIService: ObservableObject {
     static let shared = APIService()
@@ -121,6 +122,12 @@ class APIService: ObservableObject {
         let url = URL(string: urlString)!
         let (data, _) = try await URLSession.shared.data(from: url)
         return try JSONDecoder().decode([ObjectListResponse].self, from: data)
+    }
+    
+    func getCategories() async throws -> [String] {
+        let url = URL(string: "\(baseURL)/objects/categories")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try JSONDecoder().decode([String].self, from: data)
     }
     
     func getObject(objectId: String) async throws -> ObjectDetailResponse {
@@ -308,6 +315,18 @@ struct ObjectListResponse: Codable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case id, name, category
         case imageCount = "image_count"
+    }
+    
+    var objectCategory: ObjectCategory? {
+        ObjectCategory(rawValue: category)
+    }
+    
+    var color: Color {
+        objectCategory?.color ?? .gray
+    }
+    
+    var icon: String {
+        objectCategory?.icon ?? "photo.fill"
     }
 }
 
