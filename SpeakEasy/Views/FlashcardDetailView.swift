@@ -355,7 +355,8 @@ struct APIFlashcardDetailView: View {
                     imageType: .flashcard,
                     fallbackIcon: iconForObject(object.name),
                     iconColor: object.color,
-                    size: 180
+                    size: 180,
+                    directURL: object.flashcardUrl
                 )
                 .clipShape(Circle())
                 .scaleEffect(speechService.isSpeaking ? 1.1 : 1.0)

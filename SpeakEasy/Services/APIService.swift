@@ -311,10 +311,14 @@ struct ObjectListResponse: Codable, Identifiable {
     let name: String
     let category: String
     let imageCount: Int
+    let thumbnailUrl: String?
+    let flashcardUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case id, name, category
         case imageCount = "image_count"
+        case thumbnailUrl = "thumbnail_url"
+        case flashcardUrl = "flashcard_url"
     }
     
     var objectCategory: ObjectCategory? {
