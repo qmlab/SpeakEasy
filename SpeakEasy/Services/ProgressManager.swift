@@ -86,4 +86,31 @@ class ProgressManager: ObservableObject {
         practiceCountById.removeAll()
         saveProgress()
     }
+    
+    func markAsLearned(_ object: ObjectItem) {
+        markAsLearnedById(object.id.uuidString)
+    }
+    
+    func incrementPractice(for object: ObjectItem) {
+        incrementPracticeForObject(id: object.id.uuidString, name: object.name)
+    }
+    
+    func isLearned(_ object: ObjectItem) -> Bool {
+        isLearnedById(object.id.uuidString)
+    }
+    
+    func practiceCountFor(_ object: ObjectItem) -> Int {
+        practiceCountForId(object.id.uuidString)
+    }
+    
+    func progressForCategory(_ category: ObjectCategory) -> Double {
+        let categoryObjects = ObjectData.objects(for: category)
+        let objectIds = categoryObjects.map { $0.id.uuidString }
+        return progressForCategoryById(category, objectIds: objectIds)
+    }
+    
+    func overallProgress() -> Double {
+        let totalObjects = ObjectData.allObjects.count
+        return overallProgressById(totalObjectCount: totalObjects)
+    }
 }
