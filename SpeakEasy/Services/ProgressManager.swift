@@ -7,76 +7,93 @@ import Foundation
 import SwiftUI
 
 class ProgressManager: ObservableObject {
-        @Published var learnedObjectIds: Set<String> = []
-        @Published var totalStars: Int = 0
-        @Published var practiceCountById: [String: Int] = [:]
-        @Published var lastRatingById: [String: Double] = [:]
-        @Published var consecutiveFailedAttemptsById: [String: Int] = [:]
-        @Published var showCelebration = false
-    
-        private let learnedObjectsKey = "learnedObjectIds"
-        private let totalStarsKey = "totalStars"
-        private let practiceCountKey = "practiceCountById"
-        private let lastRatingKey = "lastRatingById"
-        private let consecutiveFailedAttemptsKey = "consecutiveFailedAttemptsById"
+    @Published var learnedObjectIds: Set<String> = []
+    @Published var totalStars: Int = 0
+    @Published var practiceCountById: [String: Int] = [:]
+    @Published var lastRatingById: [String: Double] = [:]
+    @Published var consecutiveFailedAttemptsById: [String: Int] = [:]
+    @Published var showCelebration = false
+    @Published var isLoading = false
     
     init() {
-        loadProgress()
+        loadProgressFromServer()
     }
     
-    func markAsLearnedById(_ objectId: String) {
-        if !learnedObjectIds.contains(objectId) {
-            learnedObjectIds.insert(objectId)
-            totalStars += 1
-            showCelebration = true
-            saveProgress()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showCelebration = false
-            }
-        }
-    }
-    
-        func recordRating(id: String, name: String, rating: Double) {
-            lastRatingById[id] = rating
-            let currentCount = practiceCountById[id] ?? 0
-            practiceCountById[id] = currentCount + 1
-        
-            if rating >= 4.0 {
-                consecutiveFailedAttemptsById[id] = 0
-                if !learnedObjectIds.contains(id) {
-                    markAsLearnedById(id)
+    func loadProgressFromServer() {
+        Task {
+            do {
+                let progressList = try await APIService.shared.getProgress()
+                await MainActor.run {
+                    self.learnedObjectIds.removeAll()
+                    self.practiceCountById.removeAll()
+                    self.lastRatingById.removeAll()
+                    self.consecutiveFailedAttemptsById.removeAll()
+                    
+                    for progress in progressList {
+                        if progress.isLearned {
+                            self.learnedObjectIds.insert(progress.objectId)
+                        }
+                        self.practiceCountById[progress.objectId] = progress.practiceCount
+                        self.lastRatingById[progress.objectId] = progress.lastRating
+                        self.consecutiveFailedAttemptsById[progress.objectId] = progress.consecutiveFailedAttempts
+                    }
+                    
+                    self.totalStars = self.learnedObjectIds.count
                 }
-            } else {
-                let currentFailed = consecutiveFailedAttemptsById[id] ?? 0
-                consecutiveFailedAttemptsById[id] = currentFailed + 1
+            } catch {
+                print("Failed to load progress from server: \(error)")
             }
-        
-            saveProgress()
         }
-    
-        func consecutiveFailedAttemptsForId(_ objectId: String) -> Int {
-            consecutiveFailedAttemptsById[objectId] ?? 0
-        }
-    
-        func resetConsecutiveFailedAttempts(id: String) {
-            consecutiveFailedAttemptsById[id] = 0
-            saveProgress()
-        }
-    
-    func lastRatingForId(_ objectId: String) -> Double {
-        lastRatingById[objectId] ?? 0.0
     }
     
-    func incrementPracticeForObject(id: String, name: String) {
+    func recordRating(id: String, name: String, rating: Double) {
+        lastRatingById[id] = rating
         let currentCount = practiceCountById[id] ?? 0
         practiceCountById[id] = currentCount + 1
         
-        if currentCount + 1 >= 3 && !learnedObjectIds.contains(id) {
-            markAsLearnedById(id)
+        if rating >= 4.0 {
+            consecutiveFailedAttemptsById[id] = 0
+            if !learnedObjectIds.contains(id) {
+                learnedObjectIds.insert(id)
+                totalStars += 1
+                showCelebration = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.showCelebration = false
+                }
+            }
+        } else {
+            let currentFailed = consecutiveFailedAttemptsById[id] ?? 0
+            consecutiveFailedAttemptsById[id] = currentFailed + 1
         }
         
-        saveProgress()
+        Task {
+            do {
+                let response = try await APIService.shared.recordProgress(objectId: id, rating: rating)
+                await MainActor.run {
+                    if response.isLearned {
+                        self.learnedObjectIds.insert(id)
+                    }
+                    self.lastRatingById[id] = response.lastRating
+                    self.practiceCountById[id] = response.practiceCount
+                    self.consecutiveFailedAttemptsById[id] = response.consecutiveFailedAttempts
+                    self.totalStars = self.learnedObjectIds.count
+                }
+            } catch {
+                print("Failed to record progress to server: \(error)")
+            }
+        }
+    }
+    
+    func consecutiveFailedAttemptsForId(_ objectId: String) -> Int {
+        consecutiveFailedAttemptsById[objectId] ?? 0
+    }
+    
+    func resetConsecutiveFailedAttempts(id: String) {
+        consecutiveFailedAttemptsById[id] = 0
+    }
+    
+    func lastRatingForId(_ objectId: String) -> Double {
+        lastRatingById[objectId] ?? 0.0
     }
     
     func isLearnedById(_ objectId: String) -> Bool {
@@ -96,50 +113,33 @@ class ProgressManager: ObservableObject {
         return totalObjectCount == 0 ? 0 : Double(learnedObjectIds.count) / Double(totalObjectCount)
     }
     
-        private func saveProgress() {
-            let learnedArray = Array(learnedObjectIds)
-            UserDefaults.standard.set(learnedArray, forKey: learnedObjectsKey)
-            UserDefaults.standard.set(totalStars, forKey: totalStarsKey)
-            UserDefaults.standard.set(practiceCountById, forKey: practiceCountKey)
-            UserDefaults.standard.set(lastRatingById, forKey: lastRatingKey)
-            UserDefaults.standard.set(consecutiveFailedAttemptsById, forKey: consecutiveFailedAttemptsKey)
-        }
-    
-        private func loadProgress() {
-            if let learnedArray = UserDefaults.standard.stringArray(forKey: learnedObjectsKey) {
-                learnedObjectIds = Set(learnedArray)
-            }
+    func resetProgress() {
+        learnedObjectIds.removeAll()
+        totalStars = 0
+        practiceCountById.removeAll()
+        lastRatingById.removeAll()
+        consecutiveFailedAttemptsById.removeAll()
         
-            totalStars = UserDefaults.standard.integer(forKey: totalStarsKey)
-        
-            if let practiceDict = UserDefaults.standard.dictionary(forKey: practiceCountKey) as? [String: Int] {
-                practiceCountById = practiceDict
-            }
-        
-            if let ratingDict = UserDefaults.standard.dictionary(forKey: lastRatingKey) as? [String: Double] {
-                lastRatingById = ratingDict
-            }
-        
-            if let failedDict = UserDefaults.standard.dictionary(forKey: consecutiveFailedAttemptsKey) as? [String: Int] {
-                consecutiveFailedAttemptsById = failedDict
+        Task {
+            do {
+                try await APIService.shared.resetProgress()
+            } catch {
+                print("Failed to reset progress on server: \(error)")
             }
         }
-    
-        func resetProgress() {
-            learnedObjectIds.removeAll()
-            totalStars = 0
-            practiceCountById.removeAll()
-            lastRatingById.removeAll()
-            consecutiveFailedAttemptsById.removeAll()
-            saveProgress()
-        }
+    }
     
     func markAsLearned(_ object: ObjectItem) {
-        markAsLearnedById(object.id.uuidString)
+        if !learnedObjectIds.contains(object.id.uuidString) {
+            learnedObjectIds.insert(object.id.uuidString)
+            totalStars += 1
+        }
     }
     
     func incrementPractice(for object: ObjectItem) {
-        incrementPracticeForObject(id: object.id.uuidString, name: object.name)
+        let id = object.id.uuidString
+        let currentCount = practiceCountById[id] ?? 0
+        practiceCountById[id] = currentCount + 1
     }
     
     func isLearned(_ object: ObjectItem) -> Bool {
