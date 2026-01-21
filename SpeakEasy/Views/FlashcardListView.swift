@@ -9,8 +9,11 @@ struct FlashcardListView: View {
     let category: ObjectCategory
     @EnvironmentObject var progressManager: ProgressManager
     @StateObject private var speechService = SpeechService()
-    @State private var selectedObject: ObjectItem?
+    @State private var selectedObject: ObjectListResponse?
     @State private var showFlashcard = false
+    @State private var objects: [ObjectListResponse] = []
+    @State private var isLoading = true
+    @State private var errorMessage: String?
     
     let columns = [
         GridItem(.flexible(), spacing: 15),
@@ -18,27 +21,55 @@ struct FlashcardListView: View {
         GridItem(.flexible(), spacing: 15)
     ]
     
-    var objects: [ObjectItem] {
-        ObjectData.objects(for: category)
-    }
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 categoryHeader
                 
-                LazyVGrid(columns: columns, spacing: 15) {
-                    ForEach(objects) { object in
-                        ObjectCard(object: object, speechService: speechService)
-                            .onTapGesture {
-                                selectedObject = object
-                                showFlashcard = true
-                                speechService.speak(object.name)
-                                progressManager.incrementPractice(for: object)
+                if isLoading {
+                    ProgressView("Loading objects...")
+                        .padding(.top, 50)
+                } else if let error = errorMessage {
+                    VStack(spacing: 10) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.orange)
+                        Text(error)
+                            .font(.system(size: 16, weight: .medium, design: .rounded))
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                        Button("Retry") {
+                            Task {
+                                await loadObjects()
                             }
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
+                    .padding(.top, 50)
+                } else if objects.isEmpty {
+                    VStack(spacing: 10) {
+                        Image(systemName: "tray.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.gray)
+                        Text("No objects in this category yet")
+                            .font(.system(size: 16, weight: .medium, design: .rounded))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.top, 50)
+                } else {
+                    LazyVGrid(columns: columns, spacing: 15) {
+                        ForEach(objects) { object in
+                            APIObjectCard(object: object, speechService: speechService)
+                                .onTapGesture {
+                                    selectedObject = object
+                                    showFlashcard = true
+                                    speechService.speak(object.name)
+                                    progressManager.incrementPracticeForObject(id: object.id, name: object.name)
+                                }
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
             .padding(.vertical)
         }
@@ -53,7 +84,28 @@ struct FlashcardListView: View {
         .navigationTitle(category.rawValue)
         .sheet(isPresented: $showFlashcard) {
             if let object = selectedObject {
-                FlashcardDetailView(object: object, speechService: speechService)
+                APIFlashcardDetailView(object: object, speechService: speechService)
+            }
+        }
+        .task {
+            await loadObjects()
+        }
+    }
+    
+    private func loadObjects() async {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            let fetchedObjects = try await APIService.shared.getObjects(category: category.rawValue)
+            await MainActor.run {
+                self.objects = fetchedObjects
+                self.isLoading = false
+            }
+        } catch {
+            await MainActor.run {
+                self.errorMessage = "Failed to load objects: \(error.localizedDescription)"
+                self.isLoading = false
             }
         }
     }
@@ -74,12 +126,12 @@ struct FlashcardListView: View {
                 .font(.system(size: 28, weight: .bold, design: .rounded))
                 .foregroundColor(category.color)
             
-            let learnedCount = objects.filter { progressManager.isLearned($0) }.count
+            let learnedCount = objects.filter { progressManager.isLearnedById($0.id) }.count
             Text("\(learnedCount) of \(objects.count) learned")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
             
-            ProgressBar(progress: progressManager.progressForCategory(category), color: category.color)
+            ProgressBar(progress: progressManager.progressForCategoryById(category, objectIds: objects.map { $0.id }), color: category.color)
                 .frame(height: 12)
                 .padding(.horizontal, 40)
         }
@@ -90,8 +142,8 @@ struct FlashcardListView: View {
     }
 }
 
-struct ObjectCard: View {
-    let object: ObjectItem
+struct APIObjectCard: View {
+    let object: ObjectListResponse
     @ObservedObject var speechService: SpeechService
     @EnvironmentObject var progressManager: ProgressManager
     
@@ -105,13 +157,13 @@ struct ObjectCard: View {
                 RemoteImageView(
                     objectName: object.name,
                     imageType: .thumbnail,
-                    fallbackIcon: iconForObject(object),
+                    fallbackIcon: iconForObject(object.name),
                     iconColor: object.color,
                     size: 70
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 
-                if progressManager.isLearned(object) {
+                if progressManager.isLearnedById(object.id) {
                     VStack {
                         HStack {
                             Spacer()
@@ -140,8 +192,8 @@ struct ObjectCard: View {
         )
     }
     
-    private func iconForObject(_ object: ObjectItem) -> String {
-        switch object.name.lowercased() {
+    private func iconForObject(_ name: String) -> String {
+        switch name.lowercased() {
         case "dog": return "dog.fill"
         case "cat": return "cat.fill"
         case "bird": return "bird.fill"
