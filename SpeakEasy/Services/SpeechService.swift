@@ -109,12 +109,16 @@ class SpeechService: ObservableObject {
         
         guard authorizationStatus == .authorized else {
             checkAuthorizationStatus()
-            completion(0)
+            DispatchQueue.main.async {
+                completion(0)
+            }
             return
         }
         
         guard let speechRecognizer = speechRecognizer, speechRecognizer.isAvailable else {
-            completion(0)
+            DispatchQueue.main.async {
+                completion(0)
+            }
             return
         }
         
@@ -123,13 +127,24 @@ class SpeechService: ObservableObject {
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
-            completion(0)
+            DispatchQueue.main.async {
+                completion(0)
+            }
             return
         }
         
         recognitionRequest.shouldReportPartialResults = true
         
         let inputNode = audioEngine.inputNode
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        
+        guard recordingFormat.sampleRate > 0 && recordingFormat.channelCount > 0 else {
+            print("Invalid recording format - microphone may not be available")
+            DispatchQueue.main.async {
+                completion(0)
+            }
+            return
+        }
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
             guard let self = self else { return }
@@ -146,7 +161,11 @@ class SpeechService: ObservableObject {
             
             if error != nil || isFinal {
                 self.audioEngine.stop()
-                inputNode.removeTap(onBus: 0)
+                do {
+                    inputNode.removeTap(onBus: 0)
+                } catch {
+                    print("Error removing tap: \(error)")
+                }
                 
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
@@ -160,9 +179,16 @@ class SpeechService: ObservableObject {
             }
         }
         
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            self.recognitionRequest?.append(buffer)
+        do {
+            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
+                self?.recognitionRequest?.append(buffer)
+            }
+        } catch {
+            print("Failed to install tap on audio input: \(error)")
+            DispatchQueue.main.async {
+                completion(0)
+            }
+            return
         }
         
         audioEngine.prepare()
@@ -181,7 +207,9 @@ class SpeechService: ObservableObject {
             }
         } catch {
             print("Audio engine failed to start: \(error)")
-            completion(0)
+            DispatchQueue.main.async {
+                completion(0)
+            }
         }
     }
     
@@ -195,8 +223,12 @@ class SpeechService: ObservableObject {
         recognitionTask = nil
         recognitionRequest = nil
         
-        let inputNode = audioEngine.inputNode
-        inputNode.removeTap(onBus: 0)
+        do {
+            let inputNode = audioEngine.inputNode
+            inputNode.removeTap(onBus: 0)
+        } catch {
+            print("Error removing tap in stopListening: \(error)")
+        }
         
         DispatchQueue.main.async {
             self.isListening = false

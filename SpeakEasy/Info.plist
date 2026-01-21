@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>SpeakEasy needs camera access to recognize objects and help you learn their names.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>SpeakEasy needs microphone access to listen to your pronunciation and help you practice speaking.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>SpeakEasy needs photo library access to let you choose images for object recognition.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
