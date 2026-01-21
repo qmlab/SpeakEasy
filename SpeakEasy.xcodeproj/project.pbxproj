@@ -26,6 +26,7 @@
 		A1000001234567890000017 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000002234567890000017 /* Preview Assets.xcassets */; };
 		A1000001234567890000019 /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002234567890000019 /* RemoteImageView.swift */; };
 		A1000001234567890000020 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002234567890000020 /* APIService.swift */; };
+		B1000001234567890000001 /* SpeechServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000002234567890000001 /* SpeechServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,10 +51,29 @@
 		A1000002234567890000019 /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		A1000002234567890000020 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A1000003234567890000001 /* SpeakEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1000002234567890000001 /* SpeechServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechServiceTests.swift; sourceTree = "<group>"; };
+		B1000003234567890000001 /* SpeakEasyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeakEasyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXContainerItemProxy section */
+		B1000004234567890000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A100000A234567890000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1000006234567890000001;
+			remoteInfo = SpeakEasy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1000004234567890000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1000005234567890000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -67,8 +87,17 @@
 			isa = PBXGroup;
 			children = (
 				A1000005234567890000002 /* SpeakEasy */,
+				B1000006234567890000001 /* SpeakEasyTests */,
 				A1000005234567890000003 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		B1000006234567890000001 /* SpeakEasyTests */ = {
+			isa = PBXGroup;
+			children = (
+				B1000002234567890000001 /* SpeechServiceTests.swift */,
+			);
+			path = SpeakEasyTests;
 			sourceTree = "<group>";
 		};
 		A1000005234567890000002 /* SpeakEasy */ = {
@@ -89,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				A1000003234567890000001 /* SpeakEasy.app */,
+				B1000003234567890000001 /* SpeakEasyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +188,24 @@
 			productReference = A1000003234567890000001 /* SpeakEasy.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B1000007234567890000001 /* SpeakEasyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1000008234567890000001 /* Build configuration list for PBXNativeTarget "SpeakEasyTests" */;
+			buildPhases = (
+				B1000009234567890000001 /* Sources */,
+				B1000005234567890000001 /* Frameworks */,
+				B100000A234567890000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B100000B234567890000001 /* PBXTargetDependency */,
+			);
+			name = SpeakEasyTests;
+			productName = SpeakEasyTests;
+			productReference = B1000003234567890000001 /* SpeakEasyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -187,6 +235,7 @@
 			projectRoot = "";
 			targets = (
 				A1000006234567890000001 /* SpeakEasy */,
+				B1000007234567890000001 /* SpeakEasyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -198,6 +247,13 @@
 			files = (
 				A1000001234567890000016 /* Assets.xcassets in Resources */,
 				A1000001234567890000017 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B100000A234567890000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +284,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1000009234567890000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1000001234567890000001 /* SpeechServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B100000B234567890000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1000006234567890000001 /* SpeakEasy */;
+			targetProxy = B1000004234567890000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A100000C234567890000001 /* Debug */ = {
@@ -416,6 +488,42 @@
 			};
 			name = Release;
 		};
+		B100000C234567890000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speakeasy.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeakEasy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpeakEasy";
+			};
+			name = Debug;
+		};
+		B100000C234567890000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speakeasy.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeakEasy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpeakEasy";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -433,6 +541,15 @@
 			buildConfigurations = (
 				A100000D234567890000001 /* Debug */,
 				A100000D234567890000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1000008234567890000001 /* Build configuration list for PBXNativeTarget "SpeakEasyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B100000C234567890000001 /* Debug */,
+				B100000C234567890000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

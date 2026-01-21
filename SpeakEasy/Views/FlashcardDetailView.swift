@@ -285,6 +285,49 @@ struct ConfettiParticle: Identifiable {
     var opacity: Double
 }
 
+struct StarRatingView: View {
+    let rating: Double
+    let maxRating: Int = 5
+    let starSize: CGFloat
+    let filledColor: Color
+    let emptyColor: Color
+    
+    init(rating: Double, starSize: CGFloat = 24, filledColor: Color = .yellow, emptyColor: Color = .gray.opacity(0.3)) {
+        self.rating = rating
+        self.starSize = starSize
+        self.filledColor = filledColor
+        self.emptyColor = emptyColor
+    }
+    
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<maxRating, id: \.self) { index in
+                starView(for: index)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func starView(for index: Int) -> some View {
+        let fillAmount = min(max(rating - Double(index), 0), 1)
+        
+        GeometryReader { geometry in
+            ZStack {
+                Image(systemName: "star.fill")
+                    .foregroundColor(emptyColor)
+                
+                Image(systemName: "star.fill")
+                    .foregroundColor(filledColor)
+                    .mask(
+                        Rectangle()
+                            .size(width: geometry.size.width * fillAmount, height: geometry.size.height)
+                    )
+            }
+        }
+        .frame(width: starSize, height: starSize)
+    }
+}
+
 struct APIFlashcardDetailView: View {
     let object: ObjectListResponse
     @ObservedObject var speechService: SpeechService
@@ -292,6 +335,9 @@ struct APIFlashcardDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State private var isAnimating = false
     @State private var showConfetti = false
+    @State private var currentRating: Double = 0.0
+    @State private var showRatingResult = false
+    @State private var recognizedText: String = ""
     
     var body: some View {
         ZStack {
@@ -315,6 +361,9 @@ struct APIFlashcardDetailView: View {
             if showConfetti {
                 ConfettiView()
             }
+        }
+        .onAppear {
+            currentRating = progressManager.lastRatingForId(object.id)
         }
     }
     
@@ -359,8 +408,9 @@ struct APIFlashcardDetailView: View {
                     directURL: object.flashcardUrl
                 )
                 .clipShape(Circle())
-                .scaleEffect(speechService.isSpeaking ? 1.1 : 1.0)
+                .scaleEffect(speechService.isSpeaking || speechService.isListening ? 1.1 : 1.0)
                 .animation(.spring(), value: speechService.isSpeaking)
+                .animation(.spring(), value: speechService.isListening)
             }
             .onAppear {
                 isAnimating = true
@@ -371,30 +421,31 @@ struct APIFlashcardDetailView: View {
                 .foregroundColor(object.color)
                 .shadow(color: object.color.opacity(0.3), radius: 5)
             
-            if progressManager.isLearnedById(object.id) {
-                HStack(spacing: 5) {
-                    ForEach(0..<3, id: \.self) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                            .font(.title)
+            StarRatingView(rating: currentRating, starSize: 32, filledColor: .yellow, emptyColor: .gray.opacity(0.3))
+            
+            if showRatingResult {
+                VStack(spacing: 8) {
+                    Text(String(format: "%.1f / 5.0 stars", currentRating))
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundColor(ratingColor)
+                    
+                    if !recognizedText.isEmpty {
+                        Text("You said: \"\(recognizedText)\"")
+                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .foregroundColor(.gray)
                     }
+                    
+                    Text(ratingMessage)
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .foregroundColor(ratingColor)
                 }
-                
+            } else if progressManager.isLearnedById(object.id) {
                 Text("You learned this!")
                     .font(.system(size: 18, weight: .medium, design: .rounded))
                     .foregroundColor(.green)
             } else {
-                let practiceCount = progressManager.practiceCountForId(object.id)
-                HStack(spacing: 5) {
-                    ForEach(0..<3, id: \.self) { index in
-                        Image(systemName: index < practiceCount ? "star.fill" : "star")
-                            .foregroundColor(index < practiceCount ? .yellow : .gray.opacity(0.3))
-                            .font(.title)
-                    }
-                }
-                
-                Text("Practice \(3 - practiceCount) more time\(3 - practiceCount == 1 ? "" : "s")!")
-                    .font(.system(size: 18, weight: .medium, design: .rounded))
+                Text("Tap 'Say It!' and speak the word")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
                     .foregroundColor(.gray)
             }
         }
@@ -406,23 +457,62 @@ struct APIFlashcardDetailView: View {
         )
     }
     
+    private var ratingColor: Color {
+        if currentRating >= 4.0 {
+            return .green
+        } else if currentRating >= 2.5 {
+            return .orange
+        } else {
+            return .red
+        }
+    }
+    
+    private var ratingMessage: String {
+        if currentRating >= 4.5 {
+            return "Perfect!"
+        } else if currentRating >= 4.0 {
+            return "Excellent!"
+        } else if currentRating >= 3.0 {
+            return "Good job! Keep practicing!"
+        } else if currentRating >= 2.0 {
+            return "Nice try! Try again!"
+        } else if currentRating > 0 {
+            return "Keep trying!"
+        } else {
+            return "Tap 'Say It!' to start"
+        }
+    }
+    
     private var actionButtons: some View {
-        HStack(spacing: 20) {
+        VStack(spacing: 15) {
             Button(action: {
-                speechService.speak(object.name)
-                progressManager.incrementPracticeForObject(id: object.id, name: object.name)
-                
-                if progressManager.isLearnedById(object.id) {
-                    showConfetti = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        showConfetti = false
+                if speechService.isListening {
+                    speechService.stopListening()
+                } else {
+                    speechService.speak(object.name)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        speechService.startListening(targetWord: object.name) { rating in
+                            self.currentRating = rating
+                            self.recognizedText = speechService.recognizedText
+                            self.showRatingResult = true
+                            
+                            progressManager.recordRating(id: object.id, name: object.name, rating: rating)
+                            
+                            if rating >= 4.0 {
+                                showConfetti = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    showConfetti = false
+                                }
+                            }
+                        }
                     }
                 }
             }) {
                 HStack(spacing: 10) {
-                    Image(systemName: "speaker.wave.3.fill")
+                    Image(systemName: speechService.isListening ? "mic.fill" : "speaker.wave.3.fill")
                         .font(.title2)
-                    Text("Say It!")
+                    Text(speechService.isListening ? "Listening..." : "Say It!")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                 }
                 .foregroundColor(.white)
@@ -430,12 +520,26 @@ struct APIFlashcardDetailView: View {
                 .padding(.vertical, 20)
                 .background(
                     Capsule()
-                        .fill(object.color)
-                        .shadow(color: object.color.opacity(0.5), radius: 10)
+                        .fill(speechService.isListening ? Color.red : object.color)
+                        .shadow(color: (speechService.isListening ? Color.red : object.color).opacity(0.5), radius: 10)
                 )
             }
-            .scaleEffect(speechService.isSpeaking ? 0.95 : 1.0)
+            .scaleEffect(speechService.isSpeaking || speechService.isListening ? 0.95 : 1.0)
             .animation(.spring(), value: speechService.isSpeaking)
+            .animation(.spring(), value: speechService.isListening)
+            .disabled(speechService.isSpeaking)
+            
+            if showRatingResult {
+                Button(action: {
+                    showRatingResult = false
+                    currentRating = 0
+                    recognizedText = ""
+                }) {
+                    Text("Try Again")
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .foregroundColor(object.color)
+                }
+            }
         }
     }
     
