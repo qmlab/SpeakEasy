@@ -60,12 +60,11 @@ struct FlashcardListView: View {
                     LazyVGrid(columns: columns, spacing: 15) {
                         ForEach(objects) { object in
                             APIObjectCard(object: object, speechService: speechService)
-                                .onTapGesture {
-                                    selectedObject = object
-                                    showFlashcard = true
-                                    speechService.speak(object.name)
-                                    progressManager.incrementPracticeForObject(id: object.id, name: object.name)
-                                }
+                                                                .onTapGesture {
+                                                                    selectedObject = object
+                                                                    showFlashcard = true
+                                                                    speechService.speak(object.name)
+                                                                }
                         }
                     }
                     .padding(.horizontal)

@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text, inspect
 
 from app.database import engine, Base
-from app.routers import players_router, objects_router, game_router
+from app.routers import players_router, objects_router, game_router, progress_router
 from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
@@ -47,6 +47,7 @@ app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 app.include_router(players_router)
 app.include_router(objects_router)
 app.include_router(game_router)
+app.include_router(progress_router)
 
 
 @app.get("/")

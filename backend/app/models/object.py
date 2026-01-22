@@ -22,6 +22,7 @@ class Object(Base):
 
     images = relationship("ObjectImage", back_populates="object", cascade="all, delete-orphan")
     attempts = relationship("AttemptHistory", back_populates="object")
+    progress = relationship("PlayerProgress", back_populates="object")
 
 
 class ObjectImage(Base):

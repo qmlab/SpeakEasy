@@ -14,3 +14,4 @@ class Player(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     attempts = relationship("AttemptHistory", back_populates="player")
+    progress = relationship("PlayerProgress", back_populates="player")

@@ -161,6 +161,54 @@ class APIService: ObservableObject {
         let images = try await getObjectImages(objectId: objectId, imageType: .thumbnail)
         return images.first
     }
+    
+    func recordProgress(objectId: String, rating: Double) async throws -> RecordProgressResponse {
+        let playerId = try await getOrCreatePlayer()
+        
+        let url = URL(string: "\(baseURL)/progress/record")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body = RecordProgressRequest(playerId: playerId, objectId: objectId, rating: rating)
+        request.httpBody = try JSONEncoder().encode(body)
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(RecordProgressResponse.self, from: data)
+    }
+    
+    func getProgress() async throws -> [ProgressResponse] {
+        guard let playerId = playerId else { return [] }
+        
+        let url = URL(string: "\(baseURL)/progress/\(playerId)")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try JSONDecoder().decode([ProgressResponse].self, from: data)
+    }
+    
+    func getObjectProgress(objectId: String) async throws -> ProgressResponse? {
+        guard let playerId = playerId else { return nil }
+        
+        let url = URL(string: "\(baseURL)/progress/\(playerId)/\(objectId)")!
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+            if data.isEmpty || String(data: data, encoding: .utf8) == "null" {
+                return nil
+            }
+            return try JSONDecoder().decode(ProgressResponse.self, from: data)
+        }
+        return nil
+    }
+    
+    func resetProgress() async throws {
+        guard let playerId = playerId else { return }
+        
+        let url = URL(string: "\(baseURL)/progress/\(playerId)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        let _ = try await URLSession.shared.data(for: request)
+    }
 }
 
 struct PlayerResponse: Codable {
@@ -386,5 +434,59 @@ struct ObjectDetailResponse: Codable {
         case id, name, category
         case createdAt = "created_at"
         case images
+    }
+}
+
+struct RecordProgressRequest: Codable {
+    let playerId: String
+    let objectId: String
+    let rating: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case objectId = "object_id"
+        case rating
+    }
+}
+
+struct RecordProgressResponse: Codable {
+    let success: Bool
+    let isLearned: Bool
+    let lastRating: Double
+    let practiceCount: Int
+    let consecutiveFailedAttempts: Int
+    let message: String
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case isLearned = "is_learned"
+        case lastRating = "last_rating"
+        case practiceCount = "practice_count"
+        case consecutiveFailedAttempts = "consecutive_failed_attempts"
+        case message
+    }
+}
+
+struct ProgressResponse: Codable, Identifiable {
+    let id: String
+    let playerId: String
+    let objectId: String
+    let lastRating: Double
+    let practiceCount: Int
+    let consecutiveFailedAttempts: Int
+    let isLearned: Bool
+    let createdAt: String
+    let updatedAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case playerId = "player_id"
+        case objectId = "object_id"
+        case lastRating = "last_rating"
+        case practiceCount = "practice_count"
+        case consecutiveFailedAttempts = "consecutive_failed_attempts"
+        case isLearned = "is_learned"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
