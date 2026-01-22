@@ -307,10 +307,9 @@ struct APIFeaturedObjectCard: View {
                 .fill(Color.white)
                 .shadow(color: .gray.opacity(0.2), radius: 5)
         )
-        .onTapGesture {
-            speechService.speak(object.name)
-            progressManager.incrementPracticeForObject(id: object.id, name: object.name)
-        }
+                .onTapGesture {
+                    speechService.speak(object.name)
+                }
     }
     
     private func iconForObject(_ name: String) -> String {
