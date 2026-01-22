@@ -36,7 +36,9 @@ struct RemoteImageView: View {
     }
     
     private var imageURL: URL? {
-        if let directURL = directURL, let url = URL(string: directURL) {
+        if let directURL = directURL,
+           let url = URL(string: directURL),
+           url.scheme != nil {
             return url
         }
         return constructedCloudinaryURL
