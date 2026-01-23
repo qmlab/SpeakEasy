@@ -129,43 +129,4 @@ class ProgressManager: ObservableObject {
         }
     }
     
-    func markAsLearned(_ object: ObjectItem) {
-        if !learnedObjectIds.contains(object.id.uuidString) {
-            learnedObjectIds.insert(object.id.uuidString)
-            totalStars += 1
-        }
-    }
-    
-    func incrementPractice(for object: ObjectItem) {
-        let id = object.id.uuidString
-        let currentCount = practiceCountById[id] ?? 0
-        practiceCountById[id] = currentCount + 1
-    }
-    
-    func isLearned(_ object: ObjectItem) -> Bool {
-        isLearnedById(object.id.uuidString)
-    }
-    
-    func practiceCountFor(_ object: ObjectItem) -> Int {
-        practiceCountForId(object.id.uuidString)
-    }
-    
-    func lastRatingFor(_ object: ObjectItem) -> Double {
-        lastRatingForId(object.id.uuidString)
-    }
-    
-    func recordRating(for object: ObjectItem, rating: Double) {
-        recordRating(id: object.id.uuidString, name: object.name, rating: rating)
-    }
-    
-    func progressForCategory(_ category: ObjectCategory) -> Double {
-        let categoryObjects = ObjectData.objects(for: category)
-        let objectIds = categoryObjects.map { $0.id.uuidString }
-        return progressForCategoryById(category, objectIds: objectIds)
-    }
-    
-    func overallProgress() -> Double {
-        let totalObjects = ObjectData.allObjects.count
-        return overallProgressById(totalObjectCount: totalObjects)
-    }
 }

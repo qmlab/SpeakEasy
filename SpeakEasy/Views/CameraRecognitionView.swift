@@ -144,9 +144,6 @@ struct CameraRecognitionView: View {
             
             Button(action: {
                 speechService.speak(recognizedObject)
-                if let matchedObject = cameraService.mapToKnownObject(recognizedObject) {
-                    progressManager.incrementPractice(for: matchedObject)
-                }
             }) {
                 HStack(spacing: 10) {
                     Image(systemName: "speaker.wave.3.fill")
