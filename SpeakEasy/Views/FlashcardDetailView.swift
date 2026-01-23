@@ -215,59 +215,37 @@ struct APIFlashcardDetailView: View {
             
             StarRatingView(rating: currentRating, starSize: 32, filledColor: .yellow, emptyColor: .gray.opacity(0.3))
             
-                        if showRatingResult {
-                            VStack(spacing: 8) {
-                                Text(String(format: "%.1f / 5.0 stars", currentRating))
-                                    .font(.system(size: 20, weight: .bold, design: .rounded))
-                                    .foregroundColor(ratingColor)
-                    
-                                if !recognizedText.isEmpty {
-                                    Text("You said: \"\(recognizedText)\"")
-                                        .font(.system(size: 14, weight: .medium, design: .rounded))
-                                        .foregroundColor(.gray)
-                                }
-                    
-                                if showEncouragement {
-                                    HStack(spacing: 8) {
-                                        if currentRating >= 4.0 {
-                                            Image(systemName: "star.fill")
-                                                .foregroundColor(.yellow)
-                                                .font(.system(size: 24))
-                                        } else if showHelpMode {
-                                            Image(systemName: "hand.wave.fill")
-                                                .foregroundColor(.blue)
-                                                .font(.system(size: 24))
-                                        } else {
-                                            Image(systemName: "heart.fill")
-                                                .foregroundColor(.pink)
-                                                .font(.system(size: 24))
-                                        }
-                            
-                                        Text(encouragementMessage)
-                                            .font(.system(size: 18, weight: .bold, design: .rounded))
-                                            .foregroundColor(currentRating >= 4.0 ? .green : (showHelpMode ? .blue : .orange))
-                                            .multilineTextAlignment(.center)
-                                    }
-                                    .padding(.top, 8)
-                                    .transition(.scale.combined(with: .opacity))
-                                }
-                    
-                                if showHelpMode && currentRating < 4.0 {
-                                    Text("Listen and repeat: \(object.name)")
-                                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                        .foregroundColor(.blue)
-                                        .padding(.top, 4)
-                                }
+            if showRatingResult {
+                VStack(spacing: 8) {
+                    if showEncouragement {
+                        HStack(spacing: 8) {
+                            if currentRating >= 4.0 {
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.yellow)
+                                    .font(.system(size: 40))
+                            } else if showHelpMode {
+                                Image(systemName: "ear.fill")
+                                    .foregroundColor(.blue)
+                                    .font(.system(size: 40))
+                            } else {
+                                Image(systemName: "heart.fill")
+                                    .foregroundColor(.pink)
+                                    .font(.system(size: 40))
                             }
-                        } else if progressManager.isLearnedById(object.id) {
-                            Text("You learned this!")
-                                .font(.system(size: 18, weight: .medium, design: .rounded))
-                                .foregroundColor(.green)
-                        } else {
-                            Text("Tap 'Say It!' and speak the word")
-                                .font(.system(size: 16, weight: .medium, design: .rounded))
-                                .foregroundColor(.gray)
                         }
+                        .padding(.top, 8)
+                        .transition(.scale.combined(with: .opacity))
+                    }
+                }
+            } else if progressManager.isLearnedById(object.id) {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 40))
+                    .foregroundColor(.green)
+            } else {
+                Image(systemName: "hand.point.up.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(.gray)
+            }
         }
         .padding(40)
         .background(
@@ -312,27 +290,22 @@ struct APIFlashcardDetailView: View {
                         handleSayItTapped()
                     }
                 }) {
-                    HStack(spacing: 10) {
-                        Image(systemName: speechService.isListening ? "mic.fill" : "speaker.wave.3.fill")
-                            .font(.title2)
-                        Text(speechService.isListening ? "Listening..." : "Say It!")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                    }
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 40)
-                    .padding(.vertical, 20)
-                    .background(
-                        Capsule()
-                            .fill(speechService.isListening ? Color.red : object.color)
-                            .shadow(color: (speechService.isListening ? Color.red : object.color).opacity(0.5), radius: 10)
-                    )
+                    Image(systemName: speechService.isListening ? "mic.fill" : "speaker.wave.3.fill")
+                        .font(.system(size: 50))
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 100)
+                        .background(
+                            Circle()
+                                .fill(speechService.isListening ? Color.red : object.color)
+                                .shadow(color: (speechService.isListening ? Color.red : object.color).opacity(0.5), radius: 10)
+                        )
                 }
                 .scaleEffect(speechService.isSpeaking || speechService.isListening ? 0.95 : 1.0)
                 .animation(.spring(), value: speechService.isSpeaking)
                 .animation(.spring(), value: speechService.isListening)
                 .disabled(speechService.isSpeaking)
             
-                if showRatingResult {
+                if showRatingResult && !showHelpMode {
                     Button(action: {
                         showRatingResult = false
                         showEncouragement = false
@@ -340,8 +313,8 @@ struct APIFlashcardDetailView: View {
                         currentRating = 0
                         recognizedText = ""
                     }) {
-                        Text("Try Again")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .font(.system(size: 40))
                             .foregroundColor(object.color)
                     }
                 }
@@ -390,19 +363,42 @@ struct APIFlashcardDetailView: View {
             if failedAttempts >= 3 {
                 showHelpMode = true
                 let helpMessage = "Let me help you. The word is \(object.name). Now you say \(object.name)."
-                encouragementMessage = "Let me help you!"
+                encouragementMessage = ""
                 showEncouragement = true
             
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     speechService.speak(helpMessage)
                 }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                    self.startListeningAfterHelp()
+                }
             } else {
                 let message = encouragementMessages.randomElement() ?? "Keep trying!"
-                encouragementMessage = message
+                encouragementMessage = ""
                 showEncouragement = true
             
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     speechService.speak(message)
+                }
+            }
+        }
+    
+        private func startListeningAfterHelp() {
+            showRatingResult = false
+            recognizedText = ""
+            
+            speechService.startListening(targetWord: object.name) { rating in
+                self.currentRating = rating
+                self.recognizedText = speechService.recognizedText
+                self.showRatingResult = true
+            
+                progressManager.recordRating(id: object.id, name: object.name, rating: rating)
+            
+                if rating >= 4.0 {
+                    handleSuccess()
+                } else {
+                    handleFailedAttempt()
                 }
             }
         }
