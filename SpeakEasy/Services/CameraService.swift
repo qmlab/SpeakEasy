@@ -137,15 +137,6 @@ class CameraService: NSObject, ObservableObject {
             self?.confidence = topResult.confidence
         }
     }
-    
-    func mapToKnownObject(_ recognizedLabel: String) -> ObjectItem? {
-        let lowercased = recognizedLabel.lowercased()
-        
-        return ObjectData.allObjects.first { object in
-            let objectName = object.name.lowercased()
-            return lowercased.contains(objectName) || objectName.contains(lowercased)
-        }
-    }
 }
 
 extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {

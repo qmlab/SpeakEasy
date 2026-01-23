@@ -208,67 +208,6 @@ struct QuickStartButton: View {
     }
 }
 
-struct FeaturedObjectCard: View {
-    let object: ObjectItem
-    @ObservedObject var speechService: SpeechService
-    @EnvironmentObject var progressManager: ProgressManager
-    
-    var body: some View {
-        VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(object.color.opacity(0.2))
-                    .frame(width: 80, height: 80)
-                
-                Image(systemName: iconForObject(object))
-                    .font(.system(size: 35))
-                    .foregroundColor(object.color)
-            }
-            
-            Text(object.name)
-                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                .foregroundColor(.primary)
-            
-            if progressManager.isLearned(object) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-            }
-        }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
-                .shadow(color: .gray.opacity(0.2), radius: 5)
-        )
-        .onTapGesture {
-            speechService.speak(object.name)
-            progressManager.incrementPractice(for: object)
-        }
-    }
-    
-    private func iconForObject(_ object: ObjectItem) -> String {
-        switch object.name.lowercased() {
-        case "dog": return "dog.fill"
-        case "cat": return "cat.fill"
-        case "bird": return "bird.fill"
-        case "fish": return "fish.fill"
-        case "rabbit": return "hare.fill"
-        case "apple": return "apple.logo"
-        case "car": return "car.fill"
-        case "sun": return "sun.max.fill"
-        case "moon": return "moon.fill"
-        case "star": return "star.fill"
-        case "tree": return "tree.fill"
-        case "flower": return "camera.macro"
-        case "house": return "house.fill"
-        case "ball": return "circle.fill"
-        case "book": return "book.fill"
-        case "cup": return "cup.and.saucer.fill"
-        default: return "photo.fill"
-        }
-    }
-}
-
 struct APIFeaturedObjectCard: View {
     let object: ObjectListResponse
     @ObservedObject var speechService: SpeechService
