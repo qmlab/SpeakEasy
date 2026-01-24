@@ -87,9 +87,7 @@ class AuthenticationService: NSObject, ObservableObject {
                     
                     UserDefaults.standard.set(appleUserId, forKey: self.appleUserIdKey)
                     UserDefaults.standard.set(response.id, forKey: self.playerIdKey)
-                    if let name = response.name {
-                        UserDefaults.standard.set(name, forKey: self.userNameKey)
-                    }
+                    UserDefaults.standard.set(response.name, forKey: self.userNameKey)
                     if let email = response.email {
                         UserDefaults.standard.set(email, forKey: self.userEmailKey)
                     }
