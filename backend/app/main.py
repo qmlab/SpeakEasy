@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text, inspect
 
 from app.database import engine, Base
-from app.routers import players_router, objects_router, game_router, progress_router
+from app.routers import players_router, objects_router, game_router, progress_router, auth_router
 from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
@@ -48,6 +48,7 @@ app.include_router(players_router)
 app.include_router(objects_router)
 app.include_router(game_router)
 app.include_router(progress_router)
+app.include_router(auth_router)
 
 
 @app.get("/")

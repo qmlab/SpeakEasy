@@ -7,9 +7,25 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var progressManager: ProgressManager
+    @StateObject private var authService = AuthenticationService.shared
     @State private var selectedTab = 0
     
     var body: some View {
+        Group {
+            if authService.isSignedIn {
+                mainTabView
+            } else {
+                SignInView(authService: authService)
+            }
+        }
+        .onChange(of: authService.isSignedIn) { isSignedIn in
+            if isSignedIn {
+                progressManager.loadProgressFromServer()
+            }
+        }
+    }
+    
+    private var mainTabView: some View {
         TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem {
