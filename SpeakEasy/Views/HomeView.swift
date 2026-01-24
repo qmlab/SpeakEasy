@@ -7,6 +7,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var progressManager: ProgressManager
+    @Binding var selectedTab: Int
     @StateObject private var speechService = SpeechService()
     @State private var featuredObjects: [ObjectListResponse] = []
     @State private var totalObjectCount = 0
@@ -135,19 +136,25 @@ struct HomeView: View {
                     icon: "square.grid.2x2.fill",
                     title: "Flashcards",
                     color: .blue
-                )
+                ) {
+                    selectedTab = 1
+                }
                 
                 QuickStartButton(
                     icon: "camera.fill",
                     title: "Camera",
                     color: .green
-                )
+                ) {
+                    selectedTab = 2
+                }
                 
                 QuickStartButton(
                     icon: "star.fill",
                     title: "Progress",
                     color: .orange
-                )
+                ) {
+                    selectedTab = 3
+                }
             }
         }
     }
@@ -187,24 +194,27 @@ struct QuickStartButton: View {
     let icon: String
     let title: String
     let color: Color
+    let action: () -> Void
     
     var body: some View {
-        VStack(spacing: 10) {
-            Image(systemName: icon)
-                .font(.system(size: 30))
-                .foregroundColor(.white)
-            
-            Text(title)
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                .foregroundColor(.white)
+        Button(action: action) {
+            VStack(spacing: 10) {
+                Image(systemName: icon)
+                    .font(.system(size: 30))
+                    .foregroundColor(.white)
+                
+                Text(title)
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 20)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(color)
+                    .shadow(color: color.opacity(0.4), radius: 5)
+            )
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 20)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(color)
-                .shadow(color: color.opacity(0.4), radius: 5)
-        )
     }
 }
 
@@ -302,7 +312,7 @@ struct APIFeaturedObjectCard: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(selectedTab: .constant(0))
             .environmentObject(ProgressManager())
     }
 }
