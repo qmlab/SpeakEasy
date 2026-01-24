@@ -7,9 +7,30 @@ class PlayerCreate(BaseModel):
     name: str
 
 
+class AppleSignInRequest(BaseModel):
+    apple_user_id: str
+    name: Optional[str] = None
+    email: Optional[str] = None
+
+
+class AppleSignInResponse(BaseModel):
+    id: str
+    name: str
+    apple_user_id: str
+    email: Optional[str] = None
+    is_new_user: bool
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
 class PlayerResponse(BaseModel):
     id: str
     name: str
+    apple_user_id: Optional[str] = None
+    email: Optional[str] = None
     created_at: datetime
     updated_at: datetime
 

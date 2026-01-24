@@ -209,6 +209,30 @@ class APIService: ObservableObject {
         
         let _ = try await URLSession.shared.data(for: request)
     }
+    
+    func appleSignIn(appleUserId: String, name: String?, email: String?) async throws -> AppleSignInResponse {
+        let url = URL(string: "\(baseURL)/auth/apple")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body = AppleSignInRequest(appleUserId: appleUserId, name: name, email: email)
+        request.httpBody = try JSONEncoder().encode(body)
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(AppleSignInResponse.self, from: data)
+    }
+    
+    func getPlayerByAppleId(appleUserId: String) async throws -> PlayerResponse? {
+        let url = URL(string: "\(baseURL)/auth/player/\(appleUserId)")!
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 404 {
+            return nil
+        }
+        
+        return try JSONDecoder().decode(PlayerResponse.self, from: data)
+    }
 }
 
 struct PlayerResponse: Codable {
@@ -486,6 +510,36 @@ struct ProgressResponse: Codable, Identifiable {
         case practiceCount = "practice_count"
         case consecutiveFailedAttempts = "consecutive_failed_attempts"
         case isLearned = "is_learned"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+struct AppleSignInRequest: Codable {
+    let appleUserId: String
+    let name: String?
+    let email: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case appleUserId = "apple_user_id"
+        case name
+        case email
+    }
+}
+
+struct AppleSignInResponse: Codable {
+    let id: String
+    let name: String
+    let appleUserId: String
+    let email: String?
+    let isNewUser: Bool
+    let createdAt: String
+    let updatedAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, email
+        case appleUserId = "apple_user_id"
+        case isNewUser = "is_new_user"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

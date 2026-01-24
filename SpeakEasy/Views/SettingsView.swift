@@ -8,13 +8,17 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var progressManager: ProgressManager
     @StateObject private var speechService = SpeechService()
+    @ObservedObject private var authService = AuthenticationService.shared
     @State private var speechRate: Double = 0.4
     @State private var showResetAlert = false
+    @State private var showSignOutAlert = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 25) {
+                    accountSection
+                    
                     speechSettingsSection
                     
                     aboutSection
@@ -40,7 +44,68 @@ struct SettingsView: View {
             } message: {
                 Text("Are you sure you want to reset all progress? This cannot be undone.")
             }
+            .alert("Sign Out", isPresented: $showSignOutAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Sign Out", role: .destructive) {
+                    authService.signOut()
+                }
+            } message: {
+                Text("Are you sure you want to sign out?")
+            }
         }
+    }
+    
+    private var accountSection: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            HStack {
+                Image(systemName: "person.circle.fill")
+                    .foregroundColor(.green)
+                    .font(.title2)
+                
+                Text("Account")
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundColor(.primary)
+            }
+            
+            if let user = authService.currentUser {
+                VStack(alignment: .leading, spacing: 15) {
+                    if let name = user.name {
+                        AboutRow(icon: "person.fill", color: .blue, title: "Name", value: name)
+                        Divider()
+                    }
+                    
+                    if let email = user.email {
+                        AboutRow(icon: "envelope.fill", color: .purple, title: "Email", value: email)
+                        Divider()
+                    }
+                    
+                    AboutRow(icon: "checkmark.seal.fill", color: .green, title: "Signed in with", value: "Apple")
+                }
+            }
+            
+            Button(action: {
+                showSignOutAlert = true
+            }) {
+                HStack(spacing: 10) {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                    Text("Sign Out")
+                }
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 15)
+                .background(
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.orange)
+                )
+            }
+        }
+        .padding(25)
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                .fill(Color.white)
+                .shadow(color: .gray.opacity(0.2), radius: 10)
+        )
     }
     
     private var speechSettingsSection: some View {
