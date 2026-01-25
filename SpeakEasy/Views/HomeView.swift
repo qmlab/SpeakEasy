@@ -159,26 +159,26 @@ struct QuickStartButton: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
-            VStack(spacing: 10) {
-                Image(systemName: icon)
-                    .font(.system(size: 30))
-                    .foregroundColor(.white)
-                
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 20)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(color)
-                    .shadow(color: color.opacity(0.4), radius: 5)
-            )
-            .contentShape(Rectangle())
+        VStack(spacing: 10) {
+            Image(systemName: icon)
+                .font(.system(size: 30))
+                .foregroundColor(.white)
+            
+            Text(title)
+                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .foregroundColor(.white)
         }
-        .buttonStyle(PlainButtonStyle())
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 20)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(color)
+                .shadow(color: color.opacity(0.4), radius: 5)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            action()
+        }
     }
 }
 
