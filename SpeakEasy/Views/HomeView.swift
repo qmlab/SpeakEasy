@@ -160,22 +160,24 @@ struct QuickStartButton: View {
     
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 10) {
-                Image(systemName: icon)
-                    .font(.system(size: 30))
-                    .foregroundColor(.white)
-                
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 20)
-            .background(
+            ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(color)
                     .shadow(color: color.opacity(0.4), radius: 5)
-            )
+                
+                VStack(spacing: 10) {
+                    Image(systemName: icon)
+                        .font(.system(size: 30))
+                        .foregroundColor(.white)
+                    
+                    Text(title)
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white)
+                }
+                .padding(.vertical, 20)
+            }
+            .frame(maxWidth: .infinity, minHeight: 80)
+            .contentShape(Rectangle())
         }
         .buttonStyle(QuickStartButtonStyle())
     }
@@ -185,6 +187,7 @@ struct QuickStartButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .opacity(configuration.isPressed ? 0.9 : 1.0)
             .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }
