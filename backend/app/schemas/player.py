@@ -26,11 +26,30 @@ class AppleSignInResponse(BaseModel):
         from_attributes = True
 
 
+class GuestSignInRequest(BaseModel):
+    device_id: str
+
+
+class GuestSignInResponse(BaseModel):
+    id: str
+    name: str
+    device_id: str
+    is_guest: bool
+    is_new_user: bool
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
 class PlayerResponse(BaseModel):
     id: str
     name: str
     apple_user_id: Optional[str] = None
+    device_id: Optional[str] = None
     email: Optional[str] = None
+    is_guest: bool = False
     created_at: datetime
     updated_at: datetime
 
