@@ -233,6 +233,30 @@ class APIService: ObservableObject {
         
         return try JSONDecoder().decode(PlayerResponse.self, from: data)
     }
+    
+    func guestSignIn(deviceId: String) async throws -> GuestSignInResponse {
+        let url = URL(string: "\(baseURL)/auth/guest")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body = GuestSignInRequest(deviceId: deviceId)
+        request.httpBody = try JSONEncoder().encode(body)
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(GuestSignInResponse.self, from: data)
+    }
+    
+    func getPlayerByDeviceId(deviceId: String) async throws -> PlayerResponse? {
+        let url = URL(string: "\(baseURL)/auth/guest/\(deviceId)")!
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 404 {
+            return nil
+        }
+        
+        return try JSONDecoder().decode(PlayerResponse.self, from: data)
+    }
 }
 
 struct PlayerResponse: Codable {
@@ -539,6 +563,33 @@ struct AppleSignInResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case id, name, email
         case appleUserId = "apple_user_id"
+        case isNewUser = "is_new_user"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+struct GuestSignInRequest: Codable {
+    let deviceId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case deviceId = "device_id"
+    }
+}
+
+struct GuestSignInResponse: Codable {
+    let id: String
+    let name: String
+    let deviceId: String
+    let isGuest: Bool
+    let isNewUser: Bool
+    let createdAt: String
+    let updatedAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case deviceId = "device_id"
+        case isGuest = "is_guest"
         case isNewUser = "is_new_user"
         case createdAt = "created_at"
         case updatedAt = "updated_at"

@@ -48,6 +48,23 @@ struct SignInView: View {
                     .frame(height: 55)
                     .cornerRadius(12)
                     .padding(.horizontal, 40)
+                    
+                    Button(action: {
+                        authService.signInAsGuest()
+                    }) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 20))
+                            Text("Continue as Guest")
+                                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 55)
+                        .background(Color.purple)
+                        .cornerRadius(12)
+                    }
+                    .padding(.horizontal, 40)
                 }
                 
                 if let errorMessage = authService.errorMessage {
@@ -125,23 +142,28 @@ struct SignInView: View {
                     let playerIdKey = "speakeasy_player_id"
                     let userNameKey = "speakeasy_user_name"
                     let userEmailKey = "speakeasy_user_email"
+                    let isGuestKey = "speakeasy_is_guest"
                     
                     UserDefaults.standard.set(appleUserId, forKey: appleUserIdKey)
                     UserDefaults.standard.set(response.id, forKey: playerIdKey)
                     UserDefaults.standard.set(response.name, forKey: userNameKey)
+                    UserDefaults.standard.set(false, forKey: isGuestKey)
                     if let email = response.email {
                         UserDefaults.standard.set(email, forKey: userEmailKey)
                     }
                     
                     APIService.shared.playerId = response.id
                     
-                    authService.currentUser = AppleUser(
+                    authService.currentUser = AppUser(
                         appleUserId: appleUserId,
+                        deviceId: nil,
                         playerId: response.id,
                         name: response.name,
-                        email: response.email
+                        email: response.email,
+                        isGuest: false
                     )
                     authService.isSignedIn = true
+                    authService.isGuest = false
                     authService.isLoading = false
                 }
             } catch {

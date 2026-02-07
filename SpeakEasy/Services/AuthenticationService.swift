@@ -6,19 +6,23 @@
 import Foundation
 import AuthenticationServices
 import SwiftUI
+import UIKit
 
 class AuthenticationService: NSObject, ObservableObject {
     static let shared = AuthenticationService()
     
     @Published var isSignedIn = false
-    @Published var currentUser: AppleUser?
+    @Published var currentUser: AppUser?
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var isGuest = false
     
     private let appleUserIdKey = "speakeasy_apple_user_id"
+    private let deviceIdKey = "speakeasy_device_id"
     private let playerIdKey = "speakeasy_player_id"
     private let userNameKey = "speakeasy_user_name"
     private let userEmailKey = "speakeasy_user_email"
+    private let isGuestKey = "speakeasy_is_guest"
     
     override init() {
         super.init()
@@ -26,21 +30,35 @@ class AuthenticationService: NSObject, ObservableObject {
     }
     
     private func loadSavedUser() {
-        if let appleUserId = UserDefaults.standard.string(forKey: appleUserIdKey),
-           let playerId = UserDefaults.standard.string(forKey: playerIdKey) {
+        if let playerId = UserDefaults.standard.string(forKey: playerIdKey) {
+            let appleUserId = UserDefaults.standard.string(forKey: appleUserIdKey)
+            let deviceId = UserDefaults.standard.string(forKey: deviceIdKey)
             let name = UserDefaults.standard.string(forKey: userNameKey)
             let email = UserDefaults.standard.string(forKey: userEmailKey)
+            let isGuestUser = UserDefaults.standard.bool(forKey: isGuestKey)
             
-            currentUser = AppleUser(
+            currentUser = AppUser(
                 appleUserId: appleUserId,
+                deviceId: deviceId,
                 playerId: playerId,
                 name: name,
-                email: email
+                email: email,
+                isGuest: isGuestUser
             )
             isSignedIn = true
+            isGuest = isGuestUser
             
             APIService.shared.playerId = playerId
         }
+    }
+    
+    func getDeviceId() -> String {
+        if let existingId = UserDefaults.standard.string(forKey: deviceIdKey) {
+            return existingId
+        }
+        let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+        UserDefaults.standard.set(deviceId, forKey: deviceIdKey)
+        return deviceId
     }
     
     func signInWithApple() {
@@ -60,10 +78,51 @@ class AuthenticationService: NSObject, ObservableObject {
         UserDefaults.standard.removeObject(forKey: playerIdKey)
         UserDefaults.standard.removeObject(forKey: userNameKey)
         UserDefaults.standard.removeObject(forKey: userEmailKey)
+        UserDefaults.standard.removeObject(forKey: isGuestKey)
         
         currentUser = nil
         isSignedIn = false
+        isGuest = false
         APIService.shared.playerId = nil
+    }
+    
+    func signInAsGuest() {
+        isLoading = true
+        errorMessage = nil
+        
+        let deviceId = getDeviceId()
+        
+        Task {
+            do {
+                let response = try await APIService.shared.guestSignIn(deviceId: deviceId)
+                
+                await MainActor.run {
+                    self.currentUser = AppUser(
+                        appleUserId: nil,
+                        deviceId: deviceId,
+                        playerId: response.id,
+                        name: response.name,
+                        email: nil,
+                        isGuest: true
+                    )
+                    self.isSignedIn = true
+                    self.isGuest = true
+                    self.isLoading = false
+                    
+                    UserDefaults.standard.set(deviceId, forKey: self.deviceIdKey)
+                    UserDefaults.standard.set(response.id, forKey: self.playerIdKey)
+                    UserDefaults.standard.set(response.name, forKey: self.userNameKey)
+                    UserDefaults.standard.set(true, forKey: self.isGuestKey)
+                    
+                    APIService.shared.playerId = response.id
+                }
+            } catch {
+                await MainActor.run {
+                    self.errorMessage = "Failed to sign in as guest: \(error.localizedDescription)"
+                    self.isLoading = false
+                }
+            }
+        }
     }
     
     private func authenticateWithBackend(appleUserId: String, name: String?, email: String?) {
@@ -76,18 +135,22 @@ class AuthenticationService: NSObject, ObservableObject {
                 )
                 
                 await MainActor.run {
-                    self.currentUser = AppleUser(
+                    self.currentUser = AppUser(
                         appleUserId: appleUserId,
+                        deviceId: self.getDeviceId(),
                         playerId: response.id,
                         name: response.name,
-                        email: response.email
+                        email: response.email,
+                        isGuest: false
                     )
                     self.isSignedIn = true
+                    self.isGuest = false
                     self.isLoading = false
                     
                     UserDefaults.standard.set(appleUserId, forKey: self.appleUserIdKey)
                     UserDefaults.standard.set(response.id, forKey: self.playerIdKey)
                     UserDefaults.standard.set(response.name, forKey: self.userNameKey)
+                    UserDefaults.standard.set(false, forKey: self.isGuestKey)
                     if let email = response.email {
                         UserDefaults.standard.set(email, forKey: self.userEmailKey)
                     }
@@ -150,9 +213,11 @@ extension AuthenticationService: ASAuthorizationControllerDelegate {
     }
 }
 
-struct AppleUser {
-    let appleUserId: String
+struct AppUser {
+    let appleUserId: String?
+    let deviceId: String?
     let playerId: String
     let name: String?
     let email: String?
+    let isGuest: Bool
 }
