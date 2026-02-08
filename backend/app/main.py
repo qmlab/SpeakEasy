@@ -16,6 +16,7 @@ else:
     print("Cloudinary not configured - image uploads will use local storage")
 def run_migrations():
     inspector = inspect(engine)
+    
     if 'object_images' in inspector.get_table_names():
         columns = [col['name'] for col in inspector.get_columns('object_images')]
         if 'image_type' not in columns:
@@ -23,6 +24,22 @@ def run_migrations():
                 conn.execute(text("ALTER TABLE object_images ADD COLUMN image_type VARCHAR(20) DEFAULT 'flashcard'"))
                 conn.commit()
                 print("Migration: Added image_type column to object_images table")
+    
+    if 'players' in inspector.get_table_names():
+        columns = [col['name'] for col in inspector.get_columns('players')]
+        with engine.connect() as conn:
+            if 'apple_user_id' not in columns:
+                conn.execute(text("ALTER TABLE players ADD COLUMN apple_user_id VARCHAR"))
+                conn.commit()
+                print("Migration: Added apple_user_id column to players table")
+            if 'device_id' not in columns:
+                conn.execute(text("ALTER TABLE players ADD COLUMN device_id VARCHAR"))
+                conn.commit()
+                print("Migration: Added device_id column to players table")
+            if 'is_guest' not in columns:
+                conn.execute(text("ALTER TABLE players ADD COLUMN is_guest VARCHAR DEFAULT 'false'"))
+                conn.commit()
+                print("Migration: Added is_guest column to players table")
 
 run_migrations()
 
