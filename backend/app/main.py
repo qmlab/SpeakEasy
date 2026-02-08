@@ -36,6 +36,10 @@ def run_migrations():
                 conn.execute(text("ALTER TABLE players ADD COLUMN device_id VARCHAR"))
                 conn.commit()
                 print("Migration: Added device_id column to players table")
+            if 'email' not in columns:
+                conn.execute(text("ALTER TABLE players ADD COLUMN email VARCHAR"))
+                conn.commit()
+                print("Migration: Added email column to players table")
             if 'is_guest' not in columns:
                 conn.execute(text("ALTER TABLE players ADD COLUMN is_guest VARCHAR DEFAULT 'false'"))
                 conn.commit()
