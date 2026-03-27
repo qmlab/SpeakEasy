@@ -322,6 +322,9 @@ struct LiveCameraExplorerView: View {
         }
         .onDisappear {
             cameraService.stopSession()
+            cameraService.recognizedObject = nil
+            cameraService.confidence = 0
+            cameraService.topClassifications = []
         }
     }
 }
