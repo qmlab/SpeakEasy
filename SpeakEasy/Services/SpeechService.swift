@@ -45,9 +45,16 @@ class SpeechService: NSObject, ObservableObject {
 
     var mockProvider: SpeechRecognitionProvider?
 
+    private static let languageKey = "speechLanguage"
+
     override init() {
         super.init()
         synthesizer.delegate = self
+        // Restore persisted language preference
+        if let savedLang = UserDefaults.standard.string(forKey: SpeechService.languageKey),
+           let language = SpeechLanguage(rawValue: savedLang) {
+            currentLanguage = language
+        }
         speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: currentLanguage.rawValue))
         checkAuthorizationStatus()
     }
@@ -56,6 +63,7 @@ class SpeechService: NSObject, ObservableObject {
     func setLanguage(_ language: SpeechLanguage) {
         currentLanguage = language
         speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: language.rawValue))
+        UserDefaults.standard.set(language.rawValue, forKey: SpeechService.languageKey)
     }
     
     private func checkAuthorizationStatus() {

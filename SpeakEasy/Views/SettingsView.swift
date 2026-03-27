@@ -10,7 +10,7 @@ struct SettingsView: View {
     @StateObject private var speechService = SpeechService()
     @ObservedObject private var authService = AuthenticationService.shared
     @State private var speechRate: Double = 0.4
-    @State private var selectedLanguage: SpeechService.SpeechLanguage = .english
+    @State private var selectedLanguage: SpeechService.SpeechLanguage = SpeechService.SpeechLanguage(rawValue: UserDefaults.standard.string(forKey: "speechLanguage") ?? "en-US") ?? .english
     @State private var showResetAlert = false
     @State private var showSignOutAlert = false
     

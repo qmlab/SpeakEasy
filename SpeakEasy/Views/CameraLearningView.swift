@@ -37,7 +37,21 @@ struct CameraLearningView: View {
 
             // Overlay UI
             VStack {
-                // Top: instruction banner
+                // Top: close button + instruction banner
+                HStack {
+                    Button {
+                        onResult(false, 0)
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 32))
+                            .foregroundColor(.white)
+                            .shadow(radius: 4)
+                    }
+                    .padding(.leading, 16)
+                    .padding(.top, 8)
+                    Spacer()
+                }
+
                 instructionBanner
 
                 Spacer()
