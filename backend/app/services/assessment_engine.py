@@ -9,6 +9,7 @@ Key design:
 - Animal characters provide narrative framing so it feels like play
 - ~12-18 activities total, ~30-45 seconds each = 6-10 minutes
 - Results set initial levels for all DevelopmentalProfile entries
+- Assessment state is persisted to the database (survives server restarts)
 """
 
 import uuid
@@ -22,6 +23,7 @@ from app.models.adaptive import (
     DevelopmentalProfile,
     DevelopmentalDimension,
     AdaptiveTask,
+    Assessment,
 )
 from app.models.player import Player
 
@@ -118,45 +120,6 @@ STORY_INTRO = (
 MAX_ASSESSMENT_LEVEL = 2  # Only test up to level 2 during assessment
 
 
-class AssessmentState:
-    """In-memory state for an ongoing assessment."""
-
-    def __init__(
-        self,
-        assessment_id: str,
-        player_id: str,
-        character: dict,
-    ):
-        self.assessment_id = assessment_id
-        self.player_id = player_id
-        self.character = character
-        self.started_at = datetime.utcnow()
-        self.completed_at: Optional[datetime] = None
-
-        # Track per-dimension progress
-        # {dimension: {"current_level": 0, "results": [(level, is_correct), ...]}}
-        self.dimension_state: dict[str, dict] = {}
-        for dim in DIMENSION_ORDER:
-            self.dimension_state[dim] = {
-                "current_level": 0,
-                "results": [],
-                "done": False,
-                "assessed_level": 0,
-            }
-
-        # Activity queue
-        self.activities: list[dict] = []
-        self.current_index: int = 0
-        self.completed: bool = False
-
-        # Cache task IDs per activity index to avoid random re-fetch mismatch
-        self.activity_task_ids: dict[int, str] = {}
-
-
-# In-memory store for active assessments
-_active_assessments: dict[str, AssessmentState] = {}
-
-
 class AssessmentEngine:
     def __init__(self, db: Session):
         self.db = db
@@ -173,16 +136,33 @@ class AssessmentEngine:
         character = random.choice(CHARACTERS)
 
         assessment_id = str(uuid.uuid4())
-        state = AssessmentState(
-            assessment_id=assessment_id,
-            player_id=player_id,
-            character=character,
-        )
 
         # Build activity queue
-        self._build_activity_queue(state)
+        activities = self._build_activity_queue()
 
-        _active_assessments[assessment_id] = state
+        # Build initial dimension state
+        dimension_state: dict[str, dict] = {}
+        for dim in DIMENSION_ORDER:
+            dimension_state[dim] = {
+                "current_level": 0,
+                "results": [],
+                "done": False,
+                "assessed_level": 0,
+            }
+
+        # Persist to database
+        assessment = Assessment(
+            id=assessment_id,
+            player_id=player_id,
+            character=character,
+            started_at=datetime.utcnow(),
+            activities=activities,
+            current_index=0,
+            dimension_state=dimension_state,
+            activity_task_ids={},
+        )
+        self.db.add(assessment)
+        self.db.commit()
 
         story_intro = STORY_INTRO.format(
             emoji=character["emoji"],
@@ -199,47 +179,55 @@ class AssessmentEngine:
                 "greeting": character["greeting"],
             },
             "story_intro": story_intro,
-            "total_activities": len(state.activities),
+            "total_activities": len(activities),
         }
 
     def get_next_activity(self, assessment_id: str) -> Optional[dict]:
         """Get the next activity in the assessment game."""
-        state = self._get_state(assessment_id)
+        assessment = self._get_assessment(assessment_id)
+        activities = assessment.activities
+        current_index = assessment.current_index
 
-        if state.current_index >= len(state.activities):
+        if current_index >= len(activities):
             return None
 
-        activity = state.activities[state.current_index]
+        activity = activities[current_index]
         dimension = activity["dimension"]
         level = activity["level"]
+        character = assessment.character
 
         # Get narrative
         dim_narratives = DIMENSION_NARRATIVES.get(dimension, {})
         narrative_template = dim_narratives.get(
             level, "{name} has a challenge for you!"
         )
-        narrative = narrative_template.format(name=state.character["name"])
+        narrative = narrative_template.format(name=character["name"])
 
         # Fetch a task from the database and cache its ID
         task = self._find_assessment_task(dimension, level)
 
         if not task:
             # Skip this activity if no task available
-            state.current_index += 1
+            assessment.current_index = current_index + 1
+            self.db.commit()
             return self.get_next_activity(assessment_id)
 
         # Cache so process_response uses the same task
-        state.activity_task_ids[state.current_index] = task.id
+        task_ids = dict(assessment.activity_task_ids or {})
+        task_ids[str(current_index)] = task.id
+        assessment.activity_task_ids = task_ids
+        self.db.commit()
+
         content = task.content or {}
 
         return {
-            "activity_index": state.current_index,
-            "total_activities": len(state.activities),
+            "activity_index": current_index,
+            "total_activities": len(activities),
             "dimension": dimension,
             "level": level,
             "character": {
-                "name": state.character["name"],
-                "emoji": state.character["emoji"],
+                "name": character["name"],
+                "emoji": character["emoji"],
             },
             "content": {
                 "instruction": content.get("instruction", "Can you do this?"),
@@ -250,7 +238,7 @@ class AssessmentEngine:
                 "target_word": content.get("target_word"),
                 "interaction_type": self._get_interaction_type(dimension, level),
             },
-            "is_last": state.current_index >= len(state.activities) - 1,
+            "is_last": current_index >= len(activities) - 1,
         }
 
     def process_response(
@@ -263,17 +251,19 @@ class AssessmentEngine:
         interaction_type: str = "touch",
     ) -> dict:
         """Process a child's response to an assessment activity."""
-        state = self._get_state(assessment_id)
+        assessment = self._get_assessment(assessment_id)
+        activities = assessment.activities
 
-        if activity_index >= len(state.activities):
+        if activity_index >= len(activities):
             raise ValueError("Activity index out of range")
 
-        activity = state.activities[activity_index]
+        activity = activities[activity_index]
         dimension = activity["dimension"]
         level = activity["level"]
 
         # Look up the cached task (same one shown in get_next_activity)
-        cached_task_id = state.activity_task_ids.get(activity_index)
+        task_ids = assessment.activity_task_ids or {}
+        cached_task_id = task_ids.get(str(activity_index))
         if cached_task_id:
             task = (
                 self.db.query(AdaptiveTask)
@@ -286,40 +276,51 @@ class AssessmentEngine:
             task, selected_option, spoken_text, interaction_type
         )
 
-        # Record result
-        dim_state = state.dimension_state[dimension]
-        dim_state["results"].append(
+        # Update dimension state (must copy to trigger SQLAlchemy change detection)
+        dim_state = dict(assessment.dimension_state)
+        dim_entry = dict(dim_state[dimension])
+        dim_results = list(dim_entry["results"])
+        dim_results.append(
             {
                 "level": level,
                 "is_correct": is_correct,
                 "response_time_ms": response_time_ms,
             }
         )
+        dim_entry["results"] = dim_results
 
         # Update assessed level
-        if is_correct and level >= dim_state["assessed_level"]:
-            dim_state["assessed_level"] = level
+        if is_correct and level >= dim_entry["assessed_level"]:
+            dim_entry["assessed_level"] = level
 
         # Adaptive logic: if failed, mark dimension done (don't test higher levels)
+        current_index = assessment.current_index
         if not is_correct:
-            dim_state["done"] = True
+            dim_entry["done"] = True
             # Remove future activities for this dimension at higher levels
-            state.activities = [
+            new_activities = [
                 a
-                for i, a in enumerate(state.activities)
-                if i <= state.current_index
+                for i, a in enumerate(activities)
+                if i <= current_index
                 or a["dimension"] != dimension
                 or a["level"] <= level
             ]
+            assessment.activities = new_activities
+            activities = new_activities
+
+        dim_state[dimension] = dim_entry
+        assessment.dimension_state = dim_state
 
         # Move to next activity
-        state.current_index += 1
+        assessment.current_index = current_index + 1
+        self.db.commit()
 
         # Generate feedback
         import random
 
+        character = assessment.character
         if is_correct:
-            encouragement = random.choice(state.character["encouragement"])
+            encouragement = random.choice(character["encouragement"])
             feedback = {
                 "message": encouragement,
                 "emoji": "⭐",
@@ -327,15 +328,13 @@ class AssessmentEngine:
             }
         else:
             feedback = {
-                "message": f"That's okay! {state.character['name']} thinks you're great!",
+                "message": f"That's okay! {character['name']} thinks you're great!",
                 "emoji": "💪",
                 "is_correct": False,
             }
 
-        should_continue = state.current_index < len(state.activities)
-        progress = (
-            state.current_index / len(state.activities) if state.activities else 1.0
-        )
+        should_continue = assessment.current_index < len(activities)
+        progress = assessment.current_index / len(activities) if activities else 1.0
 
         return {
             "is_correct": is_correct,
@@ -346,9 +345,12 @@ class AssessmentEngine:
 
     def complete_assessment(self, assessment_id: str) -> dict:
         """Complete the assessment and update developmental profiles."""
-        state = self._get_state(assessment_id)
-        state.completed = True
-        state.completed_at = datetime.utcnow()
+        assessment = self._get_assessment(assessment_id)
+        assessment.completed = True
+        assessment.completed_at = datetime.utcnow()
+
+        dim_state = assessment.dimension_state
+        character = assessment.character
 
         # Calculate results per dimension
         dimension_results = []
@@ -356,8 +358,8 @@ class AssessmentEngine:
         total_count = 0
 
         for dim in DIMENSION_ORDER:
-            dim_state = state.dimension_state[dim]
-            results = dim_state["results"]
+            dim_entry = dim_state.get(dim, {})
+            results = dim_entry.get("results", [])
             correct = sum(1 for r in results if r["is_correct"])
             count = len(results)
             total_correct += correct
@@ -388,9 +390,9 @@ class AssessmentEngine:
             )
 
             # Stage the developmental profile update (no commit yet)
-            self._update_profile(state.player_id, dim, assessed_level)
+            self._update_profile(assessment.player_id, dim, assessed_level)
 
-        # Commit all profile updates in a single transaction
+        # Commit assessment completion + all profile updates in a single transaction
         self.db.commit()
 
         overall_level = (
@@ -400,33 +402,35 @@ class AssessmentEngine:
         )
 
         duration = None
-        if state.completed_at and state.started_at:
-            duration = int((state.completed_at - state.started_at).total_seconds())
-
-        # Clean up
-        _active_assessments.pop(assessment_id, None)
+        if assessment.completed_at and assessment.started_at:
+            duration = int(
+                (assessment.completed_at - assessment.started_at).total_seconds()
+            )
 
         return {
             "assessment_id": assessment_id,
-            "player_id": state.player_id,
+            "player_id": assessment.player_id,
             "dimensions": dimension_results,
             "overall_level": round(overall_level, 2),
             "total_activities": total_count,
             "total_correct": total_correct,
             "duration_seconds": duration,
-            "character_message": state.character["celebration"],
+            "character_message": character["celebration"],
         }
 
     def get_results(self, assessment_id: str) -> Optional[dict]:
         """Get results for a completed or in-progress assessment."""
-        state = _active_assessments.get(assessment_id)
-        if not state:
+        assessment = (
+            self.db.query(Assessment).filter(Assessment.id == assessment_id).first()
+        )
+        if not assessment:
             return None
 
+        dim_state = assessment.dimension_state or {}
         dimension_results = []
         for dim in DIMENSION_ORDER:
-            dim_state = state.dimension_state[dim]
-            results = dim_state["results"]
+            dim_entry = dim_state.get(dim, {})
+            results = dim_entry.get("results", [])
             correct = sum(1 for r in results if r["is_correct"])
             count = len(results)
 
@@ -460,19 +464,21 @@ class AssessmentEngine:
 
         return {
             "assessment_id": assessment_id,
-            "player_id": state.player_id,
+            "player_id": assessment.player_id,
             "dimensions": dimension_results,
             "overall_level": round(overall_level, 2),
-            "completed": state.completed,
-            "started_at": state.started_at.isoformat() if state.started_at else None,
+            "completed": assessment.completed,
+            "started_at": (
+                assessment.started_at.isoformat() if assessment.started_at else None
+            ),
             "completed_at": (
-                state.completed_at.isoformat() if state.completed_at else None
+                assessment.completed_at.isoformat() if assessment.completed_at else None
             ),
         }
 
     # -- Internal helpers --
 
-    def _build_activity_queue(self, state: AssessmentState) -> None:
+    def _build_activity_queue(self) -> list[dict]:
         """Build the sequence of assessment activities.
 
         Strategy: For each dimension, plan level 0, 1, 2.
@@ -492,7 +498,7 @@ class AssessmentEngine:
         for dim in DIMENSION_ORDER:
             activities.append({"dimension": dim, "level": 2})
 
-        state.activities = activities
+        return activities
 
     def _find_assessment_task(
         self, dimension: str, level: int
@@ -594,14 +600,21 @@ class AssessmentEngine:
             profile.last_assessed_at = datetime.utcnow()
             profile.updated_at = datetime.utcnow()
 
-    def _get_state(self, assessment_id: str) -> AssessmentState:
-        """Get assessment state or raise error."""
-        state = _active_assessments.get(assessment_id)
-        if not state:
+    def _get_assessment(self, assessment_id: str) -> Assessment:
+        """Get assessment from database or raise error."""
+        assessment = (
+            self.db.query(Assessment)
+            .filter(
+                Assessment.id == assessment_id,
+                Assessment.completed == False,  # noqa: E712
+            )
+            .first()
+        )
+        if not assessment:
             raise ValueError(
                 f"Assessment {assessment_id} not found or already completed"
             )
-        return state
+        return assessment
 
 
 def _get_dimension_display_info(dim: DevelopmentalDimension) -> dict:

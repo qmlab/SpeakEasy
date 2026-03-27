@@ -56,7 +56,10 @@ def seed_object_cognition_tasks(db: Session) -> int:
     """Seed object cognition tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.OBJECT_COGNITION.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.OBJECT_COGNITION.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -83,7 +86,7 @@ def seed_object_cognition_tasks(db: Session) -> int:
                         {"name": "Ball", "category": "Toys", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
@@ -158,7 +161,7 @@ def seed_object_cognition_tasks(db: Session) -> int:
                         {"name": "Fish", "category": "Animals", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
@@ -234,7 +237,7 @@ def seed_object_cognition_tasks(db: Session) -> int:
                         {"name": "Chair", "category": "Household", "is_target": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
@@ -298,7 +301,7 @@ def seed_object_cognition_tasks(db: Session) -> int:
                         {"name": "Chair", "category": "Household", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
@@ -362,7 +365,7 @@ def seed_object_cognition_tasks(db: Session) -> int:
                         {"name": "Bird", "category": "Animals", "is_odd": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
@@ -427,7 +430,8 @@ def seed_language_expression_tasks(db: Session) -> int:
     existing = (
         db.query(AdaptiveTask)
         .filter(
-            AdaptiveTask.dimension == DevelopmentalDimension.LANGUAGE_EXPRESSION.value
+            AdaptiveTask.dimension == DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
         )
         .count()
     )
@@ -452,7 +456,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "accept_threshold": 0.5,
                     "syllables": 1,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
@@ -500,7 +504,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "target_category": "Food",
                     "accept_threshold": 0.6,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
@@ -548,7 +552,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "target_phrases": ["red ball", "ball grass", "red", "ball"],
                     "accept_threshold": 0.4,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
@@ -596,7 +600,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "correct_order": [0, 1, 2, 3],
                     "target_sentence": "The dog is big",
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
@@ -659,7 +663,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     ],
                     "accept_threshold": 0.3,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
@@ -720,7 +724,8 @@ def seed_language_comprehension_tasks(db: Session) -> int:
         db.query(AdaptiveTask)
         .filter(
             AdaptiveTask.dimension
-            == DevelopmentalDimension.LANGUAGE_COMPREHENSION.value
+            == DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
         )
         .count()
     )
@@ -748,7 +753,7 @@ def seed_language_comprehension_tasks(db: Session) -> int:
                         {"name": "Ball", "category": "Toys", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
@@ -807,7 +812,7 @@ def seed_language_comprehension_tasks(db: Session) -> int:
                         {"name": "Book", "category": "Household", "is_target": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
@@ -873,7 +878,7 @@ def seed_language_comprehension_tasks(db: Session) -> int:
                         {"name": "Chair", "category": "Household"},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
@@ -946,7 +951,7 @@ def seed_language_comprehension_tasks(db: Session) -> int:
                         {"text": "He found a toy", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
@@ -1015,7 +1020,7 @@ def seed_language_comprehension_tasks(db: Session) -> int:
                     ],
                     "reasoning": "Dark sky and big clouds usually mean rain",
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
@@ -1069,7 +1074,10 @@ def seed_literacy_tasks(db: Session) -> int:
     """Seed literacy tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.LITERACY.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.LITERACY.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -1096,7 +1104,7 @@ def seed_literacy_tasks(db: Session) -> int:
                         {"name": "Hat", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
@@ -1153,7 +1161,7 @@ def seed_literacy_tasks(db: Session) -> int:
                         {"image_name": "Bird", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
@@ -1206,7 +1214,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "target_word": "Dog",
                     "accept_threshold": 0.6,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
@@ -1251,7 +1259,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "target_sentence": "I see a dog.",
                     "accept_threshold": 0.5,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
@@ -1301,7 +1309,7 @@ def seed_literacy_tasks(db: Session) -> int:
                         {"text": "At school", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
@@ -1353,7 +1361,10 @@ def seed_social_behavior_tasks(db: Session) -> int:
     """Seed social behavior tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.SOCIAL_BEHAVIOR.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -1380,7 +1391,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                         {"action": "reading", "position": "right"},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
@@ -1446,7 +1457,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                         {"action": "wave", "label": "Wave", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
@@ -1518,7 +1529,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                     "sequence": ["bear_rolls", "your_turn", "bear_rolls", "your_turn"],
                     "current_step": 1,
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
@@ -1575,7 +1586,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                         {"name": "Tree", "position": "center"},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
@@ -1638,7 +1649,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                         {"action": "ignore", "label": "Do nothing", "is_best": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
@@ -1700,7 +1711,10 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
     """Seed cognitive logic tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.COGNITIVE_LOGIC.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.COGNITIVE_LOGIC.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -1748,7 +1762,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                     ],
                     "correct_pair": "A",
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
@@ -1830,7 +1844,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                         {"name": "Red Hat", "color": "red", "is_target": True},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
@@ -1893,7 +1907,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                         {"text": "It grows", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
@@ -1951,7 +1965,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                         {"text": "Close the sandwich", "order": 3},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
@@ -2010,7 +2024,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                         {"text": "Six", "is_correct": False},
                     ],
                 },
-                is_assessment=True,
+                is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
