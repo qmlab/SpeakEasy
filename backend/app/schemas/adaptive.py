@@ -90,6 +90,7 @@ class AttemptResultResponse(BaseModel):
     should_level_down: bool
     confidence_rebuild: bool
     next_action: str
+    level_change: int = 0
 
 
 class EndSessionResponse(BaseModel):

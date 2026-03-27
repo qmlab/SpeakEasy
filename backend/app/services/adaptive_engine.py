@@ -201,7 +201,17 @@ class AdaptiveEngine:
         )
 
         if not task:
-            # Try adjacent levels if no task found at target level
+            # Prefer repeating at the target level before moving to adjacent
+            # levels so children get enough practice before harder content.
+            task = self._select_task(
+                dimension=dimension,
+                level=target_level,
+                is_assessment=False,
+                exclude_task_ids=[],
+            )
+
+        if not task:
+            # Try adjacent levels if no task found at target level at all
             for offset in [1, -1, 2, -2]:
                 alt_level = target_level + offset
                 if MIN_LEVEL <= alt_level <= MAX_LEVEL:
@@ -213,15 +223,6 @@ class AdaptiveEngine:
                     )
                     if task:
                         break
-
-        if not task:
-            # Fallback: get any task in this dimension, allow repeats
-            task = self._select_task(
-                dimension=dimension,
-                level=target_level,
-                is_assessment=False,
-                exclude_task_ids=[],
-            )
 
         if not task:
             return None
@@ -311,8 +312,15 @@ class AdaptiveEngine:
         task = self.db.query(AdaptiveTask).filter(AdaptiveTask.id == task_id).first()
         dimension = task.dimension if task else (session.dimension if session else None)
 
-        # Compute adaptive feedback
-        recent_attempts = self._get_recent_attempts(player_id, dimension)
+        # Compute adaptive feedback scoped to the task's level so that
+        # stale accuracy from a previous level cannot trigger an unintended
+        # level change immediately after promotion/demotion.
+        task_level = task.level if task else None
+        profile = None
+        if dimension:
+            profile = self.get_profile(player_id, dimension)
+
+        recent_attempts = self._get_recent_attempts(player_id, dimension, level=task_level)
         accuracy = self._compute_accuracy(recent_attempts)
         consecutive_fails = self._count_consecutive_fails(recent_attempts)
         streak = self._count_streak(recent_attempts)
@@ -321,23 +329,21 @@ class AdaptiveEngine:
         should_level_down = accuracy <= LEVEL_DOWN_THRESHOLD and len(recent_attempts) >= ACCURACY_WINDOW // 2
         confidence_rebuild = consecutive_fails >= CONSECUTIVE_FAIL_LIMIT
 
-        # Apply level changes
+        # Apply level changes (reuse profile fetched above)
         level_change = 0
-        if dimension:
-            profile = self.get_profile(player_id, dimension)
-            if profile:
-                if should_level_up and profile.level < MAX_LEVEL:
-                    profile.level += 1
-                    level_change = 1
-                    if session:
-                        session.current_level = profile.level
-                elif should_level_down and profile.level > MIN_LEVEL:
-                    profile.level -= 1
-                    level_change = -1
-                    if session:
-                        session.current_level = profile.level
-                profile.updated_at = datetime.utcnow()
-                self.db.commit()
+        if dimension and profile:
+            if should_level_up and profile.level < MAX_LEVEL:
+                profile.level += 1
+                level_change = 1
+                if session:
+                    session.current_level = profile.level
+            elif should_level_down and profile.level > MIN_LEVEL:
+                profile.level -= 1
+                level_change = -1
+                if session:
+                    session.current_level = profile.level
+            profile.updated_at = datetime.utcnow()
+            self.db.commit()
 
         # Determine reward
         config = self._get_reinforcement_config(player_id)
@@ -419,19 +425,26 @@ class AdaptiveEngine:
     # ---- Helper Methods ----
 
     def _get_recent_attempts(
-        self, player_id: str, dimension: Optional[str] = None
+        self, player_id: str, dimension: Optional[str] = None, level: Optional[int] = None
     ) -> list[TaskAttempt]:
-        """Get recent attempts for accuracy computation."""
+        """Get recent attempts for accuracy computation.
+        
+        When level is provided, only attempts on tasks at that level are
+        considered.  This prevents stale high-accuracy from a previous
+        level from triggering an unintended level-up right after promotion.
+        """
         query = (
             self.db.query(TaskAttempt)
             .filter(TaskAttempt.player_id == player_id)
             .order_by(desc(TaskAttempt.created_at))
         )
 
-        if dimension:
-            query = query.join(AdaptiveTask, TaskAttempt.task_id == AdaptiveTask.id).filter(
-                AdaptiveTask.dimension == dimension
-            )
+        if dimension or level is not None:
+            query = query.join(AdaptiveTask, TaskAttempt.task_id == AdaptiveTask.id)
+            if dimension:
+                query = query.filter(AdaptiveTask.dimension == dimension)
+            if level is not None:
+                query = query.filter(AdaptiveTask.level == level)
 
         return query.limit(ACCURACY_WINDOW).all()
 
