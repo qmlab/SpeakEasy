@@ -43,8 +43,7 @@ class GuidanceRecommendation(BaseModel):
     dimension_label: Optional[str] = None
     current_level: Optional[int] = None
     priority: str = Field(description="'high', 'medium', or 'low'")
-    suggestion: Optional[str] = None
-    suggestions: Optional[list[str]] = None
+    suggestions: list[str] = Field(description="List of actionable suggestions")
     rationale: Optional[str] = None
 
 

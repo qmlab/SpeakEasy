@@ -367,6 +367,7 @@ class AIService:
                 result = self._parse_json_response(llm_response)
                 result["source"] = "llm"
                 result["player_id"] = player_id
+                result["social_level"] = social_level
                 # Validate against the response schema before returning
                 SocialStoryResponse(**result)
                 return result
@@ -415,7 +416,7 @@ class AIService:
             "to parents and therapists of a child with autism. "
             "Give practical, evidence-based recommendations. "
             "Return valid JSON with keys: summary (string), recommendations (list of objects "
-            "with keys: dimension, priority (high/medium/low), suggestion, rationale), "
+            "with keys: dimension, priority (high/medium/low), suggestions (list of strings), rationale), "
             "home_activities (list of strings). "
             f"{lang_instruction}"
         )
