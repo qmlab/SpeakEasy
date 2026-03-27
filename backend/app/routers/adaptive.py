@@ -57,7 +57,9 @@ def get_player_profiles(player_id: str, db: Session = Depends(get_db)):
     )
 
 
-@router.put("/profiles/{player_id}/{dimension}", response_model=DevelopmentalProfileResponse)
+@router.put(
+    "/profiles/{player_id}/{dimension}", response_model=DevelopmentalProfileResponse
+)
 def update_player_profile(
     player_id: str,
     dimension: str,
@@ -69,7 +71,10 @@ def update_player_profile(
 
     valid_dims = [d.value for d in DevelopmentalDimension]
     if dimension not in valid_dims:
-        raise HTTPException(status_code=400, detail=f"Invalid dimension: {dimension}. Valid: {valid_dims}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid dimension: {dimension}. Valid: {valid_dims}",
+        )
 
     engine = AdaptiveEngine(db)
     profile = engine.get_profile(player_id, dimension)
@@ -97,7 +102,9 @@ def start_session(request: StartSessionRequest, db: Session = Depends(get_db)):
     if request.dimension:
         valid_dims = [d.value for d in DevelopmentalDimension]
         if request.dimension not in valid_dims:
-            raise HTTPException(status_code=400, detail=f"Invalid dimension: {request.dimension}")
+            raise HTTPException(
+                status_code=400, detail=f"Invalid dimension: {request.dimension}"
+            )
 
     engine = AdaptiveEngine(db)
     session = engine.start_session(
@@ -117,7 +124,11 @@ def end_session(session_id: str, db: Session = Depends(get_db)):
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
-    accuracy = (session.correct_count / session.total_count) if session.total_count > 0 else 0.0
+    accuracy = (
+        (session.correct_count / session.total_count)
+        if session.total_count > 0
+        else 0.0
+    )
 
     # Calculate level change from session attempts
     level_change = 0  # Will be tracked in future iterations

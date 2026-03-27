@@ -183,9 +183,11 @@ struct LearningSessionView: View {
             if let imageHint = task.content.imageHint, !imageHint.isEmpty {
                 RemoteImageView(
                     objectName: imageHint,
-                    imageType: "flashcard"
+                    imageType: .flashcard,
+                    fallbackIcon: "photo",
+                    iconColor: dimension.color,
+                    size: 180
                 )
-                .frame(height: 180)
                 .cornerRadius(16)
             }
 

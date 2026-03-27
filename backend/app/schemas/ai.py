@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 # -- Social Story --
 
+
 class SocialStoryRequest(BaseModel):
     player_id: str
     scenario: Optional[str] = Field(
@@ -26,6 +27,7 @@ class SocialStoryResponse(BaseModel):
 
 
 # -- Behavior Guidance --
+
 
 class BehaviorGuidanceRequest(BaseModel):
     player_id: str
@@ -56,6 +58,7 @@ class BehaviorGuidanceResponse(BaseModel):
 
 
 # -- Progress Summary --
+
 
 class ProgressSummaryRequest(BaseModel):
     player_id: str
@@ -90,6 +93,7 @@ class ProgressSummaryResponse(BaseModel):
 
 # -- Task Content Generation --
 
+
 class TaskContentRequest(BaseModel):
     player_id: str
     dimension: str
@@ -120,6 +124,7 @@ class TaskContentResponse(BaseModel):
 
 
 # -- AI Status --
+
 
 class AIStatusResponse(BaseModel):
     llm_enabled: bool

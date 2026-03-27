@@ -26,8 +26,6 @@ from sqlalchemy import desc, func
 from app.models.adaptive import (
     DevelopmentalProfile,
     LearningSession,
-    TaskAttempt,
-    AdaptiveTask,
     DevelopmentalDimension,
 )
 from app.models.player import Player
@@ -227,9 +225,7 @@ class _LLMClient:
 
     def __init__(self) -> None:
         self.api_key: str = os.getenv("OPENAI_API_KEY", "")
-        self.base_url: str = os.getenv(
-            "OPENAI_BASE_URL", "https://api.openai.com/v1"
-        )
+        self.base_url: str = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
         self.model: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
         self.enabled: bool = bool(self.api_key)
 
@@ -342,7 +338,11 @@ class AIService:
         social_level = social_profile.level if social_profile else 0
 
         # Try LLM first
-        lang_instruction = "Respond in Chinese (简体中文)." if language == "zh" else "Respond in English."
+        lang_instruction = (
+            "Respond in Chinese (简体中文)."
+            if language == "zh"
+            else "Respond in English."
+        )
         system_prompt = (
             "You are an expert ABA therapist and children's story author. "
             "Write a short, personalized social story for a child with autism. "
@@ -351,7 +351,11 @@ class AIService:
             "Return valid JSON with keys: title, story, target_skill, practice_tips (list of 3 strings). "
             f"{lang_instruction}"
         )
-        scenario_text = f"Specific scenario requested: {scenario}" if scenario else "No specific scenario; create one appropriate for the level."
+        scenario_text = (
+            f"Specific scenario requested: {scenario}"
+            if scenario
+            else "No specific scenario; create one appropriate for the level."
+        )
         user_prompt = (
             f"Child profile:\n{profile_text}\n\n"
             f"Child's name: {player.name}\n"
@@ -375,7 +379,9 @@ class AIService:
                 logger.warning("Failed to parse/validate LLM social story response")
 
         # Template fallback
-        template = _SOCIAL_STORY_TEMPLATES[min(social_level, len(_SOCIAL_STORY_TEMPLATES) - 1)]
+        template = _SOCIAL_STORY_TEMPLATES[
+            min(social_level, len(_SOCIAL_STORY_TEMPLATES) - 1)
+        ]
         return {
             "player_id": player_id,
             "title": template["title"],
@@ -410,7 +416,11 @@ class AIService:
         session_summary = self._sessions_summary_text(sessions)
 
         # Try LLM
-        lang_instruction = "Respond in Chinese (简体中文)." if language == "zh" else "Respond in English."
+        lang_instruction = (
+            "Respond in Chinese (简体中文)."
+            if language == "zh"
+            else "Respond in English."
+        )
         system_prompt = (
             "You are a Board Certified Behavior Analyst (BCBA) providing guidance "
             "to parents and therapists of a child with autism. "
@@ -421,7 +431,9 @@ class AIService:
             f"{lang_instruction}"
         )
         concern_text = f"Specific concern: {concern}" if concern else ""
-        dim_text = f"Focus on dimension: {dimension}" if dimension else "Cover all dimensions."
+        dim_text = (
+            f"Focus on dimension: {dimension}" if dimension else "Cover all dimensions."
+        )
         user_prompt = (
             f"Child: {player.name}\n"
             f"Profile:\n{profile_text}\n\n"
@@ -444,21 +456,29 @@ class AIService:
 
         # Template fallback
         recommendations = []
-        target_dims = [dimension] if dimension else [d.value for d in DevelopmentalDimension]
+        target_dims = (
+            [dimension] if dimension else [d.value for d in DevelopmentalDimension]
+        )
         for dim in target_dims:
             profile = next((p for p in profiles if p.dimension == dim), None)
             level = profile.level if profile else 0
             tips = _GUIDANCE_BY_DIMENSION.get(dim, [])
             if tips:
-                recommendations.append({
-                    "dimension": dim,
-                    "dimension_label": DIMENSION_LABELS.get(dim, dim),
-                    "current_level": level,
-                    "priority": "high" if level <= 1 else ("medium" if level <= 3 else "low"),
-                    "suggestions": tips,
-                })
+                recommendations.append(
+                    {
+                        "dimension": dim,
+                        "dimension_label": DIMENSION_LABELS.get(dim, dim),
+                        "current_level": level,
+                        "priority": "high"
+                        if level <= 1
+                        else ("medium" if level <= 3 else "low"),
+                        "suggestions": tips,
+                    }
+                )
 
-        struggling_dims = [r["dimension_label"] for r in recommendations if r["priority"] == "high"]
+        struggling_dims = [
+            r["dimension_label"] for r in recommendations if r["priority"] == "high"
+        ]
         if struggling_dims:
             summary = f"{player.name} would benefit most from focused support in: {', '.join(struggling_dims)}."
         else:
@@ -516,7 +536,9 @@ class AIService:
             or 0
         )
         total_correct = int(total_correct)
-        overall_accuracy = (total_correct / total_attempts * 100) if total_attempts > 0 else 0
+        overall_accuracy = (
+            (total_correct / total_attempts * 100) if total_attempts > 0 else 0
+        )
 
         # Dimension-level analysis
         dim_analysis: list[dict] = []
@@ -525,18 +547,28 @@ class AIService:
             descs = LEVEL_DESCRIPTIONS.get(p.dimension, [])
             current = descs[p.level] if p.level < len(descs) else "advanced"
             next_skill = descs[p.level + 1] if p.level + 1 < len(descs) else None
-            status = "advanced" if p.level >= 3 else ("progressing" if p.level >= 1 else "beginning")
-            dim_analysis.append({
-                "dimension": p.dimension,
-                "dimension_label": label,
-                "level": p.level,
-                "current_ability": current,
-                "next_skill": next_skill,
-                "status": status,
-            })
+            status = (
+                "advanced"
+                if p.level >= 3
+                else ("progressing" if p.level >= 1 else "beginning")
+            )
+            dim_analysis.append(
+                {
+                    "dimension": p.dimension,
+                    "dimension_label": label,
+                    "level": p.level,
+                    "current_ability": current,
+                    "next_skill": next_skill,
+                    "status": status,
+                }
+            )
 
         # Try LLM for richer narrative
-        lang_instruction = "Respond in Chinese (简体中文)." if language == "zh" else "Respond in English."
+        lang_instruction = (
+            "Respond in Chinese (简体中文)."
+            if language == "zh"
+            else "Respond in English."
+        )
         system_prompt = (
             "You are a developmental specialist writing a progress report for parents "
             "of a child with autism. Write a warm, encouraging yet honest summary. "
@@ -579,9 +611,7 @@ class AIService:
             if d["status"] in ("advanced", "progressing")
         ]
         growth_areas = [
-            d["dimension_label"]
-            for d in dim_analysis
-            if d["status"] == "beginning"
+            d["dimension_label"] for d in dim_analysis if d["status"] == "beginning"
         ]
         next_steps = []
         for d in dim_analysis:
@@ -617,8 +647,12 @@ class AIService:
             "player_id": player_id,
             "narrative": narrative,
             "strengths": strengths if strengths else ["Starting the learning journey"],
-            "areas_for_growth": growth_areas if growth_areas else ["Building foundations across all areas"],
-            "next_steps": next_steps if next_steps else ["Continue daily practice sessions"],
+            "areas_for_growth": growth_areas
+            if growth_areas
+            else ["Building foundations across all areas"],
+            "next_steps": next_steps
+            if next_steps
+            else ["Continue daily practice sessions"],
             "dimensions": dim_analysis,
             "stats": {
                 "total_sessions": total_sessions,
@@ -651,10 +685,16 @@ class AIService:
         profile = next((p for p in profiles if p.dimension == dimension), None)
         level = profile.level if profile else 0
 
-        interests_text = ", ".join(interests) if interests else "animals, vehicles, food"
+        interests_text = (
+            ", ".join(interests) if interests else "animals, vehicles, food"
+        )
 
         # Try LLM
-        lang_instruction = "Respond in Chinese (简体中文)." if language == "zh" else "Respond in English."
+        lang_instruction = (
+            "Respond in Chinese (简体中文)."
+            if language == "zh"
+            else "Respond in English."
+        )
         system_prompt = (
             "You are a curriculum designer for children with autism. "
             "Generate task content for adaptive learning exercises. "
@@ -678,7 +718,9 @@ class AIService:
             "Generate personalized task content."
         )
 
-        llm_response = _llm.call(system_prompt, user_prompt, temperature=0.9, max_tokens=2048)
+        llm_response = _llm.call(
+            system_prompt, user_prompt, temperature=0.9, max_tokens=2048
+        )
         if llm_response:
             try:
                 result = self._parse_json_response(llm_response)
@@ -717,7 +759,9 @@ class AIService:
             "llm_enabled": _llm.enabled,
             "model": _llm.model if _llm.enabled else None,
             "base_url": _llm.base_url if _llm.enabled else None,
-            "fallback_mode": "template" if not _llm.enabled else "llm_with_template_fallback",
+            "fallback_mode": "template"
+            if not _llm.enabled
+            else "llm_with_template_fallback",
             "supported_features": [
                 "social_story_generation",
                 "behavior_guidance",
@@ -746,7 +790,9 @@ class AIService:
         """Extract JSON from an LLM response that may include markdown fences."""
         text = text.strip()
         # Search for markdown code fences anywhere in the text
-        fence_match = re.search(r"```(?:json)?\s*\n?(.*?)```", text, re.DOTALL | re.IGNORECASE)
+        fence_match = re.search(
+            r"```(?:json)?\s*\n?(.*?)```", text, re.DOTALL | re.IGNORECASE
+        )
         if fence_match:
             text = fence_match.group(1).strip()
         return json.loads(text)
@@ -774,7 +820,9 @@ class AIService:
             task = {
                 "instruction": template["instruction"].format(interest=interest),
                 "correct_answer": template["correct_answer"].format(interest=interest),
-                "options": [opt.format(interest=interest) for opt in template["options"]],
+                "options": [
+                    opt.format(interest=interest) for opt in template["options"]
+                ],
                 "image_hint": template["image_hint"].format(interest=interest),
                 "difficulty_note": f"Level {level} - {task_type}",
             }

@@ -30,7 +30,9 @@ def list_tasks(
     if dimension:
         valid_dims = [d.value for d in DevelopmentalDimension]
         if dimension not in valid_dims:
-            raise HTTPException(status_code=400, detail=f"Invalid dimension: {dimension}")
+            raise HTTPException(
+                status_code=400, detail=f"Invalid dimension: {dimension}"
+            )
         query = query.filter(AdaptiveTask.dimension == dimension)
 
     if level is not None:
@@ -57,7 +59,9 @@ def create_task(task_data: AdaptiveTaskCreate, db: Session = Depends(get_db)):
     """Create a new adaptive task."""
     valid_dims = [d.value for d in DevelopmentalDimension]
     if task_data.dimension not in valid_dims:
-        raise HTTPException(status_code=400, detail=f"Invalid dimension: {task_data.dimension}")
+        raise HTTPException(
+            status_code=400, detail=f"Invalid dimension: {task_data.dimension}"
+        )
 
     task = AdaptiveTask(
         dimension=task_data.dimension,
