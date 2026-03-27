@@ -19,3 +19,7 @@ class Player(Base):
 
     attempts = relationship("AttemptHistory", back_populates="player")
     progress = relationship("PlayerProgress", back_populates="player")
+    profiles = relationship("DevelopmentalProfile", back_populates="player", cascade="all, delete-orphan")
+    learning_sessions = relationship("LearningSession", back_populates="player", cascade="all, delete-orphan")
+    task_attempts = relationship("TaskAttempt", back_populates="player")
+    reinforcement_config = relationship("ReinforcementConfig", back_populates="player", uselist=False, cascade="all, delete-orphan")

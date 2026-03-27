@@ -160,7 +160,7 @@ async def upload_object_image(
     content = await file.read()
     
     if cloudinary_service.is_configured:
-        folder = f"speakeasy/{obj.category}/{image_type.value}"
+        folder = f"risingstar/{obj.category}/{image_type.value}"
         public_id = f"{obj.name.lower().replace(' ', '_')}_{uuid.uuid4().hex[:8]}"
         
         try:
