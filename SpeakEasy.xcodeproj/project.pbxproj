@@ -34,6 +34,7 @@
 		C1000001234567890000005 /* LearningSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002234567890000005 /* LearningSessionView.swift */; };
 		C1000001234567890000006 /* AdaptiveDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002234567890000006 /* AdaptiveDashboardView.swift */; };
 		C1000001234567890000007 /* AssessmentGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002234567890000007 /* AssessmentGameView.swift */; };
+		D1000001234567890000001 /* CameraLearningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1000002234567890000001 /* CameraLearningView.swift */; };
 		B1000001234567890000001 /* SpeechServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000002234567890000001 /* SpeechServiceTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		C1000002234567890000005 /* LearningSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningSessionView.swift; sourceTree = "<group>"; };
 		C1000002234567890000006 /* AdaptiveDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDashboardView.swift; sourceTree = "<group>"; };
 		C1000002234567890000007 /* AssessmentGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentGameView.swift; sourceTree = "<group>"; };
+		D1000002234567890000001 /* CameraLearningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLearningView.swift; sourceTree = "<group>"; };
 		A1000003234567890000001 /* SpeakEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1000002234567890000001 /* SpeechServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechServiceTests.swift; sourceTree = "<group>"; };
 		B1000003234567890000001 /* SpeakEasyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeakEasyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +161,7 @@
 				C1000002234567890000005 /* LearningSessionView.swift */,
 				C1000002234567890000006 /* AdaptiveDashboardView.swift */,
 				C1000002234567890000007 /* AssessmentGameView.swift */,
+				D1000002234567890000001 /* CameraLearningView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				C1000001234567890000005 /* LearningSessionView.swift in Sources */,
 				C1000001234567890000006 /* AdaptiveDashboardView.swift in Sources */,
 				C1000001234567890000007 /* AssessmentGameView.swift in Sources */,
+				D1000001234567890000001 /* CameraLearningView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

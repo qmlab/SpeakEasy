@@ -19,6 +19,7 @@ struct LearningSessionView: View {
     @State private var isListening: Bool = false
     @State private var showSessionSummary: Bool = false
     @State private var animateReward: Bool = false
+    @State private var showCameraView: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -268,9 +269,21 @@ struct LearningSessionView: View {
 
     // MARK: - Interaction Area
 
+    /// Whether this task supports camera-based interaction (object cognition with target word)
+    private func taskSupportsCamera(_ task: AdaptiveTask) -> Bool {
+        dimension == .objectCognition &&
+        task.content.targetWord != nil &&
+        !task.content.targetWord!.isEmpty
+    }
+
     @ViewBuilder
     private func interactionArea(task: AdaptiveTask) -> some View {
         let modalities = task.modalities
+
+        // Camera button for object cognition tasks
+        if taskSupportsCamera(task) {
+            cameraButton(task: task)
+        }
 
         // Option selection (touch modality)
         if !task.content.displayOptions.isEmpty {
@@ -283,8 +296,52 @@ struct LearningSessionView: View {
         }
 
         // Simple correct/incorrect buttons for tasks without specific interaction
-        if task.content.displayOptions.isEmpty && !modalities.contains("voice") {
+        if task.content.displayOptions.isEmpty && !modalities.contains("voice") && !taskSupportsCamera(task) {
             simpleResponseButtons(task: task)
+        }
+    }
+
+    // MARK: - Camera Button
+
+    private func cameraButton(task: AdaptiveTask) -> some View {
+        Button {
+            showCameraView = true
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "camera.viewfinder")
+                    .font(.title2)
+                Text("Find with Camera")
+                    .font(.headline)
+            }
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(
+                        LinearGradient(
+                            colors: [dimension.color, .green],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+            )
+        }
+        .disabled(learningManager.isSubmitting)
+        .fullScreenCover(isPresented: $showCameraView) {
+            CameraLearningView(
+                task: task,
+                dimension: dimension
+            ) { isCorrect, score in
+                showCameraView = false
+                Task {
+                    await learningManager.submitAttempt(
+                        isCorrect: isCorrect,
+                        score: score,
+                        dimension: dimension
+                    )
+                }
+            }
         }
     }
 

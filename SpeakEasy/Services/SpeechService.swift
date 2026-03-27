@@ -13,7 +13,7 @@ protocol SpeechRecognitionProvider {
     var isListening: Bool { get }
 }
 
-class SpeechService: ObservableObject {
+class SpeechService: NSObject, ObservableObject {
     private let synthesizer = AVSpeechSynthesizer()
     @Published var isSpeaking = false
     @Published var isListening = false
@@ -21,17 +21,49 @@ class SpeechService: ObservableObject {
     @Published var lastRating: Double = 0.0
     @Published var speechRate: Float = 0.4
     @Published var authorizationStatus: SFSpeechRecognizerAuthorizationStatus = .notDetermined
-    
+    @Published var currentLanguage: SpeechLanguage = .english
+
+    /// Configurable listening duration (seconds). Default 5s, can extend for longer utterances.
+    var listeningDuration: TimeInterval = 5.0
+
+    enum SpeechLanguage: String, CaseIterable {
+        case english = "en-US"
+        case chinese = "zh-CN"
+
+        var displayName: String {
+            switch self {
+            case .english: return "English"
+            case .chinese: return "中文"
+            }
+        }
+    }
+
     private var speechRecognizer: SFSpeechRecognizer?
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
-    
+
     var mockProvider: SpeechRecognitionProvider?
-    
-    init() {
-        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+
+    private static let languageKey = "speechLanguage"
+
+    override init() {
+        super.init()
+        synthesizer.delegate = self
+        // Restore persisted language preference
+        if let savedLang = UserDefaults.standard.string(forKey: SpeechService.languageKey),
+           let language = SpeechLanguage(rawValue: savedLang) {
+            currentLanguage = language
+        }
+        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: currentLanguage.rawValue))
         checkAuthorizationStatus()
+    }
+
+    /// Switch recognition + TTS language
+    func setLanguage(_ language: SpeechLanguage) {
+        currentLanguage = language
+        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: language.rawValue))
+        UserDefaults.standard.set(language.rawValue, forKey: SpeechService.languageKey)
     }
     
     private func checkAuthorizationStatus() {
@@ -66,14 +98,10 @@ class SpeechService: ObservableObject {
         utterance.rate = speechRate
         utterance.pitchMultiplier = 1.1
         utterance.volume = 1.0
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.voice = AVSpeechSynthesisVoice(language: currentLanguage.rawValue)
         
         isSpeaking = true
         synthesizer.speak(utterance)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(text.count) * 0.1 + 0.5) {
-            self.isSpeaking = false
-        }
     }
     
     func stop() {
@@ -200,7 +228,7 @@ class SpeechService: ObservableObject {
                 self.recognizedText = ""
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration) { [weak self] in
                 if self?.isListening == true {
                     self?.stopListening()
                 }
@@ -302,6 +330,22 @@ class SpeechService: ObservableObject {
         }
         
         return matrix[m][n]
+    }
+}
+
+// MARK: - AVSpeechSynthesizerDelegate
+
+extension SpeechService: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        DispatchQueue.main.async {
+            self.isSpeaking = false
+        }
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        DispatchQueue.main.async {
+            self.isSpeaking = false
+        }
     }
 }
 
