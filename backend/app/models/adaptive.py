@@ -28,6 +28,7 @@ class SessionStatus(str, enum.Enum):
 
 
 class TaskType(str, enum.Enum):
+    # Object cognition
     MATCH = "match"
     IDENTIFY = "identify"
     CLASSIFY = "classify"
@@ -35,6 +36,17 @@ class TaskType(str, enum.Enum):
     ABSTRACT = "abstract"
     SAY_WORD = "say_word"
     FIND_OBJECT = "find_object"
+    # Language expression
+    IMITATE = "imitate"
+    NAME_OBJECT = "name_object"
+    DESCRIBE = "describe"
+    BUILD_SENTENCE = "build_sentence"
+    CONVERSATION = "conversation"
+    # Language comprehension
+    POINT_TO = "point_to"
+    FOLLOW_INSTRUCTION = "follow_instruction"
+    STORY_COMPREHENSION = "story_comprehension"
+    INFER_MEANING = "infer_meaning"
 
 
 class Modality(str, enum.Enum):
