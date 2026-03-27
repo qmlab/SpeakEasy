@@ -21,7 +21,7 @@ from typing import Optional
 
 import httpx
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 
 from app.models.adaptive import (
     DevelopmentalProfile,
@@ -356,7 +356,7 @@ class AIService:
             f"Child profile:\n{profile_text}\n\n"
             f"Child's name: {player.name}\n"
             f"Social behavior level: {social_level}\n"
-            f"Current ability: {LEVEL_DESCRIPTIONS['social_behavior'][min(social_level, 4)]}\n"
+            f"Current ability: {LEVEL_DESCRIPTIONS['social_behavior'][min(social_level, len(LEVEL_DESCRIPTIONS['social_behavior']) - 1)]}\n"
             f"{scenario_text}\n\n"
             "Generate a social story."
         )
@@ -491,16 +491,30 @@ class AIService:
         profiles = self._get_profiles(player_id)
         profile_text = self._profile_summary_text(profiles)
 
-        sessions = self._get_recent_sessions(player_id, limit=10)
-        session_summary = self._sessions_summary_text(sessions)
+        recent_sessions = self._get_recent_sessions(player_id, limit=10)
+        session_summary = self._sessions_summary_text(recent_sessions)
 
-        # Compute stats
-        total_sessions = len(sessions)
-        total_attempts = 0
-        total_correct = 0
-        for s in sessions:
-            total_attempts += s.total_count or 0
-            total_correct += s.correct_count or 0
+        # Compute true lifetime stats (not capped by the recent-sessions window)
+        total_sessions = (
+            self.db.query(func.count(LearningSession.id))
+            .filter(LearningSession.player_id == player_id)
+            .scalar()
+            or 0
+        )
+        total_attempts = (
+            self.db.query(func.sum(LearningSession.total_count))
+            .filter(LearningSession.player_id == player_id)
+            .scalar()
+            or 0
+        )
+        total_attempts = int(total_attempts)
+        total_correct = (
+            self.db.query(func.sum(LearningSession.correct_count))
+            .filter(LearningSession.player_id == player_id)
+            .scalar()
+            or 0
+        )
+        total_correct = int(total_correct)
         overall_accuracy = (total_correct / total_attempts * 100) if total_attempts > 0 else 0
 
         # Dimension-level analysis
@@ -593,7 +607,7 @@ class AIService:
             )
 
         narrative += (
-            f"Over the last {total_sessions} sessions, {player.name} attempted "
+            f"Across {total_sessions} total sessions, {player.name} has attempted "
             f"{total_attempts} tasks with an overall accuracy of {overall_accuracy:.0f}%. "
             "Keep up the great work!"
         )
@@ -731,7 +745,7 @@ class AIService:
         """Extract JSON from an LLM response that may include markdown fences."""
         text = text.strip()
         # Search for markdown code fences anywhere in the text
-        fence_match = re.search(r"```(?:json)?\s*\n(.*?)```", text, re.DOTALL)
+        fence_match = re.search(r"```(?:json)?\s*\n?(.*?)```", text, re.DOTALL | re.IGNORECASE)
         if fence_match:
             text = fence_match.group(1).strip()
         return json.loads(text)
@@ -855,6 +869,48 @@ _TASK_TEMPLATES: dict[str, dict[int, list[dict]]] = {
                 "correct_answer": "{interest}",
                 "options": ["{interest}"],
                 "image_hint": "A {interest} with audio prompt icon",
+            },
+        ],
+    },
+    "language_comprehension": {
+        0: [
+            {
+                "instruction": "Point to the {interest}",
+                "correct_answer": "{interest}",
+                "options": ["{interest}", "table", "lamp"],
+                "image_hint": "Several objects including a {interest}",
+            },
+            {
+                "instruction": "Where is the {interest}?",
+                "correct_answer": "{interest}",
+                "options": ["{interest}", "chair", "cup"],
+                "image_hint": "A scene with a {interest} among other items",
+            },
+            {
+                "instruction": "Show me the {interest}",
+                "correct_answer": "{interest}",
+                "options": ["{interest}", "ball", "hat"],
+                "image_hint": "Objects spread out including a {interest}",
+            },
+        ],
+        1: [
+            {
+                "instruction": "Give me the {interest}",
+                "correct_answer": "{interest}",
+                "options": ["{interest}", "spoon", "shoe"],
+                "image_hint": "A {interest} among other items on a table",
+            },
+            {
+                "instruction": "Put the {interest} on the table",
+                "correct_answer": "{interest}",
+                "options": ["{interest}", "book", "bottle"],
+                "image_hint": "A {interest} and a table in a room scene",
+            },
+            {
+                "instruction": "Pick up the {interest} and give it to me",
+                "correct_answer": "{interest}",
+                "options": ["{interest}", "blanket", "fork"],
+                "image_hint": "A {interest} within reach of the child",
             },
         ],
     },
