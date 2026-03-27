@@ -56,7 +56,10 @@ def seed_object_cognition_tasks(db: Session) -> int:
     """Seed object cognition tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.OBJECT_COGNITION.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.OBJECT_COGNITION.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -427,7 +430,8 @@ def seed_language_expression_tasks(db: Session) -> int:
     existing = (
         db.query(AdaptiveTask)
         .filter(
-            AdaptiveTask.dimension == DevelopmentalDimension.LANGUAGE_EXPRESSION.value
+            AdaptiveTask.dimension == DevelopmentalDimension.LANGUAGE_EXPRESSION.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
         )
         .count()
     )
@@ -720,7 +724,8 @@ def seed_language_comprehension_tasks(db: Session) -> int:
         db.query(AdaptiveTask)
         .filter(
             AdaptiveTask.dimension
-            == DevelopmentalDimension.LANGUAGE_COMPREHENSION.value
+            == DevelopmentalDimension.LANGUAGE_COMPREHENSION.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
         )
         .count()
     )
@@ -1069,7 +1074,10 @@ def seed_literacy_tasks(db: Session) -> int:
     """Seed literacy tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.LITERACY.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.LITERACY.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -1353,7 +1361,10 @@ def seed_social_behavior_tasks(db: Session) -> int:
     """Seed social behavior tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.SOCIAL_BEHAVIOR.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.SOCIAL_BEHAVIOR.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
@@ -1700,7 +1711,10 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
     """Seed cognitive logic tasks. Returns count of tasks created."""
     existing = (
         db.query(AdaptiveTask)
-        .filter(AdaptiveTask.dimension == DevelopmentalDimension.COGNITIVE_LOGIC.value)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.COGNITIVE_LOGIC.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
         .count()
     )
 
