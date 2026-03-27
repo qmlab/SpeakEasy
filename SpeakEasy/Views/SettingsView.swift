@@ -10,6 +10,7 @@ struct SettingsView: View {
     @StateObject private var speechService = SpeechService()
     @ObservedObject private var authService = AuthenticationService.shared
     @State private var speechRate: Double = 0.4
+    @State private var selectedLanguage: SpeechService.SpeechLanguage = .english
     @State private var showResetAlert = false
     @State private var showSignOutAlert = false
     
@@ -121,6 +122,23 @@ struct SettingsView: View {
             }
             
             VStack(alignment: .leading, spacing: 15) {
+                // Language selector
+                Text("Language")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundColor(.gray)
+
+                Picker("Language", selection: $selectedLanguage) {
+                    ForEach(SpeechService.SpeechLanguage.allCases, id: \.self) { language in
+                        Text(language.displayName).tag(language)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: selectedLanguage) { newValue in
+                    speechService.setLanguage(newValue)
+                }
+
+                Divider()
+
                 Text("Speech Speed")
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundColor(.gray)
@@ -143,7 +161,8 @@ struct SettingsView: View {
                     Spacer()
                     
                     Button(action: {
-                        speechService.speak("Hello! This is how I sound.")
+                        let testText = selectedLanguage == .chinese ? "你好！这是我的声音。" : "Hello! This is how I sound."
+                        speechService.speak(testText)
                     }) {
                         HStack(spacing: 8) {
                             Image(systemName: "play.fill")

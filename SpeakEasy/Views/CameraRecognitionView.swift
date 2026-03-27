@@ -1,6 +1,8 @@
 //
 //  CameraRecognitionView.swift
-//  SpeakEasy
+//  RisingStarKid
+//
+//  Free-play camera recognition: pick from gallery OR use live camera preview.
 //
 
 import SwiftUI
@@ -14,6 +16,7 @@ struct CameraRecognitionView: View {
     @State private var showImagePicker = false
     @State private var selectedImage: UIImage?
     @State private var showResult = false
+    @State private var showLiveCamera = false
     
     var body: some View {
         NavigationView {
@@ -38,6 +41,11 @@ struct CameraRecognitionView: View {
             .navigationTitle("Camera")
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(image: $selectedImage)
+            }
+            .fullScreenCover(isPresented: $showLiveCamera) {
+                LiveCameraExplorerView(cameraService: cameraService, speechService: speechService) {
+                    showLiveCamera = false
+                }
             }
             .onChange(of: selectedImage) { newImage in
                 if let image = newImage {
@@ -172,7 +180,25 @@ struct CameraRecognitionView: View {
     }
     
     private var actionButtons: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 16) {
+            Button(action: {
+                showLiveCamera = true
+            }) {
+                VStack(spacing: 10) {
+                    Image(systemName: "camera.viewfinder")
+                        .font(.system(size: 30))
+                    Text("Live")
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                }
+                .foregroundColor(.white)
+                .frame(width: 90, height: 90)
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(Color.green)
+                        .shadow(color: .green.opacity(0.4), radius: 8)
+                )
+            }
+
             Button(action: {
                 showImagePicker = true
             }) {
@@ -183,7 +209,7 @@ struct CameraRecognitionView: View {
                         .font(.system(size: 14, weight: .semibold, design: .rounded))
                 }
                 .foregroundColor(.white)
-                .frame(width: 100, height: 100)
+                .frame(width: 90, height: 90)
                 .background(
                     RoundedRectangle(cornerRadius: 25)
                         .fill(Color.blue)
@@ -203,13 +229,99 @@ struct CameraRecognitionView: View {
                         .font(.system(size: 14, weight: .semibold, design: .rounded))
                 }
                 .foregroundColor(.white)
-                .frame(width: 100, height: 100)
+                .frame(width: 90, height: 90)
                 .background(
                     RoundedRectangle(cornerRadius: 25)
                         .fill(Color.orange)
                         .shadow(color: .orange.opacity(0.4), radius: 8)
                 )
             }
+        }
+    }
+}
+
+// MARK: - Live Camera Explorer (free-play mode)
+
+struct LiveCameraExplorerView: View {
+    @ObservedObject var cameraService: CameraService
+    @ObservedObject var speechService: SpeechService
+    let onDismiss: () -> Void
+
+    var body: some View {
+        ZStack {
+            // Live camera feed
+            CameraPreviewView(cameraService: cameraService)
+                .ignoresSafeArea()
+
+            VStack {
+                // Top bar with close button
+                HStack {
+                    Button(action: onDismiss) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 32))
+                            .foregroundColor(.white)
+                            .shadow(radius: 4)
+                    }
+                    .padding()
+
+                    Spacer()
+                }
+
+                Spacer()
+
+                // Bottom: recognized objects
+                VStack(spacing: 12) {
+                    if let topObject = cameraService.recognizedObject {
+                        Button {
+                            speechService.speak(topObject)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Text(topObject)
+                                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                                    .foregroundColor(.white)
+
+                                Text("\(Int(cameraService.confidence * 100))%")
+                                    .font(.system(size: 16, weight: .medium, design: .monospaced))
+                                    .foregroundColor(.white.opacity(0.7))
+
+                                Image(systemName: "speaker.wave.2.fill")
+                                    .foregroundColor(.yellow)
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.black.opacity(0.6))
+                            )
+                        }
+                    }
+
+                    // Secondary classifications
+                    if cameraService.topClassifications.count > 1 {
+                        HStack(spacing: 8) {
+                            ForEach(Array(cameraService.topClassifications.dropFirst().prefix(3).enumerated()), id: \.offset) { _, item in
+                                Text(item.label)
+                                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(
+                                        Capsule()
+                                            .fill(Color.black.opacity(0.4))
+                                    )
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom, 40)
+            }
+        }
+        .onAppear {
+            cameraService.setupCamera()
+            cameraService.startSession()
+        }
+        .onDisappear {
+            cameraService.stopSession()
         }
     }
 }
