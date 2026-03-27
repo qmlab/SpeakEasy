@@ -31,6 +31,7 @@ jobs:
 
       - name: Build
         run: |
+          set -o pipefail
           xcodebuild build \
             -project SpeakEasy.xcodeproj \
             -scheme "$SCHEME" \
@@ -39,10 +40,11 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            | xcpretty || true
+            | xcpretty
 
       - name: Run tests
         run: |
+          set -o pipefail
           xcodebuild test \
             -project SpeakEasy.xcodeproj \
             -scheme "$SCHEME" \
@@ -51,4 +53,4 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            | xcpretty || true
+            | xcpretty
