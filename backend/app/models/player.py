@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime
+from sqlalchemy import Column, String, DateTime, Integer
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -10,6 +10,7 @@ class Player(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String, nullable=False)
+    age = Column(Integer, nullable=True)
     apple_user_id = Column(String, unique=True, nullable=True, index=True)
     device_id = Column(String, unique=True, nullable=True, index=True)
     email = Column(String, nullable=True)

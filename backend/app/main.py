@@ -67,6 +67,10 @@ def run_migrations():
                 )
                 conn.commit()
                 print("Migration: Added is_guest column to players table")
+            if "age" not in columns:
+                conn.execute(text("ALTER TABLE players ADD COLUMN age INTEGER"))
+                conn.commit()
+                print("Migration: Added age column to players table")
 
 
 run_migrations()

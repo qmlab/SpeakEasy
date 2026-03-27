@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 class PlayerCreate(BaseModel):
     name: str
+    age: Optional[int] = None
 
 
 class AppleSignInRequest(BaseModel):
@@ -46,6 +47,7 @@ class GuestSignInResponse(BaseModel):
 class PlayerResponse(BaseModel):
     id: str
     name: str
+    age: Optional[int] = None
     apple_user_id: Optional[str] = None
     device_id: Optional[str] = None
     email: Optional[str] = None
