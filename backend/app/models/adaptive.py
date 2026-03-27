@@ -47,6 +47,24 @@ class TaskType(str, enum.Enum):
     FOLLOW_INSTRUCTION = "follow_instruction"
     STORY_COMPREHENSION = "story_comprehension"
     INFER_MEANING = "infer_meaning"
+    # Literacy
+    RECOGNIZE_IMAGE = "recognize_image"
+    MATCH_WORD_IMAGE = "match_word_image"
+    READ_WORD = "read_word"
+    READ_SENTENCE = "read_sentence"
+    READ_PASSAGE = "read_passage"
+    # Social behavior
+    ATTEND = "attend"
+    IMITATE_ACTION = "imitate_action"
+    TURN_TAKE = "turn_take"
+    JOINT_ATTENTION = "joint_attention"
+    INITIATE = "initiate"
+    # Cognitive logic
+    PAIR = "pair"
+    SORT = "sort"
+    CAUSE_EFFECT = "cause_effect"
+    SEQUENCE_ORDER = "sequence_order"
+    REASON = "reason"
 
 
 class Modality(str, enum.Enum):

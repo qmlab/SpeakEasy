@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text, inspect
 
 from app.database import engine, Base
-from app.routers import players_router, objects_router, game_router, progress_router, auth_router, adaptive_router, dashboard_router, tasks_router
+from app.routers import players_router, objects_router, game_router, progress_router, auth_router, adaptive_router, dashboard_router, tasks_router, ai_router
 from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
@@ -73,6 +73,7 @@ app.include_router(auth_router)
 app.include_router(adaptive_router)
 app.include_router(dashboard_router)
 app.include_router(tasks_router)
+app.include_router(ai_router)
 
 
 @app.get("/")
@@ -85,7 +86,8 @@ def root():
             "Feature 2: Find object in picture - Location-based game",
             "Feature 3: Adaptive learning engine with multi-dimensional profiles",
             "Feature 4: ABA-based reinforcement system",
-            "Feature 5: Parent/therapist dashboard"
+            "Feature 5: Parent/therapist dashboard",
+            "Feature 6: AI-powered personalization (social stories, behavior guidance, progress summaries)"
         ]
     }
 
