@@ -12,14 +12,25 @@ from app.models.adaptive import AdaptiveTask, DevelopmentalDimension, TaskType, 
 
 def seed_assessment_tasks(db: Session) -> int:
     """Seed assessment-specific tasks. Returns count of tasks created."""
-    existing = (
+    existing_tasks = (
         db.query(AdaptiveTask)
         .filter(AdaptiveTask.is_assessment == True)  # noqa: E712
-        .count()
+        .all()
     )
 
-    if existing > 0:
-        return 0
+    if existing_tasks:
+        # Verify content format — assessment tasks must use "instruction"
+        # key (not "instruction_audio" from regular seeds). If stale
+        # tasks exist with the wrong format, delete them and re-seed.
+        sample = existing_tasks[0]
+        content = sample.content or {}
+        if "instruction" in content and "correct_answer" in content:
+            return 0  # Already seeded with correct format
+
+        # Stale assessment tasks with wrong content format — remove them
+        for task in existing_tasks:
+            db.delete(task)
+        db.commit()
 
     tasks = []
 
