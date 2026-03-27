@@ -14,7 +14,7 @@ Key behaviors:
 from datetime import datetime, timedelta
 from typing import Optional
 from sqlalchemy.orm import Session
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, Integer
 
 from app.models.adaptive import (
     DevelopmentalProfile,

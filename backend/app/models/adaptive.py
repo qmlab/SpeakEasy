@@ -1,7 +1,7 @@
 import uuid
 import enum
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime, ForeignKey, Float, Integer, Boolean, Text, JSON
+from sqlalchemy import Column, String, DateTime, ForeignKey, Float, Integer, Boolean, JSON, UniqueConstraint
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -65,6 +65,9 @@ class RewardType(str, enum.Enum):
 
 class DevelopmentalProfile(Base):
     __tablename__ = "developmental_profiles"
+    __table_args__ = (
+        UniqueConstraint("player_id", "dimension", name="uq_player_dimension"),
+    )
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     player_id = Column(String, ForeignKey("players.id"), nullable=False, index=True)
@@ -95,7 +98,7 @@ class LearningSession(Base):
     prompt_dependency_rate = Column(Float, nullable=True)
     engagement_score = Column(Float, nullable=True)
     status = Column(String, nullable=False, default=SessionStatus.ACTIVE.value)
-    current_level = Column(Integer, nullable=False, default=2)
+    current_level = Column(Integer, nullable=False, default=0)
 
     player = relationship("Player", back_populates="learning_sessions")
     task_attempts = relationship("TaskAttempt", back_populates="session", cascade="all, delete-orphan")
