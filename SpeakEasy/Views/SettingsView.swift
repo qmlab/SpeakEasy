@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  SpeakEasy
+//  RisingStarKid
 //
 
 import SwiftUI
@@ -178,7 +178,7 @@ struct SettingsView: View {
                     .foregroundColor(.purple)
                     .font(.title2)
                 
-                Text("About SpeakEasy")
+                Text("About Rising Star Kid")
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
             }
@@ -195,7 +195,7 @@ struct SettingsView: View {
                 AboutRow(icon: "person.3.fill", color: .blue, title: "For", value: "Special Kids")
             }
             
-            Text("SpeakEasy helps non-verbal children learn to recognize and speak object names through interactive flashcards and camera recognition.")
+            Text("Rising Star Kid helps autistic children develop across 6 dimensions with adaptive learning, ABA-based reinforcement, and personalized content.")
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
                 .padding(.top, 10)

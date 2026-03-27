@@ -1,12 +1,13 @@
 //
 //  HomeView.swift
-//  SpeakEasy
+//  RisingStarKid
 //
 
 import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var progressManager: ProgressManager
+    @EnvironmentObject var learningManager: AdaptiveLearningManager
     @Binding var selectedTab: Int
     @StateObject private var speechService = SpeechService()
     @State private var totalObjectCount = 0
@@ -17,7 +18,7 @@ struct HomeView: View {
                 VStack(spacing: 30) {
                     welcomeSection
                     
-                    progressSection
+                    dimensionOverviewSection
                     
                     quickStartSection
                 }
@@ -31,9 +32,10 @@ struct HomeView: View {
                 )
                 .ignoresSafeArea()
             )
-            .navigationTitle("SpeakEasy")
+            .navigationTitle("Rising Star Kid")
             .task {
                 await loadTotalObjectCount()
+                await learningManager.loadProfiles()
             }
         }
     }
@@ -50,12 +52,12 @@ struct HomeView: View {
     
     private var welcomeSection: some View {
         VStack(spacing: 15) {
-            Image(systemName: "face.smiling.fill")
+            Image(systemName: "star.fill")
                 .font(.system(size: 80))
                 .foregroundColor(.yellow)
                 .shadow(color: .orange.opacity(0.5), radius: 10)
             
-            Text("Hello, Friend!")
+            Text("Hello, \(learningManager.playerName.isEmpty ? "Star" : learningManager.playerName)!")
                 .font(.system(size: 36, weight: .bold, design: .rounded))
                 .foregroundColor(.purple)
             
@@ -65,48 +67,45 @@ struct HomeView: View {
         }
         .padding(.vertical, 20)
         .onTapGesture {
-            speechService.speak("Hello, Friend! Let's learn together!")
+            speechService.speak("Hello! Let's learn together!")
         }
     }
     
-    private var progressSection: some View {
-        let progress = progressManager.overallProgressById(totalObjectCount: totalObjectCount)
-        return VStack(spacing: 15) {
+    private var dimensionOverviewSection: some View {
+        VStack(spacing: 15) {
             HStack {
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-                    .font(.title2)
-                
-                Text("\(progressManager.totalStars) Stars")
+                Text("My Development")
                     .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundColor(.orange)
-                
+                    .foregroundColor(.purple)
                 Spacer()
-                
-                Text("\(Int(progress * 100))%")
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .foregroundColor(.green)
+                Text("Level \(String(format: "%.1f", learningManager.overallLevel))")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundColor(.orange)
             }
             
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(height: 20)
-                    
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(
-                            LinearGradient(
-                                colors: [.green, .blue],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .frame(width: geometry.size.width * progress, height: 20)
-                        .animation(.spring(), value: progress)
+            // Mini dimension indicators
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                ForEach(DevelopmentalDimension.allCases) { dimension in
+                    VStack(spacing: 6) {
+                        Image(systemName: dimension.icon)
+                            .font(.title2)
+                            .foregroundColor(dimension.color)
+                        
+                        Text("Lv.\(learningManager.level(for: dimension))")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(dimension.color)
+                        
+                        // Mini level dots
+                        HStack(spacing: 3) {
+                            ForEach(0..<5, id: \.self) { i in
+                                Circle()
+                                    .fill(i < learningManager.level(for: dimension) ? dimension.color : Color(.systemGray4))
+                                    .frame(width: 6, height: 6)
+                            }
+                        }
+                    }
                 }
             }
-            .frame(height: 20)
         }
         .padding(20)
         .background(
@@ -124,8 +123,8 @@ struct HomeView: View {
             
             HStack(spacing: 15) {
                 QuickStartButton(
-                    icon: "square.grid.2x2.fill",
-                    title: "Flashcards",
+                    icon: "sparkles",
+                    title: "Learn",
                     color: .blue
                 ) {
                     selectedTab = 1
@@ -140,7 +139,7 @@ struct HomeView: View {
                 }
                 
                 QuickStartButton(
-                    icon: "star.fill",
+                    icon: "chart.bar.fill",
                     title: "Progress",
                     color: .orange
                 ) {
