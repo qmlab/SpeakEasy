@@ -12,7 +12,7 @@ router = APIRouter(prefix="/players", tags=["players"])
 
 @router.post("/", response_model=PlayerResponse)
 def create_player(player: PlayerCreate, db: Session = Depends(get_db)):
-    db_player = Player(name=player.name)
+    db_player = Player(name=player.name, age=player.age)
     db.add(db_player)
     db.commit()
     db.refresh(db_player)
