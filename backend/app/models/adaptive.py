@@ -185,6 +185,25 @@ class TaskAttempt(Base):
     player = relationship("Player", back_populates="task_attempts")
 
 
+class Assessment(Base):
+    """Persisted assessment state. Survives server restarts."""
+
+    __tablename__ = "assessments"
+
+    id = Column(String, primary_key=True)  # assessment_id (UUID)
+    player_id = Column(String, ForeignKey("players.id"), nullable=False, index=True)
+    character = Column(JSON, nullable=False)  # {name, emoji, greeting, ...}
+    started_at = Column(DateTime, nullable=False)
+    completed_at = Column(DateTime, nullable=True)
+    completed = Column(Boolean, nullable=False, default=False)
+    activities = Column(JSON, nullable=False, default=list)  # activity queue
+    current_index = Column(Integer, nullable=False, default=0)
+    dimension_state = Column(JSON, nullable=False, default=dict)  # per-dim tracking
+    activity_task_ids = Column(JSON, nullable=False, default=dict)  # cached task IDs
+
+    player = relationship("Player", back_populates="assessments")
+
+
 class ReinforcementConfig(Base):
     __tablename__ = "reinforcement_configs"
 

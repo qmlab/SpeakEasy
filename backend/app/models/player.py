@@ -32,3 +32,6 @@ class Player(Base):
         uselist=False,
         cascade="all, delete-orphan",
     )
+    assessments = relationship(
+        "Assessment", back_populates="player", cascade="all, delete-orphan"
+    )
