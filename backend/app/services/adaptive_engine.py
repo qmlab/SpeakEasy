@@ -545,6 +545,47 @@ class AdaptiveEngine:
 
         return rewards.get(reward_type, rewards[RewardType.ANIMATION.value])
 
+    # ---- Modality Recommendation ----
+
+    def recommend_modality(self, player_id: str) -> dict:
+        """Recommend interaction modality based on cross-dimension profile levels.
+
+        Logic:
+        - object_cognition 0-1 + language_expression 0  → TOUCH only
+        - object_cognition 0-1 + language_expression 1+ → IMAGE_EXCHANGE
+        - object_cognition 2+  + language_expression 2+ → VOICE
+        - literacy 2+                                    → TEXT
+        """
+        profiles = self.get_or_create_profiles(player_id)
+        levels: dict[str, int] = {p.dimension: p.level for p in profiles}
+
+        obj = levels.get("object_cognition", 0)
+        expr = levels.get("language_expression", 0)
+        lit = levels.get("literacy", 0)
+
+        primary = "touch"
+        alternatives: list[str] = []
+
+        if lit >= 2:
+            primary = "text"
+            alternatives = ["voice", "touch"]
+        elif obj >= 2 and expr >= 2:
+            primary = "voice"
+            alternatives = ["touch", "image_exchange"]
+        elif expr >= 1:
+            primary = "image_exchange"
+            alternatives = ["touch"]
+        else:
+            primary = "touch"
+            alternatives = ["image_exchange"]
+
+        return {
+            "player_id": player_id,
+            "recommended_modality": primary,
+            "alternatives": alternatives,
+            "profile_levels": levels,
+        }
+
     # ---- Dashboard Queries ----
 
     def get_dashboard_summary(self, player_id: str) -> dict:

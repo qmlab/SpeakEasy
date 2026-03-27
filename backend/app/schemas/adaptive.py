@@ -174,3 +174,22 @@ class DimensionProgress(BaseModel):
     mastered_count: int
     total_count: int
     accuracy_trend: list[float]
+
+
+class SpeechEvaluationRequest(BaseModel):
+    target: str
+    spoken: str
+    accept_threshold: float = 0.6
+
+
+class SpeechEvaluationResponse(BaseModel):
+    similarity_score: float
+    is_accepted: bool
+    feedback: str
+
+
+class ModalityRecommendationResponse(BaseModel):
+    player_id: str
+    recommended_modality: str
+    alternatives: list[str]
+    profile_levels: dict[str, int]

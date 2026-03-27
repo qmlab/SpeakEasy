@@ -22,8 +22,12 @@ from app.schemas.adaptive import (
     DevelopmentalProfileUpdate,
     ReinforcementConfigResponse,
     ReinforcementConfigUpdate,
+    SpeechEvaluationRequest,
+    SpeechEvaluationResponse,
+    ModalityRecommendationResponse,
 )
 from app.services.adaptive_engine import AdaptiveEngine
+from app.services.speech_evaluation import evaluate_speech
 
 router = APIRouter(prefix="/adaptive", tags=["adaptive"])
 
@@ -196,6 +200,26 @@ def run_assessment(
     engine = AdaptiveEngine(db)
     result = engine.run_assessment(player_id, dimension, results)
     return result
+
+
+@router.post("/evaluate-speech", response_model=SpeechEvaluationResponse)
+def evaluate_speech_endpoint(request: SpeechEvaluationRequest):
+    """Evaluate a spoken response against a target word/phrase."""
+    result = evaluate_speech(
+        target=request.target,
+        spoken=request.spoken,
+        accept_threshold=request.accept_threshold,
+    )
+    return SpeechEvaluationResponse(**result)
+
+
+@router.get("/modality/{player_id}", response_model=ModalityRecommendationResponse)
+def get_recommended_modality(player_id: str, db: Session = Depends(get_db)):
+    """Get recommended interaction modality for a player based on their profile."""
+    _validate_player(db, player_id)
+    engine = AdaptiveEngine(db)
+    result = engine.recommend_modality(player_id)
+    return ModalityRecommendationResponse(**result)
 
 
 @router.get("/reinforcement/{player_id}", response_model=ReinforcementConfigResponse)
