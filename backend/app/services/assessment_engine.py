@@ -387,8 +387,11 @@ class AssessmentEngine:
                 }
             )
 
-            # Update the developmental profile in the database
+            # Stage the developmental profile update (no commit yet)
             self._update_profile(state.player_id, dim, assessed_level)
+
+        # Commit all profile updates in a single transaction
+        self.db.commit()
 
         overall_level = (
             sum(d["assessed_level"] for d in dimension_results) / len(dimension_results)
@@ -590,8 +593,6 @@ class AssessmentEngine:
             profile.assessed = True
             profile.last_assessed_at = datetime.utcnow()
             profile.updated_at = datetime.utcnow()
-
-        self.db.commit()
 
     def _get_state(self, assessment_id: str) -> AssessmentState:
         """Get assessment state or raise error."""

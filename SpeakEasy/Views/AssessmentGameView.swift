@@ -114,7 +114,17 @@ struct AssessmentGameView: View {
 
                     Button("Try Again") {
                         errorMessage = nil
-                        Task { await startAssessment() }
+                        if assessmentId != nil {
+                            // Mid-assessment error — retry fetching next activity
+                            Task {
+                                withAnimation(.spring()) {
+                                    phase = .playing
+                                }
+                                await fetchNextActivity()
+                            }
+                        } else {
+                            Task { await startAssessment() }
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.purple)
@@ -499,7 +509,7 @@ struct AssessmentGameView: View {
                 HStack(spacing: 4) {
                     ForEach(0..<5, id: \.self) { i in
                         Circle()
-                            .fill(i <= dim.assessedLevel ? Color.purple : Color(.systemGray4))
+                            .fill(i < dim.assessedLevel ? Color.purple : Color(.systemGray4))
                             .frame(width: 8, height: 8)
                     }
                 }
@@ -592,9 +602,23 @@ struct AssessmentGameView: View {
                 selectedOption = nil
                 activityStartTime = Date()
             }
+        } catch let error as AdaptiveAPIError {
+            if case .httpError(let statusCode, _) = error, statusCode == 404 {
+                // No more activities — complete the assessment
+                await completeAssessment()
+            } else {
+                print("[Assessment] Fetch activity error: \(error)")
+                errorMessage = "Failed to load activity: \(error.localizedDescription)"
+                withAnimation(.spring()) {
+                    phase = .intro
+                }
+            }
         } catch {
-            // No more activities — complete the assessment
-            await completeAssessment()
+            print("[Assessment] Fetch activity error: \(error)")
+            errorMessage = "Network error: \(error.localizedDescription)"
+            withAnimation(.spring()) {
+                phase = .intro
+            }
         }
         isLoading = false
     }
