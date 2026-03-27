@@ -52,11 +52,11 @@ class CameraService: NSObject, ObservableObject {
     func checkPermission() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            DispatchQueue.main.async { self.permissionGranted = true }
+            permissionGranted = true
         case .notDetermined:
             requestPermission()
         default:
-            DispatchQueue.main.async { self.permissionGranted = false }
+            permissionGranted = false
         }
     }
 
@@ -77,6 +77,7 @@ class CameraService: NSObject, ObservableObject {
     }
 
     private func configureSession() {
+        guard captureSession == nil else { return }
         let session = AVCaptureSession()
         session.sessionPreset = .medium
 
