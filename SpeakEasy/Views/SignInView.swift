@@ -1,6 +1,6 @@
 //
 //  SignInView.swift
-//  SpeakEasy
+//  RisingStarKid
 //
 
 import SwiftUI
@@ -20,16 +20,16 @@ struct SignInView: View {
                     .foregroundColor(.yellow)
                     .shadow(color: .orange.opacity(0.5), radius: 15)
                 
-                Text("SpeakEasy")
-                    .font(.system(size: 48, weight: .bold, design: .rounded))
+                Text("Rising Star Kid")
+                    .font(.system(size: 42, weight: .bold, design: .rounded))
                     .foregroundColor(.purple)
                 
-                Text("Learn to speak with fun!")
+                Text("Learn, grow, and shine!")
                     .font(.system(size: 20, weight: .medium, design: .rounded))
                     .foregroundColor(.gray)
             }
             .onTapGesture {
-                speechService.speak("Welcome to SpeakEasy! Learn to speak with fun!")
+                speechService.speak("Welcome to Rising Star Kid! Learn, grow, and shine!")
             }
             
             Spacer()
