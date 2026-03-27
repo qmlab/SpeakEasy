@@ -35,8 +35,13 @@ def get_dashboard_summary(player_id: str, db: Session = Depends(get_db)):
     return DashboardSummary(
         player_id=summary["player_id"],
         player_name=summary["player_name"],
-        dimensions=[DevelopmentalProfileResponse.model_validate(p) for p in summary["dimensions"]],
-        recent_sessions=[SessionResponse.model_validate(s) for s in summary["recent_sessions"]],
+        dimensions=[
+            DevelopmentalProfileResponse.model_validate(p)
+            for p in summary["dimensions"]
+        ],
+        recent_sessions=[
+            SessionResponse.model_validate(s) for s in summary["recent_sessions"]
+        ],
         total_sessions=summary["total_sessions"],
         total_tasks_completed=summary["total_tasks_completed"],
         overall_accuracy=summary["overall_accuracy"],
@@ -59,7 +64,10 @@ def get_dimension_progress(
 
     valid_dims = [d.value for d in DevelopmentalDimension]
     if dimension not in valid_dims:
-        raise HTTPException(status_code=400, detail=f"Invalid dimension: {dimension}. Valid: {valid_dims}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid dimension: {dimension}. Valid: {valid_dims}",
+        )
 
     engine = AdaptiveEngine(db)
     progress = engine.get_dimension_progress(player_id, dimension)
@@ -89,7 +97,9 @@ def get_session_history(
     if dimension:
         valid_dims = [d.value for d in DevelopmentalDimension]
         if dimension not in valid_dims:
-            raise HTTPException(status_code=400, detail=f"Invalid dimension: {dimension}")
+            raise HTTPException(
+                status_code=400, detail=f"Invalid dimension: {dimension}"
+            )
         query = query.filter(LearningSession.dimension == dimension)
 
     sessions = query.offset(offset).limit(limit).all()

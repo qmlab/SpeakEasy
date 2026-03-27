@@ -19,6 +19,9 @@ cloudinary = "^1.44.1"
 httpx = "^0.28.1"
 
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.15.8"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

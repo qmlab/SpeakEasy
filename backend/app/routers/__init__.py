@@ -9,6 +9,13 @@ from app.routers.tasks import router as tasks_router
 from app.routers.ai import router as ai_router
 
 __all__ = [
-    "players_router", "objects_router", "game_router", "progress_router", "auth_router",
-    "adaptive_router", "dashboard_router", "tasks_router", "ai_router",
+    "players_router",
+    "objects_router",
+    "game_router",
+    "progress_router",
+    "auth_router",
+    "adaptive_router",
+    "dashboard_router",
+    "tasks_router",
+    "ai_router",
 ]

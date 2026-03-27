@@ -5,7 +5,17 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text, inspect
 
 from app.database import engine, Base
-from app.routers import players_router, objects_router, game_router, progress_router, auth_router, adaptive_router, dashboard_router, tasks_router, ai_router
+from app.routers import (
+    players_router,
+    objects_router,
+    game_router,
+    progress_router,
+    auth_router,
+    adaptive_router,
+    dashboard_router,
+    tasks_router,
+    ai_router,
+)
 from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
@@ -14,43 +24,56 @@ if cloudinary_service.configure_from_env():
     print("Cloudinary configured successfully")
 else:
     print("Cloudinary not configured - image uploads will use local storage")
+
+
 def run_migrations():
     inspector = inspect(engine)
-    
-    if 'object_images' in inspector.get_table_names():
-        columns = [col['name'] for col in inspector.get_columns('object_images')]
-        if 'image_type' not in columns:
+
+    if "object_images" in inspector.get_table_names():
+        columns = [col["name"] for col in inspector.get_columns("object_images")]
+        if "image_type" not in columns:
             with engine.connect() as conn:
-                conn.execute(text("ALTER TABLE object_images ADD COLUMN image_type VARCHAR(20) DEFAULT 'flashcard'"))
+                conn.execute(
+                    text(
+                        "ALTER TABLE object_images ADD COLUMN image_type VARCHAR(20) DEFAULT 'flashcard'"
+                    )
+                )
                 conn.commit()
                 print("Migration: Added image_type column to object_images table")
-    
-    if 'players' in inspector.get_table_names():
-        columns = [col['name'] for col in inspector.get_columns('players')]
+
+    if "players" in inspector.get_table_names():
+        columns = [col["name"] for col in inspector.get_columns("players")]
         with engine.connect() as conn:
-            if 'apple_user_id' not in columns:
-                conn.execute(text("ALTER TABLE players ADD COLUMN apple_user_id VARCHAR"))
+            if "apple_user_id" not in columns:
+                conn.execute(
+                    text("ALTER TABLE players ADD COLUMN apple_user_id VARCHAR")
+                )
                 conn.commit()
                 print("Migration: Added apple_user_id column to players table")
-            if 'device_id' not in columns:
+            if "device_id" not in columns:
                 conn.execute(text("ALTER TABLE players ADD COLUMN device_id VARCHAR"))
                 conn.commit()
                 print("Migration: Added device_id column to players table")
-            if 'email' not in columns:
+            if "email" not in columns:
                 conn.execute(text("ALTER TABLE players ADD COLUMN email VARCHAR"))
                 conn.commit()
                 print("Migration: Added email column to players table")
-            if 'is_guest' not in columns:
-                conn.execute(text("ALTER TABLE players ADD COLUMN is_guest VARCHAR DEFAULT 'false'"))
+            if "is_guest" not in columns:
+                conn.execute(
+                    text(
+                        "ALTER TABLE players ADD COLUMN is_guest VARCHAR DEFAULT 'false'"
+                    )
+                )
                 conn.commit()
                 print("Migration: Added is_guest column to players table")
+
 
 run_migrations()
 
 app = FastAPI(
     title="Rising Star Kid API",
     description="Backend API for Rising Star Kid - Adaptive learning platform for children with autism",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 app.add_middleware(
@@ -87,8 +110,8 @@ def root():
             "Feature 3: Adaptive learning engine with multi-dimensional profiles",
             "Feature 4: ABA-based reinforcement system",
             "Feature 5: Parent/therapist dashboard",
-            "Feature 6: AI-powered personalization (social stories, behavior guidance, progress summaries)"
-        ]
+            "Feature 6: AI-powered personalization (social stories, behavior guidance, progress summaries)",
+        ],
     }
 
 

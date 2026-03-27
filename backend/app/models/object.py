@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime, ForeignKey, Float, Enum
+from sqlalchemy import Column, String, DateTime, ForeignKey, Float
 from sqlalchemy.orm import relationship
 import enum
 from app.database import Base
@@ -20,7 +20,9 @@ class Object(Base):
     category = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    images = relationship("ObjectImage", back_populates="object", cascade="all, delete-orphan")
+    images = relationship(
+        "ObjectImage", back_populates="object", cascade="all, delete-orphan"
+    )
     attempts = relationship("AttemptHistory", back_populates="object")
     progress = relationship("PlayerProgress", back_populates="object")
 
@@ -35,7 +37,9 @@ class ObjectImage(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     object = relationship("Object", back_populates="images")
-    bounding_boxes = relationship("BoundingBox", back_populates="object_image", cascade="all, delete-orphan")
+    bounding_boxes = relationship(
+        "BoundingBox", back_populates="object_image", cascade="all, delete-orphan"
+    )
 
 
 class BoundingBox(Base):

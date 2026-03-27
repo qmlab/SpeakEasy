@@ -6,7 +6,9 @@ from pydantic import BaseModel, Field
 class AttemptCreate(BaseModel):
     player_id: str
     object_id: str
-    feature_type: int = Field(..., ge=1, le=2, description="1 = say word, 2 = find object")
+    feature_type: int = Field(
+        ..., ge=1, le=2, description="1 = say word, 2 = find object"
+    )
     score: int = Field(..., ge=0, le=100)
     spoken_text: Optional[str] = None
     tap_x: Optional[float] = None
@@ -48,8 +50,12 @@ class SayWordResponse(BaseModel):
 class FindObjectRequest(BaseModel):
     player_id: str
     object_image_id: str
-    tap_x: float = Field(..., ge=0, le=1, description="X coordinate of tap (0-1 normalized)")
-    tap_y: float = Field(..., ge=0, le=1, description="Y coordinate of tap (0-1 normalized)")
+    tap_x: float = Field(
+        ..., ge=0, le=1, description="X coordinate of tap (0-1 normalized)"
+    )
+    tap_y: float = Field(
+        ..., ge=0, le=1, description="Y coordinate of tap (0-1 normalized)"
+    )
 
 
 class FindObjectResponse(BaseModel):

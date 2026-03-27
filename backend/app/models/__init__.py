@@ -19,8 +19,23 @@ from app.models.adaptive import (
 )
 
 __all__ = [
-    "Player", "Object", "ObjectImage", "BoundingBox", "AttemptHistory", "PlayerProgress",
-    "DevelopmentalProfile", "LearningSession", "AdaptiveTask", "TaskAttempt", "ReinforcementConfig",
-    "DevelopmentalDimension", "SessionType", "SessionStatus", "TaskType", "Modality",
-    "PromptLevel", "PromptStrategy", "RewardType",
+    "Player",
+    "Object",
+    "ObjectImage",
+    "BoundingBox",
+    "AttemptHistory",
+    "PlayerProgress",
+    "DevelopmentalProfile",
+    "LearningSession",
+    "AdaptiveTask",
+    "TaskAttempt",
+    "ReinforcementConfig",
+    "DevelopmentalDimension",
+    "SessionType",
+    "SessionStatus",
+    "TaskType",
+    "Modality",
+    "PromptLevel",
+    "PromptStrategy",
+    "RewardType",
 ]

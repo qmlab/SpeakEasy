@@ -1,7 +1,17 @@
 import uuid
 import enum
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime, ForeignKey, Float, Integer, Boolean, JSON, UniqueConstraint
+from sqlalchemy import (
+    Column,
+    String,
+    DateTime,
+    ForeignKey,
+    Float,
+    Integer,
+    Boolean,
+    JSON,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -131,7 +141,9 @@ class LearningSession(Base):
     current_level = Column(Integer, nullable=False, default=0)
 
     player = relationship("Player", back_populates="learning_sessions")
-    task_attempts = relationship("TaskAttempt", back_populates="session", cascade="all, delete-orphan")
+    task_attempts = relationship(
+        "TaskAttempt", back_populates="session", cascade="all, delete-orphan"
+    )
 
 
 class AdaptiveTask(Base):
@@ -154,11 +166,15 @@ class TaskAttempt(Base):
     __tablename__ = "task_attempts"
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    session_id = Column(String, ForeignKey("learning_sessions.id"), nullable=False, index=True)
+    session_id = Column(
+        String, ForeignKey("learning_sessions.id"), nullable=False, index=True
+    )
     task_id = Column(String, ForeignKey("adaptive_tasks.id"), nullable=True)
     player_id = Column(String, ForeignKey("players.id"), nullable=False, index=True)
     response_time_ms = Column(Integer, nullable=True)
-    prompt_level = Column(Integer, nullable=False, default=PromptLevel.INDEPENDENT.value)
+    prompt_level = Column(
+        Integer, nullable=False, default=PromptLevel.INDEPENDENT.value
+    )
     is_correct = Column(Boolean, nullable=False, default=False)
     score = Column(Integer, nullable=False, default=0)
     response_data = Column(JSON, nullable=True, default=dict)
@@ -173,10 +189,14 @@ class ReinforcementConfig(Base):
     __tablename__ = "reinforcement_configs"
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    player_id = Column(String, ForeignKey("players.id"), nullable=False, unique=True, index=True)
+    player_id = Column(
+        String, ForeignKey("players.id"), nullable=False, unique=True, index=True
+    )
     reward_frequency = Column(Integer, nullable=False, default=3)
     reward_type = Column(String, nullable=False, default=RewardType.ANIMATION.value)
-    prompt_strategy = Column(String, nullable=False, default=PromptStrategy.MOST_TO_LEAST.value)
+    prompt_strategy = Column(
+        String, nullable=False, default=PromptStrategy.MOST_TO_LEAST.value
+    )
     confidence_rebuild_threshold = Column(Integer, nullable=False, default=3)
     session_max_duration_minutes = Column(Integer, nullable=False, default=15)
     break_after_minutes = Column(Integer, nullable=False, default=10)

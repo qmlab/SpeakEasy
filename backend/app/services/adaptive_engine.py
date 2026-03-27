@@ -74,7 +74,9 @@ class AdaptiveEngine:
             self.db.refresh(p)
         return profiles
 
-    def get_profile(self, player_id: str, dimension: str) -> Optional[DevelopmentalProfile]:
+    def get_profile(
+        self, player_id: str, dimension: str
+    ) -> Optional[DevelopmentalProfile]:
         """Get a single profile for a specific dimension."""
         return (
             self.db.query(DevelopmentalProfile)
@@ -131,7 +133,11 @@ class AdaptiveEngine:
 
     def end_session(self, session_id: str) -> LearningSession:
         """End a learning session and compute summary stats."""
-        session = self.db.query(LearningSession).filter(LearningSession.id == session_id).first()
+        session = (
+            self.db.query(LearningSession)
+            .filter(LearningSession.id == session_id)
+            .first()
+        )
         if not session:
             raise ValueError(f"Session {session_id} not found")
 
@@ -149,7 +155,9 @@ class AdaptiveEngine:
         session.tasks_completed = session.total_count
 
         if attempts:
-            response_times = [a.response_time_ms for a in attempts if a.response_time_ms]
+            response_times = [
+                a.response_time_ms for a in attempts if a.response_time_ms
+            ]
             if response_times:
                 session.avg_response_time_ms = sum(response_times) / len(response_times)
 
@@ -169,7 +177,11 @@ class AdaptiveEngine:
         dimension: str,
     ) -> Optional[dict]:
         """Select the next task based on current level and adaptive logic."""
-        session = self.db.query(LearningSession).filter(LearningSession.id == session_id).first()
+        session = (
+            self.db.query(LearningSession)
+            .filter(LearningSession.id == session_id)
+            .first()
+        )
         if not session:
             raise ValueError(f"Session {session_id} not found")
 
@@ -218,7 +230,9 @@ class AdaptiveEngine:
                     task = self._select_task(
                         dimension=dimension,
                         level=alt_level,
-                        is_assessment=(session.session_type == SessionType.ASSESSMENT.value),
+                        is_assessment=(
+                            session.session_type == SessionType.ASSESSMENT.value
+                        ),
                         exclude_task_ids=self._get_recent_task_ids(session_id),
                     )
                     if task:
@@ -298,7 +312,11 @@ class AdaptiveEngine:
         self.db.add(attempt)
 
         # Update session counters
-        session = self.db.query(LearningSession).filter(LearningSession.id == session_id).first()
+        session = (
+            self.db.query(LearningSession)
+            .filter(LearningSession.id == session_id)
+            .first()
+        )
         if session:
             session.total_count = (session.total_count or 0) + 1
             if is_correct:
@@ -320,13 +338,21 @@ class AdaptiveEngine:
         if dimension:
             profile = self.get_profile(player_id, dimension)
 
-        recent_attempts = self._get_recent_attempts(player_id, dimension, level=task_level)
+        recent_attempts = self._get_recent_attempts(
+            player_id, dimension, level=task_level
+        )
         accuracy = self._compute_accuracy(recent_attempts)
         consecutive_fails = self._count_consecutive_fails(recent_attempts)
         streak = self._count_streak(recent_attempts)
 
-        should_level_up = accuracy >= LEVEL_UP_THRESHOLD and len(recent_attempts) >= ACCURACY_WINDOW // 2
-        should_level_down = accuracy <= LEVEL_DOWN_THRESHOLD and len(recent_attempts) >= ACCURACY_WINDOW // 2
+        should_level_up = (
+            accuracy >= LEVEL_UP_THRESHOLD
+            and len(recent_attempts) >= ACCURACY_WINDOW // 2
+        )
+        should_level_down = (
+            accuracy <= LEVEL_DOWN_THRESHOLD
+            and len(recent_attempts) >= ACCURACY_WINDOW // 2
+        )
         confidence_rebuild = consecutive_fails >= CONSECUTIVE_FAIL_LIMIT
 
         # Apply level changes (reuse profile fetched above)
@@ -379,7 +405,9 @@ class AdaptiveEngine:
 
     # ---- Assessment ----
 
-    def run_assessment(self, player_id: str, dimension: str, results: list[dict]) -> dict:
+    def run_assessment(
+        self, player_id: str, dimension: str, results: list[dict]
+    ) -> dict:
         """Process assessment results and set initial level."""
         if not results:
             return {"dimension": dimension, "level": 0, "assessed": False}
@@ -425,10 +453,13 @@ class AdaptiveEngine:
     # ---- Helper Methods ----
 
     def _get_recent_attempts(
-        self, player_id: str, dimension: Optional[str] = None, level: Optional[int] = None
+        self,
+        player_id: str,
+        dimension: Optional[str] = None,
+        level: Optional[int] = None,
     ) -> list[TaskAttempt]:
         """Get recent attempts for accuracy computation.
-        
+
         When level is provided, only attempts on tasks at that level are
         considered.  This prevents stale high-accuracy from a previous
         level from triggering an unintended level-up right after promotion.
@@ -684,13 +715,15 @@ class AdaptiveEngine:
         accuracy_trend = []
         for s in sessions:
             accuracy = (s.correct_count / s.total_count) if s.total_count > 0 else 0.0
-            history.append({
-                "session_id": s.id,
-                "date": s.started_at.isoformat() if s.started_at else None,
-                "level": s.current_level,
-                "accuracy": round(accuracy, 3),
-                "tasks_completed": s.tasks_completed,
-            })
+            history.append(
+                {
+                    "session_id": s.id,
+                    "date": s.started_at.isoformat() if s.started_at else None,
+                    "level": s.current_level,
+                    "accuracy": round(accuracy, 3),
+                    "tasks_completed": s.tasks_completed,
+                }
+            )
             accuracy_trend.append(round(accuracy, 3))
 
         # Count mastered tasks at this dimension
@@ -741,7 +774,9 @@ class AdaptiveEngine:
         if not sessions:
             return 0
 
-        dates = sorted(set(s.started_at.date() for s in sessions if s.started_at), reverse=True)
+        dates = sorted(
+            set(s.started_at.date() for s in sessions if s.started_at), reverse=True
+        )
         if not dates:
             return 0
 
@@ -765,9 +800,7 @@ class AdaptiveEngine:
             self.db.query(
                 TaskAttempt.task_id,
                 func.count(TaskAttempt.id).label("total"),
-                func.sum(
-                    func.cast(TaskAttempt.is_correct, Integer)
-                ).label("correct"),
+                func.sum(func.cast(TaskAttempt.is_correct, Integer)).label("correct"),
             )
             .filter(TaskAttempt.player_id == player_id)
             .group_by(TaskAttempt.task_id)
