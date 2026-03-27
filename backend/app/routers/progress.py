@@ -93,18 +93,6 @@ def get_player_progress(player_id: str, db: Session = Depends(get_db)):
     return progress_list
 
 
-@router.get("/{player_id}/{object_id}", response_model=Optional[ProgressResponse])
-def get_object_progress(player_id: str, object_id: str, db: Session = Depends(get_db)):
-    progress = (
-        db.query(PlayerProgress)
-        .filter(
-            PlayerProgress.player_id == player_id, PlayerProgress.object_id == object_id
-        )
-        .first()
-    )
-    return progress
-
-
 @router.get("/{player_id}/summary", response_model=ProgressSummary)
 def get_progress_summary(player_id: str, db: Session = Depends(get_db)):
     progress_list = (
@@ -122,6 +110,18 @@ def get_progress_summary(player_id: str, db: Session = Depends(get_db)):
         total_stars=total_stars,
         progress_by_object=progress_by_object,
     )
+
+
+@router.get("/{player_id}/{object_id}", response_model=Optional[ProgressResponse])
+def get_object_progress(player_id: str, object_id: str, db: Session = Depends(get_db)):
+    progress = (
+        db.query(PlayerProgress)
+        .filter(
+            PlayerProgress.player_id == player_id, PlayerProgress.object_id == object_id
+        )
+        .first()
+    )
+    return progress
 
 
 @router.delete("/{player_id}")
