@@ -13,7 +13,7 @@ protocol SpeechRecognitionProvider {
     var isListening: Bool { get }
 }
 
-class SpeechService: ObservableObject {
+class SpeechService: NSObject, ObservableObject {
     private let synthesizer = AVSpeechSynthesizer()
     @Published var isSpeaking = false
     @Published var isListening = false
@@ -45,7 +45,9 @@ class SpeechService: ObservableObject {
 
     var mockProvider: SpeechRecognitionProvider?
 
-    init() {
+    override init() {
+        super.init()
+        synthesizer.delegate = self
         speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: currentLanguage.rawValue))
         checkAuthorizationStatus()
     }
@@ -92,10 +94,6 @@ class SpeechService: ObservableObject {
         
         isSpeaking = true
         synthesizer.speak(utterance)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(text.count) * 0.1 + 0.5) {
-            self.isSpeaking = false
-        }
     }
     
     func stop() {
@@ -324,6 +322,22 @@ class SpeechService: ObservableObject {
         }
         
         return matrix[m][n]
+    }
+}
+
+// MARK: - AVSpeechSynthesizerDelegate
+
+extension SpeechService: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        DispatchQueue.main.async {
+            self.isSpeaking = false
+        }
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        DispatchQueue.main.async {
+            self.isSpeaking = false
+        }
     }
 }
 

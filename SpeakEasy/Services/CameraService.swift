@@ -131,7 +131,8 @@ class CameraService: NSObject, ObservableObject {
     /// When the camera recognizes this object, `matchFound` is set to true.
     func setTargetLabel(_ label: String?) {
         DispatchQueue.main.async {
-            self.targetLabel = label?.lowercased()
+            let trimmed = label?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            self.targetLabel = (trimmed?.isEmpty == true) ? nil : trimmed
             self.matchFound = false
             self.matchConfidence = 0
         }
