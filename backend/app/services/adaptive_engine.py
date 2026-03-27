@@ -268,6 +268,8 @@ class AdaptiveEngine:
 
         if is_assessment:
             query = query.filter(AdaptiveTask.is_assessment == True)  # noqa: E712
+        else:
+            query = query.filter(AdaptiveTask.is_assessment == False)  # noqa: E712
 
         if exclude_task_ids:
             query = query.filter(AdaptiveTask.id.notin_(exclude_task_ids))
