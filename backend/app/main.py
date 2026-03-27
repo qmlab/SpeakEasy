@@ -17,6 +17,7 @@ from app.routers import (
     ai_router,
     assessment_router,
 )
+from app.config import UPLOAD_DIR
 from app.services import cloudinary_service
 
 Base.metadata.create_all(bind=engine)
@@ -85,9 +86,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-UPLOAD_DIR = os.getenv(
-    "UPLOAD_DIR", "/data/uploads" if os.path.isdir("/data") else "uploads"
-)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 

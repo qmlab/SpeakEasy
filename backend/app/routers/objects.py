@@ -17,11 +17,10 @@ from app.schemas.object import (
     ObjectListResponse,
     ImageType,
 )
+from app.config import UPLOAD_DIR
 from app.services import cloudinary_service
 
 router = APIRouter(prefix="/objects", tags=["objects"])
-
-UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
 
 
 @router.post("/", response_model=ObjectResponse)
