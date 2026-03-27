@@ -45,7 +45,7 @@ class CloudinaryService:
     def upload_image(
         self,
         file_data: bytes,
-        folder: str = "speakeasy",
+        folder: str = "risingstar",
         public_id: Optional[str] = None,
         resource_type: str = "image",
         transformation: Optional[dict] = None

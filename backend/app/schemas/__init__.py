@@ -4,10 +4,24 @@ from app.schemas.object import (
     BoundingBoxCreate, BoundingBoxResponse
 )
 from app.schemas.attempt import AttemptCreate, AttemptResponse, SayWordRequest, FindObjectRequest
+from app.schemas.adaptive import (
+    DevelopmentalProfileResponse, DevelopmentalProfileUpdate, FullProfileResponse,
+    StartSessionRequest, SessionResponse, NextTaskResponse,
+    SubmitAttemptRequest, AttemptResultResponse, EndSessionResponse,
+    AdaptiveTaskCreate, AdaptiveTaskResponse,
+    ReinforcementConfigResponse, ReinforcementConfigUpdate,
+    DashboardSummary, DimensionProgress,
+)
 
 __all__ = [
     "PlayerCreate", "PlayerResponse", "PlayerStats",
     "ObjectCreate", "ObjectResponse", "ObjectImageCreate", "ObjectImageResponse",
     "BoundingBoxCreate", "BoundingBoxResponse",
-    "AttemptCreate", "AttemptResponse", "SayWordRequest", "FindObjectRequest"
+    "AttemptCreate", "AttemptResponse", "SayWordRequest", "FindObjectRequest",
+    "DevelopmentalProfileResponse", "DevelopmentalProfileUpdate", "FullProfileResponse",
+    "StartSessionRequest", "SessionResponse", "NextTaskResponse",
+    "SubmitAttemptRequest", "AttemptResultResponse", "EndSessionResponse",
+    "AdaptiveTaskCreate", "AdaptiveTaskResponse",
+    "ReinforcementConfigResponse", "ReinforcementConfigUpdate",
+    "DashboardSummary", "DimensionProgress",
 ]

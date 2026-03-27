@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "speakeasy-backend"
+name = "risingstar-backend"
 version = "0.1.0"
-description = "Backend API for SpeakEasy iOS app"
-authors = ["SpeakEasy Team"]
+description = "Backend API for Rising Star Kid - Adaptive learning platform for children with autism"
+authors = ["Rising Star Kid Team"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

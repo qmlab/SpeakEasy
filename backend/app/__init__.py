@@ -1,1 +1,1 @@
-# SpeakEasy Backend
+# Rising Star Kid Backend
