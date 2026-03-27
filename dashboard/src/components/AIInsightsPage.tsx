@@ -47,6 +47,12 @@ export function AIInsightsPage({ playerId }: Props) {
   }
 
   useEffect(() => {
+    setProgressData(null);
+    setGuidanceData(null);
+    setStoryData(null);
+  }, [playerId]);
+
+  useEffect(() => {
     load(tab);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerId, tab]);
@@ -145,7 +151,7 @@ function ProgressReport({ data }: { data: ProgressSummary }) {
         <Card>
           <CardContent className="p-4 text-center">
             <p className="text-2xl font-bold">
-              {Math.round(data.stats.overall_accuracy * 100)}%
+              {Math.round(data.stats.overall_accuracy)}%
             </p>
             <p className="text-xs text-muted-foreground">Accuracy</p>
           </CardContent>
