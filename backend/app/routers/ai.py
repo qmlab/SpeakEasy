@@ -12,6 +12,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
+from app.models.adaptive import DevelopmentalDimension
 from app.models.player import Player
 from app.schemas.ai import (
     SocialStoryRequest,
@@ -29,10 +30,21 @@ from app.services.ai_service import AIService
 router = APIRouter(prefix="/ai", tags=["ai"])
 
 
+_VALID_DIMENSIONS = [d.value for d in DevelopmentalDimension]
+
+
 def _validate_player(player_id: str, db: Session) -> None:
     player = db.query(Player).filter(Player.id == player_id).first()
     if not player:
         raise HTTPException(status_code=404, detail=f"Player {player_id} not found")
+
+
+def _validate_dimension(dimension: str) -> None:
+    if dimension not in _VALID_DIMENSIONS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid dimension: {dimension}. Valid: {_VALID_DIMENSIONS}",
+        )
 
 
 @router.get("/status", response_model=AIStatusResponse)
@@ -76,6 +88,8 @@ def generate_behavior_guidance(
     and prioritized suggestions per dimension.
     """
     _validate_player(request.player_id, db)
+    if request.dimension:
+        _validate_dimension(request.dimension)
     service = AIService(db)
     try:
         result = service.generate_behavior_guidance(
@@ -122,6 +136,7 @@ def generate_task_content(
     dimension, and personal interests for maximum engagement.
     """
     _validate_player(request.player_id, db)
+    _validate_dimension(request.dimension)
     service = AIService(db)
     try:
         result = service.generate_task_content(
