@@ -102,17 +102,33 @@ struct AssessmentGameView: View {
                     .foregroundColor(.secondary)
                     .padding(.horizontal, 32)
                     .lineSpacing(6)
-            } else if isLoading {
-                ProgressView()
-                    .scaleEffect(1.5)
-                Text("Getting ready...")
-                    .font(.title3)
-                    .foregroundColor(.secondary)
-            }
+                } else if let error = errorMessage {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 48))
+                        .foregroundColor(.orange)
+                    Text(error)
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
 
-            Spacer()
+                    Button("Try Again") {
+                        errorMessage = nil
+                        Task { await startAssessment() }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.purple)
+                } else if isLoading {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                    Text("Getting ready...")
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                }
 
-            if character != nil {
+                Spacer()
+
+                if character != nil {
                 Button {
                     withAnimation(.spring()) {
                         phase = .playing
@@ -198,9 +214,61 @@ struct AssessmentGameView: View {
                     if let options = activity.content.options, !options.isEmpty {
                         optionButtons(options, activity: activity)
                     }
+
+                    // Voice interaction fallback: show "I said it!" button
+                    if activity.content.interactionType == "voice" {
+                        voiceActivitySection(activity: activity)
+                    }
                 }
                 .padding(.vertical, 24)
             }
+        }
+    }
+
+    // MARK: - Voice Activity Section
+
+    private func voiceActivitySection(activity: AssessmentActivity) -> some View {
+        VStack(spacing: 16) {
+            Text("Say it out loud!")
+                .font(.headline)
+                .foregroundColor(.purple)
+
+            Button {
+                // For assessment, treat voice attempt as correct (simplified)
+                let target = activity.content.correctAnswer ?? activity.content.targetWord ?? ""
+                Task {
+                    await submitResponse(activity: activity, selected: target)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "mic.fill")
+                        .font(.title2)
+                    Text("I said it!")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.green.gradient)
+                )
+            }
+            .disabled(selectedOption != nil)
+            .padding(.horizontal, 24)
+
+            Button {
+                // Skip / can't say it
+                Task {
+                    await submitResponse(activity: activity, selected: "")
+                }
+            } label: {
+                Text("Skip")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .disabled(selectedOption != nil)
         }
     }
 

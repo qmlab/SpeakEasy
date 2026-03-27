@@ -149,6 +149,9 @@ class AssessmentState:
         self.current_index: int = 0
         self.completed: bool = False
 
+        # Cache task IDs per activity index to avoid random re-fetch mismatch
+        self.activity_task_ids: dict[int, str] = {}
+
 
 # In-memory store for active assessments
 _active_assessments: dict[str, AssessmentState] = {}
@@ -217,7 +220,7 @@ class AssessmentEngine:
         )
         narrative = narrative_template.format(name=state.character["name"])
 
-        # Fetch a task from the database
+        # Fetch a task from the database and cache its ID
         task = self._find_assessment_task(dimension, level)
 
         if not task:
@@ -225,6 +228,8 @@ class AssessmentEngine:
             state.current_index += 1
             return self.get_next_activity(assessment_id)
 
+        # Cache so process_response uses the same task
+        state.activity_task_ids[state.current_index] = task.id
         content = task.content or {}
 
         return {
@@ -267,8 +272,16 @@ class AssessmentEngine:
         dimension = activity["dimension"]
         level = activity["level"]
 
-        # Determine correctness
-        task = self._find_assessment_task(dimension, level)
+        # Look up the cached task (same one shown in get_next_activity)
+        cached_task_id = state.activity_task_ids.get(activity_index)
+        if cached_task_id:
+            task = (
+                self.db.query(AdaptiveTask)
+                .filter(AdaptiveTask.id == cached_task_id)
+                .first()
+            )
+        else:
+            task = self._find_assessment_task(dimension, level)
         is_correct = self._evaluate_response(
             task, selected_option, spoken_text, interaction_type
         )
