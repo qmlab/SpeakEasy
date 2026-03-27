@@ -85,3 +85,59 @@ Priority: text (literacy>=2) > voice (OC>=2 & expr>=2) > image_exchange (expr>=1
 - The `next-task` endpoint requires query params: `player_id` and `dimension`
 - Port 8000 may already be in use from previous runs - use `fuser -k 8000/tcp` to clear
 - No CI is configured on this repo
+# Testing Rising Star Kid Backend
+
+## Setup & Server
+
+- Backend lives in `backend/` directory
+- Uses Poetry for dependency management
+- Database: SQLite file `risingstar.db` in `backend/` directory
+- Start server: `poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000` from `backend/`
+- Fresh DB for testing: delete `risingstar.db` before starting server
+- No CI configured — run lint/tests locally
+
+## Key API Endpoints
+
+- `GET /` — Root, returns app name "Rising Star Kid"
+- `GET /health` — Health check, returns `{"status": "healthy"}`
+- `POST /players/` — Create player with `{"name": "...", "age": N}`
+- `POST /tasks/seed` — Seed all tasks (idempotent). Returns `{"counts": {dimension: count}}`. Expected: 92 total (17+15+15+15+15+15)
+- `GET /tasks/?limit=200` — List tasks. **Default limit is 50**, pass `?limit=200` to get all
+- `GET /adaptive/profiles/{player_id}` — Get player profiles. Response structure: `{"player_id": ..., "player_name": ..., "dimensions": [...], "overall_level": ...}`. Profiles are in `dimensions` array, each with `dimension` and `level` keys
+- `POST /adaptive/sessions/start` — Start session with `{"player_id": ..., "dimension": ..., "session_type": "practice"}`
+- `GET /adaptive/sessions/{session_id}/next-task?player_id=...&dimension=...` — Get next adaptive task
+- `POST /adaptive/attempts` — Submit attempt with `{"session_id": ..., "task_id": ..., "player_id": ..., "is_correct": bool, "response_data": {...}, "response_time_ms": N}`
+- `POST /adaptive/sessions/{session_id}/end` — End session
+- `POST /adaptive/evaluate-speech` — Speech evaluation
+- `GET /adaptive/modality/{player_id}` — Modality recommendation
+
+## 6 Dimensions & Expected Task Types per Level
+
+| Dimension | Level 0 | Level 1 | Level 2 | Level 3 | Level 4 |
+|---|---|---|---|---|---|
+| object_cognition | match | identify | classify | function | abstract |
+| language_expression | imitate | name_object | describe | build_sentence | conversation |
+| language_comprehension | point_to | follow_instruction | story_comprehension | infer_meaning | — |
+| literacy | recognize_image | match_word_image | read_word | read_sentence | read_passage |
+| social_behavior | attend | imitate_action | turn_take | joint_attention | initiate |
+| cognitive_logic | pair | sort | cause_effect | sequence_order | reason |
+
+## Adaptive Engine Rules
+
+- ACCURACY_WINDOW = 10 (last N attempts considered)
+- LEVEL_UP_THRESHOLD = 0.80 (>=80% accuracy triggers level up)
+- LEVEL_DOWN_THRESHOLD = 0.50 (<50% triggers level down)
+- CONSECUTIVE_FAIL_LIMIT = 3 (3 consecutive failures → `confidence_rebuild: true`)
+- Level range: 0–4
+- In practice, 5 consecutive correct answers at a fresh level triggers level-up
+
+## Testing Workflow
+
+1. Kill any existing server: `fuser -k 8000/tcp`
+2. Delete old DB: `rm -f backend/risingstar.db`
+3. Start server from `backend/` dir
+4. Seed tasks: `curl -s -X POST http://localhost:8000/tasks/seed`
+5. Create player: `curl -s -X POST http://localhost:8000/players/ -H 'Content-Type: application/json' -d '{"name":"TestKid","age":5}'`
+6. Test each dimension: start session → get task → submit attempts → verify level-up
+7. Verify cross-dimension independence via profiles endpoint
+8. Test confidence rebuild: 3 consecutive `is_correct: false` → check for `confidence_rebuild: true`
