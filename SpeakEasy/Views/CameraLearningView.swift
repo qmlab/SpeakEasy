@@ -40,6 +40,7 @@ struct CameraLearningView: View {
                 // Top: close button + instruction banner
                 HStack {
                     Button {
+                        guard !hasSubmitted else { return }
                         onResult(false, 0)
                     } label: {
                         Image(systemName: "xmark.circle.fill")
