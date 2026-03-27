@@ -1,0 +1,583 @@
+//
+//  AdaptiveModels.swift
+//  RisingStarKid
+//
+//  Codable models for the adaptive learning and AI personalization APIs.
+//
+
+import Foundation
+import SwiftUI
+
+// MARK: - Developmental Dimensions
+
+enum DevelopmentalDimension: String, Codable, CaseIterable, Identifiable {
+    case objectCognition = "object_cognition"
+    case languageExpression = "language_expression"
+    case languageComprehension = "language_comprehension"
+    case literacy = "literacy"
+    case socialBehavior = "social_behavior"
+    case cognitiveLogic = "cognitive_logic"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .objectCognition: return "Object Cognition"
+        case .languageExpression: return "Language Expression"
+        case .languageComprehension: return "Language Comprehension"
+        case .literacy: return "Literacy"
+        case .socialBehavior: return "Social Behavior"
+        case .cognitiveLogic: return "Cognitive Logic"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .objectCognition: return "cube.fill"
+        case .languageExpression: return "mouth.fill"
+        case .languageComprehension: return "ear.fill"
+        case .literacy: return "book.fill"
+        case .socialBehavior: return "person.2.fill"
+        case .cognitiveLogic: return "brain.head.profile"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .objectCognition: return .orange
+        case .languageExpression: return .blue
+        case .languageComprehension: return .green
+        case .literacy: return .purple
+        case .socialBehavior: return .pink
+        case .cognitiveLogic: return .cyan
+        }
+    }
+
+    var levelDescriptions: [String] {
+        switch self {
+        case .objectCognition:
+            return ["Matching", "Identifying", "Classifying", "Function Understanding", "Abstract Relations"]
+        case .languageExpression:
+            return ["Imitating Sounds", "Naming Objects", "Describing", "Building Sentences", "Conversation"]
+        case .languageComprehension:
+            return ["Point To", "Follow Instructions", "Story Comprehension", "Inferring Meaning", "Advanced"]
+        case .literacy:
+            return ["Recognize Images", "Match Word-Image", "Read Words", "Read Sentences", "Read Passages"]
+        case .socialBehavior:
+            return ["Attending", "Imitating Actions", "Turn Taking", "Joint Attention", "Initiating"]
+        case .cognitiveLogic:
+            return ["Pairing", "Sorting", "Cause & Effect", "Sequencing", "Reasoning"]
+        }
+    }
+}
+
+// MARK: - Profile Models
+
+struct DevelopmentalProfile: Codable, Identifiable {
+    let id: String
+    let playerId: String
+    let dimension: String
+    let level: Int
+    let subScores: [String: AnyCodableValue]?
+    let assessed: Bool
+    let lastAssessedAt: String?
+    let createdAt: String
+    let updatedAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case playerId = "player_id"
+        case dimension
+        case level
+        case subScores = "sub_scores"
+        case assessed
+        case lastAssessedAt = "last_assessed_at"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+
+    var dimensionEnum: DevelopmentalDimension? {
+        DevelopmentalDimension(rawValue: dimension)
+    }
+}
+
+struct FullProfileResponse: Codable {
+    let playerId: String
+    let playerName: String
+    let dimensions: [DevelopmentalProfile]
+    let overallLevel: Double
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case playerName = "player_name"
+        case dimensions
+        case overallLevel = "overall_level"
+    }
+}
+
+// MARK: - Session Models
+
+struct StartSessionRequest: Codable {
+    let playerId: String
+    let sessionType: String
+    let dimension: String?
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case sessionType = "session_type"
+        case dimension
+    }
+}
+
+struct LearningSession: Codable, Identifiable {
+    let id: String
+    let playerId: String
+    let sessionType: String
+    let dimension: String?
+    let startedAt: String
+    let endedAt: String?
+    let tasksCompleted: Int
+    let correctCount: Int
+    let totalCount: Int
+    let avgResponseTimeMs: Double?
+    let status: String
+    let currentLevel: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case playerId = "player_id"
+        case sessionType = "session_type"
+        case dimension
+        case startedAt = "started_at"
+        case endedAt = "ended_at"
+        case tasksCompleted = "tasks_completed"
+        case correctCount = "correct_count"
+        case totalCount = "total_count"
+        case avgResponseTimeMs = "avg_response_time_ms"
+        case status
+        case currentLevel = "current_level"
+    }
+}
+
+// MARK: - Task Models
+
+struct AdaptiveTask: Codable {
+    let taskId: String
+    let dimension: String
+    let level: Int
+    let taskType: String
+    let modalities: [String]
+    let content: TaskContent
+    let promptLevel: Int
+    let sessionId: String
+
+    enum CodingKeys: String, CodingKey {
+        case taskId = "task_id"
+        case dimension
+        case level
+        case taskType = "task_type"
+        case modalities
+        case content
+        case promptLevel = "prompt_level"
+        case sessionId = "session_id"
+    }
+}
+
+struct TaskContent: Codable {
+    let instruction: String?
+    let targetWord: String?
+    let imageHint: String?
+    let correctAnswer: String?
+    let options: [String]?
+    let prompt: String?
+    let scenario: String?
+    let sentence: String?
+    let story: String?
+    let question: String?
+    let passage: String?
+    let items: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case instruction
+        case targetWord = "target_word"
+        case imageHint = "image_hint"
+        case correctAnswer = "correct_answer"
+        case options
+        case prompt
+        case scenario
+        case sentence
+        case story
+        case question
+        case passage
+        case items
+    }
+
+    var displayInstruction: String {
+        instruction ?? prompt ?? question ?? "Complete this task"
+    }
+
+    var displayOptions: [String] {
+        options ?? []
+    }
+}
+
+// MARK: - Attempt Models
+
+struct SubmitAttemptRequest: Codable {
+    let sessionId: String
+    let taskId: String
+    let playerId: String
+    let isCorrect: Bool
+    let score: Int
+    let responseTimeMs: Int?
+    let promptLevel: Int
+    let responseData: [String: AnyCodableValue]?
+
+    enum CodingKeys: String, CodingKey {
+        case sessionId = "session_id"
+        case taskId = "task_id"
+        case playerId = "player_id"
+        case isCorrect = "is_correct"
+        case score
+        case responseTimeMs = "response_time_ms"
+        case promptLevel = "prompt_level"
+        case responseData = "response_data"
+    }
+}
+
+struct AttemptResult: Codable {
+    let attemptId: String
+    let isCorrect: Bool
+    let score: Int
+    let reward: RewardInfo?
+    let streak: Int
+    let accuracy: Double
+    let shouldLevelUp: Bool
+    let shouldLevelDown: Bool
+    let confidenceRebuild: Bool
+    let nextAction: String
+    let levelChange: Int
+
+    enum CodingKeys: String, CodingKey {
+        case attemptId = "attempt_id"
+        case isCorrect = "is_correct"
+        case score
+        case reward
+        case streak
+        case accuracy
+        case shouldLevelUp = "should_level_up"
+        case shouldLevelDown = "should_level_down"
+        case confidenceRebuild = "confidence_rebuild"
+        case nextAction = "next_action"
+        case levelChange = "level_change"
+    }
+}
+
+struct RewardInfo: Codable {
+    let type: String?
+    let message: String?
+}
+
+struct EndSessionResponse: Codable {
+    let sessionId: String
+    let tasksCompleted: Int
+    let correctCount: Int
+    let totalCount: Int
+    let accuracy: Double
+    let avgResponseTimeMs: Double?
+    let levelChange: Int
+    let rewardsEarned: Int
+
+    enum CodingKeys: String, CodingKey {
+        case sessionId = "session_id"
+        case tasksCompleted = "tasks_completed"
+        case correctCount = "correct_count"
+        case totalCount = "total_count"
+        case accuracy
+        case avgResponseTimeMs = "avg_response_time_ms"
+        case levelChange = "level_change"
+        case rewardsEarned = "rewards_earned"
+    }
+}
+
+// MARK: - Dashboard Models
+
+struct DashboardSummary: Codable {
+    let playerId: String
+    let playerName: String
+    let dimensions: [DevelopmentalProfile]
+    let recentSessions: [LearningSession]
+    let totalSessions: Int
+    let totalTasksCompleted: Int
+    let overallAccuracy: Double
+    let streakDays: Int
+    let masteredTasks: Int
+    let strugglingTasks: Int
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case playerName = "player_name"
+        case dimensions
+        case recentSessions = "recent_sessions"
+        case totalSessions = "total_sessions"
+        case totalTasksCompleted = "total_tasks_completed"
+        case overallAccuracy = "overall_accuracy"
+        case streakDays = "streak_days"
+        case masteredTasks = "mastered_tasks"
+        case strugglingTasks = "struggling_tasks"
+    }
+}
+
+// MARK: - Modality
+
+struct ModalityRecommendation: Codable {
+    let playerId: String
+    let recommendedModality: String
+    let alternatives: [String]
+    let profileLevels: [String: Int]
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case recommendedModality = "recommended_modality"
+        case alternatives
+        case profileLevels = "profile_levels"
+    }
+}
+
+// MARK: - AI Models
+
+struct SocialStoryRequest: Codable {
+    let playerId: String
+    let scenario: String?
+    let language: String
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case scenario
+        case language
+    }
+}
+
+struct SocialStoryResponse: Codable {
+    let playerId: String
+    let title: String
+    let story: String
+    let targetSkill: String
+    let practiceTips: [String]
+    let socialLevel: Int?
+    let source: String
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case title
+        case story
+        case targetSkill = "target_skill"
+        case practiceTips = "practice_tips"
+        case socialLevel = "social_level"
+        case source
+    }
+}
+
+struct BehaviorGuidanceRequest: Codable {
+    let playerId: String
+    let dimension: String?
+    let concern: String?
+    let language: String
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case dimension
+        case concern
+        case language
+    }
+}
+
+struct GuidanceRecommendation: Codable, Identifiable {
+    var id: String { dimension }
+    let dimension: String
+    let dimensionLabel: String?
+    let currentLevel: Int?
+    let priority: String
+    let suggestions: [String]?
+    let rationale: String?
+
+    enum CodingKeys: String, CodingKey {
+        case dimension
+        case dimensionLabel = "dimension_label"
+        case currentLevel = "current_level"
+        case priority
+        case suggestions
+        case rationale
+    }
+}
+
+struct BehaviorGuidanceResponse: Codable {
+    let playerId: String
+    let summary: String
+    let recommendations: [GuidanceRecommendation]
+    let homeActivities: [String]
+    let source: String
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case summary
+        case recommendations
+        case homeActivities = "home_activities"
+        case source
+    }
+}
+
+struct ProgressSummaryRequest: Codable {
+    let playerId: String
+    let language: String
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case language
+    }
+}
+
+struct DimensionAnalysis: Codable, Identifiable {
+    var id: String { dimension }
+    let dimension: String
+    let dimensionLabel: String
+    let level: Int
+    let currentAbility: String
+    let nextSkill: String?
+    let status: String
+
+    enum CodingKeys: String, CodingKey {
+        case dimension
+        case dimensionLabel = "dimension_label"
+        case level
+        case currentAbility = "current_ability"
+        case nextSkill = "next_skill"
+        case status
+    }
+}
+
+struct ProgressStatsResponse: Codable {
+    let totalSessions: Int
+    let totalAttempts: Int
+    let overallAccuracy: Double
+
+    enum CodingKeys: String, CodingKey {
+        case totalSessions = "total_sessions"
+        case totalAttempts = "total_attempts"
+        case overallAccuracy = "overall_accuracy"
+    }
+}
+
+struct ProgressSummaryResponse: Codable {
+    let playerId: String
+    let narrative: String
+    let strengths: [String]
+    let areasForGrowth: [String]
+    let nextSteps: [String]
+    let dimensions: [DimensionAnalysis]
+    let stats: ProgressStatsResponse
+    let source: String
+
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case narrative
+        case strengths
+        case areasForGrowth = "areas_for_growth"
+        case nextSteps = "next_steps"
+        case dimensions
+        case stats
+        case source
+    }
+}
+
+struct AIStatusResponse: Codable {
+    let llmEnabled: Bool
+    let model: String?
+    let baseUrl: String?
+    let fallbackMode: String
+    let supportedFeatures: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case llmEnabled = "llm_enabled"
+        case model
+        case baseUrl = "base_url"
+        case fallbackMode = "fallback_mode"
+        case supportedFeatures = "supported_features"
+    }
+}
+
+// MARK: - Seed Tasks
+
+struct SeedTasksResponse: Codable {
+    let message: String
+    let taskCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case taskCount = "task_count"
+    }
+}
+
+// MARK: - Speech Evaluation
+
+struct SpeechEvalRequest: Codable {
+    let target: String
+    let spoken: String
+    let acceptThreshold: Double
+
+    enum CodingKeys: String, CodingKey {
+        case target
+        case spoken
+        case acceptThreshold = "accept_threshold"
+    }
+}
+
+struct SpeechEvalResponse: Codable {
+    let similarityScore: Double
+    let isAccepted: Bool
+    let feedback: String
+
+    enum CodingKeys: String, CodingKey {
+        case similarityScore = "similarity_score"
+        case isAccepted = "is_accepted"
+        case feedback
+    }
+}
+
+// MARK: - AnyCodableValue (for flexible dict values)
+
+enum AnyCodableValue: Codable {
+    case string(String)
+    case int(Int)
+    case double(Double)
+    case bool(Bool)
+    case null
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = try? container.decode(Bool.self) {
+            self = .bool(value)
+        } else if let value = try? container.decode(Int.self) {
+            self = .int(value)
+        } else if let value = try? container.decode(Double.self) {
+            self = .double(value)
+        } else if let value = try? container.decode(String.self) {
+            self = .string(value)
+        } else if container.decodeNil() {
+            self = .null
+        } else {
+            self = .null
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .string(let value): try container.encode(value)
+        case .int(let value): try container.encode(value)
+        case .double(let value): try container.encode(value)
+        case .bool(let value): try container.encode(value)
+        case .null: try container.encodeNil()
+        }
+    }
+}

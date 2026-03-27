@@ -1,12 +1,13 @@
 //
 //  ContentView.swift
-//  SpeakEasy
+//  RisingStarKid
 //
 
 import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var progressManager: ProgressManager
+    @EnvironmentObject var learningManager: AdaptiveLearningManager
     @StateObject private var authService = AuthenticationService.shared
     @State private var selectedTab = 0
     
@@ -34,9 +35,9 @@ struct ContentView: View {
                 }
                 .tag(0)
             
-            CategoriesView()
+            DimensionHubView()
                 .tabItem {
-                    Image(systemName: "square.grid.2x2.fill")
+                    Image(systemName: "sparkles")
                     Text("Learn")
                 }
                 .tag(1)
@@ -48,9 +49,9 @@ struct ContentView: View {
                 }
                 .tag(2)
             
-            ProgressTrackerView()
+            AdaptiveDashboardView()
                 .tabItem {
-                    Image(systemName: "star.fill")
+                    Image(systemName: "chart.bar.fill")
                     Text("Progress")
                 }
                 .tag(3)
