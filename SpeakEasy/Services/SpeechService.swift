@@ -247,8 +247,16 @@ class SpeechService: ObservableObject {
             return 5.0
         }
         
-        if normalizedRecognized.contains(normalizedTarget) || normalizedTarget.contains(normalizedRecognized) {
-            let lengthRatio = Double(min(normalizedRecognized.count, normalizedTarget.count)) / Double(max(normalizedRecognized.count, normalizedTarget.count))
+        // Recognized text contains the full target word (e.g. "I see an apple" for target "apple")
+        if normalizedRecognized.contains(normalizedTarget) {
+            let lengthRatio = Double(normalizedTarget.count) / Double(normalizedRecognized.count)
+            return min(4.5, 3.5 + lengthRatio)
+        }
+        
+        let lengthRatio = Double(min(normalizedRecognized.count, normalizedTarget.count)) / Double(max(normalizedRecognized.count, normalizedTarget.count))
+        
+        // Target contains the recognized text and it's a substantial portion (e.g. "appl" or "ap" for "apple")
+        if normalizedTarget.contains(normalizedRecognized) && lengthRatio >= 0.4 {
             return min(4.5, 3.5 + lengthRatio)
         }
         
@@ -263,6 +271,7 @@ class SpeechService: ObservableObject {
         return 1.0 - (Double(distance) / Double(maxLength))
     }
     
+    /// Damerau-Levenshtein distance: counts transpositions of adjacent characters as a single edit
     private func levenshteinDistance(_ s1: String, _ s2: String) -> Int {
         let s1Array = Array(s1)
         let s2Array = Array(s2)
@@ -285,6 +294,10 @@ class SpeechService: ObservableObject {
                     matrix[i][j - 1] + 1,
                     matrix[i - 1][j - 1] + cost
                 )
+                // Transposition of two adjacent characters
+                if i > 1 && j > 1 && s1Array[i - 1] == s2Array[j - 2] && s1Array[i - 2] == s2Array[j - 1] {
+                    matrix[i][j] = min(matrix[i][j], matrix[i - 2][j - 2] + cost)
+                }
             }
         }
         
