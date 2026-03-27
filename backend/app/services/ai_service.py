@@ -16,6 +16,7 @@ external dependency.
 import os
 import json
 import logging
+import re
 from typing import Optional
 
 import httpx
@@ -30,6 +31,12 @@ from app.models.adaptive import (
     DevelopmentalDimension,
 )
 from app.models.player import Player
+from app.schemas.ai import (
+    SocialStoryResponse,
+    BehaviorGuidanceResponse,
+    ProgressSummaryResponse,
+    TaskContentResponse,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -357,13 +364,14 @@ class AIService:
         llm_response = _llm.call(system_prompt, user_prompt, temperature=0.8)
         if llm_response:
             try:
-                # Try to parse JSON from the response
                 result = self._parse_json_response(llm_response)
                 result["source"] = "llm"
                 result["player_id"] = player_id
+                # Validate against the response schema before returning
+                SocialStoryResponse(**result)
                 return result
             except Exception:
-                logger.warning("Failed to parse LLM social story response")
+                logger.warning("Failed to parse/validate LLM social story response")
 
         # Template fallback
         template = _SOCIAL_STORY_TEMPLATES[min(social_level, len(_SOCIAL_STORY_TEMPLATES) - 1)]
@@ -427,9 +435,11 @@ class AIService:
                 result = self._parse_json_response(llm_response)
                 result["source"] = "llm"
                 result["player_id"] = player_id
+                # Validate against the response schema before returning
+                BehaviorGuidanceResponse(**result)
                 return result
             except Exception:
-                logger.warning("Failed to parse LLM guidance response")
+                logger.warning("Failed to parse/validate LLM guidance response")
 
         # Template fallback
         recommendations = []
@@ -541,9 +551,11 @@ class AIService:
                     "total_attempts": total_attempts,
                     "overall_accuracy": round(overall_accuracy, 1),
                 }
+                # Validate against the response schema before returning
+                ProgressSummaryResponse(**result)
                 return result
             except Exception:
-                logger.warning("Failed to parse LLM progress response")
+                logger.warning("Failed to parse/validate LLM progress response")
 
         # Template fallback
         strengths = [
@@ -660,9 +672,11 @@ class AIService:
                 result["dimension"] = dimension
                 result["task_type"] = task_type
                 result["level"] = level
+                # Validate against the response schema before returning
+                TaskContentResponse(**result)
                 return result
             except Exception:
-                logger.warning("Failed to parse LLM task content response")
+                logger.warning("Failed to parse/validate LLM task content response")
 
         # Template fallback — generate simple tasks based on dimension + level
         tasks = self._generate_template_tasks(
@@ -716,21 +730,10 @@ class AIService:
     def _parse_json_response(self, text: str) -> dict:
         """Extract JSON from an LLM response that may include markdown fences."""
         text = text.strip()
-        if text.startswith("```"):
-            # Remove markdown code fences
-            lines = text.split("\n")
-            # Drop first line (```json) and last line (```)
-            json_lines = []
-            inside = False
-            for line in lines:
-                if line.strip().startswith("```") and not inside:
-                    inside = True
-                    continue
-                if line.strip() == "```" and inside:
-                    break
-                if inside:
-                    json_lines.append(line)
-            text = "\n".join(json_lines)
+        # Search for markdown code fences anywhere in the text
+        fence_match = re.search(r"```(?:json)?\s*\n(.*?)```", text, re.DOTALL)
+        if fence_match:
+            text = fence_match.group(1).strip()
         return json.loads(text)
 
     def _generate_template_tasks(
