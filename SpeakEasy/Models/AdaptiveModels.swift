@@ -544,6 +544,164 @@ struct SpeechEvalResponse: Codable {
     }
 }
 
+// MARK: - Assessment Models
+
+struct AssessmentCharacter: Codable {
+    let name: String
+    let emoji: String
+    let greeting: String?
+}
+
+struct AssessmentStartResponse: Codable {
+    let assessmentId: String
+    let playerId: String
+    let character: AssessmentCharacter
+    let storyIntro: String
+    let totalActivities: Int
+
+    enum CodingKeys: String, CodingKey {
+        case assessmentId = "assessment_id"
+        case playerId = "player_id"
+        case character
+        case storyIntro = "story_intro"
+        case totalActivities = "total_activities"
+    }
+}
+
+struct AssessmentActivityContent: Codable {
+    let instruction: String
+    let narrative: String
+    let imageHint: String?
+    let options: [String]?
+    let correctAnswer: String?
+    let targetWord: String?
+    let interactionType: String
+
+    enum CodingKeys: String, CodingKey {
+        case instruction
+        case narrative
+        case imageHint = "image_hint"
+        case options
+        case correctAnswer = "correct_answer"
+        case targetWord = "target_word"
+        case interactionType = "interaction_type"
+    }
+}
+
+struct AssessmentActivity: Codable {
+    let activityIndex: Int
+    let totalActivities: Int
+    let dimension: String
+    let level: Int
+    let character: AssessmentCharacter
+    let content: AssessmentActivityContent
+    let isLast: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case activityIndex = "activity_index"
+        case totalActivities = "total_activities"
+        case dimension
+        case level
+        case character
+        case content
+        case isLast = "is_last"
+    }
+}
+
+struct AssessmentRespondRequest: Codable {
+    let activityIndex: Int
+    let selectedOption: String?
+    let spokenText: String?
+    let responseTimeMs: Int?
+    let interactionType: String
+
+    enum CodingKeys: String, CodingKey {
+        case activityIndex = "activity_index"
+        case selectedOption = "selected_option"
+        case spokenText = "spoken_text"
+        case responseTimeMs = "response_time_ms"
+        case interactionType = "interaction_type"
+    }
+}
+
+struct AssessmentFeedback: Codable {
+    let message: String
+    let emoji: String
+    let isCorrect: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case emoji
+        case isCorrect = "is_correct"
+    }
+}
+
+struct AssessmentRespondResponse: Codable {
+    let isCorrect: Bool
+    let feedback: AssessmentFeedback
+    let shouldContinue: Bool
+    let progressFraction: Double
+
+    enum CodingKeys: String, CodingKey {
+        case isCorrect = "is_correct"
+        case feedback
+        case shouldContinue = "should_continue"
+        case progressFraction = "progress_fraction"
+    }
+}
+
+struct DimensionResult: Codable, Identifiable {
+    let dimension: String
+    let dimensionLabel: String
+    let assessedLevel: Int
+    let maxTestedLevel: Int
+    let correctCount: Int
+    let totalCount: Int
+    let accuracy: Double
+    let icon: String
+    let color: String
+
+    var id: String { dimension }
+
+    enum CodingKeys: String, CodingKey {
+        case dimension
+        case dimensionLabel = "dimension_label"
+        case assessedLevel = "assessed_level"
+        case maxTestedLevel = "max_tested_level"
+        case correctCount = "correct_count"
+        case totalCount = "total_count"
+        case accuracy
+        case icon
+        case color
+    }
+
+    var dimensionEnum: DevelopmentalDimension? {
+        DevelopmentalDimension(rawValue: dimension)
+    }
+}
+
+struct AssessmentCompleteResponse: Codable {
+    let assessmentId: String
+    let playerId: String
+    let dimensions: [DimensionResult]
+    let overallLevel: Double
+    let totalActivities: Int
+    let totalCorrect: Int
+    let durationSeconds: Int?
+    let characterMessage: String
+
+    enum CodingKeys: String, CodingKey {
+        case assessmentId = "assessment_id"
+        case playerId = "player_id"
+        case dimensions
+        case overallLevel = "overall_level"
+        case totalActivities = "total_activities"
+        case totalCorrect = "total_correct"
+        case durationSeconds = "duration_seconds"
+        case characterMessage = "character_message"
+    }
+}
+
 // MARK: - AnyCodableValue (for flexible dict values)
 
 enum AnyCodableValue: Codable {

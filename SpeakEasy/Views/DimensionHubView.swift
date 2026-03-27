@@ -10,6 +10,7 @@ import SwiftUI
 struct DimensionHubView: View {
     @EnvironmentObject var learningManager: AdaptiveLearningManager
     @State private var selectedDimension: DevelopmentalDimension?
+    @State private var showAssessment: Bool = false
 
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -22,6 +23,11 @@ struct DimensionHubView: View {
                 VStack(spacing: 24) {
                     // Header
                     overallProgressHeader
+
+                    // Assessment prompt (when not yet assessed)
+                    if learningManager.needsInitialAssessment && !learningManager.isLoadingProfiles {
+                        assessmentPromptBanner
+                    }
 
                     // Dimension Grid
                     LazyVGrid(columns: columns, spacing: 16) {
@@ -46,6 +52,10 @@ struct DimensionHubView: View {
                 LearningSessionView(dimension: dimension)
                     .environmentObject(learningManager)
             }
+            .fullScreenCover(isPresented: $showAssessment) {
+                AssessmentGameView()
+                    .environmentObject(learningManager)
+            }
             .task {
                 await learningManager.seedTasksIfNeeded()
                 await learningManager.loadProfiles()
@@ -54,6 +64,52 @@ struct DimensionHubView: View {
                 await learningManager.loadProfiles()
             }
         }
+    }
+
+    // MARK: - Assessment Prompt Banner
+
+    private var assessmentPromptBanner: some View {
+        VStack(spacing: 16) {
+            HStack(spacing: 12) {
+                Text("🐰")
+                    .font(.system(size: 44))
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Let's Play a Game!")
+                        .font(.headline)
+                        .fontWeight(.bold)
+
+                    Text("A friendly animal will guide you through fun activities to find the best starting point.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineSpacing(2)
+                }
+            }
+
+            Button {
+                showAssessment = true
+            } label: {
+                HStack {
+                    Image(systemName: "play.fill")
+                    Text("Start Adventure")
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.purple.gradient)
+                )
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemBackground))
+                .shadow(color: .purple.opacity(0.15), radius: 8, y: 4)
+        )
+        .padding(.horizontal)
     }
 
     // MARK: - Overall Progress Header

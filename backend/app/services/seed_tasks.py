@@ -2060,6 +2060,8 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
 
 def seed_all_tasks(db: Session) -> dict:
     """Seed all task dimensions. Returns counts per dimension."""
+    from app.services.seed_assessment import seed_assessment_tasks
+
     results = {}
     results["object_cognition"] = seed_object_cognition_tasks(db)
     results["language_expression"] = seed_language_expression_tasks(db)
@@ -2067,4 +2069,5 @@ def seed_all_tasks(db: Session) -> dict:
     results["literacy"] = seed_literacy_tasks(db)
     results["social_behavior"] = seed_social_behavior_tasks(db)
     results["cognitive_logic"] = seed_cognitive_logic_tasks(db)
+    results["assessment"] = seed_assessment_tasks(db)
     return results

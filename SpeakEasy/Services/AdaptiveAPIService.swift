@@ -147,6 +147,24 @@ class AdaptiveAPIService {
         let body = ProgressSummaryRequest(playerId: playerId, language: language)
         return try await post("/ai/progress-summary", body: body)
     }
+
+    // MARK: - Assessment
+
+    func startAssessment(playerId: String) async throws -> AssessmentStartResponse {
+        try await postNoBody("/assessment/start/\(playerId)")
+    }
+
+    func getNextAssessmentActivity(assessmentId: String) async throws -> AssessmentActivity {
+        try await get("/assessment/\(assessmentId)/next-activity")
+    }
+
+    func respondToAssessment(assessmentId: String, body: AssessmentRespondRequest) async throws -> AssessmentRespondResponse {
+        try await post("/assessment/\(assessmentId)/respond", body: body)
+    }
+
+    func completeAssessment(assessmentId: String) async throws -> AssessmentCompleteResponse {
+        try await postNoBody("/assessment/\(assessmentId)/complete")
+    }
 }
 
 // MARK: - Error

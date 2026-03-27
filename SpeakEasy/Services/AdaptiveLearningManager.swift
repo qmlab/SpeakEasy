@@ -252,6 +252,14 @@ class AdaptiveLearningManager: ObservableObject {
         isLoadingDashboard = false
     }
 
+    // MARK: - Assessment
+
+    /// True when no dimension has been assessed yet
+    var needsInitialAssessment: Bool {
+        guard !profiles.isEmpty else { return true }
+        return profiles.allSatisfy { !$0.assessed }
+    }
+
     // MARK: - Reset
 
     func reset() {

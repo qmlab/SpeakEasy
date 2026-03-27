@@ -15,6 +15,7 @@ from app.routers import (
     dashboard_router,
     tasks_router,
     ai_router,
+    assessment_router,
 )
 from app.services import cloudinary_service
 
@@ -97,6 +98,7 @@ app.include_router(adaptive_router)
 app.include_router(dashboard_router)
 app.include_router(tasks_router)
 app.include_router(ai_router)
+app.include_router(assessment_router)
 
 
 @app.get("/")
@@ -111,6 +113,7 @@ def root():
             "Feature 4: ABA-based reinforcement system",
             "Feature 5: Parent/therapist dashboard",
             "Feature 6: AI-powered personalization (social stories, behavior guidance, progress summaries)",
+            "Feature 7: Gamified initial assessment with animal character guides",
         ],
     }
 
