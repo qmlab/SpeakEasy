@@ -4,14 +4,16 @@ import { OverviewPage } from "@/components/OverviewPage";
 import { DimensionDetailPage } from "@/components/DimensionDetailPage";
 import { SessionsPage } from "@/components/SessionsPage";
 import { AIInsightsPage } from "@/components/AIInsightsPage";
+import { CMSPage } from "@/components/CMSPage";
 import {
   LayoutDashboard,
   Clock,
   Brain,
   Star,
+  Settings,
 } from "lucide-react";
 
-type Page = "overview" | "sessions" | "insights" | "dimension";
+type Page = "overview" | "sessions" | "insights" | "dimension" | "cms";
 
 function App() {
   const [playerId, setPlayerId] = useState<string | null>(null);
@@ -27,6 +29,7 @@ function App() {
     { key: "overview", label: "Overview", icon: LayoutDashboard },
     { key: "sessions", label: "Sessions", icon: Clock },
     { key: "insights", label: "AI Insights", icon: Brain },
+    { key: "cms", label: "Content CMS", icon: Settings },
   ];
 
   return (
@@ -45,9 +48,8 @@ function App() {
         </div>
       </header>
 
-      {/* Page nav */}
-      {playerId && (
-        <nav className="border-b bg-white">
+      {/* Page nav — always visible so CMS is reachable without a player */}
+      <nav className="border-b bg-white">
           <div className="mx-auto flex max-w-7xl gap-1 px-4">
             {navItems.map((item) => (
               <button
@@ -64,12 +66,13 @@ function App() {
               </button>
             ))}
           </div>
-        </nav>
-      )}
+      </nav>
 
       {/* Content */}
       <main className="mx-auto max-w-7xl px-4 py-6">
-        {!playerId ? (
+        {page === "cms" ? (
+          <CMSPage />
+        ) : !playerId ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <Star className="mb-4 h-16 w-16 text-amber-400" />
             <h2 className="text-2xl font-bold">Welcome to Rising Star Kid</h2>
