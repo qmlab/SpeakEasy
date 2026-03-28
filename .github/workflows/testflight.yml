@@ -1,5 +1,5 @@
 name: TestFlight Deploy
-
+# Auto-build and deploy Rising Star Kid to TestFlight
 on:
   push:
     branches: [main]
