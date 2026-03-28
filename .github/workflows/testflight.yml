@@ -42,14 +42,14 @@ jobs:
 
           # Import certificate
           CERTIFICATE_PATH=$RUNNER_TEMP/certificate.p12
-          echo -n "$APPLE_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$APPLE_CERTIFICATE_BASE64" | base64 --decode > $CERTIFICATE_PATH
           security import $CERTIFICATE_PATH -P "$APPLE_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
 
           # Install provisioning profile
           PP_PATH=$RUNNER_TEMP/profile.mobileprovision
-          echo -n "$APPLE_PROVISIONING_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          echo -n "$APPLE_PROVISIONING_PROFILE_BASE64" | base64 --decode > $PP_PATH
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           PP_UUID=$(/usr/libexec/PlistBuddy -c "Print :UUID" /dev/stdin <<< $(security cms -D -i $PP_PATH))
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$PP_UUID.mobileprovision
@@ -82,24 +82,26 @@ jobs:
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
           <dict>
-              <key>method</key>
-              <string>app-store-connect</string>
-              <key>teamID</key>
-              <string>${{ secrets.APPLE_TEAM_ID }}</string>
-              <key>signingStyle</key>
-              <string>manual</string>
-              <key>provisioningProfiles</key>
-              <dict>
-                  <key>$BUNDLE_ID</key>
-                  <string>$PROVISIONING_PROFILE_UUID</string>
-              </dict>
-              <key>uploadBitcode</key>
-              <false/>
-              <key>uploadSymbols</key>
-              <true/>
+          <key>method</key>
+          <string>app-store-connect</string>
+          <key>teamID</key>
+          <string>${{ secrets.APPLE_TEAM_ID }}</string>
+          <key>signingStyle</key>
+          <string>manual</string>
+          <key>provisioningProfiles</key>
+          <dict>
+          <key>$BUNDLE_ID</key>
+          <string>$PROVISIONING_PROFILE_UUID</string>
+          </dict>
+          <key>uploadBitcode</key>
+          <false/>
+          <key>uploadSymbols</key>
+          <true/>
           </dict>
           </plist>
           EOF
+          echo "ExportOptions.plist created:"
+          cat $RUNNER_TEMP/ExportOptions.plist
 
       - name: Export IPA
         run: |
@@ -135,23 +137,44 @@ jobs:
           mkdir -p ~/.private_keys
           echo -n "$APP_STORE_CONNECT_API_KEY_CONTENT" > ~/.private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8
 
-          # Upload to TestFlight using xcrun notarytool/altool
+          # Upload to TestFlight
           IPA_PATH=$(ls $RUNNER_TEMP/export/*.ipa | head -1)
           echo "Uploading $IPA_PATH to TestFlight..."
 
-          xcrun altool --upload-app \
+          # Try xcrun altool first (available on most macOS runners)
+          if xcrun altool --upload-app \
             --type ios \
             --file "$IPA_PATH" \
             --apiKey "$APP_STORE_CONNECT_API_KEY_ID" \
             --apiIssuer "$APP_STORE_CONNECT_API_ISSUER_ID" \
-            2>&1 || true
-
-          echo "## TestFlight Upload Complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "The app has been uploaded to App Store Connect." >> $GITHUB_STEP_SUMMARY
-          echo "It will appear in TestFlight after Apple processes it (usually 10-30 minutes)." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Open TestFlight on your iPhone to install the latest build." >> $GITHUB_STEP_SUMMARY
+            2>&1; then
+            echo "## TestFlight Upload Successful" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The app has been uploaded to App Store Connect." >> $GITHUB_STEP_SUMMARY
+            echo "It will appear in TestFlight after Apple processes it (usually 10-30 minutes)." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Open TestFlight on your iPhone to install the latest build." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "altool failed, trying xcodebuild -exportArchive with upload..."
+            # Re-export with authentication to trigger direct upload
+            mkdir -p ~/.private_keys_xc
+            cp ~/.private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8 ~/.private_keys_xc/
+            xcodebuild -exportArchive \
+              -archivePath $RUNNER_TEMP/SpeakEasy.xcarchive \
+              -exportOptionsPlist $RUNNER_TEMP/ExportOptions.plist \
+              -exportPath $RUNNER_TEMP/export_upload \
+              -allowProvisioningUpdates \
+              -authenticationKeyPath ~/.private_keys_xc/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8 \
+              -authenticationKeyID "$APP_STORE_CONNECT_API_KEY_ID" \
+              -authenticationKeyIssuerID "$APP_STORE_CONNECT_API_ISSUER_ID" \
+              2>&1
+            echo "## TestFlight Upload Successful" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The app has been uploaded to App Store Connect." >> $GITHUB_STEP_SUMMARY
+            echo "It will appear in TestFlight after Apple processes it (usually 10-30 minutes)." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Open TestFlight on your iPhone to install the latest build." >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Clean up keychain
         if: always()
