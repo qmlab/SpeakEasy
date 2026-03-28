@@ -56,9 +56,16 @@ jobs:
           echo "PROVISIONING_PROFILE_UUID=$PP_UUID" >> $GITHUB_ENV
           echo "Installed provisioning profile: $PP_UUID"
 
+      - name: Verify signing identity
+        run: |
+          echo "Available signing identities:"
+          security find-identity -v -p codesigning $RUNNER_TEMP/app-signing.keychain-db
+          echo ""
+          echo "Provisioning profile details:"
+          security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/$PROVISIONING_PROFILE_UUID.mobileprovision 2>/dev/null | head -80
+
       - name: Archive app
         run: |
-          set -o pipefail
           xcodebuild archive \
             -project SpeakEasy.xcodeproj \
             -scheme "$SCHEME" \
@@ -71,8 +78,7 @@ jobs:
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="Apple Distribution" \
             PROVISIONING_PROFILE_SPECIFIER="" \
-            PROVISIONING_PROFILE="$PROVISIONING_PROFILE_UUID" \
-            | xcpretty
+            PROVISIONING_PROFILE="$PROVISIONING_PROFILE_UUID"
           echo "Archive created successfully"
 
       - name: Create ExportOptions.plist
