@@ -204,6 +204,7 @@ class SpeechService: NSObject, ObservableObject {
             return
         }
         
+        var hasCompleted = false
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
             guard let self = self else { return }
             
@@ -231,7 +232,8 @@ class SpeechService: NSObject, ObservableObject {
                 self.recognitionTask = nil
                 
                 DispatchQueue.main.async {
-                    guard self.isListening else { return }
+                    guard !hasCompleted else { return }
+                    hasCompleted = true
                     self.isListening = false
                     let rating = self.calculateRating(recognized: self.recognizedText, target: targetWord)
                     self.lastRating = rating
