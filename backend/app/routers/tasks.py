@@ -11,6 +11,7 @@ from app.database import get_db
 from app.models.adaptive import AdaptiveTask, DevelopmentalDimension
 from app.schemas.adaptive import AdaptiveTaskCreate, AdaptiveTaskResponse
 from app.services.seed_tasks import seed_all_tasks
+from app.services.seed_expanded import seed_expanded_tasks, get_expanded_task_stats
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
@@ -91,9 +92,17 @@ def delete_task(task_id: str, db: Session = Depends(get_db)):
 
 @router.post("/seed")
 def seed_tasks(db: Session = Depends(get_db)):
-    """Seed the database with default adaptive tasks."""
+    """Seed the database with default adaptive tasks + expanded content."""
     results = seed_all_tasks(db)
+    expanded_results = seed_expanded_tasks(db)
+    results.update(expanded_results)
     return {
         "message": "Tasks seeded successfully",
         "counts": results,
     }
+
+
+@router.get("/stats/expanded")
+def expanded_task_stats():
+    """Get statistics about available expanded task resources."""
+    return get_expanded_task_stats()

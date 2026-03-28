@@ -1,0 +1,337 @@
+{
+  "dimension": "social_behavior",
+  "description": "Social Behavior: From attending to initiating social interactions",
+  "levels": {
+    "0": {
+      "name": "Attending",
+      "name_zh": "注意力",
+      "task_type": "attend",
+      "tasks": [
+        {
+          "instruction": "Look at me! Who is waving?",
+          "instruction_zh": "看着我！谁在挥手？",
+          "social_cue": "waving",
+          "correct_answer": "The teacher",
+          "correct_answer_zh": "老师",
+          "options": ["The teacher", "The dog", "The tree"]
+        },
+        {
+          "instruction": "Look at the picture! Who is smiling?",
+          "instruction_zh": "看图片！谁在微笑？",
+          "social_cue": "smiling",
+          "correct_answer": "The girl",
+          "correct_answer_zh": "女孩",
+          "options": ["The girl", "The cat", "The ball"]
+        },
+        {
+          "instruction": "Who is talking?",
+          "instruction_zh": "谁在说话？",
+          "social_cue": "talking",
+          "correct_answer": "Mom",
+          "correct_answer_zh": "妈妈",
+          "options": ["Mom", "The toy", "The book"]
+        },
+        {
+          "instruction": "Look! Who is clapping?",
+          "instruction_zh": "看！谁在拍手？",
+          "social_cue": "clapping",
+          "correct_answer": "The boy",
+          "correct_answer_zh": "男孩",
+          "options": ["The boy", "The car", "The flower"]
+        },
+        {
+          "instruction": "Who is pointing at the sky?",
+          "instruction_zh": "谁在指天空？",
+          "social_cue": "pointing",
+          "correct_answer": "Dad",
+          "correct_answer_zh": "爸爸",
+          "options": ["Dad", "The bird", "The cloud"]
+        },
+        {
+          "instruction": "Look! Who is crying?",
+          "instruction_zh": "看！谁在哭？",
+          "social_cue": "crying",
+          "correct_answer": "The baby",
+          "correct_answer_zh": "宝宝",
+          "options": ["The baby", "The table", "The shoe"]
+        },
+        {
+          "instruction": "Who is dancing?",
+          "instruction_zh": "谁在跳舞？",
+          "social_cue": "dancing",
+          "correct_answer": "The girl",
+          "correct_answer_zh": "女孩",
+          "options": ["The chair", "The girl", "The lamp"]
+        },
+        {
+          "instruction": "Look! Who is eating?",
+          "instruction_zh": "看！谁在吃东西？",
+          "social_cue": "eating",
+          "correct_answer": "The boy",
+          "correct_answer_zh": "男孩",
+          "options": ["The cup", "The boy", "The phone"]
+        }
+      ]
+    },
+    "1": {
+      "name": "Imitate Action",
+      "name_zh": "模仿动作",
+      "task_type": "imitate_action",
+      "tasks": [
+        {
+          "instruction": "Do what I do! Clap your hands!",
+          "instruction_zh": "跟我做！拍拍手！",
+          "action": "clap_hands",
+          "animation_hint": "clapping"
+        },
+        {
+          "instruction": "Copy me! Touch your nose!",
+          "instruction_zh": "模仿我！摸摸鼻子！",
+          "action": "touch_nose",
+          "animation_hint": "touching_nose"
+        },
+        {
+          "instruction": "Do this! Wave hello!",
+          "instruction_zh": "做这个！挥手说你好！",
+          "action": "wave",
+          "animation_hint": "waving"
+        },
+        {
+          "instruction": "Copy me! Stamp your feet!",
+          "instruction_zh": "模仿我！跺跺脚！",
+          "action": "stamp_feet",
+          "animation_hint": "stamping"
+        },
+        {
+          "instruction": "Do what I do! Put your hands up!",
+          "instruction_zh": "跟我做！把手举起来！",
+          "action": "hands_up",
+          "animation_hint": "raising_hands"
+        },
+        {
+          "instruction": "Copy me! Blow a kiss!",
+          "instruction_zh": "模仿我！飞吻！",
+          "action": "blow_kiss",
+          "animation_hint": "blowing_kiss"
+        },
+        {
+          "instruction": "Do this! Touch your ears!",
+          "instruction_zh": "做这个！摸摸耳朵！",
+          "action": "touch_ears",
+          "animation_hint": "touching_ears"
+        },
+        {
+          "instruction": "Copy me! Shake your head!",
+          "instruction_zh": "模仿我！摇摇头！",
+          "action": "shake_head",
+          "animation_hint": "shaking_head"
+        }
+      ]
+    },
+    "2": {
+      "name": "Turn Taking",
+      "name_zh": "轮流",
+      "task_type": "turn_take",
+      "tasks": [
+        {
+          "instruction": "It's your turn! Roll the ball!",
+          "instruction_zh": "轮到你了！滚球！",
+          "activity": "ball_rolling",
+          "sequence": ["My turn", "Your turn"],
+          "current_turn": "child"
+        },
+        {
+          "instruction": "Wait for your turn, then pick a card!",
+          "instruction_zh": "等轮到你，然后选一张卡！",
+          "activity": "card_picking",
+          "sequence": ["Friend picks", "You pick"],
+          "current_turn": "wait"
+        },
+        {
+          "instruction": "Now it's your turn to add a block!",
+          "instruction_zh": "现在轮到你加一块积木！",
+          "activity": "block_stacking",
+          "sequence": ["Friend adds", "You add"],
+          "current_turn": "child"
+        },
+        {
+          "instruction": "Take turns! Your friend goes first, then you!",
+          "instruction_zh": "轮流！朋友先，然后你！",
+          "activity": "drawing_turns",
+          "sequence": ["Friend draws", "You draw"],
+          "current_turn": "wait"
+        },
+        {
+          "instruction": "It's your turn to feed the animal!",
+          "instruction_zh": "轮到你喂动物了！",
+          "activity": "feeding_game",
+          "sequence": ["My turn", "Your turn"],
+          "current_turn": "child"
+        },
+        {
+          "instruction": "Wait... now your turn! Color the picture!",
+          "instruction_zh": "等一下...现在轮到你了！涂颜色！",
+          "activity": "coloring",
+          "sequence": ["Friend colors", "You color"],
+          "current_turn": "child"
+        },
+        {
+          "instruction": "Let your friend go first, then it's your turn!",
+          "instruction_zh": "让朋友先来，然后轮到你！",
+          "activity": "puzzle_piece",
+          "sequence": ["Friend places", "You place"],
+          "current_turn": "wait"
+        },
+        {
+          "instruction": "Your turn! Sing the next part!",
+          "instruction_zh": "轮到你了！唱下一句！",
+          "activity": "singing_turns",
+          "sequence": ["I sing", "You sing"],
+          "current_turn": "child"
+        }
+      ]
+    },
+    "3": {
+      "name": "Joint Attention",
+      "name_zh": "共同注意",
+      "task_type": "joint_attention",
+      "tasks": [
+        {
+          "instruction": "Look where I'm pointing! What do you see?",
+          "instruction_zh": "看我指的方向！你看到了什么？",
+          "target": "Bird in the tree",
+          "target_zh": "树上的鸟",
+          "correct_answer": "Bird",
+          "options": ["Bird", "Fish", "Cat"]
+        },
+        {
+          "instruction": "I see something! Can you find it too?",
+          "instruction_zh": "我看到了什么！你也能找到吗？",
+          "target": "Hidden star",
+          "target_zh": "隐藏的星星",
+          "correct_answer": "Star",
+          "options": ["Star", "Moon", "Sun"]
+        },
+        {
+          "instruction": "Look at what the dog is looking at!",
+          "instruction_zh": "看看狗在看什么！",
+          "target": "Ball behind the bush",
+          "target_zh": "灌木后面的球",
+          "correct_answer": "Ball",
+          "options": ["Ball", "Bone", "Stick"]
+        },
+        {
+          "instruction": "The cat is watching something. What is it?",
+          "instruction_zh": "猫在看着什么。是什么？",
+          "target": "Butterfly",
+          "target_zh": "蝴蝶",
+          "correct_answer": "Butterfly",
+          "options": ["Butterfly", "Flower", "Cloud"]
+        },
+        {
+          "instruction": "Follow my eyes! What am I looking at?",
+          "instruction_zh": "跟着我的眼睛看！我在看什么？",
+          "target": "Rainbow",
+          "target_zh": "彩虹",
+          "correct_answer": "Rainbow",
+          "options": ["Rainbow", "Cloud", "Rain"]
+        },
+        {
+          "instruction": "Look where the arrow points! What is there?",
+          "instruction_zh": "看箭头指的地方！那里有什么？",
+          "target": "Treasure chest",
+          "target_zh": "宝箱",
+          "correct_answer": "Treasure",
+          "options": ["Treasure", "Rock", "Sand"]
+        },
+        {
+          "instruction": "The boy is excited! What is he looking at?",
+          "instruction_zh": "男孩很兴奋！他在看什么？",
+          "target": "Ice cream truck",
+          "target_zh": "冰淇淋车",
+          "correct_answer": "Ice cream truck",
+          "options": ["Ice cream truck", "School bus", "Fire truck"]
+        },
+        {
+          "instruction": "Everyone is looking up! What do they see?",
+          "instruction_zh": "大家都在往上看！他们看到了什么？",
+          "target": "Airplane in the sky",
+          "target_zh": "天上的飞机",
+          "correct_answer": "Airplane",
+          "options": ["Airplane", "Cloud", "Star"]
+        }
+      ]
+    },
+    "4": {
+      "name": "Initiating Interaction",
+      "name_zh": "主动社交",
+      "task_type": "initiate",
+      "tasks": [
+        {
+          "instruction": "How would you ask to play with someone?",
+          "instruction_zh": "你怎么邀请别人一起玩？",
+          "scenario": "asking_to_play",
+          "correct_response": "Can I play with you?",
+          "correct_response_zh": "我可以和你一起玩吗？",
+          "options": ["Can I play with you?", "Give me that!", "Go away!"]
+        },
+        {
+          "instruction": "Your friend fell down. What do you say?",
+          "instruction_zh": "你的朋友摔倒了。你说什么？",
+          "scenario": "showing_empathy",
+          "correct_response": "Are you okay?",
+          "correct_response_zh": "你还好吗？",
+          "options": ["Are you okay?", "That's funny!", "I don't care."]
+        },
+        {
+          "instruction": "Someone gives you a gift. What do you say?",
+          "instruction_zh": "有人给你礼物。你说什么？",
+          "scenario": "receiving_gift",
+          "correct_response": "Thank you!",
+          "correct_response_zh": "谢谢！",
+          "options": ["Thank you!", "I don't want it.", "Give me more!"]
+        },
+        {
+          "instruction": "You want to share your toy. What do you say?",
+          "instruction_zh": "你想分享你的玩具。你说什么？",
+          "scenario": "sharing",
+          "correct_response": "Do you want to play with this?",
+          "correct_response_zh": "你想玩这个吗？",
+          "options": ["Do you want to play with this?", "This is mine!", "Don't touch!"]
+        },
+        {
+          "instruction": "You meet someone new. What do you say?",
+          "instruction_zh": "你遇到新朋友。你说什么？",
+          "scenario": "meeting_new_person",
+          "correct_response": "Hi, my name is...",
+          "correct_response_zh": "你好，我叫...",
+          "options": ["Hi, my name is...", "Who are you?", "Go away!"]
+        },
+        {
+          "instruction": "You accidentally bump into someone. What do you say?",
+          "instruction_zh": "你不小心碰到了别人。你说什么？",
+          "scenario": "apologizing",
+          "correct_response": "I'm sorry!",
+          "correct_response_zh": "对不起！",
+          "options": ["I'm sorry!", "Move!", "It's your fault!"]
+        },
+        {
+          "instruction": "Your friend is sad. What can you do?",
+          "instruction_zh": "你的朋友不开心。你能做什么？",
+          "scenario": "comforting",
+          "correct_response": "I'll stay with you.",
+          "correct_response_zh": "我陪你。",
+          "options": ["I'll stay with you.", "Stop being sad!", "I'm going to play."]
+        },
+        {
+          "instruction": "You need help with something. What do you say?",
+          "instruction_zh": "你需要帮助。你说什么？",
+          "scenario": "asking_for_help",
+          "correct_response": "Can you help me, please?",
+          "correct_response_zh": "你能帮帮我吗？",
+          "options": ["Can you help me, please?", "Do it for me!", "I can't do anything!"]
+        }
+      ]
+    }
+  }
+}

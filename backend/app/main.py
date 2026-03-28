@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -92,6 +94,13 @@ app.add_middleware(
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
+# Serve task illustration images (SVGs)
+_images_dir = Path(__file__).parent / "resources" / "images"
+if _images_dir.exists():
+    app.mount(
+        "/task-images", StaticFiles(directory=str(_images_dir)), name="task-images"
+    )
 
 app.include_router(players_router)
 app.include_router(objects_router)

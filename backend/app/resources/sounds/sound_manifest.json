@@ -1,0 +1,198 @@
+{
+  "version": "1.0",
+  "description": "Sound effect descriptors for Rising Star Kid adaptive learning tasks. Each entry describes when and how to use the sound.",
+  "sounds": {
+    "feedback": {
+      "correct_chime": {
+        "description": "Short, bright chime played when child answers correctly",
+        "description_zh": "答对时播放的短促明亮铃声",
+        "duration_ms": 800,
+        "suggested_file": "correct_chime.mp3",
+        "usage": ["task_correct", "assessment_correct"],
+        "notes": "Should be encouraging but not overstimulating. Gentle bell or xylophone tone."
+      },
+      "incorrect_gentle": {
+        "description": "Soft, non-punishing tone when answer is incorrect",
+        "description_zh": "答错时播放的柔和提示音",
+        "duration_ms": 600,
+        "suggested_file": "incorrect_gentle.mp3",
+        "usage": ["task_incorrect", "assessment_incorrect"],
+        "notes": "Must be gentle and neutral. Avoid buzzer sounds that could cause anxiety."
+      },
+      "try_again": {
+        "description": "Encouraging tone prompting child to try again",
+        "description_zh": "鼓励再试一次的提示音",
+        "duration_ms": 500,
+        "suggested_file": "try_again.mp3",
+        "usage": ["task_retry"],
+        "notes": "Uplifting, like a gentle nudge forward."
+      },
+      "level_up": {
+        "description": "Celebratory sound when child advances to next level",
+        "description_zh": "升级时的庆祝音效",
+        "duration_ms": 2000,
+        "suggested_file": "level_up.mp3",
+        "usage": ["level_advance"],
+        "notes": "Joyful fanfare, not too loud. Stars/sparkle feeling."
+      },
+      "session_complete": {
+        "description": "Warm completion sound at end of learning session",
+        "description_zh": "学习会话结束时的温暖音效",
+        "duration_ms": 1500,
+        "suggested_file": "session_complete.mp3",
+        "usage": ["session_end"],
+        "notes": "Calming, satisfying resolution. Like a gentle musical phrase ending."
+      },
+      "streak_bonus": {
+        "description": "Extra celebratory sound for correct answer streaks",
+        "description_zh": "连续答对的额外庆祝音效",
+        "duration_ms": 1200,
+        "suggested_file": "streak_bonus.mp3",
+        "usage": ["streak_3", "streak_5"],
+        "notes": "Building excitement, escalating tones."
+      }
+    },
+    "interaction": {
+      "tap_select": {
+        "description": "Light tap sound when child selects an option",
+        "description_zh": "选择选项时的轻触音效",
+        "duration_ms": 100,
+        "suggested_file": "tap_select.mp3",
+        "usage": ["touch_select", "image_exchange_select"],
+        "notes": "Very subtle, like a soft click. Provides tactile feedback."
+      },
+      "drag_start": {
+        "description": "Sound when starting to drag an item",
+        "description_zh": "开始拖拽时的音效",
+        "duration_ms": 150,
+        "suggested_file": "drag_start.mp3",
+        "usage": ["drag_begin"],
+        "notes": "Light pickup sound."
+      },
+      "drop_place": {
+        "description": "Sound when dropping/placing an item in target",
+        "description_zh": "放下物品时的音效",
+        "duration_ms": 200,
+        "suggested_file": "drop_place.mp3",
+        "usage": ["drag_drop"],
+        "notes": "Satisfying placement sound, like a soft thud."
+      },
+      "card_flip": {
+        "description": "Sound when flipping a flashcard or revealing content",
+        "description_zh": "翻转卡片时的音效",
+        "duration_ms": 300,
+        "suggested_file": "card_flip.mp3",
+        "usage": ["card_reveal", "image_reveal"],
+        "notes": "Quick swoosh/flip sound."
+      }
+    },
+    "navigation": {
+      "screen_transition": {
+        "description": "Soft swoosh when navigating between screens",
+        "description_zh": "切换页面时的柔和音效",
+        "duration_ms": 400,
+        "suggested_file": "screen_transition.mp3",
+        "usage": ["nav_forward", "nav_back"],
+        "notes": "Gentle whoosh, not intrusive."
+      },
+      "menu_open": {
+        "description": "Sound when opening a menu or panel",
+        "description_zh": "打开菜单时的音效",
+        "duration_ms": 250,
+        "suggested_file": "menu_open.mp3",
+        "usage": ["menu_show"],
+        "notes": "Light pop-up sound."
+      }
+    },
+    "assessment": {
+      "animal_greeting": {
+        "description": "Friendly animal sound when assessment character appears",
+        "description_zh": "评估角色出现时的友好动物叫声",
+        "duration_ms": 1000,
+        "suggested_file": "animal_greeting.mp3",
+        "usage": ["assessment_start", "character_appear"],
+        "notes": "Cute, non-threatening animal vocalization matching the guide character."
+      },
+      "activity_intro": {
+        "description": "Playful sound introducing a new assessment activity",
+        "description_zh": "引入新评估活动时的活泼音效",
+        "duration_ms": 800,
+        "suggested_file": "activity_intro.mp3",
+        "usage": ["assessment_activity_start"],
+        "notes": "Musical phrase that signals 'here comes something new and fun'."
+      },
+      "assessment_complete": {
+        "description": "Celebration sound when assessment journey finishes",
+        "description_zh": "评估完成时的庆祝音效",
+        "duration_ms": 3000,
+        "suggested_file": "assessment_complete.mp3",
+        "usage": ["assessment_finish"],
+        "notes": "Full celebration with gentle fanfare. Child should feel accomplished."
+      }
+    },
+    "ambient": {
+      "background_calm": {
+        "description": "Optional calming background music loop for sessions",
+        "description_zh": "学习会话中的可选平静背景音乐",
+        "duration_ms": 60000,
+        "suggested_file": "background_calm.mp3",
+        "usage": ["session_background"],
+        "notes": "Very subtle, repetitive, calming. Can be toggled off in settings. Minimal melody."
+      },
+      "nature_sounds": {
+        "description": "Optional nature ambient sounds (birds, water) for calm environment",
+        "description_zh": "可选的自然环境音（鸟鸣、流水）",
+        "duration_ms": 60000,
+        "suggested_file": "nature_sounds.mp3",
+        "usage": ["session_background_alt"],
+        "notes": "Alternative to music. Some ASD children prefer nature sounds."
+      }
+    },
+    "speech_prompts": {
+      "listen_prompt": {
+        "description": "Tone indicating child should listen carefully",
+        "description_zh": "提示孩子仔细听的音效",
+        "duration_ms": 500,
+        "suggested_file": "listen_prompt.mp3",
+        "usage": ["before_instruction_audio"],
+        "notes": "Attention-getting but gentle. Like a soft bell."
+      },
+      "speak_prompt": {
+        "description": "Tone indicating child should speak/respond vocally",
+        "description_zh": "提示孩子说话/口头回答的音效",
+        "duration_ms": 400,
+        "suggested_file": "speak_prompt.mp3",
+        "usage": ["before_voice_task"],
+        "notes": "Encouraging, like a gentle 'your turn' cue."
+      },
+      "recording_start": {
+        "description": "Sound when voice recording begins",
+        "description_zh": "开始录音时的音效",
+        "duration_ms": 300,
+        "suggested_file": "recording_start.mp3",
+        "usage": ["voice_record_begin"],
+        "notes": "Clear but soft beep indicating recording is active."
+      },
+      "recording_stop": {
+        "description": "Sound when voice recording ends",
+        "description_zh": "录音结束时的音效",
+        "duration_ms": 300,
+        "suggested_file": "recording_stop.mp3",
+        "usage": ["voice_record_end"],
+        "notes": "Double beep indicating recording has stopped."
+      }
+    }
+  },
+  "design_guidelines": {
+    "general": [
+      "All sounds should be gentle and non-startling for children with autism",
+      "Avoid sudden loud sounds, buzzer-like tones, or harsh frequencies",
+      "Keep sounds short (under 2s for feedback, under 1s for interactions)",
+      "Use warm, natural tones (bells, xylophones, soft synths)",
+      "Provide volume control and mute option in app settings",
+      "Consider sensory sensitivity - some children may need sounds completely off"
+    ],
+    "frequency_range": "Focus on mid-range frequencies (300Hz-2000Hz). Avoid very high or very low frequencies.",
+    "volume": "Default volume should be moderate (60-70% of max). Allow user adjustment."
+  }
+}

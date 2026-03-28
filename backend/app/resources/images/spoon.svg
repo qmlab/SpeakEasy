@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#827717" stroke-width="3"/>
+<ellipse cx="60" cy="45" rx="12" ry="16" fill="#BDBDBD" stroke="#757575" stroke-width="1.5"/><rect x="57" y="58" width="6" height="35" rx="3" fill="#BDBDBD" stroke="#757575" stroke-width="1.5"/></svg>

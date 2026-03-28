@@ -1,0 +1,164 @@
+{
+  "version": "1.0",
+  "description": "Image manifest for Rising Star Kid task illustrations. Maps image_hint values to SVG files.",
+  "base_path": "/task-images/",
+  "format": "svg",
+  "categories": {
+    "animals": [
+      "dog", "cat", "bird", "fish", "rabbit", "butterfly", "duck",
+      "elephant", "penguin", "frog", "bear", "whale", "dolphin"
+    ],
+    "food": [
+      "apple", "banana", "orange", "grape", "strawberry", "watermelon",
+      "pear", "cake", "pizza", "ice_cream", "bread", "milk", "cookie"
+    ],
+    "vehicles": [
+      "car", "bus", "truck", "airplane", "boat", "train", "bicycle"
+    ],
+    "nature": [
+      "sun", "moon", "star", "tree", "flower", "cloud", "rainbow",
+      "rain", "snowman"
+    ],
+    "household": [
+      "cup", "spoon", "plate", "book", "pencil", "scissors", "clock",
+      "lamp", "umbrella", "key", "chair", "bed", "house"
+    ],
+    "clothing": [
+      "hat", "shoe", "shirt"
+    ],
+    "toys": [
+      "ball", "doll", "teddy_bear", "block"
+    ],
+    "shapes": [
+      "circle_shape", "square_shape", "triangle_shape", "heart"
+    ],
+    "music": [
+      "guitar", "drum", "piano"
+    ],
+    "people": [
+      "mother", "father", "happy_face", "sad_face", "waving",
+      "thumbs_up", "stop_hand"
+    ],
+    "actions": [
+      "sleeping", "eating", "more", "water", "soap", "flashlight",
+      "chopsticks", "crayon"
+    ],
+    "dimensions": [
+      "dim_object_cognition", "dim_language_expression",
+      "dim_language_comprehension", "dim_literacy",
+      "dim_social_behavior", "dim_cognitive_logic"
+    ],
+    "rewards": [
+      "reward_star", "reward_trophy", "reward_ribbon", "reward_fireworks"
+    ]
+  },
+  "image_hint_aliases": {
+    "banana": "banana",
+    "apple": "apple",
+    "dog": "dog",
+    "cat": "cat",
+    "ball": "ball",
+    "car": "car",
+    "cup": "cup",
+    "book": "book",
+    "shoe": "shoe",
+    "hat": "hat",
+    "truck": "truck",
+    "bird": "bird",
+    "fish": "fish",
+    "tree": "tree",
+    "flower": "flower",
+    "sun": "sun",
+    "moon": "moon",
+    "star": "star",
+    "cake": "cake",
+    "milk": "milk",
+    "bread": "bread",
+    "orange": "orange",
+    "grape": "grape",
+    "grapes": "grape",
+    "strawberry": "strawberry",
+    "watermelon": "watermelon",
+    "pear": "pear",
+    "pizza": "pizza",
+    "ice cream": "ice_cream",
+    "ice_cream": "ice_cream",
+    "cookie": "cookie",
+    "bus": "bus",
+    "airplane": "airplane",
+    "plane": "airplane",
+    "boat": "boat",
+    "ship": "boat",
+    "train": "train",
+    "bicycle": "bicycle",
+    "bike": "bicycle",
+    "rabbit": "rabbit",
+    "bunny": "rabbit",
+    "butterfly": "butterfly",
+    "duck": "duck",
+    "elephant": "elephant",
+    "penguin": "penguin",
+    "frog": "frog",
+    "bear": "bear",
+    "teddy bear": "teddy_bear",
+    "teddy_bear": "teddy_bear",
+    "whale": "whale",
+    "dolphin": "dolphin",
+    "spoon": "spoon",
+    "plate": "plate",
+    "pencil": "pencil",
+    "pen": "pencil",
+    "scissors": "scissors",
+    "clock": "clock",
+    "lamp": "lamp",
+    "light": "lamp",
+    "umbrella": "umbrella",
+    "key": "key",
+    "chair": "chair",
+    "bed": "bed",
+    "house": "house",
+    "home": "house",
+    "shirt": "shirt",
+    "doll": "doll",
+    "block": "block",
+    "blocks": "block",
+    "circle": "circle_shape",
+    "square": "square_shape",
+    "triangle": "triangle_shape",
+    "heart": "heart",
+    "guitar": "guitar",
+    "drum": "drum",
+    "piano": "piano",
+    "mother": "mother",
+    "mama": "mother",
+    "mom": "mother",
+    "father": "father",
+    "papa": "father",
+    "dad": "father",
+    "daddy": "father",
+    "happy": "happy_face",
+    "sad": "sad_face",
+    "wave": "waving",
+    "waving": "waving",
+    "thumbs up": "thumbs_up",
+    "stop": "stop_hand",
+    "sleeping": "sleeping",
+    "sleep": "sleeping",
+    "eating": "eating",
+    "eat": "eating",
+    "more": "more",
+    "water": "water",
+    "drink": "water",
+    "soap": "soap",
+    "wash": "soap",
+    "flashlight": "flashlight",
+    "chopsticks": "chopsticks",
+    "crayon": "crayon",
+    "cloud": "cloud",
+    "rainbow": "rainbow",
+    "rain": "rain",
+    "snowman": "snowman",
+    "snow": "snowman"
+  },
+  "total_images": 94
+}
