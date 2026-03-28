@@ -109,7 +109,8 @@ def _load_dimension_tasks(db: Session, json_path: Path, force: bool = False) -> 
         .all()
     )
     existing_expanded = [
-        t for t in expanded_exists
+        t
+        for t in expanded_exists
         if t.metadata_info and t.metadata_info.get("source") == "expanded_v1"
     ]
     if existing_expanded and not force:
@@ -175,7 +176,8 @@ def _load_assessment_tasks(db: Session, force: bool = False) -> int:
         .all()
     )
     existing_expanded = [
-        t for t in existing_assessments
+        t
+        for t in existing_assessments
         if t.metadata_info and t.metadata_info.get("source") == "expanded_v1"
     ]
     if existing_expanded and not force:
