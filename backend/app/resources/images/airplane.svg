@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E8EAF6" stroke="#283593" stroke-width="3"/>
+<ellipse cx="60" cy="60" rx="30" ry="8" fill="#5C6BC0"/><polygon points="30,60 20,40 40,55" fill="#3F51B5"/><polygon points="30,60 20,80 40,65" fill="#3F51B5"/><polygon points="75,60 90,48 90,60" fill="#3F51B5"/><polygon points="75,60 90,72 90,60" fill="#3F51B5"/><circle cx="35" cy="57" r="3" fill="#BBDEFB"/><circle cx="45" cy="57" r="3" fill="#BBDEFB"/><circle cx="55" cy="57" r="3" fill="#BBDEFB"/></svg>

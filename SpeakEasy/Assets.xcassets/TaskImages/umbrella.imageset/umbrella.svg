@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E1F5FE" stroke="#01579B" stroke-width="3"/>
+<path d="M30 60 Q60 20 90 60" fill="#2196F3" stroke="#1565C0" stroke-width="2"/><line x1="60" y1="35" x2="60" y2="90" stroke="#795548" stroke-width="3"/><path d="M60 90 Q55 95 52 90" stroke="#795548" stroke-width="3" fill="none"/></svg>

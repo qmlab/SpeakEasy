@@ -1,0 +1,329 @@
+{
+  "dimension": "language_expression",
+  "description": "Language Expression: From imitation to conversation",
+  "levels": {
+    "0": {
+      "name": "Imitation",
+      "name_zh": "模仿",
+      "task_type": "imitate",
+      "tasks": [
+        {
+          "instruction": "Say this word: Mama",
+          "instruction_zh": "说这个词：妈妈",
+          "target_word": "Mama",
+          "target_word_zh": "妈妈",
+          "image_hint": "mother"
+        },
+        {
+          "instruction": "Say this word: Papa",
+          "instruction_zh": "说这个词：爸爸",
+          "target_word": "Papa",
+          "target_word_zh": "爸爸",
+          "image_hint": "father"
+        },
+        {
+          "instruction": "Can you say: Water",
+          "instruction_zh": "你能说：水",
+          "target_word": "Water",
+          "target_word_zh": "水",
+          "image_hint": "water"
+        },
+        {
+          "instruction": "Say this word: Hello",
+          "instruction_zh": "说这个词：你好",
+          "target_word": "Hello",
+          "target_word_zh": "你好",
+          "image_hint": "waving"
+        },
+        {
+          "instruction": "Can you say: Milk",
+          "instruction_zh": "你能说：牛奶",
+          "target_word": "Milk",
+          "target_word_zh": "牛奶",
+          "image_hint": "milk"
+        },
+        {
+          "instruction": "Say this word: More",
+          "instruction_zh": "说这个词：还要",
+          "target_word": "More",
+          "target_word_zh": "还要",
+          "image_hint": "more"
+        },
+        {
+          "instruction": "Can you say: Yes",
+          "instruction_zh": "你能说：是",
+          "target_word": "Yes",
+          "target_word_zh": "是",
+          "image_hint": "thumbs_up"
+        },
+        {
+          "instruction": "Say this word: No",
+          "instruction_zh": "说这个词：不要",
+          "target_word": "No",
+          "target_word_zh": "不要",
+          "image_hint": "stop_hand"
+        }
+      ]
+    },
+    "1": {
+      "name": "Naming Objects",
+      "name_zh": "命名物体",
+      "task_type": "name_object",
+      "tasks": [
+        {
+          "instruction": "What is this?",
+          "instruction_zh": "这是什么？",
+          "target_word": "Sun",
+          "target_word_zh": "太阳",
+          "image_hint": "sun"
+        },
+        {
+          "instruction": "What do you see?",
+          "instruction_zh": "你看到了什么？",
+          "target_word": "Moon",
+          "target_word_zh": "月亮",
+          "image_hint": "moon"
+        },
+        {
+          "instruction": "What is this?",
+          "instruction_zh": "这是什么？",
+          "target_word": "Fish",
+          "target_word_zh": "鱼",
+          "image_hint": "fish"
+        },
+        {
+          "instruction": "Can you name this?",
+          "instruction_zh": "你能说出它的名字吗？",
+          "target_word": "Tree",
+          "target_word_zh": "树",
+          "image_hint": "tree"
+        },
+        {
+          "instruction": "What is this?",
+          "instruction_zh": "这是什么？",
+          "target_word": "Shoe",
+          "target_word_zh": "鞋子",
+          "image_hint": "shoe"
+        },
+        {
+          "instruction": "What do you see?",
+          "instruction_zh": "你看到了什么？",
+          "target_word": "Flower",
+          "target_word_zh": "花",
+          "image_hint": "flower"
+        },
+        {
+          "instruction": "What is this?",
+          "instruction_zh": "这是什么？",
+          "target_word": "Star",
+          "target_word_zh": "星星",
+          "image_hint": "star"
+        },
+        {
+          "instruction": "Can you name this?",
+          "instruction_zh": "你能说出它的名字吗？",
+          "target_word": "Cake",
+          "target_word_zh": "蛋糕",
+          "image_hint": "cake"
+        }
+      ]
+    },
+    "2": {
+      "name": "Description",
+      "name_zh": "描述",
+      "task_type": "describe",
+      "tasks": [
+        {
+          "instruction": "What color is this?",
+          "instruction_zh": "这是什么颜色？",
+          "target_phrase": "red ball",
+          "target_phrase_zh": "红色的球",
+          "image_hint": "red_ball"
+        },
+        {
+          "instruction": "Tell me about this!",
+          "instruction_zh": "告诉我这是什么！",
+          "target_phrase": "big dog",
+          "target_phrase_zh": "大狗",
+          "image_hint": "big_dog"
+        },
+        {
+          "instruction": "What do you see?",
+          "instruction_zh": "你看到了什么？",
+          "target_phrase": "yellow banana",
+          "target_phrase_zh": "黄色的香蕉",
+          "image_hint": "yellow_banana"
+        },
+        {
+          "instruction": "Describe this picture!",
+          "instruction_zh": "描述这张图片！",
+          "target_phrase": "small cat",
+          "target_phrase_zh": "小猫",
+          "image_hint": "small_cat"
+        },
+        {
+          "instruction": "What is this?",
+          "instruction_zh": "这是什么？",
+          "target_phrase": "blue car",
+          "target_phrase_zh": "蓝色的车",
+          "image_hint": "blue_car"
+        },
+        {
+          "instruction": "Tell me what you see!",
+          "instruction_zh": "告诉我你看到了什么！",
+          "target_phrase": "green tree",
+          "target_phrase_zh": "绿色的树",
+          "image_hint": "green_tree"
+        },
+        {
+          "instruction": "What color is this?",
+          "instruction_zh": "这是什么颜色？",
+          "target_phrase": "white cloud",
+          "target_phrase_zh": "白色的云",
+          "image_hint": "white_cloud"
+        },
+        {
+          "instruction": "Describe this!",
+          "instruction_zh": "描述一下！",
+          "target_phrase": "happy face",
+          "target_phrase_zh": "开心的脸",
+          "image_hint": "happy_face"
+        }
+      ]
+    },
+    "3": {
+      "name": "Sentence Building",
+      "name_zh": "造句",
+      "task_type": "build_sentence",
+      "tasks": [
+        {
+          "instruction": "Put the words in order!",
+          "instruction_zh": "把词语排好顺序！",
+          "words": ["I", "like", "apples"],
+          "words_zh": ["我", "喜欢", "苹果"],
+          "correct_sentence": "I like apples",
+          "correct_sentence_zh": "我喜欢苹果"
+        },
+        {
+          "instruction": "Make a sentence!",
+          "instruction_zh": "组成一句话！",
+          "words": ["The", "cat", "is", "sleeping"],
+          "words_zh": ["猫", "在", "睡觉"],
+          "correct_sentence": "The cat is sleeping",
+          "correct_sentence_zh": "猫在睡觉"
+        },
+        {
+          "instruction": "Put the words in order!",
+          "instruction_zh": "把词语排好顺序！",
+          "words": ["I", "want", "water"],
+          "words_zh": ["我", "要", "喝水"],
+          "correct_sentence": "I want water",
+          "correct_sentence_zh": "我要喝水"
+        },
+        {
+          "instruction": "Make a sentence!",
+          "instruction_zh": "组成一句话！",
+          "words": ["The", "dog", "is", "running"],
+          "words_zh": ["狗", "在", "跑"],
+          "correct_sentence": "The dog is running",
+          "correct_sentence_zh": "狗在跑"
+        },
+        {
+          "instruction": "Put the words in order!",
+          "instruction_zh": "把词语排好顺序！",
+          "words": ["She", "has", "a", "ball"],
+          "words_zh": ["她", "有", "一个", "球"],
+          "correct_sentence": "She has a ball",
+          "correct_sentence_zh": "她有一个球"
+        },
+        {
+          "instruction": "Make a sentence!",
+          "instruction_zh": "组成一句话！",
+          "words": ["I", "see", "a", "bird"],
+          "words_zh": ["我", "看到", "一只", "鸟"],
+          "correct_sentence": "I see a bird",
+          "correct_sentence_zh": "我看到一只鸟"
+        },
+        {
+          "instruction": "Put the words in order!",
+          "instruction_zh": "把词语排好顺序！",
+          "words": ["He", "is", "eating", "cake"],
+          "words_zh": ["他", "在", "吃", "蛋糕"],
+          "correct_sentence": "He is eating cake",
+          "correct_sentence_zh": "他在吃蛋糕"
+        },
+        {
+          "instruction": "Make a sentence!",
+          "instruction_zh": "组成一句话！",
+          "words": ["We", "go", "to", "school"],
+          "words_zh": ["我们", "去", "上学"],
+          "correct_sentence": "We go to school",
+          "correct_sentence_zh": "我们去上学"
+        }
+      ]
+    },
+    "4": {
+      "name": "Conversation",
+      "name_zh": "对话",
+      "task_type": "conversation",
+      "tasks": [
+        {
+          "instruction": "What is your favorite food?",
+          "instruction_zh": "你最喜欢的食物是什么？",
+          "topic": "favorite_food",
+          "example_answers": ["I like pizza", "My favorite food is rice", "I like apples"],
+          "example_answers_zh": ["我喜欢比萨", "我最喜欢的食物是米饭", "我喜欢苹果"]
+        },
+        {
+          "instruction": "What did you do today?",
+          "instruction_zh": "你今天做了什么？",
+          "topic": "daily_activity",
+          "example_answers": ["I played with toys", "I went to school", "I ate lunch"],
+          "example_answers_zh": ["我玩了玩具", "我去了学校", "我吃了午饭"]
+        },
+        {
+          "instruction": "What is your favorite animal?",
+          "instruction_zh": "你最喜欢的动物是什么？",
+          "topic": "favorite_animal",
+          "example_answers": ["I like dogs", "My favorite animal is a cat", "I like rabbits"],
+          "example_answers_zh": ["我喜欢狗", "我最喜欢猫", "我喜欢兔子"]
+        },
+        {
+          "instruction": "Tell me about your family!",
+          "instruction_zh": "告诉我你的家人！",
+          "topic": "family",
+          "example_answers": ["I have a mom and dad", "I have a brother", "My family is big"],
+          "example_answers_zh": ["我有爸爸和妈妈", "我有一个哥哥", "我的家很大"]
+        },
+        {
+          "instruction": "What do you like to play?",
+          "instruction_zh": "你喜欢玩什么？",
+          "topic": "play_preferences",
+          "example_answers": ["I like to play with blocks", "I like drawing", "I like to run"],
+          "example_answers_zh": ["我喜欢玩积木", "我喜欢画画", "我喜欢跑步"]
+        },
+        {
+          "instruction": "How are you feeling today?",
+          "instruction_zh": "你今天感觉怎么样？",
+          "topic": "emotions",
+          "example_answers": ["I am happy", "I feel good", "I am tired"],
+          "example_answers_zh": ["我很开心", "我感觉很好", "我很累"]
+        },
+        {
+          "instruction": "What is your favorite color?",
+          "instruction_zh": "你最喜欢什么颜色？",
+          "topic": "favorite_color",
+          "example_answers": ["I like blue", "My favorite color is red", "I like green"],
+          "example_answers_zh": ["我喜欢蓝色", "我最喜欢红色", "我喜欢绿色"]
+        },
+        {
+          "instruction": "What do you want to be when you grow up?",
+          "instruction_zh": "你长大想做什么？",
+          "topic": "aspirations",
+          "example_answers": ["I want to be a doctor", "I want to be a teacher", "I want to be an astronaut"],
+          "example_answers_zh": ["我想当医生", "我想当老师", "我想当宇航员"]
+        }
+      ]
+    }
+  }
+}

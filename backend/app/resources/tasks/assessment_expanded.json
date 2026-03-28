@@ -1,0 +1,737 @@
+{
+  "description": "Expanded assessment tasks covering all 6 dimensions at levels 0-4",
+  "dimensions": {
+    "object_cognition": {
+      "0": [
+        {
+          "task_type": "match",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Find the same one!",
+            "instruction_zh": "找到一样的！",
+            "correct_answer": "Banana",
+            "options": ["Banana", "Truck", "Cat"],
+            "image_hint": "banana"
+          }
+        },
+        {
+          "task_type": "match",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Which one is the same?",
+            "instruction_zh": "哪一个是一样的？",
+            "correct_answer": "Star",
+            "options": ["Moon", "Star", "Tree"],
+            "image_hint": "star"
+          }
+        }
+      ],
+      "1": [
+        {
+          "task_type": "identify",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Where is the elephant?",
+            "instruction_zh": "大象在哪里？",
+            "correct_answer": "Elephant",
+            "options": ["Lion", "Elephant", "Giraffe"],
+            "image_hint": "elephant"
+          }
+        },
+        {
+          "task_type": "identify",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Find the bicycle!",
+            "instruction_zh": "找到自行车！",
+            "correct_answer": "Bicycle",
+            "options": ["Bicycle", "Car", "Boat"],
+            "image_hint": "bicycle"
+          }
+        }
+      ],
+      "2": [
+        {
+          "task_type": "classify",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Which ones are vehicles?",
+            "instruction_zh": "哪些是交通工具？",
+            "correct_answer": "Car, Bus, Train",
+            "options": ["Car", "Dog", "Bus", "Apple", "Train"],
+            "image_hint": "vehicles"
+          }
+        },
+        {
+          "task_type": "classify",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Which ones are food?",
+            "instruction_zh": "哪些是食物？",
+            "correct_answer": "Pizza, Rice, Bread",
+            "options": ["Pizza", "Chair", "Rice", "Bread", "Cat"],
+            "image_hint": "food"
+          }
+        }
+      ],
+      "3": [
+        {
+          "task_type": "function",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What do you use to write?",
+            "instruction_zh": "你用什么写字？",
+            "correct_answer": "Pencil",
+            "options": ["Pencil", "Spoon", "Hat"],
+            "image_hint": "pencil"
+          }
+        },
+        {
+          "task_type": "function",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What do you use to drink?",
+            "instruction_zh": "你用什么喝水？",
+            "correct_answer": "Cup",
+            "options": ["Plate", "Cup", "Book"],
+            "image_hint": "cup"
+          }
+        }
+      ],
+      "4": [
+        {
+          "task_type": "abstract",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Which one does NOT belong?",
+            "instruction_zh": "哪一个不属于这一组？",
+            "correct_answer": "Dog",
+            "options": ["Red", "Blue", "Green", "Dog"],
+            "image_hint": "odd_one_out"
+          }
+        },
+        {
+          "task_type": "abstract",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What comes next? Circle, Square, Circle, ...",
+            "instruction_zh": "接下来是什么？圆、方、圆、...",
+            "correct_answer": "Square",
+            "options": ["Circle", "Square", "Triangle"],
+            "image_hint": "pattern"
+          }
+        }
+      ]
+    },
+    "language_expression": {
+      "0": [
+        {
+          "task_type": "imitate",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Say: Ball",
+            "instruction_zh": "说：球",
+            "correct_answer": "Ball",
+            "options": [],
+            "image_hint": "ball"
+          }
+        },
+        {
+          "task_type": "imitate",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Say: Eat",
+            "instruction_zh": "说：吃",
+            "correct_answer": "Eat",
+            "options": [],
+            "image_hint": "eating"
+          }
+        }
+      ],
+      "1": [
+        {
+          "task_type": "name_object",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "What is this?",
+            "instruction_zh": "这是什么？",
+            "correct_answer": "Butterfly",
+            "options": [],
+            "image_hint": "butterfly"
+          }
+        },
+        {
+          "task_type": "name_object",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "What do you see?",
+            "instruction_zh": "你看到了什么？",
+            "correct_answer": "Rainbow",
+            "options": [],
+            "image_hint": "rainbow"
+          }
+        }
+      ],
+      "2": [
+        {
+          "task_type": "describe",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Describe what you see!",
+            "instruction_zh": "描述你看到的！",
+            "correct_answer": "A big red ball",
+            "options": [],
+            "image_hint": "red_ball"
+          }
+        },
+        {
+          "task_type": "describe",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Tell me about this picture!",
+            "instruction_zh": "告诉我这张图片！",
+            "correct_answer": "A yellow flower",
+            "options": [],
+            "image_hint": "yellow_flower"
+          }
+        }
+      ],
+      "3": [
+        {
+          "task_type": "build_sentence",
+          "modalities": ["voice", "touch"],
+          "content": {
+            "instruction": "Make a sentence with these words!",
+            "instruction_zh": "用这些词造句！",
+            "correct_answer": "The cat is sleeping",
+            "options": ["cat", "is", "sleeping", "The"],
+            "image_hint": "sleeping_cat"
+          }
+        },
+        {
+          "task_type": "build_sentence",
+          "modalities": ["voice", "touch"],
+          "content": {
+            "instruction": "Put words in order!",
+            "instruction_zh": "把词语排好！",
+            "correct_answer": "I like ice cream",
+            "options": ["I", "like", "ice cream"],
+            "image_hint": "ice_cream"
+          }
+        }
+      ],
+      "4": [
+        {
+          "task_type": "conversation",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "What is your favorite game?",
+            "instruction_zh": "你最喜欢什么游戏？",
+            "correct_answer": "open_ended",
+            "options": [],
+            "image_hint": "games"
+          }
+        },
+        {
+          "task_type": "conversation",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Tell me about your best friend!",
+            "instruction_zh": "告诉我你最好的朋友！",
+            "correct_answer": "open_ended",
+            "options": [],
+            "image_hint": "friends"
+          }
+        }
+      ]
+    },
+    "language_comprehension": {
+      "0": [
+        {
+          "task_type": "point_to",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Touch the flower!",
+            "instruction_zh": "点一下花！",
+            "correct_answer": "Flower",
+            "options": ["Flower", "Tree", "Rock"],
+            "image_hint": "flower"
+          }
+        },
+        {
+          "task_type": "point_to",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Where is the boat?",
+            "instruction_zh": "船在哪里？",
+            "correct_answer": "Boat",
+            "options": ["Car", "Boat", "Plane"],
+            "image_hint": "boat"
+          }
+        }
+      ],
+      "1": [
+        {
+          "task_type": "follow_instruction",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Touch the biggest animal!",
+            "instruction_zh": "点最大的动物！",
+            "correct_answer": "Elephant",
+            "options": ["Mouse", "Cat", "Elephant"],
+            "image_hint": "animals_sizes"
+          }
+        },
+        {
+          "task_type": "follow_instruction",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Find the one that is NOT round!",
+            "instruction_zh": "找到不是圆的那个！",
+            "correct_answer": "Square block",
+            "options": ["Ball", "Orange", "Square block"],
+            "image_hint": "shapes"
+          }
+        }
+      ],
+      "2": [
+        {
+          "task_type": "follow_instruction",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "First touch the hat, then the shoe!",
+            "instruction_zh": "先点帽子，再点鞋子！",
+            "correct_answer": "Hat then Shoe",
+            "options": ["Hat", "Shoe", "Shirt", "Pants"],
+            "image_hint": "clothing"
+          }
+        },
+        {
+          "task_type": "follow_instruction",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Touch the red one, then the blue one!",
+            "instruction_zh": "先点红色的，再点蓝色的！",
+            "correct_answer": "Red then Blue",
+            "options": ["Red circle", "Blue circle", "Green circle"],
+            "image_hint": "colored_circles"
+          }
+        }
+      ],
+      "3": [
+        {
+          "task_type": "story_comprehension",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "The boy went to school. He forgot his lunch. Where did he go?",
+            "instruction_zh": "男孩去上学了。他忘了带午饭。他去了哪里？",
+            "correct_answer": "School",
+            "options": ["School", "Park", "Store"],
+            "image_hint": "school"
+          }
+        },
+        {
+          "task_type": "story_comprehension",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "The girl picked three flowers. She gave one to Mom. How many does she have now?",
+            "instruction_zh": "女孩摘了三朵花。她给了妈妈一朵。她现在有几朵？",
+            "correct_answer": "Two",
+            "options": ["One", "Two", "Three"],
+            "image_hint": "flowers"
+          }
+        }
+      ],
+      "4": [
+        {
+          "task_type": "infer_meaning",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "The girl is wearing a coat, scarf, and gloves. What is the weather like?",
+            "instruction_zh": "女孩穿着大衣、围巾和手套。天气怎么样？",
+            "correct_answer": "Cold",
+            "options": ["Hot", "Cold", "Rainy"],
+            "image_hint": "winter_clothes"
+          }
+        },
+        {
+          "task_type": "infer_meaning",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Everyone is blowing out candles on a cake. What event is this?",
+            "instruction_zh": "大家在吹蛋糕上的蜡烛。这是什么活动？",
+            "correct_answer": "Birthday party",
+            "options": ["Birthday party", "Dinner", "School day"],
+            "image_hint": "birthday"
+          }
+        }
+      ]
+    },
+    "literacy": {
+      "0": [
+        {
+          "task_type": "recognize_image",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What is this?",
+            "instruction_zh": "这是什么？",
+            "correct_answer": "Airplane",
+            "options": ["Airplane", "Bird", "Cloud"],
+            "image_hint": "airplane"
+          }
+        },
+        {
+          "task_type": "recognize_image",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What do you see?",
+            "instruction_zh": "你看到了什么？",
+            "correct_answer": "Umbrella",
+            "options": ["Umbrella", "Hat", "Mushroom"],
+            "image_hint": "umbrella"
+          }
+        }
+      ],
+      "1": [
+        {
+          "task_type": "match_word_image",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Match the word: CAT",
+            "instruction_zh": "配对这个词：猫",
+            "correct_answer": "Cat",
+            "options": ["Dog", "Cat", "Bird"],
+            "image_hint": "cat"
+          }
+        },
+        {
+          "task_type": "match_word_image",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Match the word: HOUSE",
+            "instruction_zh": "配对这个词：房子",
+            "correct_answer": "House",
+            "options": ["House", "Tree", "Car"],
+            "image_hint": "house"
+          }
+        }
+      ],
+      "2": [
+        {
+          "task_type": "read_word",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Read this word: STAR",
+            "instruction_zh": "读这个字：星",
+            "correct_answer": "Star",
+            "options": [],
+            "image_hint": "star"
+          }
+        },
+        {
+          "task_type": "read_word",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Read this word: TREE",
+            "instruction_zh": "读这个字：树",
+            "correct_answer": "Tree",
+            "options": [],
+            "image_hint": "tree"
+          }
+        }
+      ],
+      "3": [
+        {
+          "task_type": "read_sentence",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Read: The bird sings.",
+            "instruction_zh": "读：鸟在唱歌。",
+            "correct_answer": "The bird sings.",
+            "options": [],
+            "image_hint": "bird_singing"
+          }
+        },
+        {
+          "task_type": "read_sentence",
+          "modalities": ["voice"],
+          "content": {
+            "instruction": "Read: I love my mom.",
+            "instruction_zh": "读：我爱妈妈。",
+            "correct_answer": "I love my mom.",
+            "options": [],
+            "image_hint": "mother_child"
+          }
+        }
+      ],
+      "4": [
+        {
+          "task_type": "read_passage",
+          "modalities": ["voice", "touch"],
+          "content": {
+            "instruction": "Read and answer: The duck swims in the lake. It finds a fish. What does the duck find?",
+            "instruction_zh": "读并回答：鸭子在湖里游泳。它找到了一条鱼。鸭子找到了什么？",
+            "correct_answer": "A fish",
+            "options": ["A fish", "A frog", "A boat"],
+            "image_hint": "duck_lake"
+          }
+        },
+        {
+          "task_type": "read_passage",
+          "modalities": ["voice", "touch"],
+          "content": {
+            "instruction": "Read and answer: The bear eats honey. It loves sweet things. What does the bear eat?",
+            "instruction_zh": "读并回答：熊吃蜂蜜。它喜欢甜的东西。熊吃什么？",
+            "correct_answer": "Honey",
+            "options": ["Honey", "Fish", "Grass"],
+            "image_hint": "bear_honey"
+          }
+        }
+      ]
+    },
+    "social_behavior": {
+      "0": [
+        {
+          "task_type": "attend",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Who is saying hello?",
+            "instruction_zh": "谁在打招呼？",
+            "correct_answer": "The girl waving",
+            "options": ["The girl waving", "The sleeping cat", "The book"],
+            "image_hint": "girl_waving"
+          }
+        },
+        {
+          "task_type": "attend",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Who is singing?",
+            "instruction_zh": "谁在唱歌？",
+            "correct_answer": "The boy with microphone",
+            "options": ["The boy with microphone", "The table", "The tree"],
+            "image_hint": "boy_singing"
+          }
+        }
+      ],
+      "1": [
+        {
+          "task_type": "imitate_action",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Do what the picture shows: Give a thumbs up!",
+            "instruction_zh": "做图片上的动作：竖起大拇指！",
+            "correct_answer": "thumbs_up",
+            "options": [],
+            "image_hint": "thumbs_up"
+          }
+        },
+        {
+          "task_type": "imitate_action",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Copy the action: Raise your hand!",
+            "instruction_zh": "模仿动作：举手！",
+            "correct_answer": "raise_hand",
+            "options": [],
+            "image_hint": "raising_hand"
+          }
+        }
+      ],
+      "2": [
+        {
+          "task_type": "turn_take",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Whose turn is it next?",
+            "instruction_zh": "下一个轮到谁？",
+            "correct_answer": "Your turn",
+            "options": ["Your turn", "Skip", "Stop"],
+            "image_hint": "turn_taking"
+          }
+        },
+        {
+          "task_type": "turn_take",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Wait for your turn! Now go!",
+            "instruction_zh": "等轮到你！现在开始！",
+            "correct_answer": "Place a block",
+            "options": ["Place a block", "Take all blocks", "Break the tower"],
+            "image_hint": "block_tower"
+          }
+        }
+      ],
+      "3": [
+        {
+          "task_type": "joint_attention",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Everyone is looking at the sky! What do they see?",
+            "instruction_zh": "大家都在看天空！他们看到了什么？",
+            "correct_answer": "Fireworks",
+            "options": ["Fireworks", "Nothing", "Ground"],
+            "image_hint": "fireworks"
+          }
+        },
+        {
+          "task_type": "joint_attention",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "The teacher is pointing. What is she pointing at?",
+            "instruction_zh": "老师在指。她指的是什么？",
+            "correct_answer": "The map",
+            "options": ["The map", "The floor", "The window"],
+            "image_hint": "teacher_pointing"
+          }
+        }
+      ],
+      "4": [
+        {
+          "task_type": "initiate",
+          "modalities": ["touch", "voice"],
+          "content": {
+            "instruction": "Your friend looks lonely. What should you do?",
+            "instruction_zh": "你的朋友看起来很孤独。你应该怎么做？",
+            "correct_answer": "Ask them to play",
+            "options": ["Ask them to play", "Walk away", "Laugh at them"],
+            "image_hint": "lonely_child"
+          }
+        },
+        {
+          "task_type": "initiate",
+          "modalities": ["touch", "voice"],
+          "content": {
+            "instruction": "You found a cool bug! What do you say to show your friend?",
+            "instruction_zh": "你发现了一只有趣的虫子！你怎么告诉朋友看？",
+            "correct_answer": "Come look at this!",
+            "options": ["Come look at this!", "Go away!", "I don't care."],
+            "image_hint": "sharing_discovery"
+          }
+        }
+      ]
+    },
+    "cognitive_logic": {
+      "0": [
+        {
+          "task_type": "pair",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Which two go together?",
+            "instruction_zh": "哪两个是一对？",
+            "correct_answer": "Knife and Fork",
+            "options": ["Knife", "Fork", "Ball", "Tree"],
+            "image_hint": "knife_fork"
+          }
+        },
+        {
+          "task_type": "pair",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Find the matching pair!",
+            "instruction_zh": "找到配对的！",
+            "correct_answer": "Rain and Umbrella",
+            "options": ["Rain", "Umbrella", "Sun", "Ice"],
+            "image_hint": "rain_umbrella"
+          }
+        }
+      ],
+      "1": [
+        {
+          "task_type": "sort",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Sort from smallest to biggest!",
+            "instruction_zh": "从小到大排列！",
+            "correct_answer": "Mouse, Cat, Elephant",
+            "options": ["Elephant", "Mouse", "Cat"],
+            "image_hint": "animal_sizes"
+          }
+        },
+        {
+          "task_type": "sort",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Sort from lightest to heaviest!",
+            "instruction_zh": "从轻到重排列！",
+            "correct_answer": "Feather, Book, Rock",
+            "options": ["Rock", "Feather", "Book"],
+            "image_hint": "weight_comparison"
+          }
+        }
+      ],
+      "2": [
+        {
+          "task_type": "cause_effect",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What happens if you don't water the plant?",
+            "instruction_zh": "如果你不浇花会怎样？",
+            "correct_answer": "It wilts",
+            "options": ["It wilts", "It grows bigger", "It turns blue"],
+            "image_hint": "wilting_plant"
+          }
+        },
+        {
+          "task_type": "cause_effect",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What happens if you mix blue and yellow?",
+            "instruction_zh": "如果你把蓝色和黄色混在一起会怎样？",
+            "correct_answer": "Green",
+            "options": ["Red", "Green", "Orange"],
+            "image_hint": "color_mixing"
+          }
+        }
+      ],
+      "3": [
+        {
+          "task_type": "sequence_order",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "Put in order: Getting dressed",
+            "instruction_zh": "排好顺序：穿衣服",
+            "correct_answer": "Underwear, Pants, Shirt, Jacket",
+            "options": ["Jacket", "Underwear", "Shirt", "Pants"],
+            "image_hint": "getting_dressed"
+          }
+        },
+        {
+          "task_type": "sequence_order",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "What order: Making juice",
+            "instruction_zh": "什么顺序：做果汁",
+            "correct_answer": "Get fruit, Cut fruit, Put in blender, Pour into cup",
+            "options": ["Pour into cup", "Get fruit", "Put in blender", "Cut fruit"],
+            "image_hint": "making_juice"
+          }
+        }
+      ],
+      "4": [
+        {
+          "task_type": "reason",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "If 2+2=4, what is 3+3?",
+            "instruction_zh": "如果2+2=4，那3+3=？",
+            "correct_answer": "6",
+            "options": ["5", "6", "7"],
+            "image_hint": "math"
+          }
+        },
+        {
+          "task_type": "reason",
+          "modalities": ["touch"],
+          "content": {
+            "instruction": "All birds have feathers. A penguin is a bird. Does a penguin have feathers?",
+            "instruction_zh": "所有的鸟都有羽毛。企鹅是一种鸟。企鹅有羽毛吗？",
+            "correct_answer": "Yes",
+            "options": ["Yes", "No", "Maybe"],
+            "image_hint": "penguin"
+          }
+        }
+      ]
+    }
+  }
+}
