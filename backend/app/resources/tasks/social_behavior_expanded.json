@@ -13,7 +13,12 @@
           "social_cue": "waving",
           "correct_answer": "The teacher",
           "correct_answer_zh": "老师",
-          "options": ["The teacher", "The dog", "The tree"]
+          "options": [
+            "The teacher",
+            "The dog",
+            "The tree"
+          ],
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Look at the picture! Who is smiling?",
@@ -21,7 +26,12 @@
           "social_cue": "smiling",
           "correct_answer": "The girl",
           "correct_answer_zh": "女孩",
-          "options": ["The girl", "The cat", "The ball"]
+          "options": [
+            "The girl",
+            "The cat",
+            "The ball"
+          ],
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Who is talking?",
@@ -29,7 +39,12 @@
           "social_cue": "talking",
           "correct_answer": "Mom",
           "correct_answer_zh": "妈妈",
-          "options": ["Mom", "The toy", "The book"]
+          "options": [
+            "Mom",
+            "The toy",
+            "The book"
+          ],
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Look! Who is clapping?",
@@ -37,7 +52,12 @@
           "social_cue": "clapping",
           "correct_answer": "The boy",
           "correct_answer_zh": "男孩",
-          "options": ["The boy", "The car", "The flower"]
+          "options": [
+            "The boy",
+            "The car",
+            "The flower"
+          ],
+          "image_hint": "thumbs_up"
         },
         {
           "instruction": "Who is pointing at the sky?",
@@ -45,7 +65,12 @@
           "social_cue": "pointing",
           "correct_answer": "Dad",
           "correct_answer_zh": "爸爸",
-          "options": ["Dad", "The bird", "The cloud"]
+          "options": [
+            "Dad",
+            "The bird",
+            "The cloud"
+          ],
+          "image_hint": "thumbs_up"
         },
         {
           "instruction": "Look! Who is crying?",
@@ -53,7 +78,12 @@
           "social_cue": "crying",
           "correct_answer": "The baby",
           "correct_answer_zh": "宝宝",
-          "options": ["The baby", "The table", "The shoe"]
+          "options": [
+            "The baby",
+            "The table",
+            "The shoe"
+          ],
+          "image_hint": "sad_face"
         },
         {
           "instruction": "Who is dancing?",
@@ -61,7 +91,12 @@
           "social_cue": "dancing",
           "correct_answer": "The girl",
           "correct_answer_zh": "女孩",
-          "options": ["The chair", "The girl", "The lamp"]
+          "options": [
+            "The chair",
+            "The girl",
+            "The lamp"
+          ],
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Look! Who is eating?",
@@ -69,7 +104,12 @@
           "social_cue": "eating",
           "correct_answer": "The boy",
           "correct_answer_zh": "男孩",
-          "options": ["The cup", "The boy", "The phone"]
+          "options": [
+            "The cup",
+            "The boy",
+            "The phone"
+          ],
+          "image_hint": "happy_face"
         }
       ]
     },
@@ -82,49 +122,57 @@
           "instruction": "Do what I do! Clap your hands!",
           "instruction_zh": "跟我做！拍拍手！",
           "action": "clap_hands",
-          "animation_hint": "clapping"
+          "animation_hint": "clapping",
+          "image_hint": "thumbs_up"
         },
         {
           "instruction": "Copy me! Touch your nose!",
           "instruction_zh": "模仿我！摸摸鼻子！",
           "action": "touch_nose",
-          "animation_hint": "touching_nose"
+          "animation_hint": "touching_nose",
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Do this! Wave hello!",
           "instruction_zh": "做这个！挥手说你好！",
           "action": "wave",
-          "animation_hint": "waving"
+          "animation_hint": "waving",
+          "image_hint": "waving"
         },
         {
           "instruction": "Copy me! Stamp your feet!",
           "instruction_zh": "模仿我！跺跺脚！",
           "action": "stamp_feet",
-          "animation_hint": "stamping"
+          "animation_hint": "stamping",
+          "image_hint": "shoe"
         },
         {
           "instruction": "Do what I do! Put your hands up!",
           "instruction_zh": "跟我做！把手举起来！",
           "action": "hands_up",
-          "animation_hint": "raising_hands"
+          "animation_hint": "raising_hands",
+          "image_hint": "thumbs_up"
         },
         {
           "instruction": "Copy me! Blow a kiss!",
           "instruction_zh": "模仿我！飞吻！",
           "action": "blow_kiss",
-          "animation_hint": "blowing_kiss"
+          "animation_hint": "blowing_kiss",
+          "image_hint": "heart"
         },
         {
           "instruction": "Do this! Touch your ears!",
           "instruction_zh": "做这个！摸摸耳朵！",
           "action": "touch_ears",
-          "animation_hint": "touching_ears"
+          "animation_hint": "touching_ears",
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Copy me! Shake your head!",
           "instruction_zh": "模仿我！摇摇头！",
           "action": "shake_head",
-          "animation_hint": "shaking_head"
+          "animation_hint": "shaking_head",
+          "image_hint": "sad_face"
         }
       ]
     },
@@ -137,57 +185,89 @@
           "instruction": "It's your turn! Roll the ball!",
           "instruction_zh": "轮到你了！滚球！",
           "activity": "ball_rolling",
-          "sequence": ["My turn", "Your turn"],
-          "current_turn": "child"
+          "sequence": [
+            "My turn",
+            "Your turn"
+          ],
+          "current_turn": "child",
+          "image_hint": "ball"
         },
         {
           "instruction": "Wait for your turn, then pick a card!",
           "instruction_zh": "等轮到你，然后选一张卡！",
           "activity": "card_picking",
-          "sequence": ["Friend picks", "You pick"],
-          "current_turn": "wait"
+          "sequence": [
+            "Friend picks",
+            "You pick"
+          ],
+          "current_turn": "wait",
+          "image_hint": "star"
         },
         {
           "instruction": "Now it's your turn to add a block!",
           "instruction_zh": "现在轮到你加一块积木！",
           "activity": "block_stacking",
-          "sequence": ["Friend adds", "You add"],
-          "current_turn": "child"
+          "sequence": [
+            "Friend adds",
+            "You add"
+          ],
+          "current_turn": "child",
+          "image_hint": "block"
         },
         {
           "instruction": "Take turns! Your friend goes first, then you!",
           "instruction_zh": "轮流！朋友先，然后你！",
           "activity": "drawing_turns",
-          "sequence": ["Friend draws", "You draw"],
-          "current_turn": "wait"
+          "sequence": [
+            "Friend draws",
+            "You draw"
+          ],
+          "current_turn": "wait",
+          "image_hint": "crayon"
         },
         {
           "instruction": "It's your turn to feed the animal!",
           "instruction_zh": "轮到你喂动物了！",
           "activity": "feeding_game",
-          "sequence": ["My turn", "Your turn"],
-          "current_turn": "child"
+          "sequence": [
+            "My turn",
+            "Your turn"
+          ],
+          "current_turn": "child",
+          "image_hint": "spoon"
         },
         {
           "instruction": "Wait... now your turn! Color the picture!",
           "instruction_zh": "等一下...现在轮到你了！涂颜色！",
           "activity": "coloring",
-          "sequence": ["Friend colors", "You color"],
-          "current_turn": "child"
+          "sequence": [
+            "Friend colors",
+            "You color"
+          ],
+          "current_turn": "child",
+          "image_hint": "crayon"
         },
         {
           "instruction": "Let your friend go first, then it's your turn!",
           "instruction_zh": "让朋友先来，然后轮到你！",
           "activity": "puzzle_piece",
-          "sequence": ["Friend places", "You place"],
-          "current_turn": "wait"
+          "sequence": [
+            "Friend places",
+            "You place"
+          ],
+          "current_turn": "wait",
+          "image_hint": "block"
         },
         {
           "instruction": "Your turn! Sing the next part!",
           "instruction_zh": "轮到你了！唱下一句！",
           "activity": "singing_turns",
-          "sequence": ["I sing", "You sing"],
-          "current_turn": "child"
+          "sequence": [
+            "I sing",
+            "You sing"
+          ],
+          "current_turn": "child",
+          "image_hint": "happy_face"
         }
       ]
     },
@@ -202,7 +282,12 @@
           "target": "Bird in the tree",
           "target_zh": "树上的鸟",
           "correct_answer": "Bird",
-          "options": ["Bird", "Fish", "Cat"]
+          "options": [
+            "Bird",
+            "Fish",
+            "Cat"
+          ],
+          "image_hint": "bird"
         },
         {
           "instruction": "I see something! Can you find it too?",
@@ -210,7 +295,12 @@
           "target": "Hidden star",
           "target_zh": "隐藏的星星",
           "correct_answer": "Star",
-          "options": ["Star", "Moon", "Sun"]
+          "options": [
+            "Star",
+            "Moon",
+            "Sun"
+          ],
+          "image_hint": "star"
         },
         {
           "instruction": "Look at what the dog is looking at!",
@@ -218,7 +308,12 @@
           "target": "Ball behind the bush",
           "target_zh": "灌木后面的球",
           "correct_answer": "Ball",
-          "options": ["Ball", "Bone", "Stick"]
+          "options": [
+            "Ball",
+            "Bone",
+            "Stick"
+          ],
+          "image_hint": "ball"
         },
         {
           "instruction": "The cat is watching something. What is it?",
@@ -226,7 +321,12 @@
           "target": "Butterfly",
           "target_zh": "蝴蝶",
           "correct_answer": "Butterfly",
-          "options": ["Butterfly", "Flower", "Cloud"]
+          "options": [
+            "Butterfly",
+            "Flower",
+            "Cloud"
+          ],
+          "image_hint": "butterfly"
         },
         {
           "instruction": "Follow my eyes! What am I looking at?",
@@ -234,7 +334,12 @@
           "target": "Rainbow",
           "target_zh": "彩虹",
           "correct_answer": "Rainbow",
-          "options": ["Rainbow", "Cloud", "Rain"]
+          "options": [
+            "Rainbow",
+            "Cloud",
+            "Rain"
+          ],
+          "image_hint": "rainbow"
         },
         {
           "instruction": "Look where the arrow points! What is there?",
@@ -242,7 +347,12 @@
           "target": "Treasure chest",
           "target_zh": "宝箱",
           "correct_answer": "Treasure",
-          "options": ["Treasure", "Rock", "Sand"]
+          "options": [
+            "Treasure",
+            "Rock",
+            "Sand"
+          ],
+          "image_hint": "star"
         },
         {
           "instruction": "The boy is excited! What is he looking at?",
@@ -250,7 +360,12 @@
           "target": "Ice cream truck",
           "target_zh": "冰淇淋车",
           "correct_answer": "Ice cream truck",
-          "options": ["Ice cream truck", "School bus", "Fire truck"]
+          "options": [
+            "Ice cream truck",
+            "School bus",
+            "Fire truck"
+          ],
+          "image_hint": "ice_cream"
         },
         {
           "instruction": "Everyone is looking up! What do they see?",
@@ -258,7 +373,12 @@
           "target": "Airplane in the sky",
           "target_zh": "天上的飞机",
           "correct_answer": "Airplane",
-          "options": ["Airplane", "Cloud", "Star"]
+          "options": [
+            "Airplane",
+            "Cloud",
+            "Star"
+          ],
+          "image_hint": "airplane"
         }
       ]
     },
@@ -273,7 +393,11 @@
           "scenario": "asking_to_play",
           "correct_response": "Can I play with you?",
           "correct_response_zh": "我可以和你一起玩吗？",
-          "options": ["Can I play with you?", "Give me that!", "Go away!"]
+          "options": [
+            "Can I play with you?",
+            "Give me that!",
+            "Go away!"
+          ]
         },
         {
           "instruction": "Your friend fell down. What do you say?",
@@ -281,7 +405,11 @@
           "scenario": "showing_empathy",
           "correct_response": "Are you okay?",
           "correct_response_zh": "你还好吗？",
-          "options": ["Are you okay?", "That's funny!", "I don't care."]
+          "options": [
+            "Are you okay?",
+            "That's funny!",
+            "I don't care."
+          ]
         },
         {
           "instruction": "Someone gives you a gift. What do you say?",
@@ -289,7 +417,11 @@
           "scenario": "receiving_gift",
           "correct_response": "Thank you!",
           "correct_response_zh": "谢谢！",
-          "options": ["Thank you!", "I don't want it.", "Give me more!"]
+          "options": [
+            "Thank you!",
+            "I don't want it.",
+            "Give me more!"
+          ]
         },
         {
           "instruction": "You want to share your toy. What do you say?",
@@ -297,7 +429,11 @@
           "scenario": "sharing",
           "correct_response": "Do you want to play with this?",
           "correct_response_zh": "你想玩这个吗？",
-          "options": ["Do you want to play with this?", "This is mine!", "Don't touch!"]
+          "options": [
+            "Do you want to play with this?",
+            "This is mine!",
+            "Don't touch!"
+          ]
         },
         {
           "instruction": "You meet someone new. What do you say?",
@@ -305,7 +441,11 @@
           "scenario": "meeting_new_person",
           "correct_response": "Hi, my name is...",
           "correct_response_zh": "你好，我叫...",
-          "options": ["Hi, my name is...", "Who are you?", "Go away!"]
+          "options": [
+            "Hi, my name is...",
+            "Who are you?",
+            "Go away!"
+          ]
         },
         {
           "instruction": "You accidentally bump into someone. What do you say?",
@@ -313,7 +453,11 @@
           "scenario": "apologizing",
           "correct_response": "I'm sorry!",
           "correct_response_zh": "对不起！",
-          "options": ["I'm sorry!", "Move!", "It's your fault!"]
+          "options": [
+            "I'm sorry!",
+            "Move!",
+            "It's your fault!"
+          ]
         },
         {
           "instruction": "Your friend is sad. What can you do?",
@@ -321,7 +465,11 @@
           "scenario": "comforting",
           "correct_response": "I'll stay with you.",
           "correct_response_zh": "我陪你。",
-          "options": ["I'll stay with you.", "Stop being sad!", "I'm going to play."]
+          "options": [
+            "I'll stay with you.",
+            "Stop being sad!",
+            "I'm going to play."
+          ]
         },
         {
           "instruction": "You need help with something. What do you say?",
@@ -329,7 +477,11 @@
           "scenario": "asking_for_help",
           "correct_response": "Can you help me, please?",
           "correct_response_zh": "你能帮帮我吗？",
-          "options": ["Can you help me, please?", "Do it for me!", "I can't do anything!"]
+          "options": [
+            "Can you help me, please?",
+            "Do it for me!",
+            "I can't do anything!"
+          ]
         }
       ]
     }

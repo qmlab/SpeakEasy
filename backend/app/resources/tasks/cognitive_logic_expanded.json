@@ -10,66 +10,170 @@
         {
           "instruction": "Which two go together?",
           "instruction_zh": "哪两个是一对？",
-          "pair": ["Cup", "Saucer"],
-          "pair_zh": ["杯子", "碟子"],
-          "distractors": ["Ball", "Tree"],
-          "distractors_zh": ["球", "树"]
+          "pair": [
+            "Cup",
+            "Saucer"
+          ],
+          "pair_zh": [
+            "杯子",
+            "碟子"
+          ],
+          "distractors": [
+            "Ball",
+            "Tree"
+          ],
+          "distractors_zh": [
+            "球",
+            "树"
+          ],
+          "image_hint": "cup"
         },
         {
           "instruction": "Find the matching pair!",
           "instruction_zh": "找到配对的！",
-          "pair": ["Sock", "Shoe"],
-          "pair_zh": ["袜子", "鞋子"],
-          "distractors": ["Hat", "Fish"],
-          "distractors_zh": ["帽子", "鱼"]
+          "pair": [
+            "Sock",
+            "Shoe"
+          ],
+          "pair_zh": [
+            "袜子",
+            "鞋子"
+          ],
+          "distractors": [
+            "Hat",
+            "Fish"
+          ],
+          "distractors_zh": [
+            "帽子",
+            "鱼"
+          ],
+          "image_hint": "shoe"
         },
         {
           "instruction": "Which two belong together?",
           "instruction_zh": "哪两个属于一起？",
-          "pair": ["Hammer", "Nail"],
-          "pair_zh": ["锤子", "钉子"],
-          "distractors": ["Apple", "Moon"],
-          "distractors_zh": ["苹果", "月亮"]
+          "pair": [
+            "Hammer",
+            "Nail"
+          ],
+          "pair_zh": [
+            "锤子",
+            "钉子"
+          ],
+          "distractors": [
+            "Apple",
+            "Moon"
+          ],
+          "distractors_zh": [
+            "苹果",
+            "月亮"
+          ],
+          "image_hint": "block"
         },
         {
           "instruction": "Find the pair!",
           "instruction_zh": "找到一对！",
-          "pair": ["Pencil", "Paper"],
-          "pair_zh": ["铅笔", "纸"],
-          "distractors": ["Dog", "Star"],
-          "distractors_zh": ["狗", "星星"]
+          "pair": [
+            "Pencil",
+            "Paper"
+          ],
+          "pair_zh": [
+            "铅笔",
+            "纸"
+          ],
+          "distractors": [
+            "Dog",
+            "Star"
+          ],
+          "distractors_zh": [
+            "狗",
+            "星星"
+          ],
+          "image_hint": "pencil"
         },
         {
           "instruction": "Which two go together?",
           "instruction_zh": "哪两个是一对？",
-          "pair": ["Needle", "Thread"],
-          "pair_zh": ["针", "线"],
-          "distractors": ["Car", "Flower"],
-          "distractors_zh": ["车", "花"]
+          "pair": [
+            "Needle",
+            "Thread"
+          ],
+          "pair_zh": [
+            "针",
+            "线"
+          ],
+          "distractors": [
+            "Car",
+            "Flower"
+          ],
+          "distractors_zh": [
+            "车",
+            "花"
+          ],
+          "image_hint": "scissors"
         },
         {
           "instruction": "Find the matching pair!",
           "instruction_zh": "找到配对的！",
-          "pair": ["Bread", "Butter"],
-          "pair_zh": ["面包", "黄油"],
-          "distractors": ["Cat", "Clock"],
-          "distractors_zh": ["猫", "钟"]
+          "pair": [
+            "Bread",
+            "Butter"
+          ],
+          "pair_zh": [
+            "面包",
+            "黄油"
+          ],
+          "distractors": [
+            "Cat",
+            "Clock"
+          ],
+          "distractors_zh": [
+            "猫",
+            "钟"
+          ],
+          "image_hint": "bread"
         },
         {
           "instruction": "Which two belong together?",
           "instruction_zh": "哪两个属于一起？",
-          "pair": ["Bat", "Ball"],
-          "pair_zh": ["球棒", "球"],
-          "distractors": ["Lamp", "Fish"],
-          "distractors_zh": ["灯", "鱼"]
+          "pair": [
+            "Bat",
+            "Ball"
+          ],
+          "pair_zh": [
+            "球棒",
+            "球"
+          ],
+          "distractors": [
+            "Lamp",
+            "Fish"
+          ],
+          "distractors_zh": [
+            "灯",
+            "鱼"
+          ],
+          "image_hint": "ball"
         },
         {
           "instruction": "Find the pair!",
           "instruction_zh": "找到一对！",
-          "pair": ["Brush", "Paint"],
-          "pair_zh": ["画笔", "颜料"],
-          "distractors": ["Shoe", "Moon"],
-          "distractors_zh": ["鞋子", "月亮"]
+          "pair": [
+            "Brush",
+            "Paint"
+          ],
+          "pair_zh": [
+            "画笔",
+            "颜料"
+          ],
+          "distractors": [
+            "Shoe",
+            "Moon"
+          ],
+          "distractors_zh": [
+            "鞋子",
+            "月亮"
+          ],
+          "image_hint": "crayon"
         }
       ]
     },
@@ -82,65 +186,169 @@
           "instruction": "Sort from smallest to biggest!",
           "instruction_zh": "从小到大排列！",
           "sort_type": "size",
-          "items": ["Small ball", "Medium ball", "Big ball"],
-          "items_zh": ["小球", "中球", "大球"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Small ball",
+            "Medium ball",
+            "Big ball"
+          ],
+          "items_zh": [
+            "小球",
+            "中球",
+            "大球"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "ball"
         },
         {
           "instruction": "Sort from shortest to tallest!",
           "instruction_zh": "从矮到高排列！",
           "sort_type": "height",
-          "items": ["Short tree", "Medium tree", "Tall tree"],
-          "items_zh": ["矮树", "中树", "高树"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Short tree",
+            "Medium tree",
+            "Tall tree"
+          ],
+          "items_zh": [
+            "矮树",
+            "中树",
+            "高树"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "tree"
         },
         {
           "instruction": "Sort from lightest to darkest!",
           "instruction_zh": "从浅到深排列！",
           "sort_type": "shade",
-          "items": ["Light blue", "Medium blue", "Dark blue"],
-          "items_zh": ["浅蓝", "中蓝", "深蓝"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Light blue",
+            "Medium blue",
+            "Dark blue"
+          ],
+          "items_zh": [
+            "浅蓝",
+            "中蓝",
+            "深蓝"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "cloud"
         },
         {
           "instruction": "Sort from thinnest to thickest!",
           "instruction_zh": "从细到粗排列！",
           "sort_type": "thickness",
-          "items": ["Thin pencil", "Medium pencil", "Thick pencil"],
-          "items_zh": ["细铅笔", "中铅笔", "粗铅笔"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Thin pencil",
+            "Medium pencil",
+            "Thick pencil"
+          ],
+          "items_zh": [
+            "细铅笔",
+            "中铅笔",
+            "粗铅笔"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "pencil"
         },
         {
           "instruction": "Sort from least to most!",
           "instruction_zh": "从少到多排列！",
           "sort_type": "quantity",
-          "items": ["1 apple", "3 apples", "5 apples"],
-          "items_zh": ["1个苹果", "3个苹果", "5个苹果"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "1 apple",
+            "3 apples",
+            "5 apples"
+          ],
+          "items_zh": [
+            "1个苹果",
+            "3个苹果",
+            "5个苹果"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "apple"
         },
         {
           "instruction": "Sort from coldest to hottest!",
           "instruction_zh": "从冷到热排列！",
           "sort_type": "temperature",
-          "items": ["Ice cream", "Water", "Hot soup"],
-          "items_zh": ["冰淇淋", "水", "热汤"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Ice cream",
+            "Water",
+            "Hot soup"
+          ],
+          "items_zh": [
+            "冰淇淋",
+            "水",
+            "热汤"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "ice_cream"
         },
         {
           "instruction": "Sort from youngest to oldest!",
           "instruction_zh": "从小到大排列！",
           "sort_type": "age",
-          "items": ["Baby", "Child", "Grandparent"],
-          "items_zh": ["婴儿", "小孩", "爷爷奶奶"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Baby",
+            "Child",
+            "Grandparent"
+          ],
+          "items_zh": [
+            "婴儿",
+            "小孩",
+            "爷爷奶奶"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Sort from slowest to fastest!",
           "instruction_zh": "从慢到快排列！",
           "sort_type": "speed",
-          "items": ["Turtle", "Cat", "Cheetah"],
-          "items_zh": ["乌龟", "猫", "猎豹"],
-          "correct_order": [0, 1, 2]
+          "items": [
+            "Turtle",
+            "Cat",
+            "Cheetah"
+          ],
+          "items_zh": [
+            "乌龟",
+            "猫",
+            "猎豹"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2
+          ],
+          "image_hint": "frog"
         }
       ]
     },
@@ -156,8 +364,16 @@
           "cause_zh": "摔杯子",
           "correct_effect": "It breaks",
           "correct_effect_zh": "它会碎",
-          "options": ["It breaks", "It flies", "It grows"],
-          "options_zh": ["它会碎", "它会飞", "它会长大"]
+          "options": [
+            "It breaks",
+            "It flies",
+            "It grows"
+          ],
+          "options_zh": [
+            "它会碎",
+            "它会飞",
+            "它会长大"
+          ]
         },
         {
           "instruction": "What happens when it rains?",
@@ -166,8 +382,17 @@
           "cause_zh": "下雨",
           "correct_effect": "The ground gets wet",
           "correct_effect_zh": "地面变湿",
-          "options": ["The ground gets wet", "It snows", "The sun comes out"],
-          "options_zh": ["地面变湿", "下雪了", "太阳出来了"]
+          "options": [
+            "The ground gets wet",
+            "It snows",
+            "The sun comes out"
+          ],
+          "options_zh": [
+            "地面变湿",
+            "下雪了",
+            "太阳出来了"
+          ],
+          "image_hint": "rain"
         },
         {
           "instruction": "What happens if you water a plant?",
@@ -176,8 +401,17 @@
           "cause_zh": "浇花",
           "correct_effect": "It grows",
           "correct_effect_zh": "它会长大",
-          "options": ["It grows", "It flies away", "It turns blue"],
-          "options_zh": ["它会长大", "它飞走了", "它变蓝了"]
+          "options": [
+            "It grows",
+            "It flies away",
+            "It turns blue"
+          ],
+          "options_zh": [
+            "它会长大",
+            "它飞走了",
+            "它变蓝了"
+          ],
+          "image_hint": "water"
         },
         {
           "instruction": "What happens if you turn off the light?",
@@ -186,8 +420,16 @@
           "cause_zh": "关灯",
           "correct_effect": "It gets dark",
           "correct_effect_zh": "变暗了",
-          "options": ["It gets dark", "It gets hot", "It rains"],
-          "options_zh": ["变暗了", "变热了", "下雨了"]
+          "options": [
+            "It gets dark",
+            "It gets hot",
+            "It rains"
+          ],
+          "options_zh": [
+            "变暗了",
+            "变热了",
+            "下雨了"
+          ]
         },
         {
           "instruction": "What happens if you put ice in the sun?",
@@ -196,8 +438,17 @@
           "cause_zh": "冰在太阳下",
           "correct_effect": "It melts",
           "correct_effect_zh": "它会融化",
-          "options": ["It melts", "It freezes more", "It turns red"],
-          "options_zh": ["它会融化", "它结更多冰", "它变红了"]
+          "options": [
+            "It melts",
+            "It freezes more",
+            "It turns red"
+          ],
+          "options_zh": [
+            "它会融化",
+            "它结更多冰",
+            "它变红了"
+          ],
+          "image_hint": "sun"
         },
         {
           "instruction": "What happens when you blow a balloon too much?",
@@ -206,8 +457,17 @@
           "cause_zh": "吹太大气球",
           "correct_effect": "It pops",
           "correct_effect_zh": "它会爆",
-          "options": ["It pops", "It shrinks", "It flies to space"],
-          "options_zh": ["它会爆", "它缩小了", "它飞到太空"]
+          "options": [
+            "It pops",
+            "It shrinks",
+            "It flies to space"
+          ],
+          "options_zh": [
+            "它会爆",
+            "它缩小了",
+            "它飞到太空"
+          ],
+          "image_hint": "ball"
         },
         {
           "instruction": "What happens if you don't eat?",
@@ -216,8 +476,16 @@
           "cause_zh": "不吃饭",
           "correct_effect": "You get hungry",
           "correct_effect_zh": "你会饿",
-          "options": ["You get hungry", "You get taller", "You turn green"],
-          "options_zh": ["你会饿", "你变高了", "你变绿了"]
+          "options": [
+            "You get hungry",
+            "You get taller",
+            "You turn green"
+          ],
+          "options_zh": [
+            "你会饿",
+            "你变高了",
+            "你变绿了"
+          ]
         },
         {
           "instruction": "What happens if you push a ball?",
@@ -226,8 +494,17 @@
           "cause_zh": "推球",
           "correct_effect": "It rolls",
           "correct_effect_zh": "它会滚",
-          "options": ["It rolls", "It jumps", "It disappears"],
-          "options_zh": ["它会滚", "它会跳", "它消失了"]
+          "options": [
+            "It rolls",
+            "It jumps",
+            "It disappears"
+          ],
+          "options_zh": [
+            "它会滚",
+            "它会跳",
+            "它消失了"
+          ],
+          "image_hint": "ball"
         }
       ]
     },
@@ -241,72 +518,192 @@
           "instruction_zh": "把故事排好顺序！",
           "story_title": "Planting a flower",
           "story_title_zh": "种花",
-          "steps": ["Dig a hole", "Put in the seed", "Water it", "The flower grows"],
-          "steps_zh": ["挖坑", "放入种子", "浇水", "花长大了"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Dig a hole",
+            "Put in the seed",
+            "Water it",
+            "The flower grows"
+          ],
+          "steps_zh": [
+            "挖坑",
+            "放入种子",
+            "浇水",
+            "花长大了"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "What comes first, second, third?",
           "instruction_zh": "第一步、第二步、第三步是什么？",
           "story_title": "Making a sandwich",
           "story_title_zh": "做三明治",
-          "steps": ["Get bread", "Add peanut butter", "Put bread on top", "Eat it"],
-          "steps_zh": ["拿面包", "涂花生酱", "盖上面包", "吃掉"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Get bread",
+            "Add peanut butter",
+            "Put bread on top",
+            "Eat it"
+          ],
+          "steps_zh": [
+            "拿面包",
+            "涂花生酱",
+            "盖上面包",
+            "吃掉"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "Put these in order!",
           "instruction_zh": "把这些排好顺序！",
           "story_title": "Getting ready for school",
           "story_title_zh": "准备上学",
-          "steps": ["Wake up", "Brush teeth", "Get dressed", "Go to school"],
-          "steps_zh": ["起床", "刷牙", "穿衣服", "去学校"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Wake up",
+            "Brush teeth",
+            "Get dressed",
+            "Go to school"
+          ],
+          "steps_zh": [
+            "起床",
+            "刷牙",
+            "穿衣服",
+            "去学校"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "What is the right order?",
           "instruction_zh": "正确的顺序是什么？",
           "story_title": "Baking cookies",
           "story_title_zh": "烤饼干",
-          "steps": ["Mix ingredients", "Shape cookies", "Put in oven", "Cookies are done"],
-          "steps_zh": ["搅拌材料", "做成饼干形状", "放进烤箱", "饼干做好了"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Mix ingredients",
+            "Shape cookies",
+            "Put in oven",
+            "Cookies are done"
+          ],
+          "steps_zh": [
+            "搅拌材料",
+            "做成饼干形状",
+            "放进烤箱",
+            "饼干做好了"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "Put the story in order!",
           "instruction_zh": "把故事排好顺序！",
           "story_title": "Building a snowman",
           "story_title_zh": "堆雪人",
-          "steps": ["Roll a big ball", "Stack a smaller ball", "Add a carrot nose", "Put on a hat"],
-          "steps_zh": ["滚一个大球", "叠一个小球", "加胡萝卜鼻子", "戴上帽子"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Roll a big ball",
+            "Stack a smaller ball",
+            "Add a carrot nose",
+            "Put on a hat"
+          ],
+          "steps_zh": [
+            "滚一个大球",
+            "叠一个小球",
+            "加胡萝卜鼻子",
+            "戴上帽子"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "What comes first, second, third?",
           "instruction_zh": "第一步、第二步、第三步是什么？",
           "story_title": "Washing hands",
           "story_title_zh": "洗手",
-          "steps": ["Turn on water", "Add soap", "Rub hands", "Rinse and dry"],
-          "steps_zh": ["开水", "加肥皂", "搓手", "冲洗擦干"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Turn on water",
+            "Add soap",
+            "Rub hands",
+            "Rinse and dry"
+          ],
+          "steps_zh": [
+            "开水",
+            "加肥皂",
+            "搓手",
+            "冲洗擦干"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "Put these in order!",
           "instruction_zh": "把这些排好顺序！",
           "story_title": "Butterfly life cycle",
           "story_title_zh": "蝴蝶的一生",
-          "steps": ["Egg", "Caterpillar", "Cocoon", "Butterfly"],
-          "steps_zh": ["卵", "毛毛虫", "茧", "蝴蝶"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Egg",
+            "Caterpillar",
+            "Cocoon",
+            "Butterfly"
+          ],
+          "steps_zh": [
+            "卵",
+            "毛毛虫",
+            "茧",
+            "蝴蝶"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "instruction": "What is the right order?",
           "instruction_zh": "正确的顺序是什么？",
           "story_title": "Brushing teeth",
           "story_title_zh": "刷牙",
-          "steps": ["Get toothbrush", "Put on toothpaste", "Brush teeth", "Rinse mouth"],
-          "steps_zh": ["拿牙刷", "挤牙膏", "刷牙", "漱口"],
-          "correct_order": [0, 1, 2, 3]
+          "steps": [
+            "Get toothbrush",
+            "Put on toothpaste",
+            "Brush teeth",
+            "Rinse mouth"
+          ],
+          "steps_zh": [
+            "拿牙刷",
+            "挤牙膏",
+            "刷牙",
+            "漱口"
+          ],
+          "correct_order": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ]
     },
@@ -321,7 +718,11 @@
           "logic_type": "deductive",
           "correct_answer": "Four",
           "correct_answer_zh": "四条",
-          "options": ["Two", "Four", "Six"]
+          "options": [
+            "Two",
+            "Four",
+            "Six"
+          ]
         },
         {
           "instruction": "If it's bigger than a cat but smaller than a horse, what could it be?",
@@ -329,7 +730,11 @@
           "logic_type": "size_comparison",
           "correct_answer": "Dog",
           "correct_answer_zh": "狗",
-          "options": ["Mouse", "Dog", "Elephant"]
+          "options": [
+            "Mouse",
+            "Dog",
+            "Elephant"
+          ]
         },
         {
           "instruction": "If you mix red and yellow, what color do you get?",
@@ -337,7 +742,11 @@
           "logic_type": "color_mixing",
           "correct_answer": "Orange",
           "correct_answer_zh": "橙色",
-          "options": ["Green", "Orange", "Purple"]
+          "options": [
+            "Green",
+            "Orange",
+            "Purple"
+          ]
         },
         {
           "instruction": "Monday, Tuesday, Wednesday... What comes next?",
@@ -345,7 +754,11 @@
           "logic_type": "sequence",
           "correct_answer": "Thursday",
           "correct_answer_zh": "星期四",
-          "options": ["Friday", "Thursday", "Sunday"]
+          "options": [
+            "Friday",
+            "Thursday",
+            "Sunday"
+          ]
         },
         {
           "instruction": "If Sara is taller than Tom, and Tom is taller than Bob, who is the tallest?",
@@ -353,7 +766,11 @@
           "logic_type": "transitive",
           "correct_answer": "Sara",
           "correct_answer_zh": "小红",
-          "options": ["Sara", "Tom", "Bob"]
+          "options": [
+            "Sara",
+            "Tom",
+            "Bob"
+          ]
         },
         {
           "instruction": "A circle has 0 corners. A triangle has 3 corners. How many corners does a square have?",
@@ -361,7 +778,11 @@
           "logic_type": "counting",
           "correct_answer": "4",
           "correct_answer_zh": "4个",
-          "options": ["3", "4", "5"]
+          "options": [
+            "3",
+            "4",
+            "5"
+          ]
         },
         {
           "instruction": "If you have 3 apples and eat 1, how many are left?",
@@ -369,7 +790,11 @@
           "logic_type": "subtraction",
           "correct_answer": "2",
           "correct_answer_zh": "2个",
-          "options": ["1", "2", "4"]
+          "options": [
+            "1",
+            "2",
+            "4"
+          ]
         },
         {
           "instruction": "Spring, Summer, Autumn... What comes next?",
@@ -377,7 +802,11 @@
           "logic_type": "sequence",
           "correct_answer": "Winter",
           "correct_answer_zh": "冬天",
-          "options": ["Spring", "Winter", "Summer"]
+          "options": [
+            "Spring",
+            "Winter",
+            "Summer"
+          ]
         }
       ]
     }

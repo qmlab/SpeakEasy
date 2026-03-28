@@ -10,82 +10,210 @@
         {
           "instruction": "Find the same one!",
           "instruction_zh": "找到一样的！",
-          "target": {"name": "Banana", "category": "Food"},
+          "target": {
+            "name": "Banana",
+            "category": "Food"
+          },
           "choices": [
-            {"name": "Banana", "category": "Food", "is_correct": true},
-            {"name": "Orange", "category": "Food", "is_correct": false},
-            {"name": "Book", "category": "Household", "is_correct": false}
-          ]
+            {
+              "name": "Banana",
+              "category": "Food",
+              "is_correct": true
+            },
+            {
+              "name": "Orange",
+              "category": "Food",
+              "is_correct": false
+            },
+            {
+              "name": "Book",
+              "category": "Household",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "banana"
         },
         {
           "instruction": "Which one is the same?",
           "instruction_zh": "哪一个是一样的？",
-          "target": {"name": "Hat", "category": "Clothing"},
+          "target": {
+            "name": "Hat",
+            "category": "Clothing"
+          },
           "choices": [
-            {"name": "Shoe", "category": "Clothing", "is_correct": false},
-            {"name": "Hat", "category": "Clothing", "is_correct": true},
-            {"name": "Fish", "category": "Animals", "is_correct": false}
-          ]
+            {
+              "name": "Shoe",
+              "category": "Clothing",
+              "is_correct": false
+            },
+            {
+              "name": "Hat",
+              "category": "Clothing",
+              "is_correct": true
+            },
+            {
+              "name": "Fish",
+              "category": "Animals",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "hat"
         },
         {
           "instruction": "Find the same one!",
           "instruction_zh": "找到一样的！",
-          "target": {"name": "Star", "category": "Shapes"},
+          "target": {
+            "name": "Star",
+            "category": "Shapes"
+          },
           "choices": [
-            {"name": "Moon", "category": "Shapes", "is_correct": false},
-            {"name": "Sun", "category": "Nature", "is_correct": false},
-            {"name": "Star", "category": "Shapes", "is_correct": true}
-          ]
+            {
+              "name": "Moon",
+              "category": "Shapes",
+              "is_correct": false
+            },
+            {
+              "name": "Sun",
+              "category": "Nature",
+              "is_correct": false
+            },
+            {
+              "name": "Star",
+              "category": "Shapes",
+              "is_correct": true
+            }
+          ],
+          "image_hint": "star"
         },
         {
           "instruction": "Match it!",
           "instruction_zh": "配对一下！",
-          "target": {"name": "Tree", "category": "Nature"},
+          "target": {
+            "name": "Tree",
+            "category": "Nature"
+          },
           "choices": [
-            {"name": "Tree", "category": "Nature", "is_correct": true},
-            {"name": "Flower", "category": "Nature", "is_correct": false},
-            {"name": "Truck", "category": "Vehicles", "is_correct": false}
-          ]
+            {
+              "name": "Tree",
+              "category": "Nature",
+              "is_correct": true
+            },
+            {
+              "name": "Flower",
+              "category": "Nature",
+              "is_correct": false
+            },
+            {
+              "name": "Truck",
+              "category": "Vehicles",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "tree"
         },
         {
           "instruction": "Find the same one!",
           "instruction_zh": "找到一样的！",
-          "target": {"name": "Fish", "category": "Animals"},
+          "target": {
+            "name": "Fish",
+            "category": "Animals"
+          },
           "choices": [
-            {"name": "Bird", "category": "Animals", "is_correct": false},
-            {"name": "Fish", "category": "Animals", "is_correct": true},
-            {"name": "Spoon", "category": "Household", "is_correct": false}
-          ]
+            {
+              "name": "Bird",
+              "category": "Animals",
+              "is_correct": false
+            },
+            {
+              "name": "Fish",
+              "category": "Animals",
+              "is_correct": true
+            },
+            {
+              "name": "Spoon",
+              "category": "Household",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "fish"
         },
         {
           "instruction": "Which one matches?",
           "instruction_zh": "哪一个匹配？",
-          "target": {"name": "Shoe", "category": "Clothing"},
+          "target": {
+            "name": "Shoe",
+            "category": "Clothing"
+          },
           "choices": [
-            {"name": "Shoe", "category": "Clothing", "is_correct": true},
-            {"name": "Glove", "category": "Clothing", "is_correct": false},
-            {"name": "Apple", "category": "Food", "is_correct": false}
-          ]
+            {
+              "name": "Shoe",
+              "category": "Clothing",
+              "is_correct": true
+            },
+            {
+              "name": "Glove",
+              "category": "Clothing",
+              "is_correct": false
+            },
+            {
+              "name": "Apple",
+              "category": "Food",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "shoe"
         },
         {
           "instruction": "Find the same one!",
           "instruction_zh": "找到一样的！",
-          "target": {"name": "Truck", "category": "Vehicles"},
+          "target": {
+            "name": "Truck",
+            "category": "Vehicles"
+          },
           "choices": [
-            {"name": "Bus", "category": "Vehicles", "is_correct": false},
-            {"name": "Truck", "category": "Vehicles", "is_correct": true},
-            {"name": "Dog", "category": "Animals", "is_correct": false}
-          ]
+            {
+              "name": "Bus",
+              "category": "Vehicles",
+              "is_correct": false
+            },
+            {
+              "name": "Truck",
+              "category": "Vehicles",
+              "is_correct": true
+            },
+            {
+              "name": "Dog",
+              "category": "Animals",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "truck"
         },
         {
           "instruction": "Match the picture!",
           "instruction_zh": "配对图片！",
-          "target": {"name": "Teddy Bear", "category": "Toys"},
+          "target": {
+            "name": "Teddy Bear",
+            "category": "Toys"
+          },
           "choices": [
-            {"name": "Ball", "category": "Toys", "is_correct": false},
-            {"name": "Doll", "category": "Toys", "is_correct": false},
-            {"name": "Teddy Bear", "category": "Toys", "is_correct": true}
-          ]
+            {
+              "name": "Ball",
+              "category": "Toys",
+              "is_correct": false
+            },
+            {
+              "name": "Doll",
+              "category": "Toys",
+              "is_correct": false
+            },
+            {
+              "name": "Teddy Bear",
+              "category": "Toys",
+              "is_correct": true
+            }
+          ],
+          "image_hint": "teddy_bear"
         }
       ]
     },
@@ -99,88 +227,224 @@
           "instruction_zh": "兔子在哪里？",
           "target_name": "Rabbit",
           "choices": [
-            {"name": "Rabbit", "category": "Animals", "is_correct": true},
-            {"name": "Squirrel", "category": "Animals", "is_correct": false},
-            {"name": "Frog", "category": "Animals", "is_correct": false},
-            {"name": "Duck", "category": "Animals", "is_correct": false}
-          ]
+            {
+              "name": "Rabbit",
+              "category": "Animals",
+              "is_correct": true
+            },
+            {
+              "name": "Squirrel",
+              "category": "Animals",
+              "is_correct": false
+            },
+            {
+              "name": "Frog",
+              "category": "Animals",
+              "is_correct": false
+            },
+            {
+              "name": "Duck",
+              "category": "Animals",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "rabbit"
         },
         {
           "instruction": "Can you find the airplane?",
           "instruction_zh": "你能找到飞机吗？",
           "target_name": "Airplane",
           "choices": [
-            {"name": "Car", "category": "Vehicles", "is_correct": false},
-            {"name": "Airplane", "category": "Vehicles", "is_correct": true},
-            {"name": "Boat", "category": "Vehicles", "is_correct": false},
-            {"name": "Train", "category": "Vehicles", "is_correct": false}
-          ]
+            {
+              "name": "Car",
+              "category": "Vehicles",
+              "is_correct": false
+            },
+            {
+              "name": "Airplane",
+              "category": "Vehicles",
+              "is_correct": true
+            },
+            {
+              "name": "Boat",
+              "category": "Vehicles",
+              "is_correct": false
+            },
+            {
+              "name": "Train",
+              "category": "Vehicles",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "airplane"
         },
         {
           "instruction": "Where is the watermelon?",
           "instruction_zh": "西瓜在哪里？",
           "target_name": "Watermelon",
           "choices": [
-            {"name": "Grape", "category": "Food", "is_correct": false},
-            {"name": "Strawberry", "category": "Food", "is_correct": false},
-            {"name": "Watermelon", "category": "Food", "is_correct": true},
-            {"name": "Pear", "category": "Food", "is_correct": false}
-          ]
+            {
+              "name": "Grape",
+              "category": "Food",
+              "is_correct": false
+            },
+            {
+              "name": "Strawberry",
+              "category": "Food",
+              "is_correct": false
+            },
+            {
+              "name": "Watermelon",
+              "category": "Food",
+              "is_correct": true
+            },
+            {
+              "name": "Pear",
+              "category": "Food",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "watermelon"
         },
         {
           "instruction": "Find the umbrella!",
           "instruction_zh": "找到雨伞！",
           "target_name": "Umbrella",
           "choices": [
-            {"name": "Umbrella", "category": "Household", "is_correct": true},
-            {"name": "Lamp", "category": "Household", "is_correct": false},
-            {"name": "Clock", "category": "Household", "is_correct": false},
-            {"name": "Book", "category": "Household", "is_correct": false}
-          ]
+            {
+              "name": "Umbrella",
+              "category": "Household",
+              "is_correct": true
+            },
+            {
+              "name": "Lamp",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Clock",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Book",
+              "category": "Household",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "umbrella"
         },
         {
           "instruction": "Where is the butterfly?",
           "instruction_zh": "蝴蝶在哪里？",
           "target_name": "Butterfly",
           "choices": [
-            {"name": "Bee", "category": "Animals", "is_correct": false},
-            {"name": "Ladybug", "category": "Animals", "is_correct": false},
-            {"name": "Butterfly", "category": "Animals", "is_correct": true},
-            {"name": "Ant", "category": "Animals", "is_correct": false}
-          ]
+            {
+              "name": "Bee",
+              "category": "Animals",
+              "is_correct": false
+            },
+            {
+              "name": "Ladybug",
+              "category": "Animals",
+              "is_correct": false
+            },
+            {
+              "name": "Butterfly",
+              "category": "Animals",
+              "is_correct": true
+            },
+            {
+              "name": "Ant",
+              "category": "Animals",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "butterfly"
         },
         {
           "instruction": "Can you find the guitar?",
           "instruction_zh": "你能找到吉他吗？",
           "target_name": "Guitar",
           "choices": [
-            {"name": "Drum", "category": "Musical Instruments", "is_correct": false},
-            {"name": "Guitar", "category": "Musical Instruments", "is_correct": true},
-            {"name": "Piano", "category": "Musical Instruments", "is_correct": false},
-            {"name": "Flute", "category": "Musical Instruments", "is_correct": false}
-          ]
+            {
+              "name": "Drum",
+              "category": "Musical Instruments",
+              "is_correct": false
+            },
+            {
+              "name": "Guitar",
+              "category": "Musical Instruments",
+              "is_correct": true
+            },
+            {
+              "name": "Piano",
+              "category": "Musical Instruments",
+              "is_correct": false
+            },
+            {
+              "name": "Flute",
+              "category": "Musical Instruments",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "guitar"
         },
         {
           "instruction": "Where is the moon?",
           "instruction_zh": "月亮在哪里？",
           "target_name": "Moon",
           "choices": [
-            {"name": "Star", "category": "Nature", "is_correct": false},
-            {"name": "Moon", "category": "Nature", "is_correct": true},
-            {"name": "Sun", "category": "Nature", "is_correct": false},
-            {"name": "Cloud", "category": "Nature", "is_correct": false}
-          ]
+            {
+              "name": "Star",
+              "category": "Nature",
+              "is_correct": false
+            },
+            {
+              "name": "Moon",
+              "category": "Nature",
+              "is_correct": true
+            },
+            {
+              "name": "Sun",
+              "category": "Nature",
+              "is_correct": false
+            },
+            {
+              "name": "Cloud",
+              "category": "Nature",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "moon"
         },
         {
           "instruction": "Find the pencil!",
           "instruction_zh": "找到铅笔！",
           "target_name": "Pencil",
           "choices": [
-            {"name": "Eraser", "category": "School", "is_correct": false},
-            {"name": "Ruler", "category": "School", "is_correct": false},
-            {"name": "Pencil", "category": "School", "is_correct": true},
-            {"name": "Scissors", "category": "School", "is_correct": false}
-          ]
+            {
+              "name": "Eraser",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Ruler",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Pencil",
+              "category": "School",
+              "is_correct": true
+            },
+            {
+              "name": "Scissors",
+              "category": "School",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "pencil"
         }
       ]
     },
@@ -194,91 +458,266 @@
           "instruction_zh": "哪些是水果？",
           "target_category": "Fruits",
           "items": [
-            {"name": "Apple", "category": "Fruits", "is_target": true},
-            {"name": "Banana", "category": "Fruits", "is_target": true},
-            {"name": "Car", "category": "Vehicles", "is_target": false},
-            {"name": "Grape", "category": "Fruits", "is_target": true},
-            {"name": "Chair", "category": "Household", "is_target": false},
-            {"name": "Dog", "category": "Animals", "is_target": false}
-          ]
+            {
+              "name": "Apple",
+              "category": "Fruits",
+              "is_target": true
+            },
+            {
+              "name": "Banana",
+              "category": "Fruits",
+              "is_target": true
+            },
+            {
+              "name": "Car",
+              "category": "Vehicles",
+              "is_target": false
+            },
+            {
+              "name": "Grape",
+              "category": "Fruits",
+              "is_target": true
+            },
+            {
+              "name": "Chair",
+              "category": "Household",
+              "is_target": false
+            },
+            {
+              "name": "Dog",
+              "category": "Animals",
+              "is_target": false
+            }
+          ],
+          "image_hint": "apple"
         },
         {
           "instruction": "Which ones are toys?",
           "instruction_zh": "哪些是玩具？",
           "target_category": "Toys",
           "items": [
-            {"name": "Ball", "category": "Toys", "is_target": true},
-            {"name": "Doll", "category": "Toys", "is_target": true},
-            {"name": "Spoon", "category": "Household", "is_target": false},
-            {"name": "Teddy Bear", "category": "Toys", "is_target": true},
-            {"name": "Tree", "category": "Nature", "is_target": false},
-            {"name": "Shirt", "category": "Clothing", "is_target": false}
-          ]
+            {
+              "name": "Ball",
+              "category": "Toys",
+              "is_target": true
+            },
+            {
+              "name": "Doll",
+              "category": "Toys",
+              "is_target": true
+            },
+            {
+              "name": "Spoon",
+              "category": "Household",
+              "is_target": false
+            },
+            {
+              "name": "Teddy Bear",
+              "category": "Toys",
+              "is_target": true
+            },
+            {
+              "name": "Tree",
+              "category": "Nature",
+              "is_target": false
+            },
+            {
+              "name": "Shirt",
+              "category": "Clothing",
+              "is_target": false
+            }
+          ],
+          "image_hint": "ball"
         },
         {
           "instruction": "Which ones are clothing?",
           "instruction_zh": "哪些是衣服？",
           "target_category": "Clothing",
           "items": [
-            {"name": "Shirt", "category": "Clothing", "is_target": true},
-            {"name": "Cat", "category": "Animals", "is_target": false},
-            {"name": "Pants", "category": "Clothing", "is_target": true},
-            {"name": "Hat", "category": "Clothing", "is_target": true},
-            {"name": "Cake", "category": "Food", "is_target": false},
-            {"name": "Bus", "category": "Vehicles", "is_target": false}
-          ]
+            {
+              "name": "Shirt",
+              "category": "Clothing",
+              "is_target": true
+            },
+            {
+              "name": "Cat",
+              "category": "Animals",
+              "is_target": false
+            },
+            {
+              "name": "Pants",
+              "category": "Clothing",
+              "is_target": true
+            },
+            {
+              "name": "Hat",
+              "category": "Clothing",
+              "is_target": true
+            },
+            {
+              "name": "Cake",
+              "category": "Food",
+              "is_target": false
+            },
+            {
+              "name": "Bus",
+              "category": "Vehicles",
+              "is_target": false
+            }
+          ],
+          "image_hint": "shirt"
         },
         {
           "instruction": "Which ones live in water?",
           "instruction_zh": "哪些生活在水里？",
           "target_category": "Water Animals",
           "items": [
-            {"name": "Fish", "category": "Water Animals", "is_target": true},
-            {"name": "Dog", "category": "Animals", "is_target": false},
-            {"name": "Whale", "category": "Water Animals", "is_target": true},
-            {"name": "Cat", "category": "Animals", "is_target": false},
-            {"name": "Dolphin", "category": "Water Animals", "is_target": true},
-            {"name": "Bird", "category": "Animals", "is_target": false}
-          ]
+            {
+              "name": "Fish",
+              "category": "Water Animals",
+              "is_target": true
+            },
+            {
+              "name": "Dog",
+              "category": "Animals",
+              "is_target": false
+            },
+            {
+              "name": "Whale",
+              "category": "Water Animals",
+              "is_target": true
+            },
+            {
+              "name": "Cat",
+              "category": "Animals",
+              "is_target": false
+            },
+            {
+              "name": "Dolphin",
+              "category": "Water Animals",
+              "is_target": true
+            },
+            {
+              "name": "Bird",
+              "category": "Animals",
+              "is_target": false
+            }
+          ],
+          "image_hint": "fish"
         },
         {
           "instruction": "Which ones are in the kitchen?",
           "instruction_zh": "哪些在厨房里？",
           "target_category": "Kitchen",
           "items": [
-            {"name": "Spoon", "category": "Kitchen", "is_target": true},
-            {"name": "Shoe", "category": "Clothing", "is_target": false},
-            {"name": "Plate", "category": "Kitchen", "is_target": true},
-            {"name": "Cup", "category": "Kitchen", "is_target": true},
-            {"name": "Ball", "category": "Toys", "is_target": false},
-            {"name": "Tree", "category": "Nature", "is_target": false}
-          ]
+            {
+              "name": "Spoon",
+              "category": "Kitchen",
+              "is_target": true
+            },
+            {
+              "name": "Shoe",
+              "category": "Clothing",
+              "is_target": false
+            },
+            {
+              "name": "Plate",
+              "category": "Kitchen",
+              "is_target": true
+            },
+            {
+              "name": "Cup",
+              "category": "Kitchen",
+              "is_target": true
+            },
+            {
+              "name": "Ball",
+              "category": "Toys",
+              "is_target": false
+            },
+            {
+              "name": "Tree",
+              "category": "Nature",
+              "is_target": false
+            }
+          ],
+          "image_hint": "spoon"
         },
         {
           "instruction": "Which ones can fly?",
           "instruction_zh": "哪些会飞？",
           "target_category": "Flying",
           "items": [
-            {"name": "Bird", "category": "Flying", "is_target": true},
-            {"name": "Dog", "category": "Animals", "is_target": false},
-            {"name": "Butterfly", "category": "Flying", "is_target": true},
-            {"name": "Cat", "category": "Animals", "is_target": false},
-            {"name": "Airplane", "category": "Flying", "is_target": true},
-            {"name": "Car", "category": "Vehicles", "is_target": false}
-          ]
+            {
+              "name": "Bird",
+              "category": "Flying",
+              "is_target": true
+            },
+            {
+              "name": "Dog",
+              "category": "Animals",
+              "is_target": false
+            },
+            {
+              "name": "Butterfly",
+              "category": "Flying",
+              "is_target": true
+            },
+            {
+              "name": "Cat",
+              "category": "Animals",
+              "is_target": false
+            },
+            {
+              "name": "Airplane",
+              "category": "Flying",
+              "is_target": true
+            },
+            {
+              "name": "Car",
+              "category": "Vehicles",
+              "is_target": false
+            }
+          ],
+          "image_hint": "bird"
         },
         {
           "instruction": "Which ones are musical instruments?",
           "instruction_zh": "哪些是乐器？",
           "target_category": "Musical Instruments",
           "items": [
-            {"name": "Guitar", "category": "Musical Instruments", "is_target": true},
-            {"name": "Chair", "category": "Household", "is_target": false},
-            {"name": "Drum", "category": "Musical Instruments", "is_target": true},
-            {"name": "Apple", "category": "Food", "is_target": false},
-            {"name": "Piano", "category": "Musical Instruments", "is_target": true},
-            {"name": "Hat", "category": "Clothing", "is_target": false}
-          ]
+            {
+              "name": "Guitar",
+              "category": "Musical Instruments",
+              "is_target": true
+            },
+            {
+              "name": "Chair",
+              "category": "Household",
+              "is_target": false
+            },
+            {
+              "name": "Drum",
+              "category": "Musical Instruments",
+              "is_target": true
+            },
+            {
+              "name": "Apple",
+              "category": "Food",
+              "is_target": false
+            },
+            {
+              "name": "Piano",
+              "category": "Musical Instruments",
+              "is_target": true
+            },
+            {
+              "name": "Hat",
+              "category": "Clothing",
+              "is_target": false
+            }
+          ],
+          "image_hint": "guitar"
         }
       ]
     },
@@ -292,10 +731,26 @@
           "instruction_zh": "你用什么剪纸？",
           "function": "cutting",
           "choices": [
-            {"name": "Scissors", "category": "School", "is_correct": true},
-            {"name": "Pencil", "category": "School", "is_correct": false},
-            {"name": "Eraser", "category": "School", "is_correct": false},
-            {"name": "Book", "category": "School", "is_correct": false}
+            {
+              "name": "Scissors",
+              "category": "School",
+              "is_correct": true
+            },
+            {
+              "name": "Pencil",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Eraser",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Book",
+              "category": "School",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -303,10 +758,26 @@
           "instruction_zh": "你睡在什么上面？",
           "function": "sleeping",
           "choices": [
-            {"name": "Table", "category": "Household", "is_correct": false},
-            {"name": "Bed", "category": "Household", "is_correct": true},
-            {"name": "Chair", "category": "Household", "is_correct": false},
-            {"name": "Lamp", "category": "Household", "is_correct": false}
+            {
+              "name": "Table",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Bed",
+              "category": "Household",
+              "is_correct": true
+            },
+            {
+              "name": "Chair",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Lamp",
+              "category": "Household",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -314,10 +785,26 @@
           "instruction_zh": "下雨时你用什么？",
           "function": "rain_protection",
           "choices": [
-            {"name": "Umbrella", "category": "Household", "is_correct": true},
-            {"name": "Sunglasses", "category": "Clothing", "is_correct": false},
-            {"name": "Hat", "category": "Clothing", "is_correct": false},
-            {"name": "Scarf", "category": "Clothing", "is_correct": false}
+            {
+              "name": "Umbrella",
+              "category": "Household",
+              "is_correct": true
+            },
+            {
+              "name": "Sunglasses",
+              "category": "Clothing",
+              "is_correct": false
+            },
+            {
+              "name": "Hat",
+              "category": "Clothing",
+              "is_correct": false
+            },
+            {
+              "name": "Scarf",
+              "category": "Clothing",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -325,10 +812,26 @@
           "instruction_zh": "你用什么洗手？",
           "function": "washing",
           "choices": [
-            {"name": "Soap", "category": "Household", "is_correct": true},
-            {"name": "Pen", "category": "School", "is_correct": false},
-            {"name": "Book", "category": "School", "is_correct": false},
-            {"name": "Spoon", "category": "Kitchen", "is_correct": false}
+            {
+              "name": "Soap",
+              "category": "Household",
+              "is_correct": true
+            },
+            {
+              "name": "Pen",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Book",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Spoon",
+              "category": "Kitchen",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -336,10 +839,26 @@
           "instruction_zh": "你用什么看时间？",
           "function": "telling_time",
           "choices": [
-            {"name": "Mirror", "category": "Household", "is_correct": false},
-            {"name": "Clock", "category": "Household", "is_correct": true},
-            {"name": "Lamp", "category": "Household", "is_correct": false},
-            {"name": "Window", "category": "Household", "is_correct": false}
+            {
+              "name": "Mirror",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Clock",
+              "category": "Household",
+              "is_correct": true
+            },
+            {
+              "name": "Lamp",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Window",
+              "category": "Household",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -347,10 +866,26 @@
           "instruction_zh": "你用什么画画？",
           "function": "drawing",
           "choices": [
-            {"name": "Crayon", "category": "School", "is_correct": true},
-            {"name": "Ruler", "category": "School", "is_correct": false},
-            {"name": "Scissors", "category": "School", "is_correct": false},
-            {"name": "Backpack", "category": "School", "is_correct": false}
+            {
+              "name": "Crayon",
+              "category": "School",
+              "is_correct": true
+            },
+            {
+              "name": "Ruler",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Scissors",
+              "category": "School",
+              "is_correct": false
+            },
+            {
+              "name": "Backpack",
+              "category": "School",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -358,10 +893,26 @@
           "instruction_zh": "你用什么吃饭？",
           "function": "eating_rice",
           "choices": [
-            {"name": "Chopsticks", "category": "Kitchen", "is_correct": true},
-            {"name": "Knife", "category": "Kitchen", "is_correct": false},
-            {"name": "Cup", "category": "Kitchen", "is_correct": false},
-            {"name": "Plate", "category": "Kitchen", "is_correct": false}
+            {
+              "name": "Chopsticks",
+              "category": "Kitchen",
+              "is_correct": true
+            },
+            {
+              "name": "Knife",
+              "category": "Kitchen",
+              "is_correct": false
+            },
+            {
+              "name": "Cup",
+              "category": "Kitchen",
+              "is_correct": false
+            },
+            {
+              "name": "Plate",
+              "category": "Kitchen",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -369,10 +920,26 @@
           "instruction_zh": "什么帮你在晚上看东西？",
           "function": "lighting",
           "choices": [
-            {"name": "Flashlight", "category": "Household", "is_correct": true},
-            {"name": "Pillow", "category": "Household", "is_correct": false},
-            {"name": "Blanket", "category": "Household", "is_correct": false},
-            {"name": "Clock", "category": "Household", "is_correct": false}
+            {
+              "name": "Flashlight",
+              "category": "Household",
+              "is_correct": true
+            },
+            {
+              "name": "Pillow",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Blanket",
+              "category": "Household",
+              "is_correct": false
+            },
+            {
+              "name": "Clock",
+              "category": "Household",
+              "is_correct": false
+            }
           ]
         }
       ]
@@ -387,21 +954,54 @@
           "instruction_zh": "哪一个不属于这一组？",
           "concept": "odd_one_out",
           "items": [
-            {"name": "Apple", "category": "Fruits", "is_odd": false},
-            {"name": "Banana", "category": "Fruits", "is_odd": false},
-            {"name": "Chair", "category": "Household", "is_odd": true},
-            {"name": "Grape", "category": "Fruits", "is_odd": false}
-          ]
+            {
+              "name": "Apple",
+              "category": "Fruits",
+              "is_odd": false
+            },
+            {
+              "name": "Banana",
+              "category": "Fruits",
+              "is_odd": false
+            },
+            {
+              "name": "Chair",
+              "category": "Household",
+              "is_odd": true
+            },
+            {
+              "name": "Grape",
+              "category": "Fruits",
+              "is_odd": false
+            }
+          ],
+          "image_hint": "apple"
         },
         {
           "instruction": "Which one does NOT belong?",
           "instruction_zh": "哪一个不属于这一组？",
           "concept": "odd_one_out",
           "items": [
-            {"name": "Red", "category": "Colors", "is_odd": false},
-            {"name": "Blue", "category": "Colors", "is_odd": false},
-            {"name": "Green", "category": "Colors", "is_odd": false},
-            {"name": "Elephant", "category": "Animals", "is_odd": true}
+            {
+              "name": "Red",
+              "category": "Colors",
+              "is_odd": false
+            },
+            {
+              "name": "Blue",
+              "category": "Colors",
+              "is_odd": false
+            },
+            {
+              "name": "Green",
+              "category": "Colors",
+              "is_odd": false
+            },
+            {
+              "name": "Elephant",
+              "category": "Animals",
+              "is_odd": true
+            }
           ]
         },
         {
@@ -409,37 +1009,89 @@
           "instruction_zh": "哪两个东西是一起的？",
           "concept": "association",
           "items": [
-            {"name": "Pen", "category": "School", "pair": "A"},
-            {"name": "Paper", "category": "School", "pair": "A"},
-            {"name": "Fish", "category": "Animals", "pair": null},
-            {"name": "Tree", "category": "Nature", "pair": null}
+            {
+              "name": "Pen",
+              "category": "School",
+              "pair": "A"
+            },
+            {
+              "name": "Paper",
+              "category": "School",
+              "pair": "A"
+            },
+            {
+              "name": "Fish",
+              "category": "Animals",
+              "pair": null
+            },
+            {
+              "name": "Tree",
+              "category": "Nature",
+              "pair": null
+            }
           ],
-          "correct_pair": "A"
+          "correct_pair": "A",
+          "image_hint": "pencil"
         },
         {
           "instruction": "Which two things go together?",
           "instruction_zh": "哪两个东西是一起的？",
           "concept": "association",
           "items": [
-            {"name": "Lock", "category": "Household", "pair": "A"},
-            {"name": "Key", "category": "Household", "pair": "A"},
-            {"name": "Ball", "category": "Toys", "pair": null},
-            {"name": "Cloud", "category": "Nature", "pair": null}
+            {
+              "name": "Lock",
+              "category": "Household",
+              "pair": "A"
+            },
+            {
+              "name": "Key",
+              "category": "Household",
+              "pair": "A"
+            },
+            {
+              "name": "Ball",
+              "category": "Toys",
+              "pair": null
+            },
+            {
+              "name": "Cloud",
+              "category": "Nature",
+              "pair": null
+            }
           ],
-          "correct_pair": "A"
+          "correct_pair": "A",
+          "image_hint": "key"
         },
         {
           "instruction": "What comes next? 1, 2, ...",
           "instruction_zh": "接下来是什么？1, 2, ...",
           "concept": "pattern",
           "sequence": [
-            {"name": "1", "category": "Numbers"},
-            {"name": "2", "category": "Numbers"}
+            {
+              "name": "1",
+              "category": "Numbers"
+            },
+            {
+              "name": "2",
+              "category": "Numbers"
+            }
           ],
           "choices": [
-            {"name": "3", "category": "Numbers", "is_correct": true},
-            {"name": "5", "category": "Numbers", "is_correct": false},
-            {"name": "1", "category": "Numbers", "is_correct": false}
+            {
+              "name": "3",
+              "category": "Numbers",
+              "is_correct": true
+            },
+            {
+              "name": "5",
+              "category": "Numbers",
+              "is_correct": false
+            },
+            {
+              "name": "1",
+              "category": "Numbers",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -447,14 +1099,35 @@
           "instruction_zh": "接下来是什么？红, 蓝, 红, ...",
           "concept": "pattern",
           "sequence": [
-            {"name": "Red", "category": "Colors"},
-            {"name": "Blue", "category": "Colors"},
-            {"name": "Red", "category": "Colors"}
+            {
+              "name": "Red",
+              "category": "Colors"
+            },
+            {
+              "name": "Blue",
+              "category": "Colors"
+            },
+            {
+              "name": "Red",
+              "category": "Colors"
+            }
           ],
           "choices": [
-            {"name": "Blue", "category": "Colors", "is_correct": true},
-            {"name": "Red", "category": "Colors", "is_correct": false},
-            {"name": "Green", "category": "Colors", "is_correct": false}
+            {
+              "name": "Blue",
+              "category": "Colors",
+              "is_correct": true
+            },
+            {
+              "name": "Red",
+              "category": "Colors",
+              "is_correct": false
+            },
+            {
+              "name": "Green",
+              "category": "Colors",
+              "is_correct": false
+            }
           ]
         },
         {
@@ -462,23 +1135,57 @@
           "instruction_zh": "哪一个不属于这一组？",
           "concept": "odd_one_out",
           "items": [
-            {"name": "Car", "category": "Vehicles", "is_odd": false},
-            {"name": "Bus", "category": "Vehicles", "is_odd": false},
-            {"name": "Bicycle", "category": "Vehicles", "is_odd": false},
-            {"name": "Banana", "category": "Food", "is_odd": true}
-          ]
+            {
+              "name": "Car",
+              "category": "Vehicles",
+              "is_odd": false
+            },
+            {
+              "name": "Bus",
+              "category": "Vehicles",
+              "is_odd": false
+            },
+            {
+              "name": "Bicycle",
+              "category": "Vehicles",
+              "is_odd": false
+            },
+            {
+              "name": "Banana",
+              "category": "Food",
+              "is_odd": true
+            }
+          ],
+          "image_hint": "car"
         },
         {
           "instruction": "Which two things go together?",
           "instruction_zh": "哪两个东西是一起的？",
           "concept": "association",
           "items": [
-            {"name": "Toothbrush", "category": "Household", "pair": "A"},
-            {"name": "Toothpaste", "category": "Household", "pair": "A"},
-            {"name": "Chair", "category": "Household", "pair": null},
-            {"name": "Sun", "category": "Nature", "pair": null}
+            {
+              "name": "Toothbrush",
+              "category": "Household",
+              "pair": "A"
+            },
+            {
+              "name": "Toothpaste",
+              "category": "Household",
+              "pair": "A"
+            },
+            {
+              "name": "Chair",
+              "category": "Household",
+              "pair": null
+            },
+            {
+              "name": "Sun",
+              "category": "Nature",
+              "pair": null
+            }
           ],
-          "correct_pair": "A"
+          "correct_pair": "A",
+          "image_hint": "soap"
         }
       ]
     }

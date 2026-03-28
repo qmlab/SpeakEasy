@@ -12,80 +12,160 @@
           "instruction_zh": "点一下兔子！",
           "target_name": "Rabbit",
           "choices": [
-            {"name": "Rabbit", "is_correct": true},
-            {"name": "Bear", "is_correct": false},
-            {"name": "Fox", "is_correct": false}
-          ]
+            {
+              "name": "Rabbit",
+              "is_correct": true
+            },
+            {
+              "name": "Bear",
+              "is_correct": false
+            },
+            {
+              "name": "Fox",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "rabbit"
         },
         {
           "instruction": "Where is the heart?",
           "instruction_zh": "心在哪里？",
           "target_name": "Heart",
           "choices": [
-            {"name": "Heart", "is_correct": true},
-            {"name": "Star", "is_correct": false},
-            {"name": "Circle", "is_correct": false}
-          ]
+            {
+              "name": "Heart",
+              "is_correct": true
+            },
+            {
+              "name": "Star",
+              "is_correct": false
+            },
+            {
+              "name": "Circle",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "heart"
         },
         {
           "instruction": "Touch the sun!",
           "instruction_zh": "点一下太阳！",
           "target_name": "Sun",
           "choices": [
-            {"name": "Moon", "is_correct": false},
-            {"name": "Sun", "is_correct": true},
-            {"name": "Cloud", "is_correct": false}
-          ]
+            {
+              "name": "Moon",
+              "is_correct": false
+            },
+            {
+              "name": "Sun",
+              "is_correct": true
+            },
+            {
+              "name": "Cloud",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "sun"
         },
         {
           "instruction": "Find the airplane!",
           "instruction_zh": "找到飞机！",
           "target_name": "Airplane",
           "choices": [
-            {"name": "Airplane", "is_correct": true},
-            {"name": "Boat", "is_correct": false},
-            {"name": "Car", "is_correct": false}
-          ]
+            {
+              "name": "Airplane",
+              "is_correct": true
+            },
+            {
+              "name": "Boat",
+              "is_correct": false
+            },
+            {
+              "name": "Car",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "airplane"
         },
         {
           "instruction": "Where is the apple?",
           "instruction_zh": "苹果在哪里？",
           "target_name": "Apple",
           "choices": [
-            {"name": "Banana", "is_correct": false},
-            {"name": "Apple", "is_correct": true},
-            {"name": "Orange", "is_correct": false}
-          ]
+            {
+              "name": "Banana",
+              "is_correct": false
+            },
+            {
+              "name": "Apple",
+              "is_correct": true
+            },
+            {
+              "name": "Orange",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "apple"
         },
         {
           "instruction": "Touch the shoe!",
           "instruction_zh": "点一下鞋子！",
           "target_name": "Shoe",
           "choices": [
-            {"name": "Hat", "is_correct": false},
-            {"name": "Shirt", "is_correct": false},
-            {"name": "Shoe", "is_correct": true}
-          ]
+            {
+              "name": "Hat",
+              "is_correct": false
+            },
+            {
+              "name": "Shirt",
+              "is_correct": false
+            },
+            {
+              "name": "Shoe",
+              "is_correct": true
+            }
+          ],
+          "image_hint": "shoe"
         },
         {
           "instruction": "Find the fish!",
           "instruction_zh": "找到鱼！",
           "target_name": "Fish",
           "choices": [
-            {"name": "Fish", "is_correct": true},
-            {"name": "Bird", "is_correct": false},
-            {"name": "Cat", "is_correct": false}
-          ]
+            {
+              "name": "Fish",
+              "is_correct": true
+            },
+            {
+              "name": "Bird",
+              "is_correct": false
+            },
+            {
+              "name": "Cat",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "fish"
         },
         {
           "instruction": "Where is the ball?",
           "instruction_zh": "球在哪里？",
           "target_name": "Ball",
           "choices": [
-            {"name": "Block", "is_correct": false},
-            {"name": "Ball", "is_correct": true},
-            {"name": "Doll", "is_correct": false}
-          ]
+            {
+              "name": "Block",
+              "is_correct": false
+            },
+            {
+              "name": "Ball",
+              "is_correct": true
+            },
+            {
+              "name": "Doll",
+              "is_correct": false
+            }
+          ],
+          "image_hint": "ball"
         }
       ]
     },
@@ -98,49 +178,89 @@
           "instruction": "Touch the smallest one!",
           "instruction_zh": "点最小的那个！",
           "correct_answer": "Small star",
-          "options": ["Big star", "Medium star", "Small star"]
+          "options": [
+            "Big star",
+            "Medium star",
+            "Small star"
+          ],
+          "image_hint": "star"
         },
         {
           "instruction": "Find the one that is different!",
           "instruction_zh": "找到不一样的那个！",
           "correct_answer": "Square",
-          "options": ["Circle", "Circle", "Square"]
+          "options": [
+            "Circle",
+            "Circle",
+            "Square"
+          ],
+          "image_hint": "square_shape"
         },
         {
           "instruction": "Touch the blue one!",
           "instruction_zh": "点蓝色的那个！",
           "correct_answer": "Blue flower",
-          "options": ["Red flower", "Blue flower", "Yellow flower"]
+          "options": [
+            "Red flower",
+            "Blue flower",
+            "Yellow flower"
+          ],
+          "image_hint": "flower"
         },
         {
           "instruction": "Find the tall one!",
           "instruction_zh": "找到高的那个！",
           "correct_answer": "Tall tree",
-          "options": ["Short tree", "Tall tree", "Medium tree"]
+          "options": [
+            "Short tree",
+            "Tall tree",
+            "Medium tree"
+          ],
+          "image_hint": "tree"
         },
         {
           "instruction": "Touch the one with spots!",
           "instruction_zh": "点有斑点的那个！",
           "correct_answer": "Spotted dog",
-          "options": ["White dog", "Spotted dog", "Brown dog"]
+          "options": [
+            "White dog",
+            "Spotted dog",
+            "Brown dog"
+          ],
+          "image_hint": "dog"
         },
         {
           "instruction": "Find the empty one!",
           "instruction_zh": "找到空的那个！",
           "correct_answer": "Empty cup",
-          "options": ["Full cup", "Half cup", "Empty cup"]
+          "options": [
+            "Full cup",
+            "Half cup",
+            "Empty cup"
+          ],
+          "image_hint": "cup"
         },
         {
           "instruction": "Touch the round one!",
           "instruction_zh": "点圆的那个！",
           "correct_answer": "Ball",
-          "options": ["Box", "Ball", "Book"]
+          "options": [
+            "Box",
+            "Ball",
+            "Book"
+          ],
+          "image_hint": "ball"
         },
         {
           "instruction": "Find the soft one!",
           "instruction_zh": "找到软的那个！",
           "correct_answer": "Pillow",
-          "options": ["Rock", "Pillow", "Block"]
+          "options": [
+            "Rock",
+            "Pillow",
+            "Block"
+          ],
+          "image_hint": "bed"
         }
       ]
     },
@@ -152,50 +272,114 @@
         {
           "instruction": "First touch the star, then touch the moon!",
           "instruction_zh": "先点星星，再点月亮！",
-          "steps": ["Star", "Moon"],
-          "options": ["Star", "Moon", "Sun", "Cloud"]
+          "steps": [
+            "Star",
+            "Moon"
+          ],
+          "options": [
+            "Star",
+            "Moon",
+            "Sun",
+            "Cloud"
+          ]
         },
         {
           "instruction": "Touch the red one first, then the blue one!",
           "instruction_zh": "先点红色的，再点蓝色的！",
-          "steps": ["Red ball", "Blue ball"],
-          "options": ["Red ball", "Blue ball", "Green ball", "Yellow ball"]
+          "steps": [
+            "Red ball",
+            "Blue ball"
+          ],
+          "options": [
+            "Red ball",
+            "Blue ball",
+            "Green ball",
+            "Yellow ball"
+          ]
         },
         {
           "instruction": "Pick up the cup, then put it on the table!",
           "instruction_zh": "拿起杯子，然后放在桌子上！",
-          "steps": ["Cup", "Table"],
-          "options": ["Cup", "Table", "Chair", "Lamp"]
+          "steps": [
+            "Cup",
+            "Table"
+          ],
+          "options": [
+            "Cup",
+            "Table",
+            "Chair",
+            "Lamp"
+          ]
         },
         {
           "instruction": "Find the dog, then find the bone!",
           "instruction_zh": "找到狗，然后找到骨头！",
-          "steps": ["Dog", "Bone"],
-          "options": ["Dog", "Bone", "Cat", "Ball"]
+          "steps": [
+            "Dog",
+            "Bone"
+          ],
+          "options": [
+            "Dog",
+            "Bone",
+            "Cat",
+            "Ball"
+          ]
         },
         {
           "instruction": "Touch the biggest one first, then the smallest!",
           "instruction_zh": "先点最大的，再点最小的！",
-          "steps": ["Big bear", "Small bear"],
-          "options": ["Big bear", "Medium bear", "Small bear"]
+          "steps": [
+            "Big bear",
+            "Small bear"
+          ],
+          "options": [
+            "Big bear",
+            "Medium bear",
+            "Small bear"
+          ]
         },
         {
           "instruction": "Put on the hat, then put on the shoes!",
           "instruction_zh": "先戴帽子，再穿鞋子！",
-          "steps": ["Hat", "Shoes"],
-          "options": ["Hat", "Shoes", "Gloves", "Scarf"]
+          "steps": [
+            "Hat",
+            "Shoes"
+          ],
+          "options": [
+            "Hat",
+            "Shoes",
+            "Gloves",
+            "Scarf"
+          ]
         },
         {
           "instruction": "First clap your hands, then wave!",
           "instruction_zh": "先拍手，再挥手！",
-          "steps": ["Clap", "Wave"],
-          "options": ["Clap", "Wave", "Jump", "Dance"]
+          "steps": [
+            "Clap",
+            "Wave"
+          ],
+          "options": [
+            "Clap",
+            "Wave",
+            "Jump",
+            "Dance"
+          ]
         },
         {
           "instruction": "Touch the triangle, then the square, then the circle!",
           "instruction_zh": "点三角形，再点正方形，再点圆形！",
-          "steps": ["Triangle", "Square", "Circle"],
-          "options": ["Triangle", "Square", "Circle", "Star"]
+          "steps": [
+            "Triangle",
+            "Square",
+            "Circle"
+          ],
+          "options": [
+            "Triangle",
+            "Square",
+            "Circle",
+            "Star"
+          ]
         }
       ]
     },
@@ -209,56 +393,93 @@
           "instruction_zh": "小狗在公园玩。小狗在哪里玩？",
           "correct_answer": "In the park",
           "correct_answer_zh": "在公园",
-          "options": ["In the park", "At home", "At school"]
+          "options": [
+            "In the park",
+            "At home",
+            "At school"
+          ],
+          "image_hint": "tree"
         },
         {
           "instruction": "The girl ate three cookies. How many cookies did she eat?",
           "instruction_zh": "女孩吃了三块饼干。她吃了几块饼干？",
           "correct_answer": "Three",
           "correct_answer_zh": "三块",
-          "options": ["One", "Two", "Three"]
+          "options": [
+            "One",
+            "Two",
+            "Three"
+          ],
+          "image_hint": "block"
         },
         {
           "instruction": "Tom gave his toy to his friend. What did Tom do?",
           "instruction_zh": "小明把玩具给了朋友。小明做了什么？",
           "correct_answer": "Shared his toy",
           "correct_answer_zh": "分享了玩具",
-          "options": ["Shared his toy", "Broke his toy", "Lost his toy"]
+          "options": [
+            "Shared his toy",
+            "Broke his toy",
+            "Lost his toy"
+          ],
+          "image_hint": "teddy_bear"
         },
         {
           "instruction": "It was raining. Mom took an umbrella. Why did she take an umbrella?",
           "instruction_zh": "下雨了。妈妈拿了雨伞。她为什么拿雨伞？",
           "correct_answer": "Because it was raining",
           "correct_answer_zh": "因为下雨了",
-          "options": ["Because it was raining", "Because it was sunny", "Because it was cold"]
+          "options": [
+            "Because it was raining",
+            "Because it was sunny",
+            "Because it was cold"
+          ]
         },
         {
           "instruction": "The cat climbed the tree. The bird flew away. Why did the bird fly away?",
           "instruction_zh": "猫爬上了树。鸟飞走了。鸟为什么飞走了？",
           "correct_answer": "The cat scared it",
           "correct_answer_zh": "猫吓到了它",
-          "options": ["The cat scared it", "It was hungry", "It was sleepy"]
+          "options": [
+            "The cat scared it",
+            "It was hungry",
+            "It was sleepy"
+          ]
         },
         {
           "instruction": "Sara has a red hat and a blue hat. She wore the blue hat today. What color is her hat?",
           "instruction_zh": "小红有一顶红帽子和一顶蓝帽子。她今天戴了蓝帽子。她的帽子是什么颜色？",
           "correct_answer": "Blue",
           "correct_answer_zh": "蓝色",
-          "options": ["Red", "Blue", "Green"]
+          "options": [
+            "Red",
+            "Blue",
+            "Green"
+          ]
         },
         {
           "instruction": "The bunny was tired. He went to bed early. How did the bunny feel?",
           "instruction_zh": "小兔子累了。他很早就去睡觉了。小兔子感觉怎么样？",
           "correct_answer": "Tired",
           "correct_answer_zh": "累了",
-          "options": ["Happy", "Tired", "Hungry"]
+          "options": [
+            "Happy",
+            "Tired",
+            "Hungry"
+          ],
+          "image_hint": "sleeping"
         },
         {
           "instruction": "The sun was shining. The kids went to play outside. What was the weather like?",
           "instruction_zh": "太阳出来了。孩子们出去玩了。天气怎么样？",
           "correct_answer": "Sunny",
           "correct_answer_zh": "晴天",
-          "options": ["Rainy", "Sunny", "Snowy"]
+          "options": [
+            "Rainy",
+            "Sunny",
+            "Snowy"
+          ],
+          "image_hint": "sun"
         }
       ]
     },
@@ -272,56 +493,95 @@
           "instruction_zh": "男孩穿上泳衣拿了毛巾。他要去哪里？",
           "correct_answer": "Swimming",
           "correct_answer_zh": "游泳",
-          "options": ["Swimming", "School", "Shopping"]
+          "options": [
+            "Swimming",
+            "School",
+            "Shopping"
+          ],
+          "image_hint": "fish"
         },
         {
           "instruction": "Mom is mixing flour, eggs, and sugar. What is she making?",
           "instruction_zh": "妈妈在搅拌面粉、鸡蛋和糖。她在做什么？",
           "correct_answer": "A cake",
           "correct_answer_zh": "蛋糕",
-          "options": ["A cake", "Soup", "Salad"]
+          "options": [
+            "A cake",
+            "Soup",
+            "Salad"
+          ],
+          "image_hint": "cake"
         },
         {
           "instruction": "The sky is dark and there are lots of stars. What time is it?",
           "instruction_zh": "天黑了，有很多星星。现在是什么时候？",
           "correct_answer": "Nighttime",
           "correct_answer_zh": "晚上",
-          "options": ["Morning", "Afternoon", "Nighttime"]
+          "options": [
+            "Morning",
+            "Afternoon",
+            "Nighttime"
+          ],
+          "image_hint": "moon"
         },
         {
           "instruction": "The dog is wagging its tail and jumping. How does it feel?",
           "instruction_zh": "小狗摇尾巴又跳。它感觉怎么样？",
           "correct_answer": "Happy",
           "correct_answer_zh": "开心",
-          "options": ["Happy", "Sad", "Scared"]
+          "options": [
+            "Happy",
+            "Sad",
+            "Scared"
+          ],
+          "image_hint": "happy_face"
         },
         {
           "instruction": "Everyone is singing and there is a big cake with candles. What is happening?",
           "instruction_zh": "大家在唱歌，有一个插着蜡烛的大蛋糕。发生了什么？",
           "correct_answer": "A birthday party",
           "correct_answer_zh": "生日派对",
-          "options": ["A birthday party", "Dinner", "School"]
+          "options": [
+            "A birthday party",
+            "Dinner",
+            "School"
+          ],
+          "image_hint": "cake"
         },
         {
           "instruction": "The leaves are falling from the trees and it's getting cold. What season is it?",
           "instruction_zh": "树叶在掉落，天气变冷了。现在是什么季节？",
           "correct_answer": "Autumn",
           "correct_answer_zh": "秋天",
-          "options": ["Spring", "Summer", "Autumn"]
+          "options": [
+            "Spring",
+            "Summer",
+            "Autumn"
+          ],
+          "image_hint": "tree"
         },
         {
           "instruction": "The girl is crying and holding her knee. What happened?",
           "instruction_zh": "女孩在哭，抱着膝盖。发生了什么？",
           "correct_answer": "She fell down",
           "correct_answer_zh": "她摔倒了",
-          "options": ["She fell down", "She is happy", "She is hungry"]
+          "options": [
+            "She fell down",
+            "She is happy",
+            "She is hungry"
+          ],
+          "image_hint": "sad_face"
         },
         {
           "instruction": "Dad is putting bags in the car and checking the map. What is the family doing?",
           "instruction_zh": "爸爸在把包放进车里，看地图。一家人要做什么？",
           "correct_answer": "Going on a trip",
           "correct_answer_zh": "去旅行",
-          "options": ["Going on a trip", "Going to sleep", "Going to cook"]
+          "options": [
+            "Going on a trip",
+            "Going to sleep",
+            "Going to cook"
+          ]
         }
       ]
     }

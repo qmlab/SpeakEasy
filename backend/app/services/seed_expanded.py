@@ -87,7 +87,7 @@ def _build_content(task_type: str, task_data: dict) -> dict:
     return content
 
 
-def _load_dimension_tasks(db: Session, json_path: Path) -> int:
+def _load_dimension_tasks(db: Session, json_path: Path, force: bool = False) -> int:
     """Load expanded tasks from a dimension JSON file."""
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -108,9 +108,18 @@ def _load_dimension_tasks(db: Session, json_path: Path) -> int:
         )
         .all()
     )
-    for task in expanded_exists:
-        if task.metadata_info and task.metadata_info.get("source") == "expanded_v1":
-            return 0
+    existing_expanded = [
+        t for t in expanded_exists
+        if t.metadata_info and t.metadata_info.get("source") == "expanded_v1"
+    ]
+    if existing_expanded and not force:
+        return 0
+
+    # If force re-seed, delete old expanded tasks first
+    if existing_expanded and force:
+        for t in existing_expanded:
+            db.delete(t)
+        db.flush()
 
     tasks = []
     levels = data.get("levels", {})
@@ -147,7 +156,7 @@ def _load_dimension_tasks(db: Session, json_path: Path) -> int:
     return len(tasks)
 
 
-def _load_assessment_tasks(db: Session) -> int:
+def _load_assessment_tasks(db: Session, force: bool = False) -> int:
     """Load expanded assessment tasks from JSON."""
     json_path = RESOURCES_DIR / "assessment_expanded.json"
     if not json_path.exists():
@@ -165,9 +174,17 @@ def _load_assessment_tasks(db: Session) -> int:
         )
         .all()
     )
-    for task in existing_assessments:
-        if task.metadata_info and task.metadata_info.get("source") == "expanded_v1":
-            return 0
+    existing_expanded = [
+        t for t in existing_assessments
+        if t.metadata_info and t.metadata_info.get("source") == "expanded_v1"
+    ]
+    if existing_expanded and not force:
+        return 0
+
+    if existing_expanded and force:
+        for t in existing_expanded:
+            db.delete(t)
+        db.flush()
 
     tasks = []
     dimensions = data.get("dimensions", {})
@@ -213,8 +230,12 @@ def _load_assessment_tasks(db: Session) -> int:
     return len(tasks)
 
 
-def seed_expanded_tasks(db: Session) -> dict:
+def seed_expanded_tasks(db: Session, force: bool = False) -> dict:
     """Seed all expanded tasks from JSON resource files.
+
+    Args:
+        db: Database session.
+        force: If True, delete existing expanded tasks and re-seed.
 
     Returns dict with counts per dimension + assessment.
     """
@@ -233,11 +254,11 @@ def seed_expanded_tasks(db: Session) -> dict:
     for dim_name, filename in dimension_files.items():
         json_path = RESOURCES_DIR / filename
         if json_path.exists():
-            count = _load_dimension_tasks(db, json_path)
+            count = _load_dimension_tasks(db, json_path, force=force)
             results[f"{dim_name}_expanded"] = count
 
     # Load expanded assessment tasks
-    results["assessment_expanded"] = _load_assessment_tasks(db)
+    results["assessment_expanded"] = _load_assessment_tasks(db, force=force)
 
     return results
 
