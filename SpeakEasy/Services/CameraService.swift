@@ -28,8 +28,10 @@ class CameraService: NSObject, ObservableObject {
     @Published var matchConfidence: Float = 0
 
     /// Exposed for SwiftUI live preview via CameraPreviewView
-    private(set) var captureSession: AVCaptureSession?
+    @Published private(set) var captureSession: AVCaptureSession?
 
+    /// Internal session reference accessible from sessionQueue (avoids main-thread-only @Published)
+    private var _session: AVCaptureSession?
     private var videoOutput: AVCaptureVideoDataOutput?
     private let sessionQueue = DispatchQueue(label: "camera.session.queue")
     private var lastProcessingTime = Date()
@@ -77,7 +79,7 @@ class CameraService: NSObject, ObservableObject {
     }
 
     private func configureSession() {
-        guard captureSession == nil else { return }
+        guard _session == nil else { return }
         let session = AVCaptureSession()
         session.sessionPreset = .medium
 
@@ -98,8 +100,12 @@ class CameraService: NSObject, ObservableObject {
             session.addOutput(output)
         }
 
-        captureSession = session
+        _session = session
         videoOutput = output
+        // Publish on main thread so SwiftUI re-renders CameraPreviewView
+        DispatchQueue.main.async {
+            self.captureSession = session
+        }
     }
 
     // MARK: - Session Control
@@ -107,10 +113,10 @@ class CameraService: NSObject, ObservableObject {
     func startSession() {
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
-            if self.captureSession == nil {
+            if self._session == nil {
                 self.configureSession()
             }
-            self.captureSession?.startRunning()
+            self._session?.startRunning()
             DispatchQueue.main.async {
                 self.isSessionRunning = true
             }
@@ -119,7 +125,7 @@ class CameraService: NSObject, ObservableObject {
 
     func stopSession() {
         sessionQueue.async { [weak self] in
-            self?.captureSession?.stopRunning()
+            self?._session?.stopRunning()
             DispatchQueue.main.async {
                 self?.isSessionRunning = false
             }
@@ -245,46 +251,44 @@ extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 // MARK: - Camera Preview UIViewRepresentable
 
+/// Custom UIView that auto-resizes its AVCaptureVideoPreviewLayer via layoutSubviews
+private class CameraPreviewUIView: UIView {
+    var previewLayer: AVCaptureVideoPreviewLayer?
+
+    func setSession(_ session: AVCaptureSession) {
+        guard previewLayer == nil else { return }
+        let layer = AVCaptureVideoPreviewLayer(session: session)
+        layer.videoGravity = .resizeAspectFill
+        layer.frame = bounds
+        self.layer.addSublayer(layer)
+        previewLayer = layer
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        previewLayer?.frame = bounds
+    }
+}
+
 /// SwiftUI wrapper for AVCaptureVideoPreviewLayer to show live camera feed
 struct CameraPreviewView: UIViewRepresentable {
     let cameraService: CameraService
 
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView(frame: .zero)
+    func makeUIView(context: Context) -> CameraPreviewUIView {
+        let view = CameraPreviewUIView()
         view.backgroundColor = .black
 
         if let session = cameraService.captureSession {
-            let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-            previewLayer.videoGravity = .resizeAspectFill
-            previewLayer.frame = view.bounds
-            view.layer.addSublayer(previewLayer)
-            context.coordinator.previewLayer = previewLayer
+            view.setSession(session)
         }
 
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // Update preview layer frame when view resizes
-        DispatchQueue.main.async {
-            context.coordinator.previewLayer?.frame = uiView.bounds
+    func updateUIView(_ uiView: CameraPreviewUIView, context: Context) {
+        // If session was set up after initial makeUIView, add the layer now
+        if uiView.previewLayer == nil, let session = cameraService.captureSession {
+            uiView.setSession(session)
         }
-
-        // If session was set up after initial makeUIView, add the layer
-        if context.coordinator.previewLayer == nil, let session = cameraService.captureSession {
-            let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-            previewLayer.videoGravity = .resizeAspectFill
-            previewLayer.frame = uiView.bounds
-            uiView.layer.addSublayer(previewLayer)
-            context.coordinator.previewLayer = previewLayer
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-
-    class Coordinator {
-        var previewLayer: AVCaptureVideoPreviewLayer?
     }
 }
