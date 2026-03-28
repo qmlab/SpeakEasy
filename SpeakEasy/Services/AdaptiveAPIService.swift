@@ -10,7 +10,7 @@ import Foundation
 class AdaptiveAPIService {
     private let baseURL: String
 
-    init(baseURL: String = "https://speakeasy-backend-jswsybdb.fly.dev") {
+    init(baseURL: String = "https://risingstar-backend-zclkfobb.fly.dev") {
         self.baseURL = baseURL
     }
 
