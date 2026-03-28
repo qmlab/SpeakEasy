@@ -347,6 +347,11 @@ export function CMSPage() {
       .then((data) => {
         setTasksPage(data);
         setSelected(new Set());
+        if (data.total_pages > 0 && page > data.total_pages) {
+          setPage(data.total_pages);
+        } else if (data.total_pages === 0 && page !== 1) {
+          setPage(1);
+        }
       })
       .catch(console.error)
       .finally(() => setLoading(false));

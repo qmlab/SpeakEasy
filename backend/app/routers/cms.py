@@ -117,7 +117,9 @@ def list_tasks_paginated(
     if search:
         from sqlalchemy import cast, String
 
-        search_escaped = search.replace("%", "\\%").replace("_", "\\_")
+        search_escaped = (
+            search.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+        )
         query = query.filter(
             cast(AdaptiveTask.content, String).like(f"%{search_escaped}%", escape="\\")
         )
