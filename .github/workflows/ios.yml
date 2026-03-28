@@ -100,28 +100,38 @@ jobs:
           # Check if we already have an app (stored as a secret or variable)
           PUBLIC_KEY="${{ vars.APPETIZE_PUBLIC_KEY }}"
 
-          if [ -n "$PUBLIC_KEY" ]; then
-            # Update existing app
-            RESPONSE=$(curl -s -w "\n%{http_code}" \
-              -X PUT \
+          upload_to_appetize() {
+            local METHOD=$1
+            local URL=$2
+            curl -s -w "\n%{http_code}" \
+              -X "$METHOD" \
               -H "X-API-KEY: $APPETIZE_API_TOKEN" \
               -F "file=@RisingStarKid.zip" \
               -F "platform=ios" \
               -F "note=Rising Star Kid - Build from commit ${{ github.sha }}" \
-              "https://api.appetize.io/v1/apps/$PUBLIC_KEY")
-          else
-            # Create new app
-            RESPONSE=$(curl -s -w "\n%{http_code}" \
-              -X POST \
-              -H "X-API-KEY: $APPETIZE_API_TOKEN" \
-              -F "file=@RisingStarKid.zip" \
-              -F "platform=ios" \
-              -F "note=Rising Star Kid - Build from commit ${{ github.sha }}" \
-              "https://api.appetize.io/v1/apps")
-          fi
+              "$URL"
+          }
 
-          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
-          BODY=$(echo "$RESPONSE" | sed '$d')
+          if [ -n "$PUBLIC_KEY" ]; then
+            echo "Updating existing app with public key: $PUBLIC_KEY"
+            RESPONSE=$(upload_to_appetize PUT "https://api.appetize.io/v1/apps/$PUBLIC_KEY")
+            HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+
+            # Fall back to creating a new app if update fails (e.g. wrong public key)
+            if [ "$HTTP_CODE" -ge 400 ]; then
+              echo "Update failed with HTTP $HTTP_CODE, falling back to create new app..."
+              echo "$BODY"
+              RESPONSE=$(upload_to_appetize POST "https://api.appetize.io/v1/apps")
+              HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+              BODY=$(echo "$RESPONSE" | sed '$d')
+            fi
+          else
+            echo "No public key configured, creating new app..."
+            RESPONSE=$(upload_to_appetize POST "https://api.appetize.io/v1/apps")
+            HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+          fi
 
           if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
             APP_PUBLIC_KEY=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin)['publicKey'])")
