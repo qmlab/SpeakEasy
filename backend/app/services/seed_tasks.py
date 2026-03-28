@@ -49,6 +49,7 @@ Cognitive Logic levels:
 """
 
 from sqlalchemy.orm import Session
+from sqlalchemy.orm.attributes import flag_modified
 from app.models.adaptive import AdaptiveTask, DevelopmentalDimension, TaskType, Modality
 
 
@@ -2117,8 +2118,8 @@ def backfill_image_hints(db: Session) -> int:
         hint = _derive_image_hint(content)
         if hint:
             content["image_hint"] = hint
-            # SQLAlchemy needs the attribute reassigned to detect JSON mutation
-            task.content = dict(content)
+            task.content = content
+            flag_modified(task, "content")
             updated += 1
     if updated:
         db.commit()
