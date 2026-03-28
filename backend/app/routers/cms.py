@@ -47,7 +47,9 @@ def cms_stats(db: Session = Depends(get_db)):
             AdaptiveTask.is_assessment,
             func.count(AdaptiveTask.id),
         )
-        .group_by(AdaptiveTask.dimension, AdaptiveTask.level, AdaptiveTask.is_assessment)
+        .group_by(
+            AdaptiveTask.dimension, AdaptiveTask.level, AdaptiveTask.is_assessment
+        )
         .all()
     )
 
@@ -97,7 +99,9 @@ def list_tasks_paginated(
 
     if dimension:
         if dimension not in VALID_DIMENSIONS:
-            raise HTTPException(status_code=400, detail=f"Invalid dimension: {dimension}")
+            raise HTTPException(
+                status_code=400, detail=f"Invalid dimension: {dimension}"
+            )
         query = query.filter(AdaptiveTask.dimension == dimension)
 
     if level is not None:
@@ -112,13 +116,14 @@ def list_tasks_paginated(
     # Text search across content JSON (cast to string for LIKE)
     if search:
         from sqlalchemy import cast, String
-        query = query.filter(
-            cast(AdaptiveTask.content, String).like(f"%{search}%")
-        )
+
+        query = query.filter(cast(AdaptiveTask.content, String).like(f"%{search}%"))
 
     total = query.count()
     tasks = (
-        query.order_by(AdaptiveTask.dimension, AdaptiveTask.level, AdaptiveTask.created_at)
+        query.order_by(
+            AdaptiveTask.dimension, AdaptiveTask.level, AdaptiveTask.created_at
+        )
         .offset((page - 1) * page_size)
         .limit(page_size)
         .all()
@@ -148,7 +153,9 @@ def update_task(
         raise HTTPException(status_code=404, detail=f"Task {task_id} not found")
 
     if task_data.dimension not in VALID_DIMENSIONS:
-        raise HTTPException(status_code=400, detail=f"Invalid dimension: {task_data.dimension}")
+        raise HTTPException(
+            status_code=400, detail=f"Invalid dimension: {task_data.dimension}"
+        )
 
     task.dimension = task_data.dimension
     task.level = task_data.level
@@ -202,16 +209,18 @@ def export_tasks_json(
 
     export_data = []
     for t in tasks:
-        export_data.append({
-            "id": t.id,
-            "dimension": t.dimension,
-            "level": t.level,
-            "task_type": t.task_type,
-            "modalities": t.modalities,
-            "content": t.content,
-            "metadata_info": t.metadata_info,
-            "is_assessment": t.is_assessment,
-        })
+        export_data.append(
+            {
+                "id": t.id,
+                "dimension": t.dimension,
+                "level": t.level,
+                "task_type": t.task_type,
+                "modalities": t.modalities,
+                "content": t.content,
+                "metadata_info": t.metadata_info,
+                "is_assessment": t.is_assessment,
+            }
+        )
 
     output = json.dumps(export_data, ensure_ascii=False, indent=2)
     filename = f"tasks_export{'_' + dimension if dimension else ''}.json"
@@ -240,22 +249,34 @@ def export_tasks_csv(
 
     output = io.StringIO()
     writer = csv.writer(output)
-    writer.writerow([
-        "id", "dimension", "level", "task_type",
-        "modalities", "content", "metadata_info", "is_assessment",
-    ])
+    writer.writerow(
+        [
+            "id",
+            "dimension",
+            "level",
+            "task_type",
+            "modalities",
+            "content",
+            "metadata_info",
+            "is_assessment",
+        ]
+    )
 
     for t in tasks:
-        writer.writerow([
-            t.id,
-            t.dimension,
-            t.level,
-            t.task_type,
-            json.dumps(t.modalities, ensure_ascii=False),
-            json.dumps(t.content, ensure_ascii=False),
-            json.dumps(t.metadata_info, ensure_ascii=False) if t.metadata_info else "",
-            t.is_assessment,
-        ])
+        writer.writerow(
+            [
+                t.id,
+                t.dimension,
+                t.level,
+                t.task_type,
+                json.dumps(t.modalities, ensure_ascii=False),
+                json.dumps(t.content, ensure_ascii=False),
+                json.dumps(t.metadata_info, ensure_ascii=False)
+                if t.metadata_info
+                else "",
+                t.is_assessment,
+            ]
+        )
 
     filename = f"tasks_export{'_' + dimension if dimension else ''}.csv"
 
@@ -290,7 +311,9 @@ async def import_tasks_json(
         raise HTTPException(status_code=400, detail=f"Invalid JSON file: {e}")
 
     if not isinstance(data, list):
-        raise HTTPException(status_code=400, detail="Expected a JSON array of task objects")
+        raise HTTPException(
+            status_code=400, detail="Expected a JSON array of task objects"
+        )
 
     created = 0
     updated = 0
@@ -310,7 +333,11 @@ async def import_tasks_json(
 
             existing_id = item.get("id")
             if existing_id and overwrite:
-                existing = db.query(AdaptiveTask).filter(AdaptiveTask.id == existing_id).first()
+                existing = (
+                    db.query(AdaptiveTask)
+                    .filter(AdaptiveTask.id == existing_id)
+                    .first()
+                )
                 if existing:
                     existing.dimension = dimension
                     existing.level = item.get("level", 0)
@@ -392,7 +419,11 @@ async def import_tasks_csv(
 
             existing_id = row.get("id", "").strip()
             if existing_id and overwrite:
-                existing = db.query(AdaptiveTask).filter(AdaptiveTask.id == existing_id).first()
+                existing = (
+                    db.query(AdaptiveTask)
+                    .filter(AdaptiveTask.id == existing_id)
+                    .first()
+                )
                 if existing:
                     existing.dimension = dimension
                     existing.level = level
@@ -424,5 +455,5 @@ async def import_tasks_csv(
         "created": created,
         "updated": updated,
         "errors": errors,
-        "total_processed": idx + 1 if 'idx' in dir() else 0,
+        "total_processed": idx + 1 if "idx" in dir() else 0,
     }
