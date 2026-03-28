@@ -64,6 +64,13 @@ jobs:
           echo "Provisioning profile details:"
           security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/$PROVISIONING_PROFILE_UUID.mobileprovision 2>/dev/null | head -80
 
+      - name: Set build number
+        run: |
+          BUILD_NUMBER=${{ github.run_number }}
+          echo "Setting CFBundleVersion to $BUILD_NUMBER"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" SpeakEasy/Info.plist
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
+
       - name: Archive app
         run: |
           xcodebuild archive \
