@@ -17,6 +17,8 @@ struct LearningSessionView: View {
     @State private var selectedOption: String?
     @State private var spokenText: String = ""
     @State private var isListening: Bool = false
+    @State private var hasRecording: Bool = false
+    @State private var isEvaluating: Bool = false
     @State private var showSessionSummary: Bool = false
     @State private var animateReward: Bool = false
     @State private var showCameraView: Bool = false
@@ -51,13 +53,20 @@ struct LearningSessionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("End") {
+                    Button {
                         Task {
                             await learningManager.endSession()
                             showSessionSummary = true
                         }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title3)
+                            Text("Exit")
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundColor(.red)
                     }
-                    .foregroundColor(.red)
                 }
                 ToolbarItem(placement: .principal) {
                     HStack(spacing: 6) {
@@ -78,6 +87,17 @@ struct LearningSessionView: View {
             }
             .task {
                 await learningManager.startSession(dimension: dimension)
+            }
+            .onChange(of: learningManager.currentTask?.id) { _ in
+                // Reset voice recording state for each new task
+                hasRecording = false
+                isEvaluating = false
+                spokenText = ""
+                selectedOption = nil
+                if isListening {
+                    speechService.stopListening()
+                    isListening = false
+                }
             }
             .onChange(of: learningManager.showReward) { newValue in
                 if newValue {
@@ -380,42 +400,72 @@ struct LearningSessionView: View {
     // MARK: - Speech Input
 
     private func speechInputArea(task: AdaptiveTask) -> some View {
-        VStack(spacing: 12) {
+        let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
+
+        return VStack(spacing: 12) {
+            // Show recognized text
             if !spokenText.isEmpty {
-                Text("You said: \"\(spokenText)\"")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                HStack {
+                    Image(systemName: "quote.bubble.fill")
+                        .foregroundColor(dimension.color)
+                    Text("You said: \"\(spokenText)\"")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal)
             }
 
+            // Live transcription while listening
+            if isListening && !speechService.recognizedText.isEmpty {
+                Text(speechService.recognizedText)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(.secondarySystemBackground))
+                    )
+            }
+
+            // Main mic button: 3 states
             Button {
+                if isEvaluating { return }
+
                 if isListening {
-                    return
-                }
-                isListening = true
-                spokenText = ""
-                let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
-                speechService.startListening(targetWord: targetWord) { rating in
-                    isListening = false
-                    spokenText = speechService.recognizedText
-                    if rating > 0 {
-                        let isCorrect = rating >= 3.0
-                        Task {
-                            await learningManager.submitAttempt(
-                                isCorrect: isCorrect,
-                                score: Int(rating),
-                                dimension: dimension
-                            )
-                            spokenText = ""
+                    // State 2 -> Stop recording and evaluate
+                    speechService.stopAndEvaluate()
+                } else {
+                    // State 1 or 3 -> Start recording
+                    isListening = true
+                    spokenText = ""
+                    speechService.startListeningManual(targetWord: targetWord) { rating in
+                        isListening = false
+                        spokenText = speechService.recognizedText
+                        if rating > 0 {
+                            hasRecording = true
+                            isEvaluating = true
+                            let isCorrect = rating >= 3.0
+                            Task {
+                                await learningManager.submitAttempt(
+                                    isCorrect: isCorrect,
+                                    score: Int(rating),
+                                    dimension: dimension
+                                )
+                                isEvaluating = false
+                            }
+                        } else {
+                            hasRecording = false
+                            spokenText = "Could not hear clearly. Try again!"
                         }
-                    } else {
-                        spokenText = "Could not hear clearly"
                     }
                 }
             } label: {
                 HStack(spacing: 12) {
-                    Image(systemName: isListening ? "mic.fill" : "mic")
-                        .font(.title2)
-                    Text(isListening ? "Listening..." : "Say It!")
+                    Image(systemName: isListening ? "stop.circle.fill" : "mic.circle.fill")
+                        .font(.title)
+                        .symbolEffect(.pulse, isActive: isListening)
+                    Text(micButtonLabel)
                         .font(.headline)
                 }
                 .foregroundColor(.white)
@@ -423,21 +473,33 @@ struct LearningSessionView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(isListening ? Color.red : dimension.color)
+                        .fill(isListening ? Color.red : (hasRecording ? Color.orange : dimension.color))
                 )
             }
-            .disabled(learningManager.isSubmitting)
+            .disabled(learningManager.isSubmitting || isEvaluating)
 
             // Help: speak the target word
-            if let target = task.content.targetWord, !target.isEmpty {
+            if !targetWord.isEmpty {
                 Button {
-                    speechService.speak(target)
+                    speechService.speak(targetWord)
                 } label: {
                     Label("Hear the word", systemImage: "speaker.wave.2")
                         .font(.subheadline)
                         .foregroundColor(dimension.color)
                 }
+                .disabled(isListening)
             }
+        }
+    }
+
+    /// Label for the mic button based on current state
+    private var micButtonLabel: String {
+        if isListening {
+            return "Tap to Stop"
+        } else if hasRecording {
+            return "Say It Again"
+        } else {
+            return "Say It"
         }
     }
 

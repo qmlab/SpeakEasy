@@ -26,6 +26,11 @@ class SpeechService: NSObject, ObservableObject {
     /// Configurable listening duration (seconds). Default 5s, can extend for longer utterances.
     var listeningDuration: TimeInterval = 5.0
 
+    /// Stored completion handler for manual-stop mode
+    private var pendingCompletion: ((Double) -> Void)?
+    /// Stored target word for manual-stop evaluation
+    private var pendingTargetWord: String = ""
+
     enum SpeechLanguage: String, CaseIterable {
         case english = "en-US"
         case chinese = "zh-CN"
@@ -113,7 +118,30 @@ class SpeechService: NSObject, ObservableObject {
         speechRate = max(0.1, min(0.6, rate))
     }
     
+    /// Start listening with manual stop control. The user must call `stopAndEvaluate()` to finish.
+    func startListeningManual(targetWord: String, completion: @escaping (Double) -> Void) {
+        pendingCompletion = completion
+        pendingTargetWord = targetWord
+        startListeningInternal(targetWord: targetWord, autoStop: false, completion: completion)
+    }
+
+    /// Stop listening and evaluate the recognized speech against the target word.
+    func stopAndEvaluate() {
+        guard isListening else { return }
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+        }
+        // The recognition task callback will fire and call the pending completion
+    }
+
     func startListening(targetWord: String, completion: @escaping (Double) -> Void) {
+        pendingCompletion = completion
+        pendingTargetWord = targetWord
+        startListeningInternal(targetWord: targetWord, autoStop: true, completion: completion)
+    }
+
+    private func startListeningInternal(targetWord: String, autoStop: Bool, completion: @escaping (Double) -> Void) {
         if let mockProvider = mockProvider {
             isListening = true
             mockProvider.startListening { [weak self] text, error in
@@ -202,6 +230,7 @@ class SpeechService: NSObject, ObservableObject {
                     self.isListening = false
                     let rating = self.calculateRating(recognized: self.recognizedText, target: targetWord)
                     self.lastRating = rating
+                    self.pendingCompletion = nil
                     completion(rating)
                 }
             }
@@ -228,9 +257,11 @@ class SpeechService: NSObject, ObservableObject {
                 self.recognizedText = ""
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration) { [weak self] in
-                if self?.isListening == true {
-                    self?.stopListening()
+            if autoStop {
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration) { [weak self] in
+                    if self?.isListening == true {
+                        self?.stopListening()
+                    }
                 }
             }
         } catch {
