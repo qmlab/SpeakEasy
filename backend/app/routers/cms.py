@@ -119,7 +119,7 @@ def list_tasks_paginated(
 
         search_escaped = search.replace("%", "\\%").replace("_", "\\_")
         query = query.filter(
-            cast(AdaptiveTask.content, String).like(f"%{search_escaped}%")
+            cast(AdaptiveTask.content, String).like(f"%{search_escaped}%", escape="\\")
         )
 
     total = query.count()
