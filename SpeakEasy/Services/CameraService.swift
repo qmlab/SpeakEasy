@@ -252,7 +252,7 @@ extension CameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
 // MARK: - Camera Preview UIViewRepresentable
 
 /// Custom UIView that auto-resizes its AVCaptureVideoPreviewLayer via layoutSubviews
-private class CameraPreviewUIView: UIView {
+class CameraPreviewUIView: UIView {
     var previewLayer: AVCaptureVideoPreviewLayer?
 
     func setSession(_ session: AVCaptureSession) {
