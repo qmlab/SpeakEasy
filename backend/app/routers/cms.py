@@ -117,7 +117,10 @@ def list_tasks_paginated(
     if search:
         from sqlalchemy import cast, String
 
-        query = query.filter(cast(AdaptiveTask.content, String).like(f"%{search}%"))
+        search_escaped = search.replace("%", "\\%").replace("_", "\\_")
+        query = query.filter(
+            cast(AdaptiveTask.content, String).like(f"%{search_escaped}%")
+        )
 
     total = query.count()
     tasks = (
@@ -396,8 +399,10 @@ async def import_tasks_csv(
     created = 0
     updated = 0
     errors = []
+    row_count = 0
 
     for idx, row in enumerate(reader):
+        row_count += 1
         try:
             dimension = row.get("dimension", "").strip()
             if dimension not in VALID_DIMENSIONS:
@@ -455,5 +460,5 @@ async def import_tasks_csv(
         "created": created,
         "updated": updated,
         "errors": errors,
-        "total_processed": idx + 1 if "idx" in dir() else 0,
+        "total_processed": row_count,
     }
