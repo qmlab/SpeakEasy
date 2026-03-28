@@ -183,6 +183,25 @@ struct AdaptiveTask: Codable {
     }
 }
 
+/// Helper for decoding the nested `target` object from backend task content.
+private struct TaskTarget: Codable {
+    let name: String
+    let category: String?
+}
+
+/// Helper for decoding `choices` array items from backend task content.
+private struct TaskChoice: Codable {
+    let name: String
+    let category: String?
+    let isCorrect: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case category
+        case isCorrect = "is_correct"
+    }
+}
+
 struct TaskContent: Codable {
     let instruction: String?
     let instructionText: String?
@@ -216,6 +235,73 @@ struct TaskContent: Codable {
         case question
         case passage
         case items
+        case target
+        case choices
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        instruction = try container.decodeIfPresent(String.self, forKey: .instruction)
+        instructionText = try container.decodeIfPresent(String.self, forKey: .instructionText)
+        instructionAudio = try container.decodeIfPresent(String.self, forKey: .instructionAudio)
+        instructionZh = try container.decodeIfPresent(String.self, forKey: .instructionZh)
+        imageHint = try container.decodeIfPresent(String.self, forKey: .imageHint)
+        prompt = try container.decodeIfPresent(String.self, forKey: .prompt)
+        scenario = try container.decodeIfPresent(String.self, forKey: .scenario)
+        sentence = try container.decodeIfPresent(String.self, forKey: .sentence)
+        story = try container.decodeIfPresent(String.self, forKey: .story)
+        question = try container.decodeIfPresent(String.self, forKey: .question)
+        passage = try container.decodeIfPresent(String.self, forKey: .passage)
+        items = try container.decodeIfPresent([String].self, forKey: .items)
+
+        // Decode targetWord: try explicit "target_word" string first, then extract from nested "target" object
+        if let tw = try? container.decodeIfPresent(String.self, forKey: .targetWord) {
+            targetWord = tw
+        } else if let targetObj = try? container.decodeIfPresent(TaskTarget.self, forKey: .target) {
+            targetWord = targetObj.name
+        } else {
+            targetWord = nil
+        }
+
+        // Decode options: try explicit "options" [String] first, then extract from nested "choices" array
+        let decodedChoices = try? container.decodeIfPresent([TaskChoice].self, forKey: .choices)
+        if let opts = try? container.decodeIfPresent([String].self, forKey: .options) {
+            options = opts
+        } else if let choicesList = decodedChoices {
+            options = choicesList.map { $0.name }
+        } else {
+            options = nil
+        }
+
+        // Decode correctAnswer: try explicit "correct_answer" first, then extract from choices
+        if let ca = try? container.decodeIfPresent(String.self, forKey: .correctAnswer) {
+            correctAnswer = ca
+        } else if let choicesList = decodedChoices,
+                  let correct = choicesList.first(where: { $0.isCorrect == true }) {
+            correctAnswer = correct.name
+        } else {
+            correctAnswer = nil
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(instruction, forKey: .instruction)
+        try container.encodeIfPresent(instructionText, forKey: .instructionText)
+        try container.encodeIfPresent(instructionAudio, forKey: .instructionAudio)
+        try container.encodeIfPresent(instructionZh, forKey: .instructionZh)
+        try container.encodeIfPresent(targetWord, forKey: .targetWord)
+        try container.encodeIfPresent(imageHint, forKey: .imageHint)
+        try container.encodeIfPresent(correctAnswer, forKey: .correctAnswer)
+        try container.encodeIfPresent(options, forKey: .options)
+        try container.encodeIfPresent(prompt, forKey: .prompt)
+        try container.encodeIfPresent(scenario, forKey: .scenario)
+        try container.encodeIfPresent(sentence, forKey: .sentence)
+        try container.encodeIfPresent(story, forKey: .story)
+        try container.encodeIfPresent(question, forKey: .question)
+        try container.encodeIfPresent(passage, forKey: .passage)
+        try container.encodeIfPresent(items, forKey: .items)
     }
 
     var displayInstruction: String {
