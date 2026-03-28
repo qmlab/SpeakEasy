@@ -36,6 +36,7 @@
 		C1000001234567890000007 /* AssessmentGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002234567890000007 /* AssessmentGameView.swift */; };
 		D1000001234567890000001 /* CameraLearningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1000002234567890000001 /* CameraLearningView.swift */; };
 		B1000001234567890000001 /* SpeechServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000002234567890000001 /* SpeechServiceTests.swift */; };
+		E1000001234567890000001 /* YOLOv3Int8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E1000002234567890000001 /* YOLOv3Int8LUT.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,8 @@
 		A1000003234567890000001 /* SpeakEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1000002234567890000001 /* SpeechServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechServiceTests.swift; sourceTree = "<group>"; };
 		B1000003234567890000001 /* SpeakEasyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeakEasyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1000002234567890000001 /* YOLOv3Int8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Int8LUT.mlmodel; sourceTree = "<group>"; };
+		E1000005234567890000001 /* ML */ = {isa = PBXGroup; children = (E1000002234567890000001 /* YOLOv3Int8LUT.mlmodel */,); path = ML; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +174,7 @@
 			children = (
 				A1000002234567890000011 /* ObjectItem.swift */,
 				C1000002234567890000001 /* AdaptiveModels.swift */,
+				E1000005234567890000001 /* ML */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +323,7 @@
 				C1000001234567890000006 /* AdaptiveDashboardView.swift in Sources */,
 				C1000001234567890000007 /* AssessmentGameView.swift in Sources */,
 				D1000001234567890000001 /* CameraLearningView.swift in Sources */,
+				E1000001234567890000001 /* YOLOv3Int8LUT.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

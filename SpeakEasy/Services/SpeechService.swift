@@ -128,11 +128,13 @@ class SpeechService: NSObject, ObservableObject {
     /// Stop listening and evaluate the recognized speech against the target word.
     func stopAndEvaluate() {
         guard isListening else { return }
+        // Stop the audio engine and end the audio stream so the recognition task
+        // finalises and fires its callback with the accumulated transcription.
         if audioEngine.isRunning {
             audioEngine.stop()
-            recognitionRequest?.endAudio()
+            audioEngine.inputNode.removeTap(onBus: 0)
         }
-        // The recognition task callback will fire and call the pending completion
+        recognitionRequest?.endAudio()
     }
 
     func startListening(targetWord: String, completion: @escaping (Double) -> Void) {
@@ -202,6 +204,7 @@ class SpeechService: NSObject, ObservableObject {
             return
         }
         
+        var hasCompleted = false
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
             guard let self = self else { return }
             
@@ -216,7 +219,9 @@ class SpeechService: NSObject, ObservableObject {
             }
             
             if error != nil || isFinal {
-                self.audioEngine.stop()
+                if self.audioEngine.isRunning {
+                    self.audioEngine.stop()
+                }
                 do {
                     inputNode.removeTap(onBus: 0)
                 } catch {
@@ -227,6 +232,8 @@ class SpeechService: NSObject, ObservableObject {
                 self.recognitionTask = nil
                 
                 DispatchQueue.main.async {
+                    guard !hasCompleted else { return }
+                    hasCompleted = true
                     self.isListening = false
                     let rating = self.calculateRating(recognized: self.recognizedText, target: targetWord)
                     self.lastRating = rating
@@ -275,12 +282,13 @@ class SpeechService: NSObject, ObservableObject {
     func stopListening() {
         if audioEngine.isRunning {
             audioEngine.stop()
-            recognitionRequest?.endAudio()
         }
+        recognitionRequest?.endAudio()
         
         recognitionTask?.cancel()
         recognitionTask = nil
         recognitionRequest = nil
+        pendingCompletion = nil
         
         do {
             let inputNode = audioEngine.inputNode

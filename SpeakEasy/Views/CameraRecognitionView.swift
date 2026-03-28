@@ -250,8 +250,19 @@ struct LiveCameraExplorerView: View {
     var body: some View {
         ZStack {
             // Live camera feed
-            CameraPreviewView(cameraService: cameraService)
-                .ignoresSafeArea()
+            GeometryReader { geometry in
+                ZStack {
+                    CameraPreviewView(cameraService: cameraService)
+                        .ignoresSafeArea()
+
+                    // Bounding box overlays for each detected object
+                    BoundingBoxOverlay(
+                        detectedObjects: cameraService.detectedObjects,
+                        geometry: geometry
+                    )
+                }
+            }
+            .ignoresSafeArea()
 
             VStack {
                 // Top bar with close button
@@ -265,55 +276,53 @@ struct LiveCameraExplorerView: View {
                     .padding()
 
                     Spacer()
+
+                    // Object count badge
+                    if !cameraService.detectedObjects.isEmpty {
+                        Text("\(cameraService.detectedObjects.count) objects")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Capsule().fill(Color.black.opacity(0.6)))
+                            .padding()
+                    }
                 }
 
                 Spacer()
 
-                // Bottom: recognized objects
-                VStack(spacing: 12) {
-                    if let topObject = cameraService.recognizedObject {
-                        Button {
-                            speechService.speak(topObject)
-                        } label: {
-                            HStack(spacing: 12) {
-                                Text(topObject)
-                                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                                    .foregroundColor(.white)
-
-                                Text("\(Int(cameraService.confidence * 100))%")
-                                    .font(.system(size: 16, weight: .medium, design: .monospaced))
-                                    .foregroundColor(.white.opacity(0.7))
-
-                                Image(systemName: "speaker.wave.2.fill")
-                                    .foregroundColor(.yellow)
-                            }
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 16)
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.black.opacity(0.6))
-                            )
-                        }
-                    }
-
-                    // Secondary classifications
-                    if cameraService.topClassifications.count > 1 {
-                        HStack(spacing: 8) {
-                            ForEach(Array(cameraService.topClassifications.dropFirst().prefix(3).enumerated()), id: \.offset) { _, item in
-                                Text(item.label)
-                                    .font(.system(size: 14, weight: .medium, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 6)
+                // Bottom: tap any detected object name to hear it spoken
+                if !cameraService.detectedObjects.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(cameraService.detectedObjects) { obj in
+                                Button {
+                                    speechService.speak(obj.label)
+                                } label: {
+                                    HStack(spacing: 6) {
+                                        Image(systemName: "speaker.wave.2.fill")
+                                            .font(.caption)
+                                            .foregroundColor(.yellow)
+                                        Text(obj.label)
+                                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                                            .foregroundColor(.white)
+                                        Text("\(Int(obj.confidence * 100))%")
+                                            .font(.system(size: 12, weight: .medium, design: .monospaced))
+                                            .foregroundColor(.white.opacity(0.7))
+                                    }
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 10)
                                     .background(
-                                        Capsule()
-                                            .fill(Color.black.opacity(0.4))
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(Color.black.opacity(0.6))
                                     )
+                                }
                             }
                         }
+                        .padding(.horizontal)
                     }
+                    .padding(.bottom, 40)
                 }
-                .padding(.bottom, 40)
             }
         }
         .onAppear {
@@ -325,6 +334,7 @@ struct LiveCameraExplorerView: View {
             cameraService.recognizedObject = nil
             cameraService.confidence = 0
             cameraService.topClassifications = []
+            cameraService.detectedObjects = []
         }
     }
 }

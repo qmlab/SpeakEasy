@@ -27,10 +27,21 @@ struct CameraLearningView: View {
 
     var body: some View {
         ZStack {
-            // Live camera preview
+            // Live camera preview with bounding box overlays
             if cameraService.permissionGranted {
-                CameraPreviewView(cameraService: cameraService)
-                    .ignoresSafeArea()
+                GeometryReader { geometry in
+                    ZStack {
+                        CameraPreviewView(cameraService: cameraService)
+                            .ignoresSafeArea()
+
+                        // Per-object bounding box labels
+                        BoundingBoxOverlay(
+                            detectedObjects: cameraService.detectedObjects,
+                            geometry: geometry
+                        )
+                    }
+                }
+                .ignoresSafeArea()
             } else {
                 permissionDeniedView
             }
@@ -59,11 +70,6 @@ struct CameraLearningView: View {
 
                 // Bottom: detection results + action area
                 VStack(spacing: 16) {
-                    // Live detection labels
-                    if !cameraService.topClassifications.isEmpty && !showSuccess {
-                        detectionLabels
-                    }
-
                     // Success celebration
                     if showSuccess {
                         successBanner

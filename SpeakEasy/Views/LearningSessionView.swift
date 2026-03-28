@@ -98,6 +98,12 @@ struct LearningSessionView: View {
                     speechService.stopListening()
                     isListening = false
                 }
+                // Auto-speak the instruction so illiterate kids can understand
+                if let task = learningManager.currentTask {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        speechService.speak(task.content.displayInstruction)
+                    }
+                }
             }
             .onChange(of: learningManager.showReward) { newValue in
                 if newValue {
@@ -183,15 +189,25 @@ struct LearningSessionView: View {
 
     private func instructionCard(task: AdaptiveTask) -> some View {
         VStack(spacing: 12) {
-            // Speak instruction aloud
+            // Tap-to-speak instruction button (prominent for illiterate kids)
             Button {
                 speechService.speak(task.content.displayInstruction)
             } label: {
-                HStack {
+                HStack(spacing: 8) {
                     Image(systemName: "speaker.wave.2.fill")
-                        .foregroundColor(dimension.color)
-                    Spacer()
+                        .font(.title2)
+                        .foregroundColor(.white)
+                    Text("Hear Again")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(
+                    Capsule()
+                        .fill(dimension.color)
+                )
             }
 
             Text(task.content.displayInstruction)
@@ -200,28 +216,36 @@ struct LearningSessionView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
-            // Image hint
+            // Image hint — show bigger for visual clarity
             if let imageHint = task.content.imageHint, !imageHint.isEmpty {
                 RemoteImageView(
                     objectName: imageHint,
                     imageType: .flashcard,
                     fallbackIcon: "photo",
                     iconColor: dimension.color,
-                    size: 180
+                    size: 200
                 )
                 .cornerRadius(16)
             }
 
-            // Target word display
+            // Target word display with speaker icon so kid can tap to hear it
             if let target = task.content.targetWord, !target.isEmpty {
-                Text(target)
-                    .font(.system(size: 36, weight: .bold, design: .rounded))
+                Button {
+                    speechService.speak(target)
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "speaker.wave.2")
+                            .font(.title3)
+                        Text(target)
+                            .font(.system(size: 36, weight: .bold, design: .rounded))
+                    }
                     .foregroundColor(dimension.color)
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 16)
                             .fill(dimension.color.opacity(0.1))
                     )
+                }
             }
         }
         .padding()
@@ -382,15 +406,26 @@ struct LearningSessionView: View {
                         selectedOption = nil
                     }
                 } label: {
-                    Text(option)
-                        .font(.headline)
-                        .foregroundColor(selectedOption == option ? .white : .primary)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(selectedOption == option ? dimension.color : Color(.secondarySystemBackground))
+                    HStack(spacing: 12) {
+                        // Show image for each option when task has image_hint (visual matching)
+                        RemoteImageView(
+                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                            imageType: .thumbnail,
+                            fallbackIcon: "questionmark.circle",
+                            iconColor: dimension.color,
+                            size: 48
                         )
+                        .cornerRadius(8)
+                        Text(option)
+                            .font(.headline)
+                    }
+                    .foregroundColor(selectedOption == option ? .white : .primary)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(selectedOption == option ? dimension.color : Color(.secondarySystemBackground))
+                    )
                 }
                 .disabled(learningManager.isSubmitting)
             }
