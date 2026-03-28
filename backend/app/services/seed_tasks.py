@@ -2079,26 +2079,65 @@ def _derive_image_hint(content: dict) -> str | None:
     Looks at target.name, target_name, target_word, and similar fields
     to produce a lowercase, underscore-separated hint that maps to a
     Cloudinary asset name.
-
-    Returns None when no suitable hint can be derived (e.g. abstract
-    or classification tasks with no single target object).
     """
+
+    def _normalize(name: str) -> str:
+        return name.strip().lower().replace(" ", "_")
+
     # 1. target dict with a "name" key  (match / identify tasks)
     target = content.get("target")
     if isinstance(target, dict):
         name = target.get("name")
         if name:
-            return name.strip().lower().replace(" ", "_")
+            return _normalize(name)
 
     # 2. target_name string  (identify / say_word tasks)
     target_name = content.get("target_name")
     if target_name:
-        return target_name.strip().lower().replace(" ", "_")
+        return _normalize(target_name)
 
     # 3. target_word string  (literacy tasks)
     target_word = content.get("target_word")
     if target_word:
-        return target_word.strip().lower().replace(" ", "_")
+        return _normalize(target_word)
+
+    # 4. image_name string  (literacy recognize_image tasks)
+    image_name = content.get("image_name")
+    if image_name:
+        return _normalize(image_name)
+
+    # 5. word string  (literacy match_word_image tasks)
+    word = content.get("word")
+    if word:
+        return _normalize(word)
+
+    # 6. target_objects list  (follow_instruction tasks)
+    target_objects = content.get("target_objects")
+    if isinstance(target_objects, list) and target_objects:
+        return _normalize(target_objects[0])
+
+    # 7. function tasks — use the correct choice's name
+    choices = content.get("choices")
+    if isinstance(choices, list):
+        for choice in choices:
+            if isinstance(choice, dict) and choice.get("is_correct"):
+                name = choice.get("name")
+                if name:
+                    return _normalize(name)
+            # Also handle is_target (used in follow_instruction choices)
+            if isinstance(choice, dict) and choice.get("is_target"):
+                name = choice.get("name")
+                if name:
+                    return _normalize(name)
+
+    # 8. classify / abstract tasks — use the first target item's name
+    items = content.get("items")
+    if isinstance(items, list):
+        for item in items:
+            if isinstance(item, dict) and item.get("is_target"):
+                name = item.get("name")
+                if name:
+                    return _normalize(name)
 
     return None
 

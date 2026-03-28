@@ -185,6 +185,9 @@ struct AdaptiveTask: Codable {
 
 struct TaskContent: Codable {
     let instruction: String?
+    let instructionText: String?
+    let instructionAudio: String?
+    let instructionZh: String?
     let targetWord: String?
     let imageHint: String?
     let correctAnswer: String?
@@ -199,6 +202,9 @@ struct TaskContent: Codable {
 
     enum CodingKeys: String, CodingKey {
         case instruction
+        case instructionText = "instruction_text"
+        case instructionAudio = "instruction_audio"
+        case instructionZh = "instruction_zh"
         case targetWord = "target_word"
         case imageHint = "image_hint"
         case correctAnswer = "correct_answer"
@@ -213,7 +219,7 @@ struct TaskContent: Codable {
     }
 
     var displayInstruction: String {
-        instruction ?? prompt ?? question ?? "Complete this task"
+        instructionText ?? instruction ?? prompt ?? question ?? "Complete this task"
     }
 
     var displayOptions: [String] {
