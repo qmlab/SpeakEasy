@@ -98,34 +98,18 @@ def _load_dimension_tasks(db: Session, json_path: Path) -> int:
         return 0
 
     # Check if expanded tasks already exist for this dimension
-    # We use metadata_info to mark expanded tasks
-    existing = (
+    # Query specifically for tasks with the expanded_v1 source marker
+    expanded_exists = (
         db.query(AdaptiveTask)
         .filter(
             AdaptiveTask.dimension == dimension_enum.value,
             AdaptiveTask.is_assessment == False,  # noqa: E712
             AdaptiveTask.metadata_info.isnot(None),
         )
-        .count()
+        .all()
     )
-
-    # If we already have expanded tasks, skip
-    # We check for tasks that have the "source" metadata
-    if existing > 0:
-        # Check specifically for our expanded marker
-        sample = (
-            db.query(AdaptiveTask)
-            .filter(
-                AdaptiveTask.dimension == dimension_enum.value,
-                AdaptiveTask.is_assessment == False,  # noqa: E712
-            )
-            .first()
-        )
-        if (
-            sample
-            and sample.metadata_info
-            and sample.metadata_info.get("source") == "expanded_v1"
-        ):
+    for task in expanded_exists:
+        if task.metadata_info and task.metadata_info.get("source") == "expanded_v1":
             return 0
 
     tasks = []
@@ -173,19 +157,17 @@ def _load_assessment_tasks(db: Session) -> int:
         data = json.load(f)
 
     # Check if expanded assessment tasks already exist
-    existing = (
+    existing_assessments = (
         db.query(AdaptiveTask)
         .filter(
             AdaptiveTask.is_assessment == True,  # noqa: E712
+            AdaptiveTask.metadata_info.isnot(None),
         )
-        .first()
+        .all()
     )
-    if (
-        existing
-        and existing.metadata_info
-        and existing.metadata_info.get("source") == "expanded_v1"
-    ):
-        return 0
+    for task in existing_assessments:
+        if task.metadata_info and task.metadata_info.get("source") == "expanded_v1":
+            return 0
 
     tasks = []
     dimensions = data.get("dimensions", {})
