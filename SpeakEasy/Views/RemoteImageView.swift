@@ -13,7 +13,7 @@ struct RemoteImageView: View {
     let size: CGFloat
     var directURL: String? = nil
 
-    private static let backendBaseURL = "https://risingstar-backend-zclkfobb.fly.dev"
+    private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
 
     /// Normalized asset name used for both xcasset lookup and backend URL construction.
     private var normalizedName: String {
@@ -29,7 +29,7 @@ struct RemoteImageView: View {
                 .frame(width: size, height: size)
                 .clipped()
         } else if let url = remoteImageURL {
-            // 2. Fall back to backend /task-images/ endpoint
+            // 2. Fall back to Cloudinary (PNG via cloud transform)
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .empty:
@@ -60,8 +60,8 @@ struct RemoteImageView: View {
            url.scheme != nil {
             return url
         }
-        // Construct backend task-images URL
-        let urlString = "\(Self.backendBaseURL)/task-images/\(normalizedName).svg"
+        // Construct Cloudinary URL — request PNG format for AsyncImage compatibility
+        let urlString = "\(Self.cloudinaryBaseURL)/f_png/risingstar/task_images/\(normalizedName)"
         return URL(string: urlString)
     }
 
