@@ -21,7 +21,7 @@ jobs:
     runs-on: macos-26
     env:
       SCHEME: SpeakEasy
-      DESTINATION: 'platform=iOS Simulator,name=iPhone 16,OS=latest'
+      DESTINATION: 'platform=iOS Simulator,name=iPhone 16e,OS=latest'
 
     steps:
       - uses: actions/checkout@v4
