@@ -2072,6 +2072,59 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
     return len(tasks)
 
 
+def _derive_image_hint(content: dict) -> str | None:
+    """Derive an image_hint value from task content fields.
+
+    Looks at target.name, target_name, target_word, and similar fields
+    to produce a lowercase, underscore-separated hint that maps to a
+    Cloudinary asset name.
+
+    Returns None when no suitable hint can be derived (e.g. abstract
+    or classification tasks with no single target object).
+    """
+    # 1. target dict with a "name" key  (match / identify tasks)
+    target = content.get("target")
+    if isinstance(target, dict):
+        name = target.get("name")
+        if name:
+            return name.strip().lower().replace(" ", "_")
+
+    # 2. target_name string  (identify / say_word tasks)
+    target_name = content.get("target_name")
+    if target_name:
+        return target_name.strip().lower().replace(" ", "_")
+
+    # 3. target_word string  (literacy tasks)
+    target_word = content.get("target_word")
+    if target_word:
+        return target_word.strip().lower().replace(" ", "_")
+
+    return None
+
+
+def backfill_image_hints(db: Session) -> int:
+    """Add image_hint to every task whose content is missing it.
+
+    Scans all AdaptiveTask rows, derives image_hint from the content
+    dict, and persists the update.  Returns the number of tasks updated.
+    """
+    tasks = db.query(AdaptiveTask).all()
+    updated = 0
+    for task in tasks:
+        content = task.content
+        if not content or content.get("image_hint"):
+            continue
+        hint = _derive_image_hint(content)
+        if hint:
+            content["image_hint"] = hint
+            # SQLAlchemy needs the attribute reassigned to detect JSON mutation
+            task.content = dict(content)
+            updated += 1
+    if updated:
+        db.commit()
+    return updated
+
+
 def seed_all_tasks(db: Session) -> dict:
     """Seed all task dimensions. Returns counts per dimension."""
     from app.services.seed_assessment import seed_assessment_tasks
