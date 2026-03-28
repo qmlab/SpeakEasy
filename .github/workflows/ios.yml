@@ -35,8 +35,9 @@ jobs:
           xcodebuild build \
             -project SpeakEasy.xcodeproj \
             -scheme "$SCHEME" \
-            -destination "$DESTINATION" \
+            -sdk iphonesimulator \
             -configuration Debug \
+            -derivedDataPath build \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
@@ -49,20 +50,6 @@ jobs:
             -project SpeakEasy.xcodeproj \
             -scheme "$SCHEME" \
             -destination "$DESTINATION" \
-            -configuration Debug \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            | xcpretty
-
-      # --- Build simulator .app for Appetize ---
-      - name: Build simulator .app
-        run: |
-          set -o pipefail
-          xcodebuild build \
-            -project SpeakEasy.xcodeproj \
-            -scheme "$SCHEME" \
-            -sdk iphonesimulator \
             -configuration Debug \
             -derivedDataPath build \
             CODE_SIGN_IDENTITY="" \
@@ -92,6 +79,7 @@ jobs:
       # --- Deploy to Appetize ---
       - name: Deploy to Appetize
         if: ${{ secrets.APPETIZE_API_TOKEN != '' }}
+        continue-on-error: true
         env:
           APPETIZE_API_TOKEN: ${{ secrets.APPETIZE_API_TOKEN }}
         run: |
