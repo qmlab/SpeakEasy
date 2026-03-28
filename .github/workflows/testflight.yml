@@ -77,7 +77,8 @@ jobs:
 
       - name: Create ExportOptions.plist
         run: |
-          cat > $RUNNER_TEMP/ExportOptions.plist << EOF
+          TEAM_ID="${{ secrets.APPLE_TEAM_ID }}"
+          cat > $RUNNER_TEMP/ExportOptions.plist <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -85,7 +86,7 @@ jobs:
           <key>method</key>
           <string>app-store-connect</string>
           <key>teamID</key>
-          <string>${{ secrets.APPLE_TEAM_ID }}</string>
+          <string>$TEAM_ID</string>
           <key>signingStyle</key>
           <string>manual</string>
           <key>provisioningProfiles</key>
@@ -100,6 +101,8 @@ jobs:
           </dict>
           </plist>
           EOF
+          # Strip leading whitespace from heredoc lines
+          sed -i '' 's/^[[:space:]]*//' $RUNNER_TEMP/ExportOptions.plist
           echo "ExportOptions.plist created:"
           cat $RUNNER_TEMP/ExportOptions.plist
 
@@ -159,7 +162,7 @@ jobs:
             # Re-export with authentication to trigger direct upload
             mkdir -p ~/.private_keys_xc
             cp ~/.private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8 ~/.private_keys_xc/
-            xcodebuild -exportArchive \
+            if xcodebuild -exportArchive \
               -archivePath $RUNNER_TEMP/SpeakEasy.xcarchive \
               -exportOptionsPlist $RUNNER_TEMP/ExportOptions.plist \
               -exportPath $RUNNER_TEMP/export_upload \
@@ -167,13 +170,19 @@ jobs:
               -authenticationKeyPath ~/.private_keys_xc/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8 \
               -authenticationKeyID "$APP_STORE_CONNECT_API_KEY_ID" \
               -authenticationKeyIssuerID "$APP_STORE_CONNECT_API_ISSUER_ID" \
-              2>&1
-            echo "## TestFlight Upload Successful" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "The app has been uploaded to App Store Connect." >> $GITHUB_STEP_SUMMARY
-            echo "It will appear in TestFlight after Apple processes it (usually 10-30 minutes)." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "Open TestFlight on your iPhone to install the latest build." >> $GITHUB_STEP_SUMMARY
+              2>&1; then
+              echo "## TestFlight Upload Successful" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "The app has been uploaded to App Store Connect." >> $GITHUB_STEP_SUMMARY
+              echo "It will appear in TestFlight after Apple processes it (usually 10-30 minutes)." >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Open TestFlight on your iPhone to install the latest build." >> $GITHUB_STEP_SUMMARY
+            else
+              echo "## TestFlight Upload Failed" >> $GITHUB_STEP_SUMMARY
+              echo "Both altool and xcodebuild upload methods failed." >> $GITHUB_STEP_SUMMARY
+              echo "Check the logs above for details." >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
           fi
 
       - name: Clean up keychain
