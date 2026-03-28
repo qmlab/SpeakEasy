@@ -12,55 +12,59 @@ struct RemoteImageView: View {
     let iconColor: Color
     let size: CGFloat
     var directURL: String? = nil
-    
-    private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
-    
+
+    private static let backendBaseURL = "https://risingstar-backend-zclkfobb.fly.dev"
+
+    /// Normalized asset name used for both xcasset lookup and backend URL construction.
+    private var normalizedName: String {
+        objectName.lowercased().replacingOccurrences(of: " ", with: "_")
+    }
+
     var body: some View {
-        AsyncImage(url: imageURL) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-                    .frame(width: size, height: size)
-            case .success(let image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: size, height: size)
-                    .clipped()
-            case .failure:
-                fallbackImage
-            @unknown default:
-                fallbackImage
+        // 1. Try bundled xcasset first (no network needed)
+        if let uiImage = UIImage(named: normalizedName) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: size, height: size)
+                .clipped()
+        } else if let url = remoteImageURL {
+            // 2. Fall back to backend /task-images/ endpoint
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: size, height: size)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: size, height: size)
+                        .clipped()
+                case .failure:
+                    fallbackImage
+                @unknown default:
+                    fallbackImage
+                }
             }
+        } else {
+            // 3. SF Symbol fallback
+            fallbackImage
         }
     }
-    
-    private var imageURL: URL? {
+
+    private var remoteImageURL: URL? {
+        // Direct URL takes priority (e.g. full https:// URL from backend)
         if let directURL = directURL,
            let url = URL(string: directURL),
            url.scheme != nil {
             return url
         }
-        return constructedCloudinaryURL
-    }
-    
-    private var constructedCloudinaryURL: URL? {
-        let normalizedName = objectName.lowercased().replacingOccurrences(of: " ", with: "_")
-        
-        let folder: String
-        switch imageType {
-        case .flashcard:
-            folder = "flashcards"
-        case .findObject:
-            folder = "find_object"
-        case .thumbnail:
-            folder = "thumbnails"
-        }
-        
-        let urlString = "\(Self.cloudinaryBaseURL)/\(folder)/\(normalizedName).png"
+        // Construct backend task-images URL
+        let urlString = "\(Self.backendBaseURL)/task-images/\(normalizedName).svg"
         return URL(string: urlString)
     }
-    
+
     private var fallbackImage: some View {
         Image(systemName: fallbackIcon)
             .font(.system(size: size * 0.5))
