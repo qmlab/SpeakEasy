@@ -439,7 +439,7 @@
             "In the tree",
             "On the mountain"
           ],
-          "image_hint": "cat"
+          "image_hint": "frog"
         },
         {
           "instruction": "Read this passage!",
@@ -470,7 +470,7 @@
             "A bird",
             "A bee"
           ],
-          "image_hint": "cat"
+          "image_hint": "butterfly"
         }
       ]
     }
