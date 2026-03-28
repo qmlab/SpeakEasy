@@ -87,11 +87,6 @@ struct LearningSessionView: View {
             }
             .task {
                 await learningManager.startSession(dimension: dimension)
-                // Auto-speak the first task instruction after session starts
-                if let task = learningManager.currentTask {
-                    try? await Task.sleep(nanoseconds: 500_000_000)
-                    speechService.speak(task.content.displayInstruction)
-                }
             }
             .onChange(of: learningManager.currentTask?.taskId) { _ in
                 // Reset voice recording state for each new task

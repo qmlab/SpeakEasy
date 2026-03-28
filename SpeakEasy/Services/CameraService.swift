@@ -431,7 +431,7 @@ struct BoundingBoxOverlay: View {
     /// Assign a consistent color per label
     private func colorForLabel(_ label: String) -> Color {
         let colors: [Color] = [.green, .blue, .orange, .purple, .pink, .cyan, .yellow, .red, .mint, .indigo]
-        let hash = abs(label.hashValue)
+        let hash = abs(label.hashValue % colors.count)
         return colors[hash % colors.count]
     }
 }
