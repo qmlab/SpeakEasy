@@ -9,8 +9,10 @@ import SwiftUI
 
 struct DimensionHubView: View {
     @EnvironmentObject var learningManager: AdaptiveLearningManager
+    @ObservedObject private var authService = AuthenticationService.shared
     @State private var selectedDimension: DevelopmentalDimension?
     @State private var showAssessment: Bool = false
+    @State private var showSignOutAlert: Bool = false
 
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -48,6 +50,37 @@ struct DimensionHubView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Learn")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        if let user = authService.currentUser {
+                            Section {
+                                Label(user.name ?? "Player", systemImage: "person.fill")
+                                if let email = user.email {
+                                    Label(email, systemImage: "envelope.fill")
+                                }
+                            }
+                        }
+                        Button(role: .destructive) {
+                            showSignOutAlert = true
+                        } label: {
+                            Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
+                        }
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                            .font(.title3)
+                            .foregroundColor(.purple)
+                    }
+                }
+            }
+            .alert("Sign Out", isPresented: $showSignOutAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Sign Out", role: .destructive) {
+                    authService.signOut()
+                }
+            } message: {
+                Text("Are you sure you want to sign out?")
+            }
             .fullScreenCover(item: $selectedDimension) { dimension in
                 LearningSessionView(dimension: dimension)
                     .environmentObject(learningManager)

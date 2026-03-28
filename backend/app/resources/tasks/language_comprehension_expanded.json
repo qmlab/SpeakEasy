@@ -398,7 +398,7 @@
             "At home",
             "At school"
           ],
-          "image_hint": "tree"
+          "image_hint": "dog"
         },
         {
           "instruction": "The girl ate three cookies. How many cookies did she eat?",
@@ -410,7 +410,7 @@
             "Two",
             "Three"
           ],
-          "image_hint": "block"
+          "image_hint": "food"
         },
         {
           "instruction": "Tom gave his toy to his friend. What did Tom do?",
@@ -467,7 +467,7 @@
             "Tired",
             "Hungry"
           ],
-          "image_hint": "sleeping"
+          "image_hint": "sleeping_cat"
         },
         {
           "instruction": "The sun was shining. The kids went to play outside. What was the weather like?",

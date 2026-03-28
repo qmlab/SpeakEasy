@@ -8,108 +8,108 @@
       "task_type": "attend",
       "tasks": [
         {
-          "instruction": "Look at me! Who is waving?",
-          "instruction_zh": "看着我！谁在挥手？",
+          "instruction": "Look at me! What is happening?",
+          "instruction_zh": "看着我！发生了什么？",
           "social_cue": "waving",
-          "correct_answer": "The teacher",
-          "correct_answer_zh": "老师",
+          "correct_answer": "Waving",
+          "correct_answer_zh": "在挥手",
           "options": [
-            "The teacher",
-            "The dog",
-            "The tree"
+            "Waving",
+            "Sleeping",
+            "Running"
           ],
-          "image_hint": "happy_face"
+          "image_hint": "wave"
         },
         {
-          "instruction": "Look at the picture! Who is smiling?",
-          "instruction_zh": "看图片！谁在微笑？",
+          "instruction": "Look at the picture! What do you see?",
+          "instruction_zh": "看图片！你看到了什么？",
           "social_cue": "smiling",
-          "correct_answer": "The girl",
-          "correct_answer_zh": "女孩",
+          "correct_answer": "A smile",
+          "correct_answer_zh": "微笑",
           "options": [
-            "The girl",
-            "The cat",
-            "The ball"
+            "A smile",
+            "A frown",
+            "Crying"
           ],
           "image_hint": "happy_face"
         },
         {
-          "instruction": "Who is talking?",
-          "instruction_zh": "谁在说话？",
+          "instruction": "What is the person doing?",
+          "instruction_zh": "这个人在做什么？",
           "social_cue": "talking",
-          "correct_answer": "Mom",
-          "correct_answer_zh": "妈妈",
+          "correct_answer": "Talking",
+          "correct_answer_zh": "在说话",
           "options": [
-            "Mom",
-            "The toy",
-            "The book"
+            "Talking",
+            "Sleeping",
+            "Reading"
           ],
           "image_hint": "happy_face"
         },
         {
-          "instruction": "Look! Who is clapping?",
-          "instruction_zh": "看！谁在拍手？",
+          "instruction": "Look! What is happening?",
+          "instruction_zh": "看！发生了什么？",
           "social_cue": "clapping",
-          "correct_answer": "The boy",
-          "correct_answer_zh": "男孩",
+          "correct_answer": "Clapping",
+          "correct_answer_zh": "在拍手",
           "options": [
-            "The boy",
-            "The car",
-            "The flower"
+            "Clapping",
+            "Waving",
+            "Jumping"
           ],
-          "image_hint": "thumbs_up"
+          "image_hint": "clap"
         },
         {
-          "instruction": "Who is pointing at the sky?",
-          "instruction_zh": "谁在指天空？",
+          "instruction": "Look! What is the person doing?",
+          "instruction_zh": "看！这个人在做什么？",
           "social_cue": "pointing",
-          "correct_answer": "Dad",
-          "correct_answer_zh": "爸爸",
+          "correct_answer": "Pointing up",
+          "correct_answer_zh": "在指向上方",
           "options": [
-            "Dad",
-            "The bird",
-            "The cloud"
+            "Pointing up",
+            "Sitting down",
+            "Eating"
           ],
-          "image_hint": "thumbs_up"
+          "image_hint": "raising_hand"
         },
         {
-          "instruction": "Look! Who is crying?",
-          "instruction_zh": "看！谁在哭？",
+          "instruction": "Look! How does this person feel?",
+          "instruction_zh": "看！这个人感觉怎样？",
           "social_cue": "crying",
-          "correct_answer": "The baby",
-          "correct_answer_zh": "宝宝",
+          "correct_answer": "Sad",
+          "correct_answer_zh": "伤心",
           "options": [
-            "The baby",
-            "The table",
-            "The shoe"
+            "Sad",
+            "Happy",
+            "Angry"
           ],
           "image_hint": "sad_face"
         },
         {
-          "instruction": "Who is dancing?",
-          "instruction_zh": "谁在跳舞？",
+          "instruction": "What is happening in the picture?",
+          "instruction_zh": "图片里发生了什么？",
           "social_cue": "dancing",
-          "correct_answer": "The girl",
-          "correct_answer_zh": "女孩",
+          "correct_answer": "Dancing",
+          "correct_answer_zh": "在跳舞",
           "options": [
-            "The chair",
-            "The girl",
-            "The lamp"
+            "Dancing",
+            "Sleeping",
+            "Cooking"
           ],
           "image_hint": "happy_face"
         },
         {
-          "instruction": "Look! Who is eating?",
-          "instruction_zh": "看！谁在吃东西？",
+          "instruction": "What is happening here?",
+          "instruction_zh": "这里发生了什么？",
           "social_cue": "eating",
-          "correct_answer": "The boy",
-          "correct_answer_zh": "男孩",
+          "correct_answer": "Eating",
+          "correct_answer_zh": "在吃",
           "options": [
-            "The cup",
-            "The boy",
-            "The phone"
+            "Eating",
+            "Drinking",
+            "Playing"
           ],
-          "image_hint": "happy_face"
+          "image_hint": "food"
         }
       ]
     },
