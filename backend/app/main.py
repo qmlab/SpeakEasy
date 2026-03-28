@@ -18,6 +18,7 @@ from app.routers import (
     tasks_router,
     ai_router,
     assessment_router,
+    cms_router,
 )
 from app.config import UPLOAD_DIR
 from app.services import cloudinary_service
@@ -112,6 +113,7 @@ app.include_router(dashboard_router)
 app.include_router(tasks_router)
 app.include_router(ai_router)
 app.include_router(assessment_router)
+app.include_router(cms_router)
 
 
 @app.get("/")

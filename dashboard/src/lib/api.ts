@@ -134,6 +134,44 @@ export interface AssessmentResults {
   dimension_results: Record<string, { level: number; correct: number; total: number }>;
 }
 
+// ---- CMS Types ----
+
+export interface AdaptiveTask {
+  id: string;
+  dimension: string;
+  level: number;
+  task_type: string;
+  modalities: string[];
+  content: Record<string, unknown>;
+  metadata_info: Record<string, unknown> | null;
+  is_assessment: boolean;
+  created_at: string;
+}
+
+export interface TasksPage {
+  tasks: AdaptiveTask[];
+  total: number;
+  page: number;
+  page_size: number;
+  total_pages: number;
+}
+
+export interface CMSStats {
+  total: number;
+  assessment_total: number;
+  practice_total: number;
+  by_dimension: Record<string, { total: number; levels: Record<string, number> }>;
+  dimensions: string[];
+  task_types: string[];
+}
+
+export interface ImportResult {
+  created: number;
+  updated: number;
+  errors: string[];
+  total_processed: number;
+}
+
 // ---- API Functions ----
 
 export const api = {
@@ -177,4 +215,79 @@ export const api = {
 
   // Tasks
   seedTasks: () => request<Record<string, number>>("/tasks/seed", { method: "POST" }),
+
+  // CMS
+  getCMSStats: () => request<CMSStats>("/cms/stats"),
+  getCMSTasks: (params: {
+    page?: number;
+    page_size?: number;
+    dimension?: string;
+    level?: number;
+    task_type?: string;
+    is_assessment?: boolean;
+    search?: string;
+  }) => {
+    const qs = new URLSearchParams();
+    if (params.page) qs.set("page", String(params.page));
+    if (params.page_size) qs.set("page_size", String(params.page_size));
+    if (params.dimension) qs.set("dimension", params.dimension);
+    if (params.level !== undefined && params.level !== null)
+      qs.set("level", String(params.level));
+    if (params.task_type) qs.set("task_type", params.task_type);
+    if (params.is_assessment !== undefined && params.is_assessment !== null)
+      qs.set("is_assessment", String(params.is_assessment));
+    if (params.search) qs.set("search", params.search);
+    return request<TasksPage>(`/cms/tasks?${qs.toString()}`);
+  },
+  createTask: (task: Omit<AdaptiveTask, "id" | "created_at">) =>
+    request<AdaptiveTask>("/tasks/", {
+      method: "POST",
+      body: JSON.stringify(task),
+    }),
+  updateTask: (taskId: string, task: Omit<AdaptiveTask, "id" | "created_at">) =>
+    request<AdaptiveTask>(`/cms/tasks/${taskId}`, {
+      method: "PUT",
+      body: JSON.stringify(task),
+    }),
+  deleteTask: (taskId: string) =>
+    request<{ message: string }>(`/tasks/${taskId}`, { method: "DELETE" }),
+  batchDeleteTasks: (taskIds: string[]) =>
+    request<{ deleted: number; requested: number }>("/cms/tasks/batch-delete", {
+      method: "POST",
+      body: JSON.stringify(taskIds),
+    }),
+  importTasksJSON: async (file: File, overwrite = false): Promise<ImportResult> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await fetch(
+      `${API_URL}/cms/import/json?overwrite=${overwrite}`,
+      { method: "POST", body: formData }
+    );
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(err.detail || res.statusText);
+    }
+    return res.json();
+  },
+  importTasksCSV: async (file: File, overwrite = false): Promise<ImportResult> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await fetch(
+      `${API_URL}/cms/import/csv?overwrite=${overwrite}`,
+      { method: "POST", body: formData }
+    );
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(err.detail || res.statusText);
+    }
+    return res.json();
+  },
+  exportTasksJSON: (dimension?: string) => {
+    const qs = dimension ? `?dimension=${dimension}` : "";
+    return `${API_URL}/cms/export/json${qs}`;
+  },
+  exportTasksCSV: (dimension?: string) => {
+    const qs = dimension ? `?dimension=${dimension}` : "";
+    return `${API_URL}/cms/export/csv${qs}`;
+  },
 };
