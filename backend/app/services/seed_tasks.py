@@ -2114,7 +2114,9 @@ def _derive_image_hint(content: dict) -> str | None:
     # 6. target_objects list  (follow_instruction tasks)
     target_objects = content.get("target_objects")
     if isinstance(target_objects, list) and target_objects:
-        return _normalize(target_objects[0])
+        first = target_objects[0]
+        if isinstance(first, str):
+            return _normalize(first)
 
     # 7. function tasks — use the correct choice's name
     choices = content.get("choices")
