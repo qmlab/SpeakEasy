@@ -14,7 +14,7 @@ protocol SpeechRecognitionProvider {
 }
 
 class SpeechService: NSObject, ObservableObject {
-    private let synthesizer = AVSpeechSynthesizer()
+    private nonisolated(unsafe) let synthesizer = AVSpeechSynthesizer()
     @Published var isSpeaking = false
     @Published var isListening = false
     @Published var recognizedText: String = ""

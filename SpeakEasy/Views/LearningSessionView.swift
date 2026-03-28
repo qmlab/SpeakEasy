@@ -88,7 +88,7 @@ struct LearningSessionView: View {
             .task {
                 await learningManager.startSession(dimension: dimension)
             }
-            .onChange(of: learningManager.currentTask?.id) { _ in
+            .onChange(of: learningManager.currentTask?.taskId) { _ in
                 // Reset voice recording state for each new task
                 hasRecording = false
                 isEvaluating = false
