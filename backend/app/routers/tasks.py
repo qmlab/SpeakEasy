@@ -91,10 +91,15 @@ def delete_task(task_id: str, db: Session = Depends(get_db)):
 
 
 @router.post("/seed")
-def seed_tasks(db: Session = Depends(get_db)):
-    """Seed the database with default adaptive tasks + expanded content."""
+def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
+    """Seed the database with default adaptive tasks + expanded content.
+
+    Args:
+        force: If True, delete existing expanded tasks and re-seed with
+               updated JSON data (e.g. after adding image_hint fields).
+    """
     results = seed_all_tasks(db)
-    expanded_results = seed_expanded_tasks(db)
+    expanded_results = seed_expanded_tasks(db, force=force)
     results.update(expanded_results)
     return {
         "message": "Tasks seeded successfully",

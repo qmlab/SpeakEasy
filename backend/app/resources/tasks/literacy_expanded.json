@@ -13,7 +13,11 @@
           "image_hint": "elephant",
           "correct_answer": "Elephant",
           "correct_answer_zh": "大象",
-          "options": ["Elephant", "Horse", "Cow"]
+          "options": [
+            "Elephant",
+            "Horse",
+            "Cow"
+          ]
         },
         {
           "instruction": "What do you see?",
@@ -21,7 +25,11 @@
           "image_hint": "rainbow",
           "correct_answer": "Rainbow",
           "correct_answer_zh": "彩虹",
-          "options": ["Rainbow", "Sun", "Rain"]
+          "options": [
+            "Rainbow",
+            "Sun",
+            "Rain"
+          ]
         },
         {
           "instruction": "What is this?",
@@ -29,7 +37,11 @@
           "image_hint": "ice_cream",
           "correct_answer": "Ice Cream",
           "correct_answer_zh": "冰淇淋",
-          "options": ["Ice Cream", "Cake", "Candy"]
+          "options": [
+            "Ice Cream",
+            "Cake",
+            "Candy"
+          ]
         },
         {
           "instruction": "What is in this picture?",
@@ -37,7 +49,11 @@
           "image_hint": "bicycle",
           "correct_answer": "Bicycle",
           "correct_answer_zh": "自行车",
-          "options": ["Bicycle", "Car", "Bus"]
+          "options": [
+            "Bicycle",
+            "Car",
+            "Bus"
+          ]
         },
         {
           "instruction": "What do you see?",
@@ -45,7 +61,11 @@
           "image_hint": "penguin",
           "correct_answer": "Penguin",
           "correct_answer_zh": "企鹅",
-          "options": ["Penguin", "Duck", "Parrot"]
+          "options": [
+            "Penguin",
+            "Duck",
+            "Parrot"
+          ]
         },
         {
           "instruction": "What is this?",
@@ -53,7 +73,11 @@
           "image_hint": "pizza",
           "correct_answer": "Pizza",
           "correct_answer_zh": "比萨",
-          "options": ["Pizza", "Bread", "Sandwich"]
+          "options": [
+            "Pizza",
+            "Bread",
+            "Sandwich"
+          ]
         },
         {
           "instruction": "What is in this picture?",
@@ -61,7 +85,11 @@
           "image_hint": "guitar",
           "correct_answer": "Guitar",
           "correct_answer_zh": "吉他",
-          "options": ["Guitar", "Drum", "Piano"]
+          "options": [
+            "Guitar",
+            "Drum",
+            "Piano"
+          ]
         },
         {
           "instruction": "What do you see?",
@@ -69,7 +97,11 @@
           "image_hint": "snowman",
           "correct_answer": "Snowman",
           "correct_answer_zh": "雪人",
-          "options": ["Snowman", "Robot", "Doll"]
+          "options": [
+            "Snowman",
+            "Robot",
+            "Doll"
+          ]
         }
       ]
     },
@@ -84,7 +116,11 @@
           "word": "Sun",
           "word_zh": "太阳",
           "image_hint": "sun",
-          "options": ["Sun", "Moon", "Star"],
+          "options": [
+            "Sun",
+            "Moon",
+            "Star"
+          ],
           "correct_answer": "Sun"
         },
         {
@@ -93,7 +129,11 @@
           "word": "Fish",
           "word_zh": "鱼",
           "image_hint": "fish",
-          "options": ["Bird", "Fish", "Dog"],
+          "options": [
+            "Bird",
+            "Fish",
+            "Dog"
+          ],
           "correct_answer": "Fish"
         },
         {
@@ -102,7 +142,11 @@
           "word": "Tree",
           "word_zh": "树",
           "image_hint": "tree",
-          "options": ["Flower", "Tree", "Grass"],
+          "options": [
+            "Flower",
+            "Tree",
+            "Grass"
+          ],
           "correct_answer": "Tree"
         },
         {
@@ -111,7 +155,11 @@
           "word": "House",
           "word_zh": "房子",
           "image_hint": "house",
-          "options": ["House", "School", "Shop"],
+          "options": [
+            "House",
+            "School",
+            "Shop"
+          ],
           "correct_answer": "House"
         },
         {
@@ -120,7 +168,11 @@
           "word": "Bird",
           "word_zh": "鸟",
           "image_hint": "bird",
-          "options": ["Cat", "Dog", "Bird"],
+          "options": [
+            "Cat",
+            "Dog",
+            "Bird"
+          ],
           "correct_answer": "Bird"
         },
         {
@@ -129,7 +181,11 @@
           "word": "Flower",
           "word_zh": "花",
           "image_hint": "flower",
-          "options": ["Flower", "Tree", "Leaf"],
+          "options": [
+            "Flower",
+            "Tree",
+            "Leaf"
+          ],
           "correct_answer": "Flower"
         },
         {
@@ -138,7 +194,11 @@
           "word": "Rain",
           "word_zh": "雨",
           "image_hint": "rain",
-          "options": ["Snow", "Rain", "Wind"],
+          "options": [
+            "Snow",
+            "Rain",
+            "Wind"
+          ],
           "correct_answer": "Rain"
         },
         {
@@ -147,7 +207,11 @@
           "word": "Boat",
           "word_zh": "船",
           "image_hint": "boat",
-          "options": ["Car", "Boat", "Train"],
+          "options": [
+            "Car",
+            "Boat",
+            "Train"
+          ],
           "correct_answer": "Boat"
         }
       ]
@@ -190,7 +254,7 @@
           "instruction_zh": "读这个字：手",
           "word": "Hand",
           "word_zh": "手",
-          "image_hint": "hand"
+          "image_hint": "thumbs_up"
         },
         {
           "instruction": "Read this: DUCK",
@@ -232,7 +296,7 @@
           "instruction_zh": "读一下：这只狗很大。",
           "sentence": "The dog is big.",
           "sentence_zh": "这只狗很大。",
-          "image_hint": "big_dog"
+          "image_hint": "dog"
         },
         {
           "instruction": "Can you read: I like apples.",
@@ -246,7 +310,7 @@
           "instruction_zh": "读这个句子：鸟会飞。",
           "sentence": "The bird can fly.",
           "sentence_zh": "鸟会飞。",
-          "image_hint": "bird_flying"
+          "image_hint": "bird"
         },
         {
           "instruction": "Read: The sun is yellow.",
@@ -260,7 +324,7 @@
           "instruction_zh": "读一下：我有两只手。",
           "sentence": "I have two hands.",
           "sentence_zh": "我有两只手。",
-          "image_hint": "hands"
+          "image_hint": "thumbs_up"
         },
         {
           "instruction": "Can you read: The fish swims.",
@@ -292,7 +356,12 @@
           "question_zh": "狗是什么颜色的？",
           "correct_answer": "Brown",
           "correct_answer_zh": "棕色",
-          "options": ["Brown", "White", "Black"]
+          "options": [
+            "Brown",
+            "White",
+            "Black"
+          ],
+          "image_hint": "dog"
         },
         {
           "instruction": "Read and answer!",
@@ -303,7 +372,12 @@
           "question_zh": "小红喜欢做什么？",
           "correct_answer": "Draw",
           "correct_answer_zh": "画画",
-          "options": ["Draw", "Sing", "Dance"]
+          "options": [
+            "Draw",
+            "Sing",
+            "Dance"
+          ],
+          "image_hint": "bird"
         },
         {
           "instruction": "Read this story and answer!",
@@ -314,7 +388,11 @@
           "question_zh": "他们用什么做鼻子？",
           "correct_answer": "A carrot",
           "correct_answer_zh": "胡萝卜",
-          "options": ["A carrot", "A stick", "A stone"]
+          "options": [
+            "A carrot",
+            "A stick",
+            "A stone"
+          ]
         },
         {
           "instruction": "Read and answer the question!",
@@ -325,7 +403,12 @@
           "question_zh": "猫看到了什么？",
           "correct_answer": "A mouse",
           "correct_answer_zh": "老鼠",
-          "options": ["A mouse", "A bird", "A fish"]
+          "options": [
+            "A mouse",
+            "A bird",
+            "A fish"
+          ],
+          "image_hint": "cat"
         },
         {
           "instruction": "Read this story!",
@@ -336,7 +419,11 @@
           "question_zh": "妈妈买了什么？",
           "correct_answer": "Milk, bread, and eggs",
           "correct_answer_zh": "牛奶、面包和鸡蛋",
-          "options": ["Milk, bread, and eggs", "Candy and cake", "Toys and books"]
+          "options": [
+            "Milk, bread, and eggs",
+            "Candy and cake",
+            "Toys and books"
+          ]
         },
         {
           "instruction": "Read and answer!",
@@ -347,7 +434,12 @@
           "question_zh": "青蛙住在哪里？",
           "correct_answer": "By the pond",
           "correct_answer_zh": "池塘边",
-          "options": ["By the pond", "In the tree", "On the mountain"]
+          "options": [
+            "By the pond",
+            "In the tree",
+            "On the mountain"
+          ],
+          "image_hint": "frog"
         },
         {
           "instruction": "Read this passage!",
@@ -358,7 +450,11 @@
           "question_zh": "小华有几个玩具火车？",
           "correct_answer": "Ten",
           "correct_answer_zh": "十个",
-          "options": ["Five", "Ten", "Three"]
+          "options": [
+            "Five",
+            "Ten",
+            "Three"
+          ]
         },
         {
           "instruction": "Read and answer!",
@@ -369,7 +465,12 @@
           "question_zh": "蝴蝶以前是什么？",
           "correct_answer": "A caterpillar",
           "correct_answer_zh": "毛毛虫",
-          "options": ["A caterpillar", "A bird", "A bee"]
+          "options": [
+            "A caterpillar",
+            "A bird",
+            "A bee"
+          ],
+          "image_hint": "butterfly"
         }
       ]
     }
