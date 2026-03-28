@@ -464,7 +464,6 @@ struct LearningSessionView: View {
                 HStack(spacing: 12) {
                     Image(systemName: isListening ? "stop.circle.fill" : "mic.circle.fill")
                         .font(.title)
-                        .symbolEffect(.pulse, isActive: isListening)
                     Text(micButtonLabel)
                         .font(.headline)
                 }
