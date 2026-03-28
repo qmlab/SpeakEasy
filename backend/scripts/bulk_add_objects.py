@@ -6,7 +6,7 @@ This script adds all 60+ objects from the iOS app's ObjectData.
 Usage:
     python bulk_add_objects.py [--url URL]
 
-Default URL: https://speakeasy-backend-jswsybdb.fly.dev
+Default URL: https://risingstar-backend-zclkfobb.fly.dev
 """
 
 import argparse
@@ -157,8 +157,8 @@ def main():
     parser = argparse.ArgumentParser(description="Bulk add objects to SpeakEasy backend")
     parser.add_argument(
         "--url",
-        default="https://speakeasy-backend-jswsybdb.fly.dev",
-        help="Backend URL (default: https://speakeasy-backend-jswsybdb.fly.dev)"
+        default="https://risingstar-backend-zclkfobb.fly.dev",
+        help="Backend URL (default: https://risingstar-backend-zclkfobb.fly.dev)"
     )
     parser.add_argument(
         "--force",
