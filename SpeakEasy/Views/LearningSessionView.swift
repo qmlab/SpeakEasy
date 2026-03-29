@@ -103,17 +103,24 @@ struct LearningSessionView: View {
                     speechService.stopListening()
                     isListening = false
                 }
+                // Always clear the TTS callback first so a stale closure
+                // from the previous task cannot fire (e.g. when the session
+                // ends and currentTask becomes nil while TTS is still playing).
+                speechService.onSpeechFinished = nil
+
                 // Auto-speak the instruction so illiterate kids can understand.
                 // When TTS finishes, auto-enter listening for voice tasks.
                 if let task = learningManager.currentTask {
                     let modalities = task.modalities
                     let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
-                    speechService.onSpeechFinished = modalities.contains("voice") && !targetWord.isEmpty ? { [self] in
-                        // Clear the callback so it doesn't fire again for
-                        // "Hear Again" or target-word taps.
-                        speechService.onSpeechFinished = nil
-                        startListeningForTask(targetWord: targetWord)
-                    } : nil
+                    if modalities.contains("voice") && !targetWord.isEmpty {
+                        speechService.onSpeechFinished = { [self] in
+                            // Clear the callback so it doesn't fire again for
+                            // "Hear Again" or target-word taps.
+                            speechService.onSpeechFinished = nil
+                            startListeningForTask(targetWord: targetWord)
+                        }
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         speechService.speak(task.content.displayInstruction)
                     }
