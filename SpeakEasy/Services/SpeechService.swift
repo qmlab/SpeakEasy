@@ -180,9 +180,25 @@ class SpeechService: NSObject, ObservableObject {
             return
         }
         
+        // Stop any ongoing TTS to release the audio session before recording
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+            isSpeaking = false
+        }
+
         stopListening()
+
+        // Deactivate then reactivate audio session for clean playback → record transition.
+        // On real devices the audio hardware needs a full reset when switching from
+        // .playback (TTS) to .playAndRecord (speech recognition).
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         setupAudioSession(forPlayback: false)
-        
+
+        // Reset audio engine so its node graph rebuilds with the new session config.
+        // Without this, inputNode.outputFormat can return a stale / zero-sample-rate
+        // format on real hardware after a category switch.
+        audioEngine.reset()
+
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
             DispatchQueue.main.async {
