@@ -132,10 +132,18 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         # correct_answer so iOS can check the answer.
         content["correct_answer"] = task_data.get("correct_effect", "")
         options = list(task_data.get("options", []))
-        random.shuffle(options)
-        content["options"] = options
-        if "options_zh" in task_data:
-            content["options_zh"] = task_data["options_zh"]
+        options_zh_raw = task_data.get("options_zh", [])
+        if options_zh_raw and len(options_zh_raw) >= len(options):
+            combined = list(zip(options, options_zh_raw))
+            random.shuffle(combined)
+            options, options_zh = zip(*combined) if combined else ([], [])
+            content["options"] = list(options)
+            content["options_zh"] = list(options_zh)
+        else:
+            random.shuffle(options)
+            content["options"] = options
+            if "options_zh" in task_data:
+                content["options_zh"] = task_data["options_zh"]
         if "correct_effect_zh" in task_data:
             content["correct_answer_zh"] = task_data["correct_effect_zh"]
         if "image_hint" in task_data:
