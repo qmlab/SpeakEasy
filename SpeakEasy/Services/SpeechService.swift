@@ -81,11 +81,20 @@ class SpeechService: NSObject, ObservableObject {
     
     func setupAudioSession(forPlayback: Bool = true) {
         do {
-            if forPlayback {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            } else {
-                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
-            }
+            // Always use .playAndRecord so switching between TTS and speech
+            // recognition never requires an audio-category change.  On real
+            // iPhones a .playback → .playAndRecord switch can silently fail
+            // (the deactivation races with draining TTS buffers), leaving
+            // the audio hardware in a broken state where the mic returns a
+            // zero-sample-rate format and recognition fails immediately.
+            //
+            // .defaultToSpeaker keeps TTS audible through the main speaker
+            // instead of the earpiece that .playAndRecord defaults to.
+            try AVAudioSession.sharedInstance().setCategory(
+                .playAndRecord,
+                mode: forPlayback ? .default : .measurement,
+                options: [.defaultToSpeaker, .duckOthers]
+            )
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Failed to setup audio session: \(error)")
@@ -188,16 +197,40 @@ class SpeechService: NSObject, ObservableObject {
 
         stopListening()
 
-        // Deactivate then reactivate audio session for clean playback → record transition.
-        // On real devices the audio hardware needs a full reset when switching from
-        // .playback (TTS) to .playAndRecord (speech recognition).
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        // Switch audio session mode from .default (TTS) to .measurement
+        // (recognition).  The category stays .playAndRecord throughout, so
+        // no hardware route change is needed – only the DSP mode changes.
         setupAudioSession(forPlayback: false)
 
-        // Reset audio engine so its node graph rebuilds with the new session config.
-        // Without this, inputNode.outputFormat can return a stale / zero-sample-rate
-        // format on real hardware after a category switch.
+        // Reset audio engine so its node graph is clean for the new session.
         audioEngine.reset()
+
+        // Give the audio hardware a moment to settle after stopping TTS.
+        // On real iPhones the mic input format can be stale if we query it
+        // immediately after the synthesizer releases the audio output.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.startRecognitionEngine(
+                targetWord: targetWord,
+                autoStop: autoStop,
+                speechRecognizer: speechRecognizer,
+                completion: completion
+            )
+        }
+    }
+
+    /// Second phase of recognition start – runs after a short delay to let
+    /// the audio hardware settle following TTS stop + mode switch.
+    private func startRecognitionEngine(
+        targetWord: String,
+        autoStop: Bool,
+        speechRecognizer: SFSpeechRecognizer,
+        completion: @escaping (Double) -> Void
+    ) {
+        guard speechRecognizer.isAvailable else {
+            DispatchQueue.main.async { completion(0) }
+            return
+        }
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
@@ -213,7 +246,7 @@ class SpeechService: NSObject, ObservableObject {
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         
         guard recordingFormat.sampleRate > 0 && recordingFormat.channelCount > 0 else {
-            print("Invalid recording format - microphone may not be available")
+            print("Invalid recording format – sampleRate: \(recordingFormat.sampleRate), channels: \(recordingFormat.channelCount)")
             DispatchQueue.main.async {
                 completion(0)
             }
@@ -238,11 +271,7 @@ class SpeechService: NSObject, ObservableObject {
                 if self.audioEngine.isRunning {
                     self.audioEngine.stop()
                 }
-                do {
-                    inputNode.removeTap(onBus: 0)
-                } catch {
-                    print("Error removing tap: \(error)")
-                }
+                inputNode.removeTap(onBus: 0)
                 
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
@@ -259,16 +288,8 @@ class SpeechService: NSObject, ObservableObject {
             }
         }
         
-        do {
-            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
-                self?.recognitionRequest?.append(buffer)
-            }
-        } catch {
-            print("Failed to install tap on audio input: \(error)")
-            DispatchQueue.main.async {
-                completion(0)
-            }
-            return
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
+            self?.recognitionRequest?.append(buffer)
         }
         
         audioEngine.prepare()
