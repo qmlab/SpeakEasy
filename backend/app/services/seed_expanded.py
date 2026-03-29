@@ -10,6 +10,7 @@ This supplements the original seed_tasks.py with additional content covering:
 """
 
 import json
+import random
 from pathlib import Path
 
 from sqlalchemy.orm import Session
@@ -68,7 +69,14 @@ DEFAULT_MODALITIES = {
 
 
 def _build_content(task_type: str, task_data: dict) -> dict:
-    """Build task content dict from JSON task data, matching existing format."""
+    """Build task content dict from JSON task data, matching existing format.
+
+    For cognitive task types (pair, sort, cause_effect, sequence_order) the raw
+    JSON fields are transformed into the standard ``options`` /
+    ``correct_answer`` format that the iOS client already understands so that
+    interactive option buttons are rendered instead of the generic "Got It!"
+    fallback.
+    """
     content = {}
 
     # Add instruction fields (bilingual)
@@ -78,11 +86,118 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         if "instruction_zh" in task_data:
             content["instruction_zh"] = task_data["instruction_zh"]
 
-    # Copy all fields except meta fields
-    skip_keys = {"instruction", "instruction_zh"}
-    for key, value in task_data.items():
-        if key not in skip_keys:
-            content[key] = value
+    # ------------------------------------------------------------------
+    # Cognitive task type transformations
+    # ------------------------------------------------------------------
+    if task_type == "pair":
+        # Pair tasks: "Which goes with X?" — show pair[1] + distractors as
+        # options so the child picks the correct match.
+        pair = task_data.get("pair", [])
+        distractors = task_data.get("distractors", [])
+        if len(pair) >= 2:
+            # Rewrite instruction to reference the first item
+            content["instruction_text"] = f"Which goes with {pair[0]}?"
+            content["instruction_audio"] = content["instruction_text"]
+            pair_zh = task_data.get("pair_zh", [])
+            distractors_zh = task_data.get("distractors_zh", [])
+            if len(pair_zh) >= 2:
+                content["instruction_zh"] = f"哪个和{pair_zh[0]}是一对？"
+
+            # The first pair item becomes the target shown as image
+            content["target_word"] = pair[0]
+            content["image_hint"] = task_data.get(
+                "image_hint", pair[0].lower().replace(" ", "_")
+            )
+
+            # Build shuffled options: correct answer + distractors
+            opts = [pair[1]] + list(distractors)
+            # Shuffle EN and ZH options with the same permutation
+            if len(pair_zh) >= 2 and len(distractors_zh) >= len(distractors):
+                opts_zh = [pair_zh[1]] + list(distractors_zh)
+                combined = list(zip(opts, opts_zh))
+                random.shuffle(combined)
+                opts, opts_zh = zip(*combined) if combined else ([], [])
+                content["options"] = list(opts)
+                content["options_zh"] = list(opts_zh)
+            else:
+                random.shuffle(opts)
+                content["options"] = opts
+            content["correct_answer"] = pair[1]
+        else:
+            # Fallback: copy raw fields
+            for key, value in task_data.items():
+                if key not in {"instruction", "instruction_zh"}:
+                    content[key] = value
+
+    elif task_type == "cause_effect":
+        # Cause/effect: options already present, just map correct_effect →
+        # correct_answer so iOS can check the answer.
+        content["correct_answer"] = task_data.get("correct_effect", "")
+        options = list(task_data.get("options", []))
+        options_zh_raw = task_data.get("options_zh", [])
+        if options_zh_raw and len(options_zh_raw) >= len(options):
+            combined = list(zip(options, options_zh_raw))
+            random.shuffle(combined)
+            options, options_zh = zip(*combined) if combined else ([], [])
+            content["options"] = list(options)
+            content["options_zh"] = list(options_zh)
+        else:
+            random.shuffle(options)
+            content["options"] = options
+            if "options_zh" in task_data:
+                content["options_zh"] = task_data["options_zh"]
+        if "correct_effect_zh" in task_data:
+            content["correct_answer_zh"] = task_data["correct_effect_zh"]
+        if "image_hint" in task_data:
+            content["image_hint"] = task_data["image_hint"]
+
+    elif task_type == "sort":
+        # Sort tasks: "Which comes first / next?" — present items as options
+        # with the first item in correct order as the answer.
+        items = task_data.get("items", [])
+        correct_order = task_data.get("correct_order", [])
+        if items and correct_order:
+            first_idx = correct_order[0]
+            content["correct_answer"] = items[first_idx]
+            shuffled = list(items)
+            random.shuffle(shuffled)
+            content["options"] = shuffled
+            content["items"] = items
+        if "items_zh" in task_data:
+            content["items_zh"] = task_data["items_zh"]
+        if "image_hint" in task_data:
+            content["image_hint"] = task_data["image_hint"]
+
+    elif task_type == "sequence_order":
+        # Sequence tasks: "What comes first?" — present steps as options with
+        # the first step as the correct answer.
+        steps = task_data.get("steps", [])
+        correct_order = task_data.get("correct_order", [])
+        if steps and correct_order:
+            first_idx = correct_order[0]
+            content["correct_answer"] = steps[first_idx]
+            shuffled = list(steps)
+            random.shuffle(shuffled)
+            content["options"] = shuffled
+            content["items"] = steps
+            if "story_title" in task_data:
+                content["instruction_text"] = (
+                    f"What comes first? {task_data['story_title']}"
+                )
+                content["instruction_audio"] = content["instruction_text"]
+            if "story_title_zh" in task_data:
+                content["instruction_zh"] = (
+                    f"什么是第一步？{task_data['story_title_zh']}"
+                )
+        if "steps_zh" in task_data:
+            content["items_zh"] = task_data["steps_zh"]
+
+    else:
+        # All other task types: copy fields verbatim (existing behaviour)
+        skip_keys = {"instruction", "instruction_zh"}
+        for key, value in task_data.items():
+            if key not in skip_keys:
+                content[key] = value
 
     return content
 
