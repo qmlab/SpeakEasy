@@ -30,6 +30,8 @@ class SpeechService: NSObject, ObservableObject {
     private var pendingCompletion: ((Double) -> Void)?
     /// Stored target word for manual-stop evaluation
     private var pendingTargetWord: String = ""
+    /// Cancellable work item for the delayed recognition start
+    private var pendingRecognitionWork: DispatchWorkItem?
 
     enum SpeechLanguage: String, CaseIterable {
         case english = "en-US"
@@ -81,11 +83,20 @@ class SpeechService: NSObject, ObservableObject {
     
     func setupAudioSession(forPlayback: Bool = true) {
         do {
-            if forPlayback {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            } else {
-                try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
-            }
+            // Always use .playAndRecord so switching between TTS and speech
+            // recognition never requires an audio-category change.  On real
+            // iPhones a .playback → .playAndRecord switch can silently fail
+            // (the deactivation races with draining TTS buffers), leaving
+            // the audio hardware in a broken state where the mic returns a
+            // zero-sample-rate format and recognition fails immediately.
+            //
+            // .defaultToSpeaker keeps TTS audible through the main speaker
+            // instead of the earpiece that .playAndRecord defaults to.
+            try AVAudioSession.sharedInstance().setCategory(
+                .playAndRecord,
+                mode: forPlayback ? .default : .measurement,
+                options: [.defaultToSpeaker, .duckOthers]
+            )
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("Failed to setup audio session: \(error)")
@@ -120,13 +131,26 @@ class SpeechService: NSObject, ObservableObject {
     
     /// Start listening with manual stop control. The user must call `stopAndEvaluate()` to finish.
     func startListeningManual(targetWord: String, completion: @escaping (Double) -> Void) {
-        pendingCompletion = completion
-        pendingTargetWord = targetWord
         startListeningInternal(targetWord: targetWord, autoStop: false, completion: completion)
     }
 
     /// Stop listening and evaluate the recognized speech against the target word.
     func stopAndEvaluate() {
+        // Cancel any pending delayed recognition start (during the 0.3s window)
+        if let work = pendingRecognitionWork {
+            work.cancel()
+            pendingRecognitionWork = nil
+            // If the engine never started, fire the completion with 0
+            // and reset the listening flag so the UI returns to idle.
+            if !audioEngine.isRunning {
+                isListening = false
+                let completion = pendingCompletion
+                pendingCompletion = nil
+                completion?(0)
+                return
+            }
+        }
+
         guard isListening else { return }
         // Stop the audio engine and end the audio stream so the recognition task
         // finalises and fires its callback with the accumulated transcription.
@@ -138,8 +162,6 @@ class SpeechService: NSObject, ObservableObject {
     }
 
     func startListening(targetWord: String, completion: @escaping (Double) -> Void) {
-        pendingCompletion = completion
-        pendingTargetWord = targetWord
         startListeningInternal(targetWord: targetWord, autoStop: true, completion: completion)
     }
 
@@ -188,20 +210,61 @@ class SpeechService: NSObject, ObservableObject {
 
         stopListening()
 
-        // Deactivate then reactivate audio session for clean playback → record transition.
-        // On real devices the audio hardware needs a full reset when switching from
-        // .playback (TTS) to .playAndRecord (speech recognition).
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        // Re-set pendingCompletion AFTER stopListening() which clears it.
+        // stopAndEvaluate() reads this during the 0.3s delay window.
+        pendingCompletion = completion
+        pendingTargetWord = targetWord
+
+        // Switch audio session mode from .default (TTS) to .measurement
+        // (recognition).  The category stays .playAndRecord throughout, so
+        // no hardware route change is needed – only the DSP mode changes.
         setupAudioSession(forPlayback: false)
 
-        // Reset audio engine so its node graph rebuilds with the new session config.
-        // Without this, inputNode.outputFormat can return a stale / zero-sample-rate
-        // format on real hardware after a category switch.
+        // Reset audio engine so its node graph is clean for the new session.
         audioEngine.reset()
+
+        // Set isListening immediately so stopAndEvaluate() works during
+        // the delay window and the UI shows the listening state right away.
+        isListening = true
+        recognizedText = ""
+
+        // Give the audio hardware a moment to settle after stopping TTS.
+        // On real iPhones the mic input format can be stale if we query it
+        // immediately after the synthesizer releases the audio output.
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.pendingRecognitionWork = nil
+            self.startRecognitionEngine(
+                targetWord: targetWord,
+                autoStop: autoStop,
+                speechRecognizer: speechRecognizer,
+                completion: completion
+            )
+        }
+        pendingRecognitionWork = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
+    }
+
+    /// Second phase of recognition start – runs after a short delay to let
+    /// the audio hardware settle following TTS stop + mode switch.
+    private func startRecognitionEngine(
+        targetWord: String,
+        autoStop: Bool,
+        speechRecognizer: SFSpeechRecognizer,
+        completion: @escaping (Double) -> Void
+    ) {
+        guard speechRecognizer.isAvailable else {
+            DispatchQueue.main.async {
+                self.isListening = false
+                completion(0)
+            }
+            return
+        }
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
             DispatchQueue.main.async {
+                self.isListening = false
                 completion(0)
             }
             return
@@ -213,8 +276,9 @@ class SpeechService: NSObject, ObservableObject {
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         
         guard recordingFormat.sampleRate > 0 && recordingFormat.channelCount > 0 else {
-            print("Invalid recording format - microphone may not be available")
+            print("Invalid recording format – sampleRate: \(recordingFormat.sampleRate), channels: \(recordingFormat.channelCount)")
             DispatchQueue.main.async {
+                self.isListening = false
                 completion(0)
             }
             return
@@ -238,11 +302,7 @@ class SpeechService: NSObject, ObservableObject {
                 if self.audioEngine.isRunning {
                     self.audioEngine.stop()
                 }
-                do {
-                    inputNode.removeTap(onBus: 0)
-                } catch {
-                    print("Error removing tap: \(error)")
-                }
+                inputNode.removeTap(onBus: 0)
                 
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
@@ -259,26 +319,14 @@ class SpeechService: NSObject, ObservableObject {
             }
         }
         
-        do {
-            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
-                self?.recognitionRequest?.append(buffer)
-            }
-        } catch {
-            print("Failed to install tap on audio input: \(error)")
-            DispatchQueue.main.async {
-                completion(0)
-            }
-            return
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
+            self?.recognitionRequest?.append(buffer)
         }
         
         audioEngine.prepare()
         
         do {
             try audioEngine.start()
-            DispatchQueue.main.async {
-                self.isListening = true
-                self.recognizedText = ""
-            }
             
             if autoStop {
                 DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration) { [weak self] in
@@ -290,12 +338,17 @@ class SpeechService: NSObject, ObservableObject {
         } catch {
             print("Audio engine failed to start: \(error)")
             DispatchQueue.main.async {
+                self.isListening = false
                 completion(0)
             }
         }
     }
     
     func stopListening() {
+        // Cancel any pending delayed recognition start
+        pendingRecognitionWork?.cancel()
+        pendingRecognitionWork = nil
+
         if audioEngine.isRunning {
             audioEngine.stop()
         }
@@ -306,16 +359,9 @@ class SpeechService: NSObject, ObservableObject {
         recognitionRequest = nil
         pendingCompletion = nil
         
-        do {
-            let inputNode = audioEngine.inputNode
-            inputNode.removeTap(onBus: 0)
-        } catch {
-            print("Error removing tap in stopListening: \(error)")
-        }
+        audioEngine.inputNode.removeTap(onBus: 0)
         
-        DispatchQueue.main.async {
-            self.isListening = false
-        }
+        self.isListening = false
     }
     
     func calculateRating(recognized: String, target: String) -> Double {
