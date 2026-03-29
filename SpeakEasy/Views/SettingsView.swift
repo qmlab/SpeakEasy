@@ -203,7 +203,7 @@ struct SettingsView: View {
             }
             
             VStack(alignment: .leading, spacing: 15) {
-                AboutRow(icon: "star.fill", color: .yellow, title: "Version", value: "1.0.0")
+                AboutRow(icon: "star.fill", color: .yellow, title: "Version", value: "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"))")
                 
                 Divider()
                 
