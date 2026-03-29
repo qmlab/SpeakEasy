@@ -131,8 +131,6 @@ class SpeechService: NSObject, ObservableObject {
     
     /// Start listening with manual stop control. The user must call `stopAndEvaluate()` to finish.
     func startListeningManual(targetWord: String, completion: @escaping (Double) -> Void) {
-        pendingCompletion = completion
-        pendingTargetWord = targetWord
         startListeningInternal(targetWord: targetWord, autoStop: false, completion: completion)
     }
 
@@ -164,8 +162,6 @@ class SpeechService: NSObject, ObservableObject {
     }
 
     func startListening(targetWord: String, completion: @escaping (Double) -> Void) {
-        pendingCompletion = completion
-        pendingTargetWord = targetWord
         startListeningInternal(targetWord: targetWord, autoStop: true, completion: completion)
     }
 
@@ -213,6 +209,11 @@ class SpeechService: NSObject, ObservableObject {
         }
 
         stopListening()
+
+        // Re-set pendingCompletion AFTER stopListening() which clears it.
+        // stopAndEvaluate() reads this during the 0.3s delay window.
+        pendingCompletion = completion
+        pendingTargetWord = targetWord
 
         // Switch audio session mode from .default (TTS) to .measurement
         // (recognition).  The category stays .playAndRecord throughout, so
@@ -326,10 +327,6 @@ class SpeechService: NSObject, ObservableObject {
         
         do {
             try audioEngine.start()
-            DispatchQueue.main.async {
-                self.isListening = true
-                self.recognizedText = ""
-            }
             
             if autoStop {
                 DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration) { [weak self] in
@@ -364,9 +361,7 @@ class SpeechService: NSObject, ObservableObject {
         
         audioEngine.inputNode.removeTap(onBus: 0)
         
-        DispatchQueue.main.async {
-            self.isListening = false
-        }
+        self.isListening = false
     }
     
     func calculateRating(recognized: String, target: String) -> Double {
