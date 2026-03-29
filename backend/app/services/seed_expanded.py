@@ -109,14 +109,18 @@ def _build_content(task_type: str, task_data: dict) -> dict:
 
             # Build shuffled options: correct answer + distractors
             opts = [pair[1]] + list(distractors)
-            random.shuffle(opts)
-            content["options"] = opts
-            content["correct_answer"] = pair[1]
-
-            # Build Chinese options in matching order
+            # Shuffle EN and ZH options with the same permutation
             if len(pair_zh) >= 2 and len(distractors_zh) >= len(distractors):
                 opts_zh = [pair_zh[1]] + list(distractors_zh)
-                content["options_zh"] = opts_zh
+                combined = list(zip(opts, opts_zh))
+                random.shuffle(combined)
+                opts, opts_zh = zip(*combined) if combined else ([], [])
+                content["options"] = list(opts)
+                content["options_zh"] = list(opts_zh)
+            else:
+                random.shuffle(opts)
+                content["options"] = opts
+            content["correct_answer"] = pair[1]
         else:
             # Fallback: copy raw fields
             for key, value in task_data.items():
@@ -127,7 +131,9 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         # Cause/effect: options already present, just map correct_effect →
         # correct_answer so iOS can check the answer.
         content["correct_answer"] = task_data.get("correct_effect", "")
-        content["options"] = task_data.get("options", [])
+        options = list(task_data.get("options", []))
+        random.shuffle(options)
+        content["options"] = options
         if "options_zh" in task_data:
             content["options_zh"] = task_data["options_zh"]
         if "correct_effect_zh" in task_data:
