@@ -33,6 +33,10 @@ class SpeechService: NSObject, ObservableObject {
     /// Cancellable work item for the delayed recognition start
     private var pendingRecognitionWork: DispatchWorkItem?
 
+    /// Callback fired when TTS finishes speaking naturally (not cancelled).
+    /// The view uses this to auto-start listening after the instruction is read.
+    var onSpeechFinished: (() -> Void)?
+
     enum SpeechLanguage: String, CaseIterable {
         case english = "en-US"
         case chinese = "zh-CN"
@@ -440,6 +444,7 @@ extension SpeechService: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         DispatchQueue.main.async {
             self.isSpeaking = false
+            self.onSpeechFinished?()
         }
     }
 

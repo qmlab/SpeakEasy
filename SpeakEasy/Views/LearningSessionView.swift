@@ -22,6 +22,10 @@ struct LearningSessionView: View {
     @State private var showSessionSummary: Bool = false
     @State private var animateReward: Bool = false
     @State private var showCameraView: Bool = false
+    /// Number of incorrect speech attempts on the current task (max 3 before auto-advance)
+    @State private var speechRetryCount: Int = 0
+    /// Maximum retries allowed for incorrect speech answers
+    private let maxSpeechRetries = 3
 
     var body: some View {
         NavigationStack {
@@ -94,12 +98,22 @@ struct LearningSessionView: View {
                 isEvaluating = false
                 spokenText = ""
                 selectedOption = nil
+                speechRetryCount = 0
                 if isListening {
                     speechService.stopListening()
                     isListening = false
                 }
-                // Auto-speak the instruction so illiterate kids can understand
+                // Auto-speak the instruction so illiterate kids can understand.
+                // When TTS finishes, auto-enter listening for voice tasks.
                 if let task = learningManager.currentTask {
+                    let modalities = task.modalities
+                    let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
+                    speechService.onSpeechFinished = modalities.contains("voice") && !targetWord.isEmpty ? { [self] in
+                        // Clear the callback so it doesn't fire again for
+                        // "Hear Again" or target-word taps.
+                        speechService.onSpeechFinished = nil
+                        startListeningForTask(targetWord: targetWord)
+                    } : nil
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         speechService.speak(task.content.displayInstruction)
                     }
@@ -434,6 +448,59 @@ struct LearningSessionView: View {
 
     // MARK: - Speech Input
 
+    /// Start listening for speech and handle the result (shared by button tap and auto-start).
+    private func startListeningForTask(targetWord: String) {
+        // Stop any ongoing TTS so the mic can activate
+        if speechService.isSpeaking {
+            speechService.onSpeechFinished = nil   // prevent callback loop
+            speechService.stop()
+        }
+        isListening = true
+        spokenText = ""
+        speechService.startListening(targetWord: targetWord) { rating in
+            isListening = false
+            spokenText = speechService.recognizedText
+            if rating > 0 {
+                hasRecording = true
+                let isCorrect = rating >= 3.0
+                if isCorrect {
+                    // Correct — submit and auto-advance (submitAttempt already
+                    // shows feedback + fetches the next task after a delay).
+                    isEvaluating = true
+                    Task {
+                        await learningManager.submitAttempt(
+                            isCorrect: true,
+                            score: Int(rating),
+                            dimension: dimension
+                        )
+                        isEvaluating = false
+                    }
+                } else {
+                    // Incorrect
+                    speechRetryCount += 1
+                    if speechRetryCount >= maxSpeechRetries {
+                        // Out of retries — submit as incorrect and move on
+                        isEvaluating = true
+                        Task {
+                            await learningManager.submitAttempt(
+                                isCorrect: false,
+                                score: Int(rating),
+                                dimension: dimension
+                            )
+                            isEvaluating = false
+                        }
+                    } else {
+                        // Still has retries — show feedback and let user try again
+                        spokenText = "Not quite! Try again (\(maxSpeechRetries - speechRetryCount) left)"
+                    }
+                }
+            } else {
+                hasRecording = false
+                spokenText = "Could not hear clearly. Try again!"
+            }
+        }
+    }
+
     private func speechInputArea(task: AdaptiveTask) -> some View {
         let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
 
@@ -463,39 +530,16 @@ struct LearningSessionView: View {
                     )
             }
 
-            // Main mic button: 3 states
+            // Main mic button
             Button {
                 if isEvaluating { return }
 
                 if isListening {
-                    // State 2 -> Stop recording and evaluate
+                    // Already listening -> stop and evaluate
                     speechService.stopAndEvaluate()
                 } else {
-                    // State 1 or 3 -> Start recording
-                    // Stop TTS first so audio session can switch to recording
-                    speechService.stop()
-                    isListening = true
-                    spokenText = ""
-                    speechService.startListeningManual(targetWord: targetWord) { rating in
-                        isListening = false
-                        spokenText = speechService.recognizedText
-                        if rating > 0 {
-                            hasRecording = true
-                            isEvaluating = true
-                            let isCorrect = rating >= 3.0
-                            Task {
-                                await learningManager.submitAttempt(
-                                    isCorrect: isCorrect,
-                                    score: Int(rating),
-                                    dimension: dimension
-                                )
-                                isEvaluating = false
-                            }
-                        } else {
-                            hasRecording = false
-                            spokenText = "Could not hear clearly. Try again!"
-                        }
-                    }
+                    // Not listening -> if TTS is still playing, interrupt it
+                    startListeningForTask(targetWord: targetWord)
                 }
             } label: {
                 HStack(spacing: 12) {
@@ -514,6 +558,13 @@ struct LearningSessionView: View {
             }
             .disabled(learningManager.isSubmitting || isEvaluating)
 
+            // Retry counter
+            if speechRetryCount > 0 && speechRetryCount < maxSpeechRetries && !isListening {
+                Text("Attempt \(speechRetryCount)/\(maxSpeechRetries)")
+                    .font(.caption)
+                    .foregroundColor(.orange)
+            }
+
             // Help: speak the target word
             if !targetWord.isEmpty {
                 Button {
@@ -531,8 +582,8 @@ struct LearningSessionView: View {
     /// Label for the mic button based on current state
     private var micButtonLabel: String {
         if isListening {
-            return "Tap to Stop"
-        } else if hasRecording {
+            return "Listening..."
+        } else if hasRecording || speechRetryCount > 0 {
             return "Say It Again"
         } else {
             return "Say It"
