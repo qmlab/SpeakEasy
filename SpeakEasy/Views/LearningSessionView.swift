@@ -472,6 +472,8 @@ struct LearningSessionView: View {
                     speechService.stopAndEvaluate()
                 } else {
                     // State 1 or 3 -> Start recording
+                    // Stop TTS first so audio session can switch to recording
+                    speechService.stop()
                     isListening = true
                     spokenText = ""
                     speechService.startListeningManual(targetWord: targetWord) { rating in
