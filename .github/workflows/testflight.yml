@@ -68,7 +68,7 @@ jobs:
 
       - name: Set build number
         run: |
-          BUILD_NUMBER=${{ github.run_number }}
+          BUILD_NUMBER=9
           echo "Setting CFBundleVersion to $BUILD_NUMBER"
           /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" SpeakEasy/Info.plist
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
