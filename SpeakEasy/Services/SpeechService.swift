@@ -253,13 +253,17 @@ class SpeechService: NSObject, ObservableObject {
         completion: @escaping (Double) -> Void
     ) {
         guard speechRecognizer.isAvailable else {
-            DispatchQueue.main.async { completion(0) }
+            DispatchQueue.main.async {
+                self.isListening = false
+                completion(0)
+            }
             return
         }
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
             DispatchQueue.main.async {
+                self.isListening = false
                 completion(0)
             }
             return
@@ -273,6 +277,7 @@ class SpeechService: NSObject, ObservableObject {
         guard recordingFormat.sampleRate > 0 && recordingFormat.channelCount > 0 else {
             print("Invalid recording format – sampleRate: \(recordingFormat.sampleRate), channels: \(recordingFormat.channelCount)")
             DispatchQueue.main.async {
+                self.isListening = false
                 completion(0)
             }
             return
@@ -336,6 +341,7 @@ class SpeechService: NSObject, ObservableObject {
         } catch {
             print("Audio engine failed to start: \(error)")
             DispatchQueue.main.async {
+                self.isListening = false
                 completion(0)
             }
         }
