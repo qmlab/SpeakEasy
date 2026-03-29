@@ -30,6 +30,8 @@ class SpeechService: NSObject, ObservableObject {
     private var pendingCompletion: ((Double) -> Void)?
     /// Stored target word for manual-stop evaluation
     private var pendingTargetWord: String = ""
+    /// Cancellable work item for the delayed recognition start
+    private var pendingRecognitionWork: DispatchWorkItem?
 
     enum SpeechLanguage: String, CaseIterable {
         case english = "en-US"
@@ -136,6 +138,21 @@ class SpeechService: NSObject, ObservableObject {
 
     /// Stop listening and evaluate the recognized speech against the target word.
     func stopAndEvaluate() {
+        // Cancel any pending delayed recognition start (during the 0.3s window)
+        if let work = pendingRecognitionWork {
+            work.cancel()
+            pendingRecognitionWork = nil
+            // If the engine never started, fire the completion with 0
+            // and reset the listening flag so the UI returns to idle.
+            if !audioEngine.isRunning {
+                isListening = false
+                let completion = pendingCompletion
+                pendingCompletion = nil
+                completion?(0)
+                return
+            }
+        }
+
         guard isListening else { return }
         // Stop the audio engine and end the audio stream so the recognition task
         // finalises and fires its callback with the accumulated transcription.
@@ -205,11 +222,17 @@ class SpeechService: NSObject, ObservableObject {
         // Reset audio engine so its node graph is clean for the new session.
         audioEngine.reset()
 
+        // Set isListening immediately so stopAndEvaluate() works during
+        // the delay window and the UI shows the listening state right away.
+        isListening = true
+        recognizedText = ""
+
         // Give the audio hardware a moment to settle after stopping TTS.
         // On real iPhones the mic input format can be stale if we query it
         // immediately after the synthesizer releases the audio output.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+        let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
+            self.pendingRecognitionWork = nil
             self.startRecognitionEngine(
                 targetWord: targetWord,
                 autoStop: autoStop,
@@ -217,6 +240,8 @@ class SpeechService: NSObject, ObservableObject {
                 completion: completion
             )
         }
+        pendingRecognitionWork = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
     }
 
     /// Second phase of recognition start – runs after a short delay to let
@@ -317,6 +342,10 @@ class SpeechService: NSObject, ObservableObject {
     }
     
     func stopListening() {
+        // Cancel any pending delayed recognition start
+        pendingRecognitionWork?.cancel()
+        pendingRecognitionWork = nil
+
         if audioEngine.isRunning {
             audioEngine.stop()
         }
@@ -327,12 +356,7 @@ class SpeechService: NSObject, ObservableObject {
         recognitionRequest = nil
         pendingCompletion = nil
         
-        do {
-            let inputNode = audioEngine.inputNode
-            inputNode.removeTap(onBus: 0)
-        } catch {
-            print("Error removing tap in stopListening: \(error)")
-        }
+        audioEngine.inputNode.removeTap(onBus: 0)
         
         DispatchQueue.main.async {
             self.isListening = false
