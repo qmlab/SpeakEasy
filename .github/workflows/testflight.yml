@@ -68,8 +68,9 @@ jobs:
 
       - name: Set build number
         run: |
-          # Offset so that next run produces build 9, then auto-increments (10, 11, …)
-          BUILD_NUMBER=$(( ${{ github.run_number }} - 6 ))
+          # Offset so builds are above the previous high-water mark (build 14).
+          # run 17 → 21, 18 → 22, … — always monotonically increasing.
+          BUILD_NUMBER=$(( ${{ github.run_number }} + 4 ))
           echo "Setting CFBundleVersion to $BUILD_NUMBER"
           /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" SpeakEasy/Info.plist
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
