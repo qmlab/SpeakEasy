@@ -105,7 +105,7 @@ def _build_content(task_type: str, task_data: dict) -> dict:
 
             # The first pair item becomes the target shown as image
             content["target_word"] = pair[0]
-            content["image_hint"] = pair[0].lower().replace(" ", "_")
+            content["image_hint"] = task_data.get("image_hint", pair[0].lower().replace(" ", "_"))
 
             # Build shuffled options: correct answer + distractors
             opts = [pair[1]] + list(distractors)
