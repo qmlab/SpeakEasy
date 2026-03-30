@@ -2360,7 +2360,13 @@ def backfill_task_options(db: Session) -> int:
                         s.get("text") or s.get("action") or "" for s in steps
                     ]
                     new_correct = (
-                        sorted_steps[0].get("text", "") if sorted_steps else ""
+                        (
+                            sorted_steps[0].get("text")
+                            or sorted_steps[0].get("action")
+                            or ""
+                        )
+                        if sorted_steps
+                        else ""
                     )
                     if not content.get("items"):
                         content["items"] = [
