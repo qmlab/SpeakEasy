@@ -346,8 +346,8 @@ struct LearningSessionView: View {
     /// Whether this task is a sorting/sequencing task that needs ordering UI
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
         let type = task.taskType
-        return (type == "sort" || type == "sequence_order") &&
-               task.content.displayOptions.count >= 3
+        return (type == "sort" || type == "sequence_order" || type == "build_sentence") &&
+               task.content.displayOptions.count >= 2
     }
 
     // MARK: - Interaction Area
@@ -387,6 +387,27 @@ struct LearningSessionView: View {
         if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) {
             simpleResponseButtons(task: task)
         }
+
+        // Skip button — always available so the child can move on
+        skipButton
+    }
+
+    private var skipButton: some View {
+        Button {
+            Task {
+                await learningManager.submitAttempt(
+                    isCorrect: false,
+                    score: 0,
+                    dimension: dimension
+                )
+            }
+        } label: {
+            Label("Skip", systemImage: "forward.fill")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        }
+        .disabled(learningManager.isSubmitting)
+        .padding(.top, 4)
     }
 
     // MARK: - Ordering Area (Sort / Sequence)

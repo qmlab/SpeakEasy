@@ -226,8 +226,22 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         cs = task_data.get("correct_sentence") or task_data.get("target_sentence", "")
         if cs and "target_word" not in content:
             content["target_word"] = cs
-        # image_hint left unset intentionally when not in JSON;
-        # backfill_target_words will derive it using keyword mapping.
+        # Populate display_options + items from words array so the iOS
+        # ordering UI shows word cards instead of just an image.
+        words = task_data.get("words") or task_data.get("word_cards")
+        if words and not content.get("display_options"):
+            import random as _rand
+            shuffled = list(words)
+            _rand.seed(hash(tuple(words)))
+            _rand.shuffle(shuffled)
+            content["display_options"] = shuffled
+            if not content.get("items"):
+                content["items"] = list(words)
+            if cs and not content.get("correct_answer"):
+                content["correct_answer"] = cs
+        # Add flexible acceptance threshold for voice evaluation
+        if "accept_threshold" not in content:
+            content["accept_threshold"] = 0.3
 
     elif task_type == "conversation":
         # Conversation: open-ended response. Use first example answer as
@@ -239,8 +253,9 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         examples = task_data.get("example_answers", [])
         if examples and "target_word" not in content:
             content["target_word"] = examples[0]
-        # image_hint left unset intentionally when not in JSON;
-        # backfill_target_words will derive it using keyword mapping.
+        # Add flexible acceptance threshold for voice evaluation
+        if "accept_threshold" not in content:
+            content["accept_threshold"] = 0.3
 
     else:
         # All other task types: copy fields verbatim (existing behaviour)
