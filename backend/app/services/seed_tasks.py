@@ -607,6 +607,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "correct_order": [0, 1, 2, 3],
                     "target_sentence": "The dog is big",
                     "target_word": "The dog is big",
+                    "image_hint": "dog",
                 },
                 is_assessment=False,
             ),
@@ -622,6 +623,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "correct_order": [0, 1, 2],
                     "target_sentence": "I like apples",
                     "target_word": "I like apples",
+                    "image_hint": "apple",
                 },
                 is_assessment=False,
             ),
@@ -637,6 +639,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "correct_order": [0, 1, 2, 3, 4],
                     "target_sentence": "She is eating a banana",
                     "target_word": "She is eating a banana",
+                    "image_hint": "banana",
                 },
                 is_assessment=False,
             ),
@@ -661,6 +664,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                         "I love fish",
                     ],
                     "target_word": "I like dogs",
+                    "image_hint": "dog",
                     "keywords": [
                         "dog",
                         "cat",
@@ -687,6 +691,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "question": "What did you eat for breakfast?",
                     "example_answers": ["I ate cereal", "I had milk", "I ate eggs"],
                     "target_word": "I ate cereal",
+                    "image_hint": "spoon",
                     "keywords": [
                         "ate",
                         "eat",
@@ -716,6 +721,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                         "I like balls",
                     ],
                     "target_word": "I like to play with blocks",
+                    "image_hint": "ball",
                     "keywords": ["play", "toy", "ball", "block", "game", "like", "fun"],
                     "accept_threshold": 0.3,
                 },
@@ -2439,13 +2445,53 @@ def backfill_task_options(db: Session) -> int:
 
 
 def backfill_target_words(db: Session) -> int:
-    """Backfill target_word for voice-input tasks that are missing it.
+    """Backfill target_word and image_hint for voice-input tasks.
 
     Derives target_word from target_phrase (describe), correct_sentence /
     target_sentence (build_sentence), or first example_answers entry
     (conversation) so the iOS speech recognition flow can evaluate the
     child's spoken response.
+
+    Also adds image_hint for build_sentence / conversation tasks that
+    are missing it, using a sensible keyword from the task content.
     """
+    # Mapping from task content keywords to existing Cloudinary assets
+    _KEYWORD_TO_IMAGE: dict[str, str] = {
+        "dog": "dog",
+        "cat": "cat",
+        "ball": "ball",
+        "apple": "apple",
+        "banana": "banana",
+        "bus": "bus",
+        "tree": "tree",
+        "fish": "fish",
+        "bird": "bird",
+        "rabbit": "rabbit",
+        "car": "car",
+        "spoon": "spoon",
+        "cup": "cup",
+        "hat": "hat",
+        "shoe": "shoe",
+        "star": "star",
+        "moon": "moon",
+        "pencil": "pencil",
+        "crayon": "crayon",
+        "teddy": "teddy_bear",
+        "toy": "teddy_bear",
+        "block": "ball",
+        "food": "apple",
+        "cereal": "spoon",
+        "milk": "cup",
+        "egg": "spoon",
+        "play": "ball",
+        "happy": "star",
+        "family": "star",
+        "color": "crayon",
+        "blue": "blue",
+        "red": "crayon",
+        "doctor": "pencil",
+    }
+
     tasks = (
         db.query(AdaptiveTask)
         .filter(
@@ -2456,31 +2502,62 @@ def backfill_target_words(db: Session) -> int:
     updated = 0
     for task in tasks:
         content = task.content
-        if not content or content.get("target_word"):
+        if not content:
             continue
 
-        new_tw = None
-        if task.task_type == "describe":
-            new_tw = (
-                content.get("target_phrase")
-                or (content.get("target_phrases", []) or [None])[0]
-            )
-            # Also derive image_hint from scene for legacy tasks
-            if not content.get("image_hint") and content.get("scene"):
-                scene = content["scene"].lower()
-                for word in ["ball", "bus", "cat", "dog", "banana", "tree"]:
-                    if word in scene:
-                        content["image_hint"] = word
-                        break
-        elif task.task_type == "build_sentence":
-            new_tw = content.get("correct_sentence") or content.get("target_sentence")
-        elif task.task_type == "conversation":
-            examples = content.get("example_answers", [])
-            if examples:
-                new_tw = examples[0]
+        changed = False
+        needs_tw = not content.get("target_word")
 
-        if new_tw:
-            content["target_word"] = new_tw
+        new_tw = None
+        if needs_tw:
+            if task.task_type == "describe":
+                new_tw = (
+                    content.get("target_phrase")
+                    or (content.get("target_phrases", []) or [None])[0]
+                )
+                # Also derive image_hint from scene for legacy tasks
+                if not content.get("image_hint") and content.get("scene"):
+                    scene = content["scene"].lower()
+                    for word in ["ball", "bus", "cat", "dog", "banana", "tree"]:
+                        if word in scene:
+                            content["image_hint"] = word
+                            break
+            elif task.task_type == "build_sentence":
+                new_tw = content.get("correct_sentence") or content.get(
+                    "target_sentence"
+                )
+            elif task.task_type == "conversation":
+                examples = content.get("example_answers", [])
+                if examples:
+                    new_tw = examples[0]
+
+            if new_tw:
+                content["target_word"] = new_tw
+                changed = True
+
+        # Also derive image_hint for voice tasks missing it
+        if not content.get("image_hint") and task.task_type in (
+            "build_sentence",
+            "conversation",
+            "describe",
+        ):
+            # Try to find a keyword from the task content that maps to a
+            # known Cloudinary asset
+            search_text = " ".join(
+                [
+                    content.get("target_word", ""),
+                    content.get("target_sentence", ""),
+                    content.get("question", ""),
+                    " ".join(content.get("example_answers", [])),
+                ]
+            ).lower()
+            for keyword, asset in _KEYWORD_TO_IMAGE.items():
+                if keyword in search_text:
+                    content["image_hint"] = asset
+                    changed = True
+                    break
+
+        if changed:
             task.content = content
             flag_modified(task, "content")
             updated += 1
