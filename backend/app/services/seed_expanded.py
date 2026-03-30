@@ -192,6 +192,52 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         if "steps_zh" in task_data:
             content["items_zh"] = task_data["steps_zh"]
 
+    elif task_type == "describe":
+        # Describe tasks: child sees an image and says what they see.
+        # Map target_phrase → target_word so iOS voice input can evaluate.
+        skip_keys = {"instruction", "instruction_zh"}
+        for key, value in task_data.items():
+            if key not in skip_keys:
+                content[key] = value
+        # Derive target_word from target_phrase so speech recognition works
+        tp = task_data.get("target_phrase", "")
+        if tp and "target_word" not in content:
+            content["target_word"] = tp
+        # Also support legacy target_phrases array
+        if not tp:
+            tps = task_data.get("target_phrases", [])
+            if tps and "target_word" not in content:
+                content["target_word"] = tps[0]
+        # Derive image_hint from scene description for legacy tasks
+        if "image_hint" not in content and "scene" in task_data:
+            scene = task_data["scene"].lower()
+            for word in ["ball", "bus", "cat", "dog", "banana", "tree"]:
+                if word in scene:
+                    content["image_hint"] = word
+                    break
+
+    elif task_type == "build_sentence":
+        # Sentence building: child arranges/says a sentence.
+        # Map correct_sentence → target_word for voice evaluation.
+        skip_keys = {"instruction", "instruction_zh"}
+        for key, value in task_data.items():
+            if key not in skip_keys:
+                content[key] = value
+        cs = task_data.get("correct_sentence") or task_data.get("target_sentence", "")
+        if cs and "target_word" not in content:
+            content["target_word"] = cs
+
+    elif task_type == "conversation":
+        # Conversation: open-ended response. Use first example answer as
+        # target_word so voice input has something to match loosely against.
+        skip_keys = {"instruction", "instruction_zh"}
+        for key, value in task_data.items():
+            if key not in skip_keys:
+                content[key] = value
+        examples = task_data.get("example_answers", [])
+        if examples and "target_word" not in content:
+            content["target_word"] = examples[0]
+
     else:
         # All other task types: copy fields verbatim (existing behaviour)
         skip_keys = {"instruction", "instruction_zh"}

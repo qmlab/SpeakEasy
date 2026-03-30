@@ -29,6 +29,8 @@ struct LearningSessionView: View {
     private let maxSpeechRetries = 3
     /// Ordered selections for sorting/sequencing tasks
     @State private var orderedSelections: [String] = []
+    /// Whether the hint/clue is currently revealed
+    @State private var showHint: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -100,6 +102,7 @@ struct LearningSessionView: View {
                 speechRetryCount = 0
                 orderedSelections = []
                 animateFeedback = false
+                showHint = false
                 if isListening {
                     speechService.stopListening()
                     isListening = false
@@ -743,16 +746,43 @@ struct LearningSessionView: View {
                     .foregroundColor(.orange)
             }
 
-            // Help: speak the target word
+            // Help buttons: hear the word + show hint
             if !targetWord.isEmpty {
-                Button {
-                    speechService.speak(targetWord)
-                } label: {
-                    Label("Hear the word", systemImage: "speaker.wave.2")
-                        .font(.subheadline)
-                        .foregroundColor(dimension.color)
+                HStack(spacing: 20) {
+                    Button {
+                        speechService.speak(targetWord)
+                    } label: {
+                        Label("Hear Again", systemImage: "speaker.wave.2")
+                            .font(.subheadline)
+                            .foregroundColor(dimension.color)
+                    }
+                    .disabled(isListening)
+
+                    Button {
+                        withAnimation { showHint = true }
+                        // Also speak the hint aloud
+                        speechService.speak(targetWord)
+                    } label: {
+                        Label("Hint", systemImage: "lightbulb")
+                            .font(.subheadline)
+                            .foregroundColor(.orange)
+                    }
+                    .disabled(isListening || showHint)
                 }
-                .disabled(isListening)
+
+                // Reveal hint text
+                if showHint {
+                    Text("💡 \(targetWord)")
+                        .font(.headline)
+                        .foregroundColor(.orange)
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.orange.opacity(0.1))
+                        )
+                        .transition(.scale.combined(with: .opacity))
+                }
             }
         }
     }
