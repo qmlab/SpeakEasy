@@ -2206,17 +2206,34 @@ def _derive_image_hint(content: dict) -> str | None:
     return None
 
 
-def backfill_cognitive_base_tasks(db: Session) -> int:
-    """Backfill options/correct_answer for base cognitive tasks that are missing them.
+def backfill_task_options(db: Session) -> int:
+    """Backfill options/correct_answer for ALL tasks that are missing them.
 
-    Old base tasks only had 'choices' (dict format) or 'steps' but no 'options'
-    (string list) or 'correct_answer'. This function derives them so the iOS app
-    can render interactive option buttons instead of the fallback Got It!/Help UI.
+    Old base tasks only had 'choices' (dict format), 'steps', 'items', or
+    'distractors' but no 'options' (string list) or 'correct_answer'.
+    This function derives them so the iOS app can render interactive option
+    buttons instead of the fallback Got It!/Help UI.
+
+    Covers all dimensions: cognitive_logic, social_behavior, object_cognition,
+    language_comprehension, literacy.  Voice-input tasks (imitate, name_object,
+    describe, read_word, read_sentence, say_word, build_sentence, conversation)
+    are skipped because they use speech recognition, not option buttons.
     """
+    # Voice-input task types that intentionally have no options
+    voice_task_types = {
+        "imitate",
+        "name_object",
+        "describe",
+        "read_word",
+        "read_sentence",
+        "say_word",
+        "build_sentence",
+        "conversation",
+    }
+
     tasks = (
         db.query(AdaptiveTask)
         .filter(
-            AdaptiveTask.dimension == DevelopmentalDimension.COGNITIVE_LOGIC.value,
             AdaptiveTask.is_assessment == False,  # noqa: E712
         )
         .all()
@@ -2226,54 +2243,169 @@ def backfill_cognitive_base_tasks(db: Session) -> int:
         content = task.content
         if not content:
             continue
-        # Skip tasks that already have options
         if content.get("options"):
             continue
+        if task.task_type in voice_task_types:
+            continue
 
-        new_options = []
+        new_options: list[str] = []
         new_correct = ""
 
-        # Derive from choices (cause_effect, reason tasks)
+        # --- 1. Derive from choices (many task types) ---
         choices = content.get("choices")
         if isinstance(choices, list) and choices:
-            for ch in choices:
-                if isinstance(ch, dict):
-                    text = ch.get("text", "")
+            first = choices[0]
+            if isinstance(first, dict):
+                # Dict choices: extract text/name/label
+                for ch in choices:
+                    text = (
+                        ch.get("text")
+                        or ch.get("label")
+                        or ch.get("name")
+                        or ch.get("image_name")
+                        or ""
+                    )
                     if text:
                         new_options.append(text)
-                    if ch.get("is_correct"):
+                    if ch.get("is_correct") or ch.get("is_best"):
                         new_correct = text
+            elif isinstance(first, str):
+                # String choices: use as-is
+                new_options = list(choices)
+                new_correct = choices[0] if choices else ""
 
-        # Derive from steps (sequence_order tasks)
-        steps = content.get("steps")
-        if not new_options and isinstance(steps, list) and steps:
-            # Shuffled order for options, correct order for items
-            sorted_steps = sorted(steps, key=lambda s: s.get("order", 0))
-            new_options = [s.get("text", "") for s in steps]  # shuffled display
-            new_correct = sorted_steps[0].get("text", "") if sorted_steps else ""
-            # Also add items in correct order for full validation
-            if not content.get("items"):
-                content["items"] = [s.get("text", "") for s in sorted_steps]
+        # --- 1b. Derive from actions_sequence/objects (follow_instruction L2) ---
+        if not new_options:
+            actions_seq = content.get("actions_sequence")
+            objects = content.get("objects")
+            if isinstance(actions_seq, list) and isinstance(objects, list) and objects:
+                for obj in objects:
+                    if isinstance(obj, dict):
+                        name = obj.get("name", "")
+                        if name and name not in new_options:
+                            new_options.append(name)
+                # correct = first action target
+                if actions_seq and isinstance(actions_seq[0], dict):
+                    new_correct = actions_seq[0].get("target", "")
 
-        # Derive from items (pair, sort tasks with dict items)
-        items = content.get("items")
-        if not new_options and isinstance(items, list) and items:
-            if isinstance(items[0], dict):
-                names = list(dict.fromkeys(i.get("name", "") for i in items if i.get("name")))
-                new_options = names[:4]  # max 4 options
-                # For pair tasks, correct = the pair item
-                pair_id = content.get("correct_pair")
-                if pair_id:
-                    for item in items:
-                        if isinstance(item, dict) and item.get("pair_id") == pair_id:
-                            new_correct = item.get("name", "")
-                            break
-                # For sort tasks, correct = first target item
-                if not new_correct:
-                    for item in items:
-                        if isinstance(item, dict) and item.get("is_target"):
-                            new_correct = item.get("name", "")
-                            break
+        # --- 1c. Derive from single action field (expanded imitate_action) ---
+        if not new_options:
+            action = content.get("action")
+            if (
+                isinstance(action, str)
+                and action
+                and task.task_type == "imitate_action"
+            ):
+                label = action.replace("_", " ").title()
+                new_options = [label]
+                new_correct = label
+
+        # --- 2. Derive from distractors + target (attend, joint_attention) ---
+        if not new_options:
+            target = content.get("target")
+            distractors = content.get("distractors")
+            if isinstance(distractors, list) and distractors and target:
+                if isinstance(target, dict):
+                    target_name = (
+                        target.get("name")
+                        or target.get("action")
+                        or target.get("emotion")
+                        or ""
+                    )
+                else:
+                    target_name = str(target)
+                if target_name:
+                    new_options.append(target_name)
+                    new_correct = target_name
+                for d in distractors:
+                    if isinstance(d, dict):
+                        d_name = (
+                            d.get("name") or d.get("action") or d.get("emotion") or ""
+                        )
+                    else:
+                        d_name = str(d)
+                    if d_name and d_name not in new_options:
+                        new_options.append(d_name)
+
+            # Also handle emotion-based attend tasks
+            emotion = content.get("emotion")
+            if not new_options and emotion:
+                new_options = ["Happy", "Sad"]
+                new_correct = emotion.capitalize()
+
+        # --- 3. Derive from sequence (turn_take tasks) ---
+        if not new_options:
+            sequence = content.get("sequence")
+            if isinstance(sequence, list) and sequence:
+                if isinstance(sequence[0], dict):
+                    labels = []
+                    for s in sequence:
+                        label = s.get("label") or s.get("action") or ""
+                        if label and label not in labels:
+                            labels.append(label)
+                    new_options = labels[:4]
+                elif isinstance(sequence[0], str):
+                    unique = list(dict.fromkeys(sequence))
+                    new_options = unique[:4]
+                if new_options:
+                    new_correct = new_options[0]
+
+        # --- 4. Derive from steps (sequence_order, follow_instruction) ---
+        if not new_options:
+            steps = content.get("steps")
+            if isinstance(steps, list) and steps:
+                if isinstance(steps[0], dict):
+                    sorted_steps = sorted(steps, key=lambda s: s.get("order", 0))
+                    new_options = [
+                        s.get("text") or s.get("action") or "" for s in steps
+                    ]
+                    new_correct = (
+                        sorted_steps[0].get("text", "") if sorted_steps else ""
+                    )
+                    if not content.get("items"):
+                        content["items"] = [
+                            s.get("text") or s.get("action") or "" for s in sorted_steps
+                        ]
+                elif isinstance(steps[0], str):
+                    new_options = list(steps)
+                    new_correct = steps[0] if steps else ""
+
+        # --- 5. Derive from items (pair, sort, classify, abstract) ---
+        if not new_options:
+            items = content.get("items")
+            if isinstance(items, list) and items:
+                if isinstance(items[0], dict):
+                    names = list(
+                        dict.fromkeys(i.get("name", "") for i in items if i.get("name"))
+                    )
+                    new_options = names[:6]
+                    # Pair tasks
+                    pair_id = content.get("correct_pair")
+                    if pair_id:
+                        for item in items:
+                            if (
+                                isinstance(item, dict)
+                                and item.get("pair_id") == pair_id
+                            ):
+                                new_correct = item.get("name", "")
+                                break
+                    # Sort/classify: first target item
+                    if not new_correct:
+                        for item in items:
+                            if isinstance(item, dict) and item.get("is_target"):
+                                new_correct = item.get("name", "")
+                                break
+                    # Abstract (odd-one-out): the odd item
+                    if not new_correct:
+                        for item in items:
+                            if isinstance(item, dict) and item.get("is_odd"):
+                                new_correct = item.get("name", "")
+                                break
+                elif isinstance(items[0], str):
+                    new_options = list(items[:6])
+                    target_cat = content.get("target_category")
+                    if target_cat:
+                        new_correct = items[0]
 
         if new_options:
             content["options"] = new_options
