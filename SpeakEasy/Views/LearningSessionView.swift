@@ -432,6 +432,8 @@ struct LearningSessionView: View {
                         .foregroundColor(.secondary)
                     ForEach(remaining, id: \.self) { option in
                         Button {
+                            // Speak the option text so the child learns pronunciation
+                            speechService.speak(option)
                             orderedSelections.append(option)
                             // Auto-submit when all items selected
                             if orderedSelections.count == options.count {
@@ -545,6 +547,8 @@ struct LearningSessionView: View {
             ForEach(task.content.displayOptions, id: \.self) { option in
                 Button {
                     selectedOption = option
+                    // Speak the option text so the child learns pronunciation
+                    speechService.speak(option)
                     let isCorrect = option.lowercased() == (task.content.correctAnswer ?? "").lowercased()
                     Task {
                         await learningManager.submitAttempt(

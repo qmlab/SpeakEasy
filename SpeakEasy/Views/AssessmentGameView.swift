@@ -30,6 +30,7 @@ struct AssessmentGameView: View {
 
     @State private var activityStartTime: Date?
 
+    @StateObject private var speechService = SpeechService()
     private let api = AdaptiveAPIService()
 
     enum AssessmentPhase {
@@ -318,6 +319,8 @@ struct AssessmentGameView: View {
             ForEach(options, id: \.self) { option in
                 Button {
                     selectedOption = option
+                    // Speak the option text so the child learns pronunciation
+                    speechService.speak(option)
                     Task {
                         await submitResponse(activity: activity, selected: option)
                     }
