@@ -433,6 +433,9 @@ struct LearningSessionView: View {
                     ForEach(remaining, id: \.self) { option in
                         Button {
                             // Speak the option text so the child learns pronunciation
+                            // Clear any pending auto-listen callback so option TTS finishing
+                            // doesn't accidentally start the microphone.
+                            speechService.onSpeechFinished = nil
                             speechService.speak(option)
                             orderedSelections.append(option)
                             // Auto-submit when all items selected
@@ -548,6 +551,9 @@ struct LearningSessionView: View {
                 Button {
                     selectedOption = option
                     // Speak the option text so the child learns pronunciation
+                    // Clear any pending auto-listen callback so option TTS finishing
+                    // doesn't accidentally start the microphone.
+                    speechService.onSpeechFinished = nil
                     speechService.speak(option)
                     let isCorrect = option.lowercased() == (task.content.correctAnswer ?? "").lowercased()
                     Task {
