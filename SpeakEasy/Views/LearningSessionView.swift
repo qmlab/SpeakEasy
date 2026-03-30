@@ -21,11 +21,14 @@ struct LearningSessionView: View {
     @State private var isEvaluating: Bool = false
     @State private var showSessionSummary: Bool = false
     @State private var animateReward: Bool = false
+    @State private var animateFeedback: Bool = false
     @State private var showCameraView: Bool = false
     /// Number of incorrect speech attempts on the current task (max 3 before auto-advance)
     @State private var speechRetryCount: Int = 0
     /// Maximum retries allowed for incorrect speech answers
     private let maxSpeechRetries = 3
+    /// Ordered selections for sorting/sequencing tasks
+    @State private var orderedSelections: [String] = []
 
     var body: some View {
         NavigationStack {
@@ -63,13 +66,9 @@ struct LearningSessionView: View {
                             showSessionSummary = true
                         }
                     } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.title3)
-                            Text("Exit")
-                                .fontWeight(.semibold)
-                        }
-                        .foregroundColor(.red)
+                        Image(systemName: "xmark")
+                            .font(.body.weight(.semibold))
+                            .foregroundColor(.secondary)
                     }
                 }
                 ToolbarItem(placement: .principal) {
@@ -99,6 +98,8 @@ struct LearningSessionView: View {
                 spokenText = ""
                 selectedOption = nil
                 speechRetryCount = 0
+                orderedSelections = []
+                animateFeedback = false
                 if isListening {
                     speechService.stopListening()
                     isListening = false
@@ -167,26 +168,29 @@ struct LearningSessionView: View {
 
     @ViewBuilder
     private func taskContentView(task: AdaptiveTask) -> some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Task progress
-                taskProgressBar
+        ZStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Task progress
+                    taskProgressBar
 
-                // Task instruction
-                instructionCard(task: task)
+                    // Task instruction
+                    instructionCard(task: task)
 
-                // Content area based on task type
-                contentArea(task: task)
+                    // Content area based on task type
+                    contentArea(task: task)
 
-                // Submit / interaction area
-                interactionArea(task: task)
-
-                // Feedback area
-                if let result = learningManager.lastAttemptResult {
-                    feedbackView(result: result)
+                    // Submit / interaction area
+                    interactionArea(task: task)
                 }
+                .padding()
             }
-            .padding()
+
+            // Feedback overlay (prominent, centered)
+            if let result = learningManager.lastAttemptResult {
+                feedbackOverlay(result: result)
+                    .id(result.attemptId)
+            }
         }
     }
 
@@ -315,8 +319,8 @@ struct LearningSessionView: View {
                 )
         }
 
-        // Items display (for sorting, sequencing tasks)
-        if let items = task.content.items, !items.isEmpty {
+        // Items display (for non-sorting tasks only — sorting tasks show items in orderingArea)
+        if let items = task.content.items, !items.isEmpty, !isSortingTask(task) {
             VStack(spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     Text(item)
@@ -330,6 +334,13 @@ struct LearningSessionView: View {
                 }
             }
         }
+    }
+
+    /// Whether this task is a sorting/sequencing task that needs ordering UI
+    private func isSortingTask(_ task: AdaptiveTask) -> Bool {
+        let type = task.taskType
+        return (type == "sort" || type == "sequence_order") &&
+               task.content.displayOptions.count >= 3
     }
 
     // MARK: - Interaction Area
@@ -350,8 +361,12 @@ struct LearningSessionView: View {
             cameraButton(task: task)
         }
 
-        // Option selection (touch modality)
-        if !task.content.displayOptions.isEmpty {
+        // Sorting/sequencing tasks get ordering UI
+        if isSortingTask(task) {
+            orderingArea(task: task)
+        }
+        // Regular option selection (touch modality)
+        else if !task.content.displayOptions.isEmpty {
             optionButtons(task: task)
         }
 
@@ -361,8 +376,121 @@ struct LearningSessionView: View {
         }
 
         // Simple correct/incorrect buttons for tasks without specific interaction
-        if task.content.displayOptions.isEmpty && !modalities.contains("voice") && !taskSupportsCamera(task) {
+        if task.content.displayOptions.isEmpty && !modalities.contains("voice") && !taskSupportsCamera(task) && !isSortingTask(task) {
             simpleResponseButtons(task: task)
+        }
+    }
+
+    // MARK: - Ordering Area (Sort / Sequence)
+
+    private func orderingArea(task: AdaptiveTask) -> some View {
+        let options = task.content.displayOptions
+        let remaining = options.filter { !orderedSelections.contains($0) }
+
+        return VStack(spacing: 16) {
+            // Selected items (in order)
+            if !orderedSelections.isEmpty {
+                VStack(spacing: 8) {
+                    Text("Your order:")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    ForEach(Array(orderedSelections.enumerated()), id: \.offset) { index, item in
+                        HStack(spacing: 12) {
+                            Text("\(index + 1)")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(width: 32, height: 32)
+                                .background(Circle().fill(dimension.color))
+                            Text(item)
+                                .font(.headline)
+                            Spacer()
+                            // Undo button
+                            if index == orderedSelections.count - 1 {
+                                Button {
+                                    orderedSelections.removeLast()
+                                } label: {
+                                    Image(systemName: "arrow.uturn.backward.circle.fill")
+                                        .font(.title3)
+                                        .foregroundColor(.orange)
+                                }
+                            }
+                        }
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(dimension.color.opacity(0.1))
+                        )
+                    }
+                }
+            }
+
+            // Remaining options to pick from
+            if !remaining.isEmpty {
+                VStack(spacing: 8) {
+                    Text(orderedSelections.isEmpty ? "Tap in order:" : "Next:")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    ForEach(remaining, id: \.self) { option in
+                        Button {
+                            orderedSelections.append(option)
+                            // Auto-submit when all items selected
+                            if orderedSelections.count == options.count {
+                                // Validate full ordering against items (correct order) or correct_answer (first item fallback)
+                                let isCorrect: Bool
+                                if let correctItems = task.content.items, correctItems.count == orderedSelections.count {
+                                    // Full order validation: compare user's sequence against correct items order
+                                    isCorrect = zip(orderedSelections, correctItems).allSatisfy { $0.lowercased() == $1.lowercased() }
+                                } else {
+                                    // Fallback: at least check first item matches correct_answer
+                                    let correctFirst = task.content.correctAnswer ?? ""
+                                    isCorrect = orderedSelections.first?.lowercased() == correctFirst.lowercased()
+                                }
+                                Task {
+                                    await learningManager.submitAttempt(
+                                        isCorrect: isCorrect,
+                                        score: isCorrect ? 1 : 0,
+                                        dimension: dimension
+                                    )
+                                }
+                            }
+                        } label: {
+                            HStack(spacing: 12) {
+                                RemoteImageView(
+                                    objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                    imageType: .thumbnail,
+                                    fallbackIcon: "questionmark.circle",
+                                    iconColor: dimension.color,
+                                    size: 40
+                                )
+                                .cornerRadius(8)
+                                Text(option)
+                                    .font(.headline)
+                                Spacer()
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(dimension.color)
+                            }
+                            .foregroundColor(.primary)
+                            .padding(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color(.secondarySystemBackground))
+                            )
+                        }
+                        .disabled(learningManager.isSubmitting)
+                    }
+                }
+            }
+
+            // Reset button
+            if orderedSelections.count > 1 {
+                Button {
+                    orderedSelections = []
+                } label: {
+                    Label("Start Over", systemImage: "arrow.counterclockwise")
+                        .font(.subheadline)
+                        .foregroundColor(.orange)
+                }
+            }
         }
     }
 
@@ -644,34 +772,57 @@ struct LearningSessionView: View {
         .disabled(learningManager.isSubmitting)
     }
 
-    // MARK: - Feedback View
+    // MARK: - Feedback Overlay
 
-    private func feedbackView(result: AttemptResult) -> some View {
-        HStack {
-            Image(systemName: result.isCorrect ? "star.fill" : "arrow.counterclockwise")
-                .foregroundColor(result.isCorrect ? .yellow : .orange)
-
-            Text(result.isCorrect ? "Correct!" : (result.confidenceRebuild ? "Let's try an easier one" : "Try again!"))
-                .font(.subheadline)
-                .fontWeight(.semibold)
-
+    private func feedbackOverlay(result: AttemptResult) -> some View {
+        VStack {
             Spacer()
 
-            if result.isCorrect {
-                HStack(spacing: 2) {
-                    ForEach(0..<min(result.streak, 5), id: \.self) { _ in
-                        Image(systemName: "star.fill")
-                            .font(.caption)
-                            .foregroundColor(.yellow)
+            VStack(spacing: 12) {
+                // Big icon
+                Image(systemName: result.isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
+                    .font(.system(size: 56))
+                    .foregroundColor(result.isCorrect ? .green : .red)
+
+                Text(result.isCorrect ? "Correct!" : (result.confidenceRebuild ? "Let's try easier" : "Try again!"))
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(result.isCorrect ? .green : .red)
+
+                // Stars for streaks
+                if result.isCorrect && result.streak > 0 {
+                    HStack(spacing: 4) {
+                        ForEach(0..<min(result.streak, 5), id: \.self) { _ in
+                            Image(systemName: "star.fill")
+                                .font(.title3)
+                                .foregroundColor(.yellow)
+                        }
                     }
                 }
             }
+            .padding(32)
+            .background(
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(.ultraThinMaterial)
+                    .shadow(color: .black.opacity(0.15), radius: 16, y: 8)
+            )
+            .scaleEffect(animateFeedback ? 1 : 0.5)
+            .opacity(animateFeedback ? 1 : 0)
+
+            Spacer()
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(result.isCorrect ? Color.green.opacity(0.1) : Color.orange.opacity(0.1))
-        )
+        .background(Color.black.opacity(animateFeedback ? 0.2 : 0))
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .onAppear {
+            animateFeedback = false
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                animateFeedback = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                withAnimation { animateFeedback = false }
+            }
+        }
     }
 
     // MARK: - Reward Overlay
@@ -708,33 +859,39 @@ struct LearningSessionView: View {
     // MARK: - Level Up Overlay
 
     private var levelUpOverlay: some View {
-        VStack {
-            Spacer()
+        ZStack {
+            Color.black.opacity(0.4)
+                .ignoresSafeArea()
 
-            VStack(spacing: 16) {
-                Text("⬆️")
-                    .font(.system(size: 60))
+            VStack(spacing: 20) {
+                Image(systemName: "arrow.up.circle.fill")
+                    .font(.system(size: 72))
+                    .foregroundStyle(.white)
+                    .shadow(color: .yellow.opacity(0.6), radius: 12)
+
                 Text("Level Up!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+
+                Text("Great job! Keep going!")
+                    .font(.headline)
+                    .foregroundColor(.white.opacity(0.8))
             }
-            .padding(32)
+            .padding(40)
             .background(
-                RoundedRectangle(cornerRadius: 24)
+                RoundedRectangle(cornerRadius: 28)
                     .fill(
                         LinearGradient(
-                            colors: [dimension.color, .yellow],
+                            colors: [dimension.color, dimension.color.opacity(0.7), .yellow.opacity(0.8)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
+                    .shadow(color: dimension.color.opacity(0.4), radius: 20, y: 10)
             )
-
-            Spacer()
+            .padding(.horizontal, 40)
         }
-        .background(Color.black.opacity(0.4))
-        .ignoresSafeArea()
         .onTapGesture {
             learningManager.showLevelUp = false
         }
@@ -744,10 +901,23 @@ struct LearningSessionView: View {
 
     private func sessionSummaryView(summary: EndSessionResponse) -> some View {
         VStack(spacing: 24) {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.body.weight(.semibold))
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+            }
+            .padding(.horizontal)
+
             Spacer()
 
-            Text("🌟")
-                .font(.system(size: 64))
+            Image(systemName: "star.circle.fill")
+                .font(.system(size: 72))
+                .foregroundStyle(.yellow)
 
             Text("Great Session!")
                 .font(.largeTitle)
@@ -786,6 +956,7 @@ struct LearningSessionView: View {
             Spacer()
         }
         .padding()
+        .navigationBarHidden(true)
     }
 
     private func summaryRow(label: String, value: String) -> some View {
