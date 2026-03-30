@@ -14,6 +14,7 @@ from app.services.seed_tasks import (
     seed_all_tasks,
     backfill_image_hints,
     backfill_task_options,
+    backfill_target_words,
 )
 from app.services.seed_expanded import seed_expanded_tasks, get_expanded_task_stats
 
@@ -109,6 +110,10 @@ def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
     # Backfill image_hint for any tasks that are missing it
     backfilled = backfill_image_hints(db)
     results["image_hints_backfilled"] = backfilled
+
+    # Backfill target_word for voice-input tasks missing it
+    tw_backfilled = backfill_target_words(db)
+    results["target_words_backfilled"] = tw_backfilled
 
     # Backfill options/correct_answer for all tasks missing them
     options_backfilled = backfill_task_options(db)

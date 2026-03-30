@@ -551,6 +551,8 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_text": "Describe what you see",
                     "scene": "A red ball on the grass",
                     "target_phrases": ["red ball", "ball grass", "red", "ball"],
+                    "target_word": "red ball",
+                    "image_hint": "ball",
                     "accept_threshold": 0.4,
                 },
                 is_assessment=False,
@@ -565,6 +567,8 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_text": "Describe what you see",
                     "scene": "A big yellow bus",
                     "target_phrases": ["big bus", "yellow bus", "big", "bus"],
+                    "target_word": "yellow bus",
+                    "image_hint": "bus",
                     "accept_threshold": 0.4,
                 },
                 is_assessment=False,
@@ -579,6 +583,8 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_text": "Describe what you see",
                     "scene": "A small white cat sleeping",
                     "target_phrases": ["white cat", "cat sleeping", "small cat", "cat"],
+                    "target_word": "white cat",
+                    "image_hint": "cat",
                     "accept_threshold": 0.4,
                 },
                 is_assessment=False,
@@ -600,6 +606,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "word_cards": ["The", "dog", "is", "big"],
                     "correct_order": [0, 1, 2, 3],
                     "target_sentence": "The dog is big",
+                    "target_word": "The dog is big",
                 },
                 is_assessment=False,
             ),
@@ -614,6 +621,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "word_cards": ["I", "like", "apples"],
                     "correct_order": [0, 1, 2],
                     "target_sentence": "I like apples",
+                    "target_word": "I like apples",
                 },
                 is_assessment=False,
             ),
@@ -628,6 +636,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "word_cards": ["She", "is", "eating", "a", "banana"],
                     "correct_order": [0, 1, 2, 3, 4],
                     "target_sentence": "She is eating a banana",
+                    "target_word": "She is eating a banana",
                 },
                 is_assessment=False,
             ),
@@ -651,6 +660,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                         "My favorite animal is a cat",
                         "I love fish",
                     ],
+                    "target_word": "I like dogs",
                     "keywords": [
                         "dog",
                         "cat",
@@ -676,6 +686,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_text": "Answer the question",
                     "question": "What did you eat for breakfast?",
                     "example_answers": ["I ate cereal", "I had milk", "I ate eggs"],
+                    "target_word": "I ate cereal",
                     "keywords": [
                         "ate",
                         "eat",
@@ -704,6 +715,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                         "I play with my toys",
                         "I like balls",
                     ],
+                    "target_word": "I like to play with blocks",
                     "keywords": ["play", "toy", "ball", "block", "game", "like", "fun"],
                     "accept_threshold": 0.3,
                 },
@@ -2417,6 +2429,55 @@ def backfill_task_options(db: Session) -> int:
             content["options"] = new_options
             if new_correct:
                 content["correct_answer"] = new_correct
+            task.content = content
+            flag_modified(task, "content")
+            updated += 1
+
+    if updated:
+        db.commit()
+    return updated
+
+
+def backfill_target_words(db: Session) -> int:
+    """Backfill target_word for voice-input tasks that are missing it.
+
+    Derives target_word from target_phrase (describe), correct_sentence /
+    target_sentence (build_sentence), or first example_answers entry
+    (conversation) so the iOS speech recognition flow can evaluate the
+    child's spoken response.
+    """
+    tasks = db.query(AdaptiveTask).filter(
+        AdaptiveTask.is_assessment == False,  # noqa: E712
+    ).all()
+    updated = 0
+    for task in tasks:
+        content = task.content
+        if not content or content.get("target_word"):
+            continue
+
+        new_tw = None
+        if task.task_type == "describe":
+            new_tw = content.get("target_phrase") or (
+                content.get("target_phrases", []) or [None]
+            )[0]
+            # Also derive image_hint from scene for legacy tasks
+            if not content.get("image_hint") and content.get("scene"):
+                scene = content["scene"].lower()
+                for word in ["ball", "bus", "cat", "dog", "banana", "tree"]:
+                    if word in scene:
+                        content["image_hint"] = word
+                        break
+        elif task.task_type == "build_sentence":
+            new_tw = content.get("correct_sentence") or content.get(
+                "target_sentence"
+            )
+        elif task.task_type == "conversation":
+            examples = content.get("example_answers", [])
+            if examples:
+                new_tw = examples[0]
+
+        if new_tw:
+            content["target_word"] = new_tw
             task.content = content
             flag_modified(task, "content")
             updated += 1
