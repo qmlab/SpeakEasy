@@ -2446,9 +2446,13 @@ def backfill_target_words(db: Session) -> int:
     (conversation) so the iOS speech recognition flow can evaluate the
     child's spoken response.
     """
-    tasks = db.query(AdaptiveTask).filter(
-        AdaptiveTask.is_assessment == False,  # noqa: E712
-    ).all()
+    tasks = (
+        db.query(AdaptiveTask)
+        .filter(
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
+        .all()
+    )
     updated = 0
     for task in tasks:
         content = task.content
@@ -2457,9 +2461,10 @@ def backfill_target_words(db: Session) -> int:
 
         new_tw = None
         if task.task_type == "describe":
-            new_tw = content.get("target_phrase") or (
-                content.get("target_phrases", []) or [None]
-            )[0]
+            new_tw = (
+                content.get("target_phrase")
+                or (content.get("target_phrases", []) or [None])[0]
+            )
             # Also derive image_hint from scene for legacy tasks
             if not content.get("image_hint") and content.get("scene"):
                 scene = content["scene"].lower()
@@ -2468,9 +2473,7 @@ def backfill_target_words(db: Session) -> int:
                         content["image_hint"] = word
                         break
         elif task.task_type == "build_sentence":
-            new_tw = content.get("correct_sentence") or content.get(
-                "target_sentence"
-            )
+            new_tw = content.get("correct_sentence") or content.get("target_sentence")
         elif task.task_type == "conversation":
             examples = content.get("example_answers", [])
             if examples:
