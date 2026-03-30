@@ -112,9 +112,13 @@ struct LearningSessionView: View {
                 // Auto-speak the instruction so illiterate kids can understand.
                 // When TTS finishes, auto-enter listening for voice tasks.
                 if let task = learningManager.currentTask {
-                    let modalities = task.modalities
                     let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
-                    if modalities.contains("voice") && !targetWord.isEmpty {
+                    // Auto-listen after TTS for ALL tasks with a speakable target
+                    // word (not just voice-modality tasks).  Skip sorting/sequencing
+                    // tasks where ordering is the goal, not speaking.
+                    let taskType = task.taskType
+                    let isSorting = (taskType == "sort" || taskType == "sequence_order")
+                    if !targetWord.isEmpty && !isSorting {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -354,8 +358,6 @@ struct LearningSessionView: View {
 
     @ViewBuilder
     private func interactionArea(task: AdaptiveTask) -> some View {
-        let modalities = task.modalities
-
         // Camera button for object cognition tasks
         if taskSupportsCamera(task) {
             cameraButton(task: task)
@@ -370,13 +372,16 @@ struct LearningSessionView: View {
             optionButtons(task: task)
         }
 
-        // Speech input (voice modality)
-        if modalities.contains("voice") {
+        // Speech input — available for ALL tasks with a speakable target word,
+        // not just tasks whose modalities include "voice".  This lets children
+        // practice pronunciation across every dimension.
+        let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
+        if !effectiveTarget.isEmpty && !isSortingTask(task) {
             speechInputArea(task: task)
         }
 
-        // Simple correct/incorrect buttons for tasks without specific interaction
-        if task.content.displayOptions.isEmpty && !modalities.contains("voice") && !taskSupportsCamera(task) && !isSortingTask(task) {
+        // Simple correct/incorrect buttons for tasks without any interactive input
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) {
             simpleResponseButtons(task: task)
         }
     }
@@ -555,6 +560,12 @@ struct LearningSessionView: View {
                     // doesn't accidentally start the microphone.
                     speechService.onSpeechFinished = nil
                     speechService.speak(option)
+                    // Stop any active listening so voice input doesn't race
+                    // with the tap submission.
+                    if isListening {
+                        speechService.stopListening()
+                        isListening = false
+                    }
                     let isCorrect = option.lowercased() == (task.content.correctAnswer ?? "").lowercased()
                     Task {
                         await learningManager.submitAttempt(
@@ -566,15 +577,21 @@ struct LearningSessionView: View {
                     }
                 } label: {
                     HStack(spacing: 12) {
-                        // Show image for each option when task has image_hint (visual matching)
-                        RemoteImageView(
-                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
-                            imageType: .thumbnail,
-                            fallbackIcon: "questionmark.circle",
-                            iconColor: dimension.color,
-                            size: 48
-                        )
-                        .cornerRadius(8)
+                        // Difficulty-based option image display:
+                        // Level 0: show all images (visual matching, easiest)
+                        // Level 1-2: hide the image that matches the question
+                        //            image so the child can't just match visually
+                        // Level 3+: hide all option images (text-only, hardest)
+                        if shouldShowOptionImage(task: task, option: option) {
+                            RemoteImageView(
+                                objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                imageType: .thumbnail,
+                                fallbackIcon: "questionmark.circle",
+                                iconColor: dimension.color,
+                                size: 48
+                            )
+                            .cornerRadius(8)
+                        }
                         Text(option)
                             .font(.headline)
                     }
@@ -589,6 +606,22 @@ struct LearningSessionView: View {
                 .disabled(learningManager.isSubmitting)
             }
         }
+    }
+
+    /// Whether to show the thumbnail image for a given option button.
+    ///
+    /// Difficulty progression for option images:
+    /// - **Level 0** (easiest): show all images — visual matching is allowed.
+    /// - **Level 1–2**: hide the image whose key matches the question's
+    ///   `imageHint` so the child cannot simply match pictures.
+    /// - **Level 3+** (hardest): hide all option images — text only.
+    private func shouldShowOptionImage(task: AdaptiveTask, option: String) -> Bool {
+        if task.level >= 3 { return false }
+        if task.level >= 1, let imageHint = task.content.imageHint {
+            let optionKey = option.lowercased().replacingOccurrences(of: " ", with: "_")
+            if optionKey == imageHint.lowercased() { return false }
+        }
+        return true
     }
 
     // MARK: - Speech Input
