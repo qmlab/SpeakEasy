@@ -229,13 +229,13 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         # Populate display_options + items from words array so the iOS
         # ordering UI shows word cards instead of just an image.
         words = task_data.get("words") or task_data.get("word_cards")
-        if words and not content.get("display_options"):
+        if words and not content.get("options"):
             import random as _rand
 
             shuffled = list(words)
-            _rand.seed(hash(tuple(words)))
-            _rand.shuffle(shuffled)
-            content["display_options"] = shuffled
+            _local_rand = _rand.Random(hash(tuple(words)))
+            _local_rand.shuffle(shuffled)
+            content["options"] = shuffled
             if not content.get("items"):
                 content["items"] = list(words)
             if cs and not content.get("correct_answer"):

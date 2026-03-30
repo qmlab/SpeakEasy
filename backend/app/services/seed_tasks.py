@@ -603,7 +603,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                 content={
                     "instruction_audio": "Put the words in order to make a sentence!",
                     "instruction_text": "Put the words in order",
-                    "display_options": ["dog", "is", "The", "big"],
+                    "options": ["dog", "is", "The", "big"],
                     "items": ["The", "dog", "is", "big"],
                     "correct_answer": "The dog is big",
                     "target_sentence": "The dog is big",
@@ -621,7 +621,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                 content={
                     "instruction_audio": "Put the words in order to make a sentence!",
                     "instruction_text": "Put the words in order",
-                    "display_options": ["like", "I", "apples"],
+                    "options": ["like", "I", "apples"],
                     "items": ["I", "like", "apples"],
                     "correct_answer": "I like apples",
                     "target_sentence": "I like apples",
@@ -639,7 +639,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                 content={
                     "instruction_audio": "Put the words in order to make a sentence!",
                     "instruction_text": "Put the words in order",
-                    "display_options": ["eating", "She", "banana", "a", "is"],
+                    "options": ["eating", "She", "banana", "a", "is"],
                     "items": ["She", "is", "eating", "a", "banana"],
                     "correct_answer": "She is eating a banana",
                     "target_sentence": "She is eating a banana",
@@ -2542,15 +2542,15 @@ def backfill_target_words(db: Session) -> int:
 
         # For build_sentence tasks, ensure display_options + items are set
         # so the iOS ordering UI can show word cards instead of just an image.
-        if task.task_type == "build_sentence" and not content.get("display_options"):
+        if task.task_type == "build_sentence" and not content.get("options"):
             words = content.get("word_cards") or content.get("words")
             if words and len(words) >= 2:
                 import random as _rand
 
                 shuffled = list(words)
-                _rand.seed(hash(tuple(words)))  # deterministic shuffle
-                _rand.shuffle(shuffled)
-                content["display_options"] = shuffled
+                _local_rand = _rand.Random(hash(tuple(words)))
+                _local_rand.shuffle(shuffled)
+                content["options"] = shuffled
                 if not content.get("items"):
                     content["items"] = list(words)
                 if not content.get("correct_answer"):
