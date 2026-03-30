@@ -617,10 +617,10 @@
           "task_type": "pair",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Which two go together?",
-            "instruction_zh": "哪两个是一对？",
-            "correct_answer": "Knife and Fork",
-            "options": ["Knife", "Fork", "Ball", "Tree"],
+            "instruction": "Which goes with Knife?",
+            "instruction_zh": "哪个和刀是一对？",
+            "correct_answer": "Fork",
+            "options": ["Fork", "Ball", "Tree"],
             "image_hint": "knife_fork"
           }
         },
@@ -628,10 +628,10 @@
           "task_type": "pair",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Find the matching pair!",
-            "instruction_zh": "找到配对的！",
-            "correct_answer": "Rain and Umbrella",
-            "options": ["Rain", "Umbrella", "Sun", "Ice"],
+            "instruction": "Which goes with Rain?",
+            "instruction_zh": "哪个和雨是一对？",
+            "correct_answer": "Umbrella",
+            "options": ["Umbrella", "Sun", "Ice"],
             "image_hint": "rain_umbrella"
           }
         }
@@ -641,9 +641,9 @@
           "task_type": "sort",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Sort from smallest to biggest!",
-            "instruction_zh": "从小到大排列！",
-            "correct_answer": "Mouse, Cat, Elephant",
+            "instruction": "Which is the smallest?",
+            "instruction_zh": "哪个最小？",
+            "correct_answer": "Mouse",
             "options": ["Elephant", "Mouse", "Cat"],
             "image_hint": "animal_sizes"
           }
@@ -652,9 +652,9 @@
           "task_type": "sort",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Sort from lightest to heaviest!",
-            "instruction_zh": "从轻到重排列！",
-            "correct_answer": "Feather, Book, Rock",
+            "instruction": "Which is the lightest?",
+            "instruction_zh": "哪个最轻？",
+            "correct_answer": "Feather",
             "options": ["Rock", "Feather", "Book"],
             "image_hint": "weight_comparison"
           }
@@ -689,9 +689,9 @@
           "task_type": "sequence_order",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Put in order: Getting dressed",
-            "instruction_zh": "排好顺序：穿衣服",
-            "correct_answer": "Underwear, Pants, Shirt, Jacket",
+            "instruction": "What comes first? Getting dressed",
+            "instruction_zh": "什么是第一步？穿衣服",
+            "correct_answer": "Underwear",
             "options": ["Jacket", "Underwear", "Shirt", "Pants"],
             "image_hint": "getting_dressed"
           }
@@ -700,9 +700,9 @@
           "task_type": "sequence_order",
           "modalities": ["touch"],
           "content": {
-            "instruction": "What order: Making juice",
-            "instruction_zh": "什么顺序：做果汁",
-            "correct_answer": "Get fruit, Cut fruit, Put in blender, Pour into cup",
+            "instruction": "What comes first? Making juice",
+            "instruction_zh": "什么是第一步？做果汁",
+            "correct_answer": "Get fruit",
             "options": ["Pour into cup", "Get fruit", "Put in blender", "Cut fruit"],
             "image_hint": "making_juice"
           }
