@@ -107,13 +107,14 @@ def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
     expanded_results = seed_expanded_tasks(db, force=force)
     results.update(expanded_results)
 
-    # Backfill image_hint for any tasks that are missing it
-    backfilled = backfill_image_hints(db)
-    results["image_hints_backfilled"] = backfilled
-
-    # Backfill target_word for voice-input tasks missing it
+    # Backfill target_word + keyword-based image_hint for voice-input tasks
+    # (must run before backfill_image_hints so keyword mapping takes priority)
     tw_backfilled = backfill_target_words(db)
     results["target_words_backfilled"] = tw_backfilled
+
+    # Backfill image_hint for remaining tasks that are still missing it
+    backfilled = backfill_image_hints(db)
+    results["image_hints_backfilled"] = backfilled
 
     # Backfill options/correct_answer for all tasks missing them
     options_backfilled = backfill_task_options(db)

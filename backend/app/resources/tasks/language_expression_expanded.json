@@ -377,7 +377,8 @@
             "我玩了玩具",
             "我去了学校",
             "我吃了午饭"
-          ]
+          ],
+          "image_hint": "teddy_bear"
         },
         {
           "instruction": "What is your favorite animal?",
@@ -440,7 +441,8 @@
             "我很开心",
             "我感觉很好",
             "我很累"
-          ]
+          ],
+          "image_hint": "star"
         },
         {
           "instruction": "What is your favorite color?",
@@ -471,7 +473,8 @@
             "我想当医生",
             "我想当老师",
             "我想当宇航员"
-          ]
+          ],
+          "image_hint": "pencil"
         }
       ]
     }
