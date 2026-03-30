@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.adaptive import AdaptiveTask, DevelopmentalDimension
 from app.schemas.adaptive import AdaptiveTaskCreate, AdaptiveTaskResponse
-from app.services.seed_tasks import seed_all_tasks, backfill_image_hints
+from app.services.seed_tasks import seed_all_tasks, backfill_image_hints, backfill_cognitive_base_tasks
 from app.services.seed_expanded import seed_expanded_tasks, get_expanded_task_stats
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
@@ -105,6 +105,10 @@ def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
     # Backfill image_hint for any tasks that are missing it
     backfilled = backfill_image_hints(db)
     results["image_hints_backfilled"] = backfilled
+
+    # Backfill options/correct_answer for base cognitive tasks
+    cognitive_backfilled = backfill_cognitive_base_tasks(db)
+    results["cognitive_options_backfilled"] = cognitive_backfilled
 
     return {
         "message": "Tasks seeded successfully",

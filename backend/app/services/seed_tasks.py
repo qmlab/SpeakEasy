@@ -2206,6 +2206,88 @@ def _derive_image_hint(content: dict) -> str | None:
     return None
 
 
+def backfill_cognitive_base_tasks(db: Session) -> int:
+    """Backfill options/correct_answer for base cognitive tasks that are missing them.
+
+    Old base tasks only had 'choices' (dict format) or 'steps' but no 'options'
+    (string list) or 'correct_answer'. This function derives them so the iOS app
+    can render interactive option buttons instead of the fallback Got It!/Help UI.
+    """
+    tasks = (
+        db.query(AdaptiveTask)
+        .filter(
+            AdaptiveTask.dimension == DevelopmentalDimension.COGNITIVE_LOGIC.value,
+            AdaptiveTask.is_assessment == False,  # noqa: E712
+        )
+        .all()
+    )
+    updated = 0
+    for task in tasks:
+        content = task.content
+        if not content:
+            continue
+        # Skip tasks that already have options
+        if content.get("options"):
+            continue
+
+        new_options = []
+        new_correct = ""
+
+        # Derive from choices (cause_effect, reason tasks)
+        choices = content.get("choices")
+        if isinstance(choices, list) and choices:
+            for ch in choices:
+                if isinstance(ch, dict):
+                    text = ch.get("text", "")
+                    if text:
+                        new_options.append(text)
+                    if ch.get("is_correct"):
+                        new_correct = text
+
+        # Derive from steps (sequence_order tasks)
+        steps = content.get("steps")
+        if not new_options and isinstance(steps, list) and steps:
+            # Shuffled order for options, correct order for items
+            sorted_steps = sorted(steps, key=lambda s: s.get("order", 0))
+            new_options = [s.get("text", "") for s in steps]  # shuffled display
+            new_correct = sorted_steps[0].get("text", "") if sorted_steps else ""
+            # Also add items in correct order for full validation
+            if not content.get("items"):
+                content["items"] = [s.get("text", "") for s in sorted_steps]
+
+        # Derive from items (pair, sort tasks with dict items)
+        items = content.get("items")
+        if not new_options and isinstance(items, list) and items:
+            if isinstance(items[0], dict):
+                names = list(dict.fromkeys(i.get("name", "") for i in items if i.get("name")))
+                new_options = names[:4]  # max 4 options
+                # For pair tasks, correct = the pair item
+                pair_id = content.get("correct_pair")
+                if pair_id:
+                    for item in items:
+                        if isinstance(item, dict) and item.get("pair_id") == pair_id:
+                            new_correct = item.get("name", "")
+                            break
+                # For sort tasks, correct = first target item
+                if not new_correct:
+                    for item in items:
+                        if isinstance(item, dict) and item.get("is_target"):
+                            new_correct = item.get("name", "")
+                            break
+
+        if new_options:
+            content["options"] = new_options
+            if new_correct:
+                content["correct_answer"] = new_correct
+            task.content = content
+            flag_modified(task, "content")
+            updated += 1
+
+    if updated:
+        db.commit()
+    return updated
+
+
 def backfill_image_hints(db: Session) -> int:
     """Add image_hint to every task whose content is missing it.
 

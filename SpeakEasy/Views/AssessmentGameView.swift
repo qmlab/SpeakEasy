@@ -30,6 +30,7 @@ struct AssessmentGameView: View {
 
     @State private var activityStartTime: Date?
 
+    @StateObject private var speechService = SpeechService()
     private let api = AdaptiveAPIService()
 
     enum AssessmentPhase {
@@ -181,6 +182,20 @@ struct AssessmentGameView: View {
     @ViewBuilder
     private func activityView(_ activity: AssessmentActivity) -> some View {
         VStack(spacing: 0) {
+            // Top bar with exit button and progress
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.body.weight(.semibold))
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+
             // Progress bar
             progressBar
 
@@ -189,7 +204,21 @@ struct AssessmentGameView: View {
                     // Character + narrative
                     characterBubble(activity)
 
-                    // Instruction
+                    // Hear Again button + Instruction
+                    Button {
+                        speechService.speak(activity.content.instruction)
+                    } label: {
+                        Label("Hear Again", systemImage: "speaker.wave.2.fill")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundColor(.purple)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule()
+                                    .fill(Color.purple.opacity(0.12))
+                            )
+                    }
+
                     Text(activity.content.instruction)
                         .font(.title2)
                         .fontWeight(.bold)
@@ -222,7 +251,7 @@ struct AssessmentGameView: View {
 
                     // Options (touch interaction)
                     if let options = activity.content.options, !options.isEmpty {
-                        optionButtons(options, activity: activity)
+                        optionButtons(options, activity: activity, imageHint: activity.content.imageHint)
                     }
 
                     // Voice interaction fallback: show "I said it!" button
@@ -313,7 +342,7 @@ struct AssessmentGameView: View {
 
     // MARK: - Option Buttons
 
-    private func optionButtons(_ options: [String], activity: AssessmentActivity) -> some View {
+    private func optionButtons(_ options: [String], activity: AssessmentActivity, imageHint: String? = nil) -> some View {
         VStack(spacing: 12) {
             ForEach(options, id: \.self) { option in
                 Button {
@@ -322,7 +351,17 @@ struct AssessmentGameView: View {
                         await submitResponse(activity: activity, selected: option)
                     }
                 } label: {
-                    HStack {
+                    HStack(spacing: 12) {
+                        // SVG thumbnail for option
+                        RemoteImageView(
+                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                            imageType: .thumbnail,
+                            fallbackIcon: "questionmark.circle",
+                            iconColor: .purple,
+                            size: 40
+                        )
+                        .cornerRadius(8)
+
                         Text(option)
                             .font(.title3)
                             .fontWeight(.semibold)
@@ -602,6 +641,8 @@ struct AssessmentGameView: View {
                 selectedOption = nil
                 activityStartTime = Date()
             }
+            // Auto-speak the instruction
+            speechService.speak(activity.content.instruction)
         } catch let error as AdaptiveAPIError {
             if case .httpError(let statusCode, _) = error, statusCode == 404 {
                 // No more activities — complete the assessment
