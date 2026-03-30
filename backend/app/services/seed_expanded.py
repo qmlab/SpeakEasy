@@ -231,6 +231,7 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         words = task_data.get("words") or task_data.get("word_cards")
         if words and not content.get("display_options"):
             import random as _rand
+
             shuffled = list(words)
             _rand.seed(hash(tuple(words)))
             _rand.shuffle(shuffled)

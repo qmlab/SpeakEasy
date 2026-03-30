@@ -2546,6 +2546,7 @@ def backfill_target_words(db: Session) -> int:
             words = content.get("word_cards") or content.get("words")
             if words and len(words) >= 2:
                 import random as _rand
+
                 shuffled = list(words)
                 _rand.seed(hash(tuple(words)))  # deterministic shuffle
                 _rand.shuffle(shuffled)
@@ -2553,7 +2554,9 @@ def backfill_target_words(db: Session) -> int:
                 if not content.get("items"):
                     content["items"] = list(words)
                 if not content.get("correct_answer"):
-                    cs = content.get("correct_sentence") or content.get("target_sentence", "")
+                    cs = content.get("correct_sentence") or content.get(
+                        "target_sentence", ""
+                    )
                     if cs:
                         content["correct_answer"] = cs
                 if not content.get("accept_threshold"):
