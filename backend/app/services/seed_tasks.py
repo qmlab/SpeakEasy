@@ -2521,6 +2521,7 @@ def backfill_target_words(db: Session) -> int:
                     for word in ["ball", "bus", "cat", "dog", "banana", "tree"]:
                         if word in scene:
                             content["image_hint"] = word
+                            changed = True
                             break
             elif task.task_type == "build_sentence":
                 new_tw = content.get("correct_sentence") or content.get(
