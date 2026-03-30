@@ -189,6 +189,7 @@ struct LearningSessionView: View {
             // Feedback overlay (prominent, centered)
             if let result = learningManager.lastAttemptResult {
                 feedbackOverlay(result: result)
+                    .id(result.attemptId)
             }
         }
     }
@@ -434,10 +435,16 @@ struct LearningSessionView: View {
                             orderedSelections.append(option)
                             // Auto-submit when all items selected
                             if orderedSelections.count == options.count {
-                                let correctOrder = task.content.correctAnswer ?? ""
-                                // For sort/sequence tasks, correct_answer is the first item
-                                // Check if the user's first pick matches
-                                let isCorrect = orderedSelections.first?.lowercased() == correctOrder.lowercased()
+                                // Validate full ordering against items (correct order) or correct_answer (first item fallback)
+                                let isCorrect: Bool
+                                if let correctItems = task.content.items, correctItems.count == orderedSelections.count {
+                                    // Full order validation: compare user's sequence against correct items order
+                                    isCorrect = zip(orderedSelections, correctItems).allSatisfy { $0.lowercased() == $1.lowercased() }
+                                } else {
+                                    // Fallback: at least check first item matches correct_answer
+                                    let correctFirst = task.content.correctAnswer ?? ""
+                                    isCorrect = orderedSelections.first?.lowercased() == correctFirst.lowercased()
+                                }
                                 Task {
                                     await learningManager.submitAttempt(
                                         isCorrect: isCorrect,
@@ -804,10 +811,11 @@ struct LearningSessionView: View {
 
             Spacer()
         }
-        .background(Color.black.opacity(0.2))
+        .background(Color.black.opacity(animateFeedback ? 0.2 : 0))
         .ignoresSafeArea()
         .allowsHitTesting(false)
         .onAppear {
+            animateFeedback = false
             withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
                 animateFeedback = true
             }
