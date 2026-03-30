@@ -32,6 +32,8 @@ class SpeechService: NSObject, ObservableObject {
     private var pendingTargetWord: String = ""
     /// Cancellable work item for the delayed recognition start
     private var pendingRecognitionWork: DispatchWorkItem?
+    /// Cancellable work item for the auto-stop timer
+    private var pendingAutoStopWork: DispatchWorkItem?
 
     /// Callback fired when TTS finishes speaking naturally (not cancelled).
     /// The view uses this to auto-start listening after the instruction is read.
@@ -214,6 +216,11 @@ class SpeechService: NSObject, ObservableObject {
 
         stopListening()
 
+        // Cancel any lingering auto-stop timer from a previous session so it
+        // cannot interfere with this new listening session.
+        pendingAutoStopWork?.cancel()
+        pendingAutoStopWork = nil
+
         // Re-set pendingCompletion AFTER stopListening() which clears it.
         // stopAndEvaluate() reads this during the 0.3s delay window.
         pendingCompletion = completion
@@ -300,6 +307,22 @@ class SpeechService: NSObject, ObservableObject {
                     self.recognizedText = text
                 }
                 isFinal = result.isFinal
+
+                // Early stop: when a partial result already matches the target
+                // word well enough, stop listening immediately instead of
+                // waiting for the full auto-stop duration. This makes the UX
+                // feel snappy — the button flips to "Say It Again" right away.
+                if !isFinal && autoStop {
+                    let rating = self.calculateRating(recognized: text, target: targetWord)
+                    if rating >= 3.5 {
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self, self.isListening else { return }
+                            self.pendingAutoStopWork?.cancel()
+                            self.pendingAutoStopWork = nil
+                            self.stopAndEvaluate()
+                        }
+                    }
+                }
             }
             
             if error != nil || isFinal {
@@ -333,11 +356,13 @@ class SpeechService: NSObject, ObservableObject {
             try audioEngine.start()
             
             if autoStop {
-                DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration) { [weak self] in
+                let autoStopWork = DispatchWorkItem { [weak self] in
                     if self?.isListening == true {
                         self?.stopListening()
                     }
                 }
+                self.pendingAutoStopWork = autoStopWork
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.listeningDuration, execute: autoStopWork)
             }
         } catch {
             print("Audio engine failed to start: \(error)")
@@ -349,9 +374,11 @@ class SpeechService: NSObject, ObservableObject {
     }
     
     func stopListening() {
-        // Cancel any pending delayed recognition start
+        // Cancel any pending timers
         pendingRecognitionWork?.cancel()
         pendingRecognitionWork = nil
+        pendingAutoStopWork?.cancel()
+        pendingAutoStopWork = nil
 
         if audioEngine.isRunning {
             audioEngine.stop()

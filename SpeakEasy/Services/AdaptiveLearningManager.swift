@@ -202,8 +202,9 @@ class AdaptiveLearningManager: ObservableObject {
                 showConfidenceRebuild = true
             }
 
-            // Small delay before next task for feedback
-            try await Task.sleep(nanoseconds: isCorrect ? 1_500_000_000 : 2_000_000_000)
+            // Small delay before next task for feedback.
+            // Use try? so a cancelled sleep never prevents advancement.
+            try? await Task.sleep(nanoseconds: isCorrect ? 1_500_000_000 : 2_000_000_000)
 
             // Fetch next task
             await fetchNextTask(dimension: dimension)
