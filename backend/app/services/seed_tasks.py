@@ -2267,7 +2267,7 @@ def backfill_task_options(db: Session) -> int:
                     )
                     if text:
                         new_options.append(text)
-                    if ch.get("is_correct") or ch.get("is_best"):
+                    if ch.get("is_correct") or ch.get("is_best") or ch.get("is_target"):
                         new_correct = text
             elif isinstance(first, str):
                 # String choices: use as-is
