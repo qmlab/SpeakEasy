@@ -2100,6 +2100,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                     ],
                     "options": ["Tom", "Amy", "Ben"],
                     "correct_answer": "Ben",
+                    "image_hint": "height_comparison",
                 },
                 is_assessment=False,
             ),
