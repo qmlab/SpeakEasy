@@ -226,11 +226,8 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         cs = task_data.get("correct_sentence") or task_data.get("target_sentence", "")
         if cs and "target_word" not in content:
             content["target_word"] = cs
-        # Derive image_hint from target_word when not provided
-        if "image_hint" not in content:
-            tw = content.get("target_word", cs)
-            if tw:
-                content["image_hint"] = tw.strip().lower().replace(" ", "_")
+        # image_hint left unset intentionally when not in JSON;
+        # backfill_target_words will derive it using keyword mapping.
 
     elif task_type == "conversation":
         # Conversation: open-ended response. Use first example answer as
@@ -242,11 +239,8 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         examples = task_data.get("example_answers", [])
         if examples and "target_word" not in content:
             content["target_word"] = examples[0]
-        # Derive image_hint from target_word when not provided
-        if "image_hint" not in content:
-            tw = content.get("target_word", "")
-            if tw:
-                content["image_hint"] = tw.strip().lower().replace(" ", "_")
+        # image_hint left unset intentionally when not in JSON;
+        # backfill_target_words will derive it using keyword mapping.
 
     else:
         # All other task types: copy fields verbatim (existing behaviour)

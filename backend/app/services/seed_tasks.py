@@ -2551,8 +2551,9 @@ def backfill_target_words(db: Session) -> int:
                     " ".join(content.get("example_answers", [])),
                 ]
             ).lower()
+            search_words = set(search_text.split())
             for keyword, asset in _KEYWORD_TO_IMAGE.items():
-                if keyword in search_text:
+                if keyword in search_words:
                     content["image_hint"] = asset
                     changed = True
                     break
