@@ -319,8 +319,8 @@ struct LearningSessionView: View {
                 )
         }
 
-        // Items display (for sorting, sequencing tasks)
-        if let items = task.content.items, !items.isEmpty {
+        // Items display (for non-sorting tasks only — sorting tasks show items in orderingArea)
+        if let items = task.content.items, !items.isEmpty, !isSortingTask(task) {
             VStack(spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     Text(item)
@@ -900,63 +900,63 @@ struct LearningSessionView: View {
     // MARK: - Session Summary
 
     private func sessionSummaryView(summary: EndSessionResponse) -> some View {
-        NavigationStack {
-            VStack(spacing: 24) {
-                Spacer()
-
-                Image(systemName: "star.circle.fill")
-                    .font(.system(size: 72))
-                    .foregroundStyle(.yellow)
-
-                Text("Great Session!")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-
-                VStack(spacing: 12) {
-                    summaryRow(label: "Tasks Completed", value: "\(summary.tasksCompleted)")
-                    summaryRow(label: "Correct", value: "\(summary.correctCount) / \(summary.totalCount)")
-                    summaryRow(label: "Accuracy", value: "\(Int(summary.accuracy * 100))%")
-                    if summary.levelChange > 0 {
-                        summaryRow(label: "Level Up!", value: "+\(summary.levelChange)")
-                    }
-                    summaryRow(label: "Rewards Earned", value: "\(summary.rewardsEarned)")
-                }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color(.systemBackground))
-                )
-
+        VStack(spacing: 24) {
+            HStack {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Done")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(dimension.color)
-                        )
+                    Image(systemName: "xmark")
+                        .font(.body.weight(.semibold))
+                        .foregroundColor(.secondary)
                 }
-                .padding(.horizontal)
-
                 Spacer()
             }
-            .padding()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.body.weight(.semibold))
-                            .foregroundColor(.secondary)
-                    }
+            .padding(.horizontal)
+
+            Spacer()
+
+            Image(systemName: "star.circle.fill")
+                .font(.system(size: 72))
+                .foregroundStyle(.yellow)
+
+            Text("Great Session!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+
+            VStack(spacing: 12) {
+                summaryRow(label: "Tasks Completed", value: "\(summary.tasksCompleted)")
+                summaryRow(label: "Correct", value: "\(summary.correctCount) / \(summary.totalCount)")
+                summaryRow(label: "Accuracy", value: "\(Int(summary.accuracy * 100))%")
+                if summary.levelChange > 0 {
+                    summaryRow(label: "Level Up!", value: "+\(summary.levelChange)")
                 }
+                summaryRow(label: "Rewards Earned", value: "\(summary.rewardsEarned)")
             }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(.systemBackground))
+            )
+
+            Button {
+                dismiss()
+            } label: {
+                Text("Done")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(dimension.color)
+                    )
+            }
+            .padding(.horizontal)
+
+            Spacer()
         }
+        .padding()
+        .navigationBarHidden(true)
     }
 
     private func summaryRow(label: String, value: String) -> some View {
