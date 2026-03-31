@@ -192,9 +192,8 @@ def evaluate_open_ended(
 
     examples_text = ""
     if example_answers:
-        examples_text = (
-            "\n\nExample acceptable answers:\n"
-            + "\n".join(f"- {a}" for a in example_answers)
+        examples_text = "\n\nExample acceptable answers:\n" + "\n".join(
+            f"- {a}" for a in example_answers
         )
 
     system_prompt = (
@@ -218,9 +217,7 @@ def evaluate_open_ended(
     )
 
     user_prompt = (
-        f"Question asked: \"{question}\"\n"
-        f"Child's response: \"{spoken}\""
-        f"{examples_text}"
+        f'Question asked: "{question}"\nChild\'s response: "{spoken}"{examples_text}'
     )
 
     try:
