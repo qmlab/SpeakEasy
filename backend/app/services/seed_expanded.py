@@ -226,15 +226,19 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         cs = task_data.get("correct_sentence") or task_data.get("target_sentence", "")
         if cs and "target_word" not in content:
             content["target_word"] = cs
-        # Populate display_options + items from words array so the iOS
+        # Populate options + items from words array so the iOS
         # ordering UI shows word cards instead of just an image.
         words = task_data.get("words") or task_data.get("word_cards")
         if words and not content.get("options"):
+            import hashlib
             import random as _rand
 
+            seed = int(hashlib.md5(" ".join(words).encode()).hexdigest(), 16) % (2**32)
             shuffled = list(words)
-            _local_rand = _rand.Random(hash(tuple(words)))
+            _local_rand = _rand.Random(seed)
             _local_rand.shuffle(shuffled)
+            while shuffled == list(words) and len(words) > 1:
+                _local_rand.shuffle(shuffled)
             content["options"] = shuffled
             if not content.get("items"):
                 content["items"] = list(words)

@@ -2540,16 +2540,22 @@ def backfill_target_words(db: Session) -> int:
                 content["target_word"] = new_tw
                 changed = True
 
-        # For build_sentence tasks, ensure display_options + items are set
+        # For build_sentence tasks, ensure options + items are set
         # so the iOS ordering UI can show word cards instead of just an image.
         if task.task_type == "build_sentence" and not content.get("options"):
             words = content.get("word_cards") or content.get("words")
             if words and len(words) >= 2:
+                import hashlib
                 import random as _rand
 
+                seed = int(hashlib.md5(" ".join(words).encode()).hexdigest(), 16) % (
+                    2**32
+                )
                 shuffled = list(words)
-                _local_rand = _rand.Random(hash(tuple(words)))
+                _local_rand = _rand.Random(seed)
                 _local_rand.shuffle(shuffled)
+                while shuffled == list(words) and len(words) > 1:
+                    _local_rand.shuffle(shuffled)
                 content["options"] = shuffled
                 if not content.get("items"):
                     content["items"] = list(words)
