@@ -2554,7 +2554,7 @@ def backfill_target_words(db: Session) -> int:
                 shuffled = list(words)
                 _local_rand = _rand.Random(seed)
                 _local_rand.shuffle(shuffled)
-                while shuffled == list(words) and len(words) > 1:
+                while shuffled == list(words) and len(words) > 1 and len(set(words)) > 1:
                     _local_rand.shuffle(shuffled)
                 content["options"] = shuffled
                 if not content.get("items"):
