@@ -666,7 +666,6 @@ struct LearningSessionView: View {
         if isOpenEnded {
             // For open-ended tasks, use manual stop mode so the child can
             // speak freely without early-stop on keyword match
-            speechService.listeningDuration = 8.0
             speechService.startListeningManual(targetWord: "") { rating in
                 isListening = false
                 let recognized = speechService.recognizedText
@@ -734,7 +733,7 @@ struct LearningSessionView: View {
         let question = task.content.question ?? task.content.instructionText ?? task.content.instruction ?? ""
 
         do {
-            let result = try await AdaptiveAPIService().evaluateOpenEnded(
+            let result = try await learningManager.api.evaluateOpenEnded(
                 question: question,
                 spoken: spoken,
                 exampleAnswers: task.content.exampleAnswers,
