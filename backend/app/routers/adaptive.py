@@ -24,10 +24,12 @@ from app.schemas.adaptive import (
     ReinforcementConfigUpdate,
     SpeechEvaluationRequest,
     SpeechEvaluationResponse,
+    OpenEndedEvaluationRequest,
+    OpenEndedEvaluationResponse,
     ModalityRecommendationResponse,
 )
 from app.services.adaptive_engine import AdaptiveEngine
-from app.services.speech_evaluation import evaluate_speech
+from app.services.speech_evaluation import evaluate_open_ended, evaluate_speech
 
 router = APIRouter(prefix="/adaptive", tags=["adaptive"])
 
@@ -222,6 +224,23 @@ def evaluate_speech_endpoint(request: SpeechEvaluationRequest):
         accept_threshold=request.accept_threshold,
     )
     return SpeechEvaluationResponse(**result)
+
+
+@router.post("/evaluate-open-ended", response_model=OpenEndedEvaluationResponse)
+def evaluate_open_ended_endpoint(request: OpenEndedEvaluationRequest):
+    """Evaluate an open-ended spoken response using AI.
+
+    For questions like "What is your favorite animal?" where there is no
+    single correct answer.  Uses LLM when available, falls back to keyword
+    matching.
+    """
+    result = evaluate_open_ended(
+        question=request.question,
+        spoken=request.spoken,
+        example_answers=request.example_answers,
+        keywords=request.keywords,
+    )
+    return OpenEndedEvaluationResponse(**result)
 
 
 @router.get("/modality/{player_id}", response_model=ModalityRecommendationResponse)

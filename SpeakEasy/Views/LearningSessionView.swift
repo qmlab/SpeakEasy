@@ -659,52 +659,110 @@ struct LearningSessionView: View {
         }
         isListening = true
         spokenText = ""
-        speechService.startListening(targetWord: targetWord) { rating in
-            isListening = false
-            spokenText = speechService.recognizedText
-            if rating > 0 {
+
+        // Check if this is an open-ended task that should use AI evaluation
+        let isOpenEnded = learningManager.currentTask?.content.openEnded == true
+
+        if isOpenEnded {
+            // For open-ended tasks, use manual stop mode so the child can
+            // speak freely without early-stop on keyword match
+            speechService.listeningDuration = 8.0
+            speechService.startListeningManual(targetWord: "") { rating in
+                isListening = false
+                let recognized = speechService.recognizedText
+                spokenText = recognized
+
+                if recognized.isEmpty {
+                    hasRecording = false
+                    spokenText = "Could not hear clearly. Try again!"
+                    return
+                }
+
                 hasRecording = true
-                let isCorrect = rating >= 3.0
-                if isCorrect {
-                    // Correct — submit and auto-advance (submitAttempt already
-                    // shows feedback + fetches the next task after a delay).
-                    isEvaluating = true
-                    Task {
-                        await learningManager.submitAttempt(
-                            isCorrect: true,
-                            score: Int(rating),
-                            dimension: dimension
-                        )
-                        isEvaluating = false
-                    }
-                } else {
-                    // Incorrect
-                    speechRetryCount += 1
-                    if speechRetryCount >= maxSpeechRetries {
-                        // Out of retries — submit as incorrect and move on
+                isEvaluating = true
+
+                // Call backend AI evaluation
+                Task {
+                    await evaluateOpenEndedResponse(spoken: recognized)
+                    isEvaluating = false
+                }
+            }
+        } else {
+            speechService.startListening(targetWord: targetWord) { rating in
+                isListening = false
+                spokenText = speechService.recognizedText
+                if rating > 0 {
+                    hasRecording = true
+                    let isCorrect = rating >= 3.0
+                    if isCorrect {
                         isEvaluating = true
                         Task {
                             await learningManager.submitAttempt(
-                                isCorrect: false,
+                                isCorrect: true,
                                 score: Int(rating),
                                 dimension: dimension
                             )
                             isEvaluating = false
                         }
                     } else {
-                        // Still has retries — show feedback and let user try again
-                        spokenText = "Not quite! Try again (\(maxSpeechRetries - speechRetryCount) left)"
+                        speechRetryCount += 1
+                        if speechRetryCount >= maxSpeechRetries {
+                            isEvaluating = true
+                            Task {
+                                await learningManager.submitAttempt(
+                                    isCorrect: false,
+                                    score: Int(rating),
+                                    dimension: dimension
+                                )
+                                isEvaluating = false
+                            }
+                        } else {
+                            spokenText = "Not quite! Try again (\(maxSpeechRetries - speechRetryCount) left)"
+                        }
                     }
+                } else {
+                    hasRecording = false
+                    spokenText = "Could not hear clearly. Try again!"
                 }
-            } else {
-                hasRecording = false
-                spokenText = "Could not hear clearly. Try again!"
             }
         }
     }
 
+    /// Evaluate an open-ended response via the backend AI endpoint.
+    private func evaluateOpenEndedResponse(spoken: String) async {
+        guard let task = learningManager.currentTask else { return }
+        let question = task.content.question ?? task.content.instructionText ?? task.content.instruction ?? ""
+
+        do {
+            let result = try await AdaptiveAPIService().evaluateOpenEnded(
+                question: question,
+                spoken: spoken,
+                exampleAnswers: task.content.exampleAnswers,
+                keywords: task.content.keywords
+            )
+
+            let score = Int(result.score * 5.0)
+            await learningManager.submitAttempt(
+                isCorrect: result.isAccepted,
+                score: max(score, result.isAccepted ? 1 : 0),
+                dimension: dimension
+            )
+        } catch {
+            // If AI evaluation fails, be lenient — accept the response
+            // as long as the child said something meaningful
+            let wordCount = spoken.split(separator: " ").count
+            let fallbackCorrect = wordCount >= 1
+            await learningManager.submitAttempt(
+                isCorrect: fallbackCorrect,
+                score: fallbackCorrect ? 3 : 0,
+                dimension: dimension
+            )
+        }
+    }
+
     private func speechInputArea(task: AdaptiveTask) -> some View {
-        let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
+        let isOpenEnded = task.content.openEnded == true
+        let targetWord = isOpenEnded ? "" : (task.content.targetWord ?? task.content.correctAnswer ?? "")
 
         return VStack(spacing: 12) {
             // Show recognized text

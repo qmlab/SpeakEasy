@@ -188,6 +188,20 @@ class SpeechEvaluationResponse(BaseModel):
     feedback: str
 
 
+class OpenEndedEvaluationRequest(BaseModel):
+    question: str
+    spoken: str
+    example_answers: Optional[list[str]] = None
+    keywords: Optional[list[str]] = None
+
+
+class OpenEndedEvaluationResponse(BaseModel):
+    is_accepted: bool
+    score: float
+    feedback: str
+    evaluation_method: str
+
+
 class ModalityRecommendationResponse(BaseModel):
     player_id: str
     recommended_modality: str

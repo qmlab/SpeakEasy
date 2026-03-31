@@ -249,16 +249,16 @@ def _build_content(task_type: str, task_data: dict) -> dict:
             content["accept_threshold"] = 0.3
 
     elif task_type == "conversation":
-        # Conversation: open-ended response. Use first example answer as
-        # target_word so voice input has something to match loosely against.
+        # Conversation: open-ended response evaluated by AI.
+        # No fixed target_word — the LLM judges whether the child's
+        # answer is a reasonable response to the question.
         skip_keys = {"instruction", "instruction_zh"}
         for key, value in task_data.items():
             if key not in skip_keys:
                 content[key] = value
-        examples = task_data.get("example_answers", [])
-        if examples and "target_word" not in content:
-            content["target_word"] = examples[0]
-        # Add flexible acceptance threshold for voice evaluation
+        # Mark as open-ended so iOS routes to AI evaluation
+        content["open_ended"] = True
+        # Add flexible acceptance threshold for keyword fallback
         if "accept_threshold" not in content:
             content["accept_threshold"] = 0.3
 
