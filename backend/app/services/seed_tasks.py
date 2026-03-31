@@ -602,12 +602,14 @@ def seed_language_expression_tasks(db: Session) -> int:
                 modalities=[Modality.TOUCH.value, Modality.TEXT.value],
                 content={
                     "instruction_audio": "Put the words in order to make a sentence!",
-                    "instruction_text": "Make a sentence",
-                    "word_cards": ["The", "dog", "is", "big"],
-                    "correct_order": [0, 1, 2, 3],
+                    "instruction_text": "Put the words in order",
+                    "options": ["dog", "is", "The", "big"],
+                    "items": ["The", "dog", "is", "big"],
+                    "correct_answer": "The dog is big",
                     "target_sentence": "The dog is big",
                     "target_word": "The dog is big",
                     "image_hint": "dog",
+                    "accept_threshold": 0.3,
                 },
                 is_assessment=False,
             ),
@@ -618,12 +620,14 @@ def seed_language_expression_tasks(db: Session) -> int:
                 modalities=[Modality.TOUCH.value, Modality.TEXT.value],
                 content={
                     "instruction_audio": "Put the words in order to make a sentence!",
-                    "instruction_text": "Make a sentence",
-                    "word_cards": ["I", "like", "apples"],
-                    "correct_order": [0, 1, 2],
+                    "instruction_text": "Put the words in order",
+                    "options": ["like", "I", "apples"],
+                    "items": ["I", "like", "apples"],
+                    "correct_answer": "I like apples",
                     "target_sentence": "I like apples",
                     "target_word": "I like apples",
                     "image_hint": "apple",
+                    "accept_threshold": 0.3,
                 },
                 is_assessment=False,
             ),
@@ -634,12 +638,14 @@ def seed_language_expression_tasks(db: Session) -> int:
                 modalities=[Modality.TOUCH.value, Modality.TEXT.value],
                 content={
                     "instruction_audio": "Put the words in order to make a sentence!",
-                    "instruction_text": "Make a sentence",
-                    "word_cards": ["She", "is", "eating", "a", "banana"],
-                    "correct_order": [0, 1, 2, 3, 4],
+                    "instruction_text": "Put the words in order",
+                    "options": ["eating", "She", "banana", "a", "is"],
+                    "items": ["She", "is", "eating", "a", "banana"],
+                    "correct_answer": "She is eating a banana",
                     "target_sentence": "She is eating a banana",
                     "target_word": "She is eating a banana",
                     "image_hint": "banana",
+                    "accept_threshold": 0.3,
                 },
                 is_assessment=False,
             ),
@@ -655,8 +661,8 @@ def seed_language_expression_tasks(db: Session) -> int:
                 task_type=TaskType.CONVERSATION.value,
                 modalities=[Modality.VOICE.value, Modality.TEXT.value],
                 content={
-                    "instruction_audio": "Answer the question!",
-                    "instruction_text": "Answer the question",
+                    "instruction_audio": "What is your favorite animal?",
+                    "instruction_text": "What is your favorite animal?",
                     "question": "What is your favorite animal?",
                     "example_answers": [
                         "I like dogs",
@@ -664,7 +670,6 @@ def seed_language_expression_tasks(db: Session) -> int:
                         "I love fish",
                     ],
                     "target_word": "I like dogs",
-                    "image_hint": "dog",
                     "keywords": [
                         "dog",
                         "cat",
@@ -686,12 +691,11 @@ def seed_language_expression_tasks(db: Session) -> int:
                 task_type=TaskType.CONVERSATION.value,
                 modalities=[Modality.VOICE.value, Modality.TEXT.value],
                 content={
-                    "instruction_audio": "Answer the question!",
-                    "instruction_text": "Answer the question",
+                    "instruction_audio": "What did you eat for breakfast?",
+                    "instruction_text": "What did you eat for breakfast?",
                     "question": "What did you eat for breakfast?",
                     "example_answers": ["I ate cereal", "I had milk", "I ate eggs"],
                     "target_word": "I ate cereal",
-                    "image_hint": "spoon",
                     "keywords": [
                         "ate",
                         "eat",
@@ -712,8 +716,8 @@ def seed_language_expression_tasks(db: Session) -> int:
                 task_type=TaskType.CONVERSATION.value,
                 modalities=[Modality.VOICE.value, Modality.TEXT.value],
                 content={
-                    "instruction_audio": "Answer the question!",
-                    "instruction_text": "Answer the question",
+                    "instruction_audio": "What do you like to play with?",
+                    "instruction_text": "What do you like to play with?",
                     "question": "What do you like to play with?",
                     "example_answers": [
                         "I like to play with blocks",
@@ -721,7 +725,6 @@ def seed_language_expression_tasks(db: Session) -> int:
                         "I like balls",
                     ],
                     "target_word": "I like to play with blocks",
-                    "image_hint": "ball",
                     "keywords": ["play", "toy", "ball", "block", "game", "like", "fun"],
                     "accept_threshold": 0.3,
                 },
@@ -2478,7 +2481,8 @@ def backfill_target_words(db: Session) -> int:
         "crayon": "crayon",
         "teddy": "teddy_bear",
         "toy": "teddy_bear",
-        "block": "ball",
+        "block": "teddy_bear",
+        "blocks": "teddy_bear",
         "food": "apple",
         "cereal": "spoon",
         "milk": "cup",
@@ -2534,6 +2538,49 @@ def backfill_target_words(db: Session) -> int:
 
             if new_tw:
                 content["target_word"] = new_tw
+                changed = True
+
+        # For build_sentence tasks, ensure options + items are set
+        # so the iOS ordering UI can show word cards instead of just an image.
+        if task.task_type == "build_sentence" and not content.get("options"):
+            words = content.get("word_cards") or content.get("words")
+            if words and len(words) >= 2:
+                import hashlib
+                import random as _rand
+
+                seed = int(hashlib.md5(" ".join(words).encode()).hexdigest(), 16) % (
+                    2**32
+                )
+                shuffled = list(words)
+                _local_rand = _rand.Random(seed)
+                _local_rand.shuffle(shuffled)
+                while (
+                    shuffled == list(words) and len(words) > 1 and len(set(words)) > 1
+                ):
+                    _local_rand.shuffle(shuffled)
+                content["options"] = shuffled
+                if not content.get("items"):
+                    content["items"] = list(words)
+                if not content.get("correct_answer"):
+                    cs = content.get("correct_sentence") or content.get(
+                        "target_sentence", ""
+                    )
+                    if cs:
+                        content["correct_answer"] = cs
+                if not content.get("accept_threshold"):
+                    content["accept_threshold"] = 0.3
+                changed = True
+
+        # For conversation tasks, fix instruction to be the question itself
+        if task.task_type == "conversation":
+            q = content.get("question") or content.get("instruction_text", "")
+            if q and content.get("instruction_text") == "Answer the question":
+                content["instruction_text"] = q
+                content["instruction_audio"] = q
+                changed = True
+            # Add accept_threshold if missing
+            if not content.get("accept_threshold"):
+                content["accept_threshold"] = 0.3
                 changed = True
 
         # Also derive image_hint for voice tasks missing it
