@@ -664,12 +664,12 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_audio": "What is your favorite animal?",
                     "instruction_text": "What is your favorite animal?",
                     "question": "What is your favorite animal?",
+                    "open_ended": True,
                     "example_answers": [
                         "I like dogs",
                         "My favorite animal is a cat",
                         "I love fish",
                     ],
-                    "target_word": "I like dogs",
                     "keywords": [
                         "dog",
                         "cat",
@@ -694,8 +694,8 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_audio": "What did you eat for breakfast?",
                     "instruction_text": "What did you eat for breakfast?",
                     "question": "What did you eat for breakfast?",
+                    "open_ended": True,
                     "example_answers": ["I ate cereal", "I had milk", "I ate eggs"],
-                    "target_word": "I ate cereal",
                     "keywords": [
                         "ate",
                         "eat",
@@ -719,12 +719,12 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "instruction_audio": "What do you like to play with?",
                     "instruction_text": "What do you like to play with?",
                     "question": "What do you like to play with?",
+                    "open_ended": True,
                     "example_answers": [
                         "I like to play with blocks",
                         "I play with my toys",
                         "I like balls",
                     ],
-                    "target_word": "I like to play with blocks",
                     "keywords": ["play", "toy", "ball", "block", "game", "like", "fun"],
                     "accept_threshold": 0.3,
                 },
@@ -2581,6 +2581,10 @@ def backfill_target_words(db: Session) -> int:
             # Add accept_threshold if missing
             if not content.get("accept_threshold"):
                 content["accept_threshold"] = 0.3
+                changed = True
+            # Mark conversation tasks as open-ended for AI evaluation
+            if not content.get("open_ended"):
+                content["open_ended"] = True
                 changed = True
 
         # Also derive image_hint for voice tasks missing it

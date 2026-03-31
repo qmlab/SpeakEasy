@@ -218,6 +218,9 @@ struct TaskContent: Codable {
     let question: String?
     let passage: String?
     let items: [String]?
+    let openEnded: Bool?
+    let exampleAnswers: [String]?
+    let keywords: [String]?
 
     enum CodingKeys: String, CodingKey {
         case instruction
@@ -237,6 +240,9 @@ struct TaskContent: Codable {
         case items
         case target
         case choices
+        case openEnded = "open_ended"
+        case exampleAnswers = "example_answers"
+        case keywords
     }
 
     init(from decoder: Decoder) throws {
@@ -254,6 +260,9 @@ struct TaskContent: Codable {
         question = try container.decodeIfPresent(String.self, forKey: .question)
         passage = try container.decodeIfPresent(String.self, forKey: .passage)
         items = try container.decodeIfPresent([String].self, forKey: .items)
+        openEnded = try container.decodeIfPresent(Bool.self, forKey: .openEnded)
+        exampleAnswers = try container.decodeIfPresent([String].self, forKey: .exampleAnswers)
+        keywords = try container.decodeIfPresent([String].self, forKey: .keywords)
 
         // Decode targetWord: try explicit "target_word" string first, then extract from nested "target" object
         if let tw = try? container.decodeIfPresent(String.self, forKey: .targetWord) {
@@ -302,6 +311,9 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(question, forKey: .question)
         try container.encodeIfPresent(passage, forKey: .passage)
         try container.encodeIfPresent(items, forKey: .items)
+        try container.encodeIfPresent(openEnded, forKey: .openEnded)
+        try container.encodeIfPresent(exampleAnswers, forKey: .exampleAnswers)
+        try container.encodeIfPresent(keywords, forKey: .keywords)
     }
 
     var displayInstruction: String {
@@ -633,6 +645,36 @@ struct SpeechEvalResponse: Codable {
         case similarityScore = "similarity_score"
         case isAccepted = "is_accepted"
         case feedback
+    }
+}
+
+// MARK: - Open-Ended Evaluation
+
+struct OpenEndedEvalRequest: Codable {
+    let question: String
+    let spoken: String
+    let exampleAnswers: [String]?
+    let keywords: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case question
+        case spoken
+        case exampleAnswers = "example_answers"
+        case keywords
+    }
+}
+
+struct OpenEndedEvalResponse: Codable {
+    let isAccepted: Bool
+    let score: Double
+    let feedback: String
+    let evaluationMethod: String
+
+    enum CodingKeys: String, CodingKey {
+        case isAccepted = "is_accepted"
+        case score
+        case feedback
+        case evaluationMethod = "evaluation_method"
     }
 }
 

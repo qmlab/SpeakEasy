@@ -115,6 +115,11 @@ class AdaptiveAPIService {
         return try await post("/adaptive/evaluate-speech", body: body)
     }
 
+    func evaluateOpenEnded(question: String, spoken: String, exampleAnswers: [String]?, keywords: [String]?) async throws -> OpenEndedEvalResponse {
+        let body = OpenEndedEvalRequest(question: question, spoken: spoken, exampleAnswers: exampleAnswers, keywords: keywords)
+        return try await post("/adaptive/evaluate-open-ended", body: body)
+    }
+
     // MARK: - Modality
 
     func getModality(playerId: String) async throws -> ModalityRecommendation {
