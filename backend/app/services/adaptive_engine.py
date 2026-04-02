@@ -38,11 +38,11 @@ LEVEL_UP_THRESHOLD = 0.80  # Legacy fallback
 LEVEL_DOWN_THRESHOLD = 0.50  # Legacy fallback
 
 # New question-bank progression rules
-ADVANCE_STREAK = 3       # 3 correct in a row → level up
-RETREAT_STREAK = 2       # 2 incorrect in a row → level down + scaffolding hint
-CEILING_FAIL_COUNT = 4   # 4 failures out of 5 at a level → ceiling
-CEILING_WINDOW = 5       # Window size for ceiling detection
-BASAL_STREAK = 5         # 5 successes in a row at a level → basal (floor)
+ADVANCE_STREAK = 3  # 3 correct in a row → level up
+RETREAT_STREAK = 2  # 2 incorrect in a row → level down + scaffolding hint
+CEILING_FAIL_COUNT = 4  # 4 failures out of 5 at a level → ceiling
+CEILING_WINDOW = 5  # Window size for ceiling detection
+BASAL_STREAK = 5  # 5 successes in a row at a level → basal (floor)
 CONSECUTIVE_FAIL_LIMIT = 3  # Legacy confidence rebuild threshold
 
 MAX_LEVEL = 9  # Levels 0-9 (mapped from research bank levels 1-10)
@@ -386,7 +386,9 @@ class AdaptiveEngine:
                 or task_level is not None
                 and task_level < profile.ceiling_level
             ):
-                profile.ceiling_level = task_level if task_level is not None else profile.level
+                profile.ceiling_level = (
+                    task_level if task_level is not None else profile.level
+                )
 
             # Mark basal if detected
             if is_basal and (
@@ -394,12 +396,17 @@ class AdaptiveEngine:
                 or task_level is not None
                 and task_level > profile.basal_level
             ):
-                profile.basal_level = task_level if task_level is not None else profile.level
+                profile.basal_level = (
+                    task_level if task_level is not None else profile.level
+                )
 
             # Apply advance/retreat (ceiling caps upward movement)
             if should_level_up and profile.level < MAX_LEVEL:
                 new_level = profile.level + 1
-                if profile.ceiling_level is not None and new_level > profile.ceiling_level:
+                if (
+                    profile.ceiling_level is not None
+                    and new_level > profile.ceiling_level
+                ):
                     new_level = profile.ceiling_level  # Capped by ceiling
                 if new_level != profile.level:
                     profile.level = new_level
