@@ -1,1191 +1,754 @@
 {
   "dimension": "object_cognition",
-  "description": "Object Cognition: Understanding, identifying, classifying, and reasoning about objects",
+  "description": "Executive Function: From inhibitory control to sustained attention",
+  "version": "research_v2",
+  "source": "Autism Neurodevelopmental Question Bank v1.0",
   "levels": {
     "0": {
-      "name": "Simple Matching",
-      "name_zh": "简单配对",
-      "task_type": "match",
+      "name": "Simple Attention",
+      "name_zh": "简单注意力",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Find the same one!",
-          "instruction_zh": "找到一样的！",
-          "target": {
-            "name": "Banana",
-            "category": "Food"
-          },
-          "choices": [
-            {
-              "name": "Banana",
-              "category": "Food",
-              "is_correct": true
-            },
-            {
-              "name": "Orange",
-              "category": "Food",
-              "is_correct": false
-            },
-            {
-              "name": "Book",
-              "category": "Household",
-              "is_correct": false
-            }
+          "instruction": "TAP the green circle. Do NOT tap the red circle.",
+          "question_id": "Q101",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Slow the pace; flash green circle green",
+          "options": [
+            "Tap green only",
+            "Tap red"
           ],
-          "image_hint": "banana"
+          "correct_answer": "Tap green only",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Which one is the same?",
-          "instruction_zh": "哪一个是一样的？",
-          "target": {
-            "name": "Hat",
-            "category": "Clothing"
-          },
-          "choices": [
-            {
-              "name": "Shoe",
-              "category": "Clothing",
-              "is_correct": false
-            },
-            {
-              "name": "Hat",
-              "category": "Clothing",
-              "is_correct": true
-            },
-            {
-              "name": "Fish",
-              "category": "Animals",
-              "is_correct": false
-            }
+          "instruction": "TAP the star. Do NOT tap the square.",
+          "question_id": "Q102",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Highlight the star briefly",
+          "options": [
+            "Tap star only",
+            "Tap square"
           ],
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "Find the same one!",
-          "instruction_zh": "找到一样的！",
-          "target": {
-            "name": "Star",
-            "category": "Shapes"
-          },
-          "choices": [
-            {
-              "name": "Moon",
-              "category": "Shapes",
-              "is_correct": false
-            },
-            {
-              "name": "Sun",
-              "category": "Nature",
-              "is_correct": false
-            },
-            {
-              "name": "Star",
-              "category": "Shapes",
-              "is_correct": true
-            }
-          ],
+          "correct_answer": "Tap star only",
           "image_hint": "star"
         },
         {
-          "instruction": "Match it!",
-          "instruction_zh": "配对一下！",
-          "target": {
-            "name": "Tree",
-            "category": "Nature"
-          },
-          "choices": [
-            {
-              "name": "Tree",
-              "category": "Nature",
-              "is_correct": true
-            },
-            {
-              "name": "Flower",
-              "category": "Nature",
-              "is_correct": false
-            },
-            {
-              "name": "Truck",
-              "category": "Vehicles",
-              "is_correct": false
-            }
+          "instruction": "Remember: RED. Now tap the color you just heard.",
+          "question_id": "Q113",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the word once more",
+          "options": [
+            "Red",
+            "Blue",
+            "Green"
           ],
-          "image_hint": "tree"
+          "correct_answer": "Red",
+          "image_hint": "question"
         },
         {
-          "instruction": "Find the same one!",
-          "instruction_zh": "找到一样的！",
-          "target": {
-            "name": "Fish",
-            "category": "Animals"
-          },
-          "choices": [
-            {
-              "name": "Bird",
-              "category": "Animals",
-              "is_correct": false
-            },
-            {
-              "name": "Fish",
-              "category": "Animals",
-              "is_correct": true
-            },
-            {
-              "name": "Spoon",
-              "category": "Household",
-              "is_correct": false
-            }
+          "instruction": "Watch the light flash: [circle]. Now tap the same shape.",
+          "question_id": "Q114",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Flash the circle again briefly",
+          "options": [
+            "Circle",
+            "Square",
+            "Triangle"
           ],
-          "image_hint": "fish"
+          "correct_answer": "Circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Which one matches?",
-          "instruction_zh": "哪一个匹配？",
-          "target": {
-            "name": "Shoe",
-            "category": "Clothing"
-          },
-          "choices": [
-            {
-              "name": "Shoe",
-              "category": "Clothing",
-              "is_correct": true
-            },
-            {
-              "name": "Glove",
-              "category": "Clothing",
-              "is_correct": false
-            },
-            {
-              "name": "Apple",
-              "category": "Food",
-              "is_correct": false
-            }
+          "instruction": "Tap every time you see a STAR in the stream of shapes.",
+          "question_id": "Q141",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Slow the stream speed",
+          "options": [
+            "Tap all 5 stars",
+            "Miss stars or tap non-stars"
           ],
-          "image_hint": "shoe"
-        },
-        {
-          "instruction": "Find the same one!",
-          "instruction_zh": "找到一样的！",
-          "target": {
-            "name": "Truck",
-            "category": "Vehicles"
-          },
-          "choices": [
-            {
-              "name": "Bus",
-              "category": "Vehicles",
-              "is_correct": false
-            },
-            {
-              "name": "Truck",
-              "category": "Vehicles",
-              "is_correct": true
-            },
-            {
-              "name": "Dog",
-              "category": "Animals",
-              "is_correct": false
-            }
-          ],
-          "image_hint": "truck"
-        },
-        {
-          "instruction": "Match the picture!",
-          "instruction_zh": "配对图片！",
-          "target": {
-            "name": "Teddy Bear",
-            "category": "Toys"
-          },
-          "choices": [
-            {
-              "name": "Ball",
-              "category": "Toys",
-              "is_correct": false
-            },
-            {
-              "name": "Doll",
-              "category": "Toys",
-              "is_correct": false
-            },
-            {
-              "name": "Teddy Bear",
-              "category": "Toys",
-              "is_correct": true
-            }
-          ],
-          "image_hint": "teddy_bear"
+          "correct_answer": "Tap all 5 stars",
+          "image_hint": "star"
         }
       ]
     },
     "1": {
-      "name": "Identification",
-      "name_zh": "物体识别",
+      "name": "Basic Inhibition",
+      "name_zh": "基础抑制",
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Where is the rabbit?",
-          "instruction_zh": "兔子在哪里？",
-          "target_name": "Rabbit",
-          "choices": [
-            {
-              "name": "Rabbit",
-              "category": "Animals",
-              "is_correct": true
-            },
-            {
-              "name": "Squirrel",
-              "category": "Animals",
-              "is_correct": false
-            },
-            {
-              "name": "Frog",
-              "category": "Animals",
-              "is_correct": false
-            },
-            {
-              "name": "Duck",
-              "category": "Animals",
-              "is_correct": false
-            }
+          "instruction": "TAP the dog. Do NOT tap the cat.",
+          "question_id": "Q103",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the dog!\"",
+          "options": [
+            "Tap dog only",
+            "Tap cat"
           ],
-          "image_hint": "rabbit"
+          "correct_answer": "Tap dog only",
+          "image_hint": "dog"
         },
         {
-          "instruction": "Can you find the airplane?",
-          "instruction_zh": "你能找到飞机吗？",
-          "target_name": "Airplane",
-          "choices": [
-            {
-              "name": "Car",
-              "category": "Vehicles",
-              "is_correct": false
-            },
-            {
-              "name": "Airplane",
-              "category": "Vehicles",
-              "is_correct": true
-            },
-            {
-              "name": "Boat",
-              "category": "Vehicles",
-              "is_correct": false
-            },
-            {
-              "name": "Train",
-              "category": "Vehicles",
-              "is_correct": false
-            }
+          "instruction": "TAP the number 3. Do NOT tap other numbers.",
+          "question_id": "Q104",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Wait for the 3!\"",
+          "options": [
+            "Tap 3 only",
+            "Tap other numbers"
           ],
-          "image_hint": "airplane"
+          "correct_answer": "Tap 3 only",
+          "image_hint": "question"
         },
         {
-          "instruction": "Where is the watermelon?",
-          "instruction_zh": "西瓜在哪里？",
-          "target_name": "Watermelon",
-          "choices": [
-            {
-              "name": "Grape",
-              "category": "Food",
-              "is_correct": false
-            },
-            {
-              "name": "Strawberry",
-              "category": "Food",
-              "is_correct": false
-            },
-            {
-              "name": "Watermelon",
-              "category": "Food",
-              "is_correct": true
-            },
-            {
-              "name": "Pear",
-              "category": "Food",
-              "is_correct": false
-            }
+          "instruction": "Remember this sequence: 3, 7. Tap them in order.",
+          "question_id": "Q115",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat sequence once",
+          "options": [
+            "3 then 7"
           ],
-          "image_hint": "watermelon"
+          "correct_answer": "3 then 7",
+          "image_hint": "question"
         },
         {
-          "instruction": "Find the umbrella!",
-          "instruction_zh": "找到雨伞！",
-          "target_name": "Umbrella",
-          "choices": [
-            {
-              "name": "Umbrella",
-              "category": "Household",
-              "is_correct": true
-            },
-            {
-              "name": "Lamp",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Clock",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Book",
-              "category": "Household",
-              "is_correct": false
-            }
+          "instruction": "Remember: DOG, BALL. Tap the things you heard.",
+          "question_id": "Q116",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat words once",
+          "options": [
+            "Dog, Ball",
+            "Cat",
+            "Car"
           ],
-          "image_hint": "umbrella"
+          "correct_answer": "Dog, Ball",
+          "image_hint": "dog"
         },
         {
-          "instruction": "Where is the butterfly?",
-          "instruction_zh": "蝴蝶在哪里？",
-          "target_name": "Butterfly",
-          "choices": [
-            {
-              "name": "Bee",
-              "category": "Animals",
-              "is_correct": false
-            },
-            {
-              "name": "Ladybug",
-              "category": "Animals",
-              "is_correct": false
-            },
-            {
-              "name": "Butterfly",
-              "category": "Animals",
-              "is_correct": true
-            },
-            {
-              "name": "Ant",
-              "category": "Animals",
-              "is_correct": false
-            }
+          "instruction": "Sort by COLOR: Red goes left, Blue goes right. [Red square]",
+          "question_id": "Q128",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"What color is the shape?\"",
+          "options": [
+            "Left",
+            "Right"
           ],
-          "image_hint": "butterfly"
+          "correct_answer": "Left",
+          "image_hint": "square"
         },
         {
-          "instruction": "Can you find the guitar?",
-          "instruction_zh": "你能找到吉他吗？",
-          "target_name": "Guitar",
-          "choices": [
-            {
-              "name": "Drum",
-              "category": "Musical Instruments",
-              "is_correct": false
-            },
-            {
-              "name": "Guitar",
-              "category": "Musical Instruments",
-              "is_correct": true
-            },
-            {
-              "name": "Piano",
-              "category": "Musical Instruments",
-              "is_correct": false
-            },
-            {
-              "name": "Flute",
-              "category": "Musical Instruments",
-              "is_correct": false
-            }
+          "instruction": "Sort by COLOR: Red goes left, Blue goes right. [Blue circle]",
+          "question_id": "Q129",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"What color is the shape?\"",
+          "options": [
+            "Right",
+            "Left"
           ],
-          "image_hint": "guitar"
+          "correct_answer": "Right",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Where is the moon?",
-          "instruction_zh": "月亮在哪里？",
-          "target_name": "Moon",
-          "choices": [
-            {
-              "name": "Star",
-              "category": "Nature",
-              "is_correct": false
-            },
-            {
-              "name": "Moon",
-              "category": "Nature",
-              "is_correct": true
-            },
-            {
-              "name": "Sun",
-              "category": "Nature",
-              "is_correct": false
-            },
-            {
-              "name": "Cloud",
-              "category": "Nature",
-              "is_correct": false
-            }
+          "instruction": "Tap every time you hear the word 'BLUE' in the list.",
+          "question_id": "Q142",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Repeat the word 'BLUE' before starting",
+          "options": [
+            "Tap all 4 instances",
+            "Miss or false alarm"
           ],
-          "image_hint": "moon"
-        },
-        {
-          "instruction": "Find the pencil!",
-          "instruction_zh": "找到铅笔！",
-          "target_name": "Pencil",
-          "choices": [
-            {
-              "name": "Eraser",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Ruler",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Pencil",
-              "category": "School",
-              "is_correct": true
-            },
-            {
-              "name": "Scissors",
-              "category": "School",
-              "is_correct": false
-            }
-          ],
-          "image_hint": "pencil"
+          "correct_answer": "Tap all 4 instances",
+          "image_hint": "question"
         }
       ]
     },
     "2": {
-      "name": "Classification",
-      "name_zh": "分类",
-      "task_type": "classify",
+      "name": "Working Memory (Basic)",
+      "name_zh": "基础工作记忆",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Which ones are fruits?",
-          "instruction_zh": "哪些是水果？",
-          "target_category": "Fruits",
-          "items": [
-            {
-              "name": "Apple",
-              "category": "Fruits",
-              "is_target": true
-            },
-            {
-              "name": "Banana",
-              "category": "Fruits",
-              "is_target": true
-            },
-            {
-              "name": "Car",
-              "category": "Vehicles",
-              "is_target": false
-            },
-            {
-              "name": "Grape",
-              "category": "Fruits",
-              "is_target": true
-            },
-            {
-              "name": "Chair",
-              "category": "Household",
-              "is_target": false
-            },
-            {
-              "name": "Dog",
-              "category": "Animals",
-              "is_target": false
-            }
+          "instruction": "TAP when you see a fruit. Do NOT tap for vegetables.",
+          "question_id": "Q105",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Fruits have seeds inside\"",
+          "options": [
+            "Tap fruits only",
+            "Tap vegetables"
           ],
-          "image_hint": "apple"
+          "correct_answer": "Tap fruits only",
+          "image_hint": "table"
         },
         {
-          "instruction": "Which ones are toys?",
-          "instruction_zh": "哪些是玩具？",
-          "target_category": "Toys",
-          "items": [
-            {
-              "name": "Ball",
-              "category": "Toys",
-              "is_target": true
-            },
-            {
-              "name": "Doll",
-              "category": "Toys",
-              "is_target": true
-            },
-            {
-              "name": "Spoon",
-              "category": "Household",
-              "is_target": false
-            },
-            {
-              "name": "Teddy Bear",
-              "category": "Toys",
-              "is_target": true
-            },
-            {
-              "name": "Tree",
-              "category": "Nature",
-              "is_target": false
-            },
-            {
-              "name": "Shirt",
-              "category": "Clothing",
-              "is_target": false
-            }
+          "instruction": "TAP when you see an animal. Do NOT tap for objects.",
+          "question_id": "Q106",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Animals are living things\"",
+          "options": [
+            "Tap animals only",
+            "Tap objects"
           ],
-          "image_hint": "ball"
+          "correct_answer": "Tap animals only",
+          "image_hint": "question"
         },
         {
-          "instruction": "Which ones are clothing?",
-          "instruction_zh": "哪些是衣服？",
-          "target_category": "Clothing",
-          "items": [
-            {
-              "name": "Shirt",
-              "category": "Clothing",
-              "is_target": true
-            },
-            {
-              "name": "Cat",
-              "category": "Animals",
-              "is_target": false
-            },
-            {
-              "name": "Pants",
-              "category": "Clothing",
-              "is_target": true
-            },
-            {
-              "name": "Hat",
-              "category": "Clothing",
-              "is_target": true
-            },
-            {
-              "name": "Cake",
-              "category": "Food",
-              "is_target": false
-            },
-            {
-              "name": "Bus",
-              "category": "Vehicles",
-              "is_target": false
-            }
+          "instruction": "Remember: 4, 1, 9. Tap them in order.",
+          "question_id": "Q117",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat sequence once",
+          "options": [
+            "4, 1, 9"
           ],
-          "image_hint": "shirt"
+          "correct_answer": "4, 1, 9",
+          "image_hint": "question"
         },
         {
-          "instruction": "Which ones live in water?",
-          "instruction_zh": "哪些生活在水里？",
-          "target_category": "Water Animals",
-          "items": [
-            {
-              "name": "Fish",
-              "category": "Water Animals",
-              "is_target": true
-            },
-            {
-              "name": "Dog",
-              "category": "Animals",
-              "is_target": false
-            },
-            {
-              "name": "Whale",
-              "category": "Water Animals",
-              "is_target": true
-            },
-            {
-              "name": "Cat",
-              "category": "Animals",
-              "is_target": false
-            },
-            {
-              "name": "Dolphin",
-              "category": "Water Animals",
-              "is_target": true
-            },
-            {
-              "name": "Bird",
-              "category": "Animals",
-              "is_target": false
-            }
+          "instruction": "Remember: RED CIRCLE, BLUE SQUARE. Tap the red shape first.",
+          "question_id": "Q118",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"You heard two shapes — which one was red?\"",
+          "options": [
+            "Red circle",
+            "Blue square",
+            "Green triangle"
           ],
-          "image_hint": "fish"
+          "correct_answer": "Red circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Which ones are in the kitchen?",
-          "instruction_zh": "哪些在厨房里？",
-          "target_category": "Kitchen",
-          "items": [
-            {
-              "name": "Spoon",
-              "category": "Kitchen",
-              "is_target": true
-            },
-            {
-              "name": "Shoe",
-              "category": "Clothing",
-              "is_target": false
-            },
-            {
-              "name": "Plate",
-              "category": "Kitchen",
-              "is_target": true
-            },
-            {
-              "name": "Cup",
-              "category": "Kitchen",
-              "is_target": true
-            },
-            {
-              "name": "Ball",
-              "category": "Toys",
-              "is_target": false
-            },
-            {
-              "name": "Tree",
-              "category": "Nature",
-              "is_target": false
-            }
+          "instruction": "NOW sort by SHAPE: Circle goes left, Square goes right. [Red circle]",
+          "question_id": "Q130",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"The rule changed! Now look at the SHAPE, not the color\"",
+          "options": [
+            "Left",
+            "Right"
           ],
-          "image_hint": "spoon"
+          "correct_answer": "Left",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Which ones can fly?",
-          "instruction_zh": "哪些会飞？",
-          "target_category": "Flying",
-          "items": [
-            {
-              "name": "Bird",
-              "category": "Flying",
-              "is_target": true
-            },
-            {
-              "name": "Dog",
-              "category": "Animals",
-              "is_target": false
-            },
-            {
-              "name": "Butterfly",
-              "category": "Flying",
-              "is_target": true
-            },
-            {
-              "name": "Cat",
-              "category": "Animals",
-              "is_target": false
-            },
-            {
-              "name": "Airplane",
-              "category": "Flying",
-              "is_target": true
-            },
-            {
-              "name": "Car",
-              "category": "Vehicles",
-              "is_target": false
-            }
+          "instruction": "Sort by SHAPE: Circle goes left, Square goes right. [Blue square]",
+          "question_id": "Q131",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"What shape is it?\"",
+          "options": [
+            "Right",
+            "Left"
           ],
-          "image_hint": "bird"
+          "correct_answer": "Right",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Which ones are musical instruments?",
-          "instruction_zh": "哪些是乐器？",
-          "target_category": "Musical Instruments",
-          "items": [
-            {
-              "name": "Guitar",
-              "category": "Musical Instruments",
-              "is_target": true
-            },
-            {
-              "name": "Chair",
-              "category": "Household",
-              "is_target": false
-            },
-            {
-              "name": "Drum",
-              "category": "Musical Instruments",
-              "is_target": true
-            },
-            {
-              "name": "Apple",
-              "category": "Food",
-              "is_target": false
-            },
-            {
-              "name": "Piano",
-              "category": "Musical Instruments",
-              "is_target": true
-            },
-            {
-              "name": "Hat",
-              "category": "Clothing",
-              "is_target": false
-            }
+          "instruction": "Tap every time you see TWO circles in a row.",
+          "question_id": "Q143",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Watch for two circles together\"",
+          "options": [
+            "Tap at each pair",
+            "Miss pairs or tap singles"
           ],
-          "image_hint": "guitar"
+          "correct_answer": "Tap at each pair",
+          "image_hint": "circle"
         }
       ]
     },
     "3": {
-      "name": "Function Understanding",
-      "name_zh": "功能理解",
-      "task_type": "function",
+      "name": "Cognitive Flexibility",
+      "name_zh": "认知灵活性",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "What do you use to cut paper?",
-          "instruction_zh": "你用什么剪纸？",
-          "function": "cutting",
-          "choices": [
-            {
-              "name": "Scissors",
-              "category": "School",
-              "is_correct": true
-            },
-            {
-              "name": "Pencil",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Eraser",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Book",
-              "category": "School",
-              "is_correct": false
-            }
-          ]
+          "instruction": "TAP when you see a word that rhymes with CAT.",
+          "question_id": "Q107",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Rhymes end with the same sound as cat\"",
+          "options": [
+            "Hat, Mat, Bat",
+            "Dog",
+            "Car",
+            "Sun"
+          ],
+          "correct_answer": "Hat, Mat, Bat",
+          "image_hint": "cat"
         },
         {
-          "instruction": "What do you sleep on?",
-          "instruction_zh": "你睡在什么上面？",
-          "function": "sleeping",
-          "choices": [
-            {
-              "name": "Table",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Bed",
-              "category": "Household",
-              "is_correct": true
-            },
-            {
-              "name": "Chair",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Lamp",
-              "category": "Household",
-              "is_correct": false
-            }
-          ]
+          "instruction": "TAP for even numbers. Do NOT tap for odd numbers.",
+          "question_id": "Q108",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Even numbers can be divided by 2 evenly\"",
+          "options": [
+            "2, 4, 8, 6",
+            "5",
+            "7",
+            "3"
+          ],
+          "correct_answer": "2, 4, 8, 6",
+          "image_hint": "question"
         },
         {
-          "instruction": "What do you use when it rains?",
-          "instruction_zh": "下雨时你用什么？",
-          "function": "rain_protection",
-          "choices": [
-            {
-              "name": "Umbrella",
-              "category": "Household",
-              "is_correct": true
-            },
-            {
-              "name": "Sunglasses",
-              "category": "Clothing",
-              "is_correct": false
-            },
-            {
-              "name": "Hat",
-              "category": "Clothing",
-              "is_correct": false
-            },
-            {
-              "name": "Scarf",
-              "category": "Clothing",
-              "is_correct": false
-            }
-          ]
+          "instruction": "Remember: 7, 3, 5, 2. Tap them BACKWARDS.",
+          "question_id": "Q119",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"Start with the LAST number you heard\"",
+          "options": [
+            "2, 5, 3, 7"
+          ],
+          "correct_answer": "2, 5, 3, 7",
+          "image_hint": "question"
         },
         {
-          "instruction": "What do you use to wash your hands?",
-          "instruction_zh": "你用什么洗手？",
-          "function": "washing",
-          "choices": [
-            {
-              "name": "Soap",
-              "category": "Household",
-              "is_correct": true
-            },
-            {
-              "name": "Pen",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Book",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Spoon",
-              "category": "Kitchen",
-              "is_correct": false
-            }
-          ]
+          "instruction": "I will say 3 words. After, tell me the MIDDLE word: CAT, HOUSE, TREE.",
+          "question_id": "Q120",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"The middle word is the second one you heard\"",
+          "options": [
+            "House",
+            "Cat",
+            "Tree",
+            "Dog",
+            "Car"
+          ],
+          "correct_answer": "House",
+          "image_hint": "cat"
         },
         {
-          "instruction": "What do you use to tell time?",
-          "instruction_zh": "你用什么看时间？",
-          "function": "telling_time",
-          "choices": [
-            {
-              "name": "Mirror",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Clock",
-              "category": "Household",
-              "is_correct": true
-            },
-            {
-              "name": "Lamp",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Window",
-              "category": "Household",
-              "is_correct": false
-            }
-          ]
+          "instruction": "Sort by SIZE: Big goes left, Small goes right. [Big red circle]",
+          "question_id": "Q132",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it big or small?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "circle"
         },
         {
-          "instruction": "What do you draw with?",
-          "instruction_zh": "你用什么画画？",
-          "function": "drawing",
-          "choices": [
-            {
-              "name": "Crayon",
-              "category": "School",
-              "is_correct": true
-            },
-            {
-              "name": "Ruler",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Scissors",
-              "category": "School",
-              "is_correct": false
-            },
-            {
-              "name": "Backpack",
-              "category": "School",
-              "is_correct": false
-            }
-          ]
+          "instruction": "NOW sort by COLOR again! [Small blue square]",
+          "question_id": "Q133",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"The rule switched back to color!\"",
+          "options": [
+            "Right",
+            "Left"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "square"
         },
         {
-          "instruction": "What do you use to eat rice?",
-          "instruction_zh": "你用什么吃饭？",
-          "function": "eating_rice",
-          "choices": [
-            {
-              "name": "Chopsticks",
-              "category": "Kitchen",
-              "is_correct": true
-            },
-            {
-              "name": "Knife",
-              "category": "Kitchen",
-              "is_correct": false
-            },
-            {
-              "name": "Cup",
-              "category": "Kitchen",
-              "is_correct": false
-            },
-            {
-              "name": "Plate",
-              "category": "Kitchen",
-              "is_correct": false
-            }
-          ]
-        },
-        {
-          "instruction": "What helps you see at night?",
-          "instruction_zh": "什么帮你在晚上看东西？",
-          "function": "lighting",
-          "choices": [
-            {
-              "name": "Flashlight",
-              "category": "Household",
-              "is_correct": true
-            },
-            {
-              "name": "Pillow",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Blanket",
-              "category": "Household",
-              "is_correct": false
-            },
-            {
-              "name": "Clock",
-              "category": "Household",
-              "is_correct": false
-            }
-          ]
+          "instruction": "Count how many red shapes appear in the stream.",
+          "question_id": "Q144",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Keep a mental tally\"",
+          "options": [
+            "8",
+            "Any other number"
+          ],
+          "correct_answer": "8",
+          "image_hint": "question"
         }
       ]
     },
     "4": {
-      "name": "Abstract Association",
-      "name_zh": "抽象关联",
-      "task_type": "abstract",
+      "name": "Intermediate Attention",
+      "name_zh": "中级注意力",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Which one does NOT belong?",
-          "instruction_zh": "哪一个不属于这一组？",
-          "concept": "odd_one_out",
-          "items": [
-            {
-              "name": "Apple",
-              "category": "Fruits",
-              "is_odd": false
-            },
-            {
-              "name": "Banana",
-              "category": "Fruits",
-              "is_odd": false
-            },
-            {
-              "name": "Chair",
-              "category": "Household",
-              "is_odd": true
-            },
-            {
-              "name": "Grape",
-              "category": "Fruits",
-              "is_odd": false
-            }
+          "instruction": "TAP for living things. Do NOT tap for non-living things.",
+          "question_id": "Q109",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Living things grow and breathe\"",
+          "options": [
+            "Tree, Dog, Flower",
+            "Rock",
+            "Chair",
+            "Pencil"
           ],
-          "image_hint": "apple"
+          "correct_answer": "Tree, Dog, Flower",
+          "image_hint": "question"
         },
         {
-          "instruction": "Which one does NOT belong?",
-          "instruction_zh": "哪一个不属于这一组？",
-          "concept": "odd_one_out",
-          "items": [
-            {
-              "name": "Red",
-              "category": "Colors",
-              "is_odd": false
-            },
-            {
-              "name": "Blue",
-              "category": "Colors",
-              "is_odd": false
-            },
-            {
-              "name": "Green",
-              "category": "Colors",
-              "is_odd": false
-            },
-            {
-              "name": "Elephant",
-              "category": "Animals",
-              "is_odd": true
-            }
-          ]
+          "instruction": "TAP for words with more than 5 letters. Do NOT tap for shorter words.",
+          "question_id": "Q110",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Count the letters in your head\"",
+          "options": [
+            "Elephant, Butterfly, Crocodile",
+            "Cat",
+            "Dog",
+            "Ant"
+          ],
+          "correct_answer": "Elephant, Butterfly, Crocodile",
+          "image_hint": "question"
         },
         {
-          "instruction": "Which two things go together?",
-          "instruction_zh": "哪两个东西是一起的？",
-          "concept": "association",
-          "items": [
-            {
-              "name": "Pen",
-              "category": "School",
-              "pair": "A"
-            },
-            {
-              "name": "Paper",
-              "category": "School",
-              "pair": "A"
-            },
-            {
-              "name": "Fish",
-              "category": "Animals",
-              "pair": null
-            },
-            {
-              "name": "Tree",
-              "category": "Nature",
-              "pair": null
-            }
+          "instruction": "Remember: 8, 2, 6, 4, 1. Tap them in order from smallest to largest.",
+          "question_id": "Q121",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"First find the smallest number, then the next smallest\"",
+          "options": [
+            "1, 2, 4, 6, 8"
           ],
-          "correct_pair": "A",
-          "image_hint": "pencil"
+          "correct_answer": "1, 2, 4, 6, 8",
+          "image_hint": "question"
         },
         {
-          "instruction": "Which two things go together?",
-          "instruction_zh": "哪两个东西是一起的？",
-          "concept": "association",
-          "items": [
-            {
-              "name": "Lock",
-              "category": "Household",
-              "pair": "A"
-            },
-            {
-              "name": "Key",
-              "category": "Household",
-              "pair": "A"
-            },
-            {
-              "name": "Ball",
-              "category": "Toys",
-              "pair": null
-            },
-            {
-              "name": "Cloud",
-              "category": "Nature",
-              "pair": null
-            }
+          "instruction": "Remember: APPLE, CHAIR, DOG, BOOK. Tap only the living things.",
+          "question_id": "Q122",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"Living things grow and breathe\"",
+          "options": [
+            "Apple, Dog, Tree",
+            "Chair",
+            "Book",
+            "Car"
           ],
-          "correct_pair": "A",
-          "image_hint": "key"
+          "correct_answer": "Apple, Dog, Tree",
+          "image_hint": "dog"
         },
         {
-          "instruction": "What comes next? 1, 2, ...",
-          "instruction_zh": "接下来是什么？1, 2, ...",
-          "concept": "pattern",
-          "sequence": [
-            {
-              "name": "1",
-              "category": "Numbers"
-            },
-            {
-              "name": "2",
-              "category": "Numbers"
-            }
+          "instruction": "Sort by NUMBER OF SIDES: More than 3 sides goes left, 3 or fewer goes right. [Pentagon]",
+          "question_id": "Q134",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Count the sides of the shape\"",
+          "options": [
+            "Left",
+            "Right"
           ],
-          "choices": [
-            {
-              "name": "3",
-              "category": "Numbers",
-              "is_correct": true
-            },
-            {
-              "name": "5",
-              "category": "Numbers",
-              "is_correct": false
-            },
-            {
-              "name": "1",
-              "category": "Numbers",
-              "is_correct": false
-            }
-          ]
+          "correct_answer": "Left",
+          "image_hint": "pentagon"
         },
         {
-          "instruction": "What comes next? Red, Blue, Red, ...",
-          "instruction_zh": "接下来是什么？红, 蓝, 红, ...",
-          "concept": "pattern",
-          "sequence": [
-            {
-              "name": "Red",
-              "category": "Colors"
-            },
-            {
-              "name": "Blue",
-              "category": "Colors"
-            },
-            {
-              "name": "Red",
-              "category": "Colors"
-            }
+          "instruction": "Tap every time a number is GREATER than the previous number.",
+          "question_id": "Q145",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Is this number bigger than the last one?\"",
+          "options": [
+            "Tap at each increase",
+            "Miss increases or tap decreases"
           ],
-          "choices": [
-            {
-              "name": "Blue",
-              "category": "Colors",
-              "is_correct": true
-            },
-            {
-              "name": "Red",
-              "category": "Colors",
-              "is_correct": false
-            },
-            {
-              "name": "Green",
-              "category": "Colors",
-              "is_correct": false
-            }
-          ]
+          "correct_answer": "Tap at each increase",
+          "image_hint": "question"
+        }
+      ]
+    },
+    "5": {
+      "name": "Complex Memory",
+      "name_zh": "复杂记忆",
+      "task_type": "identify",
+      "tasks": [
+        {
+          "instruction": "TAP for verbs. Do NOT tap for nouns.",
+          "question_id": "Q111",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Verbs are action words — things you can do\"",
+          "options": [
+            "Run, Jump, Swim, Fly",
+            "Chair",
+            "Dog",
+            "Apple"
+          ],
+          "correct_answer": "Run, Jump, Swim, Fly",
+          "image_hint": "question"
         },
         {
-          "instruction": "Which one does NOT belong?",
-          "instruction_zh": "哪一个不属于这一组？",
-          "concept": "odd_one_out",
-          "items": [
-            {
-              "name": "Car",
-              "category": "Vehicles",
-              "is_odd": false
-            },
-            {
-              "name": "Bus",
-              "category": "Vehicles",
-              "is_odd": false
-            },
-            {
-              "name": "Bicycle",
-              "category": "Vehicles",
-              "is_odd": false
-            },
-            {
-              "name": "Banana",
-              "category": "Food",
-              "is_odd": true
-            }
+          "instruction": "TAP for prime numbers. Do NOT tap for composite numbers.",
+          "question_id": "Q112",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Prime numbers can only be divided by 1 and themselves\"",
+          "options": [
+            "2, 7, 11, 13",
+            "4",
+            "9",
+            "15"
           ],
+          "correct_answer": "2, 7, 11, 13",
+          "image_hint": "question"
+        },
+        {
+          "instruction": "I will say 5 numbers. Add the first and last number: 3, 7, 2, 9, 4.",
+          "question_id": "Q123",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"The first number was 3. The last was 4. What is 3 plus 4?\"",
+          "options": [
+            "7 (3+4)",
+            "5",
+            "6",
+            "8"
+          ],
+          "correct_answer": "7 (3+4)",
+          "image_hint": "question"
+        },
+        {
+          "instruction": "Sort by CATEGORY: Animals go left, Objects go right. [Dog]",
+          "question_id": "Q135",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is a dog an animal or an object?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "dog"
+        },
+        {
+          "instruction": "NOW sort by FIRST LETTER: A-M goes left, N-Z goes right. [Dog]",
+          "question_id": "Q136",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"D comes before M in the alphabet\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "dog"
+        },
+        {
+          "instruction": "Watch the grid. Tap when a shape appears in the same position as the one 2 steps ago.",
+          "question_id": "Q146",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Remember where the shape was TWO steps ago\"",
+          "options": [
+            "Tap at each 2-back match",
+            "Miss matches or false alarms"
+          ],
+          "correct_answer": "Tap at each 2-back match",
+          "image_hint": "question"
+        }
+      ]
+    },
+    "6": {
+      "name": "Set-Shifting",
+      "name_zh": "心理切换",
+      "task_type": "follow_instruction",
+      "tasks": [
+        {
+          "instruction": "Remember this story: 'Tom has 3 red cars and 2 blue cars.' How many cars does Tom have?",
+          "question_id": "Q124",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"Add the red cars and the blue cars together\"",
+          "options": [
+            "5",
+            "3",
+            "2",
+            "6"
+          ],
+          "correct_answer": "5",
           "image_hint": "car"
         },
         {
-          "instruction": "Which two things go together?",
-          "instruction_zh": "哪两个东西是一起的？",
-          "concept": "association",
-          "items": [
-            {
-              "name": "Toothbrush",
-              "category": "Household",
-              "pair": "A"
-            },
-            {
-              "name": "Toothpaste",
-              "category": "Household",
-              "pair": "A"
-            },
-            {
-              "name": "Chair",
-              "category": "Household",
-              "pair": null
-            },
-            {
-              "name": "Sun",
-              "category": "Nature",
-              "pair": null
-            }
+          "instruction": "Sort by LIVING/NON-LIVING: Living goes left, Non-living goes right. [Tree]",
+          "question_id": "Q137",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Trees grow and breathe — they are living\"",
+          "options": [
+            "Left",
+            "Right"
           ],
-          "correct_pair": "A",
-          "image_hint": "soap"
+          "correct_answer": "Left",
+          "image_hint": "tree"
+        },
+        {
+          "instruction": "Listen to the story and tap every time a character's name is mentioned.",
+          "question_id": "Q147",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Listen carefully for the characters' names\"",
+          "options": [
+            "Tap all 10",
+            "Miss or false alarm"
+          ],
+          "correct_answer": "Tap all 10",
+          "image_hint": "question"
+        }
+      ]
+    },
+    "7": {
+      "name": "Advanced Attention",
+      "name_zh": "高级注意力",
+      "task_type": "follow_instruction",
+      "tasks": [
+        {
+          "instruction": "Remember: 9, 4, 7, 2, 5, 8. Tap only the even numbers in the order you heard them.",
+          "question_id": "Q125",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"Even numbers end in 0, 2, 4, 6, or 8\"",
+          "options": [
+            "4, 2, 8",
+            "9",
+            "7",
+            "5"
+          ],
+          "correct_answer": "4, 2, 8",
+          "image_hint": "question"
+        },
+        {
+          "instruction": "NOW sort by NUMBER OF SYLLABLES: 1 syllable goes left, 2+ syllables goes right. [Elephant]",
+          "question_id": "Q138",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"El-e-phant has 3 syllables — more than 1\"",
+          "options": [
+            "Right",
+            "Left"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "question"
+        },
+        {
+          "instruction": "Watch the math problems. Tap only when the answer is an even number.",
+          "question_id": "Q148",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Solve the problem quickly, then check if the answer is even\"",
+          "options": [
+            "Tap for even answers",
+            "Tap for odd answers"
+          ],
+          "correct_answer": "Tap for even answers",
+          "image_hint": "question"
+        }
+      ]
+    },
+    "8": {
+      "name": "Executive Control",
+      "name_zh": "执行控制",
+      "task_type": "follow_instruction",
+      "tasks": [
+        {
+          "instruction": "Remember: RED, BLUE, GREEN, YELLOW, PURPLE. Tap the color that comes 3rd.",
+          "question_id": "Q126",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"Count the colors as you heard them: 1st, 2nd, 3rd...\"",
+          "options": [
+            "Green",
+            "Red",
+            "Blue",
+            "Yellow",
+            "Purple"
+          ],
+          "correct_answer": "Green",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "Sort by EMOTIONAL VALENCE: Positive words go left, Negative words go right. [Happy]",
+          "question_id": "Q139",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Happy is a good feeling — it is positive\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "question"
+        },
+        {
+          "instruction": "Read the paragraph. Tap every time you see a word that is a synonym of 'happy'.",
+          "question_id": "Q149",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Synonyms mean the same thing as happy\"",
+          "options": [
+            "Tap all 6",
+            "Miss synonyms or tap non-synonyms"
+          ],
+          "correct_answer": "Tap all 6",
+          "image_hint": "hat"
+        }
+      ]
+    },
+    "9": {
+      "name": "Advanced Executive",
+      "name_zh": "高级执行功能",
+      "task_type": "follow_instruction",
+      "tasks": [
+        {
+          "instruction": "Remember: 'The cat sat on the blue mat by the old barn.' How many adjectives were there?",
+          "question_id": "Q127",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"Adjectives describe nouns — look for describing words\"",
+          "options": [
+            "2 (blue, old)",
+            "3",
+            "4",
+            "1"
+          ],
+          "correct_answer": "2 (blue, old)",
+          "image_hint": "cat"
+        },
+        {
+          "instruction": "Sort by ABSTRACT vs CONCRETE: Abstract concepts go left, Concrete objects go right. [Justice]",
+          "question_id": "Q140",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Can you touch justice? No — it is an idea, not a thing\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "question"
+        },
+        {
+          "instruction": "Watch the code sequence. Tap when the pattern A-B-C appears in any three consecutive items.",
+          "question_id": "Q150",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"You need three specific items in a row\"",
+          "options": [
+            "Tap at each A-B-C occurrence",
+            "Miss or false alarm"
+          ],
+          "correct_answer": "Tap at each A-B-C occurrence",
+          "image_hint": "question"
         }
       ]
     }

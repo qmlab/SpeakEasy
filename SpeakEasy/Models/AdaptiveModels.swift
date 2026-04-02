@@ -56,17 +56,48 @@ enum DevelopmentalDimension: String, Codable, CaseIterable, Identifiable {
     var levelDescriptions: [String] {
         switch self {
         case .objectCognition:
-            return ["Matching", "Identifying", "Classifying", "Function Understanding", "Abstract Relations"]
+            return [
+                "Basic Matching", "Object Identification", "Classifying",
+                "Function Understanding", "Abstract Relations",
+                "Complex Categories", "Multi-Feature Sorting",
+                "Conceptual Grouping", "Analogical Reasoning", "Expert Abstraction"
+            ]
         case .languageExpression:
-            return ["Imitating Sounds", "Naming Objects", "Describing", "Building Sentences", "Conversation"]
+            return [
+                "Imitating Sounds", "Naming Objects", "Simple Describing",
+                "Building Sentences", "Basic Conversation",
+                "Detailed Description", "Complex Sentences",
+                "Storytelling", "Persuasive Speech", "Advanced Discourse"
+            ]
         case .languageComprehension:
-            return ["Point To", "Follow Instructions", "Story Comprehension", "Inferring Meaning", "Advanced"]
+            return [
+                "Receptive ID (Basic)", "Receptive ID (Intermediate)",
+                "Receptive ID (Advanced)", "Semantic & Verbal (Basic)",
+                "Semantic & Verbal (Advanced)", "Complex Instructions",
+                "Inferential Comprehension", "Abstract Language",
+                "Critical Listening", "Advanced Reasoning"
+            ]
         case .literacy:
-            return ["Recognize Images", "Match Word-Image", "Read Words", "Read Sentences", "Read Passages"]
+            return [
+                "Image Recognition", "Word-Image Matching", "Sight Words",
+                "Simple Sentences", "Short Passages",
+                "Paragraph Reading", "Story Comprehension",
+                "Informational Text", "Critical Reading", "Advanced Literacy"
+            ]
         case .socialBehavior:
-            return ["Attending", "Imitating Actions", "Turn Taking", "Joint Attention", "Initiating"]
+            return [
+                "Joint Attention", "Emotion Recognition", "Social Referencing",
+                "Turn Taking", "Perspective Taking",
+                "Conflict Resolution", "Group Interaction",
+                "Empathy & Support", "Social Problem Solving", "Leadership"
+            ]
         case .cognitiveLogic:
-            return ["Pairing", "Sorting", "Cause & Effect", "Sequencing", "Reasoning"]
+            return [
+                "Basic Pairing", "Simple Sorting", "Cause & Effect",
+                "Sequencing", "Basic Reasoning",
+                "Pattern Recognition", "Logical Deduction",
+                "Abstract Reasoning", "Multi-Step Logic", "Expert Problem Solving"
+            ]
         }
     }
 }
@@ -78,6 +109,8 @@ struct DevelopmentalProfile: Codable, Identifiable {
     let playerId: String
     let dimension: String
     let level: Int
+    let ceilingLevel: Int?
+    let basalLevel: Int?
     let subScores: [String: AnyCodableValue]?
     let assessed: Bool
     let lastAssessedAt: String?
@@ -89,6 +122,8 @@ struct DevelopmentalProfile: Codable, Identifiable {
         case playerId = "player_id"
         case dimension
         case level
+        case ceilingLevel = "ceiling_level"
+        case basalLevel = "basal_level"
         case subScores = "sub_scores"
         case assessed
         case lastAssessedAt = "last_assessed_at"
@@ -361,6 +396,10 @@ struct AttemptResult: Codable {
     let confidenceRebuild: Bool
     let nextAction: String
     let levelChange: Int
+    let hintLevel: Int?
+    let scaffoldingHint: String?
+    let isCeiling: Bool?
+    let isBasal: Bool?
 
     enum CodingKeys: String, CodingKey {
         case attemptId = "attempt_id"
@@ -374,6 +413,10 @@ struct AttemptResult: Codable {
         case confidenceRebuild = "confidence_rebuild"
         case nextAction = "next_action"
         case levelChange = "level_change"
+        case hintLevel = "hint_level"
+        case scaffoldingHint = "scaffolding_hint"
+        case isCeiling = "is_ceiling"
+        case isBasal = "is_basal"
     }
 }
 

@@ -32,12 +32,20 @@ from app.models.adaptive import (
 from app.models.player import Player
 
 
-# -- Constants --
+# -- Constants (Research-based Adaptive Progression Rules) --
 ACCURACY_WINDOW = 10  # Number of recent attempts to consider
-LEVEL_UP_THRESHOLD = 0.80
-LEVEL_DOWN_THRESHOLD = 0.50
-CONSECUTIVE_FAIL_LIMIT = 3
-MAX_LEVEL = 4
+LEVEL_UP_THRESHOLD = 0.80  # Legacy fallback
+LEVEL_DOWN_THRESHOLD = 0.50  # Legacy fallback
+
+# New question-bank progression rules
+ADVANCE_STREAK = 3       # 3 correct in a row → level up
+RETREAT_STREAK = 2       # 2 incorrect in a row → level down + scaffolding hint
+CEILING_FAIL_COUNT = 4   # 4 failures out of 5 at a level → ceiling
+CEILING_WINDOW = 5       # Window size for ceiling detection
+BASAL_STREAK = 5         # 5 successes in a row at a level → basal (floor)
+CONSECUTIVE_FAIL_LIMIT = 3  # Legacy confidence rebuild threshold
+
+MAX_LEVEL = 9  # Levels 0-9 (mapped from research bank levels 1-10)
 MIN_LEVEL = 0
 
 
@@ -96,7 +104,11 @@ class AdaptiveEngine:
             profiles = self.get_or_create_profiles(player_id)
             profile = next(p for p in profiles if p.dimension == dimension)
 
-        profile.level = max(MIN_LEVEL, min(MAX_LEVEL, new_level))
+        # Respect ceiling: do not advance beyond ceiling_level
+        capped = max(MIN_LEVEL, min(MAX_LEVEL, new_level))
+        if profile.ceiling_level is not None and capped > profile.ceiling_level:
+            capped = profile.ceiling_level
+        profile.level = capped
         profile.updated_at = datetime.utcnow()
         self.db.commit()
         self.db.refresh(profile)
@@ -190,7 +202,6 @@ class AdaptiveEngine:
 
         recent_attempts = self._get_recent_attempts(player_id, dimension)
         consecutive_fails = self._count_consecutive_fails(recent_attempts)
-        recent_accuracy = self._compute_accuracy(recent_attempts)
 
         # Confidence rebuild: switch to easier mastered tasks
         confidence_rebuild = False
@@ -200,9 +211,8 @@ class AdaptiveEngine:
         else:
             target_level = current_level
 
-        # Get reinforcement config
-        config = self._get_reinforcement_config(player_id)
-        prompt_level = self._determine_prompt_level(recent_accuracy, config)
+        # Determine hint ladder level based on consecutive failures
+        prompt_level = self._hint_ladder_level(consecutive_fails)
 
         # Find an appropriate task
         task = self._select_task(
@@ -347,29 +357,65 @@ class AdaptiveEngine:
         consecutive_fails = self._count_consecutive_fails(recent_attempts)
         streak = self._count_streak(recent_attempts)
 
-        should_level_up = (
-            accuracy >= LEVEL_UP_THRESHOLD
-            and len(recent_attempts) >= ACCURACY_WINDOW // 2
-        )
-        should_level_down = (
-            accuracy <= LEVEL_DOWN_THRESHOLD
-            and len(recent_attempts) >= ACCURACY_WINDOW // 2
-        )
+        # --- Research-based progression rules ---
+        # Advance: 3 correct in a row → level up
+        should_level_up = streak >= ADVANCE_STREAK
+        # Retreat: 2 incorrect in a row → level down + show scaffolding hint
+        should_level_down = consecutive_fails >= RETREAT_STREAK
         confidence_rebuild = consecutive_fails >= CONSECUTIVE_FAIL_LIMIT
+
+        # Ceiling detection: 4 failures out of 5 at this level
+        is_ceiling = self._check_ceiling(recent_attempts)
+        # Basal detection: 5 successes in a row at this level
+        is_basal = streak >= BASAL_STREAK
+
+        # Hint ladder: escalating support based on consecutive failures
+        hint_level = self._hint_ladder_level(consecutive_fails)
+
+        # Scaffolding hint from the task content (shown on retreat)
+        scaffolding_hint = None
+        if should_level_down and task and task.content:
+            scaffolding_hint = task.content.get("scaffolding_hint")
 
         # Apply level changes (reuse profile fetched above)
         level_change = 0
         if dimension and profile:
+            # Mark ceiling if detected
+            if is_ceiling and (
+                profile.ceiling_level is None
+                or task_level is not None
+                and task_level < profile.ceiling_level
+            ):
+                profile.ceiling_level = task_level if task_level is not None else profile.level
+
+            # Mark basal if detected
+            if is_basal and (
+                profile.basal_level is None
+                or task_level is not None
+                and task_level > profile.basal_level
+            ):
+                profile.basal_level = task_level if task_level is not None else profile.level
+
+            # Apply advance/retreat (ceiling caps upward movement)
             if should_level_up and profile.level < MAX_LEVEL:
-                profile.level += 1
-                level_change = 1
-                if session:
-                    session.current_level = profile.level
+                new_level = profile.level + 1
+                if profile.ceiling_level is not None and new_level > profile.ceiling_level:
+                    new_level = profile.ceiling_level  # Capped by ceiling
+                if new_level != profile.level:
+                    profile.level = new_level
+                    level_change = 1
+                    if session:
+                        session.current_level = profile.level
             elif should_level_down and profile.level > MIN_LEVEL:
-                profile.level -= 1
-                level_change = -1
-                if session:
-                    session.current_level = profile.level
+                new_level = profile.level - 1
+                # Don't go below basal
+                if profile.basal_level is not None and new_level < profile.basal_level:
+                    new_level = profile.basal_level
+                if new_level != profile.level:
+                    profile.level = new_level
+                    level_change = -1
+                    if session:
+                        session.current_level = profile.level
             profile.updated_at = datetime.utcnow()
             self.db.commit()
 
@@ -382,12 +428,16 @@ class AdaptiveEngine:
                 reward = self._generate_reward(config)
 
         # Determine next action
-        if confidence_rebuild:
+        if is_ceiling:
+            next_action = "ceiling"
+        elif confidence_rebuild:
             next_action = "confidence_rebuild"
         elif should_level_up:
             next_action = "level_up"
         elif should_level_down:
-            next_action = "level_down"
+            next_action = "retreat"
+        elif is_basal:
+            next_action = "basal"
         else:
             next_action = "continue"
 
@@ -403,6 +453,10 @@ class AdaptiveEngine:
             "confidence_rebuild": confidence_rebuild,
             "next_action": next_action,
             "level_change": level_change,
+            "hint_level": hint_level,
+            "scaffolding_hint": scaffolding_hint,
+            "is_ceiling": is_ceiling,
+            "is_basal": is_basal,
         }
 
     # ---- Assessment ----
@@ -522,32 +576,65 @@ class AdaptiveEngine:
             self.db.refresh(config)
         return config
 
+    def _check_ceiling(self, recent_attempts: list[TaskAttempt]) -> bool:
+        """Check ceiling rule: 4 failures out of 5 at this level."""
+        if len(recent_attempts) < CEILING_WINDOW:
+            return False
+        window = recent_attempts[:CEILING_WINDOW]
+        fails = sum(1 for a in window if not a.is_correct)
+        return fails >= CEILING_FAIL_COUNT
+
+    def _hint_ladder_level(self, consecutive_fails: int) -> int:
+        """Determine hint ladder level from consecutive failure count.
+
+        Research-based 4-step hint ladder:
+        0 failures → independent (no hint)
+        1 failure  → visual cue (highlight/pulse)
+        2 failures → verbal cue (spoken hint)
+        3 failures → modeled answer (show correct briefly)
+        4+ failures → guided completion (restrict wrong choices)
+        """
+        if consecutive_fails <= 0:
+            return PromptLevel.INDEPENDENT.value
+        elif consecutive_fails == 1:
+            return PromptLevel.VISUAL_CUE.value
+        elif consecutive_fails == 2:
+            return PromptLevel.VERBAL_CUE.value
+        elif consecutive_fails == 3:
+            return PromptLevel.MODELED_ANSWER.value
+        else:
+            return PromptLevel.GUIDED_COMPLETION.value
+
     def _determine_prompt_level(
         self, recent_accuracy: float, config: ReinforcementConfig
     ) -> int:
-        """Determine prompt level based on recent accuracy and strategy."""
+        """Determine prompt level based on recent accuracy and strategy.
+
+        Legacy method kept for backward compatibility. The new hint_ladder_level
+        method is preferred for the research-based progression.
+        """
         if config.prompt_strategy == PromptStrategy.MOST_TO_LEAST.value:
             if recent_accuracy >= LEVEL_UP_THRESHOLD:
                 return PromptLevel.INDEPENDENT.value
             elif recent_accuracy >= LEVEL_DOWN_THRESHOLD:
-                return PromptLevel.PARTIAL.value
+                return PromptLevel.VISUAL_CUE.value
             else:
-                return PromptLevel.FULL.value
+                return PromptLevel.VERBAL_CUE.value
         elif config.prompt_strategy == PromptStrategy.LEAST_TO_MOST.value:
             if recent_accuracy >= LEVEL_UP_THRESHOLD:
                 return PromptLevel.INDEPENDENT.value
             elif recent_accuracy >= LEVEL_DOWN_THRESHOLD:
-                return PromptLevel.PARTIAL.value
+                return PromptLevel.VISUAL_CUE.value
             else:
-                return PromptLevel.FULL.value
+                return PromptLevel.VERBAL_CUE.value
         else:
             # graduated_guidance - same logic but could be customized
             if recent_accuracy >= 0.70:
                 return PromptLevel.INDEPENDENT.value
             elif recent_accuracy >= 0.40:
-                return PromptLevel.PARTIAL.value
+                return PromptLevel.VISUAL_CUE.value
             else:
-                return PromptLevel.FULL.value
+                return PromptLevel.VERBAL_CUE.value
 
     def _generate_reward(self, config: ReinforcementConfig) -> dict:
         """Generate a reward based on reinforcement config."""

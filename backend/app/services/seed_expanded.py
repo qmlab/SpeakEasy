@@ -3,10 +3,11 @@ Expanded seed tasks loader.
 
 Reads task definitions from JSON resource files and creates AdaptiveTask objects.
 This supplements the original seed_tasks.py with additional content covering:
-- 8 tasks per level per dimension (vs original 3-4)
+- Research-based 300-question autism neurodevelopmental assessment bank
+- 10 difficulty levels (0-9) per dimension
 - Bilingual content (English + Chinese)
-- More diverse object categories and scenarios
-- Expanded assessment tasks for levels 3-4
+- Scaffolding hints and distractors for every question
+- Mapped from 5 research domains to 6 app dimensions
 """
 
 import json
@@ -322,13 +323,26 @@ def _load_dimension_tasks(db: Session, json_path: Path, force: bool = False) -> 
         for task_data in level_data.get("tasks", []):
             content = _build_content(task_type_str, task_data)
 
+            # Preserve research metadata
+            meta = {
+                "source": "expanded_v1",
+                "bilingual": True,
+                "version": data.get("version", "research_v2"),
+            }
+            if "question_id" in task_data:
+                meta["question_id"] = task_data["question_id"]
+            if "source_test" in task_data:
+                meta["source_test"] = task_data["source_test"]
+            if "sub_domain" in task_data:
+                meta["sub_domain"] = task_data["sub_domain"]
+
             task = AdaptiveTask(
                 dimension=dimension_enum.value,
                 level=level,
                 task_type=task_type_enum.value,
                 modalities=modalities,
                 content=content,
-                metadata_info={"source": "expanded_v1", "bilingual": True},
+                metadata_info=meta,
                 is_assessment=False,
             )
             tasks.append(task)

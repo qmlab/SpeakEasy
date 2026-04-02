@@ -1,587 +1,1066 @@
 {
   "dimension": "language_comprehension",
-  "description": "Language Comprehension: From pointing to inference",
+  "description": "Language & Comprehension: From receptive vocabulary to complex reasoning",
+  "version": "research_v2",
+  "source": "Autism Neurodevelopmental Question Bank v1.0",
   "levels": {
     "0": {
-      "name": "Point To",
-      "name_zh": "指认",
+      "name": "Receptive ID (Basic)",
+      "name_zh": "基础接受性识别",
       "task_type": "point_to",
       "tasks": [
         {
-          "instruction": "Touch the rabbit!",
-          "instruction_zh": "点一下兔子！",
-          "target_name": "Rabbit",
-          "choices": [
-            {
-              "name": "Rabbit",
-              "is_correct": true
-            },
-            {
-              "name": "Bear",
-              "is_correct": false
-            },
-            {
-              "name": "Fox",
-              "is_correct": false
-            }
+          "instruction": "Touch the dog.",
+          "question_id": "Q001",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Highlight the dog briefly",
+          "options": [
+            "Dog",
+            "Cat"
           ],
-          "image_hint": "rabbit"
+          "correct_answer": "Dog",
+          "image_hint": "dog",
+          "target_name": "Dog"
         },
         {
-          "instruction": "Where is the heart?",
-          "instruction_zh": "心在哪里？",
-          "target_name": "Heart",
-          "choices": [
-            {
-              "name": "Heart",
-              "is_correct": true
-            },
-            {
-              "name": "Star",
-              "is_correct": false
-            },
-            {
-              "name": "Circle",
-              "is_correct": false
-            }
+          "instruction": "Touch the ball.",
+          "question_id": "Q002",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Highlight the ball briefly",
+          "options": [
+            "Ball",
+            "Shoe"
           ],
-          "image_hint": "heart"
+          "correct_answer": "Ball",
+          "image_hint": "ball",
+          "target_name": "Ball"
         },
         {
-          "instruction": "Touch the sun!",
-          "instruction_zh": "点一下太阳！",
-          "target_name": "Sun",
-          "choices": [
-            {
-              "name": "Moon",
-              "is_correct": false
-            },
-            {
-              "name": "Sun",
-              "is_correct": true
-            },
-            {
-              "name": "Cloud",
-              "is_correct": false
-            }
+          "instruction": "Show me the apple.",
+          "question_id": "Q003",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Highlight the apple briefly",
+          "options": [
+            "Apple",
+            "Car"
           ],
-          "image_hint": "sun"
+          "correct_answer": "Apple",
+          "image_hint": "apple",
+          "target_name": "Apple"
         },
         {
-          "instruction": "Find the airplane!",
-          "instruction_zh": "找到飞机！",
-          "target_name": "Airplane",
-          "choices": [
-            {
-              "name": "Airplane",
-              "is_correct": true
-            },
-            {
-              "name": "Boat",
-              "is_correct": false
-            },
-            {
-              "name": "Car",
-              "is_correct": false
-            }
+          "instruction": "Where is the cup?",
+          "question_id": "Q004",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It's something you drink from\"",
+          "options": [
+            "Cup",
+            "Hat",
+            "Book"
           ],
-          "image_hint": "airplane"
+          "correct_answer": "Cup",
+          "image_hint": "cup",
+          "target_name": "Cup"
         },
         {
-          "instruction": "Where is the apple?",
-          "instruction_zh": "苹果在哪里？",
-          "target_name": "Apple",
-          "choices": [
-            {
-              "name": "Banana",
-              "is_correct": false
-            },
-            {
-              "name": "Apple",
-              "is_correct": true
-            },
-            {
-              "name": "Orange",
-              "is_correct": false
-            }
+          "instruction": "Touch the bird.",
+          "question_id": "Q005",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It has wings and can fly\"",
+          "options": [
+            "Bird",
+            "Fish",
+            "Cat"
+          ],
+          "correct_answer": "Bird",
+          "image_hint": "bird",
+          "target_name": "Bird"
+        },
+        {
+          "instruction": "Show me the chair.",
+          "question_id": "Q006",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"You sit on it\"",
+          "options": [
+            "Chair",
+            "Table",
+            "Bed"
+          ],
+          "correct_answer": "Chair",
+          "image_hint": "chair",
+          "target_name": "Chair"
+        },
+        {
+          "instruction": "Put all the animals in the box.",
+          "question_id": "Q025",
+          "source_test": "SB5",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Animals are living things that move\"",
+          "options": [
+            "Dog",
+            "Car",
+            "Cat",
+            "Ball",
+            "Bird"
+          ],
+          "correct_answer": "Dog, Cat, Bird",
+          "correct_items": [
+            "Dog",
+            "Cat",
+            "Bird"
+          ],
+          "distractor_items": [
+            "Car",
+            "Ball"
+          ],
+          "image_hint": "dog"
+        },
+        {
+          "instruction": "Find everything you can eat.",
+          "question_id": "Q026",
+          "source_test": "SB5",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Food goes in your mouth\"",
+          "options": [
+            "Apple",
+            "Shoe",
+            "Banana",
+            "Book",
+            "Bread"
+          ],
+          "correct_answer": "Apple, Banana, Bread",
+          "correct_items": [
+            "Apple",
+            "Banana",
+            "Bread"
+          ],
+          "distractor_items": [
+            "Shoe",
+            "Book"
           ],
           "image_hint": "apple"
         },
         {
-          "instruction": "Touch the shoe!",
-          "instruction_zh": "点一下鞋子！",
-          "target_name": "Shoe",
-          "choices": [
-            {
-              "name": "Hat",
-              "is_correct": false
-            },
-            {
-              "name": "Shirt",
-              "is_correct": false
-            },
-            {
-              "name": "Shoe",
-              "is_correct": true
-            }
+          "instruction": "Touch the red circle.",
+          "question_id": "Q048",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Highlight the red circle",
+          "options": [
+            "Red circle",
+            "Blue square",
+            "green triangle"
           ],
-          "image_hint": "shoe"
-        },
-        {
-          "instruction": "Find the fish!",
-          "instruction_zh": "找到鱼！",
-          "target_name": "Fish",
-          "choices": [
-            {
-              "name": "Fish",
-              "is_correct": true
-            },
-            {
-              "name": "Bird",
-              "is_correct": false
-            },
-            {
-              "name": "Cat",
-              "is_correct": false
-            }
-          ],
-          "image_hint": "fish"
-        },
-        {
-          "instruction": "Where is the ball?",
-          "instruction_zh": "球在哪里？",
-          "target_name": "Ball",
-          "choices": [
-            {
-              "name": "Block",
-              "is_correct": false
-            },
-            {
-              "name": "Ball",
-              "is_correct": true
-            },
-            {
-              "name": "Doll",
-              "is_correct": false
-            }
-          ],
-          "image_hint": "ball"
+          "correct_answer": "Red circle",
+          "image_hint": "circle"
         }
       ]
     },
     "1": {
-      "name": "Simple Instructions",
-      "name_zh": "简单指令",
-      "task_type": "follow_instruction",
+      "name": "Receptive ID (Intermediate)",
+      "name_zh": "中级接受性识别",
+      "task_type": "point_to",
       "tasks": [
         {
-          "instruction": "Touch the smallest one!",
-          "instruction_zh": "点最小的那个！",
-          "correct_answer": "Small star",
+          "instruction": "Touch the clock.",
+          "question_id": "Q007",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It tells you the time\"",
           "options": [
-            "Big star",
-            "Medium star",
-            "Small star"
+            "Clock",
+            "Brush",
+            "Flower",
+            "Door"
           ],
-          "image_hint": "star"
+          "correct_answer": "Clock",
+          "image_hint": "clock",
+          "target_name": "Clock"
         },
         {
-          "instruction": "Find the one that is different!",
-          "instruction_zh": "找到不一样的那个！",
-          "correct_answer": "Square",
+          "instruction": "Show me the train.",
+          "question_id": "Q008",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It runs on tracks\"",
           "options": [
-            "Circle",
-            "Circle",
-            "Square"
+            "Train",
+            "Plane",
+            "Boat",
+            "Car"
           ],
-          "image_hint": "square_shape"
+          "correct_answer": "Train",
+          "image_hint": "train",
+          "target_name": "Train"
         },
         {
-          "instruction": "Touch the blue one!",
-          "instruction_zh": "点蓝色的那个！",
-          "correct_answer": "Blue flower",
+          "instruction": "Touch the hat.",
+          "question_id": "Q009",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"You wear it on your head\"",
           "options": [
-            "Red flower",
-            "Blue flower",
-            "Yellow flower"
+            "Hat",
+            "Jacket",
+            "Shoe",
+            "Glove"
           ],
-          "image_hint": "flower"
+          "correct_answer": "Hat",
+          "image_hint": "hat",
+          "target_name": "Hat"
         },
         {
-          "instruction": "Find the tall one!",
-          "instruction_zh": "找到高的那个！",
-          "correct_answer": "Tall tree",
+          "instruction": "Where is the bridge?",
+          "question_id": "Q010",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It goes over water\"",
           "options": [
-            "Short tree",
-            "Tall tree",
-            "Medium tree"
+            "Bridge",
+            "Road",
+            "Tunnel",
+            "Island"
           ],
-          "image_hint": "tree"
+          "correct_answer": "Bridge",
+          "image_hint": "bridge",
+          "target_name": "Bridge"
         },
         {
-          "instruction": "Touch the one with spots!",
-          "instruction_zh": "点有斑点的那个！",
-          "correct_answer": "Spotted dog",
+          "instruction": "Sort the vehicles into the blue box.",
+          "question_id": "Q027",
+          "source_test": "SB5",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Vehicles are things that carry people from place to place\"",
           "options": [
-            "White dog",
-            "Spotted dog",
-            "Brown dog"
+            "Car",
+            "Dog",
+            "Train",
+            "Chair",
+            "Boat",
+            "Plane"
           ],
-          "image_hint": "dog"
+          "correct_answer": "Car, Train, Boat, Plane",
+          "correct_items": [
+            "Car",
+            "Train",
+            "Boat",
+            "Plane"
+          ],
+          "distractor_items": [
+            "Dog",
+            "Chair"
+          ],
+          "image_hint": "car"
         },
         {
-          "instruction": "Find the empty one!",
-          "instruction_zh": "找到空的那个！",
-          "correct_answer": "Empty cup",
+          "instruction": "Put all the tools in the box.",
+          "question_id": "Q028",
+          "source_test": "SB5",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Tools are used to build or fix things\"",
           "options": [
-            "Full cup",
-            "Half cup",
-            "Empty cup"
+            "Hammer",
+            "Apple",
+            "Wrench",
+            "Shoe",
+            "Screwdriver",
+            "Pencil"
           ],
-          "image_hint": "cup"
+          "correct_answer": "Hammer, Wrench, Screwdriver",
+          "correct_items": [
+            "Hammer",
+            "Wrench",
+            "Screwdriver"
+          ],
+          "distractor_items": [
+            "Apple",
+            "Shoe",
+            "Pencil"
+          ],
+          "image_hint": "hammer"
         },
         {
-          "instruction": "Touch the round one!",
-          "instruction_zh": "点圆的那个！",
-          "correct_answer": "Ball",
+          "instruction": "Touch the big blue square.",
+          "question_id": "Q049",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"Find the one that is both big AND blue\"",
           "options": [
-            "Box",
-            "Ball",
-            "Book"
+            "Big blue square",
+            "Small blue square",
+            "big red square"
           ],
-          "image_hint": "ball"
-        },
-        {
-          "instruction": "Find the soft one!",
-          "instruction_zh": "找到软的那个！",
-          "correct_answer": "Pillow",
-          "options": [
-            "Rock",
-            "Pillow",
-            "Block"
-          ],
-          "image_hint": "bed"
+          "correct_answer": "Big blue square",
+          "image_hint": "square"
         }
       ]
     },
     "2": {
-      "name": "Multi-step Instructions",
-      "name_zh": "多步指令",
-      "task_type": "follow_instruction",
+      "name": "Receptive ID (Advanced)",
+      "name_zh": "高级接受性识别",
+      "task_type": "point_to",
       "tasks": [
         {
-          "instruction": "First touch the star, then touch the moon!",
-          "instruction_zh": "先点星星，再点月亮！",
-          "steps": [
-            "Star",
-            "Moon"
-          ],
+          "instruction": "Touch the guitar.",
+          "question_id": "Q011",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It has strings and you strum it\"",
           "options": [
+            "Guitar",
+            "Violin",
+            "Trumpet",
+            "Drum",
+            "Piano"
+          ],
+          "correct_answer": "Guitar",
+          "image_hint": "guitar",
+          "target_name": "Guitar"
+        },
+        {
+          "instruction": "Show me the camera.",
+          "question_id": "Q012",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"You use it to take pictures\"",
+          "options": [
+            "Camera",
+            "Binoculars",
+            "Telescope",
+            "Microscope",
+            "Magnifier"
+          ],
+          "correct_answer": "Camera",
+          "image_hint": "camera",
+          "target_name": "Camera"
+        },
+        {
+          "instruction": "Touch the planet.",
+          "question_id": "Q013",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It orbits around a sun\"",
+          "options": [
+            "Planet",
             "Star",
             "Moon",
-            "Sun",
-            "Cloud"
-          ]
-        },
-        {
-          "instruction": "Touch the red one first, then the blue one!",
-          "instruction_zh": "先点红色的，再点蓝色的！",
-          "steps": [
-            "Red ball",
-            "Blue ball"
+            "Comet",
+            "Rocket"
           ],
-          "options": [
-            "Red ball",
-            "Blue ball",
-            "Green ball",
-            "Yellow ball"
-          ]
+          "correct_answer": "Planet",
+          "image_hint": "planet",
+          "target_name": "Planet"
         },
         {
-          "instruction": "Pick up the cup, then put it on the table!",
-          "instruction_zh": "拿起杯子，然后放在桌子上！",
-          "steps": [
-            "Cup",
-            "Table"
+          "instruction": "Where is the compass?",
+          "question_id": "Q014",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It always points north\"",
+          "options": [
+            "Compass",
+            "Map",
+            "Globe",
+            "Ruler",
+            "Calculator"
           ],
-          "options": [
-            "Cup",
-            "Table",
-            "Chair",
-            "Lamp"
-          ]
+          "correct_answer": "Compass",
+          "image_hint": "compass",
+          "target_name": "Compass"
         },
         {
-          "instruction": "Find the dog, then find the bone!",
-          "instruction_zh": "找到狗，然后找到骨头！",
-          "steps": [
-            "Dog",
-            "Bone"
+          "instruction": "Which ones are musical instruments?",
+          "question_id": "Q029",
+          "source_test": "SB5",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Instruments make music\"",
+          "options": [
+            "Guitar",
+            "Hammer",
+            "Drum",
+            "Wrench",
+            "Violin",
+            "Saw"
           ],
-          "options": [
-            "Dog",
-            "Bone",
-            "Cat",
-            "Ball"
-          ]
-        },
-        {
-          "instruction": "Touch the biggest one first, then the smallest!",
-          "instruction_zh": "先点最大的，再点最小的！",
-          "steps": [
-            "Big bear",
-            "Small bear"
+          "correct_answer": "Guitar, Drum, Violin",
+          "correct_items": [
+            "Guitar",
+            "Drum",
+            "Violin"
           ],
-          "options": [
-            "Big bear",
-            "Medium bear",
-            "Small bear"
-          ]
+          "distractor_items": [
+            "Hammer",
+            "Wrench",
+            "Saw"
+          ],
+          "image_hint": "guitar"
         },
         {
-          "instruction": "Put on the hat, then put on the shoes!",
-          "instruction_zh": "先戴帽子，再穿鞋子！",
-          "steps": [
+          "instruction": "Sort the clothing items.",
+          "question_id": "Q030",
+          "source_test": "SB5",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Clothing is what you wear on your body\"",
+          "options": [
+            "Jacket",
+            "Hammer",
             "Hat",
-            "Shoes"
+            "Wrench",
+            "Glove",
+            "Drill"
           ],
-          "options": [
+          "correct_answer": "Jacket, Hat, Glove",
+          "correct_items": [
+            "Jacket",
             "Hat",
-            "Shoes",
-            "Gloves",
-            "Scarf"
-          ]
+            "Glove"
+          ],
+          "distractor_items": [
+            "Hammer",
+            "Wrench",
+            "Drill"
+          ],
+          "image_hint": "jacket"
         },
         {
-          "instruction": "First clap your hands, then wave!",
-          "instruction_zh": "先拍手，再挥手！",
-          "steps": [
-            "Clap",
-            "Wave"
-          ],
+          "instruction": "What is silly about this? 'The fish climbed the tree.'",
+          "question_id": "Q037",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"Think about where fish really live\"",
           "options": [
-            "Clap",
-            "Wave",
-            "Jump",
-            "Dance"
-          ]
+            "Fish can't climb — they live in water",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "Fish can't climb — they live in water",
+          "image_hint": "fish"
         },
         {
-          "instruction": "Touch the triangle, then the square, then the circle!",
-          "instruction_zh": "点三角形，再点正方形，再点圆形！",
-          "steps": [
-            "Triangle",
-            "Square",
-            "Circle"
-          ],
+          "instruction": "What is wrong here? A boy is reading a shoe.",
+          "question_id": "Q038",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"What do you normally read?\"",
           "options": [
-            "Triangle",
-            "Square",
-            "Circle",
-            "Star"
-          ]
+            "You read a book, not a shoe",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "You read a book, not a shoe",
+          "image_hint": "shoe"
+        },
+        {
+          "instruction": "Touch the small red triangle first, then the big blue circle.",
+          "question_id": "Q050",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Repeat instruction slowly",
+          "options": [
+            "Small red triangle → big blue circle",
+            "Big red circle"
+          ],
+          "correct_answer": "Small red triangle → big blue circle",
+          "image_hint": "circle"
         }
       ]
     },
     "3": {
-      "name": "Story Comprehension",
-      "name_zh": "故事理解",
-      "task_type": "story_comprehension",
+      "name": "Semantic & Verbal (Basic)",
+      "name_zh": "基础语义和口语",
+      "task_type": "point_to",
       "tasks": [
         {
-          "instruction": "The dog played in the park. Where did the dog play?",
-          "instruction_zh": "小狗在公园玩。小狗在哪里玩？",
-          "correct_answer": "In the park",
-          "correct_answer_zh": "在公园",
+          "instruction": "Touch the thermometer.",
+          "question_id": "Q015",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It measures temperature\"",
           "options": [
-            "In the park",
-            "At home",
-            "At school"
+            "Thermometer",
+            "Barometer",
+            "Compass",
+            "Scale",
+            "Timer"
+          ],
+          "correct_answer": "Thermometer",
+          "image_hint": "thermometer",
+          "target_name": "Thermometer"
+        },
+        {
+          "instruction": "Show me the pendulum.",
+          "question_id": "Q016",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It swings back and forth to keep time\"",
+          "options": [
+            "Pendulum",
+            "Lever",
+            "Pulley",
+            "Gear",
+            "Spring"
+          ],
+          "correct_answer": "Pendulum",
+          "image_hint": "pendulum",
+          "target_name": "Pendulum"
+        },
+        {
+          "instruction": "Touch the fossil.",
+          "question_id": "Q017",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It is the preserved remains of an ancient animal\"",
+          "options": [
+            "Fossil",
+            "Crystal",
+            "Mineral",
+            "Gem",
+            "Rock"
+          ],
+          "correct_answer": "Fossil",
+          "image_hint": "fossil",
+          "target_name": "Fossil"
+        },
+        {
+          "instruction": "Where is the blueprint?",
+          "question_id": "Q018",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It is a detailed plan for building something\"",
+          "options": [
+            "Blueprint",
+            "Diagram",
+            "Sketch",
+            "Map",
+            "Chart"
+          ],
+          "correct_answer": "Blueprint",
+          "image_hint": "blueprint",
+          "target_name": "Blueprint"
+        },
+        {
+          "instruction": "Which ones are mammals?",
+          "question_id": "Q031",
+          "source_test": "WJ-III",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Mammals have fur or hair and feed their babies milk\"",
+          "options": [
+            "Dog",
+            "Eagle",
+            "Whale",
+            "Salmon",
+            "Bat",
+            "Frog"
+          ],
+          "correct_answer": "Dog, Whale, Bat",
+          "correct_items": [
+            "Dog",
+            "Whale",
+            "Bat"
+          ],
+          "distractor_items": [
+            "Eagle",
+            "Salmon",
+            "Frog"
           ],
           "image_hint": "dog"
         },
         {
-          "instruction": "The girl ate three cookies. How many cookies did she eat?",
-          "instruction_zh": "女孩吃了三块饼干。她吃了几块饼干？",
-          "correct_answer": "Three",
-          "correct_answer_zh": "三块",
+          "instruction": "Sort the measuring tools.",
+          "question_id": "Q032",
+          "source_test": "WJ-III",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Measuring tools tell you how big, heavy, or hot something is\"",
           "options": [
-            "One",
-            "Two",
-            "Three"
+            "Ruler",
+            "Hammer",
+            "Scale",
+            "Drill",
+            "Thermometer",
+            "Saw"
           ],
-          "image_hint": "food"
-        },
-        {
-          "instruction": "Tom gave his toy to his friend. What did Tom do?",
-          "instruction_zh": "小明把玩具给了朋友。小明做了什么？",
-          "correct_answer": "Shared his toy",
-          "correct_answer_zh": "分享了玩具",
-          "options": [
-            "Shared his toy",
-            "Broke his toy",
-            "Lost his toy"
+          "correct_answer": "Ruler, Scale, Thermometer",
+          "correct_items": [
+            "Ruler",
+            "Scale",
+            "Thermometer"
           ],
-          "image_hint": "teddy_bear"
-        },
-        {
-          "instruction": "It was raining. Mom took an umbrella. Why did she take an umbrella?",
-          "instruction_zh": "下雨了。妈妈拿了雨伞。她为什么拿雨伞？",
-          "correct_answer": "Because it was raining",
-          "correct_answer_zh": "因为下雨了",
-          "options": [
-            "Because it was raining",
-            "Because it was sunny",
-            "Because it was cold"
-          ]
-        },
-        {
-          "instruction": "The cat climbed the tree. The bird flew away. Why did the bird fly away?",
-          "instruction_zh": "猫爬上了树。鸟飞走了。鸟为什么飞走了？",
-          "correct_answer": "The cat scared it",
-          "correct_answer_zh": "猫吓到了它",
-          "options": [
-            "The cat scared it",
-            "It was hungry",
-            "It was sleepy"
-          ]
-        },
-        {
-          "instruction": "Sara has a red hat and a blue hat. She wore the blue hat today. What color is her hat?",
-          "instruction_zh": "小红有一顶红帽子和一顶蓝帽子。她今天戴了蓝帽子。她的帽子是什么颜色？",
-          "correct_answer": "Blue",
-          "correct_answer_zh": "蓝色",
-          "options": [
-            "Red",
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "instruction": "The bunny was tired. He went to bed early. How did the bunny feel?",
-          "instruction_zh": "小兔子累了。他很早就去睡觉了。小兔子感觉怎么样？",
-          "correct_answer": "Tired",
-          "correct_answer_zh": "累了",
-          "options": [
-            "Happy",
-            "Tired",
-            "Hungry"
+          "distractor_items": [
+            "Hammer",
+            "Drill",
+            "Saw"
           ],
-          "image_hint": "sleeping_cat"
+          "image_hint": "ruler"
         },
         {
-          "instruction": "The sun was shining. The kids went to play outside. What was the weather like?",
-          "instruction_zh": "太阳出来了。孩子们出去玩了。天气怎么样？",
-          "correct_answer": "Sunny",
-          "correct_answer_zh": "晴天",
+          "instruction": "What is silly? 'She put her hat on her foot.'",
+          "question_id": "Q039",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"Where do you normally wear a hat?\"",
           "options": [
-            "Rainy",
-            "Sunny",
-            "Snowy"
+            "Hats go on your head, not your foot",
+            "\"Nothing is wrong\""
           ],
-          "image_hint": "sun"
+          "correct_answer": "Hats go on your head, not your foot",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "What is wrong? A man is using an umbrella on a sunny day indoors.",
+          "question_id": "Q040",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"When do you use an umbrella?\"",
+          "options": [
+            "Umbrellas are for rain, not indoors on a sunny day",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "Umbrellas are for rain, not indoors on a sunny day",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "Touch all the shapes that are NOT yellow.",
+          "question_id": "Q051",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"Find everything that is a different color from yellow\"",
+          "options": [
+            "Red circle, blue square, green oval",
+            "Yellow star",
+            "yellow triangle"
+          ],
+          "correct_answer": "Red circle, blue square, green oval",
+          "image_hint": "hat"
         }
       ]
     },
     "4": {
-      "name": "Inference",
-      "name_zh": "推理",
+      "name": "Semantic & Verbal (Intermediate)",
+      "name_zh": "中级语义和口语",
+      "task_type": "point_to",
+      "tasks": [
+        {
+          "instruction": "Touch the glacier.",
+          "question_id": "Q019",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It is a slow-moving river of ice\"",
+          "options": [
+            "Glacier",
+            "Iceberg",
+            "Avalanche",
+            "Blizzard",
+            "Frost"
+          ],
+          "correct_answer": "Glacier",
+          "image_hint": "glacier",
+          "target_name": "Glacier"
+        },
+        {
+          "instruction": "Show me the satellite.",
+          "question_id": "Q020",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It orbits Earth and sends signals\"",
+          "options": [
+            "Satellite",
+            "Telescope",
+            "Rocket",
+            "Space Station",
+            "Probe"
+          ],
+          "correct_answer": "Satellite",
+          "image_hint": "satellite",
+          "target_name": "Satellite"
+        },
+        {
+          "instruction": "Touch the constellation.",
+          "question_id": "Q021",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It is a group of stars that forms a pattern\"",
+          "options": [
+            "Constellation",
+            "Galaxy",
+            "Nebula",
+            "Comet",
+            "Asteroid"
+          ],
+          "correct_answer": "Constellation",
+          "image_hint": "constellation",
+          "target_name": "Constellation"
+        },
+        {
+          "instruction": "Where is the hemisphere?",
+          "question_id": "Q022",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It is half of the Earth, divided at the equator\"",
+          "options": [
+            "Hemisphere",
+            "Continent",
+            "Equator",
+            "Meridian",
+            "Latitude"
+          ],
+          "correct_answer": "Hemisphere",
+          "image_hint": "hemisphere",
+          "target_name": "Hemisphere"
+        },
+        {
+          "instruction": "Which ones are renewable energy sources?",
+          "question_id": "Q033",
+          "source_test": "WJ-III",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Renewable energy comes from sources that never run out\"",
+          "options": [
+            "Solar",
+            "Coal",
+            "Wind",
+            "Oil",
+            "Hydro",
+            "Gas"
+          ],
+          "correct_answer": "Solar, Wind, Hydro",
+          "correct_items": [
+            "Solar",
+            "Wind",
+            "Hydro"
+          ],
+          "distractor_items": [
+            "Coal",
+            "Oil",
+            "Gas"
+          ],
+          "image_hint": "solar"
+        },
+        {
+          "instruction": "Sort the celestial bodies.",
+          "question_id": "Q034",
+          "source_test": "WJ-III",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Celestial bodies are found in space\"",
+          "options": [
+            "Star",
+            "Mountain",
+            "Planet",
+            "River",
+            "Moon",
+            "Volcano"
+          ],
+          "correct_answer": "Star, Planet, Moon",
+          "correct_items": [
+            "Star",
+            "Planet",
+            "Moon"
+          ],
+          "distractor_items": [
+            "Mountain",
+            "River",
+            "Volcano"
+          ],
+          "image_hint": "star"
+        },
+        {
+          "instruction": "What is wrong? 'The doctor used a hammer to check the patient's heartbeat.'",
+          "question_id": "Q041",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"What tool does a doctor use to listen to your heart?\"",
+          "options": [
+            "A stethoscope is used for heartbeats, not a hammer",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "A stethoscope is used for heartbeats, not a hammer",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "What is silly? 'The astronaut swam to the moon.'",
+          "question_id": "Q042",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"How do astronauts travel to the moon?\"",
+          "options": [
+            "You can't swim to the moon — there is no water in space",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "You can't swim to the moon — there is no water in space",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "Touch the shape that is the same color as the sky, but a different shape from a circle.",
+          "question_id": "Q052",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"The sky is blue. Now find something blue that is NOT a circle\"",
+          "options": [
+            "Blue square",
+            "Blue circle",
+            "red square",
+            "green triangle"
+          ],
+          "correct_answer": "Blue square",
+          "image_hint": "hat"
+        }
+      ]
+    },
+    "5": {
+      "name": "Complex Comprehension",
+      "name_zh": "复杂理解",
+      "task_type": "point_to",
+      "tasks": [
+        {
+          "instruction": "Touch the stalactite.",
+          "question_id": "Q023",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It hangs down from the ceiling of a cave\"",
+          "options": [
+            "Stalactite",
+            "Stalagmite",
+            "Cavern",
+            "Mineral"
+          ],
+          "correct_answer": "Stalactite",
+          "image_hint": "stalactite",
+          "target_name": "Stalactite"
+        },
+        {
+          "instruction": "Show me the barometer.",
+          "question_id": "Q024",
+          "source_test": "PPVT-4",
+          "sub_domain": "Receptive Vocabulary",
+          "scaffolding_hint": "Say: \"It measures air pressure\"",
+          "options": [
+            "Barometer",
+            "Thermometer",
+            "Hygrometer",
+            "Anemometer",
+            "Altimeter"
+          ],
+          "correct_answer": "Barometer",
+          "image_hint": "barometer",
+          "target_name": "Barometer"
+        },
+        {
+          "instruction": "Which are invertebrates?",
+          "question_id": "Q035",
+          "source_test": "WJ-III",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Invertebrates have no backbone\"",
+          "options": [
+            "Jellyfish",
+            "Dog",
+            "Crab",
+            "Eagle",
+            "Worm",
+            "Whale"
+          ],
+          "correct_answer": "Jellyfish, Crab, Worm",
+          "correct_items": [
+            "Jellyfish",
+            "Crab",
+            "Worm"
+          ],
+          "distractor_items": [
+            "Dog",
+            "Eagle",
+            "Whale"
+          ],
+          "image_hint": "jellyfish"
+        },
+        {
+          "instruction": "Sort the abstract concepts.",
+          "question_id": "Q036",
+          "source_test": "WJ-III",
+          "sub_domain": "Semantic Sorting",
+          "scaffolding_hint": "Say: \"Abstract concepts are ideas, not physical objects\"",
+          "options": [
+            "Freedom",
+            "Chair",
+            "Justice",
+            "Table",
+            "Equality",
+            "Hammer"
+          ],
+          "correct_answer": "Freedom, Justice, Equality",
+          "correct_items": [
+            "Freedom",
+            "Justice",
+            "Equality"
+          ],
+          "distractor_items": [
+            "Chair",
+            "Table",
+            "Hammer"
+          ],
+          "image_hint": "freedom"
+        },
+        {
+          "instruction": "What is wrong? 'The baker used a microscope to bake bread.'",
+          "question_id": "Q043",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"What tools does a baker use?\"",
+          "options": [
+            "Microscopes are for science labs, not baking",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "Microscopes are for science labs, not baking",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "Touch the second-largest shape in the row.",
+          "question_id": "Q053",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"Put them in order from biggest to smallest, then pick the second one\"",
+          "options": [
+            "Second-largest shape",
+            "Largest",
+            "third-largest",
+            "etc."
+          ],
+          "correct_answer": "Second-largest shape",
+          "image_hint": "second"
+        }
+      ]
+    },
+    "6": {
+      "name": "Following Directions",
+      "name_zh": "跟随指令",
       "task_type": "infer_meaning",
       "tasks": [
         {
-          "instruction": "The boy put on his swimsuit and grabbed a towel. Where is he going?",
-          "instruction_zh": "男孩穿上泳衣拿了毛巾。他要去哪里？",
-          "correct_answer": "Swimming",
-          "correct_answer_zh": "游泳",
+          "instruction": "What is wrong? 'The submarine flew over the clouds.'",
+          "question_id": "Q044",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"Where do submarines normally go?\"",
           "options": [
-            "Swimming",
-            "School",
-            "Shopping"
+            "Submarines travel underwater, not through the sky",
+            "\"Nothing is wrong\""
           ],
-          "image_hint": "fish"
+          "correct_answer": "Submarines travel underwater, not through the sky",
+          "image_hint": "hat"
         },
         {
-          "instruction": "Mom is mixing flour, eggs, and sugar. What is she making?",
-          "instruction_zh": "妈妈在搅拌面粉、鸡蛋和糖。她在做什么？",
-          "correct_answer": "A cake",
-          "correct_answer_zh": "蛋糕",
+          "instruction": "Touch the shape that is between the star and the triangle.",
+          "question_id": "Q054",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"Between means in the middle of two things\"",
           "options": [
-            "A cake",
-            "Soup",
-            "Salad"
+            "Circle",
+            "Star",
+            "triangle"
           ],
-          "image_hint": "cake"
+          "correct_answer": "Circle",
+          "image_hint": "hat"
+        }
+      ]
+    },
+    "7": {
+      "name": "Multi-step Reasoning",
+      "name_zh": "多步推理",
+      "task_type": "infer_meaning",
+      "tasks": [
+        {
+          "instruction": "What is wrong? 'The geologist used a telescope to study the rock layers.'",
+          "question_id": "Q045",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"What tools do geologists use?\"",
+          "options": [
+            "Geologists use hammers and hand lenses, not telescopes",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "Geologists use hammers and hand lenses, not telescopes",
+          "image_hint": "hat"
         },
         {
-          "instruction": "The sky is dark and there are lots of stars. What time is it?",
-          "instruction_zh": "天黑了，有很多星星。现在是什么时候？",
-          "correct_answer": "Nighttime",
-          "correct_answer_zh": "晚上",
+          "instruction": "Touch the shape that is to the right of the red square and above the blue circle.",
+          "question_id": "Q055",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"Find the red square first, then look to its right\"",
           "options": [
-            "Morning",
-            "Afternoon",
-            "Nighttime"
+            "Correct shape at intersection",
+            "Adjacent shapes"
           ],
-          "image_hint": "moon"
+          "correct_answer": "Correct shape at intersection",
+          "image_hint": "hat"
+        }
+      ]
+    },
+    "8": {
+      "name": "Abstract Comprehension",
+      "name_zh": "抽象理解",
+      "task_type": "infer_meaning",
+      "tasks": [
+        {
+          "instruction": "What is wrong? 'The neurosurgeon used a barometer to measure brain activity.'",
+          "question_id": "Q046",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"What does a barometer measure?\"",
+          "options": [
+            "Barometers measure air pressure; brain activity is measured with EEG",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "Barometers measure air pressure; brain activity is measured with EEG",
+          "image_hint": "hat"
         },
         {
-          "instruction": "The dog is wagging its tail and jumping. How does it feel?",
-          "instruction_zh": "小狗摇尾巴又跳。它感觉怎么样？",
-          "correct_answer": "Happy",
-          "correct_answer_zh": "开心",
+          "instruction": "Touch all shapes that are either triangles or red, but not both.",
+          "question_id": "Q056",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"Either/or means one or the other, but not both at the same time\"",
           "options": [
-            "Happy",
-            "Sad",
-            "Scared"
+            "Red circles, blue triangles",
+            "Red triangles",
+            "blue squares"
           ],
-          "image_hint": "happy_face"
+          "correct_answer": "Red circles, blue triangles",
+          "image_hint": "hat"
+        }
+      ]
+    },
+    "9": {
+      "name": "Advanced Reasoning",
+      "name_zh": "高级推理",
+      "task_type": "infer_meaning",
+      "tasks": [
+        {
+          "instruction": "What is wrong? 'The astrophysicist used a centrifuge to observe distant galaxies.'",
+          "question_id": "Q047",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Say: \"What is a centrifuge used for?\"",
+          "options": [
+            "Centrifuges separate substances; telescopes observe galaxies",
+            "\"Nothing is wrong\""
+          ],
+          "correct_answer": "Centrifuges separate substances; telescopes observe galaxies",
+          "image_hint": "hat"
         },
         {
-          "instruction": "Everyone is singing and there is a big cake with candles. What is happening?",
-          "instruction_zh": "大家在唱歌，有一个插着蜡烛的大蛋糕。发生了什么？",
-          "correct_answer": "A birthday party",
-          "correct_answer_zh": "生日派对",
+          "instruction": "If the largest shape is blue, touch the smallest shape. If not, touch the shape in the middle.",
+          "question_id": "Q057",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Say: \"First check: what color is the biggest shape?\"",
           "options": [
-            "A birthday party",
-            "Dinner",
-            "School"
+            "Depends on largest shape's color",
+            "Incorrect conditional choice"
           ],
-          "image_hint": "cake"
-        },
-        {
-          "instruction": "The leaves are falling from the trees and it's getting cold. What season is it?",
-          "instruction_zh": "树叶在掉落，天气变冷了。现在是什么季节？",
-          "correct_answer": "Autumn",
-          "correct_answer_zh": "秋天",
-          "options": [
-            "Spring",
-            "Summer",
-            "Autumn"
-          ],
-          "image_hint": "tree"
-        },
-        {
-          "instruction": "The girl is crying and holding her knee. What happened?",
-          "instruction_zh": "女孩在哭，抱着膝盖。发生了什么？",
-          "correct_answer": "She fell down",
-          "correct_answer_zh": "她摔倒了",
-          "options": [
-            "She fell down",
-            "She is happy",
-            "She is hungry"
-          ],
-          "image_hint": "sad_face"
-        },
-        {
-          "instruction": "Dad is putting bags in the car and checking the map. What is the family doing?",
-          "instruction_zh": "爸爸在把包放进车里，看地图。一家人要做什么？",
-          "correct_answer": "Going on a trip",
-          "correct_answer_zh": "去旅行",
-          "options": [
-            "Going on a trip",
-            "Going to sleep",
-            "Going to cook"
-          ]
+          "correct_answer": "Depends on largest shape's color",
+          "image_hint": "smallest"
         }
       ]
     }
