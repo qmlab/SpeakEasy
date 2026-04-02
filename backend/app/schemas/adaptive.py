@@ -8,6 +8,8 @@ class DevelopmentalProfileResponse(BaseModel):
     player_id: str
     dimension: str
     level: int
+    ceiling_level: Optional[int] = None
+    basal_level: Optional[int] = None
     sub_scores: Optional[dict] = None
     assessed: bool
     last_assessed_at: Optional[datetime] = None
@@ -91,6 +93,10 @@ class AttemptResultResponse(BaseModel):
     confidence_rebuild: bool
     next_action: str
     level_change: int = 0
+    hint_level: int = 0
+    scaffolding_hint: Optional[str] = None
+    is_ceiling: bool = False
+    is_basal: bool = False
 
 
 class EndSessionResponse(BaseModel):

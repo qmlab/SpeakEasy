@@ -1,472 +1,825 @@
 {
   "dimension": "language_expression",
-  "description": "Language Expression: From imitation to conversation",
+  "description": "Visual-Motor: From shape recognition to spatial reasoning",
+  "version": "research_v2",
+  "source": "Autism Neurodevelopmental Question Bank v1.0",
   "levels": {
     "0": {
-      "name": "Imitation",
-      "name_zh": "模仿",
-      "task_type": "imitate",
+      "name": "Basic Shapes",
+      "name_zh": "基础形状",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Say this word: Mama",
-          "instruction_zh": "说这个词：妈妈",
-          "target_word": "Mama",
-          "target_word_zh": "妈妈",
-          "image_hint": "mother"
+          "instruction": "What shape is this? Vertical straight line",
+          "question_id": "Q151",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Widen the line tolerance",
+          "options": [
+            "Vertical straight line",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Vertical straight line",
+          "image_hint": "line"
         },
         {
-          "instruction": "Say this word: Papa",
-          "instruction_zh": "说这个词：爸爸",
-          "target_word": "Papa",
-          "target_word_zh": "爸爸",
-          "image_hint": "father"
+          "instruction": "What shape is this? Horizontal straight line",
+          "question_id": "Q152",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Widen the line tolerance",
+          "options": [
+            "Horizontal straight line",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Horizontal straight line",
+          "image_hint": "line"
         },
         {
-          "instruction": "Can you say: Water",
-          "instruction_zh": "你能说：水",
-          "target_word": "Water",
-          "target_word_zh": "水",
-          "image_hint": "water"
+          "instruction": "Which shape matches this one? Vertical line",
+          "question_id": "Q171",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Vertical line",
+            "Horizontal line",
+            "Circle",
+            "Square"
+          ],
+          "correct_answer": "Vertical line",
+          "image_hint": "line"
         },
         {
-          "instruction": "Say this word: Hello",
-          "instruction_zh": "说这个词：你好",
-          "target_word": "Hello",
-          "target_word_zh": "你好",
-          "image_hint": "waving"
+          "instruction": "Put these 2 pieces together to make a circle.",
+          "question_id": "Q181",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show how pieces fit",
+          "correct_answer": "Complete circle",
+          "image_hint": "circle",
+          "options": [
+            "Complete circle",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
+          ]
         },
         {
-          "instruction": "Can you say: Milk",
-          "instruction_zh": "你能说：牛奶",
-          "target_word": "Milk",
-          "target_word_zh": "牛奶",
-          "image_hint": "milk"
-        },
-        {
-          "instruction": "Say this word: More",
-          "instruction_zh": "说这个词：还要",
-          "target_word": "More",
-          "target_word_zh": "还要",
-          "image_hint": "more"
-        },
-        {
-          "instruction": "Can you say: Yes",
-          "instruction_zh": "你能说：是",
-          "target_word": "Yes",
-          "target_word_zh": "是",
-          "image_hint": "thumbs_up"
-        },
-        {
-          "instruction": "Say this word: No",
-          "instruction_zh": "说这个词：不要",
-          "target_word": "No",
-          "target_word_zh": "不要",
-          "image_hint": "stop_hand"
+          "instruction": "Follow the ball with your eyes and tap it when it stops.",
+          "question_id": "Q191",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Slow the ball further",
+          "correct_answer": "Tap ball at rest",
+          "image_hint": "ball",
+          "options": [
+            "Tap ball at rest",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
         }
       ]
     },
     "1": {
-      "name": "Naming Objects",
-      "name_zh": "命名物体",
-      "task_type": "name_object",
+      "name": "Shape Properties",
+      "name_zh": "形状属性",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "What is this?",
-          "instruction_zh": "这是什么？",
-          "target_word": "Sun",
-          "target_word_zh": "太阳",
-          "image_hint": "sun"
+          "instruction": "What shape is this? Circle",
+          "question_id": "Q153",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Show arrow indicating direction",
+          "options": [
+            "Circle",
+            "Vertical line",
+            "Horizontal line",
+            "Square"
+          ],
+          "correct_answer": "Circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "What do you see?",
-          "instruction_zh": "你看到了什么？",
-          "target_word": "Moon",
-          "target_word_zh": "月亮",
-          "image_hint": "moon"
+          "instruction": "What shape is this? Square",
+          "question_id": "Q154",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight each corner",
+          "options": [
+            "Square",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Square",
+          "image_hint": "square"
         },
         {
-          "instruction": "What is this?",
-          "instruction_zh": "这是什么？",
-          "target_word": "Fish",
-          "target_word_zh": "鱼",
-          "image_hint": "fish"
+          "instruction": "Which shape matches this one? Circle",
+          "question_id": "Q172",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Circle",
+            "Vertical line",
+            "Horizontal line",
+            "Square"
+          ],
+          "correct_answer": "Circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "Can you name this?",
-          "instruction_zh": "你能说出它的名字吗？",
-          "target_word": "Tree",
-          "target_word_zh": "树",
-          "image_hint": "tree"
+          "instruction": "Build this shape with the blocks.",
+          "question_id": "Q182",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show one block placement",
+          "correct_answer": "Correct shape",
+          "image_hint": "shape",
+          "options": [
+            "Correct shape",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
+          ]
         },
         {
-          "instruction": "What is this?",
-          "instruction_zh": "这是什么？",
-          "target_word": "Shoe",
-          "target_word_zh": "鞋子",
-          "image_hint": "shoe"
-        },
-        {
-          "instruction": "What do you see?",
-          "instruction_zh": "你看到了什么？",
-          "target_word": "Flower",
-          "target_word_zh": "花",
-          "image_hint": "flower"
-        },
-        {
-          "instruction": "What is this?",
-          "instruction_zh": "这是什么？",
-          "target_word": "Star",
-          "target_word_zh": "星星",
-          "image_hint": "star"
-        },
-        {
-          "instruction": "Can you name this?",
-          "instruction_zh": "你能说出它的名字吗？",
-          "target_word": "Cake",
-          "target_word_zh": "蛋糕",
-          "image_hint": "cake"
+          "instruction": "Follow the star and tap it when it changes color.",
+          "question_id": "Q192",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Slow the movement",
+          "correct_answer": "Tap at color change",
+          "image_hint": "ball",
+          "options": [
+            "Tap at color change",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
         }
       ]
     },
     "2": {
-      "name": "Description",
-      "name_zh": "描述",
-      "task_type": "describe",
+      "name": "Complex Shapes",
+      "name_zh": "复杂形状",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "What color is this?",
-          "instruction_zh": "这是什么颜色？",
-          "target_phrase": "red ball",
-          "target_phrase_zh": "红色的球",
-          "image_hint": "ball"
+          "instruction": "What shape is this? Plus/cross shape",
+          "question_id": "Q155",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight the center intersection",
+          "options": [
+            "Plus/cross shape",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Plus/cross shape",
+          "image_hint": "cross"
         },
         {
-          "instruction": "Tell me about this!",
-          "instruction_zh": "告诉我这是什么！",
-          "target_phrase": "big dog",
-          "target_phrase_zh": "大狗",
-          "image_hint": "dog"
+          "instruction": "What shape is this? Equilateral triangle",
+          "question_id": "Q156",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight each vertex",
+          "options": [
+            "Equilateral triangle",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Equilateral triangle",
+          "image_hint": "triangle"
         },
         {
-          "instruction": "What do you see?",
-          "instruction_zh": "你看到了什么？",
-          "target_phrase": "yellow banana",
-          "target_phrase_zh": "黄色的香蕉",
-          "image_hint": "banana"
+          "instruction": "Which shape matches this one? Plus/cross",
+          "question_id": "Q173",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Plus/cross",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Plus/cross",
+          "image_hint": "cross"
         },
         {
-          "instruction": "Describe this picture!",
-          "instruction_zh": "描述这张图片！",
-          "target_phrase": "small cat",
-          "target_phrase_zh": "小猫",
-          "image_hint": "cat"
+          "instruction": "Put this 4-piece puzzle together.",
+          "question_id": "Q183",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Highlight correct slot",
+          "correct_answer": "All pieces in correct position",
+          "image_hint": "shape",
+          "options": [
+            "All pieces in correct position",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
+          ]
         },
         {
-          "instruction": "What is this?",
-          "instruction_zh": "这是什么？",
-          "target_phrase": "red car",
-          "target_phrase_zh": "红色的车",
-          "image_hint": "car"
-        },
-        {
-          "instruction": "Tell me what you see!",
-          "instruction_zh": "告诉我你看到了什么！",
-          "target_phrase": "green tree",
-          "target_phrase_zh": "绿色的树",
-          "image_hint": "tree"
-        },
-        {
-          "instruction": "What color is this?",
-          "instruction_zh": "这是什么颜色？",
-          "target_phrase": "white cloud",
-          "target_phrase_zh": "白色的云",
-          "image_hint": "cloud"
-        },
-        {
-          "instruction": "Describe this!",
-          "instruction_zh": "描述一下！",
-          "target_phrase": "happy face",
-          "target_phrase_zh": "开心的脸",
-          "image_hint": "happy_face"
+          "instruction": "Watch the cup. Which cup is hiding the ball?",
+          "question_id": "Q193",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Slow the movement",
+          "correct_answer": "Correct cup",
+          "image_hint": "ball",
+          "options": [
+            "Correct cup",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
         }
       ]
     },
     "3": {
-      "name": "Sentence Building",
-      "name_zh": "造句",
-      "task_type": "build_sentence",
+      "name": "Spatial Basics",
+      "name_zh": "空间基础",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Put the words in order!",
-          "instruction_zh": "把词语排好顺序！",
-          "words": [
-            "I",
-            "like",
-            "apples"
+          "instruction": "What shape is this? 5-pointed star",
+          "question_id": "Q157",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight each point",
+          "options": [
+            "5-pointed star",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "words_zh": [
-            "我",
-            "喜欢",
-            "苹果"
-          ],
-          "correct_sentence": "I like apples",
-          "correct_sentence_zh": "我喜欢苹果",
-          "image_hint": "apple"
+          "correct_answer": "5-pointed star",
+          "image_hint": "star"
         },
         {
-          "instruction": "Make a sentence!",
-          "instruction_zh": "组成一句话！",
-          "words": [
-            "The",
-            "cat",
-            "is",
-            "sleeping"
+          "instruction": "What shape is this? 45° diagonal line",
+          "question_id": "Q158",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Show angle guide",
+          "options": [
+            "45° diagonal line",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "words_zh": [
-            "猫",
-            "在",
-            "睡觉"
-          ],
-          "correct_sentence": "The cat is sleeping",
-          "correct_sentence_zh": "猫在睡觉",
-          "image_hint": "cat"
+          "correct_answer": "45° diagonal line",
+          "image_hint": "line"
         },
         {
-          "instruction": "Put the words in order!",
-          "instruction_zh": "把词语排好顺序！",
-          "words": [
-            "I",
-            "want",
-            "water"
+          "instruction": "Which shape matches this one? Diamond/rhombus",
+          "question_id": "Q174",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Diamond/rhombus",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "words_zh": [
-            "我",
-            "要",
-            "喝水"
-          ],
-          "correct_sentence": "I want water",
-          "correct_sentence_zh": "我要喝水",
-          "image_hint": "water"
+          "correct_answer": "Diamond/rhombus",
+          "image_hint": "diamond"
         },
         {
-          "instruction": "Make a sentence!",
-          "instruction_zh": "组成一句话！",
-          "words": [
-            "The",
-            "dog",
-            "is",
-            "running"
-          ],
-          "words_zh": [
-            "狗",
-            "在",
-            "跑"
-          ],
-          "correct_sentence": "The dog is running",
-          "correct_sentence_zh": "狗在跑",
-          "image_hint": "dog"
+          "instruction": "Build this 3D tower with the blocks.",
+          "question_id": "Q184",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show bottom block first",
+          "correct_answer": "Correct height and order",
+          "image_hint": "shape",
+          "options": [
+            "Correct height and order",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
+          ]
         },
         {
-          "instruction": "Put the words in order!",
-          "instruction_zh": "把词语排好顺序！",
-          "words": [
-            "She",
-            "has",
-            "a",
-            "ball"
-          ],
-          "words_zh": [
-            "她",
-            "有",
-            "一个",
-            "球"
-          ],
-          "correct_sentence": "She has a ball",
-          "correct_sentence_zh": "她有一个球",
-          "image_hint": "ball"
-        },
-        {
-          "instruction": "Make a sentence!",
-          "instruction_zh": "组成一句话！",
-          "words": [
-            "I",
-            "see",
-            "a",
-            "bird"
-          ],
-          "words_zh": [
-            "我",
-            "看到",
-            "一只",
-            "鸟"
-          ],
-          "correct_sentence": "I see a bird",
-          "correct_sentence_zh": "我看到一只鸟",
-          "image_hint": "bird"
-        },
-        {
-          "instruction": "Put the words in order!",
-          "instruction_zh": "把词语排好顺序！",
-          "words": [
-            "He",
-            "is",
-            "eating",
-            "cake"
-          ],
-          "words_zh": [
-            "他",
-            "在",
-            "吃",
-            "蛋糕"
-          ],
-          "correct_sentence": "He is eating cake",
-          "correct_sentence_zh": "他在吃蛋糕",
-          "image_hint": "cake"
-        },
-        {
-          "instruction": "Make a sentence!",
-          "instruction_zh": "组成一句话！",
-          "words": [
-            "We",
-            "go",
-            "to",
-            "school"
-          ],
-          "words_zh": [
-            "我们",
-            "去",
-            "上学"
-          ],
-          "correct_sentence": "We go to school",
-          "correct_sentence_zh": "我们去上学",
-          "image_hint": "school"
+          "instruction": "Follow the path of the moving dot and tap where it will end up.",
+          "question_id": "Q194",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Show path briefly",
+          "correct_answer": "Correct endpoint",
+          "image_hint": "ball",
+          "options": [
+            "Correct endpoint",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
         }
       ]
     },
     "4": {
-      "name": "Conversation",
-      "name_zh": "对话",
-      "task_type": "conversation",
+      "name": "Shape Construction",
+      "name_zh": "形状构建",
+      "task_type": "identify",
       "tasks": [
         {
-          "instruction": "What is your favorite food?",
-          "instruction_zh": "你最喜欢的食物是什么？",
-          "topic": "favorite_food",
-          "example_answers": [
-            "I like pizza",
-            "My favorite food is rice",
-            "I like apples"
+          "instruction": "What shape is this? Two overlapping circles (Venn)",
+          "question_id": "Q159",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Trace each circle separately",
+          "options": [
+            "Two overlapping circles (Venn)",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我喜欢比萨",
-            "我最喜欢的食物是米饭",
-            "我喜欢苹果"
+          "correct_answer": "Two overlapping circles (Venn)",
+          "image_hint": "circle"
+        },
+        {
+          "instruction": "What shape is this? Zigzag line with 5 turns",
+          "question_id": "Q160",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight each turn point",
+          "options": [
+            "Zigzag line with 5 turns",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Zigzag line with 5 turns",
+          "image_hint": "line"
+        },
+        {
+          "instruction": "Which shape matches this one? Two overlapping squares",
+          "question_id": "Q175",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Two overlapping squares",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Two overlapping squares",
+          "image_hint": "square"
+        },
+        {
+          "instruction": "Arrange these tiles to match the pattern.",
+          "question_id": "Q185",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Highlight one correct tile",
+          "correct_answer": "Exact color match",
+          "image_hint": "shape",
+          "options": [
+            "Exact color match",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
           ]
         },
         {
-          "instruction": "What did you do today?",
-          "instruction_zh": "你今天做了什么？",
-          "topic": "daily_activity",
-          "example_answers": [
-            "I played with toys",
-            "I went to school",
-            "I ate lunch"
+          "instruction": "Watch the 3 cups. Which one has the ball?",
+          "question_id": "Q195",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Replay at slower speed",
+          "correct_answer": "Correct cup",
+          "image_hint": "ball",
+          "options": [
+            "Correct cup",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
+        }
+      ]
+    },
+    "5": {
+      "name": "Visual Patterns",
+      "name_zh": "视觉模式",
+      "task_type": "identify",
+      "tasks": [
+        {
+          "instruction": "What shape is this? Inward spiral",
+          "question_id": "Q161",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Show rotation direction",
+          "options": [
+            "Inward spiral",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我玩了玩具",
-            "我去了学校",
-            "我吃了午饭"
+          "correct_answer": "Inward spiral",
+          "image_hint": "spiral"
+        },
+        {
+          "instruction": "What shape is this? Simple maze path",
+          "question_id": "Q162",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight the correct path",
+          "options": [
+            "Simple maze path",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Simple maze path",
+          "image_hint": "maze"
+        },
+        {
+          "instruction": "Which shape matches this one? Simple 3D box",
+          "question_id": "Q176",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Simple 3D box",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Simple 3D box",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Build this 6-block design.",
+          "question_id": "Q186",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show one layer at a time",
+          "correct_answer": "Correct 3D arrangement",
+          "image_hint": "shape",
+          "options": [
+            "Correct 3D arrangement",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
           ]
         },
         {
-          "instruction": "What is your favorite animal?",
-          "instruction_zh": "你最喜欢的动物是什么？",
-          "topic": "favorite_animal",
-          "example_answers": [
-            "I like dogs",
-            "My favorite animal is a cat",
-            "I like rabbits"
+          "instruction": "Follow the bouncing ball and tap the square it lands in.",
+          "question_id": "Q196",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Slow the bounce",
+          "correct_answer": "Correct grid square",
+          "image_hint": "ball",
+          "options": [
+            "Correct grid square",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
+        }
+      ]
+    },
+    "6": {
+      "name": "Spatial Reasoning",
+      "name_zh": "空间推理",
+      "task_type": "identify",
+      "tasks": [
+        {
+          "instruction": "What shape is this? Regular hexagon",
+          "question_id": "Q163",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight each vertex",
+          "options": [
+            "Regular hexagon",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我喜欢狗",
-            "我最喜欢猫",
-            "我喜欢兔子"
-          ],
-          "image_hint": "dog"
+          "correct_answer": "Regular hexagon",
+          "image_hint": "hexagon"
         },
         {
-          "instruction": "Tell me about your family!",
-          "instruction_zh": "告诉我你的家人！",
-          "topic": "family",
-          "example_answers": [
-            "I have a mom and dad",
-            "I have a brother",
-            "My family is big"
+          "instruction": "What shape is this? Figure-8",
+          "question_id": "Q164",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Show direction arrows",
+          "options": [
+            "Figure-8",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我有爸爸和妈妈",
-            "我有一个哥哥",
-            "我的家很大"
+          "correct_answer": "Figure-8",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Which shape matches this one? 5-pointed star",
+          "question_id": "Q177",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "5-pointed star",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "5-pointed star",
+          "image_hint": "star"
+        },
+        {
+          "instruction": "Assemble this 9-piece puzzle.",
+          "question_id": "Q187",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Highlight edge pieces first",
+          "correct_answer": "All pieces correct",
+          "image_hint": "shape",
+          "options": [
+            "All pieces correct",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
           ]
         },
         {
-          "instruction": "What do you like to play?",
-          "instruction_zh": "你喜欢玩什么？",
-          "topic": "play_preferences",
-          "example_answers": [
-            "I like to play with blocks",
-            "I like drawing",
-            "I like to run"
+          "instruction": "Watch the two crossing paths. Which dot ends up on the right?",
+          "question_id": "Q197",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Slow the crossing",
+          "correct_answer": "Correct dot",
+          "image_hint": "ball",
+          "options": [
+            "Correct dot",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
+        }
+      ]
+    },
+    "7": {
+      "name": "Complex Spatial",
+      "name_zh": "复杂空间",
+      "task_type": "identify",
+      "tasks": [
+        {
+          "instruction": "What shape is this? Necker cube outline",
+          "question_id": "Q165",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Trace front face first, then back",
+          "options": [
+            "Necker cube outline",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我喜欢玩积木",
-            "我喜欢画画",
-            "我喜欢跑步"
+          "correct_answer": "Necker cube outline",
+          "image_hint": "line"
+        },
+        {
+          "instruction": "What shape is this? Star with inner pentagon",
+          "question_id": "Q166",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Trace outer star first",
+          "options": [
+            "Star with inner pentagon",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Star with inner pentagon",
+          "image_hint": "star"
+        },
+        {
+          "instruction": "Which shape matches this one? 3 overlapping shapes",
+          "question_id": "Q178",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "3 overlapping shapes",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "3 overlapping shapes",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Recreate this tangram design.",
+          "question_id": "Q188",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show one piece placement",
+          "correct_answer": "All 7 pieces in correct position",
+          "image_hint": "shape",
+          "options": [
+            "All 7 pieces in correct position",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
           ]
         },
         {
-          "instruction": "How are you feeling today?",
-          "instruction_zh": "你今天感觉怎么样？",
-          "topic": "emotions",
-          "example_answers": [
-            "I am happy",
-            "I feel good",
-            "I am tired"
+          "instruction": "Watch the 5 cups. Which one has the ball?",
+          "question_id": "Q198",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Replay at slower speed",
+          "correct_answer": "Correct cup",
+          "image_hint": "ball",
+          "options": [
+            "Correct cup",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
+        }
+      ]
+    },
+    "8": {
+      "name": "3D Reasoning",
+      "name_zh": "三维推理",
+      "task_type": "identify",
+      "tasks": [
+        {
+          "instruction": "What shape is this? 3 interlocking circles",
+          "question_id": "Q167",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Trace each ring separately",
+          "options": [
+            "3 interlocking circles",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我很开心",
-            "我感觉很好",
-            "我很累"
+          "correct_answer": "3 interlocking circles",
+          "image_hint": "circle"
+        },
+        {
+          "instruction": "What shape is this? Winding road with turns",
+          "question_id": "Q168",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Highlight start and end points",
+          "options": [
+            "Winding road with turns",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Winding road with turns",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Which shape matches this one? Complex geometric design",
+          "question_id": "Q179",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Complex geometric design",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Complex geometric design",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Build this symmetrical block design.",
+          "question_id": "Q189",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show the axis of symmetry",
+          "correct_answer": "Both halves mirror each other",
+          "image_hint": "shape",
+          "options": [
+            "Both halves mirror each other",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
           ]
         },
         {
-          "instruction": "What is your favorite color?",
-          "instruction_zh": "你最喜欢什么颜色？",
-          "topic": "favorite_color",
-          "example_answers": [
-            "I like blue",
-            "My favorite color is red",
-            "I like green"
+          "instruction": "Follow the moving target through the maze and tap the exit it uses.",
+          "question_id": "Q199",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Highlight the target",
+          "correct_answer": "Correct exit",
+          "image_hint": "ball",
+          "options": [
+            "Correct exit",
+            "Wrong position",
+            "Other object",
+            "No match"
+          ]
+        }
+      ]
+    },
+    "9": {
+      "name": "Advanced Visual-Motor",
+      "name_zh": "高级视觉运动",
+      "task_type": "identify",
+      "tasks": [
+        {
+          "instruction": "What shape is this? Benzene ring with bonds",
+          "question_id": "Q169",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Trace the ring first, then bonds",
+          "options": [
+            "Benzene ring with bonds",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
           ],
-          "example_answers_zh": [
-            "我喜欢蓝色",
-            "我最喜欢红色",
-            "我喜欢绿色"
+          "correct_answer": "Benzene ring with bonds",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "What shape is this? Simple floor plan",
+          "question_id": "Q170",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Recognition",
+          "scaffolding_hint": "Trace room by room",
+          "options": [
+            "Simple floor plan",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Simple floor plan",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Which shape matches this one? Mandala quarter",
+          "question_id": "Q180",
+          "source_test": "Beery VMI",
+          "sub_domain": "Shape Matching",
+          "scaffolding_hint": "Show example again",
+          "options": [
+            "Mandala quarter",
+            "Vertical line",
+            "Horizontal line",
+            "Circle"
+          ],
+          "correct_answer": "Mandala quarter",
+          "image_hint": "shape"
+        },
+        {
+          "instruction": "Recreate this 3D architectural model.",
+          "question_id": "Q190",
+          "source_test": "SIB-R",
+          "sub_domain": "Spatial Assembly",
+          "scaffolding_hint": "Show one face of the structure",
+          "correct_answer": "All blocks in correct 3D positions",
+          "image_hint": "shape",
+          "options": [
+            "All blocks in correct 3D positions",
+            "Incorrect arrangement",
+            "Rotated version",
+            "Mirror image"
           ]
         },
         {
-          "instruction": "What do you want to be when you grow up?",
-          "instruction_zh": "你长大想做什么？",
-          "topic": "aspirations",
-          "example_answers": [
-            "I want to be a doctor",
-            "I want to be a teacher",
-            "I want to be an astronaut"
-          ],
-          "example_answers_zh": [
-            "我想当医生",
-            "我想当老师",
-            "我想当宇航员"
+          "instruction": "Watch the 3 balls. After 10 swaps, which ball is in position 1?",
+          "question_id": "Q200",
+          "source_test": "Callier-Azusa",
+          "sub_domain": "Visual Tracking",
+          "scaffolding_hint": "Slow the swaps",
+          "correct_answer": "Correct ball",
+          "image_hint": "ball",
+          "options": [
+            "Correct ball",
+            "Wrong position",
+            "Other object",
+            "No match"
           ]
         }
       ]

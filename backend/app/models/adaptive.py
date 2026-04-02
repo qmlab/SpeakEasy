@@ -86,6 +86,11 @@ class Modality(str, enum.Enum):
 
 class PromptLevel(int, enum.Enum):
     INDEPENDENT = 0
+    VISUAL_CUE = 1  # Hint ladder step 1: highlight/pulse
+    VERBAL_CUE = 2  # Hint ladder step 2: spoken hint
+    MODELED_ANSWER = 3  # Hint ladder step 3: show correct answer briefly
+    GUIDED_COMPLETION = 4  # Hint ladder step 4: restrict wrong choices
+    # Legacy aliases
     PARTIAL = 1
     FULL = 2
 
@@ -113,6 +118,12 @@ class DevelopmentalProfile(Base):
     player_id = Column(String, ForeignKey("players.id"), nullable=False, index=True)
     dimension = Column(String, nullable=False)
     level = Column(Integer, nullable=False, default=0)
+    ceiling_level = Column(
+        Integer, nullable=True
+    )  # Highest level before ceiling rule triggered
+    basal_level = Column(
+        Integer, nullable=True
+    )  # Floor level (basal rule: 5 successes in a row)
     sub_scores = Column(JSON, nullable=True, default=dict)
     assessed = Column(Boolean, nullable=False, default=False)
     last_assessed_at = Column(DateTime, nullable=True)
