@@ -270,6 +270,48 @@ def _build_content(task_type: str, task_data: dict) -> dict:
             if key not in skip_keys:
                 content[key] = value
 
+    # ------------------------------------------------------------------
+    # Auto-detect ordering / sequential-tap tasks
+    # ------------------------------------------------------------------
+    # Tasks that have a `steps` field contain the correct ordering.
+    # Ensure `items` is populated (iOS uses this to trigger the ordering UI)
+    # and that `options` are the shuffled version the child picks from.
+    if "steps" in task_data and task_data["steps"]:
+        steps = task_data["steps"]
+        if "items" not in content:
+            content["items"] = list(steps)  # correct order
+        if "options" not in content or not content["options"]:
+            shuffled = list(steps)
+            random.shuffle(shuffled)
+            # Avoid presenting options in the already-correct order
+            while shuffled == list(steps) and len(steps) > 1:
+                random.shuffle(shuffled)
+            content["options"] = shuffled
+        if "correct_answer" not in content or not content["correct_answer"]:
+            content["correct_answer"] = steps[0]
+
+    # Memory-sequence tasks: instructions like "Remember: 3, 7. Tap them in
+    # order." currently have a single composite option ("3 then 7").  Break
+    # them into individual tappable items so the ordering UI can be used.
+    inst_lower = (task_data.get("instruction") or "").lower()
+    if ("tap them in order" in inst_lower or "tap in order" in inst_lower) and \
+       "items" not in content:
+        # Try to extract individual items from instruction
+        # Pattern: "Remember: 3, 7. Tap them in order."
+        import re
+        match = re.search(r"remember[^:]*:\s*(.+?)\.", task_data.get("instruction", ""), re.IGNORECASE)
+        if match:
+            raw = match.group(1)
+            items = [s.strip() for s in raw.split(",") if s.strip()]
+            if len(items) >= 2:
+                content["items"] = list(items)  # correct order
+                shuffled = list(items)
+                random.shuffle(shuffled)
+                while shuffled == list(items) and len(items) > 1:
+                    random.shuffle(shuffled)
+                content["options"] = shuffled
+                content["correct_answer"] = items[0]
+
     return content
 
 
