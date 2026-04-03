@@ -266,6 +266,8 @@ struct TaskContent: Codable {
     let flashImage: String?
     let flashSequence: [String]?
     let interactionMode: String?
+    let sortCategories: [String]?
+    let itemCategories: [String: String]?
 
     enum CodingKeys: String, CodingKey {
         case instruction
@@ -298,6 +300,8 @@ struct TaskContent: Codable {
         case flashImage = "flash_image"
         case flashSequence = "flash_sequence"
         case interactionMode = "interaction_mode"
+        case sortCategories = "sort_categories"
+        case itemCategories = "item_categories"
     }
 
     init(from decoder: Decoder) throws {
@@ -328,6 +332,8 @@ struct TaskContent: Codable {
         flashImage = try container.decodeIfPresent(String.self, forKey: .flashImage)
         flashSequence = try container.decodeIfPresent([String].self, forKey: .flashSequence)
         interactionMode = try container.decodeIfPresent(String.self, forKey: .interactionMode)
+        sortCategories = try container.decodeIfPresent([String].self, forKey: .sortCategories)
+        itemCategories = try container.decodeIfPresent([String: String].self, forKey: .itemCategories)
 
         // Decode targetWord: try explicit "target_word" string first, then extract from nested "target" object
         if let tw = try? container.decodeIfPresent(String.self, forKey: .targetWord) {
@@ -389,6 +395,8 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(flashImage, forKey: .flashImage)
         try container.encodeIfPresent(flashSequence, forKey: .flashSequence)
         try container.encodeIfPresent(interactionMode, forKey: .interactionMode)
+        try container.encodeIfPresent(sortCategories, forKey: .sortCategories)
+        try container.encodeIfPresent(itemCategories, forKey: .itemCategories)
     }
 
     var displayInstruction: String {
