@@ -23,10 +23,8 @@ struct LearningSessionView: View {
     @State private var animateReward: Bool = false
     @State private var animateFeedback: Bool = false
     @State private var showCameraView: Bool = false
-    /// Number of incorrect speech attempts on the current task (max 3 before auto-advance)
+    /// Number of incorrect speech attempts on the current task
     @State private var speechRetryCount: Int = 0
-    /// Maximum retries allowed for incorrect speech answers
-    private let maxSpeechRetries = 3
     /// Ordered selections for sorting/sequencing tasks
     @State private var orderedSelections: [String] = []
     /// Whether the hint/clue is currently revealed
@@ -1935,12 +1933,6 @@ struct LearningSessionView: View {
             }
             .disabled(learningManager.isSubmitting || isEvaluating)
 
-            // Retry counter (kept for visual feedback after incorrect attempt)
-            if speechRetryCount > 0 && !isListening {
-                Text("Incorrect — try another question")
-                    .font(.caption)
-                    .foregroundColor(.red)
-            }
 
             // Help buttons: hear the word + show hint
             if !targetWord.isEmpty {
@@ -1987,7 +1979,7 @@ struct LearningSessionView: View {
     private var micButtonLabel: String {
         if isListening {
             return "Listening..."
-        } else if hasRecording || speechRetryCount > 0 {
+        } else if hasRecording {
             return "Say It Again"
         } else {
             return "Say It"
