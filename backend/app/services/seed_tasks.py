@@ -1949,6 +1949,116 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
         ]
     )
 
+    # ---- Level 1: Shape Arrangement (drag-to-reorder) ----
+    tasks.extend(
+        [
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
+                level=1,
+                task_type=TaskType.SORT.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "Arrange the shapes to match the picture!",
+                    "instruction_text": "Arrange the shapes to match the picture!",
+                    "question_image": "arrange_rgb",
+                    "image_hint": "red_circle",
+                    "interaction_mode": "drag",
+                    "inline_images": True,
+                    "items": [
+                        "red_circle",
+                        "blue_square",
+                        "green_triangle",
+                    ],
+                    "options": [
+                        "red_circle",
+                        "blue_square",
+                        "green_triangle",
+                    ],
+                    "correct_answer": "red_circle",
+                },
+                is_assessment=False,
+            ),
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
+                level=1,
+                task_type=TaskType.SORT.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "Put the shapes in the right order!",
+                    "instruction_text": "Put the shapes in the right order!",
+                    "question_image": "arrange_colors",
+                    "image_hint": "red_circle",
+                    "interaction_mode": "drag",
+                    "inline_images": True,
+                    "items": [
+                        "red_circle",
+                        "blue_circle",
+                        "green_circle",
+                    ],
+                    "options": [
+                        "red_circle",
+                        "blue_circle",
+                        "green_circle",
+                    ],
+                    "correct_answer": "red_circle",
+                },
+                is_assessment=False,
+            ),
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
+                level=1,
+                task_type=TaskType.SORT.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "Drag the shapes to match the picture!",
+                    "instruction_text": "Drag the shapes to match the picture!",
+                    "question_image": "arrange_mixed",
+                    "image_hint": "yellow_star",
+                    "interaction_mode": "drag",
+                    "inline_images": True,
+                    "items": [
+                        "yellow_star",
+                        "red_square",
+                        "blue_circle",
+                    ],
+                    "options": [
+                        "yellow_star",
+                        "red_square",
+                        "blue_circle",
+                    ],
+                    "correct_answer": "yellow_star",
+                },
+                is_assessment=False,
+            ),
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.COGNITIVE_LOGIC.value,
+                level=1,
+                task_type=TaskType.SORT.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "Can you arrange these shapes?",
+                    "instruction_text": "Can you arrange these shapes?",
+                    "question_image": "arrange_shapes_basic",
+                    "image_hint": "blue_circle",
+                    "interaction_mode": "drag",
+                    "inline_images": True,
+                    "items": [
+                        "blue_circle",
+                        "blue_square",
+                        "green_triangle",
+                    ],
+                    "options": [
+                        "blue_circle",
+                        "blue_square",
+                        "green_triangle",
+                    ],
+                    "correct_answer": "blue_circle",
+                },
+                is_assessment=False,
+            ),
+        ]
+    )
+
     # ---- Level 2: Cause and Effect ----
     tasks.extend(
         [

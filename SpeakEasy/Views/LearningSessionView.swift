@@ -45,6 +45,12 @@ struct LearningSessionView: View {
     @State private var flashCompleted: Bool = false
     /// Generation counter to invalidate stale DispatchQueue callbacks on task change
     @State private var flashGeneration: Int = 0
+    /// Drag-to-arrange state: current arrangement of shape options
+    @State private var dragArrangeItems: [String] = []
+    /// The item currently being dragged
+    @State private var draggedItem: String?
+    /// Drag offset for the currently dragged item
+    @State private var dragOffset: CGSize = .zero
 
     var body: some View {
         NavigationStack {
@@ -119,6 +125,10 @@ struct LearningSessionView: View {
                 showHint = false
                 multiTapCount = 0
                 textInputValue = ""
+                // Reset drag arrange state
+                dragArrangeItems = []
+                draggedItem = nil
+                dragOffset = .zero
                 // Reset flash state
                 flashVisible = false
                 flashPhase = 0
@@ -144,6 +154,10 @@ struct LearningSessionView: View {
                         return []
                     }()
                     startFlashSequence(images: images)
+                }
+                // Initialize drag arrange items in shuffled order
+                if let newTask = learningManager.currentTask, isDragArrangeTask(newTask) {
+                    initDragArrangeItems(task: newTask)
                 }
                 if isListening {
                     speechService.stopListening()
@@ -835,6 +849,170 @@ struct LearningSessionView: View {
         }
     }
 
+    // MARK: - Drag-to-Arrange
+
+    /// Whether this task uses drag-to-arrange interaction (interaction_mode == "drag").
+    private func isDragArrangeTask(_ task: AdaptiveTask) -> Bool {
+        task.content.interactionMode == "drag"
+    }
+
+    /// Initialize drag arrange items in a shuffled (wrong) order.
+    private func initDragArrangeItems(task: AdaptiveTask) {
+        let correct = task.content.items ?? task.content.displayOptions
+        guard !correct.isEmpty else { return }
+        var shuffled = correct
+        // Keep shuffling until the order differs from the correct one
+        for _ in 0..<10 {
+            shuffled.shuffle()
+            if shuffled != correct { break }
+        }
+        dragArrangeItems = shuffled
+    }
+
+    /// Drag-to-arrange interaction area: shows shapes in a row that the
+    /// child can drag to reorder. Shows a reference image of the correct
+    /// arrangement above the draggable shapes.
+    @ViewBuilder
+    private func dragArrangeArea(task: AdaptiveTask) -> some View {
+        let correctOrder = task.content.items ?? task.content.displayOptions
+
+        VStack(spacing: 20) {
+            // Reference image showing the correct arrangement
+            if let refImage = task.content.questionImage, !refImage.isEmpty {
+                VStack(spacing: 6) {
+                    Text("Match this order:")
+                        .font(.subheadline.bold())
+                        .foregroundColor(.secondary)
+                    RemoteImageView(
+                        objectName: refImage,
+                        imageType: .flashcard,
+                        fallbackIcon: "rectangle.3.group",
+                        iconColor: dimension.color,
+                        size: 200
+                    )
+                    .cornerRadius(16)
+                }
+            }
+
+            // Draggable shapes row
+            VStack(spacing: 8) {
+                Text("Drag to arrange:")
+                    .font(.subheadline.bold())
+                    .foregroundColor(.secondary)
+
+                HStack(spacing: 16) {
+                    ForEach(Array(dragArrangeItems.enumerated()), id: \.element) { index, item in
+                        let imageKey = item.lowercased().replacingOccurrences(of: " ", with: "_")
+                        let isDragging = draggedItem == item
+
+                        VStack(spacing: 4) {
+                            RemoteImageView(
+                                objectName: imageKey,
+                                imageType: .flashcard,
+                                fallbackIcon: "questionmark.circle",
+                                iconColor: dimension.color,
+                                size: 80
+                            )
+                            .cornerRadius(12)
+                            Text(item.replacingOccurrences(of: "_", with: " ").capitalized)
+                                .font(.caption2)
+                                .lineLimit(1)
+                        }
+                        .padding(8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(isDragging ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
+                                .shadow(color: isDragging ? dimension.color.opacity(0.3) : .clear, radius: 8)
+                        )
+                        .scaleEffect(isDragging ? 1.1 : 1.0)
+                        .zIndex(isDragging ? 10 : 0)
+                        .offset(isDragging ? dragOffset : .zero)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    if draggedItem == nil {
+                                        draggedItem = item
+                                    }
+                                    dragOffset = value.translation
+                                    // Determine swap target based on horizontal drag distance
+                                    let threshold: CGFloat = 80
+                                    let dragX = value.translation.width
+                                    if abs(dragX) > threshold, let currentIndex = dragArrangeItems.firstIndex(of: item) {
+                                        let targetIndex = dragX > 0
+                                            ? min(currentIndex + 1, dragArrangeItems.count - 1)
+                                            : max(currentIndex - 1, 0)
+                                        if targetIndex != currentIndex {
+                                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                                dragArrangeItems.swapAt(currentIndex, targetIndex)
+                                                dragOffset = .zero
+                                            }
+                                        }
+                                    }
+                                }
+                                .onEnded { _ in
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                        draggedItem = nil
+                                        dragOffset = .zero
+                                    }
+                                    // Check if arrangement is correct and auto-submit
+                                    if dragArrangeItems == correctOrder {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                            Task {
+                                                await learningManager.submitAttempt(
+                                                    isCorrect: true,
+                                                    score: 1,
+                                                    dimension: dimension
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                        )
+                    }
+                }
+            }
+
+            // Submit button (in case child thinks they're done but order is wrong)
+            Button {
+                let isCorrect = dragArrangeItems == correctOrder
+                Task {
+                    await learningManager.submitAttempt(
+                        isCorrect: isCorrect,
+                        score: isCorrect ? 1 : 0,
+                        dimension: dimension
+                    )
+                }
+            } label: {
+                Text("Done!")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(dimension.color)
+                    )
+            }
+            .disabled(learningManager.isSubmitting)
+
+            // Shuffle/reset button
+            Button {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    initDragArrangeItems(task: task)
+                }
+            } label: {
+                Label("Shuffle", systemImage: "shuffle")
+                    .font(.subheadline)
+                    .foregroundColor(.orange)
+            }
+        }
+        .onAppear {
+            if dragArrangeItems.isEmpty {
+                initDragArrangeItems(task: task)
+            }
+        }
+    }
+
     /// Whether this task is a sorting/sequencing task that needs ordering UI.
     ///
     /// Triggers for:
@@ -844,7 +1022,10 @@ struct LearningSessionView: View {
     ///   are typed as `identify` but need sequential multi-tap interaction.
     /// - Excludes pattern tasks (which have a `sequence` field) — those use
     ///   single-tap option selection, not multi-tap ordering.
+    /// - Excludes drag-arrange tasks which use their own drag UI.
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
+        // Drag-arrange tasks use drag reorder, not ordering UI
+        if isDragArrangeTask(task) { return false }
         // Pattern tasks have items from steps but should NOT use ordering UI
         if isPatternTask(task) { return false }
         // Multi-tap tasks use tap counting, not ordering UI
@@ -1053,8 +1234,12 @@ struct LearningSessionView: View {
             cameraButton(task: task)
         }
 
+        // Drag-to-arrange shape tasks
+        if isDragArrangeTask(task) {
+            dragArrangeArea(task: task)
+        }
         // Multi-tap counting tasks (go/no-go, sustained attention)
-        if isMultiTapTask(task) {
+        else if isMultiTapTask(task) {
             multiTapArea(task: task)
         }
         // Text/number input tasks (counting, fill-in-the-word)
@@ -1078,12 +1263,12 @@ struct LearningSessionView: View {
         // Skip for text input tasks — the child types the answer.
         // Skip for flash tasks — the child should pick visually, not speak.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) {
             speechInputArea(task: task)
         }
 
         // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) {
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) {
             simpleResponseButtons(task: task)
         }
 
