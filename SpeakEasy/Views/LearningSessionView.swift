@@ -23,10 +23,6 @@ struct LearningSessionView: View {
     @State private var animateReward: Bool = false
     @State private var animateFeedback: Bool = false
     @State private var showCameraView: Bool = false
-    /// Number of incorrect speech attempts on the current task (max 3 before auto-advance)
-    @State private var speechRetryCount: Int = 0
-    /// Maximum retries allowed for incorrect speech answers
-    private let maxSpeechRetries = 3
     /// Ordered selections for sorting/sequencing tasks
     @State private var orderedSelections: [String] = []
     /// Whether the hint/clue is currently revealed
@@ -121,7 +117,6 @@ struct LearningSessionView: View {
                 isEvaluating = false
                 spokenText = ""
                 selectedOption = nil
-                speechRetryCount = 0
                 orderedSelections = []
                 animateFeedback = false
                 showHint = false
@@ -964,7 +959,12 @@ struct LearningSessionView: View {
                                     }
                                     // Check if arrangement is correct and auto-submit
                                     if dragArrangeItems == correctOrder {
+                                        let capturedTaskId = learningManager.currentTask?.taskId
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                            // Guard against double-submit: skip if already
+                                            // submitting or if the task changed since the drag ended.
+                                            guard !learningManager.isSubmitting,
+                                                  learningManager.currentTask?.taskId == capturedTaskId else { return }
                                             Task {
                                                 await learningManager.submitAttempt(
                                                     isCorrect: true,
@@ -1821,19 +1821,15 @@ struct LearningSessionView: View {
                             isEvaluating = false
                         }
                     } else {
-                        speechRetryCount += 1
-                        if speechRetryCount >= maxSpeechRetries {
-                            isEvaluating = true
-                            Task {
-                                await learningManager.submitAttempt(
-                                    isCorrect: false,
-                                    score: Int(rating),
-                                    dimension: dimension
-                                )
-                                isEvaluating = false
-                            }
-                        } else {
-                            spokenText = "Not quite! Try again (\(maxSpeechRetries - speechRetryCount) left)"
+                        spokenText = "Incorrect"
+                        isEvaluating = true
+                        Task {
+                            await learningManager.submitAttempt(
+                                isCorrect: false,
+                                score: Int(rating),
+                                dimension: dimension
+                            )
+                            isEvaluating = false
                         }
                     }
                 } else {
@@ -1934,12 +1930,6 @@ struct LearningSessionView: View {
             }
             .disabled(learningManager.isSubmitting || isEvaluating)
 
-            // Retry counter
-            if speechRetryCount > 0 && speechRetryCount < maxSpeechRetries && !isListening {
-                Text("Attempt \(speechRetryCount)/\(maxSpeechRetries)")
-                    .font(.caption)
-                    .foregroundColor(.orange)
-            }
 
             // Help buttons: hear the word + show hint
             if !targetWord.isEmpty {
@@ -1986,7 +1976,7 @@ struct LearningSessionView: View {
     private var micButtonLabel: String {
         if isListening {
             return "Listening..."
-        } else if hasRecording || speechRetryCount > 0 {
+        } else if hasRecording {
             return "Say It Again"
         } else {
             return "Say It"
