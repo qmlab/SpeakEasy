@@ -83,6 +83,8 @@ def seed_object_cognition_tasks(db: Session) -> int:
                     "question_image": "dog_alt",
                     "image_hint": "dog",
                     "inline_images": True,
+                    "options": ["Dog", "Cat", "Ball"],
+                    "correct_answer": "Dog",
                     "target": {"name": "Dog", "category": "Animals"},
                     "choices": [
                         {"name": "Dog", "category": "Animals", "is_correct": True},
@@ -103,6 +105,8 @@ def seed_object_cognition_tasks(db: Session) -> int:
                     "question_image": "apple_alt",
                     "image_hint": "apple",
                     "inline_images": True,
+                    "options": ["Apple", "Ball", "Car"],
+                    "correct_answer": "Apple",
                     "target": {"name": "Apple", "category": "Food"},
                     "choices": [
                         {"name": "Apple", "category": "Food", "is_correct": True},
@@ -123,6 +127,8 @@ def seed_object_cognition_tasks(db: Session) -> int:
                     "question_image": "car_alt",
                     "image_hint": "car",
                     "inline_images": True,
+                    "options": ["Banana", "Car", "Hat"],
+                    "correct_answer": "Car",
                     "target": {"name": "Car", "category": "Vehicles"},
                     "choices": [
                         {"name": "Banana", "category": "Food", "is_correct": False},
@@ -143,6 +149,8 @@ def seed_object_cognition_tasks(db: Session) -> int:
                     "question_image": "cup_alt",
                     "image_hint": "cup",
                     "inline_images": True,
+                    "options": ["Shoe", "Tree", "Cup"],
+                    "correct_answer": "Cup",
                     "target": {"name": "Cup", "category": "Household"},
                     "choices": [
                         {"name": "Shoe", "category": "Clothing", "is_correct": False},
