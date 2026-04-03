@@ -381,10 +381,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"Playing alone can mean different things for different people\"",
           "options": [
-            "They are mean, They are sick, They are bored",
+            "They are mean",
+            "They are sick",
+            "They are bored",
             "Both possibilities valid"
           ],
-          "correct_answer": "They are mean, They are sick, They are bored",
+          "correct_answer": "Both possibilities valid",
           "image_hint": "hat"
         }
       ]
@@ -533,10 +535,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"Checking a watch is a signal about time\"",
           "options": [
-            "They are interested, They are nervous, They are angry",
+            "They are interested",
+            "They are nervous",
+            "They are angry",
             "They need to leave / are bored"
           ],
-          "correct_answer": "They are interested, They are nervous, They are angry",
+          "correct_answer": "They need to leave / are bored",
           "image_hint": "hat"
         }
       ]
@@ -685,10 +689,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"Physical closeness and quiet voices signal privacy\"",
           "options": [
-            "Public, Angry, Professional",
+            "Public",
+            "Angry",
+            "Professional",
             "Private / intimate"
           ],
-          "correct_answer": "Public, Angry, Professional",
+          "correct_answer": "Private / intimate",
           "image_hint": "hat"
         }
       ]
@@ -809,12 +815,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Taking responsibility is a sign of maturity\"",
           "options": [
-            "Blame others, Pretend it didn't happen, Quit",
-            "Acknowledge it",
-            "apologize",
-            "and offer to fix it"
+            "Blame others",
+            "Pretend it didn't happen",
+            "Quit",
+            "Acknowledge it, apologize, and offer to fix it"
           ],
-          "correct_answer": "Blame others, Pretend it didn't happen, Quit",
+          "correct_answer": "Acknowledge it, apologize, and offer to fix it",
           "image_hint": "hat"
         },
         {
@@ -824,10 +830,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"How would you feel on your first day somewhere new?\"",
           "options": [
-            "Ignore them, Laugh, Walk past",
+            "Ignore them",
+            "Laugh",
+            "Walk past",
             "Offer to help them find their way"
           ],
-          "correct_answer": "Ignore them, Laugh, Walk past",
+          "correct_answer": "Offer to help them find their way",
           "image_hint": "hat"
         },
         {
@@ -837,10 +845,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"Nodding can be polite but not always genuine — look at the whole picture\"",
           "options": [
-            "They are very interested, They are happy, They are focused",
+            "They are very interested",
+            "They are happy",
+            "They are focused",
             "They are disengaged or uncomfortable"
           ],
-          "correct_answer": "They are very interested, They are happy, They are focused",
+          "correct_answer": "They are disengaged or uncomfortable",
           "image_hint": "hat"
         }
       ]
@@ -966,11 +976,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"You can disagree respectfully — timing and tone matter\"",
           "options": [
-            "Argue back, Ignore, Complain to others",
-            "Listen respectfully",
-            "then politely ask to discuss"
+            "Argue back",
+            "Ignore",
+            "Complain to others",
+            "Listen respectfully, then politely ask to discuss"
           ],
-          "correct_answer": "Argue back, Ignore, Complain to others",
+          "correct_answer": "Listen respectfully, then politely ask to discuss",
           "image_hint": "hat"
         },
         {
@@ -980,10 +991,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Sometimes people just need to feel heard, not fixed\"",
           "options": [
-            "Give advice immediately, Change the subject, Tell your own story",
+            "Give advice immediately",
+            "Change the subject",
+            "Tell your own story",
             "Listen and validate their feelings"
           ],
-          "correct_answer": "Give advice immediately, Change the subject, Tell your own story",
+          "correct_answer": "Listen and validate their feelings",
           "image_hint": "hat"
         },
         {
@@ -993,10 +1006,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"In groups, who speaks first often reflects who has power or status\"",
           "options": [
-            "Everyone is equal, It is random, They are all friends",
+            "Everyone is equal",
+            "It is random",
+            "They are all friends",
             "Hierarchy / authority dynamic"
           ],
-          "correct_answer": "Everyone is equal, It is random, They are all friends",
+          "correct_answer": "Hierarchy / authority dynamic",
           "image_hint": "hat"
         }
       ]
@@ -1122,10 +1137,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"You can assert yourself without being aggressive\"",
           "options": [
-            "Yell at them, Go silent, Leave",
+            "Yell at them",
+            "Go silent",
+            "Leave",
             "Calmly say 'I wasn't finished' and continue"
           ],
-          "correct_answer": "Yell at them, Go silent, Leave",
+          "correct_answer": "Calmly say 'I wasn't finished' and continue",
           "image_hint": "hat"
         },
         {
@@ -1135,10 +1152,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Online safety means not engaging with unkind behavior\"",
           "options": [
-            "Respond angrily, Share it widely, Ignore forever",
+            "Respond angrily",
+            "Share it widely",
+            "Ignore forever",
             "Block/report and tell a trusted adult"
           ],
-          "correct_answer": "Respond angrily, Share it widely, Ignore forever",
+          "correct_answer": "Block/report and tell a trusted adult",
           "image_hint": "hat"
         },
         {
@@ -1148,10 +1167,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"Laughing at yourself can make others feel comfortable\"",
           "options": [
-            "Shows weakness, Is inappropriate, Shows anger",
+            "Shows weakness",
+            "Is inappropriate",
+            "Shows anger",
             "Diffuses tension / shows self-awareness"
           ],
-          "correct_answer": "Shows weakness, Is inappropriate, Shows anger",
+          "correct_answer": "Diffuses tension / shows self-awareness",
           "image_hint": "hat"
         }
       ]
@@ -1228,10 +1249,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Good conversations are balanced — ask and listen\"",
           "options": [
-            "Keep talking, Apologize excessively, Go silent",
+            "Keep talking",
+            "Apologize excessively",
+            "Go silent",
             "Ask the other person about themselves"
           ],
-          "correct_answer": "Keep talking, Apologize excessively, Go silent",
+          "correct_answer": "Ask the other person about themselves",
           "image_hint": "hat"
         },
         {
@@ -1241,10 +1264,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Address it directly but professionally\"",
           "options": [
-            "Publicly accuse them, Do nothing, Quit",
+            "Publicly accuse them",
+            "Do nothing",
+            "Quit",
             "Calmly clarify your contribution"
           ],
-          "correct_answer": "Publicly accuse them, Do nothing, Quit",
+          "correct_answer": "Calmly clarify your contribution",
           "image_hint": "hat"
         },
         {
@@ -1254,10 +1279,12 @@
           "sub_domain": "Social Awareness",
           "scaffolding_hint": "Say: \"Social conversation requires monitoring the other person's interest level\"",
           "options": [
-            "The topic is boring, The child is rude, The listener is rude",
+            "The topic is boring",
+            "The child is rude",
+            "The listener is rude",
             "Lack of reading the listener's disengagement cues"
           ],
-          "correct_answer": "The topic is boring, The child is rude, The listener is rude",
+          "correct_answer": "Lack of reading the listener's disengagement cues",
           "image_hint": "hat"
         }
       ]
@@ -1331,10 +1358,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Concern for others is best expressed privately and gently\"",
           "options": [
-            "Tell everyone, Ignore it, Confront them publicly",
+            "Tell everyone",
+            "Ignore it",
+            "Confront them publicly",
             "Find a private moment and gently check in"
           ],
-          "correct_answer": "Tell everyone, Ignore it, Confront them publicly",
+          "correct_answer": "Find a private moment and gently check in",
           "image_hint": "hat"
         },
         {
@@ -1344,12 +1373,12 @@
           "sub_domain": "Appropriate Response",
           "scaffolding_hint": "Say: \"Cultural intelligence means being curious and respectful\"",
           "options": [
-            "Impose your own norms, Refuse to engage, Criticize",
-            "Observe",
-            "ask respectfully",
-            "adapt"
+            "Impose your own norms",
+            "Refuse to engage",
+            "Criticize",
+            "Observe, ask respectfully, adapt"
           ],
-          "correct_answer": "Impose your own norms, Refuse to engage, Criticize",
+          "correct_answer": "Observe, ask respectfully, adapt",
           "image_hint": "book",
           "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？"
         }

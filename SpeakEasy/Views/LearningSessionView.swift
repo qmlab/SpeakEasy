@@ -37,6 +37,8 @@ struct LearningSessionView: View {
     @State private var animationTimer: Timer?
     /// Multi-tap counting state (for go/no-go, sustained attention tasks)
     @State private var multiTapCount: Int = 0
+    /// Text/number input state (for counting and fill-in-the-word tasks)
+    @State private var textInputValue: String = ""
 
     var body: some View {
         NavigationStack {
@@ -110,6 +112,7 @@ struct LearningSessionView: View {
                 animateFeedback = false
                 showHint = false
                 multiTapCount = 0
+                textInputValue = ""
                 // Reset animation slideshow state
                 animationTimer?.invalidate()
                 animationTimer = nil
@@ -139,7 +142,8 @@ struct LearningSessionView: View {
                     // tasks where ordering is the goal, not speaking.
                     let isSorting = isSortingTask(task)
                     let isMultiTap = isMultiTapTask(task)
-                    if !targetWord.isEmpty && !isSorting && !isMultiTap {
+                    let isTextInput = isTextInputTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -670,6 +674,11 @@ struct LearningSessionView: View {
         task.content.tapCount != nil && task.content.tapCount! > 0
     }
 
+    /// Whether this task uses a free-text or numeric input field instead of option buttons.
+    private func isTextInputTask(_ task: AdaptiveTask) -> Bool {
+        task.content.inputMode != nil
+    }
+
     /// Multi-tap counting interaction area.
     /// Shows a large TAP button with a counter. The child taps once per target
     /// item in the animation or story, then submits the total count.
@@ -760,6 +769,85 @@ struct LearningSessionView: View {
         }
     }
 
+    // MARK: - Text / Number Input Area
+
+    /// Renders a text field (or number pad) for counting and fill-in-the-word tasks.
+    /// The child types their answer and taps Submit.
+    @ViewBuilder
+    private func textInputArea(task: AdaptiveTask) -> some View {
+        let isNumber = task.content.inputMode == "number"
+
+        VStack(spacing: 16) {
+            HStack(spacing: 12) {
+                Image(systemName: isNumber ? "number.circle.fill" : "textformat.abc")
+                    .font(.title2)
+                    .foregroundColor(dimension.color)
+
+                if isNumber {
+                    TextField("Type your answer", text: $textInputValue)
+                        .keyboardType(.numberPad)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemBackground))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(dimension.color.opacity(0.3), lineWidth: 1)
+                        )
+                } else {
+                    TextField("Type your answer", text: $textInputValue)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemBackground))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(dimension.color.opacity(0.3), lineWidth: 1)
+                        )
+                }
+            }
+
+            Button {
+                let answer = textInputValue.trimmingCharacters(in: .whitespacesAndNewlines)
+                let expected = (task.content.correctAnswer ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+                let isCorrect = answer.lowercased() == expected.lowercased()
+                speechService.speak(isCorrect ? "Correct!" : "The answer is \(expected)")
+                Task {
+                    await learningManager.submitAttempt(
+                        isCorrect: isCorrect,
+                        score: isCorrect ? 1 : 0,
+                        dimension: dimension
+                    )
+                    textInputValue = ""
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("Submit")
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(textInputValue.isEmpty ? Color.gray : dimension.color)
+                )
+            }
+            .disabled(textInputValue.isEmpty || learningManager.isSubmitting)
+        }
+    }
+
     // MARK: - Interaction Area
 
     /// Whether this task supports camera-based interaction (object cognition with target word)
@@ -780,6 +868,10 @@ struct LearningSessionView: View {
         if isMultiTapTask(task) {
             multiTapArea(task: task)
         }
+        // Text/number input tasks (counting, fill-in-the-word)
+        else if isTextInputTask(task) {
+            textInputArea(task: task)
+        }
         // Sorting/sequencing tasks get ordering UI
         else if isSortingTask(task) {
             orderingArea(task: task)
@@ -793,13 +885,14 @@ struct LearningSessionView: View {
         // not just tasks whose modalities include "voice".  This lets children
         // practice pronunciation across every dimension.
         // Skip for multi-tap tasks — the tap count IS the answer.
+        // Skip for text input tasks — the child types the answer.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) {
             speechInputArea(task: task)
         }
 
         // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) {
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) {
             simpleResponseButtons(task: task)
         }
 

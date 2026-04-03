@@ -159,12 +159,17 @@
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Repeat words once",
           "options": [
-            "Dog, Ball",
+            "Dog",
+            "Ball",
             "Cat",
             "Car"
           ],
           "correct_answer": "Dog, Ball",
-          "image_hint": "dog"
+          "image_hint": "dog",
+          "items": [
+            "Dog",
+            "Ball"
+          ]
         },
         {
           "instruction": "Sort by COLOR: Red goes left, Blue goes right. [Red square]",
@@ -327,7 +332,7 @@
           "scaffolding_hint": "Say: \"Watch for two circles together\"",
           "correct_answer": "2",
           "image_hint": "circle",
-          "instruction_zh": "\u6bcf\u6b21\u770b\u5230\u8fde\u7eed\u4e24\u4e2a\u5706\u5f62\u5c31\u70b9\u51fb\u3002",
+          "instruction_zh": "每次看到连续两个圆形就点击。",
           "tap_count": 2,
           "animation_frames": [
             "circle",
@@ -355,7 +360,7 @@
           "scaffolding_hint": "Say: \"Rhymes end with the same sound as cat\"",
           "correct_answer": "3",
           "image_hint": "cat",
-          "instruction_zh": "\u542c\u5355\u8bcd\u3002\u542c\u5230\u548cCAT\u62bc\u97f5\u7684\u8bcd\u5c31\u70b9\u51fb\u3002",
+          "instruction_zh": "听单词。听到和CAT押韵的词就点击。",
           "tap_count": 3,
           "animation_frames": [
             "hat",
@@ -425,15 +430,9 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"The middle word is the second one you heard\"",
-          "options": [
-            "House",
-            "Cat",
-            "Tree",
-            "Dog",
-            "Car"
-          ],
           "correct_answer": "House",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "input_mode": "text"
         },
         {
           "instruction": "Sort by SIZE: Big goes left, Small goes right. [Big red circle]",
@@ -560,13 +559,20 @@
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"Living things grow and breathe\"",
           "options": [
-            "Apple, Dog, Tree",
+            "Apple",
+            "Dog",
+            "Tree",
             "Chair",
             "Book",
             "Car"
           ],
           "correct_answer": "Apple, Dog, Tree",
-          "image_hint": "dog"
+          "image_hint": "dog",
+          "items": [
+            "Apple",
+            "Dog",
+            "Tree"
+          ]
         },
         {
           "instruction": "Sort by NUMBER OF SIDES: More than 3 sides goes left, 3 or fewer goes right. [Pentagon]",
@@ -661,12 +667,6 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"The first number was 3. The last was 4. What is 3 plus 4?\"",
-          "options": [
-            "7",
-            "5",
-            "6",
-            "8"
-          ],
           "correct_answer": "7",
           "image_hint": "number_3",
           "instruction_zh": "我说5个数字。把第一个和最后一个加起来：3，7，2，9，4。",
@@ -676,7 +676,8 @@
             "number_2",
             "number_9",
             "number_4"
-          ]
+          ],
+          "input_mode": "number"
         },
         {
           "instruction": "Sort by CATEGORY: Animals go left, Objects go right. [Dog]",
@@ -737,14 +738,9 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"Add the red cars and the blue cars together\"",
-          "options": [
-            "5",
-            "3",
-            "2",
-            "6"
-          ],
           "correct_answer": "5",
-          "image_hint": "car"
+          "image_hint": "car",
+          "input_mode": "number"
         },
         {
           "instruction": "Sort by LIVING/NON-LIVING: Living goes left, Non-living goes right. [Tree]",
@@ -882,7 +878,7 @@
           "scaffolding_hint": "Say: \"Synonyms mean the same thing as happy\"",
           "correct_answer": "6",
           "image_hint": "happy_face",
-          "instruction_zh": "\u8bfb\u6bb5\u843d\u3002\u6bcf\u6b21\u770b\u5230'happy'\u7684\u540c\u4e49\u8bcd\u5c31\u70b9\u51fb\u3002",
+          "instruction_zh": "读段落。每次看到'happy'的同义词就点击。",
           "tap_count": 6,
           "story": "The joyful girl ran through the field. She felt glad to see the cheerful flowers. Her delighted friend waved. They were both pleased and merry to play together."
         }
@@ -899,14 +895,9 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"Adjectives describe nouns — look for describing words\"",
-          "options": [
-            "2 (blue, old)",
-            "3",
-            "4",
-            "1"
-          ],
-          "correct_answer": "2 (blue, old)",
-          "image_hint": "cat"
+          "correct_answer": "2",
+          "image_hint": "cat",
+          "input_mode": "number"
         },
         {
           "instruction": "Sort by ABSTRACT vs CONCRETE: Abstract concepts go left, Concrete objects go right. [Justice]",

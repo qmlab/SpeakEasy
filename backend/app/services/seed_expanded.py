@@ -271,6 +271,16 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Input mode: number or text input instead of option buttons
+    # ------------------------------------------------------------------
+    # Tasks with `input_mode` use a free-text or numeric input field
+    # instead of multiple-choice option buttons.
+    if "input_mode" in task_data:
+        content["input_mode"] = task_data["input_mode"]
+        # Remove options so iOS doesn't render option buttons
+        content.pop("options", None)
+
+    # ------------------------------------------------------------------
     # Multi-tap counting tasks (go/no-go, sustained attention, etc.)
     # ------------------------------------------------------------------
     # Tasks with a `tap_count` field require the child to tap a button
