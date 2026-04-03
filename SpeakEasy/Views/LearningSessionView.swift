@@ -1357,6 +1357,12 @@ struct LearningSessionView: View {
     /// "Tap star only" or "Miss or false alarm" — those fall back to
     /// the standard text-button layout.
     private func isImageGridTask(_ task: AdaptiveTask) -> Bool {
+        // Inline-image tasks always use image grid — the backend explicitly
+        // marks these tasks so both A and B objects are shown as tappable
+        // image cards (e.g. go/no-go tasks like "Tap the dog. Do not tap the cat.").
+        if task.content.inlineImages == true && task.content.displayOptions.count >= 2 {
+            return true
+        }
         // Pattern tasks use image grid only when all options are image-compatible
         // names (single words, no bare numbers).  Tasks like Q091 ("5 apples"),
         // Q094 ("5"), Q099 ("162") fall through to text buttons instead.
