@@ -280,7 +280,11 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         steps = task_data["steps"]
         if "items" not in content:
             content["items"] = list(steps)  # correct order
-        if "options" not in content or not content["options"]:
+        if (
+            "options" not in content
+            or not content["options"]
+            or content["options"] == list(steps)
+        ):
             shuffled = list(steps)
             random.shuffle(shuffled)
             # Avoid presenting options in the already-correct order
