@@ -103,6 +103,7 @@ def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
         force: If True, delete existing expanded tasks and re-seed with
                updated JSON data (e.g. after adding image_hint fields).
     """
+
     results = seed_all_tasks(db)
     expanded_results = seed_expanded_tasks(db, force=force)
     results.update(expanded_results)
