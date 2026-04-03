@@ -1158,11 +1158,13 @@ struct LearningSessionView: View {
                                         if !placed {
                                             // Snap back with animation
                                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                                dragSortItem = nil
                                                 dragSortOffset = .zero
                                             }
+                                        } else {
+                                            dragSortItem = nil
+                                            dragSortOffset = .zero
                                         }
-                                        dragSortItem = nil
-                                        dragSortOffset = .zero
 
                                         // Auto-submit when all items placed
                                         let newRemaining = unsortedItems(task: task)
