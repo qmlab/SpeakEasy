@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FAFAFA" rx="20"/><polygon points="70,60 50,100 90,100" fill="#78909C"/><polygon points="140,100 120,140 160,140" fill="#78909C" transform="rotate(90,140,120)"/><path d="M100 70 Q130 50 140 80" fill="none" stroke="#FFA000" stroke-width="2" marker-end="url(#arrow)"/></svg>
