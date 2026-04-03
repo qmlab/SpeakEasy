@@ -1140,6 +1140,10 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "What is in this picture?",
                     "instruction_text": "What is in this picture?",
                     "image_name": "Apple",
+                    "question_image": "apple",
+                    "image_hint": "apple",
+                    "options": ["Apple", "Car", "Hat"],
+                    "correct_answer": "Apple",
                     "choices": [
                         {"name": "Apple", "is_correct": True},
                         {"name": "Car", "is_correct": False},
@@ -1157,6 +1161,10 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "What is in this picture?",
                     "instruction_text": "What is in this picture?",
                     "image_name": "Dog",
+                    "question_image": "dog",
+                    "image_hint": "dog",
+                    "options": ["Cat", "Dog", "Fish"],
+                    "correct_answer": "Dog",
                     "choices": [
                         {"name": "Cat", "is_correct": False},
                         {"name": "Dog", "is_correct": True},
@@ -1174,6 +1182,10 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "What is in this picture?",
                     "instruction_text": "What is in this picture?",
                     "image_name": "Ball",
+                    "question_image": "ball",
+                    "image_hint": "ball",
+                    "options": ["Ball", "Cup", "Shoe"],
+                    "correct_answer": "Ball",
                     "choices": [
                         {"name": "Ball", "is_correct": True},
                         {"name": "Cup", "is_correct": False},
