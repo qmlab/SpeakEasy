@@ -248,8 +248,12 @@ struct LearningSessionView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
-            // Image hint — show bigger for visual clarity
-            if let imageHint = task.content.imageHint, !imageHint.isEmpty {
+            // Image hint — show bigger for visual clarity.
+            // Hide for image-grid tasks (identify/point_to) since all options
+            // are already displayed as images — showing the answer image here
+            // would give it away.
+            if let imageHint = task.content.imageHint, !imageHint.isEmpty,
+               !isImageGridTask(task) {
                 RemoteImageView(
                     objectName: imageHint,
                     imageType: .flashcard,
@@ -574,38 +578,74 @@ struct LearningSessionView: View {
 
     // MARK: - Option Buttons
 
+    /// Whether this task should display options as a visual image grid
+    /// (identify / point_to tasks where the child picks from multiple images).
+    private func isImageGridTask(_ task: AdaptiveTask) -> Bool {
+        let visualTypes: Set<String> = ["identify", "point_to", "match_word_image", "recognize_image", "match"]
+        return visualTypes.contains(task.taskType) && task.content.displayOptions.count >= 2
+    }
+
+    @ViewBuilder
     private func optionButtons(task: AdaptiveTask) -> some View {
+        if isImageGridTask(task) {
+            imageGridOptions(task: task)
+        } else {
+            textOptionButtons(task: task)
+        }
+    }
+
+    /// Image grid layout — shows each option as a tappable image card in a
+    /// 2-column grid.  Used for identify / point_to tasks so the child can
+    /// visually select the correct object.
+    private func imageGridOptions(task: AdaptiveTask) -> some View {
+        let columns = [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ]
+        return LazyVGrid(columns: columns, spacing: 12) {
+            ForEach(task.content.displayOptions, id: \.self) { option in
+                Button {
+                    handleOptionTap(option: option, task: task)
+                } label: {
+                    VStack(spacing: 6) {
+                        RemoteImageView(
+                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                            imageType: .flashcard,
+                            fallbackIcon: "questionmark.circle",
+                            iconColor: dimension.color,
+                            size: 100
+                        )
+                        .cornerRadius(12)
+
+                        Text(option)
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .lineLimit(1)
+                    }
+                    .padding(10)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(selectedOption == option ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(selectedOption == option ? dimension.color : Color.clear, lineWidth: 3)
+                    )
+                }
+                .disabled(learningManager.isSubmitting)
+            }
+        }
+    }
+
+    /// Traditional text-based option list with optional small thumbnails.
+    private func textOptionButtons(task: AdaptiveTask) -> some View {
         VStack(spacing: 12) {
             ForEach(task.content.displayOptions, id: \.self) { option in
                 Button {
-                    selectedOption = option
-                    // Speak the option text so the child learns pronunciation
-                    // Clear any pending auto-listen callback so option TTS finishing
-                    // doesn't accidentally start the microphone.
-                    speechService.onSpeechFinished = nil
-                    speechService.speak(option)
-                    // Stop any active listening so voice input doesn't race
-                    // with the tap submission.
-                    if isListening {
-                        speechService.stopListening()
-                        isListening = false
-                    }
-                    let isCorrect = option.lowercased() == (task.content.correctAnswer ?? "").lowercased()
-                    Task {
-                        await learningManager.submitAttempt(
-                            isCorrect: isCorrect,
-                            score: isCorrect ? 1 : 0,
-                            dimension: dimension
-                        )
-                        selectedOption = nil
-                    }
+                    handleOptionTap(option: option, task: task)
                 } label: {
                     HStack(spacing: 12) {
-                        // Difficulty-based option image display:
-                        // Level 0: show all images (visual matching, easiest)
-                        // Level 1-2: hide the image that matches the question
-                        //            image so the child can't just match visually
-                        // Level 3+: hide all option images (text-only, hardest)
                         if shouldShowOptionImage(task: task, option: option) {
                             RemoteImageView(
                                 objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
@@ -632,7 +672,27 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Whether to show the thumbnail image for a given option button.
+    /// Shared handler for tapping an option (used by both image grid and text buttons).
+    private func handleOptionTap(option: String, task: AdaptiveTask) {
+        selectedOption = option
+        speechService.onSpeechFinished = nil
+        speechService.speak(option)
+        if isListening {
+            speechService.stopListening()
+            isListening = false
+        }
+        let isCorrect = option.lowercased() == (task.content.correctAnswer ?? "").lowercased()
+        Task {
+            await learningManager.submitAttempt(
+                isCorrect: isCorrect,
+                score: isCorrect ? 1 : 0,
+                dimension: dimension
+            )
+            selectedOption = nil
+        }
+    }
+
+    /// Whether to show the thumbnail image for a given option button (text mode).
     ///
     /// Difficulty progression for option images:
     /// - **Level 0** (easiest): show all images — visual matching is allowed.
