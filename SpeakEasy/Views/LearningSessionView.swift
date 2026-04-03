@@ -23,8 +23,6 @@ struct LearningSessionView: View {
     @State private var animateReward: Bool = false
     @State private var animateFeedback: Bool = false
     @State private var showCameraView: Bool = false
-    /// Number of incorrect speech attempts on the current task
-    @State private var speechRetryCount: Int = 0
     /// Ordered selections for sorting/sequencing tasks
     @State private var orderedSelections: [String] = []
     /// Whether the hint/clue is currently revealed
@@ -119,7 +117,6 @@ struct LearningSessionView: View {
                 isEvaluating = false
                 spokenText = ""
                 selectedOption = nil
-                speechRetryCount = 0
                 orderedSelections = []
                 animateFeedback = false
                 showHint = false
