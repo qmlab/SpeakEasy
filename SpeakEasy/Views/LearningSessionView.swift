@@ -49,6 +49,16 @@ struct LearningSessionView: View {
     @State private var dragOffset: CGSize = .zero
     /// Cumulative offset consumed by completed swaps (prevents cascading swaps)
     @State private var dragSwapConsumed: CGFloat = 0
+    /// Drag-to-category sorting state: maps category name -> array of sorted item names
+    @State private var categorySortBuckets: [String: [String]] = [:]
+    /// The item currently being dragged in category sort
+    @State private var dragSortItem: String?
+    /// Drag offset for category sort item
+    @State private var dragSortOffset: CGSize = .zero
+    /// Position anchors for category drop zones (category name -> frame)
+    @State private var categoryFrames: [String: CGRect] = [:]
+    /// Position anchor for unsorted items pool
+    @State private var unsortedPoolFrame: CGRect = .zero
 
     var body: some View {
         NavigationStack {
@@ -127,6 +137,10 @@ struct LearningSessionView: View {
                 draggedItem = nil
                 dragOffset = .zero
                 dragSwapConsumed = 0
+                // Reset drag-to-category sort state
+                categorySortBuckets = [:]
+                dragSortItem = nil
+                dragSortOffset = .zero
                 // Reset flash state
                 flashVisible = false
                 flashPhase = 0
@@ -1032,6 +1046,8 @@ struct LearningSessionView: View {
     ///   single-tap option selection, not multi-tap ordering.
     /// - Excludes drag-arrange tasks which use their own drag UI.
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
+        // Drag-to-category sort tasks use their own bucket UI
+        if isDragSortTask(task) { return false }
         // Drag-arrange tasks use drag reorder, not ordering UI
         if isDragArrangeTask(task) { return false }
         // Pattern tasks have items from steps but should NOT use ordering UI
@@ -1042,6 +1058,275 @@ struct LearningSessionView: View {
         let explicitTypes = type == "sort" || type == "sequence_order" || type == "build_sentence"
         let hasItems = task.content.items != nil && !(task.content.items!.isEmpty)
         return (explicitTypes || hasItems) && task.content.displayOptions.count >= 2
+    }
+
+    // MARK: - Drag-to-Category Sorting
+
+    /// Whether this task is a drag-to-category sorting task.
+    /// These have `interaction_mode: "drag_sort"` and `sort_categories` array.
+    private func isDragSortTask(_ task: AdaptiveTask) -> Bool {
+        task.content.interactionMode == "drag_sort"
+            && task.content.sortCategories != nil
+            && !(task.content.sortCategories!.isEmpty)
+    }
+
+    /// Initialize category sort buckets if not already set up.
+    private func initCategorySortBuckets(task: AdaptiveTask) {
+        guard let categories = task.content.sortCategories else { return }
+        if categorySortBuckets.isEmpty {
+            for cat in categories {
+                categorySortBuckets[cat] = []
+            }
+        }
+    }
+
+    /// All items not yet placed in any category bucket.
+    private func unsortedItems(task: AdaptiveTask) -> [String] {
+        let allItems = task.content.displayOptions
+        let sorted = Set(categorySortBuckets.values.flatMap { $0 })
+        return allItems.filter { !sorted.contains($0) }
+    }
+
+    /// Drag-to-category sorting area: items at top, category buckets below.
+    @ViewBuilder
+    private func dragSortArea(task: AdaptiveTask) -> some View {
+        let categories = task.content.sortCategories ?? []
+        let itemCategoryMap = task.content.itemCategories ?? [:]
+        let remaining = unsortedItems(task: task)
+        let allPlaced = remaining.isEmpty
+
+        VStack(spacing: 20) {
+            // Unsorted items pool
+            if !remaining.isEmpty {
+                VStack(spacing: 8) {
+                    Text("Drag each item to the right group:")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    let columns = [
+                        GridItem(.flexible(), spacing: 10),
+                        GridItem(.flexible(), spacing: 10)
+                    ]
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(remaining, id: \.self) { item in
+                            let isDragging = dragSortItem == item
+                            VStack(spacing: 4) {
+                                RemoteImageView(
+                                    objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                    imageType: .thumbnail,
+                                    fallbackIcon: "questionmark.circle",
+                                    iconColor: dimension.color,
+                                    size: 44
+                                )
+                                .cornerRadius(8)
+                                Text(item)
+                                    .font(.subheadline.bold())
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 14)
+                                    .fill(isDragging ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
+                                    .shadow(color: isDragging ? dimension.color.opacity(0.3) : .clear, radius: 6)
+                            )
+                            .scaleEffect(isDragging ? 1.1 : 1.0)
+                            .offset(isDragging ? dragSortOffset : .zero)
+                            .zIndex(isDragging ? 10 : 0)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { value in
+                                        dragSortItem = item
+                                        dragSortOffset = value.translation
+                                    }
+                                    .onEnded { value in
+                                        // Check which category bucket the item was dropped on
+                                        let dropPoint = value.location
+                                        var placed = false
+                                        for (cat, frame) in categoryFrames {
+                                            if frame.contains(dropPoint) {
+                                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                                    categorySortBuckets[cat, default: []].append(item)
+                                                }
+                                                speechService.speak(item)
+                                                placed = true
+                                                break
+                                            }
+                                        }
+                                        if !placed {
+                                            // Snap back with animation
+                                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                                dragSortOffset = .zero
+                                            }
+                                        }
+                                        dragSortItem = nil
+                                        dragSortOffset = .zero
+
+                                        // Auto-submit when all items placed
+                                        let newRemaining = unsortedItems(task: task)
+                                        if placed && newRemaining.isEmpty {
+                                            // Check correctness
+                                            let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
+                                            let capturedTaskId = learningManager.currentTask?.taskId
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                guard !learningManager.isSubmitting,
+                                                      learningManager.currentTask?.taskId == capturedTaskId else { return }
+                                                Task {
+                                                    await learningManager.submitAttempt(
+                                                        isCorrect: isCorrect,
+                                                        score: isCorrect ? 1 : 0,
+                                                        dimension: dimension
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Category buckets
+            let bucketColumns = [
+                GridItem(.flexible(), spacing: 12),
+                GridItem(.flexible(), spacing: 12)
+            ]
+            LazyVGrid(columns: bucketColumns, spacing: 12) {
+                ForEach(categories, id: \.self) { category in
+                    let bucketItems = categorySortBuckets[category] ?? []
+                    VStack(spacing: 6) {
+                        // Category label
+                        Text(category)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(colorForCategory(category, categories: categories))
+                            )
+
+                        // Drop zone with placed items
+                        VStack(spacing: 4) {
+                            if bucketItems.isEmpty {
+                                Text("Drop here")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .frame(maxWidth: .infinity, minHeight: 60)
+                            } else {
+                                ForEach(bucketItems, id: \.self) { item in
+                                    HStack(spacing: 6) {
+                                        RemoteImageView(
+                                            objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                            imageType: .thumbnail,
+                                            fallbackIcon: "circle.fill",
+                                            iconColor: colorForCategory(category, categories: categories),
+                                            size: 24
+                                        )
+                                        .cornerRadius(4)
+                                        Text(item)
+                                            .font(.caption)
+                                            .lineLimit(1)
+                                        Spacer()
+                                        // Remove button
+                                        Button {
+                                            withAnimation {
+                                                categorySortBuckets[category]?.removeAll { $0 == item }
+                                            }
+                                        } label: {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(colorForCategory(category, categories: categories).opacity(0.1))
+                                    )
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 60)
+                        .padding(8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .strokeBorder(
+                                    colorForCategory(category, categories: categories).opacity(0.4),
+                                    style: StrokeStyle(lineWidth: 2, dash: [6, 3])
+                                )
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(colorForCategory(category, categories: categories).opacity(0.05))
+                                )
+                        )
+                        .overlay(
+                            GeometryReader { geo in
+                                Color.clear
+                                    .onAppear {
+                                        categoryFrames[category] = geo.frame(in: .global)
+                                    }
+                                    .onChange(of: geo.frame(in: .global)) { newFrame in
+                                        categoryFrames[category] = newFrame
+                                    }
+                            }
+                        )
+                    }
+                }
+            }
+
+            // Status / Submit
+            if allPlaced {
+                let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
+                HStack(spacing: 12) {
+                    Image(systemName: isCorrect ? "checkmark.circle.fill" : "arrow.triangle.2.circlepath")
+                        .foregroundColor(isCorrect ? .green : .orange)
+                    Text(isCorrect ? "All sorted!" : "Submitting...")
+                        .font(.subheadline.bold())
+                        .foregroundColor(isCorrect ? .green : .orange)
+                }
+            }
+
+            // Reset button
+            if categorySortBuckets.values.contains(where: { !$0.isEmpty }) {
+                Button {
+                    withAnimation {
+                        for key in categorySortBuckets.keys {
+                            categorySortBuckets[key] = []
+                        }
+                    }
+                } label: {
+                    Label("Start Over", systemImage: "arrow.counterclockwise")
+                        .font(.subheadline)
+                        .foregroundColor(.orange)
+                }
+            }
+        }
+        .onAppear {
+            initCategorySortBuckets(task: task)
+        }
+    }
+
+    /// Check if all items are in the correct category buckets.
+    private func checkDragSortCorrectness(task: AdaptiveTask, itemCategoryMap: [String: String]) -> Bool {
+        for (category, items) in categorySortBuckets {
+            for item in items {
+                if itemCategoryMap[item] != category {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    /// Assign a color to each category bucket for visual distinction.
+    private func colorForCategory(_ category: String, categories: [String]) -> Color {
+        let colors: [Color] = [.blue, .orange, .green, .purple, .pink, .teal]
+        guard let index = categories.firstIndex(of: category) else { return .gray }
+        return colors[index % colors.count]
     }
 
     // MARK: - Multi-Tap Counting
@@ -1246,6 +1531,10 @@ struct LearningSessionView: View {
         if isDragArrangeTask(task) {
             dragArrangeArea(task: task)
         }
+        // Drag-to-category sorting tasks
+        else if isDragSortTask(task) {
+            dragSortArea(task: task)
+        }
         // Multi-tap counting tasks (go/no-go, sustained attention)
         else if isMultiTapTask(task) {
             multiTapArea(task: task)
@@ -1271,12 +1560,12 @@ struct LearningSessionView: View {
         // Skip for text input tasks — the child types the answer.
         // Skip for flash tasks — the child should pick visually, not speak.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
             speechInputArea(task: task)
         }
 
         // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) {
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
             simpleResponseButtons(task: task)
         }
 

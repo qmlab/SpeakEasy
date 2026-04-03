@@ -1874,7 +1874,7 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
         ]
     )
 
-    # ---- Level 1: Sorting ----
+    # ---- Level 1: Sorting (drag-to-category) ----
     tasks.extend(
         [
             AdaptiveTask(
@@ -1883,19 +1883,17 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                 task_type=TaskType.SORT.value,
                 modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Sort the clothes by color! Which clothes are red?",
-                    "instruction_text": "Sort by color: Which clothes are red?",
-                    "sort_by": "color",
-                    "sort_category": "clothing",
-                    "target_value": "red",
-                    "items": [
-                        {"name": "Red Shirt", "color": "red", "is_target": True},
-                        {"name": "Blue Pants", "color": "blue", "is_target": False},
-                        {"name": "Red Dress", "color": "red", "is_target": True},
-                        {"name": "Green Jacket", "color": "green", "is_target": False},
-                        {"name": "Red Hat", "color": "red", "is_target": True},
-                    ],
-                    "options": ["Red Shirt", "Blue Pants", "Green Jacket"],
+                    "instruction_audio": "Sort the clothes by color! Drag each item to the Red or Blue group.",
+                    "instruction_text": "Sort clothes: drag to Red or Blue",
+                    "interaction_mode": "drag_sort",
+                    "sort_categories": ["Red", "Blue"],
+                    "item_categories": {
+                        "Red Shirt": "Red",
+                        "Blue Pants": "Blue",
+                        "Red Hat": "Red",
+                        "Blue Jacket": "Blue",
+                    },
+                    "options": ["Red Shirt", "Blue Pants", "Red Hat", "Blue Jacket"],
                     "correct_answer": "Red Shirt",
                     "image_hint": "red_shirt",
                 },
@@ -1907,19 +1905,17 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                 task_type=TaskType.SORT.value,
                 modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Sort the animals by size! Which animals are big?",
-                    "instruction_text": "Sort by size: Which animals are big?",
-                    "sort_by": "size",
-                    "sort_category": "animals",
-                    "target_value": "big",
-                    "items": [
-                        {"name": "Bear", "size": "big", "is_target": True},
-                        {"name": "Mouse", "size": "small", "is_target": False},
-                        {"name": "Elephant", "size": "big", "is_target": True},
-                        {"name": "Ant", "size": "small", "is_target": False},
-                        {"name": "Horse", "size": "big", "is_target": True},
-                    ],
-                    "options": ["Bear", "Mouse", "Ant"],
+                    "instruction_audio": "Sort the animals! Drag each animal to Big or Small.",
+                    "instruction_text": "Sort animals: drag to Big or Small",
+                    "interaction_mode": "drag_sort",
+                    "sort_categories": ["Big", "Small"],
+                    "item_categories": {
+                        "Bear": "Big",
+                        "Mouse": "Small",
+                        "Elephant": "Big",
+                        "Ant": "Small",
+                    },
+                    "options": ["Bear", "Mouse", "Elephant", "Ant"],
                     "correct_answer": "Bear",
                     "image_hint": "bear",
                 },
@@ -1931,21 +1927,20 @@ def seed_cognitive_logic_tasks(db: Session) -> int:
                 task_type=TaskType.SORT.value,
                 modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Sort the foods by shape! Which foods are round?",
-                    "instruction_text": "Sort by shape: Which foods are round?",
-                    "sort_by": "shape",
-                    "sort_category": "food",
-                    "target_value": "circle",
-                    "items": [
-                        {"name": "Orange", "shape": "circle", "is_target": True},
-                        {"name": "Bread", "shape": "rectangle", "is_target": False},
-                        {"name": "Cookie", "shape": "circle", "is_target": True},
-                        {"name": "Sandwich", "shape": "rectangle", "is_target": False},
-                        {"name": "Watermelon", "shape": "circle", "is_target": True},
-                    ],
-                    "options": ["Orange", "Bread", "Sandwich"],
-                    "correct_answer": "Orange",
-                    "image_hint": "orange",
+                    "instruction_audio": "Sort the foods! Drag each food to Fruit or Not Fruit.",
+                    "instruction_text": "Sort foods: drag to Fruit or Not Fruit",
+                    "interaction_mode": "drag_sort",
+                    "sort_categories": ["Fruit", "Not Fruit"],
+                    "item_categories": {
+                        "Apple": "Fruit",
+                        "Bread": "Not Fruit",
+                        "Orange": "Fruit",
+                        "Sandwich": "Not Fruit",
+                        "Banana": "Fruit",
+                    },
+                    "options": ["Apple", "Bread", "Orange", "Sandwich", "Banana"],
+                    "correct_answer": "Apple",
+                    "image_hint": "apple",
                 },
                 is_assessment=False,
             ),
