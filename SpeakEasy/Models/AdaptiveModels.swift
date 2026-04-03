@@ -261,6 +261,8 @@ struct TaskContent: Codable {
     let exampleAnswers: [String]?
     let keywords: [String]?
     let inputMode: String?
+    let inlineImages: Bool?
+    let questionImage: String?
 
     enum CodingKeys: String, CodingKey {
         case instruction
@@ -288,6 +290,8 @@ struct TaskContent: Codable {
         case exampleAnswers = "example_answers"
         case keywords
         case inputMode = "input_mode"
+        case inlineImages = "inline_images"
+        case questionImage = "question_image"
     }
 
     init(from decoder: Decoder) throws {
@@ -313,6 +317,8 @@ struct TaskContent: Codable {
         exampleAnswers = try container.decodeIfPresent([String].self, forKey: .exampleAnswers)
         keywords = try container.decodeIfPresent([String].self, forKey: .keywords)
         inputMode = try container.decodeIfPresent(String.self, forKey: .inputMode)
+        inlineImages = try container.decodeIfPresent(Bool.self, forKey: .inlineImages)
+        questionImage = try container.decodeIfPresent(String.self, forKey: .questionImage)
 
         // Decode targetWord: try explicit "target_word" string first, then extract from nested "target" object
         if let tw = try? container.decodeIfPresent(String.self, forKey: .targetWord) {
@@ -369,6 +375,8 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(exampleAnswers, forKey: .exampleAnswers)
         try container.encodeIfPresent(keywords, forKey: .keywords)
         try container.encodeIfPresent(inputMode, forKey: .inputMode)
+        try container.encodeIfPresent(inlineImages, forKey: .inlineImages)
+        try container.encodeIfPresent(questionImage, forKey: .questionImage)
     }
 
     var displayInstruction: String {

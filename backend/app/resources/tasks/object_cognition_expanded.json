@@ -51,7 +51,8 @@
           "instruction_zh": "记住：红色。现在点一下你刚听到的颜色。",
           "animation_frames": [
             "red_swatch"
-          ]
+          ],
+          "inline_images": true
         },
         {
           "instruction": "Watch the light flash: [circle]. Now tap the same shape.",
@@ -65,7 +66,8 @@
             "Triangle"
           ],
           "correct_answer": "Circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true
         },
         {
           "instruction": "Tap every time you see a STAR in the stream of shapes.",
@@ -296,7 +298,8 @@
             "Green triangle"
           ],
           "correct_answer": "Red circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true
         },
         {
           "instruction": "NOW sort by SHAPE: Circle goes left, Square goes right. [Red circle]",
@@ -854,7 +857,8 @@
             "Purple"
           ],
           "correct_answer": "Green",
-          "image_hint": "hat"
+          "image_hint": "hat",
+          "inline_images": true
         },
         {
           "instruction": "Sort by EMOTIONAL VALENCE: Positive words go left, Negative words go right. [Happy]",

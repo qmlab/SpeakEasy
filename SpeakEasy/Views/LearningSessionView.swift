@@ -275,8 +275,25 @@ struct LearningSessionView: View {
             // are already displayed as images — showing the answer image here
             // would give it away.
             // Also hide for pattern tasks since the sequence display replaces it.
-            if let imageHint = task.content.imageHint, !imageHint.isEmpty,
+            // Also hide for inline-image tasks since each option button already
+            // shows a shape/color thumbnail — no big image needed above.
+            //
+            // "Find the same one" tasks: if `questionImage` is set, show that
+            // alternate image instead of `imageHint` so the child cannot simply
+            // match pictures.  The option buttons still use the original images.
+            if let questionImg = task.content.questionImage, !questionImg.isEmpty,
                !isImageGridTask(task), !isPatternTask(task) {
+                RemoteImageView(
+                    objectName: questionImg,
+                    imageType: .flashcard,
+                    fallbackIcon: "photo",
+                    iconColor: dimension.color,
+                    size: 200
+                )
+                .cornerRadius(16)
+            } else if let imageHint = task.content.imageHint, !imageHint.isEmpty,
+               !isImageGridTask(task), !isPatternTask(task),
+               task.content.inlineImages != true {
                 RemoteImageView(
                     objectName: imageHint,
                     imageType: .flashcard,
@@ -1312,11 +1329,15 @@ struct LearningSessionView: View {
     /// Whether to show the thumbnail image for a given option button (text mode).
     ///
     /// Difficulty progression for option images:
+    /// - **Inline-image tasks**: always show — the shape/color images ARE the
+    ///   primary content (e.g. "Tap the red shape first").
     /// - **Level 0** (easiest): show all images — visual matching is allowed.
     /// - **Level 1–2**: hide the image whose key matches the question's
     ///   `imageHint` so the child cannot simply match pictures.
     /// - **Level 3+** (hardest): hide all option images — text only.
     private func shouldShowOptionImage(task: AdaptiveTask, option: String) -> Bool {
+        // Inline-image tasks always show thumbnails regardless of level
+        if task.content.inlineImages == true { return true }
         if task.level >= 3 { return false }
         if task.level >= 1, let imageHint = task.content.imageHint {
             let optionKey = option.lowercased().replacingOccurrences(of: " ", with: "_")

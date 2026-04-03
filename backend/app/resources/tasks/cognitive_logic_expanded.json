@@ -72,7 +72,8 @@
             "blue_square"
           ],
           "correct_answer": "red_circle",
-          "image_hint": "red_circle"
+          "image_hint": "red_circle",
+          "inline_images": true
         },
         {
           "instruction": "Which group has MORE?",
@@ -164,7 +165,8 @@
             "small_square"
           ],
           "correct_answer": "big_circle",
-          "image_hint": "big_circle"
+          "image_hint": "big_circle",
+          "inline_images": true
         },
         {
           "instruction": "Put the numbers from fewest to most!",
@@ -271,7 +273,8 @@
             "circle"
           ],
           "correct_answer": "square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "inline_images": true
         },
         {
           "instruction": "Which is LONGER?",
@@ -391,7 +394,8 @@
             "blue_square"
           ],
           "correct_answer": "red_circle",
-          "image_hint": "red_circle"
+          "image_hint": "red_circle",
+          "inline_images": true
         },
         {
           "instruction": "You have 3 apples and get 2 more. How many now?",
@@ -502,7 +506,8 @@
             "triangle"
           ],
           "correct_answer": "square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "inline_images": true
         },
         {
           "instruction": "Which is bigger: half a pie or a quarter?",
@@ -591,7 +596,8 @@
             "square"
           ],
           "correct_answer": "circle_with_dot",
-          "image_hint": "circle_with_dot"
+          "image_hint": "circle_with_dot",
+          "inline_images": true
         },
         {
           "instruction": "A train goes 60 miles each hour. How far in 2 hours?",
@@ -700,7 +706,8 @@
             "small_blue_circle"
           ],
           "correct_answer": "big_red_circle",
-          "image_hint": "big_red_circle"
+          "image_hint": "big_red_circle",
+          "inline_images": true
         },
         {
           "instruction": "What is 15% of 200?",
@@ -815,7 +822,8 @@
             "small_triangle"
           ],
           "correct_answer": "circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true
         },
         {
           "instruction": "If a rectangle has area 24 and width 4, what is its length?",
@@ -916,7 +924,8 @@
             "square"
           ],
           "correct_answer": "pentagon",
-          "image_hint": "pentagon"
+          "image_hint": "pentagon",
+          "inline_images": true
         },
         {
           "instruction": "Syntax is to grammar as melody is to ___?",
@@ -1022,7 +1031,8 @@
             "triangle"
           ],
           "correct_answer": "circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true
         },
         {
           "instruction": "If boys to girls is 3:5 and there are 40 students, how many boys?",

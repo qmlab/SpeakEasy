@@ -271,6 +271,24 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Inline option images: show shape/color thumbnails in each button
+    # ------------------------------------------------------------------
+    # Tasks with `inline_images` have options that are shape/color names
+    # (e.g. "red_circle", "Blue square").  iOS shows a small image
+    # inline in each option button and hides the large instruction image.
+    if task_data.get("inline_images"):
+        content["inline_images"] = True
+
+    # ------------------------------------------------------------------
+    # Question image: alternate image for "Find the same one" tasks
+    # ------------------------------------------------------------------
+    # Tasks with `question_image` show a different image of the same
+    # object type in the instruction card, so the child cannot simply
+    # match pictures.  The option buttons still use `image_hint` images.
+    if task_data.get("question_image"):
+        content["question_image"] = task_data["question_image"]
+
+    # ------------------------------------------------------------------
     # Input mode: number or text input instead of option buttons
     # ------------------------------------------------------------------
     # Tasks with `input_mode` use a free-text or numeric input field
