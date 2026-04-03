@@ -271,6 +271,15 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Animation frames for visual tasks (n-back, working memory, etc.)
+    # ------------------------------------------------------------------
+    # Tasks with an `animation_frames` array contain images to display
+    # as a timed slideshow before presenting the question.  Pass the
+    # frames through so iOS can play the animation, then show options.
+    if "animation_frames" in task_data and task_data["animation_frames"]:
+        content["animation_frames"] = list(task_data["animation_frames"])
+
+    # ------------------------------------------------------------------
     # Pattern-finding tasks (cognitive_logic with `sequence` field)
     # ------------------------------------------------------------------
     # Tasks with a `sequence` array display a visual pattern of shape
@@ -322,8 +331,10 @@ def _build_content(task_type: str, task_data: dict) -> dict:
     # available.
     inst_lower = (task_data.get("instruction") or "").lower()
     if (
-        "tap them in order" in inst_lower or "tap in order" in inst_lower
-    ) and "items" not in content:
+        ("tap them in order" in inst_lower or "tap in order" in inst_lower)
+        and "items" not in content
+        and "animation_frames" not in content
+    ):
         import re
 
         # Check if the instruction has a qualifier that changes ordering

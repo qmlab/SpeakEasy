@@ -31,6 +31,10 @@ struct LearningSessionView: View {
     @State private var orderedSelections: [String] = []
     /// Whether the hint/clue is currently revealed
     @State private var showHint: Bool = false
+    /// Animation slideshow state
+    @State private var animationFrameIndex: Int = 0
+    @State private var animationFinished: Bool = false
+    @State private var animationTimer: Timer?
 
     var body: some View {
         NavigationStack {
@@ -103,6 +107,17 @@ struct LearningSessionView: View {
                 orderedSelections = []
                 animateFeedback = false
                 showHint = false
+                // Reset animation slideshow state
+                animationTimer?.invalidate()
+                animationTimer = nil
+                animationFrameIndex = 0
+                animationFinished = false
+                // Restart animation if the new task is also animated
+                if let newTask = learningManager.currentTask,
+                   isAnimatedTask(newTask),
+                   let frames = newTask.content.animationFrames {
+                    startAnimationSlideshow(frames: frames)
+                }
                 if isListening {
                     speechService.stopListening()
                     isListening = false
@@ -301,10 +316,23 @@ struct LearningSessionView: View {
         return true
     }
 
+    /// Whether this task has animation frames (n-back, working memory, attention tasks).
+    private func isAnimatedTask(_ task: AdaptiveTask) -> Bool {
+        guard let frames = task.content.animationFrames, frames.count >= 1 else { return false }
+        // Don't treat as animated if it's also a pattern task (sequence takes priority)
+        if isPatternTask(task) { return false }
+        return true
+    }
+
     @ViewBuilder
     private func contentArea(task: AdaptiveTask) -> some View {
+        // Animated slideshow display — shows frames one at a time for attention/memory tasks
+        if isAnimatedTask(task) {
+            animatedSequenceView(task: task)
+        }
+
         // Pattern sequence display — shows shape images in a row/grid with "?" placeholder
-        if isPatternTask(task) {
+        if isPatternTask(task) && !isAnimatedTask(task) {
             patternSequenceView(task: task)
         }
 
@@ -444,6 +472,138 @@ struct LearningSessionView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color(.secondarySystemBackground))
             )
+        }
+    }
+
+    // MARK: - Animated Sequence Display
+
+    /// Renders a timed slideshow of image frames for attention/memory tasks.
+    /// Each frame is shown for ~1.5 seconds with a crossfade, then options appear.
+    private func animatedSequenceView(task: AdaptiveTask) -> some View {
+        let frames = task.content.animationFrames ?? []
+        let totalFrames = frames.count
+
+        return VStack(spacing: 12) {
+            // Header
+            HStack {
+                Image(systemName: animationFinished ? "checkmark.circle.fill" : "play.circle.fill")
+                    .font(.title3)
+                Text(animationFinished ? "Now answer!" : "Watch carefully!")
+                    .font(.headline)
+            }
+            .foregroundColor(dimension.color)
+
+            // Frame display area
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemBackground))
+                    .frame(height: 140)
+
+                if animationFinished {
+                    // Show all frames in a row after animation finishes
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(Array(frames.enumerated()), id: \.offset) { idx, frame in
+                                VStack(spacing: 4) {
+                                    RemoteImageView(
+                                        objectName: frame.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                        imageType: .flashcard,
+                                        fallbackIcon: "square.dashed",
+                                        iconColor: dimension.color,
+                                        size: 50
+                                    )
+                                    .cornerRadius(8)
+                                    Text("\(idx + 1)")
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                }
+                                .frame(width: 60, height: 70)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color(.tertiarySystemBackground))
+                                )
+                            }
+                        }
+                        .padding(.horizontal, 12)
+                    }
+                } else if animationFrameIndex < totalFrames {
+                    // Show current frame with animation
+                    VStack(spacing: 8) {
+                        RemoteImageView(
+                            objectName: frames[animationFrameIndex].lowercased()
+                                .replacingOccurrences(of: " ", with: "_"),
+                            imageType: .flashcard,
+                            fallbackIcon: "square.dashed",
+                            iconColor: dimension.color,
+                            size: 80
+                        )
+                        .cornerRadius(12)
+                        .id("frame_\(animationFrameIndex)")
+                        .transition(.opacity.combined(with: .scale))
+
+                        // Progress dots
+                        HStack(spacing: 6) {
+                            ForEach(0..<totalFrames, id: \.self) { idx in
+                                Circle()
+                                    .fill(idx == animationFrameIndex
+                                          ? dimension.color
+                                          : dimension.color.opacity(0.2))
+                                    .frame(width: 8, height: 8)
+                            }
+                        }
+                    }
+                    .animation(.easeInOut(duration: 0.4), value: animationFrameIndex)
+                }
+            }
+
+            // Step counter
+            if !animationFinished {
+                Text("Step \(min(animationFrameIndex + 1, totalFrames)) of \(totalFrames)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(dimension.color.opacity(0.05))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(dimension.color.opacity(0.2), lineWidth: 1)
+                )
+        )
+        .onAppear {
+            startAnimationSlideshow(frames: frames)
+        }
+        .onDisappear {
+            animationTimer?.invalidate()
+            animationTimer = nil
+        }
+    }
+
+    /// Starts the timed slideshow for animation frames.
+    private func startAnimationSlideshow(frames: [String]) {
+        animationFrameIndex = 0
+        animationFinished = false
+        animationTimer?.invalidate()
+
+        guard !frames.isEmpty else {
+            animationFinished = true
+            return
+        }
+
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
+            if animationFrameIndex < frames.count - 1 {
+                withAnimation {
+                    animationFrameIndex += 1
+                }
+            } else {
+                timer.invalidate()
+                animationTimer = nil
+                withAnimation {
+                    animationFinished = true
+                }
+            }
         }
     }
 

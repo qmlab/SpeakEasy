@@ -43,7 +43,8 @@
             "B"
           ],
           "correct_answer": "S",
-          "image_hint": "question"
+          "image_hint": "letter_s",
+          "instruction_zh": "哪个字母发出'sss'的声音？"
         },
         {
           "instruction": "Listen: 'The dog ran fast.' Who ran?",
