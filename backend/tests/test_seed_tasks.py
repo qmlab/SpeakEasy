@@ -38,12 +38,12 @@ class TestSeedPracticeTasks:
 
     def test_seed_cognitive_logic(self, db):
         count = seed_cognitive_logic_tasks(db)
-        assert count == 15
+        assert count == 19
 
     def test_seed_all_tasks(self, db):
         result = seed_all_tasks(db)
         total = sum(result.values())
-        assert total == 128  # 92 practice + 36 assessment
+        assert total == 132  # 96 practice + 36 assessment
 
     def test_seed_idempotent(self, db):
         """Seeding twice should not duplicate tasks."""
@@ -62,7 +62,7 @@ class TestSeedPracticeTasks:
             .filter(AdaptiveTask.is_assessment == False)  # noqa: E712
             .all()
         )
-        assert len(practice_tasks) == 92
+        assert len(practice_tasks) == 96
 
     def test_each_dimension_has_5_levels(self, db):
         """Each dimension should have tasks at levels 0-4."""
@@ -191,7 +191,7 @@ class TestCombinedSeeding:
 
     def test_total_task_count(self, seeded_db):
         total = seeded_db.query(AdaptiveTask).count()
-        assert total == 128
+        assert total == 132
 
     def test_practice_vs_assessment_counts(self, seeded_db):
         practice = (
@@ -204,7 +204,7 @@ class TestCombinedSeeding:
             .filter(AdaptiveTask.is_assessment == True)  # noqa: E712
             .count()
         )
-        assert practice == 92
+        assert practice == 96
         assert assessment == 36
 
     def test_no_overlap(self, seeded_db):
