@@ -271,6 +271,23 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Pattern-finding tasks (cognitive_logic with `sequence` field)
+    # ------------------------------------------------------------------
+    # Tasks with a `sequence` array display a visual pattern of shape
+    # images.  Pass the sequence through so iOS can render each shape
+    # as an image, with "?" shown as a placeholder for the missing piece.
+    # Options are already concrete shape names that map to Cloudinary images.
+    if "sequence" in task_data and task_data["sequence"]:
+        content["sequence"] = list(task_data["sequence"])
+        if "grid_layout" in task_data:
+            content["grid_layout"] = list(task_data["grid_layout"])
+        # Shuffle options so correct answer isn't always first
+        if "options" in content and content["options"]:
+            opts = list(content["options"])
+            random.shuffle(opts)
+            content["options"] = opts
+
+    # ------------------------------------------------------------------
     # Auto-detect ordering / sequential-tap tasks
     # ------------------------------------------------------------------
     # Tasks that have a `steps` field contain the correct ordering.
