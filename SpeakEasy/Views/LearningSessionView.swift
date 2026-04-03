@@ -192,7 +192,8 @@ struct LearningSessionView: View {
                     let isTextInput = isTextInputTask(task)
                     let isFlash = isFlashTask(task)
                     let isDragArrange = isDragArrangeTask(task)
-                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash && !isDragArrange {
+                    let isDragSort = isDragSortTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash && !isDragArrange && !isDragSort {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -1135,7 +1136,7 @@ struct LearningSessionView: View {
                             .offset(isDragging ? dragSortOffset : .zero)
                             .zIndex(isDragging ? 10 : 0)
                             .gesture(
-                                DragGesture()
+                                DragGesture(coordinateSpace: .global)
                                     .onChanged { value in
                                         dragSortItem = item
                                         dragSortOffset = value.translation
