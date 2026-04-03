@@ -271,6 +271,20 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Multi-tap counting tasks (go/no-go, sustained attention, etc.)
+    # ------------------------------------------------------------------
+    # Tasks with a `tap_count` field require the child to tap a button
+    # multiple times (e.g. "tap every time you see a star").  The tap
+    # count is the expected number of correct taps.  Pass it through so
+    # iOS can display the tap counter and validate the response.
+    if "tap_count" in task_data:
+        content["tap_count"] = task_data["tap_count"]
+
+    # Story / passage for reading comprehension + tap counting tasks
+    if "story" in task_data and task_data["story"]:
+        content["story"] = task_data["story"]
+
+    # ------------------------------------------------------------------
     # Animation frames for visual tasks (n-back, working memory, etc.)
     # ------------------------------------------------------------------
     # Tasks with an `animation_frames` array contain images to display

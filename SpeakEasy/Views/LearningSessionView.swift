@@ -35,6 +35,8 @@ struct LearningSessionView: View {
     @State private var animationFrameIndex: Int = 0
     @State private var animationFinished: Bool = false
     @State private var animationTimer: Timer?
+    /// Multi-tap counting state (for go/no-go, sustained attention tasks)
+    @State private var multiTapCount: Int = 0
 
     var body: some View {
         NavigationStack {
@@ -107,6 +109,7 @@ struct LearningSessionView: View {
                 orderedSelections = []
                 animateFeedback = false
                 showHint = false
+                multiTapCount = 0
                 // Reset animation slideshow state
                 animationTimer?.invalidate()
                 animationTimer = nil
@@ -135,7 +138,8 @@ struct LearningSessionView: View {
                     // word (not just voice-modality tasks).  Skip sorting/sequencing
                     // tasks where ordering is the goal, not speaking.
                     let isSorting = isSortingTask(task)
-                    if !targetWord.isEmpty && !isSorting {
+                    let isMultiTap = isMultiTapTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -336,25 +340,56 @@ struct LearningSessionView: View {
             patternSequenceView(task: task)
         }
 
-        // Story / passage display
+        // Story / passage display with optional image
         if let story = task.content.story, !story.isEmpty {
-            Text(story)
-                .font(.body)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color(.systemBackground))
-                )
+            VStack(spacing: 12) {
+                // Show image hint alongside story for visual context
+                if let hint = task.content.imageHint, !hint.isEmpty {
+                    RemoteImageView(
+                        objectName: hint.lowercased().replacingOccurrences(of: " ", with: "_"),
+                        imageType: .flashcard,
+                        fallbackIcon: "book.fill",
+                        iconColor: dimension.color,
+                        size: 60
+                    )
+                    .cornerRadius(12)
+                }
+                Text(story)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+            )
         }
 
         if let passage = task.content.passage, !passage.isEmpty {
-            Text(passage)
-                .font(.body)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color(.systemBackground))
-                )
+            VStack(spacing: 12) {
+                if let hint = task.content.imageHint, !hint.isEmpty {
+                    RemoteImageView(
+                        objectName: hint.lowercased().replacingOccurrences(of: " ", with: "_"),
+                        imageType: .flashcard,
+                        fallbackIcon: "book.fill",
+                        iconColor: dimension.color,
+                        size: 60
+                    )
+                    .cornerRadius(12)
+                }
+                Text(passage)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+            )
         }
 
         // Sentence display
@@ -619,10 +654,110 @@ struct LearningSessionView: View {
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
         // Pattern tasks have items from steps but should NOT use ordering UI
         if isPatternTask(task) { return false }
+        // Multi-tap tasks use tap counting, not ordering UI
+        if task.content.tapCount != nil && task.content.tapCount! > 0 { return false }
         let type = task.taskType
         let explicitTypes = type == "sort" || type == "sequence_order" || type == "build_sentence"
         let hasItems = task.content.items != nil && !(task.content.items!.isEmpty)
         return (explicitTypes || hasItems) && task.content.displayOptions.count >= 2
+    }
+
+    // MARK: - Multi-Tap Counting
+
+    /// Whether this task is a multi-tap counting task (go/no-go, sustained attention).
+    /// These tasks have a `tap_count` field indicating the expected number of taps.
+    private func isMultiTapTask(_ task: AdaptiveTask) -> Bool {
+        task.content.tapCount != nil && task.content.tapCount! > 0
+    }
+
+    /// Multi-tap counting interaction area.
+    /// Shows a large TAP button with a counter. The child taps once per target
+    /// item in the animation or story, then submits the total count.
+    @ViewBuilder
+    private func multiTapArea(task: AdaptiveTask) -> some View {
+        let expectedCount = task.content.tapCount ?? 0
+        let hasAnimation = isAnimatedTask(task)
+        let animationStillRunning = hasAnimation && !animationFinished
+
+        VStack(spacing: 16) {
+            // Tap counter display
+            HStack(spacing: 12) {
+                Image(systemName: "hand.tap.fill")
+                    .font(.title2)
+                    .foregroundColor(dimension.color)
+                Text("Taps: \(multiTapCount)")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(dimension.color)
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(dimension.color.opacity(0.1))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(dimension.color.opacity(0.3), lineWidth: 2)
+                    )
+            )
+
+            // Large TAP button — always active so child can tap during animation
+            Button {
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                    multiTapCount += 1
+                }
+            } label: {
+                VStack(spacing: 8) {
+                    Image(systemName: "hand.tap.fill")
+                        .font(.system(size: 44))
+                    Text("TAP!")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(dimension.color)
+                        .shadow(color: dimension.color.opacity(0.4), radius: 8, y: 4)
+                )
+            }
+            .scaleEffect(multiTapCount > 0 ? 1.0 : 1.0)
+            .disabled(learningManager.isSubmitting)
+
+            // Submit button — only visible after animation finishes (or for story tasks)
+            if !animationStillRunning {
+                Button {
+                    let isCorrect = multiTapCount == expectedCount
+                    Task {
+                        await learningManager.submitAttempt(
+                            isCorrect: isCorrect,
+                            score: isCorrect ? 1 : 0,
+                            dimension: dimension
+                        )
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Done (\(multiTapCount) taps)")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.green)
+                    )
+                }
+                .disabled(learningManager.isSubmitting)
+            } else {
+                // Hint text during animation
+                Text("Tap the button when you see the target!")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
     }
 
     // MARK: - Interaction Area
@@ -641,8 +776,12 @@ struct LearningSessionView: View {
             cameraButton(task: task)
         }
 
+        // Multi-tap counting tasks (go/no-go, sustained attention)
+        if isMultiTapTask(task) {
+            multiTapArea(task: task)
+        }
         // Sorting/sequencing tasks get ordering UI
-        if isSortingTask(task) {
+        else if isSortingTask(task) {
             orderingArea(task: task)
         }
         // Regular option selection (touch modality)
@@ -653,13 +792,14 @@ struct LearningSessionView: View {
         // Speech input — available for ALL tasks with a speakable target word,
         // not just tasks whose modalities include "voice".  This lets children
         // practice pronunciation across every dimension.
+        // Skip for multi-tap tasks — the tap count IS the answer.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) {
             speechInputArea(task: task)
         }
 
         // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) {
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) {
             simpleResponseButtons(task: task)
         }
 
