@@ -783,6 +783,9 @@ struct LearningSessionView: View {
             flashCompleted = true
             return
         }
+        // Increment generation to invalidate any previously scheduled callbacks
+        // (handles the case where both onChange and onAppear call this method)
+        flashGeneration += 1
         flashPhase = 0
         flashVisible = false
         flashCompleted = false
