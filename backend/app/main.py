@@ -46,6 +46,32 @@ def run_migrations():
                 conn.commit()
                 print("Migration: Added image_type column to object_images table")
 
+    if "developmental_profiles" in inspector.get_table_names():
+        columns = [
+            col["name"] for col in inspector.get_columns("developmental_profiles")
+        ]
+        with engine.connect() as conn:
+            if "ceiling_level" not in columns:
+                conn.execute(
+                    text(
+                        "ALTER TABLE developmental_profiles ADD COLUMN ceiling_level INTEGER"
+                    )
+                )
+                conn.commit()
+                print(
+                    "Migration: Added ceiling_level column to developmental_profiles table"
+                )
+            if "basal_level" not in columns:
+                conn.execute(
+                    text(
+                        "ALTER TABLE developmental_profiles ADD COLUMN basal_level INTEGER"
+                    )
+                )
+                conn.commit()
+                print(
+                    "Migration: Added basal_level column to developmental_profiles table"
+                )
+
     if "players" in inspector.get_table_names():
         columns = [col["name"] for col in inspector.get_columns("players")]
         with engine.connect() as conn:
