@@ -163,8 +163,7 @@
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Repeat words once",
           "options": [
-            "Dog",
-            "Ball",
+            "Dog, Ball",
             "Cat",
             "Car"
           ],
@@ -564,12 +563,9 @@
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"Living things grow and breathe\"",
           "options": [
-            "Apple",
-            "Dog",
-            "Tree",
+            "Apple, Dog, Tree",
             "Chair",
-            "Book",
-            "Car"
+            "Book"
           ],
           "correct_answer": "Apple, Dog, Tree",
           "image_hint": "dog"

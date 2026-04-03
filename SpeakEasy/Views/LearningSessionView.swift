@@ -135,6 +135,16 @@ struct LearningSessionView: View {
                    let frames = newTask.content.animationFrames {
                     startAnimationSlideshow(frames: frames)
                 }
+                // Restart flash sequence if the new task is a flash task
+                // (onAppear won't re-fire when SwiftUI reuses the view)
+                if let newTask = learningManager.currentTask, isFlashTask(newTask) {
+                    let images: [String] = {
+                        if let seq = newTask.content.flashSequence, !seq.isEmpty { return seq }
+                        if let img = newTask.content.flashImage, !img.isEmpty { return [img] }
+                        return []
+                    }()
+                    startFlashSequence(images: images)
+                }
                 if isListening {
                     speechService.stopListening()
                     isListening = false
