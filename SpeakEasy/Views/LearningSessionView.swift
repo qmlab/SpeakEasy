@@ -51,6 +51,8 @@ struct LearningSessionView: View {
     @State private var draggedItem: String?
     /// Drag offset for the currently dragged item
     @State private var dragOffset: CGSize = .zero
+    /// Cumulative offset consumed by completed swaps (prevents cascading swaps)
+    @State private var dragSwapConsumed: CGFloat = 0
 
     var body: some View {
         NavigationStack {
@@ -129,6 +131,7 @@ struct LearningSessionView: View {
                 dragArrangeItems = []
                 draggedItem = nil
                 dragOffset = .zero
+                dragSwapConsumed = 0
                 // Reset flash state
                 flashVisible = false
                 flashPhase = 0
@@ -179,7 +182,8 @@ struct LearningSessionView: View {
                     let isMultiTap = isMultiTapTask(task)
                     let isTextInput = isTextInputTask(task)
                     let isFlash = isFlashTask(task)
-                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash {
+                    let isDragArrange = isDragArrangeTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash && !isDragArrange {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -318,7 +322,7 @@ struct LearningSessionView: View {
             // alternate image instead of `imageHint` so the child cannot simply
             // match pictures.  The option buttons still use the original images.
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
-               !isPatternTask(task) {
+               !isPatternTask(task), !isDragArrangeTask(task) {
                 RemoteImageView(
                     objectName: questionImg,
                     imageType: .flashcard,
@@ -479,7 +483,7 @@ struct LearningSessionView: View {
 
         // Items display (for non-sorting tasks only — sorting tasks show items in orderingArea)
         // Also hide for pattern tasks since the sequence display replaces items.
-        if let items = task.content.items, !items.isEmpty, !isSortingTask(task), !isPatternTask(task) {
+        if let items = task.content.items, !items.isEmpty, !isSortingTask(task), !isPatternTask(task), !isDragArrangeTask(task) {
             VStack(spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     Text(item)
@@ -934,16 +938,19 @@ struct LearningSessionView: View {
                                         draggedItem = item
                                     }
                                     dragOffset = value.translation
-                                    // Determine swap target based on horizontal drag distance
+                                    // Determine swap target based on horizontal drag distance.
+                                    // Use dragSwapConsumed to track offset already used by
+                                    // previous swaps so we don't cascade multiple swaps.
                                     let threshold: CGFloat = 80
-                                    let dragX = value.translation.width
-                                    if abs(dragX) > threshold, let currentIndex = dragArrangeItems.firstIndex(of: item) {
-                                        let targetIndex = dragX > 0
+                                    let effectiveDragX = value.translation.width - dragSwapConsumed
+                                    if abs(effectiveDragX) > threshold, let currentIndex = dragArrangeItems.firstIndex(of: item) {
+                                        let targetIndex = effectiveDragX > 0
                                             ? min(currentIndex + 1, dragArrangeItems.count - 1)
                                             : max(currentIndex - 1, 0)
                                         if targetIndex != currentIndex {
                                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                                 dragArrangeItems.swapAt(currentIndex, targetIndex)
+                                                dragSwapConsumed += effectiveDragX > 0 ? threshold : -threshold
                                                 dragOffset = .zero
                                             }
                                         }
@@ -953,6 +960,7 @@ struct LearningSessionView: View {
                                     withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                         draggedItem = nil
                                         dragOffset = .zero
+                                        dragSwapConsumed = 0
                                     }
                                     // Check if arrangement is correct and auto-submit
                                     if dragArrangeItems == correctOrder {
