@@ -10,7 +10,7 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "TAP the green circle. Do NOT tap the red circle.",
+          "instruction": "Tap the green circle. Do NOT tap the red circle.",
           "question_id": "Q101",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -23,7 +23,7 @@
           "image_hint": "circle"
         },
         {
-          "instruction": "TAP the star. Do NOT tap the square.",
+          "instruction": "Tap the star. Do NOT tap the square.",
           "question_id": "Q102",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -36,7 +36,7 @@
           "image_hint": "star"
         },
         {
-          "instruction": "Remember: RED. Now tap the color you just heard.",
+          "instruction": "Watch! What color did you see? Tap the right one.",
           "question_id": "Q113",
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
@@ -51,10 +51,12 @@
           "instruction_zh": "记住：红色。现在点一下你刚听到的颜色。",
           "animation_frames": [
             "red_swatch"
-          ]
+          ],
+          "inline_images": true,
+          "flash_image": "red_swatch"
         },
         {
-          "instruction": "Watch the light flash: [circle]. Now tap the same shape.",
+          "instruction": "Watch the shape flash! Now tap the same shape.",
           "question_id": "Q114",
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
@@ -65,7 +67,9 @@
             "Triangle"
           ],
           "correct_answer": "Circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true,
+          "flash_image": "circle"
         },
         {
           "instruction": "Tap every time you see a STAR in the stream of shapes.",
@@ -73,12 +77,22 @@
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Slow the stream speed",
-          "options": [
-            "Tap all 5 stars",
-            "Miss stars or tap non-stars"
-          ],
-          "correct_answer": "Tap all 5 stars",
-          "image_hint": "star"
+          "correct_answer": "5",
+          "image_hint": "star",
+          "instruction_zh": "每次看到星星就点击按钮。",
+          "tap_count": 5,
+          "animation_frames": [
+            "star",
+            "circle",
+            "star",
+            "triangle",
+            "square",
+            "star",
+            "circle",
+            "star",
+            "triangle",
+            "star"
+          ]
         }
       ]
     },
@@ -88,7 +102,7 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "TAP the dog. Do NOT tap the cat.",
+          "instruction": "Tap the dog. Do NOT tap the cat.",
           "question_id": "Q103",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -101,7 +115,7 @@
           "image_hint": "dog"
         },
         {
-          "instruction": "TAP the number 3. Do NOT tap other numbers.",
+          "instruction": "Tap the number 3. Do NOT tap other numbers.",
           "question_id": "Q104",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -188,15 +202,10 @@
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Repeat the word 'BLUE' before starting",
-          "options": [
-            "Blue",
-            "Red",
-            "Green",
-            "Yellow"
-          ],
-          "correct_answer": "Blue",
+          "correct_answer": "4",
           "image_hint": "blue_swatch",
           "instruction_zh": "每次看到蓝色就点击。",
+          "tap_count": 4,
           "animation_frames": [
             "red_swatch",
             "blue_swatch",
@@ -216,34 +225,34 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "TAP when you see a fruit. Do NOT tap for vegetables.",
+          "instruction": "Tap when you see a fruit. Do NOT tap for vegetables.",
           "question_id": "Q105",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Fruits have seeds inside\"",
-          "options": [
-            "Tap fruits only",
-            "Tap vegetables"
-          ],
-          "correct_answer": "Tap fruits only",
-          "image_hint": "table"
+          "correct_answer": "3",
+          "image_hint": "apple",
+          "instruction_zh": "看到水果就点击。不要点击蔬菜。",
+          "tap_count": 3,
+          "animation_frames": [
+            "apple",
+            "carrot",
+            "banana",
+            "broccoli",
+            "orange",
+            "lettuce"
+          ]
         },
         {
-          "instruction": "TAP when you see an animal. Do NOT tap for objects.",
+          "instruction": "Tap when you see an animal. Do NOT tap for objects.",
           "question_id": "Q106",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Animals are living things\"",
-          "options": [
-            "Dog",
-            "Cat",
-            "Bird",
-            "Chair",
-            "Ball"
-          ],
-          "correct_answer": "Dog",
+          "correct_answer": "3",
           "image_hint": "dog",
           "instruction_zh": "看到动物就点击。不要点击物品。",
+          "tap_count": 3,
           "animation_frames": [
             "dog",
             "chair",
@@ -275,7 +284,7 @@
           ]
         },
         {
-          "instruction": "Remember: RED CIRCLE, BLUE SQUARE. Tap the red shape first.",
+          "instruction": "Watch the shapes flash! Now tap the RED shape first.",
           "question_id": "Q118",
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
@@ -286,7 +295,12 @@
             "Green triangle"
           ],
           "correct_answer": "Red circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true,
+          "flash_sequence": [
+            "red_circle",
+            "blue_square"
+          ]
         },
         {
           "instruction": "NOW sort by SHAPE: Circle goes left, Square goes right. [Red circle]",
@@ -320,12 +334,20 @@
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Watch for two circles together\"",
-          "options": [
-            "Tap at each pair",
-            "Miss pairs or tap singles"
-          ],
-          "correct_answer": "Tap at each pair",
-          "image_hint": "circle"
+          "correct_answer": "2",
+          "image_hint": "circle",
+          "instruction_zh": "每次看到连续两个圆形就点击。",
+          "tap_count": 2,
+          "animation_frames": [
+            "circle",
+            "circle",
+            "triangle",
+            "square",
+            "circle",
+            "circle",
+            "star",
+            "triangle"
+          ]
         }
       ]
     },
@@ -335,22 +357,26 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "TAP when you see a word that rhymes with CAT.",
+          "instruction": "Listen to the words. Tap when you hear a word that rhymes with cat.",
           "question_id": "Q107",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Rhymes end with the same sound as cat\"",
-          "options": [
-            "Hat, Mat, Bat",
-            "Dog",
-            "Car",
-            "Sun"
-          ],
-          "correct_answer": "Hat, Mat, Bat",
-          "image_hint": "cat"
+          "correct_answer": "3",
+          "image_hint": "cat",
+          "instruction_zh": "听单词。听到和CAT押韵的词就点击。",
+          "tap_count": 3,
+          "animation_frames": [
+            "hat",
+            "dog",
+            "mat",
+            "car",
+            "bat",
+            "sun"
+          ]
         },
         {
-          "instruction": "TAP for even numbers. Do NOT tap for odd numbers.",
+          "instruction": "Tap for even numbers. Do NOT tap for odd numbers.",
           "question_id": "Q108",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -364,9 +390,10 @@
             "5",
             "7"
           ],
-          "correct_answer": "2",
+          "correct_answer": "4",
           "image_hint": "number_2",
           "instruction_zh": "点击偶数。不要点击奇数。",
+          "tap_count": 4,
           "animation_frames": [
             "number_2",
             "number_5",
@@ -407,15 +434,9 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"The middle word is the second one you heard\"",
-          "options": [
-            "House",
-            "Cat",
-            "Tree",
-            "Dog",
-            "Car"
-          ],
           "correct_answer": "House",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "input_mode": "text"
         },
         {
           "instruction": "Sort by SIZE: Big goes left, Small goes right. [Big red circle]",
@@ -444,20 +465,15 @@
           "image_hint": "square"
         },
         {
-          "instruction": "Watch the shapes! How many RED ones do you see?",
+          "instruction": "Watch the shapes! Tap every RED one you see.",
           "question_id": "Q144",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Keep a mental tally\"",
-          "options": [
-            "4",
-            "3",
-            "5",
-            "6"
-          ],
           "correct_answer": "4",
           "image_hint": "red_circle",
-          "instruction_zh": "数一数有多少个红色形状出现。",
+          "instruction_zh": "看到红色形状就点击。",
+          "tap_count": 4,
           "animation_frames": [
             "red_circle",
             "blue_square",
@@ -477,40 +493,42 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "TAP for living things. Do NOT tap for non-living things.",
+          "instruction": "Tap for living things. Do NOT tap for non-living things.",
           "question_id": "Q109",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Living things grow and breathe\"",
-          "options": [
-            "Tree",
-            "Dog",
-            "Flower",
-            "Rock",
-            "Chair",
-            "Pencil"
-          ],
-          "correct_answer": "Tree",
+          "correct_answer": "3",
           "image_hint": "tree",
-          "instruction_zh": "点击有生命的东西。不要点击没有生命的。"
+          "instruction_zh": "点击有生命的东西。不要点击没有生命的。",
+          "tap_count": 3,
+          "animation_frames": [
+            "tree",
+            "rock",
+            "dog",
+            "chair",
+            "flower",
+            "pencil"
+          ]
         },
         {
-          "instruction": "TAP for words with more than 5 letters. Do NOT tap for shorter words.",
+          "instruction": "Tap for words with more than 5 letters. Do NOT tap for shorter words.",
           "question_id": "Q110",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Count the letters in your head\"",
-          "options": [
-            "Elephant",
-            "Butterfly",
-            "Crocodile",
-            "Cat",
-            "Dog",
-            "Ant"
-          ],
-          "correct_answer": "Elephant",
+          "correct_answer": "3",
           "image_hint": "elephant",
-          "instruction_zh": "点击超过5个字母的单词。不要点短的。"
+          "instruction_zh": "点击超过5个字母的单词。不要点短的。",
+          "tap_count": 3,
+          "animation_frames": [
+            "elephant",
+            "cat",
+            "butterfly",
+            "dog",
+            "crocodile",
+            "ant"
+          ]
         },
         {
           "instruction": "Remember: 8, 2, 6, 4, 1. Tap them in order from smallest to largest.",
@@ -547,8 +565,7 @@
           "options": [
             "Apple, Dog, Tree",
             "Chair",
-            "Book",
-            "Car"
+            "Book"
           ],
           "correct_answer": "Apple, Dog, Tree",
           "image_hint": "dog"
@@ -567,21 +584,15 @@
           "image_hint": "pentagon"
         },
         {
-          "instruction": "Watch the numbers! Which number is BIGGER than the one before it?",
+          "instruction": "Watch the numbers! Tap every time a number is BIGGER than the one before it.",
           "question_id": "Q145",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Is this number bigger than the last one?\"",
-          "options": [
-            "5",
-            "7",
-            "9",
-            "2",
-            "4"
-          ],
-          "correct_answer": "5",
+          "correct_answer": "3",
           "image_hint": "number_5",
           "instruction_zh": "每当数字比前一个大时就点击。",
+          "tap_count": 3,
           "animation_frames": [
             "number_3",
             "number_5",
@@ -599,26 +610,27 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "TAP for verbs. Do NOT tap for nouns.",
+          "instruction": "Tap for verbs (action words). Do NOT tap for nouns.",
           "question_id": "Q111",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Verbs are action words — things you can do\"",
-          "options": [
-            "Run",
-            "Jump",
-            "Swim",
-            "Fly",
-            "Chair",
-            "Dog",
-            "Apple"
-          ],
-          "correct_answer": "Run",
+          "correct_answer": "4",
           "image_hint": "running",
-          "instruction_zh": "点击动词（动作词）。不要点击名词。"
+          "instruction_zh": "点击动词（动作词）。不要点击名词。",
+          "tap_count": 4,
+          "animation_frames": [
+            "running",
+            "chair",
+            "jumping",
+            "dog",
+            "swimming",
+            "apple",
+            "flying"
+          ]
         },
         {
-          "instruction": "TAP for prime numbers. Do NOT tap for composite numbers.",
+          "instruction": "Tap for prime numbers. Do NOT tap for composite numbers.",
           "question_id": "Q112",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -632,9 +644,10 @@
             "9",
             "15"
           ],
-          "correct_answer": "2",
+          "correct_answer": "3",
           "image_hint": "number_7",
           "instruction_zh": "点击质数。不要点击合数。",
+          "tap_count": 3,
           "animation_frames": [
             "number_2",
             "number_4",
@@ -650,12 +663,6 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"The first number was 3. The last was 4. What is 3 plus 4?\"",
-          "options": [
-            "7",
-            "5",
-            "6",
-            "8"
-          ],
           "correct_answer": "7",
           "image_hint": "number_3",
           "instruction_zh": "我说5个数字。把第一个和最后一个加起来：3，7，2，9，4。",
@@ -665,7 +672,8 @@
             "number_2",
             "number_9",
             "number_4"
-          ]
+          ],
+          "input_mode": "number"
         },
         {
           "instruction": "Sort by CATEGORY: Animals go left, Objects go right. [Dog]",
@@ -694,37 +702,23 @@
           "image_hint": "dog"
         },
         {
-          "instruction": "Watch where each shape appears! Which shape is in the SAME spot as 2 steps before?",
+          "instruction": "Watch the shapes! Tap when the SAME shape appeared 2 steps before.",
           "question_id": "Q146",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Remember where the shape was TWO steps ago\"",
-          "options": [
-            "Triangle",
-            "Circle",
-            "Star",
-            "Square"
-          ],
-          "correct_answer": "Triangle",
+          "correct_answer": "2",
           "image_hint": "circle",
-          "instruction_zh": "看格子！当形状出现在和2步前相同的位置时点击。",
+          "instruction_zh": "看形状！当和2步前出现相同形状时点击。",
+          "tap_count": 2,
           "animation_frames": [
-            "grid_pos_1",
-            "grid_pos_5",
-            "grid_pos_1",
-            "grid_pos_9",
-            "grid_pos_5"
-          ],
-          "sequence": [
+            "star",
             "circle",
             "star",
             "triangle",
-            "square",
-            "diamond"
-          ],
-          "grid_layout": [
-            3,
-            3
+            "star",
+            "circle",
+            "triangle"
           ]
         }
       ]
@@ -740,14 +734,9 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"Add the red cars and the blue cars together\"",
-          "options": [
-            "5",
-            "3",
-            "2",
-            "6"
-          ],
           "correct_answer": "5",
-          "image_hint": "car"
+          "image_hint": "car",
+          "input_mode": "number"
         },
         {
           "instruction": "Sort by LIVING/NON-LIVING: Living goes left, Non-living goes right. [Tree]",
@@ -763,20 +752,15 @@
           "image_hint": "tree"
         },
         {
-          "instruction": "Read the story. Tap the character's name!",
+          "instruction": "Listen to the story. Tap every time you hear a character's name!",
           "question_id": "Q147",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Listen carefully for the characters' names\"",
-          "options": [
-            "Tom",
-            "Lisa",
-            "Park",
-            "Home"
-          ],
-          "correct_answer": "Tom",
+          "correct_answer": "5",
           "image_hint": "book",
           "instruction_zh": "听故事，每次听到角色名字时点击。",
+          "tap_count": 5,
           "story": "Tom went to the park. He saw his friend Lisa. Tom and Lisa played on the swings. Then Tom went home."
         }
       ]
@@ -827,20 +811,15 @@
           "instruction_zh": "按音节数分类：1个音节放左边，2个以上放右边。[大象]"
         },
         {
-          "instruction": "Solve each problem! Tap the one with an EVEN answer.",
+          "instruction": "Watch the math problems! Tap every time you see an EVEN answer.",
           "question_id": "Q148",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Solve the problem quickly, then check if the answer is even\"",
-          "options": [
-            "2+4=6",
-            "3+2=5",
-            "1+2=3",
-            "4+3=7"
-          ],
-          "correct_answer": "2+4=6",
+          "correct_answer": "3",
           "image_hint": "number_6",
           "instruction_zh": "看算术题。只在答案是偶数时点击。",
+          "tap_count": 3,
           "animation_frames": [
             "number_3",
             "number_5",
@@ -871,7 +850,8 @@
             "Purple"
           ],
           "correct_answer": "Green",
-          "image_hint": "hat"
+          "image_hint": "hat",
+          "inline_images": true
         },
         {
           "instruction": "Sort by EMOTIONAL VALENCE: Positive words go left, Negative words go right. [Happy]",
@@ -893,12 +873,11 @@
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Synonyms mean the same thing as happy\"",
-          "options": [
-            "Tap all 6",
-            "Miss synonyms or tap non-synonyms"
-          ],
-          "correct_answer": "Tap all 6",
-          "image_hint": "hat"
+          "correct_answer": "6",
+          "image_hint": "happy_face",
+          "instruction_zh": "读段落。每次看到'happy'的同义词就点击。",
+          "tap_count": 6,
+          "story": "The joyful girl ran through the field. She felt glad to see the cheerful flowers. Her delighted friend waved. They were both pleased and merry to play together."
         }
       ]
     },
@@ -913,14 +892,9 @@
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"Adjectives describe nouns — look for describing words\"",
-          "options": [
-            "2 (blue, old)",
-            "3",
-            "4",
-            "1"
-          ],
-          "correct_answer": "2 (blue, old)",
-          "image_hint": "cat"
+          "correct_answer": "2",
+          "image_hint": "cat",
+          "input_mode": "number"
         },
         {
           "instruction": "Sort by ABSTRACT vs CONCRETE: Abstract concepts go left, Concrete objects go right. [Justice]",
@@ -937,20 +911,15 @@
           "instruction_zh": "按抽象/具体分类：抽象概念放左边，具体物品放右边。[正义]"
         },
         {
-          "instruction": "Watch the letters! Tap when you see A, B, C in a row.",
+          "instruction": "Watch the letters! Tap every time you see A, B, C appear in a row.",
           "question_id": "Q150",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"You need three specific items in a row\"",
-          "options": [
-            "Steps 4-5-6",
-            "Steps 1-2-3",
-            "Steps 2-3-4",
-            "Steps 5-6-7"
-          ],
-          "correct_answer": "Steps 4-5-6",
+          "correct_answer": "1",
           "image_hint": "letter_a",
           "instruction_zh": "看字母序列。当A-B-C连续出现时点击。",
+          "tap_count": 1,
           "animation_frames": [
             "letter_b",
             "letter_a",

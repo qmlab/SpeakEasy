@@ -72,7 +72,8 @@
             "blue_square"
           ],
           "correct_answer": "red_circle",
-          "image_hint": "red_circle"
+          "image_hint": "red_circle",
+          "inline_images": true
         },
         {
           "instruction": "Which group has MORE?",
@@ -164,7 +165,8 @@
             "small_square"
           ],
           "correct_answer": "big_circle",
-          "image_hint": "big_circle"
+          "image_hint": "big_circle",
+          "inline_images": true
         },
         {
           "instruction": "Put the numbers from fewest to most!",
@@ -271,7 +273,8 @@
             "circle"
           ],
           "correct_answer": "square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "inline_images": true
         },
         {
           "instruction": "Which is LONGER?",
@@ -391,7 +394,8 @@
             "blue_square"
           ],
           "correct_answer": "red_circle",
-          "image_hint": "red_circle"
+          "image_hint": "red_circle",
+          "inline_images": true
         },
         {
           "instruction": "You have 3 apples and get 2 more. How many now?",
@@ -407,14 +411,9 @@
             "apple",
             "apple"
           ],
-          "options": [
-            "5",
-            "4",
-            "6",
-            "3"
-          ],
           "correct_answer": "5",
-          "image_hint": "apple"
+          "image_hint": "apple",
+          "input_mode": "number"
         },
         {
           "instruction": "Hand is to glove as foot is to ___?",
@@ -507,7 +506,8 @@
             "triangle"
           ],
           "correct_answer": "square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "inline_images": true
         },
         {
           "instruction": "Which is bigger: half a pie or a quarter?",
@@ -596,7 +596,8 @@
             "square"
           ],
           "correct_answer": "circle_with_dot",
-          "image_hint": "circle_with_dot"
+          "image_hint": "circle_with_dot",
+          "inline_images": true
         },
         {
           "instruction": "A train goes 60 miles each hour. How far in 2 hours?",
@@ -605,14 +606,9 @@
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
           "scaffolding_hint": "Multiply the speed by the time",
-          "options": [
-            "120",
-            "60",
-            "30",
-            "180"
-          ],
           "correct_answer": "120",
-          "image_hint": "train"
+          "image_hint": "train",
+          "input_mode": "number"
         },
         {
           "instruction": "Thermometer is to temperature as barometer is to ___?",
@@ -710,7 +706,8 @@
             "small_blue_circle"
           ],
           "correct_answer": "big_red_circle",
-          "image_hint": "big_red_circle"
+          "image_hint": "big_red_circle",
+          "inline_images": true
         },
         {
           "instruction": "What is 15% of 200?",
@@ -719,14 +716,9 @@
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
           "scaffolding_hint": "First find 10%, then add half of 10%",
-          "options": [
-            "30",
-            "15",
-            "20",
-            "25"
-          ],
           "correct_answer": "30",
-          "image_hint": "calculator"
+          "image_hint": "calculator",
+          "input_mode": "number"
         },
         {
           "instruction": "Democracy is to citizens as monarchy is to ___?",
@@ -830,7 +822,8 @@
             "small_triangle"
           ],
           "correct_answer": "circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true
         },
         {
           "instruction": "If a rectangle has area 24 and width 4, what is its length?",
@@ -839,14 +832,9 @@
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
           "scaffolding_hint": "Area = length x width, so length = area / width",
-          "options": [
-            "6",
-            "4",
-            "8",
-            "20"
-          ],
           "correct_answer": "6",
-          "image_hint": "rectangle"
+          "image_hint": "rectangle",
+          "input_mode": "number"
         },
         {
           "instruction": "Hypothesis is to experiment as theory is to ___?",
@@ -936,7 +924,8 @@
             "square"
           ],
           "correct_answer": "pentagon",
-          "image_hint": "pentagon"
+          "image_hint": "pentagon",
+          "inline_images": true
         },
         {
           "instruction": "Syntax is to grammar as melody is to ___?",
@@ -966,14 +955,9 @@
             "6_dots",
             "?"
           ],
-          "options": [
-            "162",
-            "108",
-            "72",
-            "216"
-          ],
           "correct_answer": "162",
-          "image_hint": "calculator"
+          "image_hint": "calculator",
+          "input_mode": "number"
         },
         {
           "instruction": "Three rules at once: shape, color, AND lines. What is missing?",
@@ -1047,7 +1031,8 @@
             "triangle"
           ],
           "correct_answer": "circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "inline_images": true
         },
         {
           "instruction": "If boys to girls is 3:5 and there are 40 students, how many boys?",
@@ -1056,14 +1041,9 @@
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
           "scaffolding_hint": "3+5=8 parts. 40/8=5 per part. Boys=3x5",
-          "options": [
-            "15",
-            "25",
-            "12",
-            "20"
-          ],
           "correct_answer": "15",
-          "image_hint": "calculator"
+          "image_hint": "calculator",
+          "input_mode": "number"
         },
         {
           "instruction": "Each cell combines the two cells above it. What is missing?",

@@ -271,6 +271,59 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Inline option images: show shape/color thumbnails in each button
+    # ------------------------------------------------------------------
+    # Tasks with `inline_images` have options that are shape/color names
+    # (e.g. "red_circle", "Blue square").  iOS shows a small image
+    # inline in each option button and hides the large instruction image.
+    if task_data.get("inline_images"):
+        content["inline_images"] = True
+
+    # ------------------------------------------------------------------
+    # Question image: alternate image for "Find the same one" tasks
+    # ------------------------------------------------------------------
+    # Tasks with `question_image` show a different image of the same
+    # object type in the instruction card, so the child cannot simply
+    # match pictures.  The option buttons still use `image_hint` images.
+    if task_data.get("question_image"):
+        content["question_image"] = task_data["question_image"]
+
+    # ------------------------------------------------------------------
+    # Flash image: brief visual flash of a shape/color instead of TTS
+    # ------------------------------------------------------------------
+    # Tasks with `flash_image` show the target shape briefly on screen
+    # and then hide it, so the child relies on visual memory.
+    # `flash_sequence` is an optional ordered list for multi-image flashes.
+    if task_data.get("flash_image"):
+        content["flash_image"] = task_data["flash_image"]
+    if task_data.get("flash_sequence"):
+        content["flash_sequence"] = task_data["flash_sequence"]
+
+    # ------------------------------------------------------------------
+    # Input mode: number or text input instead of option buttons
+    # ------------------------------------------------------------------
+    # Tasks with `input_mode` use a free-text or numeric input field
+    # instead of multiple-choice option buttons.
+    if "input_mode" in task_data:
+        content["input_mode"] = task_data["input_mode"]
+        # Remove options so iOS doesn't render option buttons
+        content.pop("options", None)
+
+    # ------------------------------------------------------------------
+    # Multi-tap counting tasks (go/no-go, sustained attention, etc.)
+    # ------------------------------------------------------------------
+    # Tasks with a `tap_count` field require the child to tap a button
+    # multiple times (e.g. "tap every time you see a star").  The tap
+    # count is the expected number of correct taps.  Pass it through so
+    # iOS can display the tap counter and validate the response.
+    if "tap_count" in task_data:
+        content["tap_count"] = task_data["tap_count"]
+
+    # Story / passage for reading comprehension + tap counting tasks
+    if "story" in task_data and task_data["story"]:
+        content["story"] = task_data["story"]
+
+    # ------------------------------------------------------------------
     # Animation frames for visual tasks (n-back, working memory, etc.)
     # ------------------------------------------------------------------
     # Tasks with an `animation_frames` array contain images to display

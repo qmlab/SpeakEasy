@@ -35,6 +35,16 @@ struct LearningSessionView: View {
     @State private var animationFrameIndex: Int = 0
     @State private var animationFinished: Bool = false
     @State private var animationTimer: Timer?
+    /// Multi-tap counting state (for go/no-go, sustained attention tasks)
+    @State private var multiTapCount: Int = 0
+    /// Text/number input state (for counting and fill-in-the-word tasks)
+    @State private var textInputValue: String = ""
+    /// Flash image state (for visual memory tasks like "Watch the light flash")
+    @State private var flashVisible: Bool = false
+    @State private var flashPhase: Int = 0  // current index in flash_sequence
+    @State private var flashCompleted: Bool = false
+    /// Generation counter to invalidate stale DispatchQueue callbacks on task change
+    @State private var flashGeneration: Int = 0
 
     var body: some View {
         NavigationStack {
@@ -107,6 +117,13 @@ struct LearningSessionView: View {
                 orderedSelections = []
                 animateFeedback = false
                 showHint = false
+                multiTapCount = 0
+                textInputValue = ""
+                // Reset flash state
+                flashVisible = false
+                flashPhase = 0
+                flashCompleted = false
+                flashGeneration += 1
                 // Reset animation slideshow state
                 animationTimer?.invalidate()
                 animationTimer = nil
@@ -117,6 +134,16 @@ struct LearningSessionView: View {
                    isAnimatedTask(newTask),
                    let frames = newTask.content.animationFrames {
                     startAnimationSlideshow(frames: frames)
+                }
+                // Restart flash sequence if the new task is a flash task
+                // (onAppear won't re-fire when SwiftUI reuses the view)
+                if let newTask = learningManager.currentTask, isFlashTask(newTask) {
+                    let images: [String] = {
+                        if let seq = newTask.content.flashSequence, !seq.isEmpty { return seq }
+                        if let img = newTask.content.flashImage, !img.isEmpty { return [img] }
+                        return []
+                    }()
+                    startFlashSequence(images: images)
                 }
                 if isListening {
                     speechService.stopListening()
@@ -135,7 +162,10 @@ struct LearningSessionView: View {
                     // word (not just voice-modality tasks).  Skip sorting/sequencing
                     // tasks where ordering is the goal, not speaking.
                     let isSorting = isSortingTask(task)
-                    if !targetWord.isEmpty && !isSorting {
+                    let isMultiTap = isMultiTapTask(task)
+                    let isTextInput = isTextInputTask(task)
+                    let isFlash = isFlashTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -267,8 +297,25 @@ struct LearningSessionView: View {
             // are already displayed as images — showing the answer image here
             // would give it away.
             // Also hide for pattern tasks since the sequence display replaces it.
-            if let imageHint = task.content.imageHint, !imageHint.isEmpty,
-               !isImageGridTask(task), !isPatternTask(task) {
+            // Also hide for inline-image tasks since each option button already
+            // shows a shape/color thumbnail — no big image needed above.
+            //
+            // "Find the same one" tasks: if `questionImage` is set, show that
+            // alternate image instead of `imageHint` so the child cannot simply
+            // match pictures.  The option buttons still use the original images.
+            if let questionImg = task.content.questionImage, !questionImg.isEmpty,
+               !isPatternTask(task) {
+                RemoteImageView(
+                    objectName: questionImg,
+                    imageType: .flashcard,
+                    fallbackIcon: "photo",
+                    iconColor: dimension.color,
+                    size: 200
+                )
+                .cornerRadius(16)
+            } else if let imageHint = task.content.imageHint, !imageHint.isEmpty,
+               !isImageGridTask(task), !isPatternTask(task),
+               task.content.inlineImages != true {
                 RemoteImageView(
                     objectName: imageHint,
                     imageType: .flashcard,
@@ -321,11 +368,26 @@ struct LearningSessionView: View {
         guard let frames = task.content.animationFrames, frames.count >= 1 else { return false }
         // Don't treat as animated if it's also a pattern task (sequence takes priority)
         if isPatternTask(task) { return false }
+        // Don't treat as animated if it's a flash task — the flash display replaces it
+        if isFlashTask(task) { return false }
         return true
+    }
+
+    /// Whether this task is a visual flash memory task (flash a shape/color
+    /// image briefly, then hide it — child picks from options by memory).
+    private func isFlashTask(_ task: AdaptiveTask) -> Bool {
+        if let fi = task.content.flashImage, !fi.isEmpty { return true }
+        if let fs = task.content.flashSequence, !fs.isEmpty { return true }
+        return false
     }
 
     @ViewBuilder
     private func contentArea(task: AdaptiveTask) -> some View {
+        // Flash image display — shows a shape/color image briefly then hides it
+        if isFlashTask(task) {
+            flashDisplayView(task: task)
+        }
+
         // Animated slideshow display — shows frames one at a time for attention/memory tasks
         if isAnimatedTask(task) {
             animatedSequenceView(task: task)
@@ -336,25 +398,56 @@ struct LearningSessionView: View {
             patternSequenceView(task: task)
         }
 
-        // Story / passage display
+        // Story / passage display with optional image
         if let story = task.content.story, !story.isEmpty {
-            Text(story)
-                .font(.body)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color(.systemBackground))
-                )
+            VStack(spacing: 12) {
+                // Show image hint alongside story for visual context
+                if let hint = task.content.imageHint, !hint.isEmpty {
+                    RemoteImageView(
+                        objectName: hint.lowercased().replacingOccurrences(of: " ", with: "_"),
+                        imageType: .flashcard,
+                        fallbackIcon: "book.fill",
+                        iconColor: dimension.color,
+                        size: 60
+                    )
+                    .cornerRadius(12)
+                }
+                Text(story)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+            )
         }
 
         if let passage = task.content.passage, !passage.isEmpty {
-            Text(passage)
-                .font(.body)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color(.systemBackground))
-                )
+            VStack(spacing: 12) {
+                if let hint = task.content.imageHint, !hint.isEmpty {
+                    RemoteImageView(
+                        objectName: hint.lowercased().replacingOccurrences(of: " ", with: "_"),
+                        imageType: .flashcard,
+                        fallbackIcon: "book.fill",
+                        iconColor: dimension.color,
+                        size: 60
+                    )
+                    .cornerRadius(12)
+                }
+                Text(passage)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+            )
         }
 
         // Sentence display
@@ -607,6 +700,141 @@ struct LearningSessionView: View {
         }
     }
 
+    // MARK: - Flash Image Display
+
+    /// Shows a shape/color image briefly (1.5s each) then hides it.
+    /// For `flash_image` — a single image flash.
+    /// For `flash_sequence` — multiple images shown one after another.
+    @ViewBuilder
+    private func flashDisplayView(task: AdaptiveTask) -> some View {
+        let images: [String] = {
+            if let seq = task.content.flashSequence, !seq.isEmpty { return seq }
+            if let img = task.content.flashImage, !img.isEmpty { return [img] }
+            return []
+        }()
+
+        VStack(spacing: 16) {
+            if !flashCompleted {
+                // Show the current flash image
+                if flashPhase < images.count && flashVisible {
+                    let currentImage = images[flashPhase]
+                    VStack(spacing: 8) {
+                        Text("👀 Watch carefully!")
+                            .font(.headline)
+                            .foregroundColor(dimension.color)
+
+                        RemoteImageView(
+                            objectName: currentImage,
+                            imageType: .flashcard,
+                            fallbackIcon: "eye.fill",
+                            iconColor: dimension.color,
+                            size: 180
+                        )
+                        .cornerRadius(16)
+                        .transition(.scale.combined(with: .opacity))
+
+                        if images.count > 1 {
+                            Text("\(flashPhase + 1) of \(images.count)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                } else if !flashVisible && !flashCompleted {
+                    // Brief blank between flashes or before start
+                    VStack(spacing: 8) {
+                        Text("👀 Watch carefully!")
+                            .font(.headline)
+                            .foregroundColor(dimension.color)
+                        ProgressView()
+                            .scaleEffect(1.2)
+                    }
+                }
+            } else {
+                // Flash completed — prompt child to recall
+                VStack(spacing: 8) {
+                    Image(systemName: "brain.head.profile")
+                        .font(.system(size: 40))
+                        .foregroundColor(dimension.color)
+                    Text("What did you see?")
+                        .font(.headline)
+                        .foregroundColor(dimension.color)
+                }
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(dimension.color.opacity(0.05))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(dimension.color.opacity(0.2), lineWidth: 1)
+                )
+        )
+        .onAppear {
+            startFlashSequence(images: images)
+        }
+    }
+
+    /// Starts the timed flash sequence.  Shows each image for 1.5 seconds with
+    /// a 0.4 second blank gap between them.
+    private func startFlashSequence(images: [String]) {
+        guard !images.isEmpty else {
+            flashCompleted = true
+            return
+        }
+        // Increment generation to invalidate any previously scheduled callbacks
+        // (handles the case where both onChange and onAppear call this method)
+        flashGeneration += 1
+        flashPhase = 0
+        flashVisible = false
+        flashCompleted = false
+        let gen = flashGeneration
+
+        // Small delay before first flash
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            guard flashGeneration == gen else { return }
+            showNextFlash(images: images, generation: gen)
+        }
+    }
+
+    /// Shows the next flash image, waits 1.5s, then either advances or completes.
+    /// The `generation` parameter is compared against `flashGeneration` to bail
+    /// out if the task changed while callbacks were pending.
+    private func showNextFlash(images: [String], generation: Int) {
+        guard flashGeneration == generation else { return }
+        guard flashPhase < images.count else {
+            withAnimation {
+                flashCompleted = true
+            }
+            return
+        }
+
+        withAnimation(.easeIn(duration: 0.2)) {
+            flashVisible = true
+        }
+
+        // Hide after 1.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            guard self.flashGeneration == generation else { return }
+            withAnimation(.easeOut(duration: 0.2)) {
+                self.flashVisible = false
+            }
+            // Brief gap then show next or complete
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                guard self.flashGeneration == generation else { return }
+                self.flashPhase += 1
+                if self.flashPhase < images.count {
+                    self.showNextFlash(images: images, generation: generation)
+                } else {
+                    withAnimation {
+                        self.flashCompleted = true
+                    }
+                }
+            }
+        }
+    }
+
     /// Whether this task is a sorting/sequencing task that needs ordering UI.
     ///
     /// Triggers for:
@@ -619,10 +847,194 @@ struct LearningSessionView: View {
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
         // Pattern tasks have items from steps but should NOT use ordering UI
         if isPatternTask(task) { return false }
+        // Multi-tap tasks use tap counting, not ordering UI
+        if task.content.tapCount != nil && task.content.tapCount! > 0 { return false }
         let type = task.taskType
         let explicitTypes = type == "sort" || type == "sequence_order" || type == "build_sentence"
         let hasItems = task.content.items != nil && !(task.content.items!.isEmpty)
         return (explicitTypes || hasItems) && task.content.displayOptions.count >= 2
+    }
+
+    // MARK: - Multi-Tap Counting
+
+    /// Whether this task is a multi-tap counting task (go/no-go, sustained attention).
+    /// These tasks have a `tap_count` field indicating the expected number of taps.
+    private func isMultiTapTask(_ task: AdaptiveTask) -> Bool {
+        task.content.tapCount != nil && task.content.tapCount! > 0
+    }
+
+    /// Whether this task uses a free-text or numeric input field instead of option buttons.
+    private func isTextInputTask(_ task: AdaptiveTask) -> Bool {
+        task.content.inputMode != nil
+    }
+
+    /// Multi-tap counting interaction area.
+    /// Shows a large TAP button with a counter. The child taps once per target
+    /// item in the animation or story, then submits the total count.
+    @ViewBuilder
+    private func multiTapArea(task: AdaptiveTask) -> some View {
+        let expectedCount = task.content.tapCount ?? 0
+        let hasAnimation = isAnimatedTask(task)
+        let animationStillRunning = hasAnimation && !animationFinished
+
+        VStack(spacing: 16) {
+            // Tap counter display
+            HStack(spacing: 12) {
+                Image(systemName: "hand.tap.fill")
+                    .font(.title2)
+                    .foregroundColor(dimension.color)
+                Text("Taps: \(multiTapCount)")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(dimension.color)
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(dimension.color.opacity(0.1))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(dimension.color.opacity(0.3), lineWidth: 2)
+                    )
+            )
+
+            // Large TAP button — always active so child can tap during animation
+            Button {
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                    multiTapCount += 1
+                }
+            } label: {
+                VStack(spacing: 8) {
+                    Image(systemName: "hand.tap.fill")
+                        .font(.system(size: 44))
+                    Text("TAP!")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(dimension.color)
+                        .shadow(color: dimension.color.opacity(0.4), radius: 8, y: 4)
+                )
+            }
+            .scaleEffect(1.0)
+            .disabled(learningManager.isSubmitting)
+
+            // Submit button — only visible after animation finishes (or for story tasks)
+            if !animationStillRunning {
+                Button {
+                    let isCorrect = multiTapCount == expectedCount
+                    Task {
+                        await learningManager.submitAttempt(
+                            isCorrect: isCorrect,
+                            score: isCorrect ? 1 : 0,
+                            dimension: dimension
+                        )
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Done (\(multiTapCount) taps)")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.green)
+                    )
+                }
+                .disabled(learningManager.isSubmitting)
+            } else {
+                // Hint text during animation
+                Text("Tap the button when you see the target!")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
+    }
+
+    // MARK: - Text / Number Input Area
+
+    /// Renders a text field (or number pad) for counting and fill-in-the-word tasks.
+    /// The child types their answer and taps Submit.
+    @ViewBuilder
+    private func textInputArea(task: AdaptiveTask) -> some View {
+        let isNumber = task.content.inputMode == "number"
+
+        VStack(spacing: 16) {
+            HStack(spacing: 12) {
+                Image(systemName: isNumber ? "number.circle.fill" : "textformat.abc")
+                    .font(.title2)
+                    .foregroundColor(dimension.color)
+
+                if isNumber {
+                    TextField("Type your answer", text: $textInputValue)
+                        .keyboardType(.numberPad)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemBackground))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(dimension.color.opacity(0.3), lineWidth: 1)
+                        )
+                } else {
+                    TextField("Type your answer", text: $textInputValue)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .autocapitalization(.words)
+                        .disableAutocorrection(true)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemBackground))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(dimension.color.opacity(0.3), lineWidth: 1)
+                        )
+                }
+            }
+
+            Button {
+                let answer = textInputValue.trimmingCharacters(in: .whitespacesAndNewlines)
+                let expected = (task.content.correctAnswer ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+                let isCorrect = answer.lowercased() == expected.lowercased()
+                speechService.speak(isCorrect ? "Correct!" : "The answer is \(expected)")
+                Task {
+                    await learningManager.submitAttempt(
+                        isCorrect: isCorrect,
+                        score: isCorrect ? 1 : 0,
+                        dimension: dimension
+                    )
+                    textInputValue = ""
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("Submit")
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(textInputValue.isEmpty ? Color.gray : dimension.color)
+                )
+            }
+            .disabled(textInputValue.isEmpty || learningManager.isSubmitting)
+        }
     }
 
     // MARK: - Interaction Area
@@ -641,25 +1053,37 @@ struct LearningSessionView: View {
             cameraButton(task: task)
         }
 
+        // Multi-tap counting tasks (go/no-go, sustained attention)
+        if isMultiTapTask(task) {
+            multiTapArea(task: task)
+        }
+        // Text/number input tasks (counting, fill-in-the-word)
+        else if isTextInputTask(task) {
+            textInputArea(task: task)
+        }
         // Sorting/sequencing tasks get ordering UI
-        if isSortingTask(task) {
+        else if isSortingTask(task) {
             orderingArea(task: task)
         }
         // Regular option selection (touch modality)
-        else if !task.content.displayOptions.isEmpty {
+        // For flash tasks, hide options until the flash animation completes.
+        else if !task.content.displayOptions.isEmpty && (!isFlashTask(task) || flashCompleted) {
             optionButtons(task: task)
         }
 
         // Speech input — available for ALL tasks with a speakable target word,
         // not just tasks whose modalities include "voice".  This lets children
         // practice pronunciation across every dimension.
+        // Skip for multi-tap tasks — the tap count IS the answer.
+        // Skip for text input tasks — the child types the answer.
+        // Skip for flash tasks — the child should pick visually, not speak.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) {
             speechInputArea(task: task)
         }
 
         // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) {
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) {
             simpleResponseButtons(task: task)
         }
 
@@ -981,13 +1405,17 @@ struct LearningSessionView: View {
     /// Image grid layout — shows each option as a tappable image card in a
     /// 2-column grid.  Used for identify / point_to tasks so the child can
     /// visually select the correct object.
+    ///
+    /// Each card has a numbered index badge in the top-left corner so the
+    /// child can also say the number aloud to select it via voice input.
     private func imageGridOptions(task: AdaptiveTask) -> some View {
         let columns = [
             GridItem(.flexible(), spacing: 12),
             GridItem(.flexible(), spacing: 12)
         ]
+        let options = task.content.displayOptions
         return LazyVGrid(columns: columns, spacing: 12) {
-            ForEach(task.content.displayOptions, id: \.self) { option in
+            ForEach(Array(options.enumerated()), id: \.element) { index, option in
                 Button {
                     handleOptionTap(option: option, task: task)
                 } label: {
@@ -1016,6 +1444,15 @@ struct LearningSessionView: View {
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(selectedOption == option ? dimension.color : Color.clear, lineWidth: 3)
                     )
+                    // Numbered index badge in the top-leading corner
+                    .overlay(alignment: .topLeading) {
+                        Text("\(index + 1)")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .frame(width: 26, height: 26)
+                            .background(Circle().fill(dimension.color))
+                            .offset(x: 4, y: 4)
+                    }
                 }
                 .disabled(learningManager.isSubmitting)
             }
@@ -1079,11 +1516,15 @@ struct LearningSessionView: View {
     /// Whether to show the thumbnail image for a given option button (text mode).
     ///
     /// Difficulty progression for option images:
+    /// - **Inline-image tasks**: always show — the shape/color images ARE the
+    ///   primary content (e.g. "Tap the red shape first").
     /// - **Level 0** (easiest): show all images — visual matching is allowed.
     /// - **Level 1–2**: hide the image whose key matches the question's
     ///   `imageHint` so the child cannot simply match pictures.
     /// - **Level 3+** (hardest): hide all option images — text only.
     private func shouldShowOptionImage(task: AdaptiveTask, option: String) -> Bool {
+        // Inline-image tasks always show thumbnails regardless of level
+        if task.content.inlineImages == true { return true }
         if task.level >= 3 { return false }
         if task.level >= 1, let imageHint = task.content.imageHint {
             let optionKey = option.lowercased().replacingOccurrences(of: " ", with: "_")
@@ -1093,6 +1534,31 @@ struct LearningSessionView: View {
     }
 
     // MARK: - Speech Input
+
+    /// Map spoken text (e.g. "1", "one", "two") to a 1-based option index.
+    /// Returns `nil` if the text doesn't match any number.
+    private func spokenNumberIndex(_ text: String) -> Int? {
+        let normalized = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let numberWords: [String: Int] = [
+            "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6,
+            "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+            "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6,
+        ]
+        return numberWords[normalized]
+    }
+
+    /// Try to resolve spoken text as a numbered option selection for image-grid
+    /// tasks.  Returns `true` if the number matched an option and was submitted.
+    private func tryResolveVoiceNumberSelection(spoken: String) -> Bool {
+        guard let task = learningManager.currentTask,
+              isImageGridTask(task) else { return false }
+        let options = task.content.displayOptions
+        guard let idx = spokenNumberIndex(spoken),
+              idx >= 1, idx <= options.count else { return false }
+        let chosen = options[idx - 1]
+        handleOptionTap(option: chosen, task: task)
+        return true
+    }
 
     /// Start listening for speech and handle the result (shared by button tap and auto-start).
     private func startListeningForTask(targetWord: String) {
@@ -1134,6 +1600,14 @@ struct LearningSessionView: View {
             speechService.startListening(targetWord: targetWord) { rating in
                 isListening = false
                 spokenText = speechService.recognizedText
+
+                // Voice-number selection: if the child said a number that
+                // matches an image-grid option index, select it directly.
+                if tryResolveVoiceNumberSelection(spoken: spokenText) {
+                    hasRecording = true
+                    return
+                }
+
                 if rating > 0 {
                     hasRecording = true
                     let isCorrect = rating >= 3.0

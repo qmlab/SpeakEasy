@@ -256,9 +256,15 @@ struct TaskContent: Codable {
     let sequence: [String]?
     let gridLayout: [Int]?
     let animationFrames: [String]?
+    let tapCount: Int?
     let openEnded: Bool?
     let exampleAnswers: [String]?
     let keywords: [String]?
+    let inputMode: String?
+    let inlineImages: Bool?
+    let questionImage: String?
+    let flashImage: String?
+    let flashSequence: [String]?
 
     enum CodingKeys: String, CodingKey {
         case instruction
@@ -281,9 +287,15 @@ struct TaskContent: Codable {
         case animationFrames = "animation_frames"
         case target
         case choices
+        case tapCount = "tap_count"
         case openEnded = "open_ended"
         case exampleAnswers = "example_answers"
         case keywords
+        case inputMode = "input_mode"
+        case inlineImages = "inline_images"
+        case questionImage = "question_image"
+        case flashImage = "flash_image"
+        case flashSequence = "flash_sequence"
     }
 
     init(from decoder: Decoder) throws {
@@ -304,9 +316,15 @@ struct TaskContent: Codable {
         sequence = try container.decodeIfPresent([String].self, forKey: .sequence)
         gridLayout = try container.decodeIfPresent([Int].self, forKey: .gridLayout)
         animationFrames = try container.decodeIfPresent([String].self, forKey: .animationFrames)
+        tapCount = try container.decodeIfPresent(Int.self, forKey: .tapCount)
         openEnded = try container.decodeIfPresent(Bool.self, forKey: .openEnded)
         exampleAnswers = try container.decodeIfPresent([String].self, forKey: .exampleAnswers)
         keywords = try container.decodeIfPresent([String].self, forKey: .keywords)
+        inputMode = try container.decodeIfPresent(String.self, forKey: .inputMode)
+        inlineImages = try container.decodeIfPresent(Bool.self, forKey: .inlineImages)
+        questionImage = try container.decodeIfPresent(String.self, forKey: .questionImage)
+        flashImage = try container.decodeIfPresent(String.self, forKey: .flashImage)
+        flashSequence = try container.decodeIfPresent([String].self, forKey: .flashSequence)
 
         // Decode targetWord: try explicit "target_word" string first, then extract from nested "target" object
         if let tw = try? container.decodeIfPresent(String.self, forKey: .targetWord) {
@@ -358,9 +376,15 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(sequence, forKey: .sequence)
         try container.encodeIfPresent(gridLayout, forKey: .gridLayout)
         try container.encodeIfPresent(animationFrames, forKey: .animationFrames)
+        try container.encodeIfPresent(tapCount, forKey: .tapCount)
         try container.encodeIfPresent(openEnded, forKey: .openEnded)
         try container.encodeIfPresent(exampleAnswers, forKey: .exampleAnswers)
         try container.encodeIfPresent(keywords, forKey: .keywords)
+        try container.encodeIfPresent(inputMode, forKey: .inputMode)
+        try container.encodeIfPresent(inlineImages, forKey: .inlineImages)
+        try container.encodeIfPresent(questionImage, forKey: .questionImage)
+        try container.encodeIfPresent(flashImage, forKey: .flashImage)
+        try container.encodeIfPresent(flashSequence, forKey: .flashSequence)
     }
 
     var displayInstruction: String {

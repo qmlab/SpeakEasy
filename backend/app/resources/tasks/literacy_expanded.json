@@ -113,15 +113,10 @@
           "source_test": "WJ-III",
           "sub_domain": "Reading Comprehension",
           "scaffolding_hint": "Say: \"He started with 5 and gave away 2\"",
-          "options": [
-            "3",
-            "5",
-            "2",
-            "7"
-          ],
           "correct_answer": "3",
           "image_hint": "book",
-          "passage": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?"
+          "passage": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
+          "input_mode": "number"
         }
       ]
     },
