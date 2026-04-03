@@ -1231,13 +1231,17 @@ struct LearningSessionView: View {
     /// Image grid layout — shows each option as a tappable image card in a
     /// 2-column grid.  Used for identify / point_to tasks so the child can
     /// visually select the correct object.
+    ///
+    /// Each card has a numbered index badge in the top-left corner so the
+    /// child can also say the number aloud to select it via voice input.
     private func imageGridOptions(task: AdaptiveTask) -> some View {
         let columns = [
             GridItem(.flexible(), spacing: 12),
             GridItem(.flexible(), spacing: 12)
         ]
+        let options = task.content.displayOptions
         return LazyVGrid(columns: columns, spacing: 12) {
-            ForEach(task.content.displayOptions, id: \.self) { option in
+            ForEach(Array(options.enumerated()), id: \.element) { index, option in
                 Button {
                     handleOptionTap(option: option, task: task)
                 } label: {
@@ -1266,6 +1270,15 @@ struct LearningSessionView: View {
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(selectedOption == option ? dimension.color : Color.clear, lineWidth: 3)
                     )
+                    // Numbered index badge in the top-leading corner
+                    .overlay(alignment: .topLeading) {
+                        Text("\(index + 1)")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .frame(width: 26, height: 26)
+                            .background(Circle().fill(dimension.color))
+                            .offset(x: 4, y: 4)
+                    }
                 }
                 .disabled(learningManager.isSubmitting)
             }
@@ -1348,6 +1361,31 @@ struct LearningSessionView: View {
 
     // MARK: - Speech Input
 
+    /// Map spoken text (e.g. "1", "one", "two") to a 1-based option index.
+    /// Returns `nil` if the text doesn't match any number.
+    private func spokenNumberIndex(_ text: String) -> Int? {
+        let normalized = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let numberWords: [String: Int] = [
+            "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6,
+            "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+            "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6,
+        ]
+        return numberWords[normalized]
+    }
+
+    /// Try to resolve spoken text as a numbered option selection for image-grid
+    /// tasks.  Returns `true` if the number matched an option and was submitted.
+    private func tryResolveVoiceNumberSelection(spoken: String) -> Bool {
+        guard let task = learningManager.currentTask,
+              isImageGridTask(task) else { return false }
+        let options = task.content.displayOptions
+        guard let idx = spokenNumberIndex(spoken),
+              idx >= 1, idx <= options.count else { return false }
+        let chosen = options[idx - 1]
+        handleOptionTap(option: chosen, task: task)
+        return true
+    }
+
     /// Start listening for speech and handle the result (shared by button tap and auto-start).
     private func startListeningForTask(targetWord: String) {
         // Stop any ongoing TTS so the mic can activate
@@ -1388,6 +1426,14 @@ struct LearningSessionView: View {
             speechService.startListening(targetWord: targetWord) { rating in
                 isListening = false
                 spokenText = speechService.recognizedText
+
+                // Voice-number selection: if the child said a number that
+                // matches an image-grid option index, select it directly.
+                if tryResolveVoiceNumberSelection(spoken: spokenText) {
+                    hasRecording = true
+                    return
+                }
+
                 if rating > 0 {
                     hasRecording = true
                     let isCorrect = rating >= 3.0
