@@ -1167,21 +1167,22 @@ struct LearningSessionView: View {
                                             dragSortOffset = .zero
                                         }
 
-                                        // Auto-submit when all items placed
+                                        // Auto-submit only when all items placed correctly
                                         let newRemaining = unsortedItems(task: task)
                                         if placed && newRemaining.isEmpty {
-                                            // Check correctness
                                             let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
-                                            let capturedTaskId = learningManager.currentTask?.taskId
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                guard !learningManager.isSubmitting,
-                                                      learningManager.currentTask?.taskId == capturedTaskId else { return }
-                                                Task {
-                                                    await learningManager.submitAttempt(
-                                                        isCorrect: isCorrect,
-                                                        score: isCorrect ? 1 : 0,
-                                                        dimension: dimension
-                                                    )
+                                            if isCorrect {
+                                                let capturedTaskId = learningManager.currentTask?.taskId
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                    guard !learningManager.isSubmitting,
+                                                          learningManager.currentTask?.taskId == capturedTaskId else { return }
+                                                    Task {
+                                                        await learningManager.submitAttempt(
+                                                            isCorrect: true,
+                                                            score: 1,
+                                                            dimension: dimension
+                                                        )
+                                                    }
                                                 }
                                             }
                                         }
@@ -1285,12 +1286,36 @@ struct LearningSessionView: View {
             // Status / Submit
             if allPlaced {
                 let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
-                HStack(spacing: 12) {
-                    Image(systemName: isCorrect ? "checkmark.circle.fill" : "arrow.triangle.2.circlepath")
-                        .foregroundColor(isCorrect ? .green : .orange)
-                    Text(isCorrect ? "All sorted!" : "Submitting...")
-                        .font(.subheadline.bold())
-                        .foregroundColor(isCorrect ? .green : .orange)
+                if isCorrect {
+                    HStack(spacing: 12) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                        Text("All sorted!")
+                            .font(.subheadline.bold())
+                            .foregroundColor(.green)
+                    }
+                } else {
+                    // Manual submit button for incorrect sorting
+                    Button {
+                        Task {
+                            await learningManager.submitAttempt(
+                                isCorrect: false,
+                                score: 0,
+                                dimension: dimension
+                            )
+                        }
+                    } label: {
+                        Text("Done!")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(dimension.color)
+                            )
+                    }
+                    .disabled(learningManager.isSubmitting)
                 }
             }
 
