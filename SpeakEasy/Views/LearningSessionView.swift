@@ -43,6 +43,8 @@ struct LearningSessionView: View {
     @State private var flashVisible: Bool = false
     @State private var flashPhase: Int = 0  // current index in flash_sequence
     @State private var flashCompleted: Bool = false
+    /// Generation counter to invalidate stale DispatchQueue callbacks on task change
+    @State private var flashGeneration: Int = 0
 
     var body: some View {
         NavigationStack {
@@ -121,6 +123,7 @@ struct LearningSessionView: View {
                 flashVisible = false
                 flashPhase = 0
                 flashCompleted = false
+                flashGeneration += 1
                 // Reset animation slideshow state
                 animationTimer?.invalidate()
                 animationTimer = nil
@@ -151,7 +154,8 @@ struct LearningSessionView: View {
                     let isSorting = isSortingTask(task)
                     let isMultiTap = isMultiTapTask(task)
                     let isTextInput = isTextInputTask(task)
-                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput {
+                    let isFlash = isFlashTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -354,6 +358,8 @@ struct LearningSessionView: View {
         guard let frames = task.content.animationFrames, frames.count >= 1 else { return false }
         // Don't treat as animated if it's also a pattern task (sequence takes priority)
         if isPatternTask(task) { return false }
+        // Don't treat as animated if it's a flash task — the flash display replaces it
+        if isFlashTask(task) { return false }
         return true
     }
 
@@ -761,7 +767,7 @@ struct LearningSessionView: View {
     }
 
     /// Starts the timed flash sequence.  Shows each image for 1.5 seconds with
-    /// a 0.3 second blank gap between them.
+    /// a 0.4 second blank gap between them.
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -770,15 +776,20 @@ struct LearningSessionView: View {
         flashPhase = 0
         flashVisible = false
         flashCompleted = false
+        let gen = flashGeneration
 
         // Small delay before first flash
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            showNextFlash(images: images)
+            guard flashGeneration == gen else { return }
+            showNextFlash(images: images, generation: gen)
         }
     }
 
     /// Shows the next flash image, waits 1.5s, then either advances or completes.
-    private func showNextFlash(images: [String]) {
+    /// The `generation` parameter is compared against `flashGeneration` to bail
+    /// out if the task changed while callbacks were pending.
+    private func showNextFlash(images: [String], generation: Int) {
+        guard flashGeneration == generation else { return }
         guard flashPhase < images.count else {
             withAnimation {
                 flashCompleted = true
@@ -792,17 +803,19 @@ struct LearningSessionView: View {
 
         // Hide after 1.5 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            guard self.flashGeneration == generation else { return }
             withAnimation(.easeOut(duration: 0.2)) {
-                flashVisible = false
+                self.flashVisible = false
             }
             // Brief gap then show next or complete
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                flashPhase += 1
-                if flashPhase < images.count {
-                    showNextFlash(images: images)
+                guard self.flashGeneration == generation else { return }
+                self.flashPhase += 1
+                if self.flashPhase < images.count {
+                    self.showNextFlash(images: images, generation: generation)
                 } else {
                     withAnimation {
-                        flashCompleted = true
+                        self.flashCompleted = true
                     }
                 }
             }

@@ -169,11 +169,7 @@
             "Car"
           ],
           "correct_answer": "Dog, Ball",
-          "image_hint": "dog",
-          "items": [
-            "Dog",
-            "Ball"
-          ]
+          "image_hint": "dog"
         },
         {
           "instruction": "Sort by COLOR: Red goes left, Blue goes right. [Red square]",
@@ -576,12 +572,7 @@
             "Car"
           ],
           "correct_answer": "Apple, Dog, Tree",
-          "image_hint": "dog",
-          "items": [
-            "Apple",
-            "Dog",
-            "Tree"
-          ]
+          "image_hint": "dog"
         },
         {
           "instruction": "Sort by NUMBER OF SIDES: More than 3 sides goes left, 3 or fewer goes right. [Pentagon]",
@@ -657,10 +648,10 @@
             "9",
             "15"
           ],
-          "correct_answer": "4",
+          "correct_answer": "3",
           "image_hint": "number_7",
           "instruction_zh": "点击质数。不要点击合数。",
-          "tap_count": 4,
+          "tap_count": 3,
           "animation_frames": [
             "number_2",
             "number_4",
@@ -715,22 +706,22 @@
           "image_hint": "dog"
         },
         {
-          "instruction": "Watch where each shape appears! Tap when a shape is in the SAME spot as 2 steps before.",
+          "instruction": "Watch the shapes! Tap when the SAME shape appeared 2 steps before.",
           "question_id": "Q146",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Remember where the shape was TWO steps ago\"",
           "correct_answer": "2",
           "image_hint": "circle",
-          "instruction_zh": "看格子！当形状出现在和2步前相同的位置时点击。",
+          "instruction_zh": "看形状！当和2步前出现相同形状时点击。",
           "tap_count": 2,
           "animation_frames": [
+            "star",
             "circle",
             "star",
             "triangle",
-            "square",
-            "circle",
             "star",
+            "circle",
             "triangle"
           ]
         }
