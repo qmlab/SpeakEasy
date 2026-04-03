@@ -119,8 +119,7 @@ struct LearningSessionView: View {
                     // Auto-listen after TTS for ALL tasks with a speakable target
                     // word (not just voice-modality tasks).  Skip sorting/sequencing
                     // tasks where ordering is the goal, not speaking.
-                    let taskType = task.taskType
-                    let isSorting = (taskType == "sort" || taskType == "sequence_order" || taskType == "build_sentence")
+                    let isSorting = isSortingTask(task)
                     if !targetWord.isEmpty && !isSorting {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
@@ -347,11 +346,18 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Whether this task is a sorting/sequencing task that needs ordering UI
+    /// Whether this task is a sorting/sequencing task that needs ordering UI.
+    ///
+    /// Triggers for:
+    /// - Explicit ordering types: sort, sequence_order, build_sentence
+    /// - Any task with an `items` array (the correct ordering) — this covers
+    ///   social-behavior step-ordering tasks and memory-sequence tasks that
+    ///   are typed as `identify` but need sequential multi-tap interaction.
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
         let type = task.taskType
-        return (type == "sort" || type == "sequence_order" || type == "build_sentence") &&
-               task.content.displayOptions.count >= 2
+        let explicitTypes = type == "sort" || type == "sequence_order" || type == "build_sentence"
+        let hasItems = task.content.items != nil && !(task.content.items!.isEmpty)
+        return (explicitTypes || hasItems) && task.content.displayOptions.count >= 2
     }
 
     // MARK: - Interaction Area
@@ -416,29 +422,70 @@ struct LearningSessionView: View {
 
     // MARK: - Ordering Area (Sort / Sequence)
 
+    /// Whether the ordering area should use an image-grid layout for the
+    /// remaining options instead of a simple text list.
+    ///
+    /// Only returns `true` for visual task types (identify, point_to, etc.)
+    /// whose options are likely to have matching Cloudinary images.
+    /// Excludes build_sentence (words like "I", "am", "happy") and
+    /// memory-sequence tasks (numbers like "3", "7") that have no images.
+    private func isOrderingImageGrid(_ task: AdaptiveTask) -> Bool {
+        let visualTypes: Set<String> = ["identify", "point_to", "match_word_image", "recognize_image", "match"]
+        guard visualTypes.contains(task.taskType) else { return false }
+        return task.content.displayOptions.allSatisfy { option in
+            let words = option.split(separator: " ")
+            return words.count == 1
+                && !option.contains(",")
+                && !option.contains("(")
+                && !option.contains("/")
+                && !option.contains("-")
+        }
+    }
+
     private func orderingArea(task: AdaptiveTask) -> some View {
         let options = task.content.displayOptions
         let remaining = options.filter { !orderedSelections.contains($0) }
+        let useImageGrid = isOrderingImageGrid(task)
 
         return VStack(spacing: 16) {
-            // Selected items (in order)
+            // Selected items (in order) — horizontal chips for compact display
             if !orderedSelections.isEmpty {
                 VStack(spacing: 8) {
                     Text("Your order:")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    ForEach(Array(orderedSelections.enumerated()), id: \.offset) { index, item in
-                        HStack(spacing: 12) {
-                            Text("\(index + 1)")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(width: 32, height: 32)
-                                .background(Circle().fill(dimension.color))
-                            Text(item)
-                                .font(.headline)
-                            Spacer()
-                            // Undo button
-                            if index == orderedSelections.count - 1 {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(Array(orderedSelections.enumerated()), id: \.offset) { index, item in
+                                HStack(spacing: 6) {
+                                    Text("\(index + 1)")
+                                        .font(.caption2.bold())
+                                        .foregroundColor(.white)
+                                        .frame(width: 22, height: 22)
+                                        .background(Circle().fill(dimension.color))
+                                    if useImageGrid {
+                                        RemoteImageView(
+                                            objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                            imageType: .thumbnail,
+                                            fallbackIcon: "questionmark.circle",
+                                            iconColor: dimension.color,
+                                            size: 28
+                                        )
+                                        .cornerRadius(4)
+                                    }
+                                    Text(item)
+                                        .font(.subheadline.bold())
+                                        .lineLimit(1)
+                                }
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 6)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(dimension.color.opacity(0.15))
+                                )
+                            }
+                            // Undo last selection
+                            if !orderedSelections.isEmpty {
                                 Button {
                                     orderedSelections.removeLast()
                                 } label: {
@@ -448,11 +495,6 @@ struct LearningSessionView: View {
                                 }
                             }
                         }
-                        .padding(12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(dimension.color.opacity(0.1))
-                        )
                     }
                 }
             }
@@ -463,58 +505,72 @@ struct LearningSessionView: View {
                     Text(orderedSelections.isEmpty ? "Tap in order:" : "Next:")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    ForEach(remaining, id: \.self) { option in
-                        Button {
-                            // Speak the option text so the child learns pronunciation
-                            // Clear any pending auto-listen callback so option TTS finishing
-                            // doesn't accidentally start the microphone.
-                            speechService.onSpeechFinished = nil
-                            speechService.speak(option)
-                            orderedSelections.append(option)
-                            // Auto-submit when all items selected
-                            if orderedSelections.count == options.count {
-                                // Validate full ordering against items (correct order) or correct_answer (first item fallback)
-                                let isCorrect: Bool
-                                if let correctItems = task.content.items, correctItems.count == orderedSelections.count {
-                                    // Full order validation: compare user's sequence against correct items order
-                                    isCorrect = zip(orderedSelections, correctItems).allSatisfy { $0.lowercased() == $1.lowercased() }
-                                } else {
-                                    // Fallback: at least check first item matches correct_answer
-                                    let correctFirst = task.content.correctAnswer ?? ""
-                                    isCorrect = orderedSelections.first?.lowercased() == correctFirst.lowercased()
-                                }
-                                Task {
-                                    await learningManager.submitAttempt(
-                                        isCorrect: isCorrect,
-                                        score: isCorrect ? 1 : 0,
-                                        dimension: dimension
+
+                    if useImageGrid {
+                        // 2-column image grid for simple single-word options
+                        let columns = [
+                            GridItem(.flexible(), spacing: 12),
+                            GridItem(.flexible(), spacing: 12)
+                        ]
+                        LazyVGrid(columns: columns, spacing: 12) {
+                            ForEach(remaining, id: \.self) { option in
+                                Button {
+                                    handleOrderingTap(option: option, task: task)
+                                } label: {
+                                    VStack(spacing: 6) {
+                                        RemoteImageView(
+                                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                            imageType: .flashcard,
+                                            fallbackIcon: "questionmark.circle",
+                                            iconColor: dimension.color,
+                                            size: 80
+                                        )
+                                        .cornerRadius(12)
+                                        Text(option)
+                                            .font(.subheadline.bold())
+                                            .lineLimit(1)
+                                    }
+                                    .foregroundColor(.primary)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(10)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(Color(.secondarySystemBackground))
                                     )
                                 }
+                                .disabled(learningManager.isSubmitting)
                             }
-                        } label: {
-                            HStack(spacing: 12) {
-                                RemoteImageView(
-                                    objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
-                                    imageType: .thumbnail,
-                                    fallbackIcon: "questionmark.circle",
-                                    iconColor: dimension.color,
-                                    size: 40
-                                )
-                                .cornerRadius(8)
-                                Text(option)
-                                    .font(.headline)
-                                Spacer()
-                                Image(systemName: "plus.circle.fill")
-                                    .foregroundColor(dimension.color)
-                            }
-                            .foregroundColor(.primary)
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color(.secondarySystemBackground))
-                            )
                         }
-                        .disabled(learningManager.isSubmitting)
+                    } else {
+                        // Text list for multi-word options
+                        ForEach(remaining, id: \.self) { option in
+                            Button {
+                                handleOrderingTap(option: option, task: task)
+                            } label: {
+                                HStack(spacing: 12) {
+                                    RemoteImageView(
+                                        objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                        imageType: .thumbnail,
+                                        fallbackIcon: "questionmark.circle",
+                                        iconColor: dimension.color,
+                                        size: 40
+                                    )
+                                    .cornerRadius(8)
+                                    Text(option)
+                                        .font(.headline)
+                                    Spacer()
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(dimension.color)
+                                }
+                                .foregroundColor(.primary)
+                                .padding(12)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color(.secondarySystemBackground))
+                                )
+                            }
+                            .disabled(learningManager.isSubmitting)
+                        }
                     }
                 }
             }
@@ -528,6 +584,31 @@ struct LearningSessionView: View {
                         .font(.subheadline)
                         .foregroundColor(.orange)
                 }
+            }
+        }
+    }
+
+    /// Handle tapping an option in the ordering area.
+    private func handleOrderingTap(option: String, task: AdaptiveTask) {
+        let options = task.content.displayOptions
+        speechService.onSpeechFinished = nil
+        speechService.speak(option)
+        orderedSelections.append(option)
+        // Auto-submit when all items selected
+        if orderedSelections.count == options.count {
+            let isCorrect: Bool
+            if let correctItems = task.content.items, correctItems.count == orderedSelections.count {
+                isCorrect = zip(orderedSelections, correctItems).allSatisfy { $0.lowercased() == $1.lowercased() }
+            } else {
+                let correctFirst = task.content.correctAnswer ?? ""
+                isCorrect = orderedSelections.first?.lowercased() == correctFirst.lowercased()
+            }
+            Task {
+                await learningManager.submitAttempt(
+                    isCorrect: isCorrect,
+                    score: isCorrect ? 1 : 0,
+                    dimension: dimension
+                )
             }
         }
     }
