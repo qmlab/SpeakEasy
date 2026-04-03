@@ -5,10 +5,10 @@ Handles CRUD for adaptive tasks and seeding.
 """
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import text
+from sqlalchemy import inspect, text
 from sqlalchemy.orm import Session
 
-from app.database import get_db, engine
+from app.database import get_db
 from app.models.adaptive import AdaptiveTask, DevelopmentalDimension
 from app.schemas.adaptive import AdaptiveTaskCreate, AdaptiveTaskResponse
 from app.services.seed_tasks import (
@@ -97,21 +97,22 @@ def delete_task(task_id: str, db: Session = Depends(get_db)):
 
 
 def _migrate_schema(db: Session) -> list[str]:
-    """Add missing columns to existing tables (lightweight SQLite migration).
+    """Add missing columns to existing tables (lightweight migration).
 
     SQLite's CREATE TABLE IF NOT EXISTS won't add new columns to existing
-    tables.  This helper inspects PRAGMA table_info and ALTERs as needed.
+    tables.  This helper uses SQLAlchemy's inspector (database-agnostic)
+    to check for missing columns and ALTERs as needed.
     """
     migrations: list[str] = []
-    with engine.connect() as conn:
-        # Check developmental_profiles for ceiling_level / basal_level
-        cols = {
-            row[1]
-            for row in conn.execute(
-                text("PRAGMA table_info(developmental_profiles)")
-            ).fetchall()
-        }
-        if "ceiling_level" not in cols:
+    bound_engine = db.get_bind()
+    inspector = inspect(bound_engine)
+
+    existing_cols = {
+        col["name"] for col in inspector.get_columns("developmental_profiles")
+    }
+
+    with bound_engine.connect() as conn:
+        if "ceiling_level" not in existing_cols:
             conn.execute(
                 text(
                     "ALTER TABLE developmental_profiles "
@@ -119,14 +120,15 @@ def _migrate_schema(db: Session) -> list[str]:
                 )
             )
             migrations.append("added ceiling_level to developmental_profiles")
-        if "basal_level" not in cols:
+        if "basal_level" not in existing_cols:
             conn.execute(
                 text(
                     "ALTER TABLE developmental_profiles ADD COLUMN basal_level INTEGER"
                 )
             )
             migrations.append("added basal_level to developmental_profiles")
-        conn.commit()
+        if migrations:
+            conn.commit()
     return migrations
 
 
