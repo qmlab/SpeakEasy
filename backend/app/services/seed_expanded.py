@@ -332,7 +332,7 @@ def _build_content(task_type: str, task_data: dict) -> dict:
     inst_lower = (task_data.get("instruction") or "").lower()
     if (
         "tap them in order" in inst_lower or "tap in order" in inst_lower
-    ) and "items" not in content:
+    ) and "items" not in content and "animation_frames" not in content:
         import re
 
         # Check if the instruction has a qualifier that changes ordering

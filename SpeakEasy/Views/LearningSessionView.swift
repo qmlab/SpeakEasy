@@ -112,6 +112,12 @@ struct LearningSessionView: View {
                 animationTimer = nil
                 animationFrameIndex = 0
                 animationFinished = false
+                // Restart animation if the new task is also animated
+                if let newTask = learningManager.currentTask,
+                   isAnimatedTask(newTask),
+                   let frames = newTask.content.animationFrames {
+                    startAnimationSlideshow(frames: frames)
+                }
                 if isListening {
                     speechService.stopListening()
                     isListening = false
