@@ -119,8 +119,7 @@ struct LearningSessionView: View {
                     // Auto-listen after TTS for ALL tasks with a speakable target
                     // word (not just voice-modality tasks).  Skip sorting/sequencing
                     // tasks where ordering is the goal, not speaking.
-                    let taskType = task.taskType
-                    let isSorting = (taskType == "sort" || taskType == "sequence_order" || taskType == "build_sentence")
+                    let isSorting = isSortingTask(task)
                     if !targetWord.isEmpty && !isSorting {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
