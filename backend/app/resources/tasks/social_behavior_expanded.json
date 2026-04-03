@@ -1,1388 +1,1388 @@
 {
-  "dimension": "social_behavior",
-  "description": "Social Cognition: From emotion recognition to perspective taking",
-  "version": "research_v2",
-  "source": "Autism Neurodevelopmental Question Bank v1.0",
-  "levels": {
-    "0": {
-      "name": "Basic Emotions",
-      "name_zh": "基础情绪",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "Point to the HAPPY face.",
-          "question_id": "Q201",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Highlight the smiling face",
-          "options": [
-            "Happy",
-            "Sad"
-          ],
-          "correct_answer": "Happy",
-          "image_hint": "happy_face"
-        },
-        {
-          "instruction": "Point to the SAD face.",
-          "question_id": "Q202",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Highlight the frowning face",
-          "options": [
-            "Sad",
-            "Happy"
-          ],
-          "correct_answer": "Sad",
-          "image_hint": "sad_face"
-        },
-        {
-          "instruction": "Put these in order: [Eating, Washing hands, Sitting down]",
-          "question_id": "Q221",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you do first before eating?\"",
-          "steps": [
-            "Washing hands",
-            "Sitting down",
-            "Eating"
-          ],
-          "options": [
-            "Washing hands",
-            "Sitting down",
-            "Eating"
-          ],
-          "correct_answer": "Washing hands",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Put these in order: [Waking up, Getting dressed, Sleeping]",
-          "question_id": "Q222",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What happens first in the morning?\"",
-          "steps": [
-            "Sleeping",
-            "Waking up",
-            "Getting dressed"
-          ],
-          "options": [
-            "Sleeping",
-            "Waking up",
-            "Getting dressed"
-          ],
-          "correct_answer": "Sleeping",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "A friend is crying. What do you do?",
-          "question_id": "Q254",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"What would make your friend feel better?\"",
-          "options": [
-            "Hug them",
-            "Laugh",
-            "Walk away",
-            "Ignore"
-          ],
-          "correct_answer": "Hug them",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "Someone gives you a gift. What do you say?",
-          "question_id": "Q255",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"What is the polite thing to say?\"",
-          "options": [
-            "Thank you",
-            "Nothing",
-            "Give it back",
-            "Cry"
-          ],
-          "correct_answer": "Thank you",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "1": {
-      "name": "Emotion Recognition",
-      "name_zh": "情绪识别",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "How is this person feeling? [Big smile, arms up]",
-          "question_id": "Q203",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Look at the smile and the arms\"",
-          "options": [
-            "Happy",
-            "Sad",
-            "Angry"
-          ],
-          "correct_answer": "Happy",
-          "image_hint": "happy_face"
-        },
-        {
-          "instruction": "Point to the ANGRY face.",
-          "question_id": "Q204",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Angry people have frowning eyebrows\"",
-          "options": [
-            "Angry",
-            "Happy",
-            "Sad"
-          ],
-          "correct_answer": "Angry",
-          "image_hint": "angry_face"
-        },
-        {
-          "instruction": "Order the steps of brushing teeth.",
-          "question_id": "Q223",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you need before you can brush?\"",
-          "steps": [
-            "Get toothbrush",
-            "Add toothpaste",
-            "Brush",
-            "Rinse"
-          ],
-          "options": [
-            "Get toothbrush",
-            "Add toothpaste",
-            "Brush",
-            "Rinse"
-          ],
-          "correct_answer": "Get toothbrush",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of buying something at a store.",
-          "question_id": "Q224",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you do first in a store?\"",
-          "steps": [
-            "Pick item",
-            "Go to cashier",
-            "Pay",
-            "Leave"
-          ],
-          "options": [
-            "Pick item",
-            "Go to cashier",
-            "Pay",
-            "Leave"
-          ],
-          "correct_answer": "Pick item",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Tom has a cookie. He puts it in the red box. Where is the cookie?",
-          "question_id": "Q237",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Tom put it in the red box\"",
-          "options": [
-            "Red box",
-            "Blue box"
-          ],
-          "correct_answer": "Red box",
-          "image_hint": "cookie"
-        },
-        {
-          "instruction": "You bump into someone by accident. What do you do?",
-          "question_id": "Q256",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"What do you say when you accidentally hurt someone?\"",
-          "options": [
-            "Say sorry",
-            "Run away",
-            "Laugh",
-            "Ignore"
-          ],
-          "correct_answer": "Say sorry",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "Someone is talking to you. What should you do?",
-          "question_id": "Q257",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"What shows you are paying attention?\"",
-          "options": [
-            "Listen and look at them",
-            "Play on your phone",
-            "Walk away",
-            "Talk over them"
-          ],
-          "correct_answer": "Listen and look at them",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "Two people are whispering and laughing. A third person walks by and they go quiet. How does the third person likely feel?",
-          "question_id": "Q274",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"How would you feel if people went quiet when you walked by?\"",
-          "options": [
-            "Left out / uncomfortable",
-            "Happy",
-            "Angry",
-            "Excited"
-          ],
-          "correct_answer": "Left out / uncomfortable",
-          "image_hint": "sad_face",
-          "instruction_zh": "两个人在窃窃私语和笑。第三个人走过，他们安静了。第三个人感觉怎样？"
-        }
-      ]
-    },
-    "2": {
-      "name": "Social Sequences",
-      "name_zh": "社交顺序",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "Point to the SURPRISED face.",
-          "question_id": "Q205",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Surprised people have wide eyes and an open mouth\"",
-          "options": [
-            "Surprised",
-            "Happy",
-            "Sad",
-            "Angry"
-          ],
-          "correct_answer": "Surprised",
-          "image_hint": "surprised_face"
-        },
-        {
-          "instruction": "Point to the SCARED face.",
-          "question_id": "Q206",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Scared people have wide eyes and look like they want to run\"",
-          "options": [
-            "Scared",
-            "Happy",
-            "Angry",
-            "Surprised"
-          ],
-          "correct_answer": "Scared",
-          "image_hint": "scared_face"
-        },
-        {
-          "instruction": "Order the steps of making a phone call.",
-          "question_id": "Q225",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you do before you can talk?\"",
-          "steps": [
-            "Pick up phone",
-            "Dial number",
-            "Talk",
-            "Hang up"
-          ],
-          "options": [
-            "Pick up phone",
-            "Dial number",
-            "Talk",
-            "Hang up"
-          ],
-          "correct_answer": "Pick up phone",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of greeting a new classmate.",
-          "question_id": "Q226",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What is the first thing you do when you meet someone?\"",
-          "steps": [
-            "Make eye contact",
-            "Smile",
-            "Say hello",
-            "Ask their name"
-          ],
-          "options": [
-            "Make eye contact",
-            "Smile",
-            "Say hello",
-            "Ask their name"
-          ],
-          "correct_answer": "Make eye contact",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Sally puts her ball in the basket and leaves. Anne moves it to the box. Where will Sally LOOK for her ball?",
-          "question_id": "Q238",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Sally doesn't know Anne moved it\"",
-          "options": [
-            "Basket",
-            "Box"
-          ],
-          "correct_answer": "Basket",
-          "image_hint": "ball"
-        },
-        {
-          "instruction": "A box says 'PENCILS' on it. Inside are actually candies. What will your friend think is inside before opening it?",
-          "question_id": "Q239",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Your friend hasn't opened the box yet\"",
-          "options": [
-            "Pencils",
-            "Candies"
-          ],
-          "correct_answer": "Pencils",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You want to join a game. What do you do?",
-          "question_id": "Q258",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"How do you ask to join in a nice way?\"",
-          "options": [
-            "Ask politely",
-            "Push in",
-            "Wait and watch",
-            "Cry"
-          ],
-          "correct_answer": "Ask politely",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A classmate gets a better grade than you. What is the best response?",
-          "question_id": "Q259",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"How would you want someone to treat you if you did well?\"",
-          "options": [
-            "Congratulate them",
-            "Get angry",
-            "Ignore them",
-            "Cheat next time"
-          ],
-          "correct_answer": "Congratulate them",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A child is playing alone while others play together. What might this mean?",
-          "question_id": "Q275",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"Playing alone can mean different things for different people\"",
-          "options": [
-            "They are mean",
-            "They are sick",
-            "They are bored",
-            "Both possibilities valid"
-          ],
-          "correct_answer": "Both possibilities valid",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "3": {
-      "name": "Perspective Taking (Basic)",
-      "name_zh": "基础视角转换",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "Point to the DISGUSTED face.",
-          "question_id": "Q207",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Disgusted people wrinkle their nose like they smell something bad\"",
-          "options": [
-            "Disgusted",
-            "Happy",
-            "Sad",
-            "Angry"
-          ],
-          "correct_answer": "Disgusted",
-          "image_hint": "disgusted_face"
-        },
-        {
-          "instruction": "How is this person feeling? [Slumped shoulders, looking down]",
-          "question_id": "Q208",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Look at the body — slumped shoulders mean sadness\"",
-          "options": [
-            "Sad",
-            "Happy",
-            "Angry",
-            "Excited"
-          ],
-          "correct_answer": "Sad",
-          "image_hint": "sad_face"
-        },
-        {
-          "instruction": "Order the steps of asking for help in class.",
-          "question_id": "Q227",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you do before you can speak in class?\"",
-          "steps": [
-            "Raise hand",
-            "Wait to be called",
-            "Explain problem",
-            "Listen to answer",
-            "Say thank you"
-          ],
-          "options": [
-            "Raise hand",
-            "Wait to be called",
-            "Explain problem",
-            "Listen to answer",
-            "Say thank you"
-          ],
-          "correct_answer": "Raise hand",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of joining a game at recess.",
-          "question_id": "Q228",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you do before asking to join?\"",
-          "steps": [
-            "Watch the game",
-            "Ask to join",
-            "Wait for a turn",
-            "Play",
-            "Thank others"
-          ],
-          "options": [
-            "Watch the game",
-            "Ask to join",
-            "Wait for a turn",
-            "Play",
-            "Thank others"
-          ],
-          "correct_answer": "Watch the game",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Max is hiding behind the couch. He can see his sister but she can't see him. Does his sister know where he is?",
-          "question_id": "Q240",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Can the sister see Max?\"",
-          "options": [
-            "No",
-            "Yes"
-          ],
-          "correct_answer": "No",
-          "image_hint": "happy_face",
-          "instruction_zh": "小明躲在沙发后面。他能看到姐姐，但姐姐看不到他。姐姐知道他在哪里吗？"
-        },
-        {
-          "instruction": "Emma thinks the party is on Saturday. It is actually on Sunday. What day does Emma think the party is?",
-          "question_id": "Q241",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"What does Emma THINK, not what is true?\"",
-          "options": [
-            "Saturday",
-            "Sunday"
-          ],
-          "correct_answer": "Saturday",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You disagree with what a friend says. What do you do?",
-          "question_id": "Q260",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"You can disagree and still be kind\"",
-          "options": [
-            "Calmly share your view",
-            "Yell",
-            "Ignore them",
-            "Walk away"
-          ],
-          "correct_answer": "Calmly share your view",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You are in a library. Your phone rings. What do you do?",
-          "question_id": "Q261",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Libraries are quiet places — what is respectful?\"",
-          "options": [
-            "Quickly silence it and step out",
-            "Answer loudly",
-            "Ignore it"
-          ],
-          "correct_answer": "Quickly silence it and step out",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A person keeps checking their watch during a conversation. What does this signal?",
-          "question_id": "Q276",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"Checking a watch is a signal about time\"",
-          "options": [
-            "They are interested",
-            "They are nervous",
-            "They are angry",
-            "They need to leave / are bored"
-          ],
-          "correct_answer": "They need to leave / are bored",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "4": {
-      "name": "Appropriate Response",
-      "name_zh": "适当回应",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "Point to the EMBARRASSED face.",
-          "question_id": "Q209",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Embarrassed people look down and their cheeks turn red\"",
-          "options": [
-            "Embarrassed",
-            "Angry",
-            "Surprised",
-            "Sad"
-          ],
-          "correct_answer": "Embarrassed",
-          "image_hint": "embarrassed_face"
-        },
-        {
-          "instruction": "Point to the FRUSTRATED face.",
-          "question_id": "Q210",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Frustrated people look like they are trying hard but can't do something\"",
-          "options": [
-            "Frustrated",
-            "Happy",
-            "Excited",
-            "Disgusted"
-          ],
-          "correct_answer": "Frustrated",
-          "image_hint": "frustrated_face"
-        },
-        {
-          "instruction": "Order the steps of resolving a disagreement with a friend.",
-          "question_id": "Q229",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What should you do first when you are upset?\"",
-          "steps": [
-            "Calm down",
-            "Listen to friend",
-            "Share your view",
-            "Find a compromise",
-            "Shake hands"
-          ],
-          "options": [
-            "Calm down",
-            "Listen to friend",
-            "Share your view",
-            "Find a compromise",
-            "Shake hands"
-          ],
-          "correct_answer": "Calm down",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of giving a compliment.",
-          "question_id": "Q230",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you notice before you give a compliment?\"",
-          "steps": [
-            "Notice something nice",
-            "Make eye contact",
-            "Smile",
-            "Say the compliment",
-            "Wait for response"
-          ],
-          "options": [
-            "Notice something nice",
-            "Make eye contact",
-            "Smile",
-            "Say the compliment",
-            "Wait for response"
-          ],
-          "correct_answer": "Notice something nice",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Jake is sad because he lost his toy. His friend Sam is laughing at a joke. Does Sam know Jake is sad?",
-          "question_id": "Q242",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Did anyone tell Sam about Jake's toy?\"",
-          "options": [
-            "No (unless told)",
-            "Yes"
-          ],
-          "correct_answer": "No (unless told)",
-          "image_hint": "sad_face",
-          "instruction_zh": "小明很伤心因为丢了玩具。朋友小红在笑一个笑话。小红知道小明伤心吗？"
-        },
-        {
-          "instruction": "Anna tells Ben a secret. Ben tells Charlie. Does Anna know Charlie knows the secret?",
-          "question_id": "Q243",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Did anyone tell Anna that Ben told Charlie?\"",
-          "options": [
-            "No",
-            "Yes"
-          ],
-          "correct_answer": "No",
-          "image_hint": "surprised_face",
-          "instruction_zh": "小红告诉小明一个秘密。小明告诉了小华。小红知道小华知道这个秘密吗？"
-        },
-        {
-          "instruction": "A friend tells you a secret. Another friend asks you about it. What do you do?",
-          "question_id": "Q262",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"A secret means you promised not to tell\"",
-          "options": [
-            "Say you can't share it",
-            "Tell the secret",
-            "Lie"
-          ],
-          "correct_answer": "Say you can't share it",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You notice a classmate is being left out at lunch. What do you do?",
-          "question_id": "Q263",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"How would you feel if you were left out?\"",
-          "options": [
-            "Invite them to sit with you",
-            "Ignore it",
-            "Laugh"
-          ],
-          "correct_answer": "Invite them to sit with you",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "Two people are standing very close and speaking quietly. What kind of conversation is this likely to be?",
-          "question_id": "Q277",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"Physical closeness and quiet voices signal privacy\"",
-          "options": [
-            "Public",
-            "Angry",
-            "Professional",
-            "Private / intimate"
-          ],
-          "correct_answer": "Private / intimate",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "5": {
-      "name": "Complex Emotions",
-      "name_zh": "复杂情绪",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "How does this person feel? [Clenched fists, stiff posture, tight jaw]",
-          "question_id": "Q211",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Clenched fists and a stiff body often mean anger\"",
-          "options": [
-            "Angry",
-            "Sad",
-            "Excited",
-            "Confused"
-          ],
-          "correct_answer": "Angry",
-          "image_hint": "angry_face"
-        },
-        {
-          "instruction": "Point to the JEALOUS face.",
-          "question_id": "Q212",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Jealous people look like they want what someone else has\"",
-          "options": [
-            "Jealous",
-            "Happy",
-            "Sad",
-            "Surprised"
-          ],
-          "correct_answer": "Jealous",
-          "image_hint": "jealous_face"
-        },
-        {
-          "instruction": "Order the steps of apologizing sincerely.",
-          "question_id": "Q231",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What is the first step in a real apology?\"",
-          "steps": [
-            "Acknowledge the mistake",
-            "Express regret",
-            "Explain what happened",
-            "Promise to do better",
-            "Give the person space"
-          ],
-          "options": [
-            "Acknowledge the mistake",
-            "Express regret",
-            "Explain what happened",
-            "Promise to do better",
-            "Give the person space"
-          ],
-          "correct_answer": "Acknowledge the mistake",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of a job interview.",
-          "question_id": "Q232",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you do before the interview?\"",
-          "steps": [
-            "Prepare",
-            "Arrive on time",
-            "Greet interviewer",
-            "Answer questions",
-            "Ask questions",
-            "Thank them"
-          ],
-          "options": [
-            "Prepare",
-            "Arrive on time",
-            "Greet interviewer",
-            "Answer questions",
-            "Ask questions",
-            "Thank them"
-          ],
-          "correct_answer": "Prepare",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Tom thinks Mary likes him. Mary actually likes Tom's friend. What does Tom THINK?",
-          "question_id": "Q244",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"What does Tom believe, not what is true?\"",
-          "options": [
-            "Mary likes him",
-            "Mary likes his friend"
-          ],
-          "correct_answer": "Mary likes him",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A boy is crying. His mother thinks he is hurt. He is actually crying because he is happy. What does the mother think?",
-          "question_id": "Q245",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"What does the mother see? What does she know?\"",
-          "options": [
-            "He is hurt",
-            "He is happy"
-          ],
-          "correct_answer": "He is hurt",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You made a mistake that affected your team. What do you do?",
-          "question_id": "Q264",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Taking responsibility is a sign of maturity\"",
-          "options": [
-            "Blame others",
-            "Pretend it didn't happen",
-            "Quit",
-            "Acknowledge it, apologize, and offer to fix it"
-          ],
-          "correct_answer": "Acknowledge it, apologize, and offer to fix it",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A new student looks lost and confused. What do you do?",
-          "question_id": "Q265",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"How would you feel on your first day somewhere new?\"",
-          "options": [
-            "Ignore them",
-            "Laugh",
-            "Walk past",
-            "Offer to help them find their way"
-          ],
-          "correct_answer": "Offer to help them find their way",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A person is nodding but not making eye contact and giving one-word answers. What does this suggest?",
-          "question_id": "Q278",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"Nodding can be polite but not always genuine — look at the whole picture\"",
-          "options": [
-            "They are very interested",
-            "They are happy",
-            "They are focused",
-            "They are disengaged or uncomfortable"
-          ],
-          "correct_answer": "They are disengaged or uncomfortable",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "6": {
-      "name": "Social Awareness",
-      "name_zh": "社会意识",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "This person just found out they won a prize but they are trying to hide their excitement. How do they feel?",
-          "question_id": "Q213",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Sometimes people feel one thing but try to look different on the outside\"",
-          "options": [
-            "Excited (hiding it)",
-            "Sad",
-            "Angry",
-            "Bored"
-          ],
-          "correct_answer": "Excited (hiding it)",
-          "image_hint": "excited_face"
-        },
-        {
-          "instruction": "Point to the CONTEMPTUOUS face.",
-          "question_id": "Q214",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Contempt looks like a one-sided sneer — like looking down on someone\"",
-          "options": [
-            "Contemptuous",
-            "Angry",
-            "Sad",
-            "Disgusted"
-          ],
-          "correct_answer": "Contemptuous",
-          "image_hint": "contemptuous_face"
-        },
-        {
-          "instruction": "Order the steps of comforting a friend who is upset.",
-          "question_id": "Q233",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you notice first?\"",
-          "steps": [
-            "Notice they are upset",
-            "Approach gently",
-            "Ask if they want to talk",
-            "Listen without interrupting",
-            "Offer support"
-          ],
-          "options": [
-            "Notice they are upset",
-            "Approach gently",
-            "Ask if they want to talk",
-            "Listen without interrupting",
-            "Offer support"
-          ],
-          "correct_answer": "Notice they are upset",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of a difficult conversation.",
-          "question_id": "Q234",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you need to set up before a hard conversation?\"",
-          "steps": [
-            "Choose right time/place",
-            "Start calmly",
-            "State your feelings",
-            "Listen to other person",
-            "Find common ground",
-            "Agree on next steps"
-          ],
-          "options": [
-            "Choose right time/place",
-            "Start calmly",
-            "State your feelings",
-            "Listen to other person",
-            "Find common ground",
-            "Agree on next steps"
-          ],
-          "correct_answer": "Choose right time/place",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Lucy wants the last cookie. She knows if she asks directly, her brother will say no. What might she do instead?",
-          "question_id": "Q246",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"What strategy might work better than asking directly?\"",
-          "options": [
-            "Ask indirectly/distract",
-            "Ask nicely",
-            "Cry",
-            "Take it"
-          ],
-          "correct_answer": "Ask indirectly/distract",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A teacher praises a student in front of the class. The student looks down and goes quiet. Why?",
-          "question_id": "Q247",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Some people feel uncomfortable being the center of attention\"",
-          "options": [
-            "Embarrassed",
-            "Happy",
-            "Angry",
-            "Sad"
-          ],
-          "correct_answer": "Embarrassed",
-          "image_hint": "embarrassed_face",
-          "instruction_zh": "老师在全班面前表扬了一个学生。学生低下头安静了。为什么？"
-        },
-        {
-          "instruction": "Your teacher gives you feedback you disagree with. What do you do?",
-          "question_id": "Q266",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"You can disagree respectfully — timing and tone matter\"",
-          "options": [
-            "Argue back",
-            "Ignore",
-            "Complain to others",
-            "Listen respectfully, then politely ask to discuss"
-          ],
-          "correct_answer": "Listen respectfully, then politely ask to discuss",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A friend is venting about a problem. They haven't asked for advice. What do you do?",
-          "question_id": "Q267",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Sometimes people just need to feel heard, not fixed\"",
-          "options": [
-            "Give advice immediately",
-            "Change the subject",
-            "Tell your own story",
-            "Listen and validate their feelings"
-          ],
-          "correct_answer": "Listen and validate their feelings",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "In a meeting, one person always speaks first and others wait. What social dynamic is at play?",
-          "question_id": "Q279",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"In groups, who speaks first often reflects who has power or status\"",
-          "options": [
-            "Everyone is equal",
-            "It is random",
-            "They are all friends",
-            "Hierarchy / authority dynamic"
-          ],
-          "correct_answer": "Hierarchy / authority dynamic",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "7": {
-      "name": "Theory of Mind",
-      "name_zh": "心智理论",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "This person is smiling, but their eyes are not smiling. How do they really feel?",
-          "question_id": "Q215",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"A real smile reaches the eyes — look for crow's feet wrinkles\"",
-          "options": [
-            "Sad/Hiding it",
-            "Happy",
-            "Excited",
-            "Neutral"
-          ],
-          "correct_answer": "Sad/Hiding it",
-          "image_hint": "sad_face"
-        },
-        {
-          "instruction": "How does this person feel? [Voice recording: shaky, quiet, hesitant speech]",
-          "question_id": "Q216",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"A shaky, quiet voice often means nervousness\"",
-          "options": [
-            "Nervous",
-            "Happy",
-            "Angry",
-            "Excited"
-          ],
-          "correct_answer": "Nervous",
-          "image_hint": "nervous_face"
-        },
-        {
-          "instruction": "Order the steps of helping someone who fell down.",
-          "question_id": "Q235",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you check first?\"",
-          "steps": [
-            "Check if they are hurt",
-            "Ask if they need help",
-            "Help them up",
-            "Ask if they need more help",
-            "Encourage them"
-          ],
-          "options": [
-            "Check if they are hurt",
-            "Ask if they need help",
-            "Help them up",
-            "Ask if they need more help",
-            "Encourage them"
-          ],
-          "correct_answer": "Check if they are hurt",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Order the steps of planning a group project.",
-          "question_id": "Q236",
-          "source_test": "BASC-3",
-          "sub_domain": "Social Sequencing",
-          "scaffolding_hint": "Say: \"What do you decide before you start working?\"",
-          "steps": [
-            "Form the group",
-            "Discuss the goal",
-            "Assign roles",
-            "Work on parts",
-            "Review together",
-            "Present"
-          ],
-          "options": [
-            "Form the group",
-            "Discuss the goal",
-            "Assign roles",
-            "Work on parts",
-            "Review together",
-            "Present"
-          ],
-          "correct_answer": "Form the group",
-          "image_hint": "sequence"
-        },
-        {
-          "instruction": "Two friends argue. One says sorry first. How does the other friend likely feel?",
-          "question_id": "Q248",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"An apology usually helps the other person feel better\"",
-          "options": [
-            "Relieved/Grateful",
-            "Angrier",
-            "Sad",
-            "Confused"
-          ],
-          "correct_answer": "Relieved/Grateful",
-          "image_hint": "happy_face",
-          "instruction_zh": "两个朋友吵架了。一个先道歉了。另一个朋友可能感觉怎样？"
-        },
-        {
-          "instruction": "A person is very quiet at a party. Others think they are rude. What might really be going on?",
-          "question_id": "Q249",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Quiet behavior can have many different causes\"",
-          "options": [
-            "Shy/Anxious",
-            "Rude",
-            "Bored",
-            "Tired"
-          ],
-          "correct_answer": "Shy/Anxious",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You are in a group discussion and someone keeps interrupting. What do you do?",
-          "question_id": "Q268",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"You can assert yourself without being aggressive\"",
-          "options": [
-            "Yell at them",
-            "Go silent",
-            "Leave",
-            "Calmly say 'I wasn't finished' and continue"
-          ],
-          "correct_answer": "Calmly say 'I wasn't finished' and continue",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "Someone online is being unkind to you. What is the best response?",
-          "question_id": "Q269",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Online safety means not engaging with unkind behavior\"",
-          "options": [
-            "Respond angrily",
-            "Share it widely",
-            "Ignore forever",
-            "Block/report and tell a trusted adult"
-          ],
-          "correct_answer": "Block/report and tell a trusted adult",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A person laughs at their own mistake in front of others. What social function does this serve?",
-          "question_id": "Q280",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"Laughing at yourself can make others feel comfortable\"",
-          "options": [
-            "Shows weakness",
-            "Is inappropriate",
-            "Shows anger",
-            "Diffuses tension / shows self-awareness"
-          ],
-          "correct_answer": "Diffuses tension / shows self-awareness",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "8": {
-      "name": "Social Judgment",
-      "name_zh": "社交判断",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "This person just heard bad news about a friend. They are trying to be strong. What are they feeling?",
-          "question_id": "Q217",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Being strong for others means hiding your own sadness\"",
-          "options": [
-            "Sad but suppressing it",
-            "Angry",
-            "Happy",
-            "Neutral"
-          ],
-          "correct_answer": "Sad but suppressing it",
-          "image_hint": "sad_but_suppressing_it_face"
-        },
-        {
-          "instruction": "Point to the WISTFUL face.",
-          "question_id": "Q218",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Wistful is a gentle sadness about something you miss or wish for\"",
-          "options": [
-            "Wistful",
-            "Sad",
-            "Happy",
-            "Nostalgic"
-          ],
-          "correct_answer": "Wistful",
-          "image_hint": "wistful_face"
-        },
-        {
-          "instruction": "A child always gives the 'right' answers but never initiates conversation. What might this suggest?",
-          "question_id": "Q250",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Sometimes people learn to say the right things without truly understanding them\"",
-          "options": [
-            "Learned social scripts / masking",
-            "Genuine social ease",
-            "Shyness",
-            "Boredom"
-          ],
-          "correct_answer": "Learned social scripts / masking",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A manager gives critical feedback harshly. The employee nods and says 'thank you.' What might the employee actually feel?",
-          "question_id": "Q251",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"People often say what is expected, not what they feel\"",
-          "options": [
-            "Hurt/Defensive",
-            "Grateful",
-            "Happy",
-            "Indifferent"
-          ],
-          "correct_answer": "Hurt/Defensive",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You realize mid-conversation that you have been talking too much about yourself. What do you do?",
-          "question_id": "Q270",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Good conversations are balanced — ask and listen\"",
-          "options": [
-            "Keep talking",
-            "Apologize excessively",
-            "Go silent",
-            "Ask the other person about themselves"
-          ],
-          "correct_answer": "Ask the other person about themselves",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A colleague takes credit for your idea. What is the most professional response?",
-          "question_id": "Q271",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Address it directly but professionally\"",
-          "options": [
-            "Publicly accuse them",
-            "Do nothing",
-            "Quit",
-            "Calmly clarify your contribution"
-          ],
-          "correct_answer": "Calmly clarify your contribution",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A child with ASD gives a very detailed, one-sided explanation of their special interest to a new acquaintance who looks increasingly uncomfortable. What is the social mismatch?",
-          "question_id": "Q281",
-          "source_test": "SRS-2",
-          "sub_domain": "Social Awareness",
-          "scaffolding_hint": "Say: \"Social conversation requires monitoring the other person's interest level\"",
-          "options": [
-            "The topic is boring",
-            "The child is rude",
-            "The listener is rude",
-            "Lack of reading the listener's disengagement cues"
-          ],
-          "correct_answer": "Lack of reading the listener's disengagement cues",
-          "image_hint": "hat"
-        }
-      ]
-    },
-    "9": {
-      "name": "Advanced Social",
-      "name_zh": "高级社交认知",
-      "task_type": "identify",
-      "tasks": [
-        {
-          "instruction": "This character is laughing loudly, but the context shows they just lost a competition. What is the most likely emotion?",
-          "question_id": "Q219",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Sometimes people laugh to hide embarrassment or hurt\"",
-          "options": [
-            "Bitter/Humiliated",
-            "Genuinely happy",
-            "Excited",
-            "Relieved"
-          ],
-          "correct_answer": "Bitter/Humiliated",
-          "image_hint": "bitter_face"
-        },
-        {
-          "instruction": "Identify the mixed emotion: [Person just graduated but their best friend is moving away]",
-          "question_id": "Q220",
-          "source_test": "SRS-2",
-          "sub_domain": "Affect Recognition",
-          "scaffolding_hint": "Say: \"Mixed emotions happen when something is both good and sad at the same time\"",
-          "options": [
-            "Bittersweet",
-            "Purely happy",
-            "Purely sad",
-            "Angry"
-          ],
-          "correct_answer": "Bittersweet",
-          "image_hint": "bittersweet_face"
-        },
-        {
-          "instruction": "A person donates to charity publicly. What are two possible motivations?",
-          "question_id": "Q252",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Human motivations are often mixed — more than one can be true\"",
-          "options": [
-            "Both motivations valid",
-            "Only one motivation"
-          ],
-          "correct_answer": "Both motivations valid",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "A child with autism gives a very literal answer to a sarcastic comment. Why is this a misunderstanding?",
-          "question_id": "Q253",
-          "source_test": "SRS-2",
-          "sub_domain": "Perspective Taking",
-          "scaffolding_hint": "Say: \"Sarcasm means the opposite of what is said — it requires reading tone and context\"",
-          "options": [
-            "Literal interpretation of sarcasm",
-            "They were being rude",
-            "They didn't hear"
-          ],
-          "correct_answer": "Literal interpretation of sarcasm",
-          "image_hint": "sun"
-        },
-        {
-          "instruction": "You notice a friend's behavior has changed significantly. You are worried. What do you do?",
-          "question_id": "Q272",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Concern for others is best expressed privately and gently\"",
-          "options": [
-            "Tell everyone",
-            "Ignore it",
-            "Confront them publicly",
-            "Find a private moment and gently check in"
-          ],
-          "correct_answer": "Find a private moment and gently check in",
-          "image_hint": "hat"
-        },
-        {
-          "instruction": "You are in a cultural setting where norms are different from yours. How do you behave?",
-          "question_id": "Q273",
-          "source_test": "ASRS",
-          "sub_domain": "Appropriate Response",
-          "scaffolding_hint": "Say: \"Cultural intelligence means being curious and respectful\"",
-          "options": [
-            "Impose your own norms",
-            "Refuse to engage",
-            "Criticize",
-            "Observe, ask respectfully, adapt"
-          ],
-          "correct_answer": "Observe, ask respectfully, adapt",
-          "image_hint": "book",
-          "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？"
-        }
-      ]
-    }
-  }
+          "dimension": "social_behavior",
+          "description": "Social Cognition: From emotion recognition to perspective taking",
+          "version": "research_v2",
+          "source": "Autism Neurodevelopmental Question Bank v1.0",
+          "levels": {
+                    "0": {
+                              "name": "Basic Emotions",
+                              "name_zh": "基础情绪",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "Point to the Happy face.",
+                                                  "question_id": "Q201",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Highlight the smiling face",
+                                                  "options": [
+                                                            "Happy",
+                                                            "Sad"
+                                                  ],
+                                                  "correct_answer": "Happy",
+                                                  "image_hint": "happy_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Sad face.",
+                                                  "question_id": "Q202",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Highlight the frowning face",
+                                                  "options": [
+                                                            "Sad",
+                                                            "Happy"
+                                                  ],
+                                                  "correct_answer": "Sad",
+                                                  "image_hint": "sad_face"
+                                        },
+                                        {
+                                                  "instruction": "Put these in order: [Eating, Washing hands, Sitting down]",
+                                                  "question_id": "Q221",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you do first before eating?\"",
+                                                  "steps": [
+                                                            "Washing hands",
+                                                            "Sitting down",
+                                                            "Eating"
+                                                  ],
+                                                  "options": [
+                                                            "Washing hands",
+                                                            "Sitting down",
+                                                            "Eating"
+                                                  ],
+                                                  "correct_answer": "Washing hands",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Put these in order: [Waking up, Getting dressed, Sleeping]",
+                                                  "question_id": "Q222",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What happens first in the morning?\"",
+                                                  "steps": [
+                                                            "Sleeping",
+                                                            "Waking up",
+                                                            "Getting dressed"
+                                                  ],
+                                                  "options": [
+                                                            "Sleeping",
+                                                            "Waking up",
+                                                            "Getting dressed"
+                                                  ],
+                                                  "correct_answer": "Sleeping",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "A friend is crying. What do you do?",
+                                                  "question_id": "Q254",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"What would make your friend feel better?\"",
+                                                  "options": [
+                                                            "Hug them",
+                                                            "Laugh",
+                                                            "Walk away",
+                                                            "Ignore"
+                                                  ],
+                                                  "correct_answer": "Hug them",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "Someone gives you a gift. What do you say?",
+                                                  "question_id": "Q255",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"What is the polite thing to say?\"",
+                                                  "options": [
+                                                            "Thank you",
+                                                            "Nothing",
+                                                            "Give it back",
+                                                            "Cry"
+                                                  ],
+                                                  "correct_answer": "Thank you",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "1": {
+                              "name": "Emotion Recognition",
+                              "name_zh": "情绪识别",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "How is this person feeling? [Big smile, arms up]",
+                                                  "question_id": "Q203",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Look at the smile and the arms\"",
+                                                  "options": [
+                                                            "Happy",
+                                                            "Sad",
+                                                            "Angry"
+                                                  ],
+                                                  "correct_answer": "Happy",
+                                                  "image_hint": "happy_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Angry face.",
+                                                  "question_id": "Q204",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Angry people have frowning eyebrows\"",
+                                                  "options": [
+                                                            "Angry",
+                                                            "Happy",
+                                                            "Sad"
+                                                  ],
+                                                  "correct_answer": "Angry",
+                                                  "image_hint": "angry_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of brushing teeth.",
+                                                  "question_id": "Q223",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you need before you can brush?\"",
+                                                  "steps": [
+                                                            "Get toothbrush",
+                                                            "Add toothpaste",
+                                                            "Brush",
+                                                            "Rinse"
+                                                  ],
+                                                  "options": [
+                                                            "Get toothbrush",
+                                                            "Add toothpaste",
+                                                            "Brush",
+                                                            "Rinse"
+                                                  ],
+                                                  "correct_answer": "Get toothbrush",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of buying something at a store.",
+                                                  "question_id": "Q224",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you do first in a store?\"",
+                                                  "steps": [
+                                                            "Pick item",
+                                                            "Go to cashier",
+                                                            "Pay",
+                                                            "Leave"
+                                                  ],
+                                                  "options": [
+                                                            "Pick item",
+                                                            "Go to cashier",
+                                                            "Pay",
+                                                            "Leave"
+                                                  ],
+                                                  "correct_answer": "Pick item",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Tom has a cookie. He puts it in the red box. Where is the cookie?",
+                                                  "question_id": "Q237",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Tom put it in the red box\"",
+                                                  "options": [
+                                                            "Red box",
+                                                            "Blue box"
+                                                  ],
+                                                  "correct_answer": "Red box",
+                                                  "image_hint": "cookie"
+                                        },
+                                        {
+                                                  "instruction": "You bump into someone by accident. What do you do?",
+                                                  "question_id": "Q256",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"What do you say when you accidentally hurt someone?\"",
+                                                  "options": [
+                                                            "Say sorry",
+                                                            "Run away",
+                                                            "Laugh",
+                                                            "Ignore"
+                                                  ],
+                                                  "correct_answer": "Say sorry",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "Someone is talking to you. What should you do?",
+                                                  "question_id": "Q257",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"What shows you are paying attention?\"",
+                                                  "options": [
+                                                            "Listen and look at them",
+                                                            "Play on your phone",
+                                                            "Walk away",
+                                                            "Talk over them"
+                                                  ],
+                                                  "correct_answer": "Listen and look at them",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "Two people are whispering and laughing. A third person walks by and they go quiet. How does the third person likely feel?",
+                                                  "question_id": "Q274",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"How would you feel if people went quiet when you walked by?\"",
+                                                  "options": [
+                                                            "Left out / uncomfortable",
+                                                            "Happy",
+                                                            "Angry",
+                                                            "Excited"
+                                                  ],
+                                                  "correct_answer": "Left out / uncomfortable",
+                                                  "image_hint": "sad_face",
+                                                  "instruction_zh": "两个人在窃窃私语和笑。第三个人走过，他们安静了。第三个人感觉怎样？"
+                                        }
+                              ]
+                    },
+                    "2": {
+                              "name": "Social Sequences",
+                              "name_zh": "社交顺序",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "Point to the Surprised face.",
+                                                  "question_id": "Q205",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Surprised people have wide eyes and an open mouth\"",
+                                                  "options": [
+                                                            "Surprised",
+                                                            "Happy",
+                                                            "Sad",
+                                                            "Angry"
+                                                  ],
+                                                  "correct_answer": "Surprised",
+                                                  "image_hint": "surprised_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Scared face.",
+                                                  "question_id": "Q206",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Scared people have wide eyes and look like they want to run\"",
+                                                  "options": [
+                                                            "Scared",
+                                                            "Happy",
+                                                            "Angry",
+                                                            "Surprised"
+                                                  ],
+                                                  "correct_answer": "Scared",
+                                                  "image_hint": "scared_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of making a phone call.",
+                                                  "question_id": "Q225",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you do before you can talk?\"",
+                                                  "steps": [
+                                                            "Pick up phone",
+                                                            "Dial number",
+                                                            "Talk",
+                                                            "Hang up"
+                                                  ],
+                                                  "options": [
+                                                            "Pick up phone",
+                                                            "Dial number",
+                                                            "Talk",
+                                                            "Hang up"
+                                                  ],
+                                                  "correct_answer": "Pick up phone",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of greeting a new classmate.",
+                                                  "question_id": "Q226",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What is the first thing you do when you meet someone?\"",
+                                                  "steps": [
+                                                            "Make eye contact",
+                                                            "Smile",
+                                                            "Say hello",
+                                                            "Ask their name"
+                                                  ],
+                                                  "options": [
+                                                            "Make eye contact",
+                                                            "Smile",
+                                                            "Say hello",
+                                                            "Ask their name"
+                                                  ],
+                                                  "correct_answer": "Make eye contact",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Sally puts her ball in the basket and leaves. Anne moves it to the box. Where will Sally Look for her ball?",
+                                                  "question_id": "Q238",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Sally doesn't know Anne moved it\"",
+                                                  "options": [
+                                                            "Basket",
+                                                            "Box"
+                                                  ],
+                                                  "correct_answer": "Basket",
+                                                  "image_hint": "ball"
+                                        },
+                                        {
+                                                  "instruction": "A box says 'Pencils' on it. Inside are actually candies. What will your friend think is inside before opening it?",
+                                                  "question_id": "Q239",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Your friend hasn't opened the box yet\"",
+                                                  "options": [
+                                                            "Pencils",
+                                                            "Candies"
+                                                  ],
+                                                  "correct_answer": "Pencils",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You want to join a game. What do you do?",
+                                                  "question_id": "Q258",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"How do you ask to join in a nice way?\"",
+                                                  "options": [
+                                                            "Ask politely",
+                                                            "Push in",
+                                                            "Wait and watch",
+                                                            "Cry"
+                                                  ],
+                                                  "correct_answer": "Ask politely",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A classmate gets a better grade than you. What is the best response?",
+                                                  "question_id": "Q259",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"How would you want someone to treat you if you did well?\"",
+                                                  "options": [
+                                                            "Congratulate them",
+                                                            "Get angry",
+                                                            "Ignore them",
+                                                            "Cheat next time"
+                                                  ],
+                                                  "correct_answer": "Congratulate them",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A child is playing alone while others play together. What might this mean?",
+                                                  "question_id": "Q275",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"Playing alone can mean different things for different people\"",
+                                                  "options": [
+                                                            "They are mean",
+                                                            "They are sick",
+                                                            "They are bored",
+                                                            "Both possibilities valid"
+                                                  ],
+                                                  "correct_answer": "Both possibilities valid",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "3": {
+                              "name": "Perspective Taking (Basic)",
+                              "name_zh": "基础视角转换",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "Point to the Disgusted face.",
+                                                  "question_id": "Q207",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Disgusted people wrinkle their nose like they smell something bad\"",
+                                                  "options": [
+                                                            "Disgusted",
+                                                            "Happy",
+                                                            "Sad",
+                                                            "Angry"
+                                                  ],
+                                                  "correct_answer": "Disgusted",
+                                                  "image_hint": "disgusted_face"
+                                        },
+                                        {
+                                                  "instruction": "How is this person feeling? [Slumped shoulders, looking down]",
+                                                  "question_id": "Q208",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Look at the body — slumped shoulders mean sadness\"",
+                                                  "options": [
+                                                            "Sad",
+                                                            "Happy",
+                                                            "Angry",
+                                                            "Excited"
+                                                  ],
+                                                  "correct_answer": "Sad",
+                                                  "image_hint": "sad_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of asking for help in class.",
+                                                  "question_id": "Q227",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you do before you can speak in class?\"",
+                                                  "steps": [
+                                                            "Raise hand",
+                                                            "Wait to be called",
+                                                            "Explain problem",
+                                                            "Listen to answer",
+                                                            "Say thank you"
+                                                  ],
+                                                  "options": [
+                                                            "Raise hand",
+                                                            "Wait to be called",
+                                                            "Explain problem",
+                                                            "Listen to answer",
+                                                            "Say thank you"
+                                                  ],
+                                                  "correct_answer": "Raise hand",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of joining a game at recess.",
+                                                  "question_id": "Q228",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you do before asking to join?\"",
+                                                  "steps": [
+                                                            "Watch the game",
+                                                            "Ask to join",
+                                                            "Wait for a turn",
+                                                            "Play",
+                                                            "Thank others"
+                                                  ],
+                                                  "options": [
+                                                            "Watch the game",
+                                                            "Ask to join",
+                                                            "Wait for a turn",
+                                                            "Play",
+                                                            "Thank others"
+                                                  ],
+                                                  "correct_answer": "Watch the game",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Max is hiding behind the couch. He can see his sister but she can't see him. Does his sister know where he is?",
+                                                  "question_id": "Q240",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Can the sister see Max?\"",
+                                                  "options": [
+                                                            "No",
+                                                            "Yes"
+                                                  ],
+                                                  "correct_answer": "No",
+                                                  "image_hint": "happy_face",
+                                                  "instruction_zh": "小明躲在沙发后面。他能看到姐姐，但姐姐看不到他。姐姐知道他在哪里吗？"
+                                        },
+                                        {
+                                                  "instruction": "Emma thinks the party is on Saturday. It is actually on Sunday. What day does Emma think the party is?",
+                                                  "question_id": "Q241",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"What does Emma THINK, not what is true?\"",
+                                                  "options": [
+                                                            "Saturday",
+                                                            "Sunday"
+                                                  ],
+                                                  "correct_answer": "Saturday",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You disagree with what a friend says. What do you do?",
+                                                  "question_id": "Q260",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"You can disagree and still be kind\"",
+                                                  "options": [
+                                                            "Calmly share your view",
+                                                            "Yell",
+                                                            "Ignore them",
+                                                            "Walk away"
+                                                  ],
+                                                  "correct_answer": "Calmly share your view",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You are in a library. Your phone rings. What do you do?",
+                                                  "question_id": "Q261",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Libraries are quiet places — what is respectful?\"",
+                                                  "options": [
+                                                            "Quickly silence it and step out",
+                                                            "Answer loudly",
+                                                            "Ignore it"
+                                                  ],
+                                                  "correct_answer": "Quickly silence it and step out",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A person keeps checking their watch during a conversation. What does this signal?",
+                                                  "question_id": "Q276",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"Checking a watch is a signal about time\"",
+                                                  "options": [
+                                                            "They are interested",
+                                                            "They are nervous",
+                                                            "They are angry",
+                                                            "They need to leave / are bored"
+                                                  ],
+                                                  "correct_answer": "They need to leave / are bored",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "4": {
+                              "name": "Appropriate Response",
+                              "name_zh": "适当回应",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "Point to the Embarrassed face.",
+                                                  "question_id": "Q209",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Embarrassed people look down and their cheeks turn red\"",
+                                                  "options": [
+                                                            "Embarrassed",
+                                                            "Angry",
+                                                            "Surprised",
+                                                            "Sad"
+                                                  ],
+                                                  "correct_answer": "Embarrassed",
+                                                  "image_hint": "embarrassed_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Frustrated face.",
+                                                  "question_id": "Q210",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Frustrated people look like they are trying hard but can't do something\"",
+                                                  "options": [
+                                                            "Frustrated",
+                                                            "Happy",
+                                                            "Excited",
+                                                            "Disgusted"
+                                                  ],
+                                                  "correct_answer": "Frustrated",
+                                                  "image_hint": "frustrated_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of resolving a disagreement with a friend.",
+                                                  "question_id": "Q229",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What should you do first when you are upset?\"",
+                                                  "steps": [
+                                                            "Calm down",
+                                                            "Listen to friend",
+                                                            "Share your view",
+                                                            "Find a compromise",
+                                                            "Shake hands"
+                                                  ],
+                                                  "options": [
+                                                            "Calm down",
+                                                            "Listen to friend",
+                                                            "Share your view",
+                                                            "Find a compromise",
+                                                            "Shake hands"
+                                                  ],
+                                                  "correct_answer": "Calm down",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of giving a compliment.",
+                                                  "question_id": "Q230",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you notice before you give a compliment?\"",
+                                                  "steps": [
+                                                            "Notice something nice",
+                                                            "Make eye contact",
+                                                            "Smile",
+                                                            "Say the compliment",
+                                                            "Wait for response"
+                                                  ],
+                                                  "options": [
+                                                            "Notice something nice",
+                                                            "Make eye contact",
+                                                            "Smile",
+                                                            "Say the compliment",
+                                                            "Wait for response"
+                                                  ],
+                                                  "correct_answer": "Notice something nice",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Jake is sad because he lost his toy. His friend Sam is laughing at a joke. Does Sam know Jake is sad?",
+                                                  "question_id": "Q242",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Did anyone tell Sam about Jake's toy?\"",
+                                                  "options": [
+                                                            "No (unless told)",
+                                                            "Yes"
+                                                  ],
+                                                  "correct_answer": "No (unless told)",
+                                                  "image_hint": "sad_face",
+                                                  "instruction_zh": "小明很伤心因为丢了玩具。朋友小红在笑一个笑话。小红知道小明伤心吗？"
+                                        },
+                                        {
+                                                  "instruction": "Anna tells Ben a secret. Ben tells Charlie. Does Anna know Charlie knows the secret?",
+                                                  "question_id": "Q243",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Did anyone tell Anna that Ben told Charlie?\"",
+                                                  "options": [
+                                                            "No",
+                                                            "Yes"
+                                                  ],
+                                                  "correct_answer": "No",
+                                                  "image_hint": "surprised_face",
+                                                  "instruction_zh": "小红告诉小明一个秘密。小明告诉了小华。小红知道小华知道这个秘密吗？"
+                                        },
+                                        {
+                                                  "instruction": "A friend tells you a secret. Another friend asks you about it. What do you do?",
+                                                  "question_id": "Q262",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"A secret means you promised not to tell\"",
+                                                  "options": [
+                                                            "Say you can't share it",
+                                                            "Tell the secret",
+                                                            "Lie"
+                                                  ],
+                                                  "correct_answer": "Say you can't share it",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You notice a classmate is being left out at lunch. What do you do?",
+                                                  "question_id": "Q263",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"How would you feel if you were left out?\"",
+                                                  "options": [
+                                                            "Invite them to sit with you",
+                                                            "Ignore it",
+                                                            "Laugh"
+                                                  ],
+                                                  "correct_answer": "Invite them to sit with you",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "Two people are standing very close and speaking quietly. What kind of conversation is this likely to be?",
+                                                  "question_id": "Q277",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"Physical closeness and quiet voices signal privacy\"",
+                                                  "options": [
+                                                            "Public",
+                                                            "Angry",
+                                                            "Professional",
+                                                            "Private / intimate"
+                                                  ],
+                                                  "correct_answer": "Private / intimate",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "5": {
+                              "name": "Complex Emotions",
+                              "name_zh": "复杂情绪",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "How does this person feel? [Clenched fists, stiff posture, tight jaw]",
+                                                  "question_id": "Q211",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Clenched fists and a stiff body often mean anger\"",
+                                                  "options": [
+                                                            "Angry",
+                                                            "Sad",
+                                                            "Excited",
+                                                            "Confused"
+                                                  ],
+                                                  "correct_answer": "Angry",
+                                                  "image_hint": "angry_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Jealous face.",
+                                                  "question_id": "Q212",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Jealous people look like they want what someone else has\"",
+                                                  "options": [
+                                                            "Jealous",
+                                                            "Happy",
+                                                            "Sad",
+                                                            "Surprised"
+                                                  ],
+                                                  "correct_answer": "Jealous",
+                                                  "image_hint": "jealous_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of apologizing sincerely.",
+                                                  "question_id": "Q231",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What is the first step in a real apology?\"",
+                                                  "steps": [
+                                                            "Acknowledge the mistake",
+                                                            "Express regret",
+                                                            "Explain what happened",
+                                                            "Promise to do better",
+                                                            "Give the person space"
+                                                  ],
+                                                  "options": [
+                                                            "Acknowledge the mistake",
+                                                            "Express regret",
+                                                            "Explain what happened",
+                                                            "Promise to do better",
+                                                            "Give the person space"
+                                                  ],
+                                                  "correct_answer": "Acknowledge the mistake",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of a job interview.",
+                                                  "question_id": "Q232",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you do before the interview?\"",
+                                                  "steps": [
+                                                            "Prepare",
+                                                            "Arrive on time",
+                                                            "Greet interviewer",
+                                                            "Answer questions",
+                                                            "Ask questions",
+                                                            "Thank them"
+                                                  ],
+                                                  "options": [
+                                                            "Prepare",
+                                                            "Arrive on time",
+                                                            "Greet interviewer",
+                                                            "Answer questions",
+                                                            "Ask questions",
+                                                            "Thank them"
+                                                  ],
+                                                  "correct_answer": "Prepare",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Tom thinks Mary likes him. Mary actually likes Tom's friend. What does Tom Think?",
+                                                  "question_id": "Q244",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"What does Tom believe, not what is true?\"",
+                                                  "options": [
+                                                            "Mary likes him",
+                                                            "Mary likes his friend"
+                                                  ],
+                                                  "correct_answer": "Mary likes him",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A boy is crying. His mother thinks he is hurt. He is actually crying because he is happy. What does the mother think?",
+                                                  "question_id": "Q245",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"What does the mother see? What does she know?\"",
+                                                  "options": [
+                                                            "He is hurt",
+                                                            "He is happy"
+                                                  ],
+                                                  "correct_answer": "He is hurt",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You made a mistake that affected your team. What do you do?",
+                                                  "question_id": "Q264",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Taking responsibility is a sign of maturity\"",
+                                                  "options": [
+                                                            "Blame others",
+                                                            "Pretend it didn't happen",
+                                                            "Quit",
+                                                            "Acknowledge it, apologize, and offer to fix it"
+                                                  ],
+                                                  "correct_answer": "Acknowledge it, apologize, and offer to fix it",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A new student looks lost and confused. What do you do?",
+                                                  "question_id": "Q265",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"How would you feel on your first day somewhere new?\"",
+                                                  "options": [
+                                                            "Ignore them",
+                                                            "Laugh",
+                                                            "Walk past",
+                                                            "Offer to help them find their way"
+                                                  ],
+                                                  "correct_answer": "Offer to help them find their way",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A person is nodding but not making eye contact and giving one-word answers. What does this suggest?",
+                                                  "question_id": "Q278",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"Nodding can be polite but not always genuine — look at the whole picture\"",
+                                                  "options": [
+                                                            "They are very interested",
+                                                            "They are happy",
+                                                            "They are focused",
+                                                            "They are disengaged or uncomfortable"
+                                                  ],
+                                                  "correct_answer": "They are disengaged or uncomfortable",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "6": {
+                              "name": "Social Awareness",
+                              "name_zh": "社会意识",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "This person just found out they won a prize but they are trying to hide their excitement. How do they feel?",
+                                                  "question_id": "Q213",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Sometimes people feel one thing but try to look different on the outside\"",
+                                                  "options": [
+                                                            "Excited (hiding it)",
+                                                            "Sad",
+                                                            "Angry",
+                                                            "Bored"
+                                                  ],
+                                                  "correct_answer": "Excited (hiding it)",
+                                                  "image_hint": "excited_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Contemptuous face.",
+                                                  "question_id": "Q214",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Contempt looks like a one-sided sneer — like looking down on someone\"",
+                                                  "options": [
+                                                            "Contemptuous",
+                                                            "Angry",
+                                                            "Sad",
+                                                            "Disgusted"
+                                                  ],
+                                                  "correct_answer": "Contemptuous",
+                                                  "image_hint": "contemptuous_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of comforting a friend who is upset.",
+                                                  "question_id": "Q233",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you notice first?\"",
+                                                  "steps": [
+                                                            "Notice they are upset",
+                                                            "Approach gently",
+                                                            "Ask if they want to talk",
+                                                            "Listen without interrupting",
+                                                            "Offer support"
+                                                  ],
+                                                  "options": [
+                                                            "Notice they are upset",
+                                                            "Approach gently",
+                                                            "Ask if they want to talk",
+                                                            "Listen without interrupting",
+                                                            "Offer support"
+                                                  ],
+                                                  "correct_answer": "Notice they are upset",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of a difficult conversation.",
+                                                  "question_id": "Q234",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you need to set up before a hard conversation?\"",
+                                                  "steps": [
+                                                            "Choose right time/place",
+                                                            "Start calmly",
+                                                            "State your feelings",
+                                                            "Listen to other person",
+                                                            "Find common ground",
+                                                            "Agree on next steps"
+                                                  ],
+                                                  "options": [
+                                                            "Choose right time/place",
+                                                            "Start calmly",
+                                                            "State your feelings",
+                                                            "Listen to other person",
+                                                            "Find common ground",
+                                                            "Agree on next steps"
+                                                  ],
+                                                  "correct_answer": "Choose right time/place",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Lucy wants the last cookie. She knows if she asks directly, her brother will say no. What might she do instead?",
+                                                  "question_id": "Q246",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"What strategy might work better than asking directly?\"",
+                                                  "options": [
+                                                            "Ask indirectly/distract",
+                                                            "Ask nicely",
+                                                            "Cry",
+                                                            "Take it"
+                                                  ],
+                                                  "correct_answer": "Ask indirectly/distract",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A teacher praises a student in front of the class. The student looks down and goes quiet. Why?",
+                                                  "question_id": "Q247",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Some people feel uncomfortable being the center of attention\"",
+                                                  "options": [
+                                                            "Embarrassed",
+                                                            "Happy",
+                                                            "Angry",
+                                                            "Sad"
+                                                  ],
+                                                  "correct_answer": "Embarrassed",
+                                                  "image_hint": "embarrassed_face",
+                                                  "instruction_zh": "老师在全班面前表扬了一个学生。学生低下头安静了。为什么？"
+                                        },
+                                        {
+                                                  "instruction": "Your teacher gives you feedback you disagree with. What do you do?",
+                                                  "question_id": "Q266",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"You can disagree respectfully — timing and tone matter\"",
+                                                  "options": [
+                                                            "Argue back",
+                                                            "Ignore",
+                                                            "Complain to others",
+                                                            "Listen respectfully, then politely ask to discuss"
+                                                  ],
+                                                  "correct_answer": "Listen respectfully, then politely ask to discuss",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A friend is venting about a problem. They haven't asked for advice. What do you do?",
+                                                  "question_id": "Q267",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Sometimes people just need to feel heard, not fixed\"",
+                                                  "options": [
+                                                            "Give advice immediately",
+                                                            "Change the subject",
+                                                            "Tell your own story",
+                                                            "Listen and validate their feelings"
+                                                  ],
+                                                  "correct_answer": "Listen and validate their feelings",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "In a meeting, one person always speaks first and others wait. What social dynamic is at play?",
+                                                  "question_id": "Q279",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"In groups, who speaks first often reflects who has power or status\"",
+                                                  "options": [
+                                                            "Everyone is equal",
+                                                            "It is random",
+                                                            "They are all friends",
+                                                            "Hierarchy / authority dynamic"
+                                                  ],
+                                                  "correct_answer": "Hierarchy / authority dynamic",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "7": {
+                              "name": "Theory of Mind",
+                              "name_zh": "心智理论",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "This person is smiling, but their eyes are not smiling. How do they really feel?",
+                                                  "question_id": "Q215",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"A real smile reaches the eyes — look for crow's feet wrinkles\"",
+                                                  "options": [
+                                                            "Sad/Hiding it",
+                                                            "Happy",
+                                                            "Excited",
+                                                            "Neutral"
+                                                  ],
+                                                  "correct_answer": "Sad/Hiding it",
+                                                  "image_hint": "sad_face"
+                                        },
+                                        {
+                                                  "instruction": "How does this person feel? [Voice recording: shaky, quiet, hesitant speech]",
+                                                  "question_id": "Q216",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"A shaky, quiet voice often means nervousness\"",
+                                                  "options": [
+                                                            "Nervous",
+                                                            "Happy",
+                                                            "Angry",
+                                                            "Excited"
+                                                  ],
+                                                  "correct_answer": "Nervous",
+                                                  "image_hint": "nervous_face"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of helping someone who fell down.",
+                                                  "question_id": "Q235",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you check first?\"",
+                                                  "steps": [
+                                                            "Check if they are hurt",
+                                                            "Ask if they need help",
+                                                            "Help them up",
+                                                            "Ask if they need more help",
+                                                            "Encourage them"
+                                                  ],
+                                                  "options": [
+                                                            "Check if they are hurt",
+                                                            "Ask if they need help",
+                                                            "Help them up",
+                                                            "Ask if they need more help",
+                                                            "Encourage them"
+                                                  ],
+                                                  "correct_answer": "Check if they are hurt",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Order the steps of planning a group project.",
+                                                  "question_id": "Q236",
+                                                  "source_test": "BASC-3",
+                                                  "sub_domain": "Social Sequencing",
+                                                  "scaffolding_hint": "Say: \"What do you decide before you start working?\"",
+                                                  "steps": [
+                                                            "Form the group",
+                                                            "Discuss the goal",
+                                                            "Assign roles",
+                                                            "Work on parts",
+                                                            "Review together",
+                                                            "Present"
+                                                  ],
+                                                  "options": [
+                                                            "Form the group",
+                                                            "Discuss the goal",
+                                                            "Assign roles",
+                                                            "Work on parts",
+                                                            "Review together",
+                                                            "Present"
+                                                  ],
+                                                  "correct_answer": "Form the group",
+                                                  "image_hint": "sequence"
+                                        },
+                                        {
+                                                  "instruction": "Two friends argue. One says sorry first. How does the other friend likely feel?",
+                                                  "question_id": "Q248",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"An apology usually helps the other person feel better\"",
+                                                  "options": [
+                                                            "Relieved/Grateful",
+                                                            "Angrier",
+                                                            "Sad",
+                                                            "Confused"
+                                                  ],
+                                                  "correct_answer": "Relieved/Grateful",
+                                                  "image_hint": "happy_face",
+                                                  "instruction_zh": "两个朋友吵架了。一个先道歉了。另一个朋友可能感觉怎样？"
+                                        },
+                                        {
+                                                  "instruction": "A person is very quiet at a party. Others think they are rude. What might really be going on?",
+                                                  "question_id": "Q249",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Quiet behavior can have many different causes\"",
+                                                  "options": [
+                                                            "Shy/Anxious",
+                                                            "Rude",
+                                                            "Bored",
+                                                            "Tired"
+                                                  ],
+                                                  "correct_answer": "Shy/Anxious",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You are in a group discussion and someone keeps interrupting. What do you do?",
+                                                  "question_id": "Q268",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"You can assert yourself without being aggressive\"",
+                                                  "options": [
+                                                            "Yell at them",
+                                                            "Go silent",
+                                                            "Leave",
+                                                            "Calmly say 'I wasn't finished' and continue"
+                                                  ],
+                                                  "correct_answer": "Calmly say 'I wasn't finished' and continue",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "Someone online is being unkind to you. What is the best response?",
+                                                  "question_id": "Q269",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Online safety means not engaging with unkind behavior\"",
+                                                  "options": [
+                                                            "Respond angrily",
+                                                            "Share it widely",
+                                                            "Ignore forever",
+                                                            "Block/report and tell a trusted adult"
+                                                  ],
+                                                  "correct_answer": "Block/report and tell a trusted adult",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A person laughs at their own mistake in front of others. What social function does this serve?",
+                                                  "question_id": "Q280",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"Laughing at yourself can make others feel comfortable\"",
+                                                  "options": [
+                                                            "Shows weakness",
+                                                            "Is inappropriate",
+                                                            "Shows anger",
+                                                            "Diffuses tension / shows self-awareness"
+                                                  ],
+                                                  "correct_answer": "Diffuses tension / shows self-awareness",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "8": {
+                              "name": "Social Judgment",
+                              "name_zh": "社交判断",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "This person just heard bad news about a friend. They are trying to be strong. What are they feeling?",
+                                                  "question_id": "Q217",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Being strong for others means hiding your own sadness\"",
+                                                  "options": [
+                                                            "Sad but suppressing it",
+                                                            "Angry",
+                                                            "Happy",
+                                                            "Neutral"
+                                                  ],
+                                                  "correct_answer": "Sad but suppressing it",
+                                                  "image_hint": "sad_but_suppressing_it_face"
+                                        },
+                                        {
+                                                  "instruction": "Point to the Wistful face.",
+                                                  "question_id": "Q218",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Wistful is a gentle sadness about something you miss or wish for\"",
+                                                  "options": [
+                                                            "Wistful",
+                                                            "Sad",
+                                                            "Happy",
+                                                            "Nostalgic"
+                                                  ],
+                                                  "correct_answer": "Wistful",
+                                                  "image_hint": "wistful_face"
+                                        },
+                                        {
+                                                  "instruction": "A child always gives the 'right' answers but never initiates conversation. What might this suggest?",
+                                                  "question_id": "Q250",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Sometimes people learn to say the right things without truly understanding them\"",
+                                                  "options": [
+                                                            "Learned social scripts / masking",
+                                                            "Genuine social ease",
+                                                            "Shyness",
+                                                            "Boredom"
+                                                  ],
+                                                  "correct_answer": "Learned social scripts / masking",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A manager gives critical feedback harshly. The employee nods and says 'thank you.' What might the employee actually feel?",
+                                                  "question_id": "Q251",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"People often say what is expected, not what they feel\"",
+                                                  "options": [
+                                                            "Hurt/Defensive",
+                                                            "Grateful",
+                                                            "Happy",
+                                                            "Indifferent"
+                                                  ],
+                                                  "correct_answer": "Hurt/Defensive",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You realize mid-conversation that you have been talking too much about yourself. What do you do?",
+                                                  "question_id": "Q270",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Good conversations are balanced — ask and listen\"",
+                                                  "options": [
+                                                            "Keep talking",
+                                                            "Apologize excessively",
+                                                            "Go silent",
+                                                            "Ask the other person about themselves"
+                                                  ],
+                                                  "correct_answer": "Ask the other person about themselves",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A colleague takes credit for your idea. What is the most professional response?",
+                                                  "question_id": "Q271",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Address it directly but professionally\"",
+                                                  "options": [
+                                                            "Publicly accuse them",
+                                                            "Do nothing",
+                                                            "Quit",
+                                                            "Calmly clarify your contribution"
+                                                  ],
+                                                  "correct_answer": "Calmly clarify your contribution",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A child with ASD gives a very detailed, one-sided explanation of their special interest to a new acquaintance who looks increasingly uncomfortable. What is the social mismatch?",
+                                                  "question_id": "Q281",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Social Awareness",
+                                                  "scaffolding_hint": "Say: \"Social conversation requires monitoring the other person's interest level\"",
+                                                  "options": [
+                                                            "The topic is boring",
+                                                            "The child is rude",
+                                                            "The listener is rude",
+                                                            "Lack of reading the listener's disengagement cues"
+                                                  ],
+                                                  "correct_answer": "Lack of reading the listener's disengagement cues",
+                                                  "image_hint": "hat"
+                                        }
+                              ]
+                    },
+                    "9": {
+                              "name": "Advanced Social",
+                              "name_zh": "高级社交认知",
+                              "task_type": "identify",
+                              "tasks": [
+                                        {
+                                                  "instruction": "This character is laughing loudly, but the context shows they just lost a competition. What is the most likely emotion?",
+                                                  "question_id": "Q219",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Sometimes people laugh to hide embarrassment or hurt\"",
+                                                  "options": [
+                                                            "Bitter/Humiliated",
+                                                            "Genuinely happy",
+                                                            "Excited",
+                                                            "Relieved"
+                                                  ],
+                                                  "correct_answer": "Bitter/Humiliated",
+                                                  "image_hint": "bitter_face"
+                                        },
+                                        {
+                                                  "instruction": "Identify the mixed emotion: [Person just graduated but their best friend is moving away]",
+                                                  "question_id": "Q220",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Affect Recognition",
+                                                  "scaffolding_hint": "Say: \"Mixed emotions happen when something is both good and sad at the same time\"",
+                                                  "options": [
+                                                            "Bittersweet",
+                                                            "Purely happy",
+                                                            "Purely sad",
+                                                            "Angry"
+                                                  ],
+                                                  "correct_answer": "Bittersweet",
+                                                  "image_hint": "bittersweet_face"
+                                        },
+                                        {
+                                                  "instruction": "A person donates to charity publicly. What are two possible motivations?",
+                                                  "question_id": "Q252",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Human motivations are often mixed — more than one can be true\"",
+                                                  "options": [
+                                                            "Both motivations valid",
+                                                            "Only one motivation"
+                                                  ],
+                                                  "correct_answer": "Both motivations valid",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "A child with autism gives a very literal answer to a sarcastic comment. Why is this a misunderstanding?",
+                                                  "question_id": "Q253",
+                                                  "source_test": "SRS-2",
+                                                  "sub_domain": "Perspective Taking",
+                                                  "scaffolding_hint": "Say: \"Sarcasm means the opposite of what is said — it requires reading tone and context\"",
+                                                  "options": [
+                                                            "Literal interpretation of sarcasm",
+                                                            "They were being rude",
+                                                            "They didn't hear"
+                                                  ],
+                                                  "correct_answer": "Literal interpretation of sarcasm",
+                                                  "image_hint": "sun"
+                                        },
+                                        {
+                                                  "instruction": "You notice a friend's behavior has changed significantly. You are worried. What do you do?",
+                                                  "question_id": "Q272",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Concern for others is best expressed privately and gently\"",
+                                                  "options": [
+                                                            "Tell everyone",
+                                                            "Ignore it",
+                                                            "Confront them publicly",
+                                                            "Find a private moment and gently check in"
+                                                  ],
+                                                  "correct_answer": "Find a private moment and gently check in",
+                                                  "image_hint": "hat"
+                                        },
+                                        {
+                                                  "instruction": "You are in a cultural setting where norms are different from yours. How do you behave?",
+                                                  "question_id": "Q273",
+                                                  "source_test": "ASRS",
+                                                  "sub_domain": "Appropriate Response",
+                                                  "scaffolding_hint": "Say: \"Cultural intelligence means being curious and respectful\"",
+                                                  "options": [
+                                                            "Impose your own norms",
+                                                            "Refuse to engage",
+                                                            "Criticize",
+                                                            "Observe, ask respectfully, adapt"
+                                                  ],
+                                                  "correct_answer": "Observe, ask respectfully, adapt",
+                                                  "image_hint": "book",
+                                                  "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？"
+                                        }
+                              ]
+                    }
+          }
 }
