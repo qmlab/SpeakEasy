@@ -592,15 +592,18 @@ struct LearningSessionView: View {
               task.content.displayOptions.count >= 2 else {
             return false
         }
-        // Every option must look like a simple object name (≤ 3 words,
-        // no action-verb prefix, no commas listing multiple items).
+        // Every option must be a single word with no special characters.
+        // This reliably keeps base-task options like "Dog", "Cat", "Ball"
+        // and simple expanded options like "Happy", "Circle", "Star" in the
+        // grid, while pushing multi-word action phrases ("Tap star only",
+        // "Red circle", "Say sorry") to text buttons.
         return task.content.displayOptions.allSatisfy { option in
             let words = option.split(separator: " ")
-            let lc = option.lowercased()
-            let isShort = words.count <= 3
-            let noActionPrefix = !lc.hasPrefix("tap ") && !lc.hasPrefix("miss ")
-            let noList = !option.contains(",")
-            return isShort && noActionPrefix && noList
+            return words.count == 1
+                && !option.contains(",")
+                && !option.contains("(")
+                && !option.contains("/")
+                && !option.contains("-")
         }
     }
 
