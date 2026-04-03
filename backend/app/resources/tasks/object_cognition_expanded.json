@@ -16,11 +16,12 @@
                                                   "sub_domain": "Inhibitory Control",
                                                   "scaffolding_hint": "Slow the pace; flash green circle green",
                                                   "options": [
-                                                            "Tap green only",
-                                                            "Tap red"
+                                                            "Green circle",
+                                                            "Red circle"
                                                   ],
-                                                  "correct_answer": "Tap green only",
-                                                  "image_hint": "circle"
+                                                  "correct_answer": "Green circle",
+                                                  "image_hint": "circle",
+                                                  "inline_images": true
                                         },
                                         {
                                                   "instruction": "Tap the star. Do not tap the square.",
@@ -29,11 +30,12 @@
                                                   "sub_domain": "Inhibitory Control",
                                                   "scaffolding_hint": "Highlight the star briefly",
                                                   "options": [
-                                                            "Tap star only",
-                                                            "Tap square"
+                                                            "Star",
+                                                            "Square"
                                                   ],
-                                                  "correct_answer": "Tap star only",
-                                                  "image_hint": "star"
+                                                  "correct_answer": "Star",
+                                                  "image_hint": "star",
+                                                  "inline_images": true
                                         },
                                         {
                                                   "instruction": "Watch! What color did you see? Tap the right one.",
@@ -108,11 +110,12 @@
                                                   "sub_domain": "Inhibitory Control",
                                                   "scaffolding_hint": "Say: \"Only tap the dog!\"",
                                                   "options": [
-                                                            "Tap dog only",
-                                                            "Tap cat"
+                                                            "Dog",
+                                                            "Cat"
                                                   ],
-                                                  "correct_answer": "Tap dog only",
-                                                  "image_hint": "dog"
+                                                  "correct_answer": "Dog",
+                                                  "image_hint": "dog",
+                                                  "inline_images": true
                                         },
                                         {
                                                   "instruction": "Tap the number 3. Do not tap other numbers.",
