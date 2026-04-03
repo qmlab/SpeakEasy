@@ -964,7 +964,12 @@ struct LearningSessionView: View {
                                     }
                                     // Check if arrangement is correct and auto-submit
                                     if dragArrangeItems == correctOrder {
+                                        let capturedTaskId = learningManager.currentTask?.taskId
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                            // Guard against double-submit: skip if already
+                                            // submitting or if the task changed since the drag ended.
+                                            guard !learningManager.isSubmitting,
+                                                  learningManager.currentTask?.taskId == capturedTaskId else { return }
                                             Task {
                                                 await learningManager.submitAttempt(
                                                     isCorrect: true,
@@ -1821,19 +1826,15 @@ struct LearningSessionView: View {
                             isEvaluating = false
                         }
                     } else {
-                        speechRetryCount += 1
-                        if speechRetryCount >= maxSpeechRetries {
-                            isEvaluating = true
-                            Task {
-                                await learningManager.submitAttempt(
-                                    isCorrect: false,
-                                    score: Int(rating),
-                                    dimension: dimension
-                                )
-                                isEvaluating = false
-                            }
-                        } else {
-                            spokenText = "Not quite! Try again (\(maxSpeechRetries - speechRetryCount) left)"
+                        spokenText = "Incorrect"
+                        isEvaluating = true
+                        Task {
+                            await learningManager.submitAttempt(
+                                isCorrect: false,
+                                score: Int(rating),
+                                dimension: dimension
+                            )
+                            isEvaluating = false
                         }
                     }
                 } else {
@@ -1934,11 +1935,11 @@ struct LearningSessionView: View {
             }
             .disabled(learningManager.isSubmitting || isEvaluating)
 
-            // Retry counter
-            if speechRetryCount > 0 && speechRetryCount < maxSpeechRetries && !isListening {
-                Text("Attempt \(speechRetryCount)/\(maxSpeechRetries)")
+            // Retry counter (kept for visual feedback after incorrect attempt)
+            if speechRetryCount > 0 && !isListening {
+                Text("Incorrect — try another question")
                     .font(.caption)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.red)
             }
 
             // Help buttons: hear the word + show hint
