@@ -773,9 +773,21 @@ struct LearningSessionView: View {
     /// "Tap star only" or "Miss or false alarm" — those fall back to
     /// the standard text-button layout.
     private func isImageGridTask(_ task: AdaptiveTask) -> Bool {
-        // Pattern tasks always use image grid for options (shape images)
+        // Pattern tasks use image grid only when all options are image-compatible
+        // names (single words, no bare numbers).  Tasks like Q091 ("5 apples"),
+        // Q094 ("5"), Q099 ("162") fall through to text buttons instead.
         if isPatternTask(task) && task.content.displayOptions.count >= 2 {
-            return true
+            let allImageCompatible = task.content.displayOptions.allSatisfy { option in
+                let words = option.split(separator: " ")
+                return words.count == 1
+                    && !option.contains(",")
+                    && !option.contains("(")
+                    && !option.contains("/")
+                    && !option.contains("-")
+                    && option.rangeOfCharacter(from: .decimalDigits) != option.startIndex..<option.endIndex
+                    && Int(option) == nil
+            }
+            if allImageCompatible { return true }
         }
         let visualTypes: Set<String> = ["identify", "point_to", "match_word_image", "recognize_image", "match"]
         guard visualTypes.contains(task.taskType),
