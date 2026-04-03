@@ -580,9 +580,31 @@ struct LearningSessionView: View {
 
     /// Whether this task should display options as a visual image grid
     /// (identify / point_to tasks where the child picks from multiple images).
+    ///
+    /// Only shows the grid when ALL options are short, simple object names
+    /// that are likely to have matching Cloudinary images.  Expanded
+    /// question-bank tasks often have action-phrase options like
+    /// "Tap star only" or "Miss or false alarm" — those fall back to
+    /// the standard text-button layout.
     private func isImageGridTask(_ task: AdaptiveTask) -> Bool {
         let visualTypes: Set<String> = ["identify", "point_to", "match_word_image", "recognize_image", "match"]
-        return visualTypes.contains(task.taskType) && task.content.displayOptions.count >= 2
+        guard visualTypes.contains(task.taskType),
+              task.content.displayOptions.count >= 2 else {
+            return false
+        }
+        // Every option must be a single word with no special characters.
+        // This reliably keeps base-task options like "Dog", "Cat", "Ball"
+        // and simple expanded options like "Happy", "Circle", "Star" in the
+        // grid, while pushing multi-word action phrases ("Tap star only",
+        // "Red circle", "Say sorry") to text buttons.
+        return task.content.displayOptions.allSatisfy { option in
+            let words = option.split(separator: " ")
+            return words.count == 1
+                && !option.contains(",")
+                && !option.contains("(")
+                && !option.contains("/")
+                && !option.contains("-")
+        }
     }
 
     @ViewBuilder
