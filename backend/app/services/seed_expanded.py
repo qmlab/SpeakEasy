@@ -284,7 +284,7 @@ def _build_content(task_type: str, task_data: dict) -> dict:
             shuffled = list(steps)
             random.shuffle(shuffled)
             # Avoid presenting options in the already-correct order
-            while shuffled == list(steps) and len(steps) > 1:
+            while shuffled == list(steps) and len(steps) > 1 and len(set(steps)) > 1:
                 random.shuffle(shuffled)
             content["options"] = shuffled
         if "correct_answer" not in content or not content["correct_answer"]:
@@ -311,7 +311,7 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content["items"] = list(items)  # correct order
                 shuffled = list(items)
                 random.shuffle(shuffled)
-                while shuffled == list(items) and len(items) > 1:
+                while shuffled == list(items) and len(items) > 1 and len(set(items)) > 1:
                     random.shuffle(shuffled)
                 content["options"] = shuffled
                 content["correct_answer"] = items[0]
