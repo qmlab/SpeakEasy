@@ -294,12 +294,16 @@ def _build_content(task_type: str, task_data: dict) -> dict:
     # order." currently have a single composite option ("3 then 7").  Break
     # them into individual tappable items so the ordering UI can be used.
     inst_lower = (task_data.get("instruction") or "").lower()
-    if ("tap them in order" in inst_lower or "tap in order" in inst_lower) and \
-       "items" not in content:
+    if (
+        "tap them in order" in inst_lower or "tap in order" in inst_lower
+    ) and "items" not in content:
         # Try to extract individual items from instruction
         # Pattern: "Remember: 3, 7. Tap them in order."
         import re
-        match = re.search(r"remember[^:]*:\s*(.+?)\.", task_data.get("instruction", ""), re.IGNORECASE)
+
+        match = re.search(
+            r"remember[^:]*:\s*(.+?)\.", task_data.get("instruction", ""), re.IGNORECASE
+        )
         if match:
             raw = match.group(1)
             items = [s.strip() for s in raw.split(",") if s.strip()]
