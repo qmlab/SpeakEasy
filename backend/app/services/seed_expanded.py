@@ -297,29 +297,59 @@ def _build_content(task_type: str, task_data: dict) -> dict:
     # Memory-sequence tasks: instructions like "Remember: 3, 7. Tap them in
     # order." currently have a single composite option ("3 then 7").  Break
     # them into individual tappable items so the ordering UI can be used.
+    #
+    # IMPORTANT: Some tasks say "Tap them in order from smallest to largest"
+    # (e.g. Q121). For those, the instruction sequence is NOT the correct
+    # answer order — the existing correct_answer field already has the right
+    # order.  We detect qualifiers and use the existing correct_answer when
+    # available.
     inst_lower = (task_data.get("instruction") or "").lower()
     if (
         "tap them in order" in inst_lower or "tap in order" in inst_lower
     ) and "items" not in content:
-        # Try to extract individual items from instruction
-        # Pattern: "Remember: 3, 7. Tap them in order."
         import re
 
-        match = re.search(
-            r"remember[^:]*:\s*(.+?)\.", task_data.get("instruction", ""), re.IGNORECASE
+        # Check if the instruction has a qualifier that changes ordering
+        # (e.g. "from smallest to largest", "in reverse")
+        has_qualifier = any(
+            q in inst_lower
+            for q in [
+                "smallest to largest",
+                "largest to smallest",
+                "reverse",
+                "alphabetical",
+            ]
         )
-        if match:
-            raw = match.group(1)
-            items = [s.strip() for s in raw.split(",") if s.strip()]
-            if len(items) >= 2:
-                content["items"] = list(items)  # correct order
-                shuffled = list(items)
+
+        # If a correct_answer already exists and looks like a comma-separated
+        # list, prefer it as the canonical correct order.
+        existing_answer = content.get("correct_answer") or ""
+        answer_items = [s.strip() for s in existing_answer.split(",") if s.strip()]
+
+        if has_qualifier and len(answer_items) >= 2:
+            # Use the existing correct_answer as the correct order
+            items = answer_items
+        else:
+            # Extract items from instruction text
+            # Pattern: "Remember: 3, 7. Tap them in order."
+            match = re.search(
+                r"remember[^:]*:\s*(.+?)\.",
+                task_data.get("instruction", ""),
+                re.IGNORECASE,
+            )
+            items = []
+            if match:
+                raw = match.group(1)
+                items = [s.strip() for s in raw.split(",") if s.strip()]
+
+        if len(items) >= 2:
+            content["items"] = list(items)  # correct order
+            shuffled = list(items)
+            random.shuffle(shuffled)
+            while shuffled == list(items) and len(items) > 1 and len(set(items)) > 1:
                 random.shuffle(shuffled)
-                while (
-                    shuffled == list(items) and len(items) > 1 and len(set(items)) > 1
-                ):
-                    random.shuffle(shuffled)
-                content["options"] = shuffled
+            content["options"] = shuffled
+            if "correct_answer" not in content or not content["correct_answer"]:
                 content["correct_answer"] = items[0]
 
     return content
