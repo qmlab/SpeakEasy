@@ -255,6 +255,7 @@ struct TaskContent: Codable {
     let items: [String]?
     let sequence: [String]?
     let gridLayout: [Int]?
+    let animationFrames: [String]?
     let openEnded: Bool?
     let exampleAnswers: [String]?
     let keywords: [String]?
@@ -277,6 +278,7 @@ struct TaskContent: Codable {
         case items
         case sequence
         case gridLayout = "grid_layout"
+        case animationFrames = "animation_frames"
         case target
         case choices
         case openEnded = "open_ended"
@@ -301,6 +303,7 @@ struct TaskContent: Codable {
         items = try container.decodeIfPresent([String].self, forKey: .items)
         sequence = try container.decodeIfPresent([String].self, forKey: .sequence)
         gridLayout = try container.decodeIfPresent([Int].self, forKey: .gridLayout)
+        animationFrames = try container.decodeIfPresent([String].self, forKey: .animationFrames)
         openEnded = try container.decodeIfPresent(Bool.self, forKey: .openEnded)
         exampleAnswers = try container.decodeIfPresent([String].self, forKey: .exampleAnswers)
         keywords = try container.decodeIfPresent([String].self, forKey: .keywords)
@@ -354,6 +357,7 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(items, forKey: .items)
         try container.encodeIfPresent(sequence, forKey: .sequence)
         try container.encodeIfPresent(gridLayout, forKey: .gridLayout)
+        try container.encodeIfPresent(animationFrames, forKey: .animationFrames)
         try container.encodeIfPresent(openEnded, forKey: .openEnded)
         try container.encodeIfPresent(exampleAnswers, forKey: .exampleAnswers)
         try container.encodeIfPresent(keywords, forKey: .keywords)

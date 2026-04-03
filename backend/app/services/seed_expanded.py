@@ -271,6 +271,15 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Animation frames for visual tasks (n-back, working memory, etc.)
+    # ------------------------------------------------------------------
+    # Tasks with an `animation_frames` array contain images to display
+    # as a timed slideshow before presenting the question.  Pass the
+    # frames through so iOS can play the animation, then show options.
+    if "animation_frames" in task_data and task_data["animation_frames"]:
+        content["animation_frames"] = list(task_data["animation_frames"])
+
+    # ------------------------------------------------------------------
     # Pattern-finding tasks (cognitive_logic with `sequence` field)
     # ------------------------------------------------------------------
     # Tasks with a `sequence` array display a visual pattern of shape

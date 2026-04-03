@@ -236,7 +236,8 @@
             "Excited"
           ],
           "correct_answer": "Left out / uncomfortable",
-          "image_hint": "question"
+          "image_hint": "sad_face",
+          "instruction_zh": "两个人在窃窃私语和笑。第三个人走过，他们安静了。第三个人感觉怎样？"
         }
       ]
     },
@@ -480,7 +481,8 @@
             "Yes"
           ],
           "correct_answer": "No",
-          "image_hint": "question"
+          "image_hint": "happy_face",
+          "instruction_zh": "小明躲在沙发后面。他能看到姐姐，但姐姐看不到他。姐姐知道他在哪里吗？"
         },
         {
           "instruction": "Emma thinks the party is on Saturday. It is actually on Sunday. What day does Emma think the party is?",
@@ -631,7 +633,8 @@
             "Yes"
           ],
           "correct_answer": "No (unless told)",
-          "image_hint": "question"
+          "image_hint": "sad_face",
+          "instruction_zh": "小明很伤心因为丢了玩具。朋友小红在笑一个笑话。小红知道小明伤心吗？"
         },
         {
           "instruction": "Anna tells Ben a secret. Ben tells Charlie. Does Anna know Charlie knows the secret?",
@@ -644,7 +647,8 @@
             "Yes"
           ],
           "correct_answer": "No",
-          "image_hint": "question"
+          "image_hint": "surprised_face",
+          "instruction_zh": "小红告诉小明一个秘密。小明告诉了小华。小红知道小华知道这个秘密吗？"
         },
         {
           "instruction": "A friend tells you a secret. Another friend asks you about it. What do you do?",
@@ -952,7 +956,8 @@
             "Sad"
           ],
           "correct_answer": "Embarrassed",
-          "image_hint": "question"
+          "image_hint": "embarrassed_face",
+          "instruction_zh": "老师在全班面前表扬了一个学生。学生低下头安静了。为什么？"
         },
         {
           "instruction": "Your teacher gives you feedback you disagree with. What do you do?",
@@ -1092,7 +1097,8 @@
             "Confused"
           ],
           "correct_answer": "Relieved/Grateful",
-          "image_hint": "question"
+          "image_hint": "happy_face",
+          "instruction_zh": "两个朋友吵架了。一个先道歉了。另一个朋友可能感觉怎样？"
         },
         {
           "instruction": "A person is very quiet at a party. Others think they are rude. What might really be going on?",
@@ -1344,7 +1350,8 @@
             "adapt"
           ],
           "correct_answer": "Impose your own norms, Refuse to engage, Criticize",
-          "image_hint": "question"
+          "image_hint": "book",
+          "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？"
         }
       ]
     }
