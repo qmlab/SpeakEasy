@@ -937,7 +937,7 @@ struct LearningSessionView: View {
                                     if draggedItem == nil {
                                         draggedItem = item
                                     }
-                                    dragOffset = value.translation
+                                    dragOffset = CGSize(width: value.translation.width - dragSwapConsumed, height: value.translation.height)
                                     // Determine swap target based on horizontal drag distance.
                                     // Use dragSwapConsumed to track offset already used by
                                     // previous swaps so we don't cascade multiple swaps.
