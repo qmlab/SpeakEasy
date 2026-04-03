@@ -39,6 +39,10 @@ struct LearningSessionView: View {
     @State private var multiTapCount: Int = 0
     /// Text/number input state (for counting and fill-in-the-word tasks)
     @State private var textInputValue: String = ""
+    /// Flash image state (for visual memory tasks like "Watch the light flash")
+    @State private var flashVisible: Bool = false
+    @State private var flashPhase: Int = 0  // current index in flash_sequence
+    @State private var flashCompleted: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -113,6 +117,10 @@ struct LearningSessionView: View {
                 showHint = false
                 multiTapCount = 0
                 textInputValue = ""
+                // Reset flash state
+                flashVisible = false
+                flashPhase = 0
+                flashCompleted = false
                 // Reset animation slideshow state
                 animationTimer?.invalidate()
                 animationTimer = nil
@@ -349,8 +357,21 @@ struct LearningSessionView: View {
         return true
     }
 
+    /// Whether this task is a visual flash memory task (flash a shape/color
+    /// image briefly, then hide it — child picks from options by memory).
+    private func isFlashTask(_ task: AdaptiveTask) -> Bool {
+        if let fi = task.content.flashImage, !fi.isEmpty { return true }
+        if let fs = task.content.flashSequence, !fs.isEmpty { return true }
+        return false
+    }
+
     @ViewBuilder
     private func contentArea(task: AdaptiveTask) -> some View {
+        // Flash image display — shows a shape/color image briefly then hides it
+        if isFlashTask(task) {
+            flashDisplayView(task: task)
+        }
+
         // Animated slideshow display — shows frames one at a time for attention/memory tasks
         if isAnimatedTask(task) {
             animatedSequenceView(task: task)
@@ -663,6 +684,131 @@ struct LearningSessionView: View {
         }
     }
 
+    // MARK: - Flash Image Display
+
+    /// Shows a shape/color image briefly (1.5s each) then hides it.
+    /// For `flash_image` — a single image flash.
+    /// For `flash_sequence` — multiple images shown one after another.
+    @ViewBuilder
+    private func flashDisplayView(task: AdaptiveTask) -> some View {
+        let images: [String] = {
+            if let seq = task.content.flashSequence, !seq.isEmpty { return seq }
+            if let img = task.content.flashImage, !img.isEmpty { return [img] }
+            return []
+        }()
+
+        VStack(spacing: 16) {
+            if !flashCompleted {
+                // Show the current flash image
+                if flashPhase < images.count && flashVisible {
+                    let currentImage = images[flashPhase]
+                    VStack(spacing: 8) {
+                        Text("👀 Watch carefully!")
+                            .font(.headline)
+                            .foregroundColor(dimension.color)
+
+                        RemoteImageView(
+                            objectName: currentImage,
+                            imageType: .flashcard,
+                            fallbackIcon: "eye.fill",
+                            iconColor: dimension.color,
+                            size: 180
+                        )
+                        .cornerRadius(16)
+                        .transition(.scale.combined(with: .opacity))
+
+                        if images.count > 1 {
+                            Text("\(flashPhase + 1) of \(images.count)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                } else if !flashVisible && !flashCompleted {
+                    // Brief blank between flashes or before start
+                    VStack(spacing: 8) {
+                        Text("👀 Watch carefully!")
+                            .font(.headline)
+                            .foregroundColor(dimension.color)
+                        ProgressView()
+                            .scaleEffect(1.2)
+                    }
+                }
+            } else {
+                // Flash completed — prompt child to recall
+                VStack(spacing: 8) {
+                    Image(systemName: "brain.head.profile")
+                        .font(.system(size: 40))
+                        .foregroundColor(dimension.color)
+                    Text("What did you see?")
+                        .font(.headline)
+                        .foregroundColor(dimension.color)
+                }
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(dimension.color.opacity(0.05))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(dimension.color.opacity(0.2), lineWidth: 1)
+                )
+        )
+        .onAppear {
+            startFlashSequence(images: images)
+        }
+    }
+
+    /// Starts the timed flash sequence.  Shows each image for 1.5 seconds with
+    /// a 0.3 second blank gap between them.
+    private func startFlashSequence(images: [String]) {
+        guard !images.isEmpty else {
+            flashCompleted = true
+            return
+        }
+        flashPhase = 0
+        flashVisible = false
+        flashCompleted = false
+
+        // Small delay before first flash
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            showNextFlash(images: images)
+        }
+    }
+
+    /// Shows the next flash image, waits 1.5s, then either advances or completes.
+    private func showNextFlash(images: [String]) {
+        guard flashPhase < images.count else {
+            withAnimation {
+                flashCompleted = true
+            }
+            return
+        }
+
+        withAnimation(.easeIn(duration: 0.2)) {
+            flashVisible = true
+        }
+
+        // Hide after 1.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation(.easeOut(duration: 0.2)) {
+                flashVisible = false
+            }
+            // Brief gap then show next or complete
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                flashPhase += 1
+                if flashPhase < images.count {
+                    showNextFlash(images: images)
+                } else {
+                    withAnimation {
+                        flashCompleted = true
+                    }
+                }
+            }
+        }
+    }
+
     /// Whether this task is a sorting/sequencing task that needs ordering UI.
     ///
     /// Triggers for:
@@ -894,7 +1040,8 @@ struct LearningSessionView: View {
             orderingArea(task: task)
         }
         // Regular option selection (touch modality)
-        else if !task.content.displayOptions.isEmpty {
+        // For flash tasks, hide options until the flash animation completes.
+        else if !task.content.displayOptions.isEmpty && (!isFlashTask(task) || flashCompleted) {
             optionButtons(task: task)
         }
 
@@ -903,8 +1050,9 @@ struct LearningSessionView: View {
         // practice pronunciation across every dimension.
         // Skip for multi-tap tasks — the tap count IS the answer.
         // Skip for text input tasks — the child types the answer.
+        // Skip for flash tasks — the child should pick visually, not speak.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) {
             speechInputArea(task: task)
         }
 

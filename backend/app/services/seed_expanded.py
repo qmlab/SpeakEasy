@@ -289,6 +289,17 @@ def _build_content(task_type: str, task_data: dict) -> dict:
         content["question_image"] = task_data["question_image"]
 
     # ------------------------------------------------------------------
+    # Flash image: brief visual flash of a shape/color instead of TTS
+    # ------------------------------------------------------------------
+    # Tasks with `flash_image` show the target shape briefly on screen
+    # and then hide it, so the child relies on visual memory.
+    # `flash_sequence` is an optional ordered list for multi-image flashes.
+    if task_data.get("flash_image"):
+        content["flash_image"] = task_data["flash_image"]
+    if task_data.get("flash_sequence"):
+        content["flash_sequence"] = task_data["flash_sequence"]
+
+    # ------------------------------------------------------------------
     # Input mode: number or text input instead of option buttons
     # ------------------------------------------------------------------
     # Tasks with `input_mode` use a free-text or numeric input field
