@@ -5,9 +5,10 @@ Handles CRUD for adaptive tasks and seeding.
 """
 
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.database import get_db
+from app.database import get_db, engine
 from app.models.adaptive import AdaptiveTask, DevelopmentalDimension
 from app.schemas.adaptive import AdaptiveTaskCreate, AdaptiveTaskResponse
 from app.services.seed_tasks import (
@@ -95,6 +96,40 @@ def delete_task(task_id: str, db: Session = Depends(get_db)):
     return {"message": f"Task {task_id} deleted"}
 
 
+def _migrate_schema(db: Session) -> list[str]:
+    """Add missing columns to existing tables (lightweight SQLite migration).
+
+    SQLite's CREATE TABLE IF NOT EXISTS won't add new columns to existing
+    tables.  This helper inspects PRAGMA table_info and ALTERs as needed.
+    """
+    migrations: list[str] = []
+    with engine.connect() as conn:
+        # Check developmental_profiles for ceiling_level / basal_level
+        cols = {
+            row[1]
+            for row in conn.execute(
+                text("PRAGMA table_info(developmental_profiles)")
+            ).fetchall()
+        }
+        if "ceiling_level" not in cols:
+            conn.execute(
+                text(
+                    "ALTER TABLE developmental_profiles "
+                    "ADD COLUMN ceiling_level INTEGER"
+                )
+            )
+            migrations.append("added ceiling_level to developmental_profiles")
+        if "basal_level" not in cols:
+            conn.execute(
+                text(
+                    "ALTER TABLE developmental_profiles ADD COLUMN basal_level INTEGER"
+                )
+            )
+            migrations.append("added basal_level to developmental_profiles")
+        conn.commit()
+    return migrations
+
+
 @router.post("/seed")
 def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
     """Seed the database with default adaptive tasks + expanded content.
@@ -102,7 +137,13 @@ def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
     Args:
         force: If True, delete existing expanded tasks and re-seed with
                updated JSON data (e.g. after adding image_hint fields).
+               Also runs lightweight schema migrations for new columns.
     """
+    # Run schema migrations first when force is True
+    migrations: list[str] = []
+    if force:
+        migrations = _migrate_schema(db)
+
     results = seed_all_tasks(db)
     expanded_results = seed_expanded_tasks(db, force=force)
     results.update(expanded_results)
@@ -120,10 +161,13 @@ def seed_tasks(force: bool = False, db: Session = Depends(get_db)):
     options_backfilled = backfill_task_options(db)
     results["options_backfilled"] = options_backfilled
 
-    return {
+    response = {
         "message": "Tasks seeded successfully",
         "counts": results,
     }
+    if migrations:
+        response["migrations"] = migrations
+    return response
 
 
 @router.get("/stats/expanded")
