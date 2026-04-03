@@ -304,7 +304,7 @@ struct LearningSessionView: View {
             // alternate image instead of `imageHint` so the child cannot simply
             // match pictures.  The option buttons still use the original images.
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
-               !isImageGridTask(task), !isPatternTask(task) {
+               !isPatternTask(task) {
                 RemoteImageView(
                     objectName: questionImg,
                     imageType: .flashcard,
@@ -919,7 +919,7 @@ struct LearningSessionView: View {
                         .shadow(color: dimension.color.opacity(0.4), radius: 8, y: 4)
                 )
             }
-            .scaleEffect(multiTapCount > 0 ? 1.0 : 1.0)
+            .scaleEffect(1.0)
             .disabled(learningManager.isSubmitting)
 
             // Submit button — only visible after animation finishes (or for story tasks)
