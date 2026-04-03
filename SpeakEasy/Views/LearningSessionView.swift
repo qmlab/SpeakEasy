@@ -424,8 +424,15 @@ struct LearningSessionView: View {
 
     /// Whether the ordering area should use an image-grid layout for the
     /// remaining options instead of a simple text list.
+    ///
+    /// Only returns `true` for visual task types (identify, point_to, etc.)
+    /// whose options are likely to have matching Cloudinary images.
+    /// Excludes build_sentence (words like "I", "am", "happy") and
+    /// memory-sequence tasks (numbers like "3", "7") that have no images.
     private func isOrderingImageGrid(_ task: AdaptiveTask) -> Bool {
-        task.content.displayOptions.allSatisfy { option in
+        let visualTypes: Set<String> = ["identify", "point_to", "match_word_image", "recognize_image", "match"]
+        guard visualTypes.contains(task.taskType) else { return false }
+        return task.content.displayOptions.allSatisfy { option in
             let words = option.split(separator: " ")
             return words.count == 1
                 && !option.contains(",")
