@@ -1,7 +1,7 @@
 {
   "dimension": "cognitive_logic",
   "description": "Logic & Reasoning: From pattern recognition to abstract reasoning",
-  "version": "research_v2",
+  "version": "research_v3",
   "source": "Autism Neurodevelopmental Question Bank v1.0",
   "levels": {
     "0": {
@@ -10,60 +10,90 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "Which piece is missing? [Row: circle, circle, circle, ?]",
+          "instruction": "Look at the shapes! What comes next?",
+          "instruction_zh": "看看这些形状！下一个是什么？",
           "question_id": "Q061",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
           "scaffolding_hint": "Highlight the repeating pattern",
-          "options": [
-            "Circle",
-            "Square",
-            "Triangle",
-            "Star"
+          "sequence": [
+            "circle",
+            "circle",
+            "circle",
+            "?"
           ],
-          "correct_answer": "Circle",
-          "image_hint": "puzzle"
+          "options": [
+            "circle",
+            "square",
+            "triangle",
+            "star"
+          ],
+          "correct_answer": "circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "What comes next? [Row: red, blue, red, blue, ?]",
+          "instruction": "The colors take turns! What comes next?",
+          "instruction_zh": "颜色在交替！下一个是什么？",
           "question_id": "Q062",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Look at the colors — they take turns\"",
-          "options": [
-            "Red",
-            "Blue",
-            "Green",
-            "Yellow"
+          "scaffolding_hint": "Look at the colors - they take turns",
+          "sequence": [
+            "red_circle",
+            "blue_circle",
+            "red_circle",
+            "blue_circle",
+            "?"
           ],
-          "correct_answer": "Red",
-          "image_hint": "puzzle"
+          "options": [
+            "red_circle",
+            "blue_circle",
+            "green_circle",
+            "yellow_circle"
+          ],
+          "correct_answer": "red_circle",
+          "image_hint": "red_circle"
         },
         {
-          "instruction": "Sort these — find the secret rule! [All red shapes go left]",
+          "instruction": "Look at the shapes! Which group has the red shapes?",
+          "instruction_zh": "看看这些形状！哪组是红色形状？",
           "question_id": "Q081",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Look at the color\"",
-          "options": [
-            "Red shapes go left",
-            "Blue shapes go left"
+          "scaffolding_hint": "Look at the color",
+          "sequence": [
+            "red_circle",
+            "blue_square",
+            "red_triangle",
+            "blue_circle"
           ],
-          "correct_answer": "Red shapes go left",
-          "image_hint": "shapes"
+          "options": [
+            "red_circle",
+            "blue_square"
+          ],
+          "correct_answer": "red_circle",
+          "image_hint": "red_circle"
         },
         {
-          "instruction": "Which has MORE? [2 apples vs 5 apples]",
+          "instruction": "Which group has MORE?",
+          "instruction_zh": "哪一组更多？",
           "question_id": "Q091",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
           "scaffolding_hint": "Highlight the larger group",
+          "sequence": [
+            "apple",
+            "apple",
+            "apple",
+            "apple",
+            "apple"
+          ],
           "options": [
             "5 apples",
             "2 apples"
           ],
           "correct_answer": "5 apples",
-          "image_hint": "shapes"
+          "image_hint": "apple"
         }
       ]
     },
@@ -73,59 +103,96 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "Which piece is missing? [Row: small square, big square, small square, ?]",
+          "instruction": "The shapes change size! What comes next?",
+          "instruction_zh": "形状大小在变化！下一个是什么？",
           "question_id": "Q063",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"The size goes small, big, small, big\"",
-          "options": [
-            "Big square",
-            "Small circle",
-            "Big triangle",
-            "Small square"
+          "scaffolding_hint": "The size goes small, big, small, big",
+          "sequence": [
+            "small_square",
+            "big_square",
+            "small_square",
+            "?"
           ],
-          "correct_answer": "Big square",
-          "image_hint": "puzzle"
+          "options": [
+            "big_square",
+            "small_circle",
+            "big_triangle",
+            "small_square"
+          ],
+          "correct_answer": "big_square",
+          "image_hint": "big_square"
         },
         {
-          "instruction": "What completes the pattern? [Row: 1 dot, 2 dots, 3 dots, ?]",
+          "instruction": "Count the dots! What comes next?",
+          "instruction_zh": "数一数圆点！下一个是什么？",
           "question_id": "Q064",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Count the dots — they go up by one each time\"",
-          "options": [
-            "4 dots",
-            "2 dots",
-            "1 dot",
-            "5 dots"
+          "scaffolding_hint": "Count the dots - they go up by one each time",
+          "sequence": [
+            "1_dot",
+            "2_dots",
+            "3_dots",
+            "?"
           ],
-          "correct_answer": "4 dots",
-          "image_hint": "puzzle"
+          "options": [
+            "4_dots",
+            "2_dots",
+            "1_dot",
+            "5_dots"
+          ],
+          "correct_answer": "4_dots",
+          "image_hint": "4_dots"
         },
         {
-          "instruction": "Find the rule! [All big shapes go left]",
+          "instruction": "Look at the shapes! Which ones are BIG?",
+          "instruction_zh": "看看这些形状！哪些是大的？",
           "question_id": "Q082",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Look at the size\"",
-          "options": [
-            "Big shapes go left",
-            "Small shapes go left"
+          "scaffolding_hint": "Look at the size",
+          "sequence": [
+            "big_circle",
+            "small_square",
+            "big_triangle",
+            "small_circle"
           ],
-          "correct_answer": "Big shapes go left",
-          "image_hint": "shapes"
+          "options": [
+            "big_circle",
+            "small_square"
+          ],
+          "correct_answer": "big_circle",
+          "image_hint": "big_circle"
         },
         {
-          "instruction": "Put these in order from fewest to most: [3, 1, 5, 2]",
+          "instruction": "Put the numbers from fewest to most!",
+          "instruction_zh": "把数字从少到多排列！",
           "question_id": "Q092",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Start with the smallest number\"",
-          "options": [
-            "1, 2, 3, 5"
+          "scaffolding_hint": "Start with the smallest number",
+          "sequence": [
+            "3_dots",
+            "1_dot",
+            "5_dots",
+            "2_dots"
           ],
-          "correct_answer": "1, 2, 3, 5",
-          "image_hint": "shapes"
+          "steps": [
+            "1_dot",
+            "2_dots",
+            "3_dots",
+            "5_dots"
+          ],
+          "options": [
+            "1_dot",
+            "2_dots",
+            "3_dots",
+            "5_dots"
+          ],
+          "correct_answer": "1_dot",
+          "image_hint": "1_dot"
         }
       ]
     },
@@ -135,75 +202,116 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "2x2 grid: top row = circle, square; bottom row = filled circle, ?]",
+          "instruction": "Look at the grid! The top shapes become filled below. What is missing?",
+          "instruction_zh": "看网格！上面的形状在下面变成实心的。缺少什么？",
           "question_id": "Q065",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"The top shapes become filled in the bottom row\"",
-          "options": [
-            "Filled square",
-            "Empty square",
-            "Filled circle",
-            "Triangle"
+          "scaffolding_hint": "The top shapes become filled in the bottom row",
+          "sequence": [
+            "circle",
+            "square",
+            "filled_circle",
+            "?"
           ],
-          "correct_answer": "Filled square",
-          "image_hint": "puzzle"
+          "grid_layout": [
+            2,
+            2
+          ],
+          "options": [
+            "filled_square",
+            "square",
+            "filled_circle",
+            "triangle"
+          ],
+          "correct_answer": "filled_square",
+          "image_hint": "filled_square"
         },
         {
-          "instruction": "2x2 grid: top row = big star, small star; bottom row = big heart, ?]",
+          "instruction": "Look at the grid! The shapes get smaller. What is missing?",
+          "instruction_zh": "看网格！形状变小了。缺少什么？",
           "question_id": "Q066",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"The size changes from big to small in each row\"",
-          "options": [
-            "Small heart",
-            "Big heart",
-            "Small star",
-            "Big star"
+          "scaffolding_hint": "The size changes from big to small in each row",
+          "sequence": [
+            "big_star",
+            "small_star",
+            "big_heart",
+            "?"
           ],
-          "correct_answer": "Small heart",
-          "image_hint": "puzzle"
+          "grid_layout": [
+            2,
+            2
+          ],
+          "options": [
+            "small_heart",
+            "big_heart",
+            "small_star",
+            "big_star"
+          ],
+          "correct_answer": "small_heart",
+          "image_hint": "small_heart"
         },
         {
-          "instruction": "Find the rule! [All shapes with straight sides go left]",
+          "instruction": "Which shapes have straight sides?",
+          "instruction_zh": "哪些形状有直边？",
           "question_id": "Q083",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Look at the edges — are they straight or curved?\"",
-          "options": [
-            "Straight-sided shapes",
-            "Curved shapes"
+          "scaffolding_hint": "Look at the edges - are they straight or curved?",
+          "sequence": [
+            "square",
+            "circle",
+            "triangle",
+            "oval"
           ],
-          "correct_answer": "Straight-sided shapes",
-          "image_hint": "shapes"
+          "options": [
+            "square",
+            "circle"
+          ],
+          "correct_answer": "square",
+          "image_hint": "square"
         },
         {
-          "instruction": "Which is LONGER? [A pencil vs a crayon]",
+          "instruction": "Which is LONGER?",
+          "instruction_zh": "哪个更长？",
           "question_id": "Q093",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Compare the lengths from end to end\"",
-          "options": [
-            "Pencil",
-            "Crayon"
+          "scaffolding_hint": "Compare the lengths from end to end",
+          "sequence": [
+            "pencil",
+            "crayon"
           ],
-          "correct_answer": "Pencil",
-          "image_hint": "shapes"
+          "options": [
+            "pencil",
+            "crayon"
+          ],
+          "correct_answer": "pencil",
+          "image_hint": "pencil"
         },
         {
           "instruction": "Dog is to puppy as cat is to ___?",
+          "instruction_zh": "狗对应小狗，猫对应___？",
           "question_id": "Q292",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"A puppy is a baby dog — what is a baby cat called?\"",
-          "options": [
-            "Kitten",
-            "Cub",
-            "Foal",
-            "Lamb"
+          "scaffolding_hint": "A puppy is a baby dog - what is a baby cat called?",
+          "sequence": [
+            "dog",
+            "puppy",
+            "cat",
+            "?"
           ],
-          "correct_answer": "Kitten",
-          "image_hint": "dog"
+          "options": [
+            "kitten",
+            "cub",
+            "foal",
+            "lamb"
+          ],
+          "correct_answer": "kitten",
+          "image_hint": "cat"
         }
       ]
     },
@@ -213,53 +321,92 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "3x3 grid: shapes rotate 90° clockwise each step. What is the missing shape?",
-          "question_id": "Q067",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Each shape turns a quarter turn to the right\"",
-          "options": [
-            "Correct 90° rotation",
-            "Wrong rotation",
-            "Mirror image"
-          ],
-          "correct_answer": "Correct 90° rotation",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "3x3 grid: each row has a circle, square, triangle. Each column has red, blue, green. Missing piece?",
+          "instruction": "Each row has different shapes and colors. What is the missing piece?",
+          "instruction_zh": "每行有不同的形状和颜色。缺少哪一块？",
           "question_id": "Q068",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Find the shape and color that is missing from that row and column\"",
-          "options": [
-            "Green triangle",
-            "Red triangle",
-            "Blue circle",
-            "Green circle"
+          "scaffolding_hint": "Find the shape and color missing from that row and column",
+          "sequence": [
+            "red_circle",
+            "blue_square",
+            "green_triangle",
+            "red_square",
+            "blue_triangle",
+            "green_circle",
+            "red_triangle",
+            "blue_circle",
+            "?"
           ],
-          "correct_answer": "Green triangle",
-          "image_hint": "puzzle"
+          "grid_layout": [
+            3,
+            3
+          ],
+          "options": [
+            "green_square",
+            "red_triangle",
+            "blue_circle",
+            "green_circle"
+          ],
+          "correct_answer": "green_square",
+          "image_hint": "green_square"
         },
         {
-          "instruction": "Find the rule! [Rule changes after 5 correct: now sort by color]",
+          "instruction": "The shapes are turning! Each one rotates a quarter turn. What comes next?",
+          "instruction_zh": "形状在转动！每个旋转四分之一圈。下一个是什么？",
+          "question_id": "Q067",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "Each shape turns a quarter turn to the right",
+          "sequence": [
+            "arrow_up",
+            "arrow_right",
+            "arrow_down",
+            "?"
+          ],
+          "options": [
+            "arrow_left",
+            "arrow_up",
+            "arrow_right",
+            "arrow_down"
+          ],
+          "correct_answer": "arrow_left",
+          "image_hint": "arrow_left"
+        },
+        {
+          "instruction": "The rule changed! First sort by shape, now sort by color.",
+          "instruction_zh": "规则变了！先按形状分，现在按颜色分。",
           "question_id": "Q084",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After rule change: \"Something changed — try a different rule!\"",
-          "options": [
-            "First by shape, then by color",
-            "Wrong category"
+          "scaffolding_hint": "Something changed - try a different rule!",
+          "sequence": [
+            "red_circle",
+            "blue_circle",
+            "red_square",
+            "blue_square"
           ],
-          "correct_answer": "First by shape, then by color",
-          "image_hint": "shapes"
+          "options": [
+            "red_circle",
+            "blue_square"
+          ],
+          "correct_answer": "red_circle",
+          "image_hint": "red_circle"
         },
         {
-          "instruction": "If you have 3 apples and get 2 more, how many do you have?",
+          "instruction": "You have 3 apples and get 2 more. How many now?",
+          "instruction_zh": "你有3个苹果，又得到2个。现在有几个？",
           "question_id": "Q094",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Count on from 3: 4, 5\"",
+          "scaffolding_hint": "Count on from 3: 4, 5",
+          "sequence": [
+            "apple",
+            "apple",
+            "apple",
+            "apple",
+            "apple"
+          ],
           "options": [
             "5",
             "4",
@@ -267,22 +414,29 @@
             "3"
           ],
           "correct_answer": "5",
-          "image_hint": "shapes"
+          "image_hint": "apple"
         },
         {
           "instruction": "Hand is to glove as foot is to ___?",
+          "instruction_zh": "手对应手套，脚对应___？",
           "question_id": "Q293",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"A glove covers the hand directly — what covers the foot directly?\"",
-          "options": [
-            "Sock",
-            "Shoe",
-            "Boot",
-            "Sandal"
+          "scaffolding_hint": "A glove covers the hand - what covers the foot?",
+          "sequence": [
+            "hand",
+            "glove",
+            "foot",
+            "?"
           ],
-          "correct_answer": "Sock",
-          "image_hint": "glove"
+          "options": [
+            "sock",
+            "shoe",
+            "boot",
+            "sandal"
+          ],
+          "correct_answer": "sock",
+          "image_hint": "foot"
         }
       ]
     },
@@ -292,76 +446,108 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "Pattern: shapes get one side added each step (triangle → square → pentagon → ?)",
+          "instruction": "Each shape gets one more side! What comes after pentagon?",
+          "instruction_zh": "每个形状多一条边！五边形之后是什么？",
           "question_id": "Q069",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Count the sides — they increase by one each time\"",
-          "options": [
-            "Hexagon",
-            "Triangle",
-            "Square",
-            "Circle"
+          "scaffolding_hint": "Count the sides - they increase by one",
+          "sequence": [
+            "triangle",
+            "square",
+            "pentagon",
+            "?"
           ],
-          "correct_answer": "Hexagon",
-          "image_hint": "puzzle"
+          "options": [
+            "hexagon",
+            "triangle",
+            "square",
+            "circle"
+          ],
+          "correct_answer": "hexagon",
+          "image_hint": "hexagon"
         },
         {
-          "instruction": "Pattern: each shape is the previous shape reflected horizontally. What is next?",
+          "instruction": "Each shape flips! What does this shape look like flipped?",
+          "instruction_zh": "每个形状翻转！翻转后是什么样？",
           "question_id": "Q070",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Imagine flipping the shape in a mirror\"",
-          "options": [
-            "Correct reflection",
-            "Wrong reflection",
-            "Rotation"
+          "scaffolding_hint": "Imagine flipping the shape in a mirror",
+          "sequence": [
+            "arrow_right",
+            "arrow_left",
+            "arrow_right",
+            "?"
           ],
-          "correct_answer": "Correct reflection",
-          "image_hint": "puzzle"
+          "options": [
+            "arrow_left",
+            "arrow_right",
+            "arrow_up",
+            "arrow_down"
+          ],
+          "correct_answer": "arrow_left",
+          "image_hint": "arrow_left"
         },
         {
-          "instruction": "Find the rule! [Sort by number of sides: even sides go left, odd sides go right]",
+          "instruction": "Count the sides! Even-sided shapes go left, odd go right.",
+          "instruction_zh": "数数边数！偶数边去左边，奇数边去右边。",
           "question_id": "Q085",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Count the sides — is it an even or odd number?\"",
-          "options": [
-            "Even-sided left, odd-sided right",
-            "Reversed"
+          "scaffolding_hint": "Count the sides - is it even or odd?",
+          "sequence": [
+            "square",
+            "triangle",
+            "hexagon",
+            "pentagon"
           ],
-          "correct_answer": "Even-sided left, odd-sided right",
-          "image_hint": "shapes"
+          "options": [
+            "square",
+            "triangle"
+          ],
+          "correct_answer": "square",
+          "image_hint": "square"
         },
         {
-          "instruction": "Which fraction is larger: 1/2 or 1/4?",
+          "instruction": "Which is bigger: half a pie or a quarter?",
+          "instruction_zh": "哪个更大：半个饼还是四分之一？",
           "question_id": "Q095",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Show a pie chart: \"1/2 is half the pie; 1/4 is only a quarter\"",
-          "options": [
-            "1/2",
-            "1/4",
-            "1/3",
-            "1/5"
+          "scaffolding_hint": "1/2 is half the pie; 1/4 is only a quarter",
+          "sequence": [
+            "half_circle",
+            "quarter_circle"
           ],
-          "correct_answer": "1/2",
-          "image_hint": "shapes"
+          "options": [
+            "half_circle",
+            "quarter_circle"
+          ],
+          "correct_answer": "half_circle",
+          "image_hint": "half_circle"
         },
         {
           "instruction": "Painter is to brush as sculptor is to ___?",
+          "instruction_zh": "画家对应画笔，雕塑家对应___？",
           "question_id": "Q294",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"A brush is the painter's main tool — what is the sculptor's main tool?\"",
-          "options": [
-            "Chisel",
-            "Pen",
-            "Needle",
-            "Hammer"
+          "scaffolding_hint": "A brush is the painter's tool - what is the sculptor's?",
+          "sequence": [
+            "brush",
+            "chisel",
+            "pen",
+            "needle"
           ],
-          "correct_answer": "Chisel",
-          "image_hint": "brush"
+          "options": [
+            "chisel",
+            "pen",
+            "needle",
+            "hammer"
+          ],
+          "correct_answer": "chisel",
+          "image_hint": "chisel"
         }
       ]
     },
@@ -371,52 +557,54 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "3x3 grid: each row, the inner shape changes. Each column, the outer shape changes. Missing?",
-          "question_id": "Q071",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Look at the row for the inner shape, and the column for the outer shape\"",
-          "options": [
-            "Wrong inner, Wrong outer, Both wrong",
-            "Correct inner+outer combo"
-          ],
-          "correct_answer": "Wrong inner, Wrong outer, Both wrong",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "Pattern: number of dots doubles each step (1, 2, 4, ?)",
+          "instruction": "The dots double each time! 1, 2, 4, ... What is next?",
+          "instruction_zh": "圆点每次翻倍！1, 2, 4, ... 下一个是什么？",
           "question_id": "Q072",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"1 doubled is 2, 2 doubled is 4, 4 doubled is...\"",
-          "options": [
-            "8",
-            "6",
-            "5",
-            "3"
+          "scaffolding_hint": "1 doubled is 2, 2 doubled is 4, 4 doubled is...",
+          "sequence": [
+            "1_dot",
+            "2_dots",
+            "4_dots",
+            "?"
           ],
-          "correct_answer": "8",
-          "image_hint": "puzzle"
+          "options": [
+            "8_dots",
+            "6_dots",
+            "5_dots",
+            "3_dots"
+          ],
+          "correct_answer": "8_dots",
+          "image_hint": "8_dots"
         },
         {
-          "instruction": "Find the rule! [Shapes with a dot inside go left]",
+          "instruction": "Look inside the shapes! Which ones have a dot inside?",
+          "instruction_zh": "看看形状里面！哪些里面有圆点？",
           "question_id": "Q086",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Look carefully inside the shape\"",
-          "options": [
-            "Shapes with dot",
-            "Shapes without dot"
+          "scaffolding_hint": "Look carefully inside the shape",
+          "sequence": [
+            "circle_with_dot",
+            "square",
+            "triangle_with_dot",
+            "circle"
           ],
-          "correct_answer": "Shapes with dot",
-          "image_hint": "shapes"
+          "options": [
+            "circle_with_dot",
+            "square"
+          ],
+          "correct_answer": "circle_with_dot",
+          "image_hint": "circle_with_dot"
         },
         {
-          "instruction": "A train travels 60 miles per hour. How far in 2 hours?",
+          "instruction": "A train goes 60 miles each hour. How far in 2 hours?",
+          "instruction_zh": "火车每小时赠60英里。2小时走多远？",
           "question_id": "Q096",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Multiply the speed by the time\"",
+          "scaffolding_hint": "Multiply the speed by the time",
           "options": [
             "120",
             "60",
@@ -424,14 +612,15 @@
             "180"
           ],
           "correct_answer": "120",
-          "image_hint": "shapes"
+          "image_hint": "train"
         },
         {
           "instruction": "Thermometer is to temperature as barometer is to ___?",
+          "instruction_zh": "温度计对应温度，气压计对应___？",
           "question_id": "Q295",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"A thermometer measures temperature — what does a barometer measure?\"",
+          "scaffolding_hint": "A thermometer measures temperature - what does a barometer measure?",
           "options": [
             "Air pressure",
             "Humidity",
@@ -440,6 +629,37 @@
           ],
           "correct_answer": "Air pressure",
           "image_hint": "thermometer"
+        },
+        {
+          "instruction": "Look at the grid! Each row changes the inner shape. What is missing?",
+          "instruction_zh": "看网格！每行里面变化。缺少什么？",
+          "question_id": "Q071",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "Look at the row for inner shape, column for outer shape",
+          "sequence": [
+            "circle_in_square",
+            "circle_in_triangle",
+            "circle_in_circle",
+            "triangle_in_square",
+            "triangle_in_triangle",
+            "triangle_in_circle",
+            "square_in_square",
+            "square_in_triangle",
+            "?"
+          ],
+          "grid_layout": [
+            3,
+            3
+          ],
+          "options": [
+            "square_in_circle",
+            "square_in_square",
+            "circle_in_triangle",
+            "triangle_in_circle"
+          ],
+          "correct_answer": "square_in_circle",
+          "image_hint": "square_in_circle"
         }
       ]
     },
@@ -449,52 +669,56 @@
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "3x3 grid: shapes overlap and the overlapping region changes color. Missing piece?",
-          "question_id": "Q073",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Look at where the two shapes meet — that area changes\"",
-          "options": [
-            "Wrong color, Wrong shape, Wrong position",
-            "Correct overlap region"
-          ],
-          "correct_answer": "Wrong color, Wrong shape, Wrong position",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "Pattern: each shape loses one element per step. Missing shape has how many elements?",
+          "instruction": "The shapes lose one piece each step! How many next?",
+          "instruction_zh": "每一步形状少一个！下一个有几个？",
           "question_id": "Q074",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Count the elements in each shape — they decrease by one\"",
-          "options": [
-            "+1 count, -1 count, same count",
-            "Correct count"
+          "scaffolding_hint": "Count the elements - they decrease by one",
+          "sequence": [
+            "5_dots",
+            "4_dots",
+            "3_dots",
+            "?"
           ],
-          "correct_answer": "+1 count, -1 count, same count",
-          "image_hint": "puzzle"
+          "options": [
+            "2_dots",
+            "4_dots",
+            "3_dots",
+            "1_dot"
+          ],
+          "correct_answer": "2_dots",
+          "image_hint": "2_dots"
         },
         {
-          "instruction": "Find the rule! [Two rules: big AND red go left; everything else goes right]",
+          "instruction": "Two rules at once! Which shapes are BOTH big AND red?",
+          "instruction_zh": "两个规则同时！哪些形状既大又红？",
           "question_id": "Q087",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Both conditions must be true at the same time\"",
-          "options": [
-            "Big red only",
-            "Small red",
-            "Big blue",
-            "Small blue"
+          "scaffolding_hint": "Both conditions must be true at the same time",
+          "sequence": [
+            "big_red_circle",
+            "small_red_square",
+            "big_blue_triangle",
+            "small_blue_circle"
           ],
-          "correct_answer": "Big red only",
-          "image_hint": "shapes"
+          "options": [
+            "big_red_circle",
+            "small_red_square",
+            "big_blue_triangle",
+            "small_blue_circle"
+          ],
+          "correct_answer": "big_red_circle",
+          "image_hint": "big_red_circle"
         },
         {
           "instruction": "What is 15% of 200?",
+          "instruction_zh": "200的15%是多少？",
           "question_id": "Q097",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"10% of 200 is 20; 5% is 10; add them together\"",
+          "scaffolding_hint": "First find 10%, then add half of 10%",
           "options": [
             "30",
             "15",
@@ -502,14 +726,15 @@
             "25"
           ],
           "correct_answer": "30",
-          "image_hint": "shapes"
+          "image_hint": "calculator"
         },
         {
           "instruction": "Democracy is to citizens as monarchy is to ___?",
+          "instruction_zh": "民主对应公民，君主制对应___？",
           "question_id": "Q296",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"In a democracy, power comes from citizens — in a monarchy, from whom?\"",
+          "scaffolding_hint": "Citizens rule in a democracy - who rules in a monarchy?",
           "options": [
             "King/Queen",
             "President",
@@ -517,60 +742,103 @@
             "Prime Minister"
           ],
           "correct_answer": "King/Queen",
-          "image_hint": "question"
+          "image_hint": "crown"
+        },
+        {
+          "instruction": "Where shapes overlap, the color changes! What is missing?",
+          "instruction_zh": "形状重叠的地方颜色变了！缺少什么？",
+          "question_id": "Q073",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "Look at where the two shapes meet",
+          "sequence": [
+            "red_circle",
+            "blue_square",
+            "purple_overlap",
+            "blue_circle",
+            "red_square",
+            "?"
+          ],
+          "grid_layout": [
+            2,
+            3
+          ],
+          "options": [
+            "purple_overlap",
+            "red_circle",
+            "blue_square",
+            "green_circle"
+          ],
+          "correct_answer": "purple_overlap",
+          "image_hint": "purple_overlap"
         }
       ]
     },
     "7": {
-      "name": "Complex Rules",
-      "name_zh": "复杂规则",
+      "name": "Abstract Logic",
+      "name_zh": "抽象逻辑",
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "4x4 grid with two rules operating simultaneously: rotation AND size change. Missing piece?",
-          "question_id": "Q075",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Check the rotation first, then check the size separately\"",
-          "options": [
-            "Wrong rotation, Wrong size, Both wrong",
-            "Correct rotation+size"
-          ],
-          "correct_answer": "Wrong rotation, Wrong size, Both wrong",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "Pattern: alternating symmetry — shapes alternate between symmetric and asymmetric. Missing?",
+          "instruction": "Shapes switch between mirror images. Which is the mirror?",
+          "instruction_zh": "形状在镜像之间切换。镜像是什么？",
           "question_id": "Q076",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Is the shape the same on both sides, or different?\"",
-          "options": [
-            "Wrong symmetry, Wrong shape",
-            "Correct symmetry type"
+          "scaffolding_hint": "Imagine placing a mirror",
+          "sequence": [
+            "arrow_right",
+            "arrow_left",
+            "arrow_right",
+            "?"
           ],
-          "correct_answer": "Wrong symmetry, Wrong shape",
-          "image_hint": "puzzle"
+          "options": [
+            "arrow_left",
+            "arrow_right",
+            "arrow_up",
+            "arrow_down"
+          ],
+          "correct_answer": "arrow_left",
+          "image_hint": "arrow_left"
         },
         {
-          "instruction": "Find the rule! [Rule changes every 3 items: color → shape → size → color...]",
+          "instruction": "The rule keeps changing! What comes next?",
+          "instruction_zh": "规则一直在变！下一个是什么？",
           "question_id": "Q088",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"The rule keeps changing — what was the last rule?\"",
-          "options": [
-            "Correct category for current cycle",
-            "Wrong category"
+          "scaffolding_hint": "The sorting rule changed again",
+          "sequence": [
+            "circle",
+            "square",
+            "triangle",
+            "red_circle",
+            "blue_circle",
+            "green_circle",
+            "big_square",
+            "small_square",
+            "?"
           ],
-          "correct_answer": "Correct category for current cycle",
-          "image_hint": "shapes"
+          "grid_layout": [
+            3,
+            3
+          ],
+          "options": [
+            "circle",
+            "red_circle",
+            "big_square",
+            "small_triangle"
+          ],
+          "correct_answer": "circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "If a rectangle has an area of 24 and a width of 4, what is its length?",
+          "instruction": "If a rectangle has area 24 and width 4, what is its length?",
+          "instruction_zh": "长方形面积24，宽4，长是多少？",
           "question_id": "Q098",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Area = length × width. Divide the area by the width\"",
+          "scaffolding_hint": "Area = length x width, so length = area / width",
           "options": [
             "6",
             "4",
@@ -578,93 +846,105 @@
             "20"
           ],
           "correct_answer": "6",
-          "image_hint": "shapes"
+          "image_hint": "rectangle"
         },
         {
           "instruction": "Hypothesis is to experiment as theory is to ___?",
+          "instruction_zh": "假说对应实验，理论对应___？",
           "question_id": "Q297",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"A hypothesis is tested by an experiment — a theory is supported by what?\"",
+          "scaffolding_hint": "An experiment tests a hypothesis - what supports a theory?",
           "options": [
-            "Evidence/Proof",
+            "Evidence",
             "Guess",
             "Question",
             "Observation"
           ],
-          "correct_answer": "Evidence/Proof",
-          "image_hint": "question"
+          "correct_answer": "Evidence",
+          "image_hint": "microscope"
+        },
+        {
+          "instruction": "Each shape rotates AND changes size. What comes next?",
+          "instruction_zh": "每个形状既旋转又改变大小。下一个是什么？",
+          "question_id": "Q075",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "Track two changes: direction and size",
+          "sequence": [
+            "big_arrow_up",
+            "small_arrow_right",
+            "big_arrow_down",
+            "?"
+          ],
+          "options": [
+            "small_arrow_left",
+            "big_arrow_left",
+            "small_arrow_up",
+            "big_arrow_right"
+          ],
+          "correct_answer": "small_arrow_left",
+          "image_hint": "small_arrow_left"
         }
       ]
     },
     "8": {
-      "name": "Abstract Logic",
-      "name_zh": "抽象逻辑",
+      "name": "Complex Reasoning",
+      "name_zh": "复杂推理",
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "5x5 grid with three simultaneous rules: shape, color, and number of internal lines. Missing?",
-          "question_id": "Q077",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Solve one rule at a time: shape first, then color, then lines\"",
-          "options": [
-            "Any wrong combination",
-            "Correct combination"
-          ],
-          "correct_answer": "Any wrong combination",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "Pattern: Fibonacci sequence of shapes (1, 1, 2, 3, 5 dots). What comes next?",
+          "instruction": "Fibonacci dots! 1, 1, 2, 3, 5, ... What is next?",
+          "instruction_zh": "斐波那契圆点！1, 1, 2, 3, 5, ... 下一个？",
           "question_id": "Q078",
           "source_test": "TONI-2",
           "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Add the last two numbers to get the next one\"",
-          "options": [
-            "8 dots",
-            "6",
-            "4",
-            "7"
+          "scaffolding_hint": "Each number is the sum of the two before it",
+          "sequence": [
+            "1_dot",
+            "1_dot",
+            "2_dots",
+            "3_dots",
+            "5_dots",
+            "?"
           ],
-          "correct_answer": "8 dots",
-          "image_hint": "puzzle"
+          "options": [
+            "8_dots",
+            "6_dots",
+            "4_dots",
+            "7_dots"
+          ],
+          "correct_answer": "8_dots",
+          "image_hint": "8_dots"
         },
         {
-          "instruction": "Find the rule! [Sort by perimeter: shapes with more than 4 sides go left]",
+          "instruction": "Which shapes have more than 4 sides?",
+          "instruction_zh": "哪些形状有超过4条边？",
           "question_id": "Q089",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"Count every side of the shape\"",
-          "options": [
-            "Pentagon, Hexagon, Heptagon",
-            "Triangle",
-            "Square"
+          "scaffolding_hint": "Count the sides of each shape",
+          "sequence": [
+            "triangle",
+            "square",
+            "pentagon",
+            "hexagon"
           ],
-          "correct_answer": "Pentagon, Hexagon, Heptagon",
-          "image_hint": "shapes"
-        },
-        {
-          "instruction": "What is the next number in the sequence: 2, 6, 18, 54, ?",
-          "question_id": "Q099",
-          "source_test": "SB5",
-          "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Each number is multiplied by 3\"",
           "options": [
-            "162",
-            "108",
-            "72",
-            "216"
+            "pentagon",
+            "triangle",
+            "square"
           ],
-          "correct_answer": "162",
-          "image_hint": "shapes"
+          "correct_answer": "pentagon",
+          "image_hint": "pentagon"
         },
         {
           "instruction": "Syntax is to grammar as melody is to ___?",
+          "instruction_zh": "语法对应文法，旋律对应___？",
           "question_id": "Q298",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"Syntax is a component of grammar — melody is a component of what?\"",
+          "scaffolding_hint": "Syntax is a part of grammar - melody is a part of...",
           "options": [
             "Music",
             "Rhythm",
@@ -672,75 +952,110 @@
             "Lyrics"
           ],
           "correct_answer": "Music",
-          "image_hint": "question"
+          "image_hint": "music"
+        },
+        {
+          "instruction": "What is the next number: 2, 6, 18, 54, ?",
+          "instruction_zh": "下一个数字：2, 6, 18, 54, ?",
+          "question_id": "Q099",
+          "source_test": "SB5",
+          "sub_domain": "Quantitative Reasoning",
+          "scaffolding_hint": "Each number is multiplied by 3",
+          "sequence": [
+            "2_dots",
+            "6_dots",
+            "?"
+          ],
+          "options": [
+            "162",
+            "108",
+            "72",
+            "216"
+          ],
+          "correct_answer": "162",
+          "image_hint": "calculator"
+        },
+        {
+          "instruction": "Three rules at once: shape, color, AND lines. What is missing?",
+          "instruction_zh": "三个规则：形状、颜色和线条。缺少什么？",
+          "question_id": "Q077",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "Track three things: shape, color, and lines inside",
+          "sequence": [
+            "red_circle_1line",
+            "blue_circle_2lines",
+            "green_circle_3lines",
+            "red_square_1line",
+            "blue_square_2lines",
+            "green_square_3lines",
+            "red_triangle_1line",
+            "blue_triangle_2lines",
+            "?"
+          ],
+          "grid_layout": [
+            3,
+            3
+          ],
+          "options": [
+            "green_triangle_3lines",
+            "red_triangle_3lines",
+            "blue_triangle_1line",
+            "green_circle_2lines"
+          ],
+          "correct_answer": "green_triangle_3lines",
+          "image_hint": "green_triangle_3lines"
         },
         {
           "instruction": "Neuron is to nervous system as cardiomyocyte is to ___?",
+          "instruction_zh": "神经元对应神经系统，心肌细胞对应___？",
           "question_id": "Q299",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"A neuron is the cell of the nervous system — a cardiomyocyte is the cell of which organ?\"",
+          "scaffolding_hint": "A neuron is in the nervous system - a cardiomyocyte is in the...",
           "options": [
-            "Heart/Cardiac muscle",
+            "Heart",
             "Brain",
             "Liver",
             "Lung"
           ],
-          "correct_answer": "Heart/Cardiac muscle",
-          "image_hint": "car"
+          "correct_answer": "Heart",
+          "image_hint": "heart"
         }
       ]
     },
     "9": {
-      "name": "Advanced Reasoning",
-      "name_zh": "高级推理",
+      "name": "Expert Logic",
+      "name_zh": "专家逻辑",
       "task_type": "reason",
       "tasks": [
         {
-          "instruction": "Abstract grid: each cell is the XOR combination of the two cells above it. Missing cell?",
-          "question_id": "Q079",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Look at the two shapes above — keep only the parts that are different\"",
-          "options": [
-            "Wrong combination, Partial",
-            "Correct XOR result"
-          ],
-          "correct_answer": "Wrong combination, Partial",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "Complex 4x4 grid with rotation, reflection, and color inversion rules. Missing piece?",
-          "question_id": "Q080",
-          "source_test": "TONI-2",
-          "sub_domain": "Matrix Completion",
-          "scaffolding_hint": "Say: \"Apply each rule one at a time to narrow down the answer\"",
-          "options": [
-            "Any partial answer",
-            "Correct multi-rule answer"
-          ],
-          "correct_answer": "Any partial answer",
-          "image_hint": "puzzle"
-        },
-        {
-          "instruction": "Find the rule! [Sort by symmetry axes: shapes with 2+ axes of symmetry go left]",
+          "instruction": "Which shapes have 2 or more lines of symmetry?",
+          "instruction_zh": "哪些形状有2条或更多对称线？",
           "question_id": "Q090",
           "source_test": "Category Test",
           "sub_domain": "Rule Discovery",
-          "scaffolding_hint": "After error: \"An axis of symmetry means you can fold the shape and both halves match\"",
-          "options": [
-            "Circle, Equilateral triangle, Rectangle, Regular hexagon",
-            "Scalene triangle"
+          "scaffolding_hint": "A line of symmetry splits the shape into two identical halves",
+          "sequence": [
+            "circle",
+            "triangle",
+            "rectangle",
+            "hexagon"
           ],
-          "correct_answer": "Circle, Equilateral triangle, Rectangle, Regular hexagon",
-          "image_hint": "shapes"
+          "options": [
+            "circle",
+            "triangle"
+          ],
+          "correct_answer": "circle",
+          "image_hint": "circle"
         },
         {
-          "instruction": "If the ratio of boys to girls is 3:5 and there are 40 students, how many are boys?",
+          "instruction": "If boys to girls is 3:5 and there are 40 students, how many boys?",
+          "instruction_zh": "男女比例3:5，40个学生，多少男生？",
           "question_id": "Q100",
           "source_test": "SB5",
           "sub_domain": "Quantitative Reasoning",
-          "scaffolding_hint": "Say: \"Total parts = 3+5=8. Each part = 40÷8=5. Boys = 3×5\"",
+          "scaffolding_hint": "3+5=8 parts. 40/8=5 per part. Boys=3x5",
           "options": [
             "15",
             "25",
@@ -748,22 +1063,85 @@
             "20"
           ],
           "correct_answer": "15",
-          "image_hint": "shapes"
+          "image_hint": "calculator"
+        },
+        {
+          "instruction": "Each cell combines the two cells above it. What is missing?",
+          "instruction_zh": "每个格子是上面两个的组合。缺少哪个？",
+          "question_id": "Q079",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "The answer combines features of the two shapes above",
+          "sequence": [
+            "circle",
+            "square",
+            "circle_square",
+            "triangle",
+            "circle",
+            "triangle_circle",
+            "square",
+            "triangle",
+            "?"
+          ],
+          "grid_layout": [
+            3,
+            3
+          ],
+          "options": [
+            "square_triangle",
+            "triangle_square",
+            "circle_triangle",
+            "square_circle"
+          ],
+          "correct_answer": "square_triangle",
+          "image_hint": "square_triangle"
         },
         {
           "instruction": "Epistemology is to knowledge as ontology is to ___?",
+          "instruction_zh": "认识论对应知识，本体论对应___？",
           "question_id": "Q300",
           "source_test": "SB5",
           "sub_domain": "Analogical Reasoning",
-          "scaffolding_hint": "Say: \"Epistemology studies how we know things — ontology studies the nature of what?\"",
+          "scaffolding_hint": "Epistemology studies knowledge - ontology studies...",
           "options": [
-            "Being/Existence",
+            "Existence",
             "Truth",
             "Ethics",
             "Logic"
           ],
-          "correct_answer": "Being/Existence",
-          "image_hint": "question"
+          "correct_answer": "Existence",
+          "image_hint": "book"
+        },
+        {
+          "instruction": "Complex grid: rotation + reflection + color change. What is missing?",
+          "instruction_zh": "复杂网格：旋转+翻转+颜色变化。缺少什么？",
+          "question_id": "Q080",
+          "source_test": "TONI-2",
+          "sub_domain": "Matrix Completion",
+          "scaffolding_hint": "Track three changes: rotation, reflection, and color",
+          "sequence": [
+            "red_arrow_up",
+            "blue_arrow_right",
+            "green_arrow_down",
+            "blue_arrow_left",
+            "green_arrow_up",
+            "red_arrow_right",
+            "green_arrow_left",
+            "red_arrow_down",
+            "?"
+          ],
+          "grid_layout": [
+            3,
+            3
+          ],
+          "options": [
+            "blue_arrow_up",
+            "red_arrow_up",
+            "green_arrow_down",
+            "blue_arrow_left"
+          ],
+          "correct_answer": "blue_arrow_up",
+          "image_hint": "blue_arrow_up"
         }
       ]
     }

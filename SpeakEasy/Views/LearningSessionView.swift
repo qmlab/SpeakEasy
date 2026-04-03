@@ -251,8 +251,9 @@ struct LearningSessionView: View {
             // Hide for image-grid tasks (identify/point_to) since all options
             // are already displayed as images — showing the answer image here
             // would give it away.
+            // Also hide for pattern tasks since the sequence display replaces it.
             if let imageHint = task.content.imageHint, !imageHint.isEmpty,
-               !isImageGridTask(task) {
+               !isImageGridTask(task), !isPatternTask(task) {
                 RemoteImageView(
                     objectName: imageHint,
                     imageType: .flashcard,
@@ -293,8 +294,20 @@ struct LearningSessionView: View {
 
     // MARK: - Content Area
 
+    /// Whether this task is a visual pattern-finding task with a sequence of
+    /// shape images.  Pattern tasks have a `sequence` array in the content.
+    private func isPatternTask(_ task: AdaptiveTask) -> Bool {
+        guard let seq = task.content.sequence, seq.count >= 2 else { return false }
+        return true
+    }
+
     @ViewBuilder
     private func contentArea(task: AdaptiveTask) -> some View {
+        // Pattern sequence display — shows shape images in a row/grid with "?" placeholder
+        if isPatternTask(task) {
+            patternSequenceView(task: task)
+        }
+
         // Story / passage display
         if let story = task.content.story, !story.isEmpty {
             Text(story)
@@ -330,7 +343,8 @@ struct LearningSessionView: View {
         }
 
         // Items display (for non-sorting tasks only — sorting tasks show items in orderingArea)
-        if let items = task.content.items, !items.isEmpty, !isSortingTask(task) {
+        // Also hide for pattern tasks since the sequence display replaces items.
+        if let items = task.content.items, !items.isEmpty, !isSortingTask(task), !isPatternTask(task) {
             VStack(spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     Text(item)
@@ -346,6 +360,93 @@ struct LearningSessionView: View {
         }
     }
 
+    // MARK: - Pattern Sequence Display
+
+    /// Renders the visual pattern sequence as a row or grid of shape images.
+    /// Each item in the sequence is shown as an image; "?" is shown as a
+    /// placeholder indicating the missing piece the child must identify.
+    private func patternSequenceView(task: AdaptiveTask) -> some View {
+        let seq = task.content.sequence ?? []
+        let layout = task.content.gridLayout  // e.g. [3, 3] for a 3x3 grid
+
+        return VStack(spacing: 12) {
+            Text("🔍 Find the pattern!")
+                .font(.headline)
+                .foregroundColor(dimension.color)
+
+            if let layout = layout, layout.count == 2 {
+                // Grid layout (e.g. 2x2, 3x3)
+                let cols = layout[0]
+                let gridColumns = Array(repeating: GridItem(.flexible(), spacing: 8), count: cols)
+                LazyVGrid(columns: gridColumns, spacing: 8) {
+                    ForEach(Array(seq.enumerated()), id: \.offset) { _, item in
+                        patternItemView(item: item)
+                    }
+                }
+            } else {
+                // Horizontal row layout
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(Array(seq.enumerated()), id: \.offset) { _, item in
+                            patternItemView(item: item)
+                        }
+                    }
+                    .padding(.horizontal, 4)
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(dimension.color.opacity(0.05))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(dimension.color.opacity(0.2), lineWidth: 1)
+                )
+        )
+    }
+
+    /// Renders a single item in the pattern sequence — either a shape image
+    /// or a "?" placeholder for the missing piece.
+    @ViewBuilder
+    private func patternItemView(item: String) -> some View {
+        if item == "?" {
+            // Question mark placeholder
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(dimension.color.opacity(0.15))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .strokeBorder(
+                                style: StrokeStyle(lineWidth: 2, dash: [6, 4])
+                            )
+                            .foregroundColor(dimension.color)
+                    )
+                Text("?")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(dimension.color)
+            }
+            .frame(width: 70, height: 70)
+        } else {
+            // Shape image from Cloudinary
+            VStack(spacing: 2) {
+                RemoteImageView(
+                    objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                    imageType: .flashcard,
+                    fallbackIcon: "square.dashed",
+                    iconColor: dimension.color,
+                    size: 60
+                )
+                .cornerRadius(8)
+            }
+            .frame(width: 70, height: 70)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.secondarySystemBackground))
+            )
+        }
+    }
+
     /// Whether this task is a sorting/sequencing task that needs ordering UI.
     ///
     /// Triggers for:
@@ -353,7 +454,11 @@ struct LearningSessionView: View {
     /// - Any task with an `items` array (the correct ordering) — this covers
     ///   social-behavior step-ordering tasks and memory-sequence tasks that
     ///   are typed as `identify` but need sequential multi-tap interaction.
+    /// - Excludes pattern tasks (which have a `sequence` field) — those use
+    ///   single-tap option selection, not multi-tap ordering.
     private func isSortingTask(_ task: AdaptiveTask) -> Bool {
+        // Pattern tasks have items from steps but should NOT use ordering UI
+        if isPatternTask(task) { return false }
         let type = task.taskType
         let explicitTypes = type == "sort" || type == "sequence_order" || type == "build_sentence"
         let hasItems = task.content.items != nil && !(task.content.items!.isEmpty)
@@ -668,6 +773,22 @@ struct LearningSessionView: View {
     /// "Tap star only" or "Miss or false alarm" — those fall back to
     /// the standard text-button layout.
     private func isImageGridTask(_ task: AdaptiveTask) -> Bool {
+        // Pattern tasks use image grid only when all options are image-compatible
+        // names (single words, no bare numbers).  Tasks like Q091 ("5 apples"),
+        // Q094 ("5"), Q099 ("162") fall through to text buttons instead.
+        if isPatternTask(task) && task.content.displayOptions.count >= 2 {
+            let allImageCompatible = task.content.displayOptions.allSatisfy { option in
+                let words = option.split(separator: " ")
+                return words.count == 1
+                    && !option.contains(",")
+                    && !option.contains("(")
+                    && !option.contains("/")
+                    && !option.contains("-")
+                    && option.rangeOfCharacter(from: .decimalDigits) != option.startIndex..<option.endIndex
+                    && Int(option) == nil
+            }
+            if allImageCompatible { return true }
+        }
         let visualTypes: Set<String> = ["identify", "point_to", "match_word_image", "recognize_image", "match"]
         guard visualTypes.contains(task.taskType),
               task.content.displayOptions.count >= 2 else {
