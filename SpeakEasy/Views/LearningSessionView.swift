@@ -141,6 +141,7 @@ struct LearningSessionView: View {
                 categorySortBuckets = [:]
                 dragSortItem = nil
                 dragSortOffset = .zero
+                categoryFrames = [:]
                 // Reset flash state
                 flashVisible = false
                 flashPhase = 0
