@@ -103,7 +103,7 @@
           "question_image": "chair_alt"
         },
         {
-          "instruction": "Put all the animals in the box.",
+          "instruction": "Select all the animals.",
           "question_id": "Q025",
           "source_test": "SB5",
           "sub_domain": "Semantic Sorting",
@@ -245,7 +245,7 @@
           "question_image": "bridge_alt"
         },
         {
-          "instruction": "Sort the vehicles into the blue box.",
+          "instruction": "Select all the vehicles.",
           "question_id": "Q027",
           "source_test": "SB5",
           "sub_domain": "Semantic Sorting",
@@ -273,7 +273,7 @@
           "multi_select": true
         },
         {
-          "instruction": "Put all the tools in the box.",
+          "instruction": "Select all the tools.",
           "question_id": "Q028",
           "source_test": "SB5",
           "sub_domain": "Semantic Sorting",
@@ -634,7 +634,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Hats go on your head, not your foot",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "What is wrong? A man is using an umbrella on a sunny day indoors.",
@@ -647,7 +647,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Umbrellas are for rain, not indoors on a sunny day",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "Touch all the shapes that are not yellow.",
@@ -661,7 +661,7 @@
             "yellow triangle"
           ],
           "correct_answer": "Red circle, blue square, green oval",
-          "image_hint": "hat"
+          "image_hint": "shapes"
         }
       ]
     },
@@ -809,7 +809,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "A stethoscope is used for heartbeats, not a hammer",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "What is silly? 'The astronaut swam to the moon.'",
@@ -822,7 +822,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "You can't swim to the moon — there is no water in space",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "Touch the shape that is the same color as the sky, but a different shape from a circle.",
@@ -837,7 +837,7 @@
             "green triangle"
           ],
           "correct_answer": "Blue square",
-          "image_hint": "hat"
+          "image_hint": "shapes"
         }
       ]
     },
@@ -948,7 +948,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Microscopes are for science labs, not baking",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "Touch the second-largest shape in the row.",
@@ -983,7 +983,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Submarines travel underwater, not through the sky",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "Touch the shape that is between the star and the triangle.",
@@ -997,7 +997,7 @@
             "triangle"
           ],
           "correct_answer": "Circle",
-          "image_hint": "hat",
+          "image_hint": "shapes",
           "inline_images": true
         }
       ]
@@ -1018,7 +1018,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Geologists use hammers and hand lenses, not telescopes",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "Touch the shape that is to the right of the red square and above the blue circle.",
@@ -1031,7 +1031,7 @@
             "Adjacent shapes"
           ],
           "correct_answer": "Correct shape at intersection",
-          "image_hint": "hat"
+          "image_hint": "shapes"
         }
       ]
     },
@@ -1051,7 +1051,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Barometers measure air pressure; brain activity is measured with EEG",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "Touch all shapes that are either triangles or red, but not both.",
@@ -1065,7 +1065,7 @@
             "blue squares"
           ],
           "correct_answer": "Red circles, blue triangles",
-          "image_hint": "hat"
+          "image_hint": "shapes"
         }
       ]
     },
@@ -1085,7 +1085,7 @@
             "\"Nothing is wrong\""
           ],
           "correct_answer": "Centrifuges separate substances; telescopes observe galaxies",
-          "image_hint": "hat"
+          "image_hint": "question_mark"
         },
         {
           "instruction": "If the largest shape is blue, touch the smallest shape. If not, touch the shape in the middle.",

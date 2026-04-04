@@ -37,11 +37,15 @@
     ],
     "people": [
       "mother", "father", "happy_face", "sad_face", "waving",
-      "thumbs_up", "stop_hand"
+      "thumbs_up", "stop_hand", "children", "team", "teacher"
     ],
     "actions": [
       "sleeping", "eating", "more", "water", "soap", "flashlight",
       "chopsticks", "crayon"
+    ],
+    "social": [
+      "speech_bubble", "gift", "sorry", "lock", "phone",
+      "calendar", "lightbulb", "question_mark", "color_palette", "box"
     ],
     "dimensions": [
       "dim_object_cognition", "dim_language_expression",
@@ -158,7 +162,21 @@
     "rainbow": "rainbow",
     "rain": "rain",
     "snowman": "snowman",
-    "snow": "snowman"
+    "snow": "snowman",
+    "shapes": "shapes",
+    "question_mark": "question_mark",
+    "gift": "gift",
+    "sorry": "sorry",
+    "speech_bubble": "speech_bubble",
+    "children": "children",
+    "box": "box",
+    "calendar": "calendar",
+    "phone": "phone",
+    "lock": "lock",
+    "team": "team",
+    "teacher": "teacher",
+    "lightbulb": "lightbulb",
+    "color_palette": "color_palette"
   },
-  "total_images": 94
+  "total_images": 107
 }
