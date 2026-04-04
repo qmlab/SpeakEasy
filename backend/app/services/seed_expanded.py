@@ -271,6 +271,16 @@ def _build_content(task_type: str, task_data: dict) -> dict:
                 content[key] = value
 
     # ------------------------------------------------------------------
+    # Multi-select: tasks where the child must pick ALL correct answers
+    # ------------------------------------------------------------------
+    # Tasks with `multi_select: true` present options as toggles instead
+    # of single-tap buttons.  The child selects/deselects items and then
+    # taps "Done".  Correctness is checked by comparing the selected set
+    # against the comma-separated `correct_answer`.
+    if task_data.get("multi_select"):
+        content["multi_select"] = True
+
+    # ------------------------------------------------------------------
     # Inline option images: show shape/color thumbnails in each button
     # ------------------------------------------------------------------
     # Tasks with `inline_images` have options that are shape/color names
