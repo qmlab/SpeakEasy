@@ -259,10 +259,40 @@ struct LearningSessionView: View {
         if isFlashTask(task) && !flashCompleted {
             return false
         }
-        // Has tappable options to display
-        if !task.content.displayOptions.isEmpty {
+        // Must have tappable options
+        guard !task.content.displayOptions.isEmpty else { return false }
+        // Only pin when there's enough visual content above the options
+        // (image, animation, flash, pattern, story, etc.) to justify the
+        // split layout.  For short instruction-only tasks (e.g. "Tap A.
+        // Do not tap B.") pinning creates an awkward large gap.
+        if !hasVisualContentAboveOptions(task) {
+            return false
+        }
+        return true
+    }
+
+    /// Whether the task renders substantial visual content (image, animation,
+    /// pattern, story, etc.) above the option buttons.  When this returns
+    /// `false` the instruction card is short text only, so pinning the
+    /// options at the bottom would leave an ugly empty gap.
+    private func hasVisualContentAboveOptions(_ task: AdaptiveTask) -> Bool {
+        // instructionCard renders a large image from questionImage
+        if let qi = task.content.questionImage, !qi.isEmpty { return true }
+        // instructionCard renders a large image from imageHint (unless suppressed)
+        if let ih = task.content.imageHint, !ih.isEmpty,
+           !isImageGridTask(task), !isPatternTask(task),
+           task.content.inlineImages != true {
             return true
         }
+        // instructionCard renders a targetWord display
+        if let tw = task.content.targetWord, !tw.isEmpty { return true }
+        // contentArea renders flash / animation / pattern / story / passage / sentence
+        if isFlashTask(task) || isAnimatedTask(task) || isPatternTask(task) { return true }
+        if let s = task.content.story, !s.isEmpty { return true }
+        if let p = task.content.passage, !p.isEmpty { return true }
+        if let s = task.content.sentence, !s.isEmpty { return true }
+        if let items = task.content.items, !items.isEmpty,
+           !isSortingTask(task), !isPatternTask(task), !isDragArrangeTask(task) { return true }
         return false
     }
 
