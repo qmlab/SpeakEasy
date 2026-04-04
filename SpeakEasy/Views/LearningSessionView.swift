@@ -373,8 +373,8 @@ struct LearningSessionView: View {
             // match pictures.  The option buttons still use the original images.
             // Use smaller images when options are pinned at the bottom
             // to keep the question area compact and avoid hiding the options.
-            let hasOptions = !task.content.displayOptions.isEmpty
-            let imageSize: CGFloat = hasOptions ? 120 : 200
+            let isPinned = isPinnedInteractionTask(task)
+            let imageSize: CGFloat = isPinned ? 120 : 200
 
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
                !isPatternTask(task), !isDragArrangeTask(task) {
