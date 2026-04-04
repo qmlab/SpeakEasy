@@ -246,24 +246,63 @@ struct LearningSessionView: View {
 
     // MARK: - Task Content
 
+    /// Whether this task uses simple option selection (tappable buttons/images)
+    /// that should be pinned at the bottom of the screen for easy access.
+    /// Complex interactions (drag, sort, ordering, multi-tap, text input)
+    /// stay in the scrollable area because they need more vertical space.
+    private func isPinnedInteractionTask(_ task: AdaptiveTask) -> Bool {
+        if isDragArrangeTask(task) || isDragSortTask(task) || isSortingTask(task)
+            || isMultiTapTask(task) || isTextInputTask(task) {
+            return false
+        }
+        // For flash tasks, only pin once flash animation is complete
+        if isFlashTask(task) && !flashCompleted {
+            return false
+        }
+        // Has tappable options to display
+        if !task.content.displayOptions.isEmpty {
+            return true
+        }
+        return false
+    }
+
     @ViewBuilder
     private func taskContentView(task: AdaptiveTask) -> some View {
         ZStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    // Task progress
-                    taskProgressBar
+            if isPinnedInteractionTask(task) {
+                // Pinned layout: question scrolls at top, options fixed at bottom
+                VStack(spacing: 0) {
+                    ScrollView {
+                        VStack(spacing: 24) {
+                            taskProgressBar
+                            instructionCard(task: task)
+                            contentArea(task: task)
+                        }
+                        .padding()
+                    }
 
-                    // Task instruction
-                    instructionCard(task: task)
-
-                    // Content area based on task type
-                    contentArea(task: task)
-
-                    // Submit / interaction area
-                    interactionArea(task: task)
+                    // Pinned interaction area at bottom
+                    VStack(spacing: 12) {
+                        interactionArea(task: task)
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+                    .background(
+                        Color(.systemBackground)
+                            .shadow(color: .black.opacity(0.06), radius: 4, y: -2)
+                    )
                 }
-                .padding()
+            } else {
+                // Original scrollable layout for complex interactions
+                ScrollView {
+                    VStack(spacing: 24) {
+                        taskProgressBar
+                        instructionCard(task: task)
+                        contentArea(task: task)
+                        interactionArea(task: task)
+                    }
+                    .padding()
+                }
             }
 
             // Feedback overlay (prominent, centered)
@@ -332,6 +371,11 @@ struct LearningSessionView: View {
             // "Find the same one" tasks: if `questionImage` is set, show that
             // alternate image instead of `imageHint` so the child cannot simply
             // match pictures.  The option buttons still use the original images.
+            // Use smaller images when options are pinned at the bottom
+            // to keep the question area compact and avoid hiding the options.
+            let isPinned = isPinnedInteractionTask(task)
+            let imageSize: CGFloat = isPinned ? 120 : 200
+
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
                !isPatternTask(task), !isDragArrangeTask(task) {
                 RemoteImageView(
@@ -339,7 +383,7 @@ struct LearningSessionView: View {
                     imageType: .flashcard,
                     fallbackIcon: "photo",
                     iconColor: dimension.color,
-                    size: 200
+                    size: imageSize
                 )
                 .cornerRadius(16)
             } else if let imageHint = task.content.imageHint, !imageHint.isEmpty,
@@ -350,7 +394,7 @@ struct LearningSessionView: View {
                     imageType: .flashcard,
                     fallbackIcon: "photo",
                     iconColor: dimension.color,
-                    size: 200
+                    size: imageSize
                 )
                 .cornerRadius(16)
             }
