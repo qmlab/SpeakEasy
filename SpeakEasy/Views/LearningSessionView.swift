@@ -301,26 +301,33 @@ struct LearningSessionView: View {
         ZStack {
             if isPinnedInteractionTask(task) {
                 // Pinned layout: question scrolls at top, options fixed at bottom
-                VStack(spacing: 0) {
-                    ScrollView {
-                        VStack(spacing: 24) {
-                            taskProgressBar
-                            instructionCard(task: task)
-                            contentArea(task: task)
+                GeometryReader { geo in
+                    let maxPinnedHeight = geo.size.height * 0.45
+                    VStack(spacing: 0) {
+                        ScrollView {
+                            VStack(spacing: 24) {
+                                taskProgressBar
+                                instructionCard(task: task)
+                                contentArea(task: task)
+                            }
+                            .padding()
                         }
-                        .padding()
-                    }
 
-                    // Pinned interaction area at bottom
-                    VStack(spacing: 12) {
-                        interactionArea(task: task)
+                        // Pinned interaction area at bottom — capped so it
+                        // never pushes the image out of the scroll area.
+                        ScrollView {
+                            VStack(spacing: 12) {
+                                interactionArea(task: task)
+                            }
+                        }
+                        .frame(maxHeight: maxPinnedHeight)
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                        .background(
+                            Color(.systemBackground)
+                                .shadow(color: .black.opacity(0.06), radius: 4, y: -2)
+                        )
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                    .background(
-                        Color(.systemBackground)
-                            .shadow(color: .black.opacity(0.06), radius: 4, y: -2)
-                    )
                 }
             } else {
                 // Original scrollable layout for complex interactions
@@ -404,7 +411,7 @@ struct LearningSessionView: View {
             // Use smaller images when options are pinned at the bottom
             // to keep the question area compact and avoid hiding the options.
             let isPinned = isPinnedInteractionTask(task)
-            let imageSize: CGFloat = isPinned ? 120 : 200
+            let imageSize: CGFloat = isPinned ? 80 : 200
 
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
                !isPatternTask(task), !isDragArrangeTask(task) {
@@ -2036,6 +2043,7 @@ struct LearningSessionView: View {
             GridItem(.flexible(), spacing: 12)
         ]
         let options = task.content.displayOptions
+        let gridImageSize: CGFloat = isPinnedInteractionTask(task) ? 60 : 100
         return LazyVGrid(columns: columns, spacing: 12) {
             ForEach(Array(options.enumerated()), id: \.element) { index, option in
                 Button {
@@ -2047,7 +2055,7 @@ struct LearningSessionView: View {
                             imageType: .flashcard,
                             fallbackIcon: "questionmark.circle",
                             iconColor: dimension.color,
-                            size: 100
+                            size: gridImageSize
                         )
                         .cornerRadius(12)
 
