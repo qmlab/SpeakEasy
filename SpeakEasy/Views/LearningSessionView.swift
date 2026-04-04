@@ -411,7 +411,7 @@ struct LearningSessionView: View {
             // Use smaller images when options are pinned at the bottom
             // to keep the question area compact and avoid hiding the options.
             let isPinned = isPinnedInteractionTask(task)
-            let imageSize: CGFloat = isPinned ? 80 : 200
+            let imageSize: CGFloat = isPinned ? 160 : 200
 
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
                !isPatternTask(task), !isDragArrangeTask(task) {
@@ -915,7 +915,14 @@ struct LearningSessionView: View {
             }
         }
         .onAppear {
-            startFlashSequence(images: images)
+            // Guard: do NOT restart if the flash already completed.
+            // When flashCompleted flips to true the layout switches from
+            // scrollable → pinned, which re-parents this view and fires
+            // onAppear again.  Without this guard the sequence restarts
+            // in an infinite loop and options never appear.
+            if !flashCompleted {
+                startFlashSequence(images: images)
+            }
         }
     }
 
@@ -2043,7 +2050,7 @@ struct LearningSessionView: View {
             GridItem(.flexible(), spacing: 12)
         ]
         let options = task.content.displayOptions
-        let gridImageSize: CGFloat = isPinnedInteractionTask(task) ? 60 : 100
+        let gridImageSize: CGFloat = isPinnedInteractionTask(task) ? 80 : 100
         return LazyVGrid(columns: columns, spacing: 12) {
             ForEach(Array(options.enumerated()), id: \.element) { index, option in
                 Button {
