@@ -1480,6 +1480,32 @@ struct LearningSessionView: View {
                     )
             )
 
+            // Fallback TAP button for multi-tap tasks without animation/flash content
+            // (e.g. story-based or text-based multi-tap tasks)
+            if !hasAnimation && !hasFlash {
+                Button {
+                    withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                        multiTapCount += 1
+                    }
+                } label: {
+                    VStack(spacing: 8) {
+                        Image(systemName: "hand.tap.fill")
+                            .font(.system(size: 44))
+                        Text("TAP!")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                    }
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 24)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(dimension.color)
+                            .shadow(color: dimension.color.opacity(0.4), radius: 8, y: 4)
+                    )
+                }
+                .disabled(learningManager.isSubmitting)
+            }
+
             // Submit button — only visible after animation/flash finishes (or for story tasks)
             if !animationStillRunning {
                 Button {
