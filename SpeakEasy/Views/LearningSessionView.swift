@@ -733,7 +733,7 @@ struct LearningSessionView: View {
             // Tap gesture for multi-tap tasks — tap the slide to count
             .contentShape(Rectangle())
             .onTapGesture {
-                guard isTappable, !learningManager.isSubmitting else { return }
+                guard isTappable, !animationFinished, !learningManager.isSubmitting else { return }
                 withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
                     multiTapCount += 1
                 }
