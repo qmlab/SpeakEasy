@@ -869,7 +869,7 @@
           "correct_answer": "4",
           "image_hint": "star",
           "instruction_zh": "点击质数。不要点击合数。",
-          "tap_count": 3,
+          "tap_count": 4,
           "animation_frames": [
             "number_2",
             "number_4",
