@@ -194,7 +194,8 @@ struct LearningSessionView: View {
                     let isFlash = isFlashTask(task)
                     let isDragArrange = isDragArrangeTask(task)
                     let isDragSort = isDragSortTask(task)
-                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash && !isDragArrange && !isDragSort {
+                    let isMultiSel = isMultiSelectTask(task)
+                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash && !isDragArrange && !isDragSort && !isMultiSel {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -252,7 +253,8 @@ struct LearningSessionView: View {
     /// stay in the scrollable area because they need more vertical space.
     private func isPinnedInteractionTask(_ task: AdaptiveTask) -> Bool {
         if isDragArrangeTask(task) || isDragSortTask(task) || isSortingTask(task)
-            || isMultiTapTask(task) || isTextInputTask(task) {
+            || isMultiTapTask(task) || isTextInputTask(task)
+            || isMultiSelectTask(task) {
             return false
         }
         // For flash tasks, only pin once flash animation is complete
@@ -1492,6 +1494,11 @@ struct LearningSessionView: View {
         task.content.inputMode != nil
     }
 
+    /// Whether this task is a multi-select question (child picks ALL correct answers).
+    private func isMultiSelectTask(_ task: AdaptiveTask) -> Bool {
+        task.content.multiSelect == true && !task.content.displayOptions.isEmpty
+    }
+
     /// Multi-tap counting interaction area.
     /// Shows a tap counter and Done button. The child taps directly on the
     /// slide/image above (in contentArea) when they see the target, and
@@ -1695,6 +1702,10 @@ struct LearningSessionView: View {
         else if isSortingTask(task) {
             orderingArea(task: task)
         }
+        // Multi-select: child picks ALL correct answers then taps Done
+        else if isMultiSelectTask(task) {
+            multiSelectArea(task: task)
+        }
         // Regular option selection (touch modality)
         // For flash tasks, hide options until the flash animation completes.
         else if !task.content.displayOptions.isEmpty && (!isFlashTask(task) || flashCompleted) {
@@ -1708,7 +1719,7 @@ struct LearningSessionView: View {
         // Skip for text input tasks — the child types the answer.
         // Skip for flash tasks — the child should pick visually, not speak.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
+        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
             speechInputArea(task: task)
         }
 
@@ -2127,6 +2138,152 @@ struct LearningSessionView: View {
                 }
                 .disabled(learningManager.isSubmitting)
             }
+        }
+    }
+
+    // MARK: - Multi-Select Area
+
+    /// Multi-select interaction: the child toggles options on/off and taps
+    /// "Done" when finished.  Correctness is checked by comparing the
+    /// selected set against the comma-separated `correct_answer`.
+    @ViewBuilder
+    private func multiSelectArea(task: AdaptiveTask) -> some View {
+        let options = task.content.displayOptions
+        let correctParts: Set<String> = {
+            guard let ca = task.content.correctAnswer else { return [] }
+            return Set(ca.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) })
+        }()
+        let useImageGrid = isImageGridTask(task)
+        let columns = [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ]
+
+        VStack(spacing: 16) {
+            // Selection count hint
+            HStack(spacing: 6) {
+                Image(systemName: "hand.tap.fill")
+                    .foregroundColor(dimension.color)
+                Text("Pick all that match (\(orderedSelections.count) selected)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+
+            if useImageGrid {
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(Array(options.enumerated()), id: \.element) { index, option in
+                        let isSelected = orderedSelections.contains(option)
+                        Button {
+                            toggleMultiSelect(option: option)
+                        } label: {
+                            VStack(spacing: 6) {
+                                RemoteImageView(
+                                    objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                    imageType: .flashcard,
+                                    fallbackIcon: "questionmark.circle",
+                                    iconColor: dimension.color,
+                                    size: 100
+                                )
+                                .cornerRadius(12)
+
+                                Text(option)
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+                                    .lineLimit(1)
+                            }
+                            .padding(10)
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(isSelected ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(isSelected ? dimension.color : Color.clear, lineWidth: 3)
+                            )
+                            .overlay(alignment: .topTrailing) {
+                                if isSelected {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(dimension.color)
+                                        .offset(x: -4, y: 4)
+                                }
+                            }
+                        }
+                        .disabled(learningManager.isSubmitting)
+                    }
+                }
+            } else {
+                VStack(spacing: 12) {
+                    ForEach(options, id: \.self) { option in
+                        let isSelected = orderedSelections.contains(option)
+                        Button {
+                            toggleMultiSelect(option: option)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                                    .font(.title3)
+                                    .foregroundColor(isSelected ? dimension.color : .secondary)
+                                Text(option)
+                                    .font(.headline)
+                            }
+                            .foregroundColor(isSelected ? .white : .primary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(isSelected ? dimension.color : Color(.secondarySystemBackground))
+                            )
+                        }
+                        .disabled(learningManager.isSubmitting)
+                    }
+                }
+            }
+
+            // Done button — submit the multi-select answer
+            Button {
+                submitMultiSelect(task: task, correctParts: correctParts)
+            } label: {
+                HStack {
+                    Image(systemName: "checkmark")
+                    Text("Done")
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(orderedSelections.isEmpty ? Color.gray : dimension.color)
+                )
+            }
+            .disabled(orderedSelections.isEmpty || learningManager.isSubmitting)
+        }
+    }
+
+    /// Toggle an option in the multi-select list.
+    private func toggleMultiSelect(option: String) {
+        if let idx = orderedSelections.firstIndex(of: option) {
+            orderedSelections.remove(at: idx)
+        } else {
+            orderedSelections.append(option)
+        }
+        speechService.speak(option)
+    }
+
+    /// Submit the multi-select answer: compare selected set vs correct set.
+    private func submitMultiSelect(task: AdaptiveTask, correctParts: Set<String>) {
+        let selectedSet = Set(orderedSelections.map { $0.trimmingCharacters(in: .whitespaces) })
+        let correctSet = Set(correctParts.map { $0.lowercased() })
+        let selectedLower = Set(selectedSet.map { $0.lowercased() })
+        let isCorrect = selectedLower == correctSet
+        Task {
+            await learningManager.submitAttempt(
+                isCorrect: isCorrect,
+                score: isCorrect ? 1 : 0,
+                dimension: dimension
+            )
+            orderedSelections = []
         }
     }
 

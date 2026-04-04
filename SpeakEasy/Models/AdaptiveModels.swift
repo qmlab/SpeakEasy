@@ -268,6 +268,7 @@ struct TaskContent: Codable {
     let interactionMode: String?
     let sortCategories: [String]?
     let itemCategories: [String: String]?
+    let multiSelect: Bool?
 
     enum CodingKeys: String, CodingKey {
         case instruction
@@ -302,6 +303,7 @@ struct TaskContent: Codable {
         case interactionMode = "interaction_mode"
         case sortCategories = "sort_categories"
         case itemCategories = "item_categories"
+        case multiSelect = "multi_select"
     }
 
     init(from decoder: Decoder) throws {
@@ -334,6 +336,7 @@ struct TaskContent: Codable {
         interactionMode = try container.decodeIfPresent(String.self, forKey: .interactionMode)
         sortCategories = try container.decodeIfPresent([String].self, forKey: .sortCategories)
         itemCategories = try container.decodeIfPresent([String: String].self, forKey: .itemCategories)
+        multiSelect = try container.decodeIfPresent(Bool.self, forKey: .multiSelect)
 
         // Decode targetWord: try explicit "target_word" string first, then extract from nested "target" object
         if let tw = try? container.decodeIfPresent(String.self, forKey: .targetWord) {
@@ -397,6 +400,7 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(interactionMode, forKey: .interactionMode)
         try container.encodeIfPresent(sortCategories, forKey: .sortCategories)
         try container.encodeIfPresent(itemCategories, forKey: .itemCategories)
+        try container.encodeIfPresent(multiSelect, forKey: .multiSelect)
     }
 
     var displayInstruction: String {
