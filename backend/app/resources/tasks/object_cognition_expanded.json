@@ -859,17 +859,16 @@
           "scaffolding_hint": "Say: \"Prime numbers can only be divided by 1 and themselves\"",
           "options": [
             "2",
-            "7",
-            "11",
-            "13",
             "4",
+            "7",
             "9",
-            "15"
+            "1",
+            "3"
           ],
-          "correct_answer": "4",
+          "correct_answer": "3",
           "image_hint": "star",
           "instruction_zh": "点击质数。不要点击合数。",
-          "tap_count": 4,
+          "tap_count": 3,
           "animation_frames": [
             "number_2",
             "number_4",
