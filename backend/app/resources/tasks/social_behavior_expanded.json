@@ -1331,10 +1331,12 @@
           "sub_domain": "Perspective Taking",
           "scaffolding_hint": "Say: \"Human motivations are often mixed — more than one can be true\"",
           "options": [
-            "Both motivations valid",
-            "Only one motivation"
+            "Genuine generosity",
+            "Social recognition / image",
+            "Tax benefits",
+            "Both genuine and self-interested motivations"
           ],
-          "correct_answer": "Both motivations valid",
+          "correct_answer": "Both genuine and self-interested motivations",
           "image_hint": "gift"
         },
         {
