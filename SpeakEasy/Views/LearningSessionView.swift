@@ -645,9 +645,11 @@ struct LearningSessionView: View {
 
     /// Renders a timed slideshow of image frames for attention/memory tasks.
     /// Each frame is shown for ~1.5 seconds with a crossfade, then options appear.
+    /// For multi-tap tasks, tapping the slide itself counts as a tap.
     private func animatedSequenceView(task: AdaptiveTask) -> some View {
         let frames = task.content.animationFrames ?? []
         let totalFrames = frames.count
+        let isTappable = isMultiTapTask(task)
 
         return VStack(spacing: 12) {
             // Header
@@ -663,7 +665,7 @@ struct LearningSessionView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(Color(.secondarySystemBackground))
-                    .frame(height: 140)
+                    .frame(height: isTappable ? 200 : 140)
 
                 if animationFinished {
                     // Show all frames in a row after animation finishes
@@ -701,7 +703,7 @@ struct LearningSessionView: View {
                             imageType: .flashcard,
                             fallbackIcon: "square.dashed",
                             iconColor: dimension.color,
-                            size: 80
+                            size: isTappable ? 120 : 80
                         )
                         .cornerRadius(12)
                         .id("frame_\(animationFrameIndex)")
@@ -717,8 +719,23 @@ struct LearningSessionView: View {
                                     .frame(width: 8, height: 8)
                             }
                         }
+
+                        // Tap hint for multi-tap tasks
+                        if isTappable {
+                            Text("Tap here when you see the target!")
+                                .font(.caption)
+                                .foregroundColor(dimension.color.opacity(0.7))
+                        }
                     }
                     .animation(.easeInOut(duration: 0.4), value: animationFrameIndex)
+                }
+            }
+            // Tap gesture for multi-tap tasks — tap the slide to count
+            .contentShape(Rectangle())
+            .onTapGesture {
+                guard isTappable, !learningManager.isSubmitting else { return }
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                    multiTapCount += 1
                 }
             }
 
@@ -785,6 +802,7 @@ struct LearningSessionView: View {
             if let img = task.content.flashImage, !img.isEmpty { return [img] }
             return []
         }()
+        let isTappable = isMultiTapTask(task)
 
         VStack(spacing: 16) {
             if !flashCompleted {
@@ -801,7 +819,7 @@ struct LearningSessionView: View {
                             imageType: .flashcard,
                             fallbackIcon: "eye.fill",
                             iconColor: dimension.color,
-                            size: 180
+                            size: isTappable ? 200 : 180
                         )
                         .cornerRadius(16)
                         .transition(.scale.combined(with: .opacity))
@@ -810,6 +828,13 @@ struct LearningSessionView: View {
                             Text("\(flashPhase + 1) of \(images.count)")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
+                        }
+
+                        // Tap hint for multi-tap tasks
+                        if isTappable {
+                            Text("Tap here when you see the target!")
+                                .font(.caption)
+                                .foregroundColor(dimension.color.opacity(0.7))
                         }
                     }
                 } else if !flashVisible && !flashCompleted {
@@ -844,6 +869,14 @@ struct LearningSessionView: View {
                         .stroke(dimension.color.opacity(0.2), lineWidth: 1)
                 )
         )
+        // Tap gesture for multi-tap tasks — tap the slide to count
+        .contentShape(Rectangle())
+        .onTapGesture {
+            guard isTappable, !flashCompleted, !learningManager.isSubmitting else { return }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                multiTapCount += 1
+            }
+        }
         .onAppear {
             startFlashSequence(images: images)
         }
@@ -1416,15 +1449,17 @@ struct LearningSessionView: View {
     }
 
     /// Multi-tap counting interaction area.
-    /// Shows a large TAP button with a counter. The child taps once per target
-    /// item in the animation or story, then submits the total count.
+    /// Shows a tap counter and Done button. The child taps directly on the
+    /// slide/image above (in contentArea) when they see the target, and
+    /// the counter updates. When done, they press the Done button.
     @ViewBuilder
     private func multiTapArea(task: AdaptiveTask) -> some View {
         let expectedCount = task.content.tapCount ?? 0
         let hasAnimation = isAnimatedTask(task)
-        let animationStillRunning = hasAnimation && !animationFinished
+        let hasFlash = isFlashTask(task)
+        let animationStillRunning = (hasAnimation && !animationFinished) || (hasFlash && !flashCompleted)
 
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             // Tap counter display
             HStack(spacing: 12) {
                 Image(systemName: "hand.tap.fill")
@@ -1445,31 +1480,7 @@ struct LearningSessionView: View {
                     )
             )
 
-            // Large TAP button — always active so child can tap during animation
-            Button {
-                withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
-                    multiTapCount += 1
-                }
-            } label: {
-                VStack(spacing: 8) {
-                    Image(systemName: "hand.tap.fill")
-                        .font(.system(size: 44))
-                    Text("TAP!")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 24)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(dimension.color)
-                        .shadow(color: dimension.color.opacity(0.4), radius: 8, y: 4)
-                )
-            }
-            .scaleEffect(1.0)
-            .disabled(learningManager.isSubmitting)
-
-            // Submit button — only visible after animation finishes (or for story tasks)
+            // Submit button — only visible after animation/flash finishes (or for story tasks)
             if !animationStillRunning {
                 Button {
                     let isCorrect = multiTapCount == expectedCount
@@ -1495,12 +1506,6 @@ struct LearningSessionView: View {
                     )
                 }
                 .disabled(learningManager.isSubmitting)
-            } else {
-                // Hint text during animation
-                Text("Tap the button when you see the target!")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
             }
         }
     }
