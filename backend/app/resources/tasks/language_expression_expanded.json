@@ -66,7 +66,8 @@
           "target_word": "Go",
           "modalities": [
             "voice"
-          ]
+          ],
+          "image_hint": "waving"
         }
       ]
     },
@@ -282,7 +283,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Conversational Response",
           "scaffolding_hint": "Think about animals you like. Do you like dogs? Cats?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -293,7 +293,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Conversational Response",
           "scaffolding_hint": "Think about what you had to eat this morning",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -304,7 +303,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Conversational Response",
           "scaffolding_hint": "Think about your favorite toy or game",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -315,7 +313,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Conversational Response",
           "scaffolding_hint": "Look around. What colors do you see that you like?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -326,7 +323,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Conversational Response",
           "scaffolding_hint": "Who lives in your house? Do you have brothers or sisters?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -411,7 +407,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Narrative Expression",
           "scaffolding_hint": "Who is in the picture? What happened? What will happen next?",
-          "target_word": "open_ended",
           "image_hint": "happy_face",
           "modalities": [
             "voice"
@@ -423,7 +418,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Personal Narrative",
           "scaffolding_hint": "What did you do at the park? Who was with you?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -434,7 +428,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Narrative Expression",
           "scaffolding_hint": "What do you need? What do you wear?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -445,7 +438,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Personal Narrative",
           "scaffolding_hint": "What made it special? Where were you?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -456,7 +448,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Narrative Expression",
           "scaffolding_hint": "Think about what came before and what comes after",
-          "target_word": "open_ended",
           "image_hint": "sad_face",
           "modalities": [
             "voice"
@@ -475,7 +466,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Procedural Explanation",
           "scaffolding_hint": "What do you do first? Then what?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -486,7 +476,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Causal Explanation",
           "scaffolding_hint": "What happens if you go outside without a coat?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -497,7 +486,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Procedural Explanation",
           "scaffolding_hint": "What do you need? What do you do first?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -508,7 +496,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Procedural Explanation",
           "scaffolding_hint": "What are the rules? How do you win?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -519,7 +506,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Causal Explanation",
           "scaffolding_hint": "How does it make other people feel?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -537,7 +523,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Opinion Expression",
           "scaffolding_hint": "Think about what each animal can do. Which do you like more?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -548,7 +533,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Creative Expression",
           "scaffolding_hint": "Think about what you would like to do that you cannot do now",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -559,7 +543,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Problem Solving Expression",
           "scaffolding_hint": "The puppy looks scared. How would you help it?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -570,7 +553,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Persuasive Expression",
           "scaffolding_hint": "Think about good things and bad things about homework",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -581,7 +563,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Abstract Expression",
           "scaffolding_hint": "Think about your friends. What do they do that makes you happy?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -599,7 +580,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Emotional Narrative",
           "scaffolding_hint": "Think about a time you did something well. How did it feel?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -610,7 +590,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Persuasive Narrative",
           "scaffolding_hint": "What would make school better for you and your friends?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -621,7 +600,6 @@
           "source_test": "TNL-2",
           "sub_domain": "Retelling",
           "scaffolding_hint": "Who were the characters? What happened in the story?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -632,7 +610,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Abstract Reasoning Expression",
           "scaffolding_hint": "Have you had any interesting dreams? What were they about?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
@@ -643,7 +620,6 @@
           "source_test": "CELF-5",
           "sub_domain": "Creative Planning Expression",
           "scaffolding_hint": "What subject do you like? How would you help your students learn?",
-          "target_word": "open_ended",
           "modalities": [
             "voice"
           ]
