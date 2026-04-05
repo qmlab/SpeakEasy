@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#E8F5E9" rx="10"/>
+  <!-- Person -->
+  <circle cx="35" cy="30" r="12" fill="#FFCC80"/>
+  <path d="M35 42 L35 65" stroke="#4A90D9" stroke-width="3"/>
+  <!-- Money/donation -->
+  <circle cx="58" cy="45" r="8" fill="#4CAF50"/>
+  <text x="58" y="48" text-anchor="middle" font-family="Arial" font-size="10" fill="white" font-weight="bold">$</text>
+  <!-- Camera / audience -->
+  <circle cx="78" cy="25" r="6" fill="#333"/>
+  <rect x="72" y="22" width="5" height="6" fill="#555"/>
+  <!-- Hearts -->
+  <text x="70" y="62" font-family="Arial" font-size="8" fill="#E91E63">♥</text>
+  <text x="80" y="55" font-family="Arial" font-size="6" fill="#E91E63">♥</text>
+</svg>

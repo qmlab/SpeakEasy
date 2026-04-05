@@ -77,20 +77,20 @@
           "instruction_zh": "哪个字母发出'sss'的声音？"
         },
         {
-          "instruction": "Listen: 'The dog ran fast.' Who ran?",
+          "instruction": "Which letter makes the 'mmm' sound?",
           "question_id": "Q283",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"Who is the sentence about?\"",
+          "source_test": "custom",
+          "sub_domain": "Literacy & Phonics",
+          "scaffolding_hint": "Say: \"Mmm like yummy food\"",
           "options": [
-            "Dog",
-            "Cat",
-            "Boy",
-            "Girl"
+            "M",
+            "N",
+            "W",
+            "V"
           ],
-          "correct_answer": "Dog",
-          "image_hint": "book",
-          "passage": "Listen: 'The dog ran fast.' Who ran?"
+          "correct_answer": "M",
+          "image_hint": "letter",
+          "instruction_zh": "哪个字母发出'mmm'的声音？"
         }
       ]
     },
@@ -115,20 +115,20 @@
           "image_hint": "cat"
         },
         {
-          "instruction": "Listen: 'Maria ate an apple because she was hungry.' Why did Maria eat?",
+          "instruction": "Which word rhymes with Dog?",
           "question_id": "Q284",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"The sentence tells you why — listen for the word 'because'\"",
+          "source_test": "custom",
+          "sub_domain": "Literacy & Phonics",
+          "scaffolding_hint": "Say: \"Rhyming words end with the same sound — dog, fog, log\"",
           "options": [
-            "She was hungry",
-            "She was bored",
-            "She was happy",
-            "She was tired"
+            "Log",
+            "Cat",
+            "Pen",
+            "Bed"
           ],
-          "correct_answer": "She was hungry",
+          "correct_answer": "Log",
           "image_hint": "book",
-          "passage": "Listen: 'Maria ate an apple because she was hungry.' Why did Maria eat?"
+          "instruction_zh": "哪个单词和Dog押韵？"
         }
       ]
     },
@@ -165,17 +165,17 @@
         },
         {
           "question_id": "Q304",
-          "instruction": "Listen: 'Tim has 3 red balls and 1 blue ball.' How many balls does Tim have in total?",
+          "instruction": "Read: 'The sun is hot.' Which word means very warm?",
           "source_test": "custom",
-          "sub_domain": "simple_reading",
-          "scaffolding_hint": "Add the red and blue balls together",
+          "sub_domain": "vocabulary",
+          "scaffolding_hint": "Think about what 'hot' means",
           "options": [
-            "4",
-            "3",
-            "5",
-            "2"
+            "Hot",
+            "Sun",
+            "Is",
+            "The"
           ],
-          "correct_answer": "4",
+          "correct_answer": "Hot",
           "image_hint": "book"
         }
       ]
@@ -451,20 +451,20 @@
       "task_type": "read_passage",
       "tasks": [
         {
-          "instruction": "In a negotiation, one party suddenly becomes very agreeable after being resistant. What might this signal?",
+          "instruction": "Read: 'The author paints a vivid picture of despair through stark imagery and fragmented sentences.' What literary technique is this analysis describing?",
           "question_id": "Q282",
-          "source_test": "SRS-2",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"Sudden changes in behavior during negotiations can have multiple meanings\"",
+          "source_test": "custom",
+          "sub_domain": "literary_analysis",
+          "scaffolding_hint": "Think about how authors use writing techniques to convey emotion",
           "options": [
-            "They may be setting a trap",
-            "They genuinely changed their mind",
-            "Both are possible",
-            "Neither is possible"
+            "Style analysis",
+            "Plot summary",
+            "Character sketch",
+            "Setting description"
           ],
-          "correct_answer": "Both are possible",
+          "correct_answer": "Style analysis",
           "image_hint": "book",
-          "passage": "In a negotiation, one party suddenly becomes very agreeable after being resistant. What might this signal?"
+          "passage": "Read: 'The author paints a vivid picture of despair through stark imagery and fragmented sentences.' What literary technique is this analysis describing?"
         },
         {
           "instruction": "Read the two passages with opposing views. What is the key point of disagreement?",

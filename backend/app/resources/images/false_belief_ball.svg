@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#E8F5E9" rx="10"/>
+  <!-- Basket -->
+  <path d="M10 60 L18 85 L42 85 L50 60 Z" fill="#D7A86E" stroke="#8D6E63" stroke-width="2"/>
+  <!-- Box -->
+  <rect x="58" y="60" width="32" height="25" fill="#90CAF9" stroke="#1976D2" stroke-width="2"/>
+  <!-- Ball in box (moved) -->
+  <circle cx="74" cy="75" r="8" fill="#F44336"/>
+  <!-- Arrow showing movement -->
+  <path d="M30 55 Q50 40 70 55" stroke="#FF9800" stroke-width="2" fill="none" stroke-dasharray="4"/>
+  <polygon points="68,52 74,55 68,58" fill="#FF9800"/>
+  <!-- Labels -->
+  <text x="30" y="95" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">Basket</text>
+  <text x="74" y="95" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">Box</text>
+</svg>

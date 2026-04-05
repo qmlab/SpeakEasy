@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#E3F2FD" rx="10"/>
+  <!-- Jake sad -->
+  <circle cx="30" cy="35" r="12" fill="#FFCC80"/>
+  <circle cx="26" cy="33" r="2" fill="#333"/>
+  <circle cx="34" cy="33" r="2" fill="#333"/>
+  <path d="M26 40 Q30 37 34 40" stroke="#333" stroke-width="1.5" fill="none"/>
+  <path d="M27 36 Q25 42 28 46" stroke="#42A5F5" stroke-width="1.5" fill="none"/>
+  <path d="M30 47 L30 65" stroke="#4A90D9" stroke-width="3"/>
+  <!-- Empty space where toy was -->
+  <text x="30" y="80" text-anchor="middle" font-family="Arial" font-size="8" fill="#999">Lost toy</text>
+  <!-- Sam laughing -->
+  <circle cx="70" cy="35" r="12" fill="#FFCC80"/>
+  <circle cx="66" cy="33" r="2" fill="#333"/>
+  <circle cx="74" cy="33" r="2" fill="#333"/>
+  <path d="M66 38 Q70 43 74 38" stroke="#333" stroke-width="1.5" fill="none"/>
+  <path d="M70 47 L70 65" stroke="#E67E22" stroke-width="3"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#FFF8E1" rx="10"/>
+  <circle cx="50" cy="45" r="30" fill="#FFCC80" stroke="#333" stroke-width="2"/>
+  <!-- Eyes NOT smiling (flat/sad) -->
+  <circle cx="38" cy="38" r="4" fill="#333"/>
+  <circle cx="62" cy="38" r="4" fill="#333"/>
+  <path d="M32 34 L44 36" stroke="#333" stroke-width="1.5" fill="none"/>
+  <path d="M56 36 L68 34" stroke="#333" stroke-width="1.5" fill="none"/>
+  <!-- Mouth IS smiling -->
+  <path d="M35 52 Q50 62 65 52" stroke="#333" stroke-width="2.5" fill="none"/>
+  <!-- Label -->
+  <text x="50" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#999">Real feeling?</text>
+</svg>

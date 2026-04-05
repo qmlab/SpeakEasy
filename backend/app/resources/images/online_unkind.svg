@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#FFEBEE" rx="10"/>
+  <!-- Phone/screen -->
+  <rect x="25" y="15" width="50" height="60" rx="8" fill="#333"/>
+  <rect x="28" y="20" width="44" height="48" rx="4" fill="white"/>
+  <!-- Mean message -->
+  <rect x="32" y="25" width="35" height="15" rx="5" fill="#FFCDD2"/>
+  <text x="50" y="35" text-anchor="middle" font-family="Arial" font-size="7" fill="#C62828">mean words</text>
+  <!-- Sad face of reader -->
+  <circle cx="50" cy="88" r="8" fill="#FFCC80"/>
+  <circle cx="47" cy="86" r="1.5" fill="#333"/>
+  <circle cx="53" cy="86" r="1.5" fill="#333"/>
+  <path d="M47 92 Q50 90 53 92" stroke="#333" stroke-width="1" fill="none"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#FFF3E0" rx="10"/>
+  <!-- Speaker (sarcastic) -->
+  <circle cx="30" cy="35" r="12" fill="#FFCC80"/>
+  <path d="M24 38 Q30 42 36 38" stroke="#333" stroke-width="1.5" fill="none"/>
+  <!-- Sarcastic speech -->
+  <ellipse cx="55" cy="20" rx="20" ry="10" fill="white" stroke="#CCC" stroke-width="1"/>
+  <text x="55" y="22" text-anchor="middle" font-family="Arial" font-size="7" fill="#E91E63" font-style="italic">"Oh great..."</text>
+  <!-- Confused literal child -->
+  <circle cx="72" cy="40" r="12" fill="#FFCC80"/>
+  <circle cx="68" cy="38" r="2.5" fill="#333"/>
+  <circle cx="76" cy="38" r="2.5" fill="#333"/>
+  <text x="85" y="35" font-family="Arial" font-size="14" fill="#FF9800">?</text>
+</svg>

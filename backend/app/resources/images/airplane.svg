@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E8EAF6" stroke="#283593" stroke-width="3"/>
-<ellipse cx="60" cy="60" rx="30" ry="8" fill="#5C6BC0"/><polygon points="30,60 20,40 40,55" fill="#3F51B5"/><polygon points="30,60 20,80 40,65" fill="#3F51B5"/><polygon points="75,60 90,48 90,60" fill="#3F51B5"/><polygon points="75,60 90,72 90,60" fill="#3F51B5"/><circle cx="35" cy="57" r="3" fill="#BBDEFB"/><circle cx="45" cy="57" r="3" fill="#BBDEFB"/><circle cx="55" cy="57" r="3" fill="#BBDEFB"/></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+<ellipse cx="60" cy="60" rx="35" ry="8" fill="#90CAF9"/>
+<path d="M30 60 L20 60 C18 60 18 58 20 57 L30 55 Z" fill="#64B5F6"/>
+<path d="M90 60 L95 57 C97 56 98 58 96 60 L90 60 Z" fill="#90CAF9"/>
+<path d="M50 60 L35 40 L65 55 Z" fill="#42A5F5"/>
+<path d="M50 60 L35 80 L65 65 Z" fill="#42A5F5"/>
+<path d="M80 58 L85 48 L90 56 Z" fill="#64B5F6"/>
+<path d="M80 62 L85 72 L90 64 Z" fill="#64B5F6"/>
+<ellipse cx="35" cy="60" rx="4" ry="5" fill="#BBDEFB"/>
+<circle cx="30" cy="58" r="2" fill="#1565C0"/>
+</svg>

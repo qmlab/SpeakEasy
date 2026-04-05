@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#E8F5E9" rx="10"/>
+  <!-- Group of children playing -->
+  <circle cx="30" cy="35" r="10" fill="#FFCC80"/>
+  <circle cx="50" cy="30" r="10" fill="#FFCC80"/>
+  <circle cx="70" cy="35" r="10" fill="#FFCC80"/>
+  <!-- Ball between them -->
+  <circle cx="50" cy="55" r="7" fill="#F44336"/>
+  <!-- Child wanting to join -->
+  <circle cx="15" cy="70" r="10" fill="#FFCC80"/>
+  <path d="M25 70 L35 55" stroke="#4A90D9" stroke-width="2" stroke-dasharray="3"/>
+  <text x="15" y="88" text-anchor="middle" font-family="Arial" font-size="8" fill="#666">Me?</text>
+</svg>

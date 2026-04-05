@@ -231,6 +231,7 @@ def seed_object_cognition_tasks(db: Session) -> int:
                     "target_name": "Cat",
                     "target_category": "Animals",
                     "accept_threshold": 0.6,
+                    "image_hint": "cat",
                 },
                 is_assessment=False,
             ),
@@ -524,6 +525,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "target_word": "Apple",
                     "target_category": "Food",
                     "accept_threshold": 0.6,
+                    "image_hint": "apple",
                 },
                 is_assessment=False,
             ),
@@ -538,6 +540,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "target_word": "Car",
                     "target_category": "Vehicles",
                     "accept_threshold": 0.6,
+                    "image_hint": "car",
                 },
                 is_assessment=False,
             ),
@@ -552,6 +555,7 @@ def seed_language_expression_tasks(db: Session) -> int:
                     "target_word": "Cup",
                     "target_category": "Household",
                     "accept_threshold": 0.6,
+                    "image_hint": "cup",
                 },
                 is_assessment=False,
             ),
@@ -1439,6 +1443,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                     "instruction_audio": "Look! Tap the character who is waving at you!",
                     "instruction_text": "Tap the character waving at you.",
                     "scene": "character_waving",
+                    "image_hint": "waving",
                     "target": {"action": "waving", "position": "center"},
                     "distractors": [
                         {"action": "sleeping", "position": "left"},
@@ -1456,6 +1461,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                     "instruction_audio": "Someone is calling your name! Tap who is calling.",
                     "instruction_text": "Tap who is calling you.",
                     "scene": "name_calling",
+                    "image_hint": "speech_bubble",
                     "target": {"action": "calling", "position": "left"},
                     "distractors": [
                         {"action": "eating", "position": "center"},
@@ -1473,6 +1479,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                     "instruction_audio": "Look at the face! Is the person happy or sad? Tap the answer.",
                     "instruction_text": "Is this person happy or sad?",
                     "scene": "emotion_recognition",
+                    "image_hint": "happy_face",
                     "emotion": "happy",
                     "choices": [
                         {"text": "Happy", "emoji": "smile", "is_correct": True},
@@ -1669,6 +1676,7 @@ def seed_social_behavior_tasks(db: Session) -> int:
                     "instruction_audio": "Show the duck where the fish is! Point to the fish.",
                     "instruction_text": "Point to the fish to show the duck.",
                     "scene": "show_duck_fish",
+                    "image_hint": "duck",
                     "mode": "child_points",
                     "target": {"name": "Fish", "position": "bottom_right"},
                     "distractors": [
