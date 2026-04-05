@@ -1095,7 +1095,7 @@
           "question_id": "Q057",
           "source_test": "WJ-III",
           "sub_domain": "Following Directions",
-          "scaffolding_hint": "Say: \"First check: what color is the biggest shape?\"",
+          "scaffolding_hint": "Say: \"Find the smallest shape in the group\"",
           "options": [
             "Small red triangle",
             "Large blue circle",

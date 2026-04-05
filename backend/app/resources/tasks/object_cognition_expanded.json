@@ -258,7 +258,7 @@
             "Blue"
           ],
           "tap_target": "Blue",
-          "no_tap_target": "Red, Green"
+          "no_tap_target": "Red, Green, Yellow"
         }
       ]
     },
