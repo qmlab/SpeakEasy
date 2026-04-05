@@ -1,269 +1,486 @@
 {
-          "dimension": "literacy",
-          "description": "Literacy: From letter recognition to reading comprehension",
-          "version": "research_v2",
-          "source": "Autism Neurodevelopmental Question Bank v1.0",
-          "levels": {
-                    "0": {
-                              "name": "Letter Recognition",
-                              "name_zh": "字母识别",
-                              "task_type": "match_word_image",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Touch the letter A.",
-                                                  "question_id": "Q058",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Literacy & Phonics",
-                                                  "scaffolding_hint": "Highlight the A",
-                                                  "options": [
-                                                            "A",
-                                                            "B",
-                                                            "C"
-                                                  ],
-                                                  "correct_answer": "A",
-                                                  "image_hint": "letter"
-                                        }
-                              ]
-                    },
-                    "1": {
-                              "name": "Letter-Sound Match",
-                              "name_zh": "字母与声音配对",
-                              "task_type": "match_word_image",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Which letter makes the 'sss' sound?",
-                                                  "question_id": "Q059",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Literacy & Phonics",
-                                                  "scaffolding_hint": "Say: \"Sss like a snake\"",
-                                                  "options": [
-                                                            "S",
-                                                            "T",
-                                                            "M",
-                                                            "B"
-                                                  ],
-                                                  "correct_answer": "S",
-                                                  "image_hint": "letter_s",
-                                                  "instruction_zh": "哪个字母发出'sss'的声音？"
-                                        },
-                                        {
-                                                  "instruction": "Listen: 'The dog ran fast.' Who ran?",
-                                                  "question_id": "Q283",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"Who is the sentence about?\"",
-                                                  "options": [
-                                                            "Dog",
-                                                            "Cat",
-                                                            "Boy",
-                                                            "Girl"
-                                                  ],
-                                                  "correct_answer": "Dog",
-                                                  "image_hint": "book",
-                                                  "passage": "Listen: 'The dog ran fast.' Who ran?"
-                                        }
-                              ]
-                    },
-                    "2": {
-                              "name": "Rhyme & Phonics",
-                              "name_zh": "韵律与语音",
-                              "task_type": "match_word_image",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Which word rhymes with Cat?",
-                                                  "question_id": "Q060",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Literacy & Phonics",
-                                                  "scaffolding_hint": "Say: \"Rhyming words end with the same sound — cat, hat, mat\"",
-                                                  "options": [
-                                                            "Hat",
-                                                            "Dog",
-                                                            "Car",
-                                                            "Sun"
-                                                  ],
-                                                  "correct_answer": "Hat",
-                                                  "image_hint": "cat"
-                                        },
-                                        {
-                                                  "instruction": "Listen: 'Maria ate an apple because she was hungry.' Why did Maria eat?",
-                                                  "question_id": "Q284",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"The sentence tells you why — listen for the word 'because'\"",
-                                                  "options": [
-                                                            "She was hungry",
-                                                            "She was bored",
-                                                            "She was happy",
-                                                            "She was tired"
-                                                  ],
-                                                  "correct_answer": "She was hungry",
-                                                  "image_hint": "book",
-                                                  "passage": "Listen: 'Maria ate an apple because she was hungry.' Why did Maria eat?"
-                                        }
-                              ]
-                    },
-                    "3": {
-                              "name": "Simple Reading",
-                              "name_zh": "简单阅读",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
-                                                  "question_id": "Q285",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"He started with 5 and gave away 2\"",
-                                                  "correct_answer": "3",
-                                                  "image_hint": "book",
-                                                  "passage": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
-                                                  "input_mode": "number"
-                                        }
-                              ]
-                    },
-                    "4": {
-                              "name": "Reading Comprehension",
-                              "name_zh": "阅读理解",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?",
-                                                  "question_id": "Q286",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"What feeling do the words 'creaked' and 'no one' give you?\"",
-                                                  "options": [
-                                                            "Eerie/Mysterious",
-                                                            "Happy",
-                                                            "Exciting",
-                                                            "Funny"
-                                                  ],
-                                                  "correct_answer": "Eerie/Mysterious",
-                                                  "image_hint": "book",
-                                                  "passage": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?"
-                                        }
-                              ]
-                    },
-                    "5": {
-                              "name": "Mood & Inference",
-                              "name_zh": "情绪与推断",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Read the paragraph. What is the main idea?",
-                                                  "question_id": "Q287",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"The main idea is what the whole paragraph is mostly about\"",
-                                                  "options": [
-                                                            "Correct main idea",
-                                                            "Supporting details"
-                                                  ],
-                                                  "correct_answer": "Correct main idea",
-                                                  "image_hint": "book",
-                                                  "passage": "Read the paragraph. What is the main idea?"
-                                        }
-                              ]
-                    },
-                    "6": {
-                              "name": "Main Idea",
-                              "name_zh": "中心思想",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Read the passage. What can you infer about the character's feelings?",
-                                                  "question_id": "Q288",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"The author doesn't say directly — use clues from the words\"",
-                                                  "options": [
-                                                            "Correct inferred emotion",
-                                                            "Stated facts",
-                                                            "Wrong emotion"
-                                                  ],
-                                                  "correct_answer": "Correct inferred emotion",
-                                                  "image_hint": "book",
-                                                  "passage": "Read the passage. What can you infer about the character's feelings?"
-                                        }
-                              ]
-                    },
-                    "7": {
-                              "name": "Character Analysis",
-                              "name_zh": "角色分析",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Read the argument. What is the author's main claim?",
-                                                  "question_id": "Q289",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"The claim is the main point the author is trying to prove\"",
-                                                  "options": [
-                                                            "Correct claim",
-                                                            "Evidence",
-                                                            "Counter-argument",
-                                                            "Conclusion"
-                                                  ],
-                                                  "correct_answer": "Correct claim",
-                                                  "image_hint": "book",
-                                                  "passage": "Read the argument. What is the author's main claim?"
-                                        }
-                              ]
-                    },
-                    "8": {
-                              "name": "Argument Analysis",
-                              "name_zh": "论证分析",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "Read the passage. Identify the figurative language and explain its meaning.",
-                                                  "question_id": "Q290",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"Figurative language uses comparison or exaggeration to make a point\"",
-                                                  "options": [
-                                                            "Correct identification and explanation",
-                                                            "Literal interpretation"
-                                                  ],
-                                                  "correct_answer": "Correct identification and explanation",
-                                                  "image_hint": "book",
-                                                  "passage": "Read the passage. Identify the figurative language and explain its meaning."
-                                        }
-                              ]
-                    },
-                    "9": {
-                              "name": "Advanced Literacy",
-                              "name_zh": "高级读写",
-                              "task_type": "read_passage",
-                              "tasks": [
-                                        {
-                                                  "instruction": "In a negotiation, one party suddenly becomes very agreeable after being resistant. What might this signal?",
-                                                  "question_id": "Q282",
-                                                  "source_test": "SRS-2",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"Sudden changes in behavior during negotiations can have multiple meanings\"",
-                                                  "options": [
-                                                            "They are being honest, They gave up, They are confused",
-                                                            "Both possibilities valid"
-                                                  ],
-                                                  "correct_answer": "They are being honest, They gave up, They are confused",
-                                                  "image_hint": "book",
-                                                  "passage": "In a negotiation, one party suddenly becomes very agreeable after being resistant. What might this signal?"
-                                        },
-                                        {
-                                                  "instruction": "Read the two passages with opposing views. What is the key point of disagreement?",
-                                                  "question_id": "Q291",
-                                                  "source_test": "WJ-III",
-                                                  "sub_domain": "Reading Comprehension",
-                                                  "scaffolding_hint": "Say: \"Look past the examples — what fundamental idea do they disagree on?\"",
-                                                  "options": [
-                                                            "Core point of disagreement",
-                                                            "Surface-level differences"
-                                                  ],
-                                                  "correct_answer": "Core point of disagreement",
-                                                  "image_hint": "book",
-                                                  "passage": "Read the two passages with opposing views. What is the key point of disagreement?"
-                                        }
-                              ]
-                    }
-          }
+  "dimension": "literacy",
+  "description": "Literacy: From letter recognition to reading comprehension",
+  "version": "research_v2",
+  "source": "Autism Neurodevelopmental Question Bank v1.0",
+  "levels": {
+    "0": {
+      "name": "Letter Recognition",
+      "name_zh": "字母识别",
+      "task_type": "match_word_image",
+      "tasks": [
+        {
+          "instruction": "Touch the letter A.",
+          "question_id": "Q058",
+          "source_test": "WJ-III",
+          "sub_domain": "Literacy & Phonics",
+          "scaffolding_hint": "Highlight the A",
+          "options": [
+            "A",
+            "B",
+            "C"
+          ],
+          "correct_answer": "A",
+          "image_hint": "letter"
+        },
+        {
+          "question_id": "Q301",
+          "instruction": "Touch the letter B.",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Look for the letter with two bumps",
+          "options": [
+            "B",
+            "D",
+            "P",
+            "R"
+          ],
+          "correct_answer": "B",
+          "image_hint": "letter"
+        },
+        {
+          "question_id": "Q302",
+          "instruction": "Touch the letter C.",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "It looks like a half circle",
+          "options": [
+            "C",
+            "O",
+            "G",
+            "Q"
+          ],
+          "correct_answer": "C",
+          "image_hint": "letter"
+        }
+      ]
+    },
+    "1": {
+      "name": "Letter-Sound Match",
+      "name_zh": "字母与声音配对",
+      "task_type": "match_word_image",
+      "tasks": [
+        {
+          "instruction": "Which letter makes the 'sss' sound?",
+          "question_id": "Q059",
+          "source_test": "WJ-III",
+          "sub_domain": "Literacy & Phonics",
+          "scaffolding_hint": "Say: \"Sss like a snake\"",
+          "options": [
+            "S",
+            "T",
+            "M",
+            "B"
+          ],
+          "correct_answer": "S",
+          "image_hint": "letter",
+          "instruction_zh": "哪个字母发出'sss'的声音？"
+        },
+        {
+          "instruction": "Listen: 'The dog ran fast.' Who ran?",
+          "question_id": "Q283",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"Who is the sentence about?\"",
+          "options": [
+            "Dog",
+            "Cat",
+            "Boy",
+            "Girl"
+          ],
+          "correct_answer": "Dog",
+          "image_hint": "book",
+          "passage": "Listen: 'The dog ran fast.' Who ran?"
+        }
+      ]
+    },
+    "2": {
+      "name": "Rhyme & Phonics",
+      "name_zh": "韵律与语音",
+      "task_type": "match_word_image",
+      "tasks": [
+        {
+          "instruction": "Which word rhymes with Cat?",
+          "question_id": "Q060",
+          "source_test": "WJ-III",
+          "sub_domain": "Literacy & Phonics",
+          "scaffolding_hint": "Say: \"Rhyming words end with the same sound — cat, hat, mat\"",
+          "options": [
+            "Hat",
+            "Dog",
+            "Car",
+            "Sun"
+          ],
+          "correct_answer": "Hat",
+          "image_hint": "cat"
+        },
+        {
+          "instruction": "Listen: 'Maria ate an apple because she was hungry.' Why did Maria eat?",
+          "question_id": "Q284",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"The sentence tells you why — listen for the word 'because'\"",
+          "options": [
+            "She was hungry",
+            "She was bored",
+            "She was happy",
+            "She was tired"
+          ],
+          "correct_answer": "She was hungry",
+          "image_hint": "book",
+          "passage": "Listen: 'Maria ate an apple because she was hungry.' Why did Maria eat?"
+        }
+      ]
+    },
+    "3": {
+      "name": "Simple Reading",
+      "name_zh": "简单阅读",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
+          "question_id": "Q285",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"He started with 5 and gave away 2\"",
+          "correct_answer": "3",
+          "image_hint": "book",
+          "passage": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
+          "input_mode": "number"
+        },
+        {
+          "question_id": "Q303",
+          "instruction": "Listen to the story: 'The cat sat on the mat. The dog sat on the rug.' Where did the cat sit?",
+          "source_test": "custom",
+          "sub_domain": "simple_reading",
+          "scaffolding_hint": "Think about where the cat was",
+          "options": [
+            "On the mat",
+            "On the rug",
+            "On the bed",
+            "On the floor"
+          ],
+          "correct_answer": "On the mat",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q304",
+          "instruction": "Listen: 'Tim has 3 red balls and 1 blue ball.' How many balls does Tim have in total?",
+          "source_test": "custom",
+          "sub_domain": "simple_reading",
+          "scaffolding_hint": "Add the red and blue balls together",
+          "options": [
+            "4",
+            "3",
+            "5",
+            "2"
+          ],
+          "correct_answer": "4",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "4": {
+      "name": "Reading Comprehension",
+      "name_zh": "阅读理解",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?",
+          "question_id": "Q286",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"What feeling do the words 'creaked' and 'no one' give you?\"",
+          "options": [
+            "Eerie/Mysterious",
+            "Happy",
+            "Exciting",
+            "Funny"
+          ],
+          "correct_answer": "Eerie/Mysterious",
+          "image_hint": "book",
+          "passage": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?"
+        },
+        {
+          "question_id": "Q305",
+          "instruction": "Read: 'The children laughed and splashed in the pool on the hot summer day.' What season is it?",
+          "source_test": "custom",
+          "sub_domain": "reading_comprehension",
+          "scaffolding_hint": "Look for clues about the weather",
+          "options": [
+            "Summer",
+            "Winter",
+            "Spring",
+            "Fall"
+          ],
+          "correct_answer": "Summer",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q306",
+          "instruction": "Read: 'The leaves turned red and gold. Birds flew south.' What time of year is this?",
+          "source_test": "custom",
+          "sub_domain": "reading_comprehension",
+          "scaffolding_hint": "Think about when leaves change color",
+          "options": [
+            "Autumn/Fall",
+            "Summer",
+            "Winter",
+            "Spring"
+          ],
+          "correct_answer": "Autumn/Fall",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "5": {
+      "name": "Mood & Inference",
+      "name_zh": "情绪与推断",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read the paragraph: 'Plants need sunlight, water, and soil to grow. Without sunlight, they cannot make food.' What is the main idea?",
+          "question_id": "Q287",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"The main idea is what the whole paragraph is mostly about\"",
+          "options": [
+            "Plants need sunlight to grow",
+            "The sky is blue",
+            "Dogs are friendly",
+            "Water is wet"
+          ],
+          "correct_answer": "Plants need sunlight to grow",
+          "image_hint": "book",
+          "passage": "Read the paragraph. What is the main idea?"
+        },
+        {
+          "question_id": "Q307",
+          "instruction": "Read: 'Bees are important because they help flowers grow by carrying pollen.' What is the main idea?",
+          "source_test": "custom",
+          "sub_domain": "main_idea",
+          "scaffolding_hint": "What is the most important point?",
+          "options": [
+            "Bees help flowers grow",
+            "Flowers are pretty",
+            "Pollen is yellow",
+            "Bees can sting"
+          ],
+          "correct_answer": "Bees help flowers grow",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q308",
+          "instruction": "Read: 'Recycling helps our planet. We can recycle paper, plastic, and glass.' Why should we recycle?",
+          "source_test": "custom",
+          "sub_domain": "main_idea",
+          "scaffolding_hint": "Think about why recycling matters",
+          "options": [
+            "To help our planet",
+            "To make money",
+            "To have fun",
+            "To save time"
+          ],
+          "correct_answer": "To help our planet",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "6": {
+      "name": "Main Idea",
+      "name_zh": "中心思想",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'Sarah stared out the window at the falling rain. She missed her grandmother's warm kitchen and the smell of fresh cookies.' How does Sarah feel?",
+          "question_id": "Q288",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"The author doesn't say directly — use clues from the words\"",
+          "options": [
+            "Lonely and homesick",
+            "Excited and happy",
+            "Angry and frustrated",
+            "Calm and peaceful"
+          ],
+          "correct_answer": "Lonely and homesick",
+          "image_hint": "book",
+          "passage": "Read the passage. What can you infer about the character's feelings?"
+        },
+        {
+          "question_id": "Q309",
+          "instruction": "Read: 'Jake walked slowly to school, dragging his feet. He sighed deeply.' How does Jake probably feel?",
+          "source_test": "custom",
+          "sub_domain": "inference",
+          "scaffolding_hint": "Think about why someone walks slowly and sighs",
+          "options": [
+            "Reluctant or sad",
+            "Excited",
+            "Angry",
+            "Happy"
+          ],
+          "correct_answer": "Reluctant or sad",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q310",
+          "instruction": "Read: 'The puppy wagged its tail and jumped up when it saw its owner.' How does the puppy feel?",
+          "source_test": "custom",
+          "sub_domain": "inference",
+          "scaffolding_hint": "What do dogs do when they are happy?",
+          "options": [
+            "Happy and excited",
+            "Scared",
+            "Angry",
+            "Sleepy"
+          ],
+          "correct_answer": "Happy and excited",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "7": {
+      "name": "Character Analysis",
+      "name_zh": "角色分析",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read the argument. What is the author's main claim?",
+          "question_id": "Q289",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"The claim is the main point the author is trying to prove\"",
+          "options": [
+            "Correct claim",
+            "Evidence",
+            "Counter-argument",
+            "Conclusion"
+          ],
+          "correct_answer": "Correct claim",
+          "image_hint": "book",
+          "passage": "Read the argument. What is the author's main claim?"
+        },
+        {
+          "question_id": "Q311",
+          "instruction": "Read the argument: 'Schools should start later because students learn better when they are well-rested.' What is the claim?",
+          "source_test": "custom",
+          "sub_domain": "argument_analysis",
+          "scaffolding_hint": "What is the main point the author is making?",
+          "options": [
+            "Schools should start later",
+            "Students are lazy",
+            "Sleep is not important",
+            "Teachers need rest too"
+          ],
+          "correct_answer": "Schools should start later",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q312",
+          "instruction": "Read: 'Video games can teach problem-solving skills, but too much screen time is harmful.' What is the author's view?",
+          "source_test": "custom",
+          "sub_domain": "argument_analysis",
+          "scaffolding_hint": "The author sees both sides",
+          "options": [
+            "Games have benefits but need limits",
+            "Games are always bad",
+            "Games are always good",
+            "Screen time does not matter"
+          ],
+          "correct_answer": "Games have benefits but need limits",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "8": {
+      "name": "Argument Analysis",
+      "name_zh": "论证分析",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'Life is a winding road with unexpected turns.' What figurative language is used and what does it mean?",
+          "question_id": "Q290",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"Figurative language uses comparison or exaggeration to make a point\"",
+          "options": [
+            "Metaphor — comparing life to a journey",
+            "Simile — using 'like' or 'as'",
+            "Personification — giving human traits to objects",
+            "Hyperbole — extreme exaggeration"
+          ],
+          "correct_answer": "Metaphor — comparing life to a journey",
+          "image_hint": "book",
+          "passage": "Read the passage. Identify the figurative language and explain its meaning."
+        },
+        {
+          "question_id": "Q313",
+          "instruction": "Read: 'Time is a thief that steals our youth.' What figurative language is this?",
+          "source_test": "custom",
+          "sub_domain": "figurative_language",
+          "scaffolding_hint": "Is time really a thief?",
+          "options": [
+            "Metaphor",
+            "Simile",
+            "Hyperbole",
+            "Alliteration"
+          ],
+          "correct_answer": "Metaphor",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q314",
+          "instruction": "Read: 'She was as brave as a lion.' What figurative language is this?",
+          "source_test": "custom",
+          "sub_domain": "figurative_language",
+          "scaffolding_hint": "Look for 'as...as' comparison",
+          "options": [
+            "Simile",
+            "Metaphor",
+            "Personification",
+            "Onomatopoeia"
+          ],
+          "correct_answer": "Simile",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "9": {
+      "name": "Advanced Literacy",
+      "name_zh": "高级读写",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "In a negotiation, one party suddenly becomes very agreeable after being resistant. What might this signal?",
+          "question_id": "Q282",
+          "source_test": "SRS-2",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"Sudden changes in behavior during negotiations can have multiple meanings\"",
+          "options": [
+            "They may be setting a trap",
+            "They genuinely changed their mind",
+            "Both are possible",
+            "Neither is possible"
+          ],
+          "correct_answer": "Both are possible",
+          "image_hint": "book",
+          "passage": "In a negotiation, one party suddenly becomes very agreeable after being resistant. What might this signal?"
+        },
+        {
+          "instruction": "Read the two passages with opposing views. What is the key point of disagreement?",
+          "question_id": "Q291",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "Say: \"Look past the examples — what fundamental idea do they disagree on?\"",
+          "options": [
+            "Core point of disagreement",
+            "Surface-level differences"
+          ],
+          "correct_answer": "Core point of disagreement",
+          "image_hint": "book",
+          "passage": "Read the two passages with opposing views. What is the key point of disagreement?"
+        }
+      ]
+    }
+  }
 }

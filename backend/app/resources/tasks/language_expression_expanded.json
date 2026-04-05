@@ -16,12 +16,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Widen the line tolerance",
           "options": [
-            "Vertical straight line",
             "Vertical line",
             "Horizontal line",
-            "Circle"
+            "Circle",
+            "Square"
           ],
-          "correct_answer": "Vertical straight line",
+          "correct_answer": "Vertical line",
           "image_hint": "line"
         },
         {
@@ -31,12 +31,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Widen the line tolerance",
           "options": [
-            "Horizontal straight line",
-            "Vertical line",
             "Horizontal line",
-            "Circle"
+            "Vertical line",
+            "Diagonal line",
+            "Curved line"
           ],
-          "correct_answer": "Horizontal straight line",
+          "correct_answer": "Horizontal line",
           "image_hint": "line"
         },
         {
@@ -48,8 +48,8 @@
           "options": [
             "Vertical line",
             "Horizontal line",
-            "Circle",
-            "Square"
+            "Wavy line",
+            "Zigzag line"
           ],
           "correct_answer": "Vertical line",
           "image_hint": "line"
@@ -60,28 +60,28 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show how pieces fit",
-          "correct_answer": "Complete circle",
+          "correct_answer": "Two half-circles",
           "image_hint": "circle",
           "options": [
-            "Complete circle",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Two half-circles",
+            "Two triangles",
+            "Two squares",
+            "Two rectangles"
           ]
         },
         {
-          "instruction": "Follow the ball with your eyes and tap it when it stops.",
+          "instruction": "Follow the ball with your eyes and tap where it stops.",
           "question_id": "Q191",
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Slow the ball further",
-          "correct_answer": "Tap ball at rest",
+          "correct_answer": "Left side",
           "image_hint": "ball",
           "options": [
-            "Tap ball at rest",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Left side",
+            "Right side",
+            "Top",
+            "Bottom"
           ]
         }
       ]
@@ -99,9 +99,9 @@
           "scaffolding_hint": "Show arrow indicating direction",
           "options": [
             "Circle",
-            "Vertical line",
-            "Horizontal line",
-            "Square"
+            "Oval",
+            "Square",
+            "Triangle"
           ],
           "correct_answer": "Circle",
           "image_hint": "circle"
@@ -114,9 +114,9 @@
           "scaffolding_hint": "Highlight each corner",
           "options": [
             "Square",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Rectangle",
+            "Circle",
+            "Diamond"
           ],
           "correct_answer": "Square",
           "image_hint": "square"
@@ -129,9 +129,9 @@
           "scaffolding_hint": "Show example again",
           "options": [
             "Circle",
-            "Vertical line",
-            "Horizontal line",
-            "Square"
+            "Oval",
+            "Semicircle",
+            "Sphere"
           ],
           "correct_answer": "Circle",
           "image_hint": "circle"
@@ -142,13 +142,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show one block placement",
-          "correct_answer": "Correct shape",
+          "correct_answer": "Square",
           "image_hint": "shape",
           "options": [
-            "Correct shape",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Square",
+            "Rectangle",
+            "Triangle",
+            "Hexagon"
           ]
         },
         {
@@ -157,13 +157,13 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Slow the movement",
-          "correct_answer": "Tap at color change",
+          "correct_answer": "When it turns red",
           "image_hint": "ball",
           "options": [
-            "Tap at color change",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "When it turns red",
+            "When it turns blue",
+            "When it stops",
+            "When it speeds up"
           ]
         }
       ]
@@ -180,12 +180,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight the center intersection",
           "options": [
-            "Plus/cross shape",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Plus/cross",
+            "T-shape",
+            "L-shape",
+            "Arrow"
           ],
-          "correct_answer": "Plus/cross shape",
+          "correct_answer": "Plus/cross",
           "image_hint": "cross"
         },
         {
@@ -195,12 +195,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight each vertex",
           "options": [
-            "Equilateral triangle",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Triangle",
+            "Square",
+            "Pentagon",
+            "Diamond"
           ],
-          "correct_answer": "Equilateral triangle",
+          "correct_answer": "Triangle",
           "image_hint": "triangle"
         },
         {
@@ -211,9 +211,9 @@
           "scaffolding_hint": "Show example again",
           "options": [
             "Plus/cross",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "X-shape",
+            "T-shape",
+            "H-shape"
           ],
           "correct_answer": "Plus/cross",
           "image_hint": "cross"
@@ -224,13 +224,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Highlight correct slot",
-          "correct_answer": "All pieces in correct position",
+          "correct_answer": "Square",
           "image_hint": "shape",
           "options": [
-            "All pieces in correct position",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Square",
+            "Rectangle",
+            "Triangle",
+            "Diamond"
           ]
         },
         {
@@ -239,13 +239,13 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Slow the movement",
-          "correct_answer": "Correct cup",
+          "correct_answer": "Middle cup",
           "image_hint": "ball",
           "options": [
-            "Correct cup",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Left cup",
+            "Middle cup",
+            "Right cup",
+            "None"
           ]
         }
       ]
@@ -262,12 +262,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight each point",
           "options": [
-            "5-pointed star",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Star",
+            "Pentagon",
+            "Hexagon",
+            "Octagon"
           ],
-          "correct_answer": "5-pointed star",
+          "correct_answer": "Star",
           "image_hint": "star"
         },
         {
@@ -277,12 +277,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Show angle guide",
           "options": [
-            "45° diagonal line",
+            "Diagonal line",
             "Vertical line",
             "Horizontal line",
-            "Circle"
+            "Curved line"
           ],
-          "correct_answer": "45° diagonal line",
+          "correct_answer": "Diagonal line",
           "image_hint": "line"
         },
         {
@@ -292,42 +292,42 @@
           "sub_domain": "Shape Matching",
           "scaffolding_hint": "Show example again",
           "options": [
-            "Diamond/rhombus",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Diamond",
+            "Square",
+            "Parallelogram",
+            "Trapezoid"
           ],
-          "correct_answer": "Diamond/rhombus",
+          "correct_answer": "Diamond",
           "image_hint": "diamond"
         },
         {
-          "instruction": "Build this 3D tower with the blocks.",
+          "instruction": "Build a 3-block tower.",
           "question_id": "Q184",
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show bottom block first",
-          "correct_answer": "Correct height and order",
+          "correct_answer": "3 blocks tall",
           "image_hint": "shape",
           "options": [
-            "Correct height and order",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "3 blocks tall",
+            "2 blocks tall",
+            "4 blocks tall",
+            "1 block tall"
           ]
         },
         {
-          "instruction": "Follow the path of the moving dot and tap where it will end up.",
+          "instruction": "Follow the dot's path and tap where it will end up.",
           "question_id": "Q194",
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Show path briefly",
-          "correct_answer": "Correct endpoint",
+          "correct_answer": "Top-right",
           "image_hint": "ball",
           "options": [
-            "Correct endpoint",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Top-right",
+            "Bottom-left",
+            "Top-left",
+            "Bottom-right"
           ]
         }
       ]
@@ -344,12 +344,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Trace each circle separately",
           "options": [
-            "Two overlapping circles (Venn)",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Two overlapping circles",
+            "Two separate circles",
+            "One big circle",
+            "Concentric circles"
           ],
-          "correct_answer": "Two overlapping circles (Venn)",
+          "correct_answer": "Two overlapping circles",
           "image_hint": "circle"
         },
         {
@@ -359,12 +359,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight each turn point",
           "options": [
-            "Zigzag line with 5 turns",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Zigzag line",
+            "Straight line",
+            "Wavy line",
+            "Spiral"
           ],
-          "correct_answer": "Zigzag line with 5 turns",
+          "correct_answer": "Zigzag line",
           "image_hint": "line"
         },
         {
@@ -375,9 +375,9 @@
           "scaffolding_hint": "Show example again",
           "options": [
             "Two overlapping squares",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Two separate squares",
+            "One big square",
+            "Concentric squares"
           ],
           "correct_answer": "Two overlapping squares",
           "image_hint": "square"
@@ -388,13 +388,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Highlight one correct tile",
-          "correct_answer": "Exact color match",
+          "correct_answer": "Red-Blue-Red",
           "image_hint": "shape",
           "options": [
-            "Exact color match",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Red-Blue-Red",
+            "Blue-Red-Blue",
+            "Red-Red-Blue",
+            "Blue-Blue-Red"
           ]
         },
         {
@@ -403,13 +403,13 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Replay at slower speed",
-          "correct_answer": "Correct cup",
+          "correct_answer": "Left cup",
           "image_hint": "ball",
           "options": [
-            "Correct cup",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Left cup",
+            "Middle cup",
+            "Right cup",
+            "None"
           ]
         }
       ]
@@ -426,12 +426,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Show rotation direction",
           "options": [
-            "Inward spiral",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Spiral",
+            "Circle",
+            "Coil",
+            "Helix"
           ],
-          "correct_answer": "Inward spiral",
+          "correct_answer": "Spiral",
           "image_hint": "spiral"
         },
         {
@@ -441,12 +441,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight the correct path",
           "options": [
-            "Simple maze path",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Maze path",
+            "Zigzag",
+            "Spiral",
+            "Grid"
           ],
-          "correct_answer": "Simple maze path",
+          "correct_answer": "Maze path",
           "image_hint": "maze"
         },
         {
@@ -456,12 +456,12 @@
           "sub_domain": "Shape Matching",
           "scaffolding_hint": "Show example again",
           "options": [
-            "Simple 3D box",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "3D box",
+            "Flat square",
+            "Rectangle",
+            "Cylinder"
           ],
-          "correct_answer": "Simple 3D box",
+          "correct_answer": "3D box",
           "image_hint": "shape"
         },
         {
@@ -470,13 +470,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show one layer at a time",
-          "correct_answer": "Correct 3D arrangement",
+          "correct_answer": "L-shape tower",
           "image_hint": "shape",
           "options": [
-            "Correct 3D arrangement",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "L-shape tower",
+            "Straight tower",
+            "T-shape",
+            "U-shape"
           ]
         },
         {
@@ -485,13 +485,13 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Slow the bounce",
-          "correct_answer": "Correct grid square",
+          "correct_answer": "Bottom-right square",
           "image_hint": "ball",
           "options": [
-            "Correct grid square",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Top-left square",
+            "Bottom-right square",
+            "Center square",
+            "Top-right square"
           ]
         }
       ]
@@ -508,12 +508,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight each vertex",
           "options": [
-            "Regular hexagon",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Hexagon",
+            "Pentagon",
+            "Octagon",
+            "Heptagon"
           ],
-          "correct_answer": "Regular hexagon",
+          "correct_answer": "Hexagon",
           "image_hint": "hexagon"
         },
         {
@@ -524,9 +524,9 @@
           "scaffolding_hint": "Show direction arrows",
           "options": [
             "Figure-8",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Circle",
+            "Oval",
+            "Infinity sign"
           ],
           "correct_answer": "Figure-8",
           "image_hint": "shape"
@@ -539,9 +539,9 @@
           "scaffolding_hint": "Show example again",
           "options": [
             "5-pointed star",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "6-pointed star",
+            "4-pointed star",
+            "8-pointed star"
           ],
           "correct_answer": "5-pointed star",
           "image_hint": "star"
@@ -552,13 +552,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Highlight edge pieces first",
-          "correct_answer": "All pieces correct",
+          "correct_answer": "Landscape scene",
           "image_hint": "shape",
           "options": [
-            "All pieces correct",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Landscape scene",
+            "Abstract pattern",
+            "Animal shape",
+            "House shape"
           ]
         },
         {
@@ -567,13 +567,13 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Slow the crossing",
-          "correct_answer": "Correct dot",
+          "correct_answer": "Red dot",
           "image_hint": "ball",
           "options": [
-            "Correct dot",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Red dot",
+            "Blue dot",
+            "Green dot",
+            "Yellow dot"
           ]
         }
       ]
@@ -590,12 +590,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Trace front face first, then back",
           "options": [
-            "Necker cube outline",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Necker cube",
+            "Pyramid",
+            "Prism",
+            "Cylinder"
           ],
-          "correct_answer": "Necker cube outline",
+          "correct_answer": "Necker cube",
           "image_hint": "line"
         },
         {
@@ -605,12 +605,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Trace outer star first",
           "options": [
-            "Star with inner pentagon",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Star with pentagon",
+            "Star with triangle",
+            "Star with square",
+            "Star with circle"
           ],
-          "correct_answer": "Star with inner pentagon",
+          "correct_answer": "Star with pentagon",
           "image_hint": "star"
         },
         {
@@ -621,9 +621,9 @@
           "scaffolding_hint": "Show example again",
           "options": [
             "3 overlapping shapes",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "3 separate shapes",
+            "3 nested shapes",
+            "3 connected shapes"
           ],
           "correct_answer": "3 overlapping shapes",
           "image_hint": "shape"
@@ -634,13 +634,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show one piece placement",
-          "correct_answer": "All 7 pieces in correct position",
+          "correct_answer": "Cat shape",
           "image_hint": "shape",
           "options": [
-            "All 7 pieces in correct position",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Cat shape",
+            "Bird shape",
+            "Fish shape",
+            "Dog shape"
           ]
         },
         {
@@ -649,13 +649,14 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Replay at slower speed",
-          "correct_answer": "Correct cup",
+          "correct_answer": "Cup 3",
           "image_hint": "ball",
           "options": [
-            "Correct cup",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Cup 1",
+            "Cup 2",
+            "Cup 3",
+            "Cup 4",
+            "Cup 5"
           ]
         }
       ]
@@ -673,9 +674,9 @@
           "scaffolding_hint": "Trace each ring separately",
           "options": [
             "3 interlocking circles",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "3 separate circles",
+            "3 concentric circles",
+            "3 tangent circles"
           ],
           "correct_answer": "3 interlocking circles",
           "image_hint": "circle"
@@ -687,12 +688,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Highlight start and end points",
           "options": [
-            "Winding road with turns",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Winding road",
+            "Straight road",
+            "Circular path",
+            "Zigzag path"
           ],
-          "correct_answer": "Winding road with turns",
+          "correct_answer": "Winding road",
           "image_hint": "shape"
         },
         {
@@ -702,12 +703,12 @@
           "sub_domain": "Shape Matching",
           "scaffolding_hint": "Show example again",
           "options": [
-            "Complex geometric design",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Geometric mandala",
+            "Simple triangle",
+            "Basic circle",
+            "Plain square"
           ],
-          "correct_answer": "Complex geometric design",
+          "correct_answer": "Geometric mandala",
           "image_hint": "shape"
         },
         {
@@ -716,28 +717,28 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show the axis of symmetry",
-          "correct_answer": "Both halves mirror each other",
+          "correct_answer": "Butterfly pattern",
           "image_hint": "shape",
           "options": [
-            "Both halves mirror each other",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Butterfly pattern",
+            "Random blocks",
+            "Staircase",
+            "Tower"
           ]
         },
         {
-          "instruction": "Follow the moving target through the maze and tap the exit it uses.",
+          "instruction": "Follow the target through the maze and tap the exit it uses.",
           "question_id": "Q199",
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Highlight the target",
-          "correct_answer": "Correct exit",
+          "correct_answer": "Exit B (right)",
           "image_hint": "ball",
           "options": [
-            "Correct exit",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Exit A (top)",
+            "Exit B (right)",
+            "Exit C (bottom)",
+            "Exit D (left)"
           ]
         }
       ]
@@ -754,12 +755,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Trace the ring first, then bonds",
           "options": [
-            "Benzene ring with bonds",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Benzene ring",
+            "Pentagon",
+            "Hexagon",
+            "Cyclohexane"
           ],
-          "correct_answer": "Benzene ring with bonds",
+          "correct_answer": "Benzene ring",
           "image_hint": "shape"
         },
         {
@@ -769,12 +770,12 @@
           "sub_domain": "Shape Recognition",
           "scaffolding_hint": "Trace room by room",
           "options": [
-            "Simple floor plan",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Floor plan",
+            "Map",
+            "Circuit diagram",
+            "Blueprint"
           ],
-          "correct_answer": "Simple floor plan",
+          "correct_answer": "Floor plan",
           "image_hint": "shape"
         },
         {
@@ -785,9 +786,9 @@
           "scaffolding_hint": "Show example again",
           "options": [
             "Mandala quarter",
-            "Vertical line",
-            "Horizontal line",
-            "Circle"
+            "Full mandala",
+            "Half mandala",
+            "Mandala border"
           ],
           "correct_answer": "Mandala quarter",
           "image_hint": "shape"
@@ -798,13 +799,13 @@
           "source_test": "SIB-R",
           "sub_domain": "Spatial Assembly",
           "scaffolding_hint": "Show one face of the structure",
-          "correct_answer": "All blocks in correct 3D positions",
+          "correct_answer": "Arch bridge",
           "image_hint": "shape",
           "options": [
-            "All blocks in correct 3D positions",
-            "Incorrect arrangement",
-            "Rotated version",
-            "Mirror image"
+            "Arch bridge",
+            "Flat bridge",
+            "Tower",
+            "Wall"
           ]
         },
         {
@@ -813,13 +814,13 @@
           "source_test": "Callier-Azusa",
           "sub_domain": "Visual Tracking",
           "scaffolding_hint": "Slow the swaps",
-          "correct_answer": "Correct ball",
+          "correct_answer": "Ball B",
           "image_hint": "ball",
           "options": [
-            "Correct ball",
-            "Wrong position",
-            "Other object",
-            "No match"
+            "Ball A",
+            "Ball B",
+            "Ball C",
+            "Cannot tell"
           ]
         }
       ]

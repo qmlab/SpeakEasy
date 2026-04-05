@@ -49,7 +49,7 @@
             "Green"
           ],
           "correct_answer": "Red",
-          "image_hint": "red_swatch",
+          "image_hint": "circle",
           "instruction_zh": "记住：红色。现在点一下你刚听到的颜色。",
           "animation_frames": [
             "red_swatch"
@@ -94,7 +94,27 @@
             "star",
             "triangle",
             "star"
-          ]
+          ],
+          "options": [
+            "Star",
+            "Circle",
+            "Triangle",
+            "Square"
+          ],
+          "slide_items": [
+            "Star",
+            "Circle",
+            "Star",
+            "Triangle",
+            "Square",
+            "Star",
+            "Circle",
+            "Star",
+            "Triangle",
+            "Star"
+          ],
+          "tap_target": "Star",
+          "no_tap_target": "Circle, Square, Triangle"
         }
       ]
     },
@@ -130,7 +150,7 @@
             "1"
           ],
           "correct_answer": "3",
-          "image_hint": "number_3",
+          "image_hint": "star",
           "instruction_zh": "点击数字3。不要点其他数字。",
           "animation_frames": [
             "number_5",
@@ -152,7 +172,7 @@
             "1"
           ],
           "correct_answer": "3",
-          "image_hint": "number_3",
+          "image_hint": "star",
           "instruction_zh": "记住这个顺序：3，7。按顺序点击它们。",
           "animation_frames": [
             "number_3",
@@ -208,7 +228,7 @@
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Repeat the word 'BLUE' before starting",
           "correct_answer": "4",
-          "image_hint": "blue_swatch",
+          "image_hint": "circle",
           "instruction_zh": "每次看到蓝色就点击。",
           "tap_count": 4,
           "animation_frames": [
@@ -220,7 +240,25 @@
             "blue_swatch",
             "red_swatch",
             "blue_swatch"
-          ]
+          ],
+          "options": [
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow"
+          ],
+          "slide_items": [
+            "Red",
+            "Blue",
+            "Green",
+            "Blue",
+            "Yellow",
+            "Blue",
+            "Red",
+            "Blue"
+          ],
+          "tap_target": "Blue",
+          "no_tap_target": "Red, Green, Yellow"
         }
       ]
     },
@@ -246,7 +284,25 @@
             "broccoli",
             "orange",
             "lettuce"
-          ]
+          ],
+          "options": [
+            "Apple",
+            "Carrot",
+            "Banana",
+            "Broccoli",
+            "Orange",
+            "Lettuce"
+          ],
+          "slide_items": [
+            "Apple",
+            "Carrot",
+            "Banana",
+            "Broccoli",
+            "Orange",
+            "Lettuce"
+          ],
+          "tap_target": "Apple, Banana, Orange",
+          "no_tap_target": "Carrot, Broccoli, Lettuce"
         },
         {
           "instruction": "Tap when you see an animal. Do not tap for objects.",
@@ -264,7 +320,23 @@
             "cat",
             "ball",
             "bird"
-          ]
+          ],
+          "options": [
+            "Dog",
+            "Chair",
+            "Cat",
+            "Ball",
+            "Bird"
+          ],
+          "slide_items": [
+            "Dog",
+            "Chair",
+            "Cat",
+            "Ball",
+            "Bird"
+          ],
+          "tap_target": "Dog, Cat, Bird",
+          "no_tap_target": "Chair, Ball"
         },
         {
           "instruction": "Remember: 4, 1, 9. Tap them in order.",
@@ -280,7 +352,7 @@
             "2"
           ],
           "correct_answer": "4",
-          "image_hint": "number_4",
+          "image_hint": "star",
           "instruction_zh": "记住：4，1，9。按顺序点击它们。",
           "animation_frames": [
             "number_4",
@@ -352,7 +424,25 @@
             "circle",
             "star",
             "triangle"
-          ]
+          ],
+          "options": [
+            "Circle",
+            "Square",
+            "Triangle",
+            "Star"
+          ],
+          "slide_items": [
+            "Circle",
+            "Circle",
+            "Triangle",
+            "Square",
+            "Circle",
+            "Circle",
+            "Star",
+            "Triangle"
+          ],
+          "tap_target": "Circle-Circle pair",
+          "no_tap_target": "Others"
         }
       ]
     },
@@ -362,7 +452,7 @@
       "task_type": "identify",
       "tasks": [
         {
-          "instruction": "Listen to the words. Tap when you hear a word that rhymes with cat.",
+          "instruction": "Tap words that rhyme with 'cat': Hat, Dog, Bat, Car, Mat, Sun.",
           "question_id": "Q107",
           "source_test": "BRIEF",
           "sub_domain": "Inhibitory Control",
@@ -378,7 +468,25 @@
             "car",
             "bat",
             "sun"
-          ]
+          ],
+          "options": [
+            "Hat",
+            "Dog",
+            "Mat",
+            "Car",
+            "Bat",
+            "Sun"
+          ],
+          "slide_items": [
+            "Hat",
+            "Dog",
+            "Mat",
+            "Car",
+            "Bat",
+            "Sun"
+          ],
+          "tap_target": "Hat, Bat, Mat",
+          "no_tap_target": "Dog, Car, Sun"
         },
         {
           "instruction": "Tap for even numbers. Do not tap for odd numbers.",
@@ -396,7 +504,7 @@
             "7"
           ],
           "correct_answer": "4",
-          "image_hint": "number_2",
+          "image_hint": "star",
           "instruction_zh": "点击偶数。不要点击奇数。",
           "tap_count": 4,
           "animation_frames": [
@@ -424,7 +532,7 @@
             "8"
           ],
           "correct_answer": "2, 5, 3, 7",
-          "image_hint": "number_7",
+          "image_hint": "star",
           "instruction_zh": "记住：7，3，5，2。倒着点击它们。",
           "animation_frames": [
             "number_7",
@@ -441,7 +549,11 @@
           "scaffolding_hint": "Say: \"The middle word is the second one you heard\"",
           "correct_answer": "House",
           "image_hint": "cat",
-          "input_mode": "text"
+          "options": [
+            "Cat",
+            "House",
+            "Tree"
+          ]
         },
         {
           "instruction": "Sort by Size: Big goes left, Small goes right. [Big red circle]",
@@ -488,7 +600,28 @@
             "blue_triangle",
             "red_circle",
             "green_square"
-          ]
+          ],
+          "options": [
+            "Red circle",
+            "Blue square",
+            "Red triangle",
+            "Green circle",
+            "Red square",
+            "Blue triangle",
+            "Green square"
+          ],
+          "slide_items": [
+            "Red circle",
+            "Blue square",
+            "Red triangle",
+            "Green circle",
+            "Red square",
+            "Blue triangle",
+            "Red circle",
+            "Green square"
+          ],
+          "tap_target": "Red",
+          "no_tap_target": "Blue, Green"
         }
       ]
     },
@@ -514,7 +647,25 @@
             "chair",
             "flower",
             "pencil"
-          ]
+          ],
+          "options": [
+            "Tree",
+            "Rock",
+            "Dog",
+            "Chair",
+            "Flower",
+            "Pencil"
+          ],
+          "slide_items": [
+            "Tree",
+            "Rock",
+            "Dog",
+            "Chair",
+            "Flower",
+            "Pencil"
+          ],
+          "tap_target": "Tree, Dog, Flower",
+          "no_tap_target": "Rock, Chair, Pencil"
         },
         {
           "instruction": "Tap for words with more than 5 letters. Do not tap for shorter words.",
@@ -533,7 +684,25 @@
             "dog",
             "crocodile",
             "ant"
-          ]
+          ],
+          "options": [
+            "Elephant",
+            "Cat",
+            "Butterfly",
+            "Dog",
+            "Crocodile",
+            "Ant"
+          ],
+          "slide_items": [
+            "Elephant",
+            "Cat",
+            "Butterfly",
+            "Dog",
+            "Crocodile",
+            "Ant"
+          ],
+          "tap_target": "Elephant, Butterfly, Crocodile",
+          "no_tap_target": "Cat, Dog, Ant"
         },
         {
           "instruction": "Remember: 8, 2, 6, 4, 1. Tap them in order from smallest to largest.",
@@ -548,10 +717,11 @@
             "6",
             "8",
             "3",
-            "5"
+            "5",
+            "7"
           ],
           "correct_answer": "1, 2, 4, 6, 8",
-          "image_hint": "number_1",
+          "image_hint": "star",
           "instruction_zh": "记住：8，2，6，4，1。从最小到最大点击它们。",
           "animation_frames": [
             "number_8",
@@ -598,7 +768,7 @@
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Is this number bigger than the last one?\"",
           "correct_answer": "3",
-          "image_hint": "number_5",
+          "image_hint": "star",
           "instruction_zh": "每当数字比前一个大时就点击。",
           "tap_count": 3,
           "animation_frames": [
@@ -608,7 +778,25 @@
             "number_7",
             "number_4",
             "number_9"
-          ]
+          ],
+          "options": [
+            "3",
+            "5",
+            "2",
+            "7",
+            "4",
+            "9"
+          ],
+          "slide_items": [
+            "3",
+            "5",
+            "2",
+            "7",
+            "4",
+            "9"
+          ],
+          "tap_target": "Increasing numbers",
+          "no_tap_target": "Decreasing numbers"
         }
       ]
     },
@@ -624,7 +812,7 @@
           "sub_domain": "Inhibitory Control",
           "scaffolding_hint": "Say: \"Verbs are action words — things you can do\"",
           "correct_answer": "4",
-          "image_hint": "running",
+          "image_hint": "star",
           "instruction_zh": "点击动词（动作词）。不要点击名词。",
           "tap_count": 4,
           "animation_frames": [
@@ -635,7 +823,27 @@
             "swimming",
             "apple",
             "flying"
-          ]
+          ],
+          "options": [
+            "Run",
+            "Chair",
+            "Jump",
+            "Dog",
+            "Swim",
+            "Apple",
+            "Fly"
+          ],
+          "slide_items": [
+            "Run",
+            "Chair",
+            "Jump",
+            "Dog",
+            "Swim",
+            "Apple",
+            "Fly"
+          ],
+          "tap_target": "Run, Jump, Swim, Fly",
+          "no_tap_target": "Chair, Dog, Apple"
         },
         {
           "instruction": "Tap for prime numbers. Do not tap for composite numbers.",
@@ -645,15 +853,14 @@
           "scaffolding_hint": "Say: \"Prime numbers can only be divided by 1 and themselves\"",
           "options": [
             "2",
-            "7",
-            "11",
-            "13",
             "4",
+            "7",
             "9",
-            "15"
+            "1",
+            "3"
           ],
           "correct_answer": "3",
-          "image_hint": "number_7",
+          "image_hint": "star",
           "instruction_zh": "点击质数。不要点击合数。",
           "tap_count": 3,
           "animation_frames": [
@@ -666,13 +873,13 @@
           ]
         },
         {
-          "instruction": "I will say 5 numbers. Add the first and last number: 3, 7, 2, 9, 4.",
+          "instruction": "Add the first and last number: 3, 7, 2, 9, 4. What is 3 + 4?",
           "question_id": "Q123",
           "source_test": "WJ-III",
           "sub_domain": "Working Memory",
           "scaffolding_hint": "Say: \"The first number was 3. The last was 4. What is 3 plus 4?\"",
           "correct_answer": "7",
-          "image_hint": "number_3",
+          "image_hint": "calculator",
           "instruction_zh": "我说5个数字。把第一个和最后一个加起来：3，7，2，9，4。",
           "animation_frames": [
             "number_3",
@@ -681,7 +888,15 @@
             "number_9",
             "number_4"
           ],
-          "input_mode": "number"
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
         },
         {
           "instruction": "Sort by Category: Animals go left, Objects go right. [Dog]",
@@ -727,7 +942,24 @@
             "star",
             "circle",
             "triangle"
-          ]
+          ],
+          "options": [
+            "Circle",
+            "Square",
+            "Triangle",
+            "Star"
+          ],
+          "slide_items": [
+            "Star",
+            "Circle",
+            "Star",
+            "Triangle",
+            "Star",
+            "Circle",
+            "Triangle"
+          ],
+          "tap_target": "Same as 2 steps before",
+          "no_tap_target": "Different from 2 steps before"
         }
       ]
     },
@@ -793,7 +1025,7 @@
             "5"
           ],
           "correct_answer": "4, 2, 8",
-          "image_hint": "number_4",
+          "image_hint": "star",
           "instruction_zh": "记住：9，4，7，2，5，8。只按顺序点击偶数。",
           "animation_frames": [
             "number_9",
@@ -825,7 +1057,7 @@
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"Solve the problem quickly, then check if the answer is even\"",
           "correct_answer": "3",
-          "image_hint": "number_6",
+          "image_hint": "calculator",
           "instruction_zh": "看算术题。只在答案是偶数时点击。",
           "tap_count": 3,
           "animation_frames": [
@@ -925,7 +1157,7 @@
           "sub_domain": "Sustained Attention",
           "scaffolding_hint": "Say: \"You need three specific items in a row\"",
           "correct_answer": "1",
-          "image_hint": "letter_a",
+          "image_hint": "book",
           "instruction_zh": "看字母序列。当A-B-C连续出现时点击。",
           "tap_count": 1,
           "animation_frames": [

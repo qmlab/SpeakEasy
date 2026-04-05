@@ -951,18 +951,18 @@
           "image_hint": "question_mark"
         },
         {
-          "instruction": "Touch the second-largest shape in the row.",
+          "instruction": "Touch the second-largest shape.",
           "question_id": "Q053",
           "source_test": "WJ-III",
           "sub_domain": "Following Directions",
           "scaffolding_hint": "Say: \"Put them in order from biggest to smallest, then pick the second one\"",
           "options": [
-            "Second-largest shape",
-            "Largest",
-            "third-largest",
-            "etc."
+            "Medium circle",
+            "Large square",
+            "Small triangle",
+            "Tiny star"
           ],
-          "correct_answer": "Second-largest shape",
+          "correct_answer": "Medium circle",
           "image_hint": "second"
         }
       ]
@@ -994,7 +994,8 @@
           "options": [
             "Circle",
             "Star",
-            "triangle"
+            "Triangle",
+            "Square"
           ],
           "correct_answer": "Circle",
           "image_hint": "shapes",
@@ -1027,10 +1028,12 @@
           "sub_domain": "Following Directions",
           "scaffolding_hint": "Say: \"Find the red square first, then look to its right\"",
           "options": [
-            "Correct shape at intersection",
-            "Adjacent shapes"
+            "Green triangle",
+            "Red square",
+            "Blue circle",
+            "Yellow star"
           ],
-          "correct_answer": "Correct shape at intersection",
+          "correct_answer": "Green triangle",
           "image_hint": "shapes"
         }
       ]
@@ -1088,16 +1091,18 @@
           "image_hint": "question_mark"
         },
         {
-          "instruction": "If the largest shape is blue, touch the smallest shape. If not, touch the shape in the middle.",
+          "instruction": "The largest shape is blue. Touch the smallest shape.",
           "question_id": "Q057",
           "source_test": "WJ-III",
           "sub_domain": "Following Directions",
-          "scaffolding_hint": "Say: \"First check: what color is the biggest shape?\"",
+          "scaffolding_hint": "Say: \"Find the smallest shape in the group\"",
           "options": [
-            "Depends on largest shape's color",
-            "Incorrect conditional choice"
+            "Small red triangle",
+            "Large blue circle",
+            "Medium green square",
+            "Yellow star"
           ],
-          "correct_answer": "Depends on largest shape's color",
+          "correct_answer": "Small red triangle",
           "image_hint": "smallest"
         }
       ]
