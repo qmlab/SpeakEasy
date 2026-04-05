@@ -325,20 +325,18 @@
             "Dog",
             "Chair",
             "Cat",
-            "Table",
-            "Bird",
-            "Book"
+            "Ball",
+            "Bird"
           ],
           "slide_items": [
             "Dog",
             "Chair",
             "Cat",
-            "Table",
-            "Bird",
-            "Book"
+            "Ball",
+            "Bird"
           ],
           "tap_target": "Dog, Cat, Bird",
-          "no_tap_target": "Chair, Table, Book"
+          "no_tap_target": "Chair, Ball"
         },
         {
           "instruction": "Remember: 4, 1, 9. Tap them in order.",
@@ -608,18 +606,19 @@
             "Blue square",
             "Red triangle",
             "Green circle",
-            "Red star",
+            "Red square",
             "Blue triangle",
-            "Red diamond"
+            "Green square"
           ],
           "slide_items": [
             "Red circle",
             "Blue square",
             "Red triangle",
             "Green circle",
-            "Red star",
+            "Red square",
             "Blue triangle",
-            "Red diamond"
+            "Red circle",
+            "Green square"
           ],
           "tap_target": "Red",
           "no_tap_target": "Blue, Green"
@@ -782,20 +781,19 @@
           ],
           "options": [
             "3",
-            "1",
-            "4",
-            "2",
             "5",
-            "6"
+            "2",
+            "7",
+            "4",
+            "9"
           ],
           "slide_items": [
             "3",
-            "1",
-            "4",
-            "2",
             "5",
-            "3",
-            "6"
+            "2",
+            "7",
+            "4",
+            "9"
           ],
           "tap_target": "Increasing numbers",
           "no_tap_target": "Decreasing numbers"
