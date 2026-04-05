@@ -403,6 +403,9 @@ struct LearningSessionView: View {
             // Hide for image-grid tasks (identify/point_to) since all options
             // are already displayed as images — showing the answer image here
             // would give it away.
+            // EXCEPTION: When the instruction references looking at a picture
+            // (e.g. "What is in this picture?", "What is this?"), the image IS
+            // the question and must always be shown even for image grid tasks.
             // Also hide for pattern tasks since the sequence display replaces it.
             // Also hide for inline-image tasks since each option button already
             // shows a shape/color thumbnail — no big image needed above.
@@ -414,6 +417,7 @@ struct LearningSessionView: View {
             // to keep the question area compact and avoid hiding the options.
             let isPinned = isPinnedInteractionTask(task)
             let imageSize: CGFloat = isPinned ? 160 : 200
+            let instructionRefsPicture = instructionReferencesPicture(task)
 
             if let questionImg = task.content.questionImage, !questionImg.isEmpty,
                !isPatternTask(task), !isDragArrangeTask(task) {
@@ -426,7 +430,8 @@ struct LearningSessionView: View {
                 )
                 .cornerRadius(16)
             } else if let imageHint = task.content.imageHint, !imageHint.isEmpty,
-               !isImageGridTask(task), !isPatternTask(task),
+               (!isImageGridTask(task) || instructionRefsPicture),
+               !isPatternTask(task),
                task.content.inlineImages != true {
                 RemoteImageView(
                     objectName: imageHint,
@@ -467,6 +472,19 @@ struct LearningSessionView: View {
     }
 
     // MARK: - Content Area
+
+    /// Whether the task instruction references looking at a picture or image.
+    /// When true, the image_hint must be shown even for image grid tasks
+    /// because the image IS the question (e.g. "What is in this picture?").
+    private func instructionReferencesPicture(_ task: AdaptiveTask) -> Bool {
+        let text = task.content.displayInstruction.lowercased()
+        let phrases = [
+            "this picture", "the picture", "this image", "the image",
+            "this photo", "the photo", "what is this", "what do you see",
+            "what is in this", "tell me about this", "name this"
+        ]
+        return phrases.contains(where: { text.contains($0) })
+    }
 
     /// Whether this task is a visual pattern-finding task with a sequence of
     /// shape images.  Pattern tasks have a `sequence` array in the content.
@@ -2077,10 +2095,6 @@ struct LearningSessionView: View {
                         )
                         .cornerRadius(12)
 
-                        Text(option)
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .lineLimit(1)
                     }
                     .padding(10)
                     .frame(maxWidth: .infinity)
@@ -2186,10 +2200,6 @@ struct LearningSessionView: View {
                                 )
                                 .cornerRadius(12)
 
-                                Text(option)
-                                    .font(.caption)
-                                    .fontWeight(.medium)
-                                    .lineLimit(1)
                             }
                             .padding(10)
                             .frame(maxWidth: .infinity)
@@ -2540,8 +2550,9 @@ struct LearningSessionView: View {
 
                     Button {
                         withAnimation { showHint = true }
-                        // Also speak the hint aloud
-                        speechService.speak(targetWord)
+                        // Speak a descriptive hint instead of just the word
+                        let hintText = contextualHint(for: targetWord)
+                        speechService.speak(hintText)
                     } label: {
                         Label("Hint", systemImage: "lightbulb")
                             .font(.subheadline)
@@ -2550,11 +2561,12 @@ struct LearningSessionView: View {
                     .disabled(isListening || showHint)
                 }
 
-                // Reveal hint text
+                // Reveal descriptive hint text
                 if showHint {
-                    Text("💡 \(targetWord)")
-                        .font(.headline)
+                    Text(contextualHint(for: targetWord))
+                        .font(.subheadline)
                         .foregroundColor(.orange)
+                        .multilineTextAlignment(.center)
                         .padding(10)
                         .frame(maxWidth: .infinity)
                         .background(
@@ -2576,6 +2588,149 @@ struct LearningSessionView: View {
         } else {
             return "Say It"
         }
+    }
+
+    /// Generate a contextual, descriptive hint for a target word instead of
+    /// just revealing the spelling.  Falls back to a phonetic hint for
+    /// unknown words.
+    private func contextualHint(for word: String) -> String {
+        let key = word.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let hints: [String: String] = [
+            // Animals
+            "dog": "It's a friendly animal that barks and loves to play fetch",
+            "cat": "It's a small furry pet that purrs and says meow",
+            "bird": "It has wings and feathers and can fly in the sky",
+            "fish": "It lives in water and has fins to swim",
+            "elephant": "It's the biggest land animal with a very long nose",
+            "bear": "It's a big furry animal that loves honey",
+            "lion": "It's the king of the jungle with a big mane",
+            "rabbit": "It has long ears and hops around",
+            "monkey": "It climbs trees and loves bananas",
+            "horse": "You can ride on it and it says neigh",
+            "cow": "It gives us milk and says moo",
+            "pig": "It's pink and loves to roll in mud",
+            "duck": "It swims in ponds and says quack",
+            "frog": "It's green, hops, and says ribbit",
+            "butterfly": "It has colorful wings and flies around flowers",
+            "turtle": "It moves slowly and carries its house on its back",
+            "snake": "It has no legs and slithers on the ground",
+            "sheep": "It has fluffy white wool and says baa",
+            "chicken": "It lays eggs and says cluck",
+            "tiger": "It has orange fur with black stripes",
+            // Fruits & Food
+            "apple": "It's a round fruit, often red, that you can eat",
+            "banana": "It's a long yellow fruit that monkeys love",
+            "orange": "It's a round fruit with the same name as a color",
+            "grape": "It's a small round fruit that grows in bunches",
+            "watermelon": "It's big, green outside, and red inside with seeds",
+            "strawberry": "It's small, red, and has tiny seeds on the outside",
+            "bread": "You can make a sandwich with it",
+            "milk": "It's a white drink that comes from cows",
+            "egg": "Chickens lay these and you can cook them",
+            "cake": "It's a sweet treat you eat on birthdays",
+            "cookie": "It's a small sweet snack, often round",
+            "pizza": "It's round, has cheese on top, and you eat slices",
+            "sandwich": "It has bread on top and bottom with food in between",
+            "ice cream": "It's cold, sweet, and comes in many flavors",
+            // Objects
+            "ball": "It's round and you can throw, kick, or bounce it",
+            "book": "It has pages with words and pictures to read",
+            "car": "It has four wheels and people drive it on roads",
+            "bus": "It's a big vehicle that carries many people",
+            "train": "It rides on tracks and goes choo choo",
+            "airplane": "It has wings and flies high in the sky",
+            "boat": "It floats on water and takes people across",
+            "bicycle": "It has two wheels and you pedal to ride it",
+            "chair": "You sit on it at a table or desk",
+            "table": "You put food or things on top of it",
+            "bed": "You sleep in it at night",
+            "door": "You open and close it to go in and out of rooms",
+            "window": "You can look through it to see outside",
+            "cup": "You drink water or juice from it",
+            "plate": "You put food on it when you eat",
+            "spoon": "You use it to eat soup or cereal",
+            "fork": "It has pointy parts and you use it to eat food",
+            "knife": "You use it to cut food",
+            "key": "You use it to lock and unlock doors",
+            "phone": "You use it to call and talk to people",
+            "clock": "It tells you what time it is",
+            "umbrella": "You hold it over your head when it rains",
+            "shoe": "You wear it on your foot to walk",
+            "hat": "You wear it on your head",
+            "shirt": "You wear it on your upper body",
+            "jacket": "You wear it when it's cold outside",
+            "glove": "You wear it on your hand when it's cold",
+            "sock": "You wear it on your foot inside your shoe",
+            "bag": "You carry things inside it",
+            "pencil": "You write or draw with it",
+            "pen": "You write with it using ink",
+            "paper": "You write or draw on it, it's thin and flat",
+            "scissors": "You use them to cut paper",
+            "soap": "You use it with water to wash your hands",
+            "toothbrush": "You use it to clean your teeth",
+            "comb": "You use it to make your hair neat",
+            "mirror": "You look in it to see yourself",
+            "pillow": "You rest your head on it when you sleep",
+            "blanket": "You cover yourself with it to stay warm in bed",
+            "lamp": "It makes light so you can see in the dark",
+            "letter": "You write a message on paper and mail it",
+            "doll": "It's a toy that looks like a small person",
+            "toy": "Something fun that kids play with",
+            // Nature
+            "sun": "It shines bright in the sky during the day",
+            "moon": "It glows in the night sky",
+            "star": "It twinkles in the sky at night",
+            "cloud": "It's white and fluffy, floating in the sky",
+            "rain": "Water drops falling from the sky",
+            "snow": "It's white, cold, and falls from the sky in winter",
+            "tree": "It's tall with branches and green leaves",
+            "flower": "It's colorful and smells nice in the garden",
+            "grass": "It's green and covers the ground outside",
+            "rock": "It's hard and you find it on the ground",
+            "water": "You drink it and use it to wash things",
+            "fire": "It's hot, bright, and can burn things",
+            "mountain": "It's very tall land that reaches into the sky",
+            "river": "Water flows through it from high to low ground",
+            "ocean": "It's a huge body of salt water",
+            // Body parts
+            "hand": "You have two of these with five fingers each",
+            "eye": "You use these to see things",
+            "ear": "You use these to hear sounds",
+            "nose": "You use it to smell things",
+            "mouth": "You use it to eat and talk",
+            "head": "It's on top of your body with your face on it",
+            "foot": "You stand and walk on these",
+            "arm": "It connects your hand to your shoulder",
+            "leg": "You use these to walk and run",
+            // Colors & Shapes
+            "red": "The color of fire trucks and strawberries",
+            "blue": "The color of the sky on a clear day",
+            "green": "The color of grass and leaves",
+            "yellow": "The color of the sun and bananas",
+            "circle": "It's round with no corners",
+            "square": "It has four equal sides and four corners",
+            "triangle": "It has three sides and three corners",
+            "rectangle": "It has four sides, two long and two short",
+            "diamond": "It looks like a square tilted to the side",
+            "hexagon": "It has six sides",
+            "pentagon": "It has five sides",
+            "oval": "It's like a stretched circle, egg-shaped",
+            "spiral": "It goes round and round in circles",
+            // People & Places
+            "house": "People live inside it, it has rooms and a roof",
+            "school": "You go there to learn new things",
+            "park": "An outdoor place with trees where kids play",
+            "store": "You go there to buy things",
+            "hospital": "Doctors and nurses help sick people there",
+        ]
+
+        if let hint = hints[key] {
+            return hint
+        }
+
+        // Fallback: phonetic hint — first letter + length
+        let first = key.prefix(1).uppercased()
+        return "It starts with the letter \(first) and has \(key.count) letters"
     }
 
     // MARK: - Simple Response Buttons

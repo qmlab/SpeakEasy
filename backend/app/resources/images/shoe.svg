@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#3E2723" stroke-width="3"/>
-<path d="M30 65 Q30 50 50 50 L80 50 Q95 50 95 60 L95 70 Q95 80 85 80 L40 80 Q30 80 30 65Z" fill="#5D4037"/><path d="M30 65 Q30 55 50 55 L80 55 Q90 55 90 62" fill="#795548"/><ellipse cx="42" cy="52" rx="4" ry="3" fill="#333"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
+<path d="M25 72 L25 55 C25 45 35 38 45 38 L55 38 C60 38 62 42 62 48 L62 55 L95 55 C100 55 102 60 100 65 L98 72 Z" fill="#F44336"/>
+<path d="M25 72 L100 72 L98 78 C96 82 92 84 88 84 L32 84 C28 84 25 80 25 76 Z" fill="#E0E0E0"/>
+<path d="M62 48 L62 55 L80 55 L80 48 C80 42 75 38 68 38 L55 38 C60 38 62 42 62 48Z" fill="#D32F2F"/>
+<circle cx="42" cy="46" r="2" fill="#FFCDD2"/>
+<circle cx="50" cy="44" r="2" fill="#FFCDD2"/>
+<line x1="30" y1="72" x2="95" y2="72" stroke="#BDBDBD" stroke-width="1.5"/>
+<path d="M35 78 L90 78" stroke="#9E9E9E" stroke-width="1" stroke-dasharray="4,3"/>
+</svg>

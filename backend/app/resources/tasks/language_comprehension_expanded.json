@@ -20,7 +20,6 @@
             "Cat"
           ],
           "correct_answer": "Dog",
-          "image_hint": "dog",
           "target_name": "Dog",
           "question_image": "dog_alt"
         },
@@ -35,7 +34,6 @@
             "Shoe"
           ],
           "correct_answer": "Ball",
-          "image_hint": "ball",
           "target_name": "Ball",
           "question_image": "ball_alt"
         },
@@ -50,7 +48,6 @@
             "Car"
           ],
           "correct_answer": "Apple",
-          "image_hint": "apple",
           "target_name": "Apple",
           "question_image": "apple_alt"
         },
@@ -66,7 +63,6 @@
             "Book"
           ],
           "correct_answer": "Cup",
-          "image_hint": "cup",
           "target_name": "Cup",
           "question_image": "cup_alt"
         },
@@ -82,7 +78,6 @@
             "Cat"
           ],
           "correct_answer": "Bird",
-          "image_hint": "bird",
           "target_name": "Bird",
           "question_image": "bird_alt"
         },
@@ -98,7 +93,6 @@
             "Bed"
           ],
           "correct_answer": "Chair",
-          "image_hint": "chair",
           "target_name": "Chair",
           "question_image": "chair_alt"
         },
@@ -125,7 +119,6 @@
             "Car",
             "Ball"
           ],
-          "image_hint": "dog",
           "multi_select": true
         },
         {
@@ -151,7 +144,6 @@
             "Shoe",
             "Book"
           ],
-          "image_hint": "apple",
           "multi_select": true
         },
         {
@@ -166,7 +158,6 @@
             "green triangle"
           ],
           "correct_answer": "Red circle",
-          "image_hint": "circle",
           "inline_images": true
         }
       ]
@@ -189,7 +180,6 @@
             "Door"
           ],
           "correct_answer": "Clock",
-          "image_hint": "clock",
           "target_name": "Clock",
           "question_image": "clock_alt"
         },
@@ -206,7 +196,6 @@
             "Car"
           ],
           "correct_answer": "Train",
-          "image_hint": "train",
           "target_name": "Train",
           "question_image": "train_alt"
         },
@@ -223,7 +212,6 @@
             "Glove"
           ],
           "correct_answer": "Hat",
-          "image_hint": "hat",
           "target_name": "Hat",
           "question_image": "hat_alt"
         },
@@ -240,7 +228,6 @@
             "Island"
           ],
           "correct_answer": "Bridge",
-          "image_hint": "bridge",
           "target_name": "Bridge",
           "question_image": "bridge_alt"
         },
@@ -269,7 +256,6 @@
             "Dog",
             "Chair"
           ],
-          "image_hint": "car",
           "multi_select": true
         },
         {
@@ -297,7 +283,6 @@
             "Shoe",
             "Pencil"
           ],
-          "image_hint": "hammer",
           "multi_select": true
         },
         {
@@ -311,8 +296,7 @@
             "Small blue square",
             "big red square"
           ],
-          "correct_answer": "Big blue square",
-          "image_hint": "square"
+          "correct_answer": "Big blue square"
         }
       ]
     },
@@ -335,7 +319,6 @@
             "Piano"
           ],
           "correct_answer": "Guitar",
-          "image_hint": "guitar",
           "target_name": "Guitar",
           "question_image": "guitar_alt"
         },
@@ -353,7 +336,6 @@
             "Magnifier"
           ],
           "correct_answer": "Camera",
-          "image_hint": "camera",
           "target_name": "Camera",
           "question_image": "camera_alt"
         },
@@ -371,7 +353,6 @@
             "Rocket"
           ],
           "correct_answer": "Planet",
-          "image_hint": "planet",
           "target_name": "Planet",
           "question_image": "planet_alt"
         },
@@ -389,7 +370,6 @@
             "Calculator"
           ],
           "correct_answer": "Compass",
-          "image_hint": "compass",
           "target_name": "Compass",
           "question_image": "compass_alt"
         },
@@ -418,7 +398,6 @@
             "Wrench",
             "Saw"
           ],
-          "image_hint": "guitar",
           "multi_select": true
         },
         {
@@ -446,7 +425,6 @@
             "Wrench",
             "Drill"
           ],
-          "image_hint": "jacket",
           "multi_select": true
         },
         {
@@ -459,8 +437,7 @@
             "Fish can't climb — they live in water",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Fish can't climb — they live in water",
-          "image_hint": "fish"
+          "correct_answer": "Fish can't climb — they live in water"
         },
         {
           "instruction": "What is wrong here? A boy is reading a shoe.",
@@ -472,8 +449,7 @@
             "You read a book, not a shoe",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "You read a book, not a shoe",
-          "image_hint": "shoe"
+          "correct_answer": "You read a book, not a shoe"
         },
         {
           "instruction": "Touch the small red triangle first, then the big blue circle.",
@@ -485,8 +461,7 @@
             "Small red triangle → big blue circle",
             "Big red circle"
           ],
-          "correct_answer": "Small red triangle → big blue circle",
-          "image_hint": "circle"
+          "correct_answer": "Small red triangle → big blue circle"
         }
       ]
     },
@@ -509,7 +484,6 @@
             "Timer"
           ],
           "correct_answer": "Thermometer",
-          "image_hint": "thermometer",
           "target_name": "Thermometer",
           "question_image": "thermometer_alt"
         },
@@ -527,7 +501,6 @@
             "Spring"
           ],
           "correct_answer": "Pendulum",
-          "image_hint": "pendulum",
           "target_name": "Pendulum",
           "question_image": "pendulum_alt"
         },
@@ -545,7 +518,6 @@
             "Rock"
           ],
           "correct_answer": "Fossil",
-          "image_hint": "fossil",
           "target_name": "Fossil",
           "question_image": "fossil_alt"
         },
@@ -563,7 +535,6 @@
             "Chart"
           ],
           "correct_answer": "Blueprint",
-          "image_hint": "blueprint",
           "target_name": "Blueprint",
           "question_image": "blueprint_alt"
         },
@@ -592,7 +563,6 @@
             "Salmon",
             "Frog"
           ],
-          "image_hint": "dog",
           "multi_select": true
         },
         {
@@ -620,7 +590,6 @@
             "Drill",
             "Saw"
           ],
-          "image_hint": "ruler",
           "multi_select": true
         },
         {
@@ -633,8 +602,7 @@
             "Hats go on your head, not your foot",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Hats go on your head, not your foot",
-          "image_hint": "question_mark"
+          "correct_answer": "Hats go on your head, not your foot"
         },
         {
           "instruction": "What is wrong? A man is using an umbrella on a sunny day indoors.",
@@ -646,8 +614,7 @@
             "Umbrellas are for rain, not indoors on a sunny day",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Umbrellas are for rain, not indoors on a sunny day",
-          "image_hint": "question_mark"
+          "correct_answer": "Umbrellas are for rain, not indoors on a sunny day"
         },
         {
           "instruction": "Touch all the shapes that are not yellow.",
@@ -660,8 +627,7 @@
             "Yellow star",
             "yellow triangle"
           ],
-          "correct_answer": "Red circle, blue square, green oval",
-          "image_hint": "shapes"
+          "correct_answer": "Red circle, blue square, green oval"
         }
       ]
     },
@@ -684,7 +650,6 @@
             "Frost"
           ],
           "correct_answer": "Glacier",
-          "image_hint": "glacier",
           "target_name": "Glacier",
           "question_image": "glacier_alt"
         },
@@ -702,7 +667,6 @@
             "Probe"
           ],
           "correct_answer": "Satellite",
-          "image_hint": "satellite",
           "target_name": "Satellite",
           "question_image": "satellite_alt"
         },
@@ -720,7 +684,6 @@
             "Asteroid"
           ],
           "correct_answer": "Constellation",
-          "image_hint": "constellation",
           "target_name": "Constellation",
           "question_image": "constellation_alt"
         },
@@ -738,7 +701,6 @@
             "Latitude"
           ],
           "correct_answer": "Hemisphere",
-          "image_hint": "hemisphere",
           "target_name": "Hemisphere",
           "question_image": "hemisphere_alt"
         },
@@ -767,7 +729,6 @@
             "Oil",
             "Gas"
           ],
-          "image_hint": "solar",
           "multi_select": true
         },
         {
@@ -795,7 +756,6 @@
             "River",
             "Volcano"
           ],
-          "image_hint": "star",
           "multi_select": true
         },
         {
@@ -808,8 +768,7 @@
             "A stethoscope is used for heartbeats, not a hammer",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "A stethoscope is used for heartbeats, not a hammer",
-          "image_hint": "question_mark"
+          "correct_answer": "A stethoscope is used for heartbeats, not a hammer"
         },
         {
           "instruction": "What is silly? 'The astronaut swam to the moon.'",
@@ -821,8 +780,7 @@
             "You can't swim to the moon — there is no water in space",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "You can't swim to the moon — there is no water in space",
-          "image_hint": "question_mark"
+          "correct_answer": "You can't swim to the moon — there is no water in space"
         },
         {
           "instruction": "Touch the shape that is the same color as the sky, but a different shape from a circle.",
@@ -836,8 +794,7 @@
             "red square",
             "green triangle"
           ],
-          "correct_answer": "Blue square",
-          "image_hint": "shapes"
+          "correct_answer": "Blue square"
         }
       ]
     },
@@ -859,7 +816,6 @@
             "Mineral"
           ],
           "correct_answer": "Stalactite",
-          "image_hint": "stalactite",
           "target_name": "Stalactite",
           "question_image": "stalactite_alt"
         },
@@ -877,7 +833,6 @@
             "Altimeter"
           ],
           "correct_answer": "Barometer",
-          "image_hint": "barometer",
           "target_name": "Barometer",
           "question_image": "barometer_alt"
         },
@@ -906,7 +861,6 @@
             "Eagle",
             "Whale"
           ],
-          "image_hint": "jellyfish",
           "multi_select": true
         },
         {
@@ -934,7 +888,6 @@
             "Table",
             "Hammer"
           ],
-          "image_hint": "freedom",
           "multi_select": true
         },
         {
@@ -947,8 +900,7 @@
             "Microscopes are for science labs, not baking",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Microscopes are for science labs, not baking",
-          "image_hint": "question_mark"
+          "correct_answer": "Microscopes are for science labs, not baking"
         },
         {
           "instruction": "Touch the second-largest shape.",
@@ -962,8 +914,7 @@
             "Small triangle",
             "Tiny star"
           ],
-          "correct_answer": "Medium circle",
-          "image_hint": "second"
+          "correct_answer": "Medium circle"
         }
       ]
     },
@@ -982,8 +933,7 @@
             "Submarines travel underwater, not through the sky",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Submarines travel underwater, not through the sky",
-          "image_hint": "question_mark"
+          "correct_answer": "Submarines travel underwater, not through the sky"
         },
         {
           "instruction": "Touch the shape that is between the star and the triangle.",
@@ -998,7 +948,6 @@
             "Square"
           ],
           "correct_answer": "Circle",
-          "image_hint": "shapes",
           "inline_images": true
         }
       ]
@@ -1018,8 +967,7 @@
             "Geologists use hammers and hand lenses, not telescopes",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Geologists use hammers and hand lenses, not telescopes",
-          "image_hint": "question_mark"
+          "correct_answer": "Geologists use hammers and hand lenses, not telescopes"
         },
         {
           "instruction": "Touch the shape that is to the right of the red square and above the blue circle.",
@@ -1033,8 +981,7 @@
             "Blue circle",
             "Yellow star"
           ],
-          "correct_answer": "Green triangle",
-          "image_hint": "shapes"
+          "correct_answer": "Green triangle"
         }
       ]
     },
@@ -1053,8 +1000,7 @@
             "Barometers measure air pressure; brain activity is measured with EEG",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Barometers measure air pressure; brain activity is measured with EEG",
-          "image_hint": "question_mark"
+          "correct_answer": "Barometers measure air pressure; brain activity is measured with EEG"
         },
         {
           "instruction": "Touch all shapes that are either triangles or red, but not both.",
@@ -1067,8 +1013,7 @@
             "Red triangles",
             "blue squares"
           ],
-          "correct_answer": "Red circles, blue triangles",
-          "image_hint": "shapes"
+          "correct_answer": "Red circles, blue triangles"
         }
       ]
     },
@@ -1087,8 +1032,7 @@
             "Centrifuges separate substances; telescopes observe galaxies",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Centrifuges separate substances; telescopes observe galaxies",
-          "image_hint": "question_mark"
+          "correct_answer": "Centrifuges separate substances; telescopes observe galaxies"
         },
         {
           "instruction": "The largest shape is blue. Touch the smallest shape.",
@@ -1102,8 +1046,7 @@
             "Medium green square",
             "Yellow star"
           ],
-          "correct_answer": "Small red triangle",
-          "image_hint": "smallest"
+          "correct_answer": "Small red triangle"
         }
       ]
     }

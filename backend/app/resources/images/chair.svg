@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#4E342E" stroke-width="3"/>
-<rect x="40" y="35" width="5" height="55" rx="1" fill="#8D6E63"/><rect x="75" y="35" width="5" height="55" rx="1" fill="#8D6E63"/><rect x="40" y="60" width="40" height="5" rx="2" fill="#A1887F"/><rect x="40" y="35" width="40" height="5" rx="2" fill="#A1887F"/><rect x="40" y="65" width="5" height="25" rx="1" fill="#8D6E63"/><rect x="75" y="65" width="5" height="25" rx="1" fill="#8D6E63"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+<rect x="35" y="25" width="8" height="75" rx="3" fill="#8D6E63"/>
+<rect x="77" y="55" width="8" height="45" rx="3" fill="#8D6E63"/>
+<rect x="35" y="55" width="50" height="8" rx="2" fill="#A1887F"/>
+<rect x="35" y="25" width="8" height="38" rx="2" fill="#795548"/>
+<path d="M39 25 L39 30 L43 30 L43 25 Z" fill="#6D4C41"/>
+<rect x="38" y="25" width="4" height="5" rx="1" fill="#6D4C41"/>
+<path d="M35 28 C45 26 50 28 50 35 L50 55 L43 55 L43 35 C43 30 40 28 35 28Z" fill="#A1887F" opacity="0.3"/>
+</svg>

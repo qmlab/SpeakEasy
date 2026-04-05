@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M60 180 L60 100 L50 60 Q50 40 65 45 L70 80 L70 50 Q70 30 85 35 L85 80 L90 45 Q90 25 105 30 L105 80 L110 50 Q110 30 125 35 L125 90 L140 70 Q150 55 155 70 L140 100 L140 180 Z" fill="#FF8A65" stroke="#E64A19" stroke-width="3"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FCE4EC" stroke="#AD1457" stroke-width="3"/>
+<path d="M45 95 L45 50 C45 45 48 42 52 42 L55 42 L55 30 C55 26 58 24 61 24 C64 24 67 26 67 30 L67 42 L70 42 C74 42 77 45 77 50 L77 60 L80 55 C82 52 86 52 88 55 C90 58 88 62 86 64 L77 75 L77 95 Z" fill="#F48FB1"/>
+<path d="M55 42 L55 30 C55 26 58 24 61 24 C64 24 67 26 67 30 L67 42" fill="#F8BBD0"/>
+<line x1="55" y1="50" x2="55" y2="70" stroke="#EC407A" stroke-width="1" opacity="0.4"/>
+<line x1="62" y1="45" x2="62" y2="70" stroke="#EC407A" stroke-width="1" opacity="0.4"/>
+<line x1="69" y1="50" x2="69" y2="70" stroke="#EC407A" stroke-width="1" opacity="0.4"/>
+<rect x="42" y="85" width="38" height="6" rx="2" fill="#EC407A"/>
+</svg>

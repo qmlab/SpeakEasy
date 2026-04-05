@@ -34,6 +34,10 @@ class SpeechService: NSObject, ObservableObject {
     private var pendingRecognitionWork: DispatchWorkItem?
     /// Cancellable work item for the auto-stop timer
     private var pendingAutoStopWork: DispatchWorkItem?
+    /// Cancellable work item for silence-based auto-stop in manual mode
+    private var pendingSilenceWork: DispatchWorkItem?
+    /// Duration of silence (no new partial results) before auto-stopping in manual mode
+    private let silenceTimeout: TimeInterval = 3.0
 
     /// Callback fired when TTS finishes speaking naturally (not cancelled).
     /// The view uses this to auto-start listening after the instruction is read.
@@ -323,6 +327,20 @@ class SpeechService: NSObject, ObservableObject {
                         }
                     }
                 }
+
+                // Silence-based auto-stop for manual mode: after each
+                // partial result, reset a timer. If no new results arrive
+                // within silenceTimeout, treat it as if the user pressed
+                // the stop button.
+                if !isFinal && !autoStop && !text.isEmpty {
+                    self.pendingSilenceWork?.cancel()
+                    let silenceWork = DispatchWorkItem { [weak self] in
+                        guard let self = self, self.isListening else { return }
+                        self.stopAndEvaluate()
+                    }
+                    self.pendingSilenceWork = silenceWork
+                    DispatchQueue.main.asyncAfter(deadline: .now() + self.silenceTimeout, execute: silenceWork)
+                }
             }
             
             if error != nil || isFinal {
@@ -358,7 +376,10 @@ class SpeechService: NSObject, ObservableObject {
             if autoStop {
                 let autoStopWork = DispatchWorkItem { [weak self] in
                     if self?.isListening == true {
-                        self?.stopListening()
+                        // Use stopAndEvaluate instead of stopListening so
+                        // the recognition task finalises and fires its
+                        // completion handler with the accumulated text.
+                        self?.stopAndEvaluate()
                     }
                 }
                 self.pendingAutoStopWork = autoStopWork
@@ -379,6 +400,8 @@ class SpeechService: NSObject, ObservableObject {
         pendingRecognitionWork = nil
         pendingAutoStopWork?.cancel()
         pendingAutoStopWork = nil
+        pendingSilenceWork?.cancel()
+        pendingSilenceWork = nil
 
         if audioEngine.isRunning {
             audioEngine.stop()
