@@ -52,7 +52,7 @@
           "sub_domain": "Single Word Imitation",
           "scaffolding_hint": "Say the word slowly and clearly",
           "target_word": "Eat",
-          "image_hint": "eat",
+          "image_hint": "eating",
           "modalities": [
             "voice"
           ]
@@ -345,7 +345,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "Who do you see? What are they doing?",
           "target_word": "The boy is running",
-          "image_hint": "children",
+          "image_hint": "happy_face",
           "modalities": [
             "voice"
           ]
@@ -381,7 +381,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "Where are the people? What are they doing together?",
           "target_word": "The children are playing outside",
-          "image_hint": "children",
+          "image_hint": "happy_face",
           "modalities": [
             "voice"
           ]
@@ -412,7 +412,7 @@
           "sub_domain": "Narrative Expression",
           "scaffolding_hint": "Who is in the picture? What happened? What will happen next?",
           "target_word": "open_ended",
-          "image_hint": "children",
+          "image_hint": "happy_face",
           "modalities": [
             "voice"
           ]
