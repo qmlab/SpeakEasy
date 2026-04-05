@@ -1,826 +1,627 @@
 {
   "dimension": "language_expression",
-  "description": "Visual-Motor: From shape recognition to spatial reasoning",
+  "description": "Language Expression: From single-word imitation to complex verbal expression",
   "version": "research_v2",
   "source": "Autism Neurodevelopmental Question Bank v1.0",
   "levels": {
     "0": {
-      "name": "Basic Shapes",
-      "name_zh": "基础形状",
-      "task_type": "identify",
+      "name": "Word Imitation",
+      "name_zh": "单词模仿",
+      "task_type": "imitate",
       "tasks": [
         {
-          "instruction": "What shape is this? Vertical straight line",
+          "instruction": "Listen and say: Dog",
           "question_id": "Q151",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Widen the line tolerance",
-          "options": [
-            "Vertical line",
-            "Horizontal line",
-            "Circle",
-            "Square"
-          ],
-          "correct_answer": "Vertical line",
-          "image_hint": "line"
+          "source_test": "REEL-3",
+          "sub_domain": "Single Word Imitation",
+          "scaffolding_hint": "Say the word slowly and clearly",
+          "target_word": "Dog",
+          "image_hint": "dog",
+          "modalities": [
+            "voice"
+          ]
         },
         {
-          "instruction": "What shape is this? Horizontal straight line",
+          "instruction": "Listen and say: Cat",
           "question_id": "Q152",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Widen the line tolerance",
-          "options": [
-            "Horizontal line",
-            "Vertical line",
-            "Diagonal line",
-            "Curved line"
-          ],
-          "correct_answer": "Horizontal line",
-          "image_hint": "line"
-        },
-        {
-          "instruction": "Which shape matches this one? Vertical line",
-          "question_id": "Q171",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Vertical line",
-            "Horizontal line",
-            "Wavy line",
-            "Zigzag line"
-          ],
-          "correct_answer": "Vertical line",
-          "image_hint": "line"
-        },
-        {
-          "instruction": "Put these 2 pieces together to make a circle.",
-          "question_id": "Q181",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show how pieces fit",
-          "correct_answer": "Two half-circles",
-          "image_hint": "circle",
-          "options": [
-            "Two half-circles",
-            "Two triangles",
-            "Two squares",
-            "Two rectangles"
+          "source_test": "REEL-3",
+          "sub_domain": "Single Word Imitation",
+          "scaffolding_hint": "Say the word slowly and clearly",
+          "target_word": "Cat",
+          "image_hint": "cat",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Follow the ball with your eyes and tap where it stops.",
-          "question_id": "Q191",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Slow the ball further",
-          "correct_answer": "Left side",
+          "instruction": "Listen and say: Ball",
+          "question_id": "Q153",
+          "source_test": "REEL-3",
+          "sub_domain": "Single Word Imitation",
+          "scaffolding_hint": "Say the word slowly and clearly",
+          "target_word": "Ball",
           "image_hint": "ball",
-          "options": [
-            "Left side",
-            "Right side",
-            "Top",
-            "Bottom"
+          "modalities": [
+            "voice"
           ]
+        },
+        {
+          "instruction": "Listen and say: Eat",
+          "question_id": "Q154",
+          "source_test": "REEL-3",
+          "sub_domain": "Single Word Imitation",
+          "scaffolding_hint": "Say the word slowly and clearly",
+          "target_word": "Eat",
+          "image_hint": "eating",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Listen and say: Go",
+          "question_id": "Q155",
+          "source_test": "REEL-3",
+          "sub_domain": "Single Word Imitation",
+          "scaffolding_hint": "Say the word slowly and clearly",
+          "target_word": "Go",
+          "modalities": [
+            "voice"
+          ],
+          "image_hint": "waving"
         }
       ]
     },
     "1": {
-      "name": "Shape Properties",
-      "name_zh": "形状属性",
-      "task_type": "identify",
+      "name": "Object Naming",
+      "name_zh": "物品命名",
+      "task_type": "name_object",
       "tasks": [
         {
-          "instruction": "What shape is this? Circle",
-          "question_id": "Q153",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Show arrow indicating direction",
-          "options": [
-            "Circle",
-            "Oval",
-            "Square",
-            "Triangle"
-          ],
-          "correct_answer": "Circle",
-          "image_hint": "circle"
-        },
-        {
-          "instruction": "What shape is this? Square",
-          "question_id": "Q154",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight each corner",
-          "options": [
-            "Square",
-            "Rectangle",
-            "Circle",
-            "Diamond"
-          ],
-          "correct_answer": "Square",
-          "image_hint": "square"
-        },
-        {
-          "instruction": "Which shape matches this one? Circle",
-          "question_id": "Q172",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Circle",
-            "Oval",
-            "Semicircle",
-            "Sphere"
-          ],
-          "correct_answer": "Circle",
-          "image_hint": "circle"
-        },
-        {
-          "instruction": "Build this shape with the blocks.",
-          "question_id": "Q182",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show one block placement",
-          "correct_answer": "Square",
-          "image_hint": "shape",
-          "options": [
-            "Square",
-            "Rectangle",
-            "Triangle",
-            "Hexagon"
+          "instruction": "What is this? Say the word!",
+          "question_id": "Q156",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Vocabulary",
+          "scaffolding_hint": "It starts with the sound ah",
+          "target_word": "Apple",
+          "image_hint": "apple",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Follow the star and tap it when it changes color.",
-          "question_id": "Q192",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Slow the movement",
-          "correct_answer": "When it turns red",
-          "image_hint": "ball",
-          "options": [
-            "When it turns red",
-            "When it turns blue",
-            "When it stops",
-            "When it speeds up"
+          "instruction": "What is this? Say the word!",
+          "question_id": "Q157",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Vocabulary",
+          "scaffolding_hint": "You ride in it",
+          "target_word": "Car",
+          "image_hint": "car",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What is this? Say the word!",
+          "question_id": "Q158",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Vocabulary",
+          "scaffolding_hint": "You drink from it",
+          "target_word": "Cup",
+          "image_hint": "cup",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What is this? Say the word!",
+          "question_id": "Q159",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Vocabulary",
+          "scaffolding_hint": "It has wings and flies",
+          "target_word": "Butterfly",
+          "image_hint": "butterfly",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What is this? Say the word!",
+          "question_id": "Q160",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Vocabulary",
+          "scaffolding_hint": "It has many colors in the sky",
+          "target_word": "Rainbow",
+          "image_hint": "rainbow",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "2": {
-      "name": "Complex Shapes",
-      "name_zh": "复杂形状",
-      "task_type": "identify",
+      "name": "Picture Description",
+      "name_zh": "看图说话",
+      "task_type": "describe",
       "tasks": [
         {
-          "instruction": "What shape is this? Plus/cross shape",
-          "question_id": "Q155",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight the center intersection",
-          "options": [
-            "Plus/cross",
-            "T-shape",
-            "L-shape",
-            "Arrow"
-          ],
-          "correct_answer": "Plus/cross",
-          "image_hint": "cross"
-        },
-        {
-          "instruction": "What shape is this? Equilateral triangle",
-          "question_id": "Q156",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight each vertex",
-          "options": [
-            "Triangle",
-            "Square",
-            "Pentagon",
-            "Diamond"
-          ],
-          "correct_answer": "Triangle",
-          "image_hint": "triangle"
-        },
-        {
-          "instruction": "Which shape matches this one? Plus/cross",
-          "question_id": "Q173",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Plus/cross",
-            "X-shape",
-            "T-shape",
-            "H-shape"
-          ],
-          "correct_answer": "Plus/cross",
-          "image_hint": "cross"
-        },
-        {
-          "instruction": "Put this 4-piece puzzle together.",
-          "question_id": "Q183",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Highlight correct slot",
-          "correct_answer": "Square",
-          "image_hint": "shape",
-          "options": [
-            "Square",
-            "Rectangle",
-            "Triangle",
-            "Diamond"
+          "instruction": "Tell me about this picture!",
+          "question_id": "Q161",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Description",
+          "scaffolding_hint": "What color is it? What is it?",
+          "target_word": "red ball",
+          "image_hint": "ball",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Watch the cup. Which cup is hiding the ball?",
-          "question_id": "Q193",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Slow the movement",
-          "correct_answer": "Middle cup",
-          "image_hint": "ball",
-          "options": [
-            "Left cup",
-            "Middle cup",
-            "Right cup",
-            "None"
+          "instruction": "Tell me about this picture!",
+          "question_id": "Q162",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Description",
+          "scaffolding_hint": "What color is it? What kind of animal?",
+          "target_word": "white cat",
+          "image_hint": "cat",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What do you see?",
+          "question_id": "Q163",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Description",
+          "scaffolding_hint": "What color is the sky?",
+          "target_word": "blue sky",
+          "image_hint": "cloud",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me about this picture!",
+          "question_id": "Q164",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Description",
+          "scaffolding_hint": "What color is the flower?",
+          "target_word": "yellow flower",
+          "image_hint": "flower",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What do you see?",
+          "question_id": "Q165",
+          "source_test": "PLS-5",
+          "sub_domain": "Expressive Description",
+          "scaffolding_hint": "What animal do you see? What is it doing?",
+          "target_word": "brown dog",
+          "image_hint": "dog",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "3": {
-      "name": "Spatial Basics",
-      "name_zh": "空间基础",
-      "task_type": "identify",
+      "name": "Simple Sentences",
+      "name_zh": "简单句子",
+      "task_type": "imitate",
       "tasks": [
         {
-          "instruction": "What shape is this? 5-pointed star",
-          "question_id": "Q157",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight each point",
-          "options": [
-            "Star",
-            "Pentagon",
-            "Hexagon",
-            "Octagon"
-          ],
-          "correct_answer": "Star",
-          "image_hint": "star"
-        },
-        {
-          "instruction": "What shape is this? 45° diagonal line",
-          "question_id": "Q158",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Show angle guide",
-          "options": [
-            "Diagonal line",
-            "Vertical line",
-            "Horizontal line",
-            "Curved line"
-          ],
-          "correct_answer": "Diagonal line",
-          "image_hint": "line"
-        },
-        {
-          "instruction": "Which shape matches this one? Diamond/rhombus",
-          "question_id": "Q174",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Diamond",
-            "Square",
-            "Parallelogram",
-            "Trapezoid"
-          ],
-          "correct_answer": "Diamond",
-          "image_hint": "diamond"
-        },
-        {
-          "instruction": "Build a 3-block tower.",
-          "question_id": "Q184",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show bottom block first",
-          "correct_answer": "3 blocks tall",
-          "image_hint": "shape",
-          "options": [
-            "3 blocks tall",
-            "2 blocks tall",
-            "4 blocks tall",
-            "1 block tall"
+          "instruction": "Listen and repeat the sentence!",
+          "question_id": "Q166",
+          "source_test": "CELF-5",
+          "sub_domain": "Sentence Imitation",
+          "scaffolding_hint": "Try saying just the first few words",
+          "target_word": "The dog is big",
+          "image_hint": "dog",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Follow the dot's path and tap where it will end up.",
-          "question_id": "Q194",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Show path briefly",
-          "correct_answer": "Top-right",
-          "image_hint": "ball",
-          "options": [
-            "Top-right",
-            "Bottom-left",
-            "Top-left",
-            "Bottom-right"
+          "instruction": "Listen and repeat the sentence!",
+          "question_id": "Q167",
+          "source_test": "CELF-5",
+          "sub_domain": "Sentence Imitation",
+          "scaffolding_hint": "Try saying just the first few words",
+          "target_word": "I like apples",
+          "image_hint": "apple",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Listen and repeat the sentence!",
+          "question_id": "Q168",
+          "source_test": "CELF-5",
+          "sub_domain": "Sentence Imitation",
+          "scaffolding_hint": "Try saying just the first few words",
+          "target_word": "The cat is sleeping",
+          "image_hint": "cat",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Listen and repeat the sentence!",
+          "question_id": "Q169",
+          "source_test": "CELF-5",
+          "sub_domain": "Sentence Imitation",
+          "scaffolding_hint": "Try saying just the first few words",
+          "target_word": "She is eating a banana",
+          "image_hint": "banana",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Listen and repeat the sentence!",
+          "question_id": "Q170",
+          "source_test": "CELF-5",
+          "sub_domain": "Sentence Imitation",
+          "scaffolding_hint": "Try saying just the first few words",
+          "target_word": "I like ice cream",
+          "image_hint": "ice_cream",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "4": {
-      "name": "Shape Construction",
-      "name_zh": "形状构建",
-      "task_type": "identify",
+      "name": "Conversation",
+      "name_zh": "对话交流",
+      "task_type": "conversation",
       "tasks": [
         {
-          "instruction": "What shape is this? Two overlapping circles (Venn)",
-          "question_id": "Q159",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Trace each circle separately",
-          "options": [
-            "Two overlapping circles",
-            "Two separate circles",
-            "One big circle",
-            "Concentric circles"
-          ],
-          "correct_answer": "Two overlapping circles",
-          "image_hint": "circle"
-        },
-        {
-          "instruction": "What shape is this? Zigzag line with 5 turns",
-          "question_id": "Q160",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight each turn point",
-          "options": [
-            "Zigzag line",
-            "Straight line",
-            "Wavy line",
-            "Spiral"
-          ],
-          "correct_answer": "Zigzag line",
-          "image_hint": "line"
-        },
-        {
-          "instruction": "Which shape matches this one? Two overlapping squares",
-          "question_id": "Q175",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Two overlapping squares",
-            "Two separate squares",
-            "One big square",
-            "Concentric squares"
-          ],
-          "correct_answer": "Two overlapping squares",
-          "image_hint": "square"
-        },
-        {
-          "instruction": "Arrange these tiles to match the pattern.",
-          "question_id": "Q185",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Highlight one correct tile",
-          "correct_answer": "Red-Blue-Red",
-          "image_hint": "shape",
-          "options": [
-            "Red-Blue-Red",
-            "Blue-Red-Blue",
-            "Red-Red-Blue",
-            "Blue-Blue-Red"
+          "instruction": "What is your favorite animal?",
+          "question_id": "Q171",
+          "source_test": "CELF-5",
+          "sub_domain": "Conversational Response",
+          "scaffolding_hint": "Think about animals you like. Do you like dogs? Cats?",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Watch the 3 cups. Which one has the ball?",
-          "question_id": "Q195",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Replay at slower speed",
-          "correct_answer": "Left cup",
-          "image_hint": "ball",
-          "options": [
-            "Left cup",
-            "Middle cup",
-            "Right cup",
-            "None"
+          "instruction": "What did you eat for breakfast?",
+          "question_id": "Q172",
+          "source_test": "CELF-5",
+          "sub_domain": "Conversational Response",
+          "scaffolding_hint": "Think about what you had to eat this morning",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What do you like to play with?",
+          "question_id": "Q173",
+          "source_test": "CELF-5",
+          "sub_domain": "Conversational Response",
+          "scaffolding_hint": "Think about your favorite toy or game",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What is your favorite color?",
+          "question_id": "Q174",
+          "source_test": "CELF-5",
+          "sub_domain": "Conversational Response",
+          "scaffolding_hint": "Look around. What colors do you see that you like?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me about your family!",
+          "question_id": "Q175",
+          "source_test": "CELF-5",
+          "sub_domain": "Conversational Response",
+          "scaffolding_hint": "Who lives in your house? Do you have brothers or sisters?",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "5": {
-      "name": "Visual Patterns",
-      "name_zh": "视觉模式",
-      "task_type": "identify",
+      "name": "Action Description",
+      "name_zh": "动作描述",
+      "task_type": "describe",
       "tasks": [
         {
-          "instruction": "What shape is this? Inward spiral",
-          "question_id": "Q161",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Show rotation direction",
-          "options": [
-            "Spiral",
-            "Circle",
-            "Coil",
-            "Helix"
-          ],
-          "correct_answer": "Spiral",
-          "image_hint": "spiral"
-        },
-        {
-          "instruction": "What shape is this? Simple maze path",
-          "question_id": "Q162",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight the correct path",
-          "options": [
-            "Maze path",
-            "Zigzag",
-            "Spiral",
-            "Grid"
-          ],
-          "correct_answer": "Maze path",
-          "image_hint": "maze"
-        },
-        {
-          "instruction": "Which shape matches this one? Simple 3D box",
+          "instruction": "What is happening in this picture?",
           "question_id": "Q176",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "3D box",
-            "Flat square",
-            "Rectangle",
-            "Cylinder"
-          ],
-          "correct_answer": "3D box",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Build this 6-block design.",
-          "question_id": "Q186",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show one layer at a time",
-          "correct_answer": "L-shape tower",
-          "image_hint": "shape",
-          "options": [
-            "L-shape tower",
-            "Straight tower",
-            "T-shape",
-            "U-shape"
+          "source_test": "CELF-5",
+          "sub_domain": "Action Description",
+          "scaffolding_hint": "Who do you see? What are they doing?",
+          "target_word": "The boy is running",
+          "image_hint": "happy_face",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Follow the bouncing ball and tap the square it lands in.",
-          "question_id": "Q196",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Slow the bounce",
-          "correct_answer": "Bottom-right square",
-          "image_hint": "ball",
-          "options": [
-            "Top-left square",
-            "Bottom-right square",
-            "Center square",
-            "Top-right square"
+          "instruction": "What is happening in this picture?",
+          "question_id": "Q177",
+          "source_test": "CELF-5",
+          "sub_domain": "Action Description",
+          "scaffolding_hint": "Look at what the person is holding",
+          "target_word": "The girl is reading a book",
+          "image_hint": "book",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me what you see happening!",
+          "question_id": "Q178",
+          "source_test": "CELF-5",
+          "sub_domain": "Action Description",
+          "scaffolding_hint": "What is the animal doing?",
+          "target_word": "The dog is playing with a ball",
+          "image_hint": "dog",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What is happening in this picture?",
+          "question_id": "Q179",
+          "source_test": "CELF-5",
+          "sub_domain": "Action Description",
+          "scaffolding_hint": "Where are the people? What are they doing together?",
+          "target_word": "The children are playing outside",
+          "image_hint": "happy_face",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me what you see!",
+          "question_id": "Q180",
+          "source_test": "CELF-5",
+          "sub_domain": "Action Description",
+          "scaffolding_hint": "What is the person eating?",
+          "target_word": "The boy is eating an apple",
+          "image_hint": "apple",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "6": {
-      "name": "Spatial Reasoning",
-      "name_zh": "空间推理",
-      "task_type": "identify",
+      "name": "Storytelling",
+      "name_zh": "故事讲述",
+      "task_type": "conversation",
       "tasks": [
         {
-          "instruction": "What shape is this? Regular hexagon",
-          "question_id": "Q163",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight each vertex",
-          "options": [
-            "Hexagon",
-            "Pentagon",
-            "Octagon",
-            "Heptagon"
-          ],
-          "correct_answer": "Hexagon",
-          "image_hint": "hexagon"
-        },
-        {
-          "instruction": "What shape is this? Figure-8",
-          "question_id": "Q164",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Show direction arrows",
-          "options": [
-            "Figure-8",
-            "Circle",
-            "Oval",
-            "Infinity sign"
-          ],
-          "correct_answer": "Figure-8",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Which shape matches this one? 5-pointed star",
-          "question_id": "Q177",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "5-pointed star",
-            "6-pointed star",
-            "4-pointed star",
-            "8-pointed star"
-          ],
-          "correct_answer": "5-pointed star",
-          "image_hint": "star"
-        },
-        {
-          "instruction": "Assemble this 9-piece puzzle.",
-          "question_id": "Q187",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Highlight edge pieces first",
-          "correct_answer": "Landscape scene",
-          "image_hint": "shape",
-          "options": [
-            "Landscape scene",
-            "Abstract pattern",
-            "Animal shape",
-            "House shape"
+          "instruction": "Look at this picture. Tell me a story about what is happening!",
+          "question_id": "Q181",
+          "source_test": "TNL-2",
+          "sub_domain": "Narrative Expression",
+          "scaffolding_hint": "Who is in the picture? What happened? What will happen next?",
+          "image_hint": "happy_face",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Watch the two crossing paths. Which dot ends up on the right?",
-          "question_id": "Q197",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Slow the crossing",
-          "correct_answer": "Red dot",
-          "image_hint": "ball",
-          "options": [
-            "Red dot",
-            "Blue dot",
-            "Green dot",
-            "Yellow dot"
+          "instruction": "Tell me about a time you went to the park!",
+          "question_id": "Q182",
+          "source_test": "TNL-2",
+          "sub_domain": "Personal Narrative",
+          "scaffolding_hint": "What did you do at the park? Who was with you?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What happens when it rains? Tell me about it!",
+          "question_id": "Q183",
+          "source_test": "TNL-2",
+          "sub_domain": "Narrative Expression",
+          "scaffolding_hint": "What do you need? What do you wear?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me about your favorite day!",
+          "question_id": "Q184",
+          "source_test": "TNL-2",
+          "sub_domain": "Personal Narrative",
+          "scaffolding_hint": "What made it special? Where were you?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Look at this picture. What do you think happened before this? What will happen next?",
+          "question_id": "Q185",
+          "source_test": "TNL-2",
+          "sub_domain": "Narrative Expression",
+          "scaffolding_hint": "Think about what came before and what comes after",
+          "image_hint": "sad_face",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "7": {
-      "name": "Complex Spatial",
-      "name_zh": "复杂空间",
-      "task_type": "identify",
+      "name": "Explanation",
+      "name_zh": "解释说明",
+      "task_type": "conversation",
       "tasks": [
         {
-          "instruction": "What shape is this? Necker cube outline",
-          "question_id": "Q165",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Trace front face first, then back",
-          "options": [
-            "Necker cube",
-            "Pyramid",
-            "Prism",
-            "Cylinder"
-          ],
-          "correct_answer": "Necker cube",
-          "image_hint": "line"
-        },
-        {
-          "instruction": "What shape is this? Star with inner pentagon",
-          "question_id": "Q166",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Trace outer star first",
-          "options": [
-            "Star with pentagon",
-            "Star with triangle",
-            "Star with square",
-            "Star with circle"
-          ],
-          "correct_answer": "Star with pentagon",
-          "image_hint": "star"
-        },
-        {
-          "instruction": "Which shape matches this one? 3 overlapping shapes",
-          "question_id": "Q178",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "3 overlapping shapes",
-            "3 separate shapes",
-            "3 nested shapes",
-            "3 connected shapes"
-          ],
-          "correct_answer": "3 overlapping shapes",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Recreate this tangram design.",
-          "question_id": "Q188",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show one piece placement",
-          "correct_answer": "Cat shape",
-          "image_hint": "shape",
-          "options": [
-            "Cat shape",
-            "Bird shape",
-            "Fish shape",
-            "Dog shape"
+          "instruction": "How do you brush your teeth? Tell me the steps!",
+          "question_id": "Q186",
+          "source_test": "CELF-5",
+          "sub_domain": "Procedural Explanation",
+          "scaffolding_hint": "What do you do first? Then what?",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Watch the 5 cups. Which one has the ball?",
-          "question_id": "Q198",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Replay at slower speed",
-          "correct_answer": "Cup 3",
-          "image_hint": "ball",
-          "options": [
-            "Cup 1",
-            "Cup 2",
-            "Cup 3",
-            "Cup 4",
-            "Cup 5"
+          "instruction": "Why do we wear a coat when it is cold?",
+          "question_id": "Q187",
+          "source_test": "CELF-5",
+          "sub_domain": "Causal Explanation",
+          "scaffolding_hint": "What happens if you go outside without a coat?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "How do you make a sandwich?",
+          "question_id": "Q188",
+          "source_test": "CELF-5",
+          "sub_domain": "Procedural Explanation",
+          "scaffolding_hint": "What do you need? What do you do first?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me about your favorite game. How do you play it?",
+          "question_id": "Q189",
+          "source_test": "CELF-5",
+          "sub_domain": "Procedural Explanation",
+          "scaffolding_hint": "What are the rules? How do you win?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Why is it important to say please and thank you?",
+          "question_id": "Q190",
+          "source_test": "CELF-5",
+          "sub_domain": "Causal Explanation",
+          "scaffolding_hint": "How does it make other people feel?",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "8": {
-      "name": "3D Reasoning",
-      "name_zh": "三维推理",
-      "task_type": "identify",
+      "name": "Opinion & Reasoning",
+      "name_zh": "观点与推理",
+      "task_type": "conversation",
       "tasks": [
         {
-          "instruction": "What shape is this? 3 interlocking circles",
-          "question_id": "Q167",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Trace each ring separately",
-          "options": [
-            "3 interlocking circles",
-            "3 separate circles",
-            "3 concentric circles",
-            "3 tangent circles"
-          ],
-          "correct_answer": "3 interlocking circles",
-          "image_hint": "circle"
-        },
-        {
-          "instruction": "What shape is this? Winding road with turns",
-          "question_id": "Q168",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Highlight start and end points",
-          "options": [
-            "Winding road",
-            "Straight road",
-            "Circular path",
-            "Zigzag path"
-          ],
-          "correct_answer": "Winding road",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Which shape matches this one? Complex geometric design",
-          "question_id": "Q179",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Geometric mandala",
-            "Simple triangle",
-            "Basic circle",
-            "Plain square"
-          ],
-          "correct_answer": "Geometric mandala",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Build this symmetrical block design.",
-          "question_id": "Q189",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show the axis of symmetry",
-          "correct_answer": "Butterfly pattern",
-          "image_hint": "shape",
-          "options": [
-            "Butterfly pattern",
-            "Random blocks",
-            "Staircase",
-            "Tower"
+          "instruction": "What is better: a dog or a cat? Tell me why you think so!",
+          "question_id": "Q191",
+          "source_test": "CELF-5",
+          "sub_domain": "Opinion Expression",
+          "scaffolding_hint": "Think about what each animal can do. Which do you like more?",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Follow the target through the maze and tap the exit it uses.",
-          "question_id": "Q199",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Highlight the target",
-          "correct_answer": "Exit B (right)",
-          "image_hint": "ball",
-          "options": [
-            "Exit A (top)",
-            "Exit B (right)",
-            "Exit C (bottom)",
-            "Exit D (left)"
+          "instruction": "If you could have any superpower, what would it be? Why?",
+          "question_id": "Q192",
+          "source_test": "CELF-5",
+          "sub_domain": "Creative Expression",
+          "scaffolding_hint": "Think about what you would like to do that you cannot do now",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What would you do if you found a lost puppy? Why?",
+          "question_id": "Q193",
+          "source_test": "CELF-5",
+          "sub_domain": "Problem Solving Expression",
+          "scaffolding_hint": "The puppy looks scared. How would you help it?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Should children have homework? Tell me what you think!",
+          "question_id": "Q194",
+          "source_test": "CELF-5",
+          "sub_domain": "Persuasive Expression",
+          "scaffolding_hint": "Think about good things and bad things about homework",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What is the most important thing about being a good friend?",
+          "question_id": "Q195",
+          "source_test": "CELF-5",
+          "sub_domain": "Abstract Expression",
+          "scaffolding_hint": "Think about your friends. What do they do that makes you happy?",
+          "modalities": [
+            "voice"
           ]
         }
       ]
     },
     "9": {
-      "name": "Advanced Visual-Motor",
-      "name_zh": "高级视觉运动",
-      "task_type": "identify",
+      "name": "Complex Expression",
+      "name_zh": "复杂表达",
+      "task_type": "conversation",
       "tasks": [
         {
-          "instruction": "What shape is this? Benzene ring with bonds",
-          "question_id": "Q169",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Trace the ring first, then bonds",
-          "options": [
-            "Benzene ring",
-            "Pentagon",
-            "Hexagon",
-            "Cyclohexane"
-          ],
-          "correct_answer": "Benzene ring",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "What shape is this? Simple floor plan",
-          "question_id": "Q170",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Recognition",
-          "scaffolding_hint": "Trace room by room",
-          "options": [
-            "Floor plan",
-            "Map",
-            "Circuit diagram",
-            "Blueprint"
-          ],
-          "correct_answer": "Floor plan",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Which shape matches this one? Mandala quarter",
-          "question_id": "Q180",
-          "source_test": "Beery VMI",
-          "sub_domain": "Shape Matching",
-          "scaffolding_hint": "Show example again",
-          "options": [
-            "Mandala quarter",
-            "Full mandala",
-            "Half mandala",
-            "Mandala border"
-          ],
-          "correct_answer": "Mandala quarter",
-          "image_hint": "shape"
-        },
-        {
-          "instruction": "Recreate this 3D architectural model.",
-          "question_id": "Q190",
-          "source_test": "SIB-R",
-          "sub_domain": "Spatial Assembly",
-          "scaffolding_hint": "Show one face of the structure",
-          "correct_answer": "Arch bridge",
-          "image_hint": "shape",
-          "options": [
-            "Arch bridge",
-            "Flat bridge",
-            "Tower",
-            "Wall"
+          "instruction": "Tell me about something that made you feel proud. What happened?",
+          "question_id": "Q196",
+          "source_test": "TNL-2",
+          "sub_domain": "Emotional Narrative",
+          "scaffolding_hint": "Think about a time you did something well. How did it feel?",
+          "modalities": [
+            "voice"
           ]
         },
         {
-          "instruction": "Watch the 3 balls. After 10 swaps, which ball is in position 1?",
+          "instruction": "If you could change one thing about your school, what would it be? Why?",
+          "question_id": "Q197",
+          "source_test": "CELF-5",
+          "sub_domain": "Persuasive Narrative",
+          "scaffolding_hint": "What would make school better for you and your friends?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Tell me about a book or movie you really liked. What was it about?",
+          "question_id": "Q198",
+          "source_test": "TNL-2",
+          "sub_domain": "Retelling",
+          "scaffolding_hint": "Who were the characters? What happened in the story?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "What do you think happens when we dream? Why do we dream?",
+          "question_id": "Q199",
+          "source_test": "CELF-5",
+          "sub_domain": "Abstract Reasoning Expression",
+          "scaffolding_hint": "Have you had any interesting dreams? What were they about?",
+          "modalities": [
+            "voice"
+          ]
+        },
+        {
+          "instruction": "Imagine you are a teacher for a day. What would you teach? How would you make it fun?",
           "question_id": "Q200",
-          "source_test": "Callier-Azusa",
-          "sub_domain": "Visual Tracking",
-          "scaffolding_hint": "Slow the swaps",
-          "correct_answer": "Ball B",
-          "image_hint": "ball",
-          "options": [
-            "Ball A",
-            "Ball B",
-            "Ball C",
-            "Cannot tell"
+          "source_test": "CELF-5",
+          "sub_domain": "Creative Planning Expression",
+          "scaffolding_hint": "What subject do you like? How would you help your students learn?",
+          "modalities": [
+            "voice"
           ]
         }
       ]
