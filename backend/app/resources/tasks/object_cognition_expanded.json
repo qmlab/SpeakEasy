@@ -98,20 +98,20 @@
           "options": [
             "Star",
             "Circle",
-            "Square",
-            "Triangle"
+            "Triangle",
+            "Square"
           ],
           "slide_items": [
             "Star",
             "Circle",
             "Star",
-            "Square",
-            "Star",
             "Triangle",
+            "Square",
             "Star",
             "Circle",
             "Star",
-            "Square"
+            "Triangle",
+            "Star"
           ],
           "tap_target": "Star",
           "no_tap_target": "Circle, Square, Triangle"
@@ -242,20 +242,20 @@
             "blue_swatch"
           ],
           "options": [
-            "Blue circle",
-            "Red square",
-            "Green triangle",
-            "Blue square"
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow"
           ],
           "slide_items": [
-            "Blue circle",
-            "Red square",
-            "Blue square",
-            "Green triangle",
-            "Blue circle",
-            "Red square",
-            "Blue circle",
-            "Green triangle"
+            "Red",
+            "Blue",
+            "Green",
+            "Blue",
+            "Yellow",
+            "Blue",
+            "Red",
+            "Blue"
           ],
           "tap_target": "Blue",
           "no_tap_target": "Red, Green"
@@ -291,7 +291,7 @@
             "Banana",
             "Broccoli",
             "Orange",
-            "Potato"
+            "Lettuce"
           ],
           "slide_items": [
             "Apple",
@@ -299,10 +299,10 @@
             "Banana",
             "Broccoli",
             "Orange",
-            "Potato"
+            "Lettuce"
           ],
           "tap_target": "Apple, Banana, Orange",
-          "no_tap_target": "Carrot, Broccoli, Potato"
+          "no_tap_target": "Carrot, Broccoli, Lettuce"
         },
         {
           "instruction": "Tap when you see an animal. Do not tap for objects.",
@@ -472,17 +472,17 @@
           "options": [
             "Hat",
             "Dog",
-            "Bat",
-            "Car",
             "Mat",
+            "Car",
+            "Bat",
             "Sun"
           ],
           "slide_items": [
             "Hat",
             "Dog",
-            "Bat",
-            "Car",
             "Mat",
+            "Car",
+            "Bat",
             "Sun"
           ],
           "tap_target": "Hat, Bat, Mat",
@@ -654,7 +654,7 @@
             "Dog",
             "Chair",
             "Flower",
-            "Book"
+            "Pencil"
           ],
           "slide_items": [
             "Tree",
@@ -662,10 +662,10 @@
             "Dog",
             "Chair",
             "Flower",
-            "Book"
+            "Pencil"
           ],
           "tap_target": "Tree, Dog, Flower",
-          "no_tap_target": "Rock, Chair, Book"
+          "no_tap_target": "Rock, Chair, Pencil"
         },
         {
           "instruction": "Tap for words with more than 5 letters. Do not tap for shorter words.",
@@ -688,21 +688,21 @@
           "options": [
             "Elephant",
             "Cat",
-            "Bicycle",
+            "Butterfly",
             "Dog",
-            "Computer",
-            "Sun"
+            "Crocodile",
+            "Ant"
           ],
           "slide_items": [
             "Elephant",
             "Cat",
-            "Bicycle",
+            "Butterfly",
             "Dog",
-            "Computer",
-            "Sun"
+            "Crocodile",
+            "Ant"
           ],
-          "tap_target": "Elephant, Bicycle, Computer",
-          "no_tap_target": "Cat, Dog, Sun"
+          "tap_target": "Elephant, Butterfly, Crocodile",
+          "no_tap_target": "Cat, Dog, Ant"
         },
         {
           "instruction": "Remember: 8, 2, 6, 4, 1. Tap them in order from smallest to largest.",
@@ -826,26 +826,24 @@
           ],
           "options": [
             "Run",
-            "Table",
-            "Jump",
             "Chair",
+            "Jump",
+            "Dog",
             "Swim",
-            "Book",
-            "Eat",
-            "Door"
+            "Apple",
+            "Fly"
           ],
           "slide_items": [
             "Run",
-            "Table",
-            "Jump",
             "Chair",
+            "Jump",
+            "Dog",
             "Swim",
-            "Book",
-            "Eat",
-            "Door"
+            "Apple",
+            "Fly"
           ],
-          "tap_target": "Run, Jump, Swim, Eat",
-          "no_tap_target": "Table, Chair, Book, Door"
+          "tap_target": "Run, Jump, Swim, Fly",
+          "no_tap_target": "Chair, Dog, Apple"
         },
         {
           "instruction": "Tap for prime numbers. Do not tap for composite numbers.",
