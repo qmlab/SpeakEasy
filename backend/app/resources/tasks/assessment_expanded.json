@@ -376,6 +376,7 @@
             "instruction": "Touch the letter A.",
             "instruction_zh": "点一下字母 A。",
             "correct_answer": "A",
+            "target_word": "A",
             "options": ["A", "B", "C"],
             "image_hint": "letter"
           }
@@ -387,6 +388,7 @@
             "instruction": "Touch the letter D.",
             "instruction_zh": "点一下字母 D。",
             "correct_answer": "D",
+            "target_word": "D",
             "options": ["D", "B", "P"],
             "image_hint": "letter"
           }

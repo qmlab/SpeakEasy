@@ -1207,6 +1207,7 @@ def seed_literacy_tasks(db: Session) -> int:
                 content={
                     "instruction_audio": "Touch the letter A.",
                     "instruction_text": "Touch the letter A.",
+                    "target_word": "A",
                     "image_hint": "letter",
                     "options": ["A", "B", "C"],
                     "correct_answer": "A",
@@ -1226,6 +1227,7 @@ def seed_literacy_tasks(db: Session) -> int:
                 content={
                     "instruction_audio": "Touch the letter B.",
                     "instruction_text": "Touch the letter B.",
+                    "target_word": "B",
                     "image_hint": "letter",
                     "options": ["B", "D", "P"],
                     "correct_answer": "B",
@@ -1245,6 +1247,7 @@ def seed_literacy_tasks(db: Session) -> int:
                 content={
                     "instruction_audio": "Touch the letter C.",
                     "instruction_text": "Touch the letter C.",
+                    "target_word": "C",
                     "image_hint": "letter",
                     "options": ["C", "O", "G"],
                     "correct_answer": "C",

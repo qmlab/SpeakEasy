@@ -346,6 +346,7 @@ def seed_assessment_tasks(db: Session) -> int:
                 content={
                     "instruction": "Touch the letter A.",
                     "correct_answer": "A",
+                    "target_word": "A",
                     "options": ["A", "B", "C"],
                     "image_hint": "letter",
                 },
@@ -359,6 +360,7 @@ def seed_assessment_tasks(db: Session) -> int:
                 content={
                     "instruction": "Touch the letter B.",
                     "correct_answer": "B",
+                    "target_word": "B",
                     "options": ["B", "D", "P"],
                     "image_hint": "letter",
                 },
