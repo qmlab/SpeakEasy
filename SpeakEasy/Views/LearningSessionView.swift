@@ -479,9 +479,21 @@ struct LearningSessionView: View {
     private func instructionReferencesPicture(_ task: AdaptiveTask) -> Bool {
         let text = task.content.displayInstruction.lowercased()
         let phrases = [
+            // Picture / image references
             "this picture", "the picture", "this image", "the image",
             "this photo", "the photo", "what is this", "what do you see",
-            "what is in this", "tell me about this", "name this"
+            "what is in this", "tell me about this", "name this",
+            // Person / face / feeling references (social behavior)
+            "this person", "the person", "this child", "the child",
+            "this boy", "the boy", "this girl", "the girl",
+            "this man", "the man", "this woman", "the woman",
+            "this face", "the face", "this animal", "the animal",
+            "how is this person", "how does this person",
+            "is this person", "how is the person",
+            // Tap / point references that need a visual target
+            "point to the", "tap the character", "tap who",
+            // Scene / situation references
+            "shown here", "look at this", "look at the"
         ]
         return phrases.contains(where: { text.contains($0) })
     }
