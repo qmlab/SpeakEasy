@@ -333,13 +333,16 @@ class SpeechService: NSObject, ObservableObject {
                 // within silenceTimeout, treat it as if the user pressed
                 // the stop button.
                 if !isFinal && !autoStop && !text.isEmpty {
-                    self.pendingSilenceWork?.cancel()
-                    let silenceWork = DispatchWorkItem { [weak self] in
+                    DispatchQueue.main.async { [weak self] in
                         guard let self = self, self.isListening else { return }
-                        self.stopAndEvaluate()
+                        self.pendingSilenceWork?.cancel()
+                        let silenceWork = DispatchWorkItem { [weak self] in
+                            guard let self = self, self.isListening else { return }
+                            self.stopAndEvaluate()
+                        }
+                        self.pendingSilenceWork = silenceWork
+                        DispatchQueue.main.asyncAfter(deadline: .now() + self.silenceTimeout, execute: silenceWork)
                     }
-                    self.pendingSilenceWork = silenceWork
-                    DispatchQueue.main.asyncAfter(deadline: .now() + self.silenceTimeout, execute: silenceWork)
                 }
             }
             

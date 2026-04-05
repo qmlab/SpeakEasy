@@ -491,7 +491,7 @@ struct LearningSessionView: View {
             "how is this person", "how does this person",
             "is this person", "how is the person",
             // Tap / point references that need a visual target
-            "point to the", "tap the character", "tap who",
+            "tap the character", "tap who",
             // Scene / situation references
             "shown here", "look at this", "look at the"
         ]
