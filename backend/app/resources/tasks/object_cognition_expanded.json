@@ -435,12 +435,13 @@
           ],
           "slide_items": [
             "Circle",
-            "Square",
             "Circle",
             "Triangle",
+            "Square",
             "Circle",
             "Circle",
-            "Star"
+            "Star",
+            "Triangle"
           ],
           "tap_target": "Circle-Circle pair",
           "no_tap_target": "Others"
@@ -540,8 +541,7 @@
             "number_3",
             "number_5",
             "number_2"
-          ],
-          "multi_select": true
+          ]
         },
         {
           "instruction": "I will say 3 words. After, tell me the Middle word: Cat, House, Tree.",
@@ -731,8 +731,7 @@
             "number_6",
             "number_4",
             "number_1"
-          ],
-          "multi_select": true
+          ]
         },
         {
           "instruction": "Remember: Apple, Chair, Dog, Book. Tap only the living things.",
@@ -957,14 +956,13 @@
             "Star"
           ],
           "slide_items": [
-            "Circle",
-            "Square",
-            "Triangle",
+            "Star",
             "Circle",
             "Star",
-            "Square",
             "Triangle",
-            "Square"
+            "Star",
+            "Circle",
+            "Triangle"
           ],
           "tap_target": "Same as 2 steps before",
           "no_tap_target": "Different from 2 steps before"
