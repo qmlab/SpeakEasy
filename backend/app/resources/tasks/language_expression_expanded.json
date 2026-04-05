@@ -173,7 +173,7 @@
           "sub_domain": "Expressive Description",
           "scaffolding_hint": "What color is the sky?",
           "target_word": "blue sky",
-          "image_hint": "sky",
+          "image_hint": "cloud",
           "modalities": [
             "voice"
           ]
@@ -357,7 +357,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "Look at what the person is holding",
           "target_word": "The girl is reading a book",
-          "image_hint": "reading",
+          "image_hint": "book",
           "modalities": [
             "voice"
           ]
@@ -457,7 +457,7 @@
           "sub_domain": "Narrative Expression",
           "scaffolding_hint": "Think about what came before and what comes after",
           "target_word": "open_ended",
-          "image_hint": "friend_crying",
+          "image_hint": "sad_face",
           "modalities": [
             "voice"
           ]
