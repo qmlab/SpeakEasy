@@ -551,7 +551,6 @@
           "scaffolding_hint": "Say: \"The middle word is the second one you heard\"",
           "correct_answer": "House",
           "image_hint": "cat",
-          "input_mode": "text",
           "options": [
             "Cat",
             "House",
@@ -893,7 +892,6 @@
             "number_9",
             "number_4"
           ],
-          "input_mode": "number",
           "options": [
             "3",
             "4",
