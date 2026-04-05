@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#E8F5E9" rx="10"/>
+  <!-- Teacher -->
+  <circle cx="30" cy="35" r="14" fill="#FFCC80"/>
+  <circle cx="25" cy="32" r="2.5" fill="#333"/>
+  <circle cx="35" cy="32" r="2.5" fill="#333"/>
+  <path d="M25 38 Q30 42 35 38" stroke="#333" stroke-width="1.5" fill="none"/>
+  <!-- Paper with marks -->
+  <rect x="55" y="25" width="30" height="38" fill="white" stroke="#CCC" stroke-width="1"/>
+  <line x1="60" y1="32" x2="80" y2="32" stroke="#F44336" stroke-width="1"/>
+  <line x1="60" y1="38" x2="78" y2="38" stroke="#F44336" stroke-width="1"/>
+  <text x="75" y="55" font-family="Arial" font-size="10" fill="#F44336">✗</text>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#FFF3E0" rx="10"/>
+  <!-- Frustrated friend -->
+  <circle cx="35" cy="40" r="14" fill="#FFCC80"/>
+  <circle cx="30" cy="37" r="2.5" fill="#333"/>
+  <circle cx="40" cy="37" r="2.5" fill="#333"/>
+  <path d="M30 45 Q35 42 40 45" stroke="#333" stroke-width="1.5" fill="none"/>
+  <!-- Anger/frustration marks -->
+  <line x1="18" y1="28" x2="22" y2="32" stroke="#F44336" stroke-width="2"/>
+  <line x1="22" y1="28" x2="18" y2="32" stroke="#F44336" stroke-width="2"/>
+  <!-- Listener with ear -->
+  <circle cx="70" cy="42" r="14" fill="#FFCC80"/>
+  <circle cx="65" cy="39" r="2.5" fill="#333"/>
+  <circle cx="75" cy="39" r="2.5" fill="#333"/>
+  <path d="M65 46 Q70 48 75 46" stroke="#333" stroke-width="1.5" fill="none"/>
+</svg>

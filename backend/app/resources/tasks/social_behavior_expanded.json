@@ -86,7 +86,7 @@
             "Ignore"
           ],
           "correct_answer": "Hug them",
-          "image_hint": "sad_face"
+          "image_hint": "friend_crying"
         },
         {
           "instruction": "Someone gives you a gift. What do you say?",
@@ -101,7 +101,7 @@
             "Cry"
           ],
           "correct_answer": "Thank you",
-          "image_hint": "gift"
+          "image_hint": "receiving_gift"
         }
       ]
     },
@@ -206,7 +206,7 @@
             "Ignore"
           ],
           "correct_answer": "Say sorry",
-          "image_hint": "sorry"
+          "image_hint": "bumping_sorry"
         },
         {
           "instruction": "Someone is talking to you. What should you do?",
@@ -221,7 +221,7 @@
             "Talk over them"
           ],
           "correct_answer": "Listen and look at them",
-          "image_hint": "speech_bubble"
+          "image_hint": "person_talking"
         },
         {
           "instruction": "Two people are whispering and laughing. A third person walks by and they go quiet. How does the third person likely feel?",
@@ -236,7 +236,7 @@
             "Excited"
           ],
           "correct_answer": "Left out / uncomfortable",
-          "image_hint": "sad_face",
+          "image_hint": "whispering_exclusion",
           "instruction_zh": "两个人在窃窃私语和笑。第三个人走过，他们安静了。第三个人感觉怎样？"
         }
       ]
@@ -329,7 +329,7 @@
             "Box"
           ],
           "correct_answer": "Basket",
-          "image_hint": "ball"
+          "image_hint": "false_belief_ball"
         },
         {
           "instruction": "A box says 'Pencils' on it. Inside are actually candies. What will your friend think is inside before opening it?",
@@ -342,7 +342,7 @@
             "Candies"
           ],
           "correct_answer": "Pencils",
-          "image_hint": "box"
+          "image_hint": "pencils_box_trick"
         },
         {
           "instruction": "You want to join a game. What do you do?",
@@ -357,7 +357,7 @@
             "Cry"
           ],
           "correct_answer": "Ask politely",
-          "image_hint": "children"
+          "image_hint": "joining_game"
         },
         {
           "instruction": "A classmate gets a better grade than you. What is the best response?",
@@ -372,7 +372,7 @@
             "Cheat next time"
           ],
           "correct_answer": "Congratulate them",
-          "image_hint": "star"
+          "image_hint": "better_grade"
         },
         {
           "instruction": "A child is playing alone while others play together. What might this mean?",
@@ -387,7 +387,7 @@
             "Both possibilities valid"
           ],
           "correct_answer": "Both possibilities valid",
-          "image_hint": "children"
+          "image_hint": "child_alone"
         }
       ]
     },
@@ -483,7 +483,7 @@
             "Yes"
           ],
           "correct_answer": "No",
-          "image_hint": "happy_face",
+          "image_hint": "hide_seek",
           "instruction_zh": "小明躲在沙发后面。他能看到姐姐，但姐姐看不到他。姐姐知道他在哪里吗？"
         },
         {
@@ -497,7 +497,7 @@
             "Sunday"
           ],
           "correct_answer": "Saturday",
-          "image_hint": "calendar"
+          "image_hint": "party_wrong_day"
         },
         {
           "instruction": "You disagree with what a friend says. What do you do?",
@@ -512,7 +512,7 @@
             "Walk away"
           ],
           "correct_answer": "Calmly share your view",
-          "image_hint": "speech_bubble"
+          "image_hint": "disagreeing_friend"
         },
         {
           "instruction": "You are in a library. Your phone rings. What do you do?",
@@ -526,7 +526,7 @@
             "Ignore it"
           ],
           "correct_answer": "Quickly silence it and step out",
-          "image_hint": "phone"
+          "image_hint": "phone_library"
         },
         {
           "instruction": "A person keeps checking their watch during a conversation. What does this signal?",
@@ -541,7 +541,7 @@
             "They need to leave / are bored"
           ],
           "correct_answer": "They need to leave / are bored",
-          "image_hint": "clock"
+          "image_hint": "checking_watch"
         }
       ]
     },
@@ -637,7 +637,7 @@
             "Yes"
           ],
           "correct_answer": "No (unless told)",
-          "image_hint": "sad_face",
+          "image_hint": "friend_lost_toy",
           "instruction_zh": "小明很伤心因为丢了玩具。朋友小红在笑一个笑话。小红知道小明伤心吗？"
         },
         {
@@ -651,7 +651,7 @@
             "Yes"
           ],
           "correct_answer": "No",
-          "image_hint": "surprised_face",
+          "image_hint": "telling_secret",
           "instruction_zh": "小红告诉小明一个秘密。小明告诉了小华。小红知道小华知道这个秘密吗？"
         },
         {
@@ -666,7 +666,7 @@
             "Lie"
           ],
           "correct_answer": "Say you can't share it",
-          "image_hint": "lock"
+          "image_hint": "keeping_secret"
         },
         {
           "instruction": "You notice a classmate is being left out at lunch. What do you do?",
@@ -680,7 +680,7 @@
             "Laugh"
           ],
           "correct_answer": "Invite them to sit with you",
-          "image_hint": "children"
+          "image_hint": "left_out_lunch"
         },
         {
           "instruction": "Two people are standing very close and speaking quietly. What kind of conversation is this likely to be?",
@@ -695,7 +695,7 @@
             "Private / intimate"
           ],
           "correct_answer": "Private / intimate",
-          "image_hint": "speech_bubble"
+          "image_hint": "person_talking"
         }
       ]
     },
@@ -806,7 +806,7 @@
             "He is happy"
           ],
           "correct_answer": "He is hurt",
-          "image_hint": "sad_face"
+          "image_hint": "friend_crying"
         },
         {
           "instruction": "You made a mistake that affected your team. What do you do?",
@@ -821,7 +821,7 @@
             "Acknowledge it, apologize, and offer to fix it"
           ],
           "correct_answer": "Acknowledge it, apologize, and offer to fix it",
-          "image_hint": "team"
+          "image_hint": "team_mistake"
         },
         {
           "instruction": "A new student looks lost and confused. What do you do?",
@@ -836,7 +836,7 @@
             "Offer to help them find their way"
           ],
           "correct_answer": "Offer to help them find their way",
-          "image_hint": "children"
+          "image_hint": "new_student_lost"
         },
         {
           "instruction": "A person is nodding but not making eye contact and giving one-word answers. What does this suggest?",
@@ -851,7 +851,7 @@
             "They are disengaged or uncomfortable"
           ],
           "correct_answer": "They are disengaged or uncomfortable",
-          "image_hint": "speech_bubble"
+          "image_hint": "nodding_disinterested"
         }
       ]
     },
@@ -951,7 +951,7 @@
             "Take it"
           ],
           "correct_answer": "Ask indirectly/distract",
-          "image_hint": "cookie"
+          "image_hint": "cookie_trick"
         },
         {
           "instruction": "A teacher praises a student in front of the class. The student looks down and goes quiet. Why?",
@@ -966,7 +966,7 @@
             "Sad"
           ],
           "correct_answer": "Embarrassed",
-          "image_hint": "embarrassed_face",
+          "image_hint": "student_praised",
           "instruction_zh": "老师在全班面前表扬了一个学生。学生低下头安静了。为什么？"
         },
         {
@@ -982,7 +982,7 @@
             "Listen respectfully, then politely ask to discuss"
           ],
           "correct_answer": "Listen respectfully, then politely ask to discuss",
-          "image_hint": "teacher"
+          "image_hint": "teacher_feedback"
         },
         {
           "instruction": "A friend is venting about a problem. They haven't asked for advice. What do you do?",
@@ -997,7 +997,7 @@
             "Listen and validate their feelings"
           ],
           "correct_answer": "Listen and validate their feelings",
-          "image_hint": "speech_bubble"
+          "image_hint": "friend_venting"
         },
         {
           "instruction": "In a meeting, one person always speaks first and others wait. What social dynamic is at play?",
@@ -1012,7 +1012,7 @@
             "Hierarchy / authority dynamic"
           ],
           "correct_answer": "Hierarchy / authority dynamic",
-          "image_hint": "speech_bubble"
+          "image_hint": "meeting_dominant"
         }
       ]
     },
@@ -1112,7 +1112,7 @@
             "Confused"
           ],
           "correct_answer": "Relieved/Grateful",
-          "image_hint": "happy_face",
+          "image_hint": "friends_argue_sorry",
           "instruction_zh": "两个朋友吵架了。一个先道歉了。另一个朋友可能感觉怎样？"
         },
         {
@@ -1128,7 +1128,7 @@
             "Tired"
           ],
           "correct_answer": "Shy/Anxious",
-          "image_hint": "children"
+          "image_hint": "quiet_at_party"
         },
         {
           "instruction": "You are in a group discussion and someone keeps interrupting. What do you do?",
@@ -1143,7 +1143,7 @@
             "Calmly say 'I wasn't finished' and continue"
           ],
           "correct_answer": "Calmly say 'I wasn't finished' and continue",
-          "image_hint": "speech_bubble"
+          "image_hint": "group_interruption"
         },
         {
           "instruction": "Someone online is being unkind to you. What is the best response?",
@@ -1158,7 +1158,7 @@
             "Block/report and tell a trusted adult"
           ],
           "correct_answer": "Block/report and tell a trusted adult",
-          "image_hint": "phone"
+          "image_hint": "online_unkind"
         },
         {
           "instruction": "A person laughs at their own mistake in front of others. What social function does this serve?",
@@ -1173,7 +1173,7 @@
             "Diffuses tension / shows self-awareness"
           ],
           "correct_answer": "Diffuses tension / shows self-awareness",
-          "image_hint": "happy_face"
+          "image_hint": "laughing_at_mistake"
         }
       ]
     },
@@ -1225,7 +1225,7 @@
             "Boredom"
           ],
           "correct_answer": "Learned social scripts / masking",
-          "image_hint": "children"
+          "image_hint": "correct_but_passive"
         },
         {
           "instruction": "A manager gives critical feedback harshly. The employee nods and says 'thank you.' What might the employee actually feel?",
@@ -1240,7 +1240,7 @@
             "Indifferent"
           ],
           "correct_answer": "Hurt/Defensive",
-          "image_hint": "speech_bubble"
+          "image_hint": "harsh_feedback"
         },
         {
           "instruction": "You realize mid-conversation that you have been talking too much about yourself. What do you do?",
@@ -1255,7 +1255,7 @@
             "Ask the other person about themselves"
           ],
           "correct_answer": "Ask the other person about themselves",
-          "image_hint": "speech_bubble"
+          "image_hint": "talking_too_much"
         },
         {
           "instruction": "A colleague takes credit for your idea. What is the most professional response?",
@@ -1270,7 +1270,7 @@
             "Calmly clarify your contribution"
           ],
           "correct_answer": "Calmly clarify your contribution",
-          "image_hint": "lightbulb"
+          "image_hint": "takes_credit"
         },
         {
           "instruction": "A child with ASD gives a very detailed, one-sided explanation of their special interest to a new acquaintance who looks increasingly uncomfortable. What is the social mismatch?",
@@ -1285,7 +1285,7 @@
             "Lack of reading the listener's disengagement cues"
           ],
           "correct_answer": "Lack of reading the listener's disengagement cues",
-          "image_hint": "speech_bubble"
+          "image_hint": "one_sided_talk"
         }
       ]
     },
@@ -1337,7 +1337,7 @@
             "Both genuine and self-interested motivations"
           ],
           "correct_answer": "Both genuine and self-interested motivations",
-          "image_hint": "gift"
+          "image_hint": "public_donation"
         },
         {
           "instruction": "A child with autism gives a very literal answer to a sarcastic comment. Why is this a misunderstanding?",
@@ -1351,7 +1351,7 @@
             "They didn't hear"
           ],
           "correct_answer": "Literal interpretation of sarcasm",
-          "image_hint": "sun"
+          "image_hint": "sarcasm_literal"
         },
         {
           "instruction": "You notice a friend's behavior has changed significantly. You are worried. What do you do?",
@@ -1366,7 +1366,7 @@
             "Find a private moment and gently check in"
           ],
           "correct_answer": "Find a private moment and gently check in",
-          "image_hint": "children"
+          "image_hint": "friend_behavior_changed"
         },
         {
           "instruction": "You are in a cultural setting where norms are different from yours. How do you behave?",
@@ -1381,7 +1381,7 @@
             "Observe, ask respectfully, adapt"
           ],
           "correct_answer": "Observe, ask respectfully, adapt",
-          "image_hint": "book",
+          "image_hint": "cultural_setting",
           "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？"
         }
       ]

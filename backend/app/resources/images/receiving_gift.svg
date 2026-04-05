@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#FFF3E0" rx="10"/>
+  <!-- Person giving -->
+  <circle cx="30" cy="30" r="12" fill="#FFCC80"/>
+  <circle cx="26" cy="28" r="2" fill="#333"/>
+  <circle cx="34" cy="28" r="2" fill="#333"/>
+  <path d="M26 34 Q30 38 34 34" stroke="#333" stroke-width="1.5" fill="none"/>
+  <path d="M30 42 L30 62" stroke="#4A90D9" stroke-width="3"/>
+  <!-- Gift box -->
+  <rect x="38" y="48" width="24" height="18" rx="3" fill="#F44336"/>
+  <rect x="38" y="48" width="24" height="5" fill="#C62828"/>
+  <line x1="50" y1="48" x2="50" y2="66" stroke="#FFD700" stroke-width="2"/>
+  <line x1="38" y1="57" x2="62" y2="57" stroke="#FFD700" stroke-width="2"/>
+  <!-- Person receiving -->
+  <circle cx="70" cy="30" r="12" fill="#FFCC80"/>
+  <circle cx="66" cy="28" r="2" fill="#333"/>
+  <circle cx="74" cy="28" r="2" fill="#333"/>
+  <ellipse cx="70" cy="35" rx="4" ry="3" fill="#333"/>
+  <path d="M70 42 L70 62" stroke="#E67E22" stroke-width="3"/>
+</svg>

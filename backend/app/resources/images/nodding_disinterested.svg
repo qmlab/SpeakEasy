@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#EFEBE9" rx="10"/>
+  <!-- Person nodding but looking away -->
+  <circle cx="50" cy="40" r="16" fill="#FFCC80"/>
+  <!-- Eyes looking sideways -->
+  <circle cx="42" cy="37" r="3" fill="white"/>
+  <circle cx="40" cy="37" r="2" fill="#333"/>
+  <circle cx="56" cy="37" r="3" fill="white"/>
+  <circle cx="54" cy="37" r="2" fill="#333"/>
+  <!-- Neutral mouth -->
+  <line x1="44" y1="48" x2="56" y2="48" stroke="#333" stroke-width="2"/>
+  <!-- Nod arrow -->
+  <path d="M50 20 L50 24" stroke="#4CAF50" stroke-width="2"/>
+  <polygon points="47,24 50,28 53,24" fill="#4CAF50"/>
+  <!-- One word answers -->
+  <text x="75" y="40" font-family="Arial" font-size="8" fill="#999">"mm"</text>
+  <text x="75" y="52" font-family="Arial" font-size="8" fill="#999">"ok"</text>
+</svg>

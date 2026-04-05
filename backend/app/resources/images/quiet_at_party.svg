@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#FCE4EC" rx="10"/>
+  <!-- Party elements -->
+  <text x="15" y="18" font-family="Arial" font-size="10">🎈</text>
+  <text x="80" y="22" font-family="Arial" font-size="10">🎈</text>
+  <!-- Lively people -->
+  <circle cx="65" cy="40" r="8" fill="#FFCC80"/>
+  <circle cx="80" cy="45" r="8" fill="#FFCC80"/>
+  <path d="M62 43 Q65 46 68 43" stroke="#333" stroke-width="1" fill="none"/>
+  <path d="M77 48 Q80 51 83 48" stroke="#333" stroke-width="1" fill="none"/>
+  <!-- Quiet person in corner -->
+  <circle cx="22" cy="55" r="10" fill="#FFCC80"/>
+  <circle cx="18" cy="53" r="2" fill="#333"/>
+  <circle cx="26" cy="53" r="2" fill="#333"/>
+  <line x1="18" y1="60" x2="26" y2="60" stroke="#333" stroke-width="1.5"/>
+</svg>

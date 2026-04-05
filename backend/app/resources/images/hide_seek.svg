@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#E8F5E9" rx="10"/>
+  <!-- Couch -->
+  <rect x="15" y="45" width="45" height="30" rx="5" fill="#8D6E63"/>
+  <rect x="15" y="40" width="45" height="10" rx="5" fill="#A1887F"/>
+  <!-- Child hiding behind -->
+  <circle cx="25" cy="60" r="8" fill="#FFCC80"/>
+  <circle cx="22" cy="58" r="1.5" fill="#333"/>
+  <circle cx="28" cy="58" r="1.5" fill="#333"/>
+  <!-- Eyes peeking -->
+  <path d="M22 63 Q25 65 28 63" stroke="#333" stroke-width="1" fill="none"/>
+  <!-- Sister looking -->
+  <circle cx="78" cy="45" r="10" fill="#FFCC80"/>
+  <circle cx="74" cy="43" r="2" fill="#333"/>
+  <circle cx="82" cy="43" r="2" fill="#333"/>
+  <text x="78" y="68" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Where?</text>
+</svg>
