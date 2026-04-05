@@ -27,7 +27,7 @@ Language Comprehension levels:
   Level 4: Inference - predict what happens next
 
 Literacy levels:
-  Level 0: Image recognition - identify objects from pictures
+  Level 0: Letter recognition - identify named letters
   Level 1: Word-image matching - match a written word to its picture
   Level 2: Word reading - read a single word aloud
   Level 3: Sentence reading - read a short sentence
@@ -232,6 +232,70 @@ def seed_object_cognition_tasks(db: Session) -> int:
                     "target_category": "Animals",
                     "accept_threshold": 0.6,
                     "image_hint": "cat",
+                },
+                is_assessment=False,
+            ),
+            # Image recognition tasks (moved from literacy)
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
+                level=1,
+                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "What is in this picture?",
+                    "instruction_text": "What is in this picture?",
+                    "image_name": "Apple",
+                    "question_image": "apple",
+                    "image_hint": "apple",
+                    "options": ["Apple", "Car", "Hat"],
+                    "correct_answer": "Apple",
+                    "choices": [
+                        {"name": "Apple", "is_correct": True},
+                        {"name": "Car", "is_correct": False},
+                        {"name": "Hat", "is_correct": False},
+                    ],
+                },
+                is_assessment=False,
+            ),
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
+                level=1,
+                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "What is in this picture?",
+                    "instruction_text": "What is in this picture?",
+                    "image_name": "Dog",
+                    "question_image": "dog",
+                    "image_hint": "dog",
+                    "options": ["Cat", "Dog", "Fish"],
+                    "correct_answer": "Dog",
+                    "choices": [
+                        {"name": "Cat", "is_correct": False},
+                        {"name": "Dog", "is_correct": True},
+                        {"name": "Fish", "is_correct": False},
+                    ],
+                },
+                is_assessment=False,
+            ),
+            AdaptiveTask(
+                dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
+                level=1,
+                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
+                content={
+                    "instruction_audio": "What is in this picture?",
+                    "instruction_text": "What is in this picture?",
+                    "image_name": "Ball",
+                    "question_image": "ball",
+                    "image_hint": "ball",
+                    "options": ["Ball", "Cup", "Shoe"],
+                    "correct_answer": "Ball",
+                    "choices": [
+                        {"name": "Ball", "is_correct": True},
+                        {"name": "Cup", "is_correct": False},
+                        {"name": "Shoe", "is_correct": False},
+                    ],
                 },
                 is_assessment=False,
             ),
@@ -1132,26 +1196,24 @@ def seed_literacy_tasks(db: Session) -> int:
 
     tasks = []
 
-    # ---- Level 0: Image Recognition ----
+    # ---- Level 0: Letter Recognition ----
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=0,
-                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "What is in this picture?",
-                    "instruction_text": "What is in this picture?",
-                    "image_name": "Apple",
-                    "question_image": "apple",
-                    "image_hint": "apple",
-                    "options": ["Apple", "Car", "Hat"],
-                    "correct_answer": "Apple",
+                    "instruction_audio": "Touch the letter A.",
+                    "instruction_text": "Touch the letter A.",
+                    "image_hint": "letter",
+                    "options": ["A", "B", "C"],
+                    "correct_answer": "A",
                     "choices": [
-                        {"name": "Apple", "is_correct": True},
-                        {"name": "Car", "is_correct": False},
-                        {"name": "Hat", "is_correct": False},
+                        {"name": "A", "is_correct": True},
+                        {"name": "B", "is_correct": False},
+                        {"name": "C", "is_correct": False},
                     ],
                 },
                 is_assessment=False,
@@ -1159,20 +1221,18 @@ def seed_literacy_tasks(db: Session) -> int:
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=0,
-                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "What is in this picture?",
-                    "instruction_text": "What is in this picture?",
-                    "image_name": "Dog",
-                    "question_image": "dog",
-                    "image_hint": "dog",
-                    "options": ["Cat", "Dog", "Fish"],
-                    "correct_answer": "Dog",
+                    "instruction_audio": "Touch the letter B.",
+                    "instruction_text": "Touch the letter B.",
+                    "image_hint": "letter",
+                    "options": ["B", "D", "P"],
+                    "correct_answer": "B",
                     "choices": [
-                        {"name": "Cat", "is_correct": False},
-                        {"name": "Dog", "is_correct": True},
-                        {"name": "Fish", "is_correct": False},
+                        {"name": "B", "is_correct": True},
+                        {"name": "D", "is_correct": False},
+                        {"name": "P", "is_correct": False},
                     ],
                 },
                 is_assessment=False,
@@ -1180,20 +1240,18 @@ def seed_literacy_tasks(db: Session) -> int:
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=0,
-                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "What is in this picture?",
-                    "instruction_text": "What is in this picture?",
-                    "image_name": "Ball",
-                    "question_image": "ball",
-                    "image_hint": "ball",
-                    "options": ["Ball", "Cup", "Shoe"],
-                    "correct_answer": "Ball",
+                    "instruction_audio": "Touch the letter C.",
+                    "instruction_text": "Touch the letter C.",
+                    "image_hint": "letter",
+                    "options": ["C", "O", "G"],
+                    "correct_answer": "C",
                     "choices": [
-                        {"name": "Ball", "is_correct": True},
-                        {"name": "Cup", "is_correct": False},
-                        {"name": "Shoe", "is_correct": False},
+                        {"name": "C", "is_correct": True},
+                        {"name": "O", "is_correct": False},
+                        {"name": "G", "is_correct": False},
                     ],
                 },
                 is_assessment=False,

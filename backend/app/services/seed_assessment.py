@@ -70,33 +70,33 @@ def seed_assessment_tasks(db: Session) -> int:
         ]
     )
 
-    # Level 1: Identification
+    # Level 1: Identification (includes image recognition)
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
                 level=1,
-                task_type=TaskType.IDENTIFY.value,
+                task_type=TaskType.RECOGNIZE_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 is_assessment=True,
                 content={
-                    "instruction": "Where is the cat?",
-                    "correct_answer": "Cat",
-                    "options": ["Cat", "Fish", "Bird"],
-                    "image_hint": "cat",
+                    "instruction": "What is in this picture?",
+                    "correct_answer": "Sun",
+                    "options": ["Sun", "Moon", "Cloud"],
+                    "image_hint": "sun",
                 },
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.OBJECT_COGNITION.value,
                 level=1,
-                task_type=TaskType.IDENTIFY.value,
+                task_type=TaskType.RECOGNIZE_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 is_assessment=True,
                 content={
-                    "instruction": "Can you find the banana?",
-                    "correct_answer": "Banana",
-                    "options": ["Banana", "Orange", "Grape"],
-                    "image_hint": "banana",
+                    "instruction": "What do you see?",
+                    "correct_answer": "House",
+                    "options": ["House", "Car", "Tree"],
+                    "image_hint": "house",
                 },
             ),
         ]
@@ -334,33 +334,33 @@ def seed_assessment_tasks(db: Session) -> int:
     # LITERACY - Assessment Tasks (Levels 0-2)
     # ================================================================
 
-    # Level 0: Recognize image
+    # Level 0: Letter Recognition
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=0,
-                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 is_assessment=True,
                 content={
-                    "instruction": "What is in this picture?",
-                    "correct_answer": "Sun",
-                    "options": ["Sun", "Moon", "Cloud"],
-                    "image_hint": "sun",
+                    "instruction": "Touch the letter A.",
+                    "correct_answer": "A",
+                    "options": ["A", "B", "C"],
+                    "image_hint": "letter",
                 },
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=0,
-                task_type=TaskType.RECOGNIZE_IMAGE.value,
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
                 modalities=[Modality.TOUCH.value],
                 is_assessment=True,
                 content={
-                    "instruction": "What do you see?",
-                    "correct_answer": "House",
-                    "options": ["House", "Car", "Tree"],
-                    "image_hint": "house",
+                    "instruction": "Touch the letter B.",
+                    "correct_answer": "B",
+                    "options": ["B", "D", "P"],
+                    "image_hint": "letter",
                 },
             ),
         ]

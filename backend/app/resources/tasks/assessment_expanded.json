@@ -28,25 +28,25 @@
       ],
       "1": [
         {
-          "task_type": "identify",
+          "task_type": "recognize_image",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Where is the elephant?",
-            "instruction_zh": "大象在哪里？",
-            "correct_answer": "Elephant",
-            "options": ["Lion", "Elephant", "Giraffe"],
-            "image_hint": "elephant"
+            "instruction": "What is this?",
+            "instruction_zh": "这是什么？",
+            "correct_answer": "Airplane",
+            "options": ["Airplane", "Bird", "Cloud"],
+            "image_hint": "airplane"
           }
         },
         {
-          "task_type": "identify",
+          "task_type": "recognize_image",
           "modalities": ["touch"],
           "content": {
-            "instruction": "Find the bicycle!",
-            "instruction_zh": "找到自行车！",
-            "correct_answer": "Bicycle",
-            "options": ["Bicycle", "Car", "Boat"],
-            "image_hint": "bicycle"
+            "instruction": "What do you see?",
+            "instruction_zh": "你看到了什么？",
+            "correct_answer": "Umbrella",
+            "options": ["Umbrella", "Hat", "Mushroom"],
+            "image_hint": "umbrella"
           }
         }
       ],
@@ -370,25 +370,25 @@
     "literacy": {
       "0": [
         {
-          "task_type": "recognize_image",
+          "task_type": "match_word_image",
           "modalities": ["touch"],
           "content": {
-            "instruction": "What is this?",
-            "instruction_zh": "这是什么？",
-            "correct_answer": "Airplane",
-            "options": ["Airplane", "Bird", "Cloud"],
-            "image_hint": "airplane"
+            "instruction": "Touch the letter A.",
+            "instruction_zh": "点一下字母 A。",
+            "correct_answer": "A",
+            "options": ["A", "B", "C"],
+            "image_hint": "letter"
           }
         },
         {
-          "task_type": "recognize_image",
+          "task_type": "match_word_image",
           "modalities": ["touch"],
           "content": {
-            "instruction": "What do you see?",
-            "instruction_zh": "你看到了什么？",
-            "correct_answer": "Umbrella",
-            "options": ["Umbrella", "Hat", "Mushroom"],
-            "image_hint": "umbrella"
+            "instruction": "Touch the letter D.",
+            "instruction_zh": "点一下字母 D。",
+            "correct_answer": "D",
+            "options": ["D", "B", "P"],
+            "image_hint": "letter"
           }
         }
       ],
