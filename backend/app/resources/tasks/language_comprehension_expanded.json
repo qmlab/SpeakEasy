@@ -949,6 +949,32 @@
           ],
           "correct_answer": "Circle",
           "inline_images": true
+        },
+        {
+          "instruction": "Listen carefully: 'First touch the biggest shape, then touch the blue one.'",
+          "question_id": "Q400",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Do the steps in order: first biggest, then blue",
+          "options": [
+            "Large square, then blue circle",
+            "Blue circle only",
+            "Small triangle only",
+            "Any shape"
+          ],
+          "correct_answer": "Large square, then blue circle"
+        },
+        {
+          "instruction": "What is silly? 'The firefighter used a garden hose to put out a forest fire.'",
+          "question_id": "Q401",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Think about what firefighters really use for big fires",
+          "options": [
+            "A garden hose is too small for a forest fire",
+            "Nothing is wrong"
+          ],
+          "correct_answer": "A garden hose is too small for a forest fire"
         }
       ]
     },
@@ -982,6 +1008,34 @@
             "Yellow star"
           ],
           "correct_answer": "Green triangle"
+        },
+        {
+          "instruction": "If all dogs have tails and Buddy is a dog, what can you say about Buddy?",
+          "question_id": "Q402",
+          "source_test": "SB5",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "If ALL dogs have something, and Buddy IS a dog...",
+          "options": [
+            "Buddy has a tail",
+            "Buddy can fly",
+            "Buddy is a cat",
+            "We cannot tell"
+          ],
+          "correct_answer": "Buddy has a tail"
+        },
+        {
+          "instruction": "Listen: 'Amy is taller than Ben. Ben is taller than Carl.' Who is the shortest?",
+          "question_id": "Q403",
+          "source_test": "SB5",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "Put them in order from tallest to shortest",
+          "options": [
+            "Carl",
+            "Ben",
+            "Amy",
+            "They are all the same"
+          ],
+          "correct_answer": "Carl"
         }
       ]
     },
@@ -1014,6 +1068,34 @@
             "blue squares"
           ],
           "correct_answer": "Red circles, blue triangles"
+        },
+        {
+          "instruction": "What does 'Don't count your chickens before they hatch' mean?",
+          "question_id": "Q404",
+          "source_test": "SB5",
+          "sub_domain": "Figurative Language",
+          "scaffolding_hint": "This is a saying. Think about what it means in everyday life.",
+          "options": [
+            "Don't assume something will happen before it does",
+            "You should count your chickens every day",
+            "Chickens are hard to count",
+            "Eggs always hatch"
+          ],
+          "correct_answer": "Don't assume something will happen before it does"
+        },
+        {
+          "instruction": "If it takes 3 workers 6 hours to paint a fence, how long would it take 6 workers?",
+          "question_id": "Q405",
+          "source_test": "WJ-III",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "More workers means less time. If you double the workers...",
+          "options": [
+            "3 hours",
+            "6 hours",
+            "12 hours",
+            "1 hour"
+          ],
+          "correct_answer": "3 hours"
         }
       ]
     },
@@ -1047,6 +1129,34 @@
             "Yellow star"
           ],
           "correct_answer": "Small red triangle"
+        },
+        {
+          "instruction": "Read: 'Some birds can fly. Penguins are birds. Can all penguins fly?'",
+          "question_id": "Q406",
+          "source_test": "SB5",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "The sentence says SOME birds, not ALL birds",
+          "options": [
+            "No — 'some' doesn't mean 'all'",
+            "Yes — all birds fly",
+            "Penguins are not birds",
+            "We cannot tell"
+          ],
+          "correct_answer": "No — 'some' doesn't mean 'all'"
+        },
+        {
+          "instruction": "What is the difference between a fact and an opinion? 'Water boils at 100 degrees Celsius' vs 'Summer is the best season.'",
+          "question_id": "Q407",
+          "source_test": "WJ-III",
+          "sub_domain": "Critical Thinking",
+          "scaffolding_hint": "A fact can be proven. An opinion is what someone thinks.",
+          "options": [
+            "The first is a fact and the second is an opinion",
+            "Both are facts",
+            "Both are opinions",
+            "The first is an opinion and the second is a fact"
+          ],
+          "correct_answer": "The first is a fact and the second is an opinion"
         }
       ]
     },
