@@ -249,7 +249,7 @@ class AdaptiveEngine:
             # Try adjacent levels if no task found at target level at all
             for offset in [1, -1, 2, -2]:
                 alt_level = target_level + offset
-                if MIN_LEVEL <= alt_level <= MAX_LEVEL:
+                if MIN_LEVEL <= alt_level <= max_level_for(dimension):
                     task = self._select_task(
                         dimension=dimension,
                         level=alt_level,
