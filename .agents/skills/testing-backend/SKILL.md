@@ -13,131 +13,96 @@
 cd backend
 # Remove old DB for fresh start
 rm -f risingstar.db
-# Start server
+# Start server (use a unique port if 8000 is busy)
 poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
 The server auto-creates tables on startup. No migrations needed (uses SQLAlchemy `create_all()`).
 
+You can also use a custom DB path: `DATABASE_URL=sqlite:///./test.db poetry run uvicorn app.main:app --port 8099`
+
 ## Seeding Test Data
 ```bash
-# Seeds all dimensions (object_cognition=17, language_expression=15, language_comprehension=15)
+# Seeds all dimensions including expanded tasks
 curl -s -X POST http://localhost:8000/tasks/seed
+# Use ?force=true to re-seed even if tasks already exist
+curl -s -X POST http://localhost:8000/tasks/seed?force=true
 ```
-Seeding is idempotent - re-seeding returns counts of 0 without duplicating.
+Expected counts (approximate): object_cognition=20, language_expression=15, language_comprehension=15, literacy=11, social_behavior=15, cognitive_logic=19, plus expanded tasks (50-85 per dimension).
 
-## Key Testing Flows
+## Per-Dimension MAX_LEVEL
 
-### 1. Full Adaptive Session Flow
+Dimensions have different maximum levels:
+- **language_comprehension**: levels 0-16 (levels 10-16 have reading comprehension tasks moved from literacy)
+- **All other dimensions**: levels 0-9 (DEFAULT_MAX_LEVEL = 9)
+
+The `max_level_for(dimension)` function in `adaptive_engine.py` handles this. When testing level capping:
 ```bash
-# Create player
-curl -s -X POST http://localhost:8000/players/ -H 'Content-Type: application/json' -d '{"name":"TestChild","age":5}'
-# Note: player ID is a UUID, not integer
+# This should clamp to 9 (object_cognition max is 9)
+curl -s -X PUT http://localhost:8000/adaptive/profiles/{player_id}/object_cognition \
+  -H 'Content-Type: application/json' -d '{"level": 15}'
 
-# Get profiles (auto-creates 6 dimensions at level 0)
-curl -s http://localhost:8000/adaptive/profiles/{player_id}
-
-# Start session
-curl -s -X POST http://localhost:8000/adaptive/sessions/start -H 'Content-Type: application/json' -d '{"player_id":"{id}","dimension":"language_expression","session_type":"learning"}'
-
-# Get next task
-curl -s 'http://localhost:8000/adaptive/sessions/{session_id}/next-task?player_id={id}&dimension=language_expression'
-
-# Submit attempt
-curl -s -X POST http://localhost:8000/adaptive/attempts -H 'Content-Type: application/json' -d '{"session_id":"{sid}","task_id":"{tid}","player_id":"{pid}","is_correct":true,"response_time_ms":1500}'
-
-# End session
-curl -s -X POST http://localhost:8000/adaptive/sessions/{session_id}/end
+# This should stay at 15 (language_comprehension max is 16)
+curl -s -X PUT http://localhost:8000/adaptive/profiles/{player_id}/language_comprehension \
+  -H 'Content-Type: application/json' -d '{"level": 15}'
 ```
-
-### 2. Level-Up Testing
-- Level-up triggers when accuracy >= 80% over the accuracy window
-- With 100% accuracy, level-up may trigger after ~5 attempts (not necessarily 10)
-- After level-up, subsequent tasks come from the new level with different task types
-- To test specific levels, use: `PUT /adaptive/profiles/{player_id}/{dimension}` with `{"level": N}`
-
-### 3. Task Type Expectations by Dimension
-
-**language_expression**: L0=imitate, L1=name_object, L2=describe, L3=build_sentence, L4=conversation
-
-**language_comprehension**: L0=point_to, L1=follow_instruction, L2=follow_instruction(multi-step), L3=story_comprehension, L4=infer_meaning
-
-**object_cognition**: L0=match/say_word/find_object, L1=identify, L2=classify, L3=function, L4=abstract
-
-### 4. Speech Evaluation
-```bash
-curl -s -X POST http://localhost:8000/adaptive/evaluate-speech -H 'Content-Type: application/json' -d '{"target":"apple","spoken":"aple"}'
-```
-- Case insensitive comparison
-- Empty spoken string returns similarity=0.0 with feedback="no_response"
-- Feedback tiers: perfect (1.0), excellent (>=0.9), good_try (>=threshold), keep_trying, try_again
-
-### 5. Modality Recommendation
-```bash
-curl -s http://localhost:8000/adaptive/modality/{player_id}
-```
-Priority: text (literacy>=2) > voice (OC>=2 & expr>=2) > image_exchange (expr>=1) > touch (default)
-
-## Common Gotchas
-- Player IDs are UUIDs, not integers
-- Session endpoints use `/sessions/start`, `/sessions/{id}/end`, `/sessions/{id}/next-task` (not `/session/`)
-- Attempt submission uses `/attempts` (not `/session/{id}/attempt`)
-- The `next-task` endpoint requires query params: `player_id` and `dimension`
-- Port 8000 may already be in use from previous runs - use `fuser -k 8000/tcp` to clear
-- No CI is configured on this repo
-# Testing Rising Star Kid Backend
-
-## Setup & Server
-
-- Backend lives in `backend/` directory
-- Uses Poetry for dependency management
-- Database: SQLite file `risingstar.db` in `backend/` directory
-- Start server: `poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000` from `backend/`
-- Fresh DB for testing: delete `risingstar.db` before starting server
-- No CI configured — run lint/tests locally
 
 ## Key API Endpoints
 
-- `GET /` — Root, returns app name "Rising Star Kid"
-- `GET /health` — Health check, returns `{"status": "healthy"}`
+- `GET /health` — Health check
 - `POST /players/` — Create player with `{"name": "...", "age": N}`
-- `POST /tasks/seed` — Seed all tasks (idempotent). Returns `{"counts": {dimension: count}}`. Expected: 92 total (17+15+15+15+15+15)
-- `GET /tasks/?limit=200` — List tasks. **Default limit is 50**, pass `?limit=200` to get all
-- `GET /adaptive/profiles/{player_id}` — Get player profiles. Response structure: `{"player_id": ..., "player_name": ..., "dimensions": [...], "overall_level": ...}`. Profiles are in `dimensions` array, each with `dimension` and `level` keys
+- `POST /tasks/seed` — Seed all tasks (idempotent)
+- `GET /tasks/?dimension=literacy&level=3&limit=10` — List tasks filtered by dimension/level
+- `GET /adaptive/profiles/{player_id}` — Get all dimension profiles
+- `PUT /adaptive/profiles/{player_id}/{dimension}` — Update profile level
 - `POST /adaptive/sessions/start` — Start session with `{"player_id": ..., "dimension": ..., "session_type": "practice"}`
-- `GET /adaptive/sessions/{session_id}/next-task?player_id=...&dimension=...` — Get next adaptive task
-- `POST /adaptive/attempts` — Submit attempt with `{"session_id": ..., "task_id": ..., "player_id": ..., "is_correct": bool, "response_data": {...}, "response_time_ms": N}`
+- `GET /adaptive/sessions/{session_id}/next-task?player_id=...&dimension=...` — Get next task
+- `POST /adaptive/attempts` — Submit attempt
 - `POST /adaptive/sessions/{session_id}/end` — End session
-- `POST /adaptive/evaluate-speech` — Speech evaluation
-- `GET /adaptive/modality/{player_id}` — Modality recommendation
+- `GET /task-images/{name}.svg` — Serve SVG images
 
-## 6 Dimensions & Expected Task Types per Level
+## Literacy Curriculum (Levels 0-9)
 
-| Dimension | Level 0 | Level 1 | Level 2 | Level 3 | Level 4 |
-|---|---|---|---|---|---|
-| object_cognition | match | identify | classify | function | abstract |
-| language_expression | imitate | name_object | describe | build_sentence | conversation |
-| language_comprehension | point_to | follow_instruction | story_comprehension | infer_meaning | — |
-| literacy | recognize_image | match_word_image | read_word | read_sentence | read_passage |
-| social_behavior | attend | imitate_action | turn_take | joint_attention | initiate |
-| cognitive_logic | pair | sort | cause_effect | sequence_order | reason |
+| Level | Skill | Example |
+|-------|-------|---------|
+| 0 | Letter recognition | "Touch the letter A" |
+| 1 | Letter-sound matching | "Which letter makes the 'mmm' sound?" |
+| 2 | Rhyming | "Which word rhymes with Cat?" |
+| 3 | CVC word building | "What word do these letters make? C-A-T" |
+| 4 | Sight words | "Touch the word 'the'" |
+| 5 | Spelling | "How do you spell the word Dog?" |
+| 6 | Word families | "Which word belongs to the -at family?" |
+| 7 | Beginning/ending sounds | "Which word starts with the same sound as Ball?" |
+| 8 | Advanced spelling | "Which is the correct spelling?" |
+| 9 | Word reading | "Read this word: elephant" |
+
+**Important**: Literacy tasks should test letter/word/phonics skills, NOT reading comprehension. Reading comprehension tasks belong in language_comprehension (levels 10-16).
+
+## Language Comprehension Extended Levels (10-16)
+
+| Level | Skill | Example |
+|-------|-------|---------|
+| 10 | Basic comprehension | Story questions ("How many does Ben have now?") |
+| 11 | Inference | Drawing conclusions from passages |
+| 12 | Main idea | Identifying central themes |
+| 13 | Vocabulary in context | Word meaning from context clues |
+| 14 | Character analysis | Understanding character traits |
+| 15 | Argument analysis | Evaluating claims and evidence |
+| 16 | Literary analysis | Analyzing literary techniques |
 
 ## Adaptive Engine Rules
 
 - ACCURACY_WINDOW = 10 (last N attempts considered)
 - LEVEL_UP_THRESHOLD = 0.80 (>=80% accuracy triggers level up)
 - LEVEL_DOWN_THRESHOLD = 0.50 (<50% triggers level down)
-- CONSECUTIVE_FAIL_LIMIT = 3 (3 consecutive failures → `confidence_rebuild: true`)
-- Level range: 0–4
-- In practice, 5 consecutive correct answers at a fresh level triggers level-up
+- CONSECUTIVE_FAIL_LIMIT = 3 (3 consecutive failures → confidence_rebuild: true)
+- Level range: 0 to max_level_for(dimension)
 
-## Testing Workflow
-
-1. Kill any existing server: `fuser -k 8000/tcp`
-2. Delete old DB: `rm -f backend/risingstar.db`
-3. Start server from `backend/` dir
-4. Seed tasks: `curl -s -X POST http://localhost:8000/tasks/seed`
-5. Create player: `curl -s -X POST http://localhost:8000/players/ -H 'Content-Type: application/json' -d '{"name":"TestKid","age":5}'`
-6. Test each dimension: start session → get task → submit attempts → verify level-up
-7. Verify cross-dimension independence via profiles endpoint
-8. Test confidence rebuild: 3 consecutive `is_correct: false` → check for `confidence_rebuild: true`
+## Common Gotchas
+- Player IDs are UUIDs, not integers
+- Session response uses `id` field, not `session_id`
+- The `next-task` endpoint requires query params: `player_id` and `dimension`
+- Port may already be in use — use `fuser -k 8000/tcp` or `kill $(fuser 8000/tcp 2>/dev/null)` to clear
+- `lsof` may not be available — use `ss -tlnp | grep PORT` or `fuser PORT/tcp` instead
+- Seeding is idempotent unless `?force=true` is passed
+- SVGs are served from `/task-images/` static mount, not from a dynamic endpoint
