@@ -1402,10 +1402,15 @@ struct LearningSessionView: View {
                         // Drop zone with placed items
                         VStack(spacing: 4) {
                             if bucketItems.isEmpty {
-                                Text("Drop here")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .frame(maxWidth: .infinity, minHeight: 60)
+                                VStack(spacing: 6) {
+                                    Image(systemName: "arrow.down.circle")
+                                        .font(.title3)
+                                        .foregroundColor(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.8 : 0.3))
+                                    Text("Drop here")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 70)
                             } else {
                                 ForEach(bucketItems, id: \.self) { item in
                                     HStack(spacing: 6) {
