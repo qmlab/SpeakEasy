@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
-<path d="M25 72 L25 55 C25 45 35 38 45 38 L55 38 C60 38 62 42 62 48 L62 55 L95 55 C100 55 102 60 100 65 L98 72 Z" fill="#F44336"/>
-<path d="M25 72 L100 72 L98 78 C96 82 92 84 88 84 L32 84 C28 84 25 80 25 76 Z" fill="#E0E0E0"/>
-<path d="M62 48 L62 55 L80 55 L80 48 C80 42 75 38 68 38 L55 38 C60 38 62 42 62 48Z" fill="#D32F2F"/>
-<circle cx="42" cy="46" r="2" fill="#FFCDD2"/>
-<circle cx="50" cy="44" r="2" fill="#FFCDD2"/>
-<line x1="30" y1="72" x2="95" y2="72" stroke="#BDBDBD" stroke-width="1.5"/>
-<path d="M35 78 L90 78" stroke="#9E9E9E" stroke-width="1" stroke-dasharray="4,3"/>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+<!-- Sole -->
+<path d="M15 82 Q15 78 20 76 L95 76 Q105 76 107 80 L107 84 Q107 88 100 88 L22 88 Q15 88 15 82Z" fill="#424242"/>
+<!-- Shoe body - classic sneaker shape -->
+<path d="M20 76 L20 62 Q20 52 30 48 L45 44 Q55 42 60 42 L60 52 Q60 56 65 56 L95 56 Q102 56 104 62 L105 76 Z" fill="#1E88E5"/>
+<!-- Toe cap -->
+<path d="M95 56 Q102 56 104 62 L105 76 L95 76 L95 56Z" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="0.5"/>
+<!-- Ankle collar -->
+<path d="M20 62 Q20 52 30 48 L45 44 Q50 43 55 43 L55 50 Q45 50 38 54 Q28 60 25 62 Z" fill="#1565C0"/>
+<!-- Shoe opening -->
+<ellipse cx="37" cy="48" rx="15" ry="5" fill="#0D47A1" opacity="0.5"/>
+<!-- Laces -->
+<line x1="50" y1="48" x2="62" y2="48" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="48" y1="52" x2="63" y2="52" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="47" y1="56" x2="64" y2="56" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<!-- Stripe -->
+<path d="M55 60 Q70 55 85 60 Q90 62 90 68 L88 74 Q80 68 65 66 Q55 65 50 68 Z" fill="white" opacity="0.8"/>
+<!-- Sole detail line -->
+<line x1="20" y1="80" x2="105" y2="80" stroke="#616161" stroke-width="1"/>
 </svg>

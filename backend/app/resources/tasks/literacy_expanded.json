@@ -1,7 +1,7 @@
 {
   "dimension": "literacy",
-  "description": "Literacy: From letter recognition to reading comprehension",
-  "version": "research_v2",
+  "description": "Literacy: From letter recognition through phonics, spelling, and word building",
+  "version": "research_v3",
   "source": "Autism Neurodevelopmental Question Bank v1.0",
   "levels": {
     "0": {
@@ -52,6 +52,36 @@
           ],
           "correct_answer": "C",
           "image_hint": "letter"
+        },
+        {
+          "question_id": "Q350",
+          "instruction": "Touch the letter D.",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "It has a straight line and a big bump",
+          "options": [
+            "D",
+            "B",
+            "P",
+            "Q"
+          ],
+          "correct_answer": "D",
+          "image_hint": "letter"
+        },
+        {
+          "question_id": "Q351",
+          "instruction": "Touch the letter M.",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "It has two humps on top",
+          "options": [
+            "M",
+            "N",
+            "W",
+            "V"
+          ],
+          "correct_answer": "M",
+          "image_hint": "letter"
         }
       ]
     },
@@ -65,7 +95,7 @@
           "question_id": "Q059",
           "source_test": "WJ-III",
           "sub_domain": "Literacy & Phonics",
-          "scaffolding_hint": "Say: \"Sss like a snake\"",
+          "scaffolding_hint": "Sss like a snake",
           "options": [
             "S",
             "T",
@@ -73,15 +103,14 @@
             "B"
           ],
           "correct_answer": "S",
-          "image_hint": "letter",
-          "instruction_zh": "哪个字母发出'sss'的声音？"
+          "image_hint": "letter"
         },
         {
           "instruction": "Which letter makes the 'mmm' sound?",
           "question_id": "Q283",
           "source_test": "custom",
           "sub_domain": "Literacy & Phonics",
-          "scaffolding_hint": "Say: \"Mmm like yummy food\"",
+          "scaffolding_hint": "Mmm like yummy food",
           "options": [
             "M",
             "N",
@@ -89,8 +118,37 @@
             "V"
           ],
           "correct_answer": "M",
-          "image_hint": "letter",
-          "instruction_zh": "哪个字母发出'mmm'的声音？"
+          "image_hint": "letter"
+        },
+        {
+          "question_id": "Q352",
+          "instruction": "Which letter makes the 'buh' sound?",
+          "source_test": "custom",
+          "sub_domain": "letter_sound",
+          "scaffolding_hint": "Buh like ball",
+          "options": [
+            "B",
+            "D",
+            "P",
+            "G"
+          ],
+          "correct_answer": "B",
+          "image_hint": "letter"
+        },
+        {
+          "question_id": "Q353",
+          "instruction": "Which letter makes the 'fff' sound?",
+          "source_test": "custom",
+          "sub_domain": "letter_sound",
+          "scaffolding_hint": "Fff like fish",
+          "options": [
+            "F",
+            "V",
+            "P",
+            "H"
+          ],
+          "correct_answer": "F",
+          "image_hint": "letter"
         }
       ]
     },
@@ -104,7 +162,7 @@
           "question_id": "Q060",
           "source_test": "WJ-III",
           "sub_domain": "Literacy & Phonics",
-          "scaffolding_hint": "Say: \"Rhyming words end with the same sound — cat, hat, mat\"",
+          "scaffolding_hint": "Rhyming words end with the same sound: cat, hat, mat",
           "options": [
             "Hat",
             "Dog",
@@ -119,7 +177,7 @@
           "question_id": "Q284",
           "source_test": "custom",
           "sub_domain": "Literacy & Phonics",
-          "scaffolding_hint": "Say: \"Rhyming words end with the same sound — dog, fog, log\"",
+          "scaffolding_hint": "Rhyming words end with the same sound: dog, fog, log",
           "options": [
             "Log",
             "Cat",
@@ -127,358 +185,506 @@
             "Bed"
           ],
           "correct_answer": "Log",
-          "image_hint": "book",
-          "instruction_zh": "哪个单词和Dog押韵？"
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q354",
+          "instruction": "Which word rhymes with Sun?",
+          "source_test": "custom",
+          "sub_domain": "rhyming",
+          "scaffolding_hint": "Sun, fun, run — they all end the same",
+          "options": [
+            "Fun",
+            "Sit",
+            "Map",
+            "Big"
+          ],
+          "correct_answer": "Fun",
+          "image_hint": "sun"
+        },
+        {
+          "question_id": "Q355",
+          "instruction": "Which word rhymes with Bed?",
+          "source_test": "custom",
+          "sub_domain": "rhyming",
+          "scaffolding_hint": "Bed, red, fed — they all end the same",
+          "options": [
+            "Red",
+            "Big",
+            "Cup",
+            "Box"
+          ],
+          "correct_answer": "Red",
+          "image_hint": "bed"
         }
       ]
     },
     "3": {
-      "name": "Simple Reading",
-      "name_zh": "简单阅读",
-      "task_type": "read_passage",
+      "name": "CVC Word Building",
+      "name_zh": "CVC 单词组合",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
-          "question_id": "Q285",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"He started with 5 and gave away 2\"",
-          "correct_answer": "3",
-          "image_hint": "book",
-          "passage": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
-          "input_mode": "number"
-        },
-        {
-          "question_id": "Q303",
-          "instruction": "Listen to the story: 'The cat sat on the mat. The dog sat on the rug.' Where did the cat sit?",
+          "question_id": "Q356",
+          "instruction": "What word do these letters make? C - A - T",
           "source_test": "custom",
-          "sub_domain": "simple_reading",
-          "scaffolding_hint": "Think about where the cat was",
+          "sub_domain": "word_building",
+          "scaffolding_hint": "Say each letter sound slowly: Cuh-Ah-Tuh",
           "options": [
-            "On the mat",
-            "On the rug",
-            "On the bed",
-            "On the floor"
+            "Cat",
+            "Car",
+            "Cup",
+            "Cow"
           ],
-          "correct_answer": "On the mat",
-          "image_hint": "book"
+          "correct_answer": "Cat",
+          "image_hint": "cat"
         },
         {
-          "question_id": "Q304",
-          "instruction": "Read: 'The sun is hot.' Which word means very warm?",
+          "question_id": "Q357",
+          "instruction": "What word do these letters make? D - O - G",
           "source_test": "custom",
-          "sub_domain": "vocabulary",
-          "scaffolding_hint": "Think about what 'hot' means",
+          "sub_domain": "word_building",
+          "scaffolding_hint": "Say each letter sound slowly: Duh-Aw-Guh",
           "options": [
-            "Hot",
+            "Dog",
+            "Dig",
+            "Dug",
+            "Dot"
+          ],
+          "correct_answer": "Dog",
+          "image_hint": "dog"
+        },
+        {
+          "question_id": "Q358",
+          "instruction": "What word do these letters make? S - U - N",
+          "source_test": "custom",
+          "sub_domain": "word_building",
+          "scaffolding_hint": "Say each letter sound slowly: Sss-Uh-Nnn",
+          "options": [
             "Sun",
-            "Is",
-            "The"
+            "Sit",
+            "Son",
+            "Sad"
           ],
-          "correct_answer": "Hot",
-          "image_hint": "book"
+          "correct_answer": "Sun",
+          "image_hint": "sun"
+        },
+        {
+          "question_id": "Q359",
+          "instruction": "What word do these letters make? H - A - T",
+          "source_test": "custom",
+          "sub_domain": "word_building",
+          "scaffolding_hint": "Say each letter sound slowly: Huh-Ah-Tuh",
+          "options": [
+            "Hat",
+            "Hot",
+            "Hit",
+            "Hut"
+          ],
+          "correct_answer": "Hat",
+          "image_hint": "hat"
         }
       ]
     },
     "4": {
-      "name": "Reading Comprehension",
-      "name_zh": "阅读理解",
-      "task_type": "read_passage",
+      "name": "Sight Words",
+      "name_zh": "常见词识别",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?",
-          "question_id": "Q286",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"What feeling do the words 'creaked' and 'no one' give you?\"",
-          "options": [
-            "Eerie/Mysterious",
-            "Happy",
-            "Exciting",
-            "Funny"
-          ],
-          "correct_answer": "Eerie/Mysterious",
-          "image_hint": "book",
-          "passage": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?"
-        },
-        {
-          "question_id": "Q305",
-          "instruction": "Read: 'The children laughed and splashed in the pool on the hot summer day.' What season is it?",
+          "question_id": "Q360",
+          "instruction": "What does this word say? THE",
           "source_test": "custom",
-          "sub_domain": "reading_comprehension",
-          "scaffolding_hint": "Look for clues about the weather",
+          "sub_domain": "sight_words",
+          "scaffolding_hint": "This is one of the most common words in English",
           "options": [
-            "Summer",
-            "Winter",
-            "Spring",
-            "Fall"
+            "The",
+            "Then",
+            "They",
+            "That"
           ],
-          "correct_answer": "Summer",
+          "correct_answer": "The",
           "image_hint": "book"
         },
         {
-          "question_id": "Q306",
-          "instruction": "Read: 'The leaves turned red and gold. Birds flew south.' What time of year is this?",
+          "question_id": "Q361",
+          "instruction": "What does this word say? AND",
           "source_test": "custom",
-          "sub_domain": "reading_comprehension",
-          "scaffolding_hint": "Think about when leaves change color",
+          "sub_domain": "sight_words",
+          "scaffolding_hint": "This word connects two things together",
           "options": [
-            "Autumn/Fall",
-            "Summer",
-            "Winter",
-            "Spring"
+            "And",
+            "An",
+            "At",
+            "Am"
           ],
-          "correct_answer": "Autumn/Fall",
+          "correct_answer": "And",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q362",
+          "instruction": "What does this word say? IS",
+          "source_test": "custom",
+          "sub_domain": "sight_words",
+          "scaffolding_hint": "A very short common word",
+          "options": [
+            "Is",
+            "It",
+            "In",
+            "If"
+          ],
+          "correct_answer": "Is",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q363",
+          "instruction": "Find the word that says SAID.",
+          "source_test": "custom",
+          "sub_domain": "sight_words",
+          "scaffolding_hint": "It means someone talked",
+          "options": [
+            "Said",
+            "Sad",
+            "Sit",
+            "See"
+          ],
+          "correct_answer": "Said",
           "image_hint": "book"
         }
       ]
     },
     "5": {
-      "name": "Mood & Inference",
-      "name_zh": "情绪与推断",
-      "task_type": "read_passage",
+      "name": "Spelling (CVC)",
+      "name_zh": "拼写（CVC词）",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Read the paragraph: 'Plants need sunlight, water, and soil to grow. Without sunlight, they cannot make food.' What is the main idea?",
-          "question_id": "Q287",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"The main idea is what the whole paragraph is mostly about\"",
+          "question_id": "Q364",
+          "instruction": "How do you spell this word? (picture of a cat)",
+          "source_test": "custom",
+          "sub_domain": "spelling",
+          "scaffolding_hint": "Sound it out: Cuh-Ah-Tuh",
           "options": [
-            "Plants need sunlight to grow",
-            "The sky is blue",
-            "Dogs are friendly",
-            "Water is wet"
+            "C-A-T",
+            "K-A-T",
+            "C-A-D",
+            "C-O-T"
           ],
-          "correct_answer": "Plants need sunlight to grow",
-          "image_hint": "book",
-          "passage": "Read the paragraph. What is the main idea?"
+          "correct_answer": "C-A-T",
+          "image_hint": "cat"
         },
         {
-          "question_id": "Q307",
-          "instruction": "Read: 'Bees are important because they help flowers grow by carrying pollen.' What is the main idea?",
+          "question_id": "Q365",
+          "instruction": "How do you spell this word? (picture of a dog)",
           "source_test": "custom",
-          "sub_domain": "main_idea",
-          "scaffolding_hint": "What is the most important point?",
+          "sub_domain": "spelling",
+          "scaffolding_hint": "Sound it out: Duh-Aw-Guh",
           "options": [
-            "Bees help flowers grow",
-            "Flowers are pretty",
-            "Pollen is yellow",
-            "Bees can sting"
+            "D-O-G",
+            "D-A-G",
+            "D-O-K",
+            "D-U-G"
           ],
-          "correct_answer": "Bees help flowers grow",
-          "image_hint": "book"
+          "correct_answer": "D-O-G",
+          "image_hint": "dog"
         },
         {
-          "question_id": "Q308",
-          "instruction": "Read: 'Recycling helps our planet. We can recycle paper, plastic, and glass.' Why should we recycle?",
+          "question_id": "Q366",
+          "instruction": "How do you spell this word? (picture of a bus)",
           "source_test": "custom",
-          "sub_domain": "main_idea",
-          "scaffolding_hint": "Think about why recycling matters",
+          "sub_domain": "spelling",
+          "scaffolding_hint": "Sound it out: Buh-Uh-Sss",
           "options": [
-            "To help our planet",
-            "To make money",
-            "To have fun",
-            "To save time"
+            "B-U-S",
+            "B-A-S",
+            "B-U-Z",
+            "B-O-S"
           ],
-          "correct_answer": "To help our planet",
-          "image_hint": "book"
+          "correct_answer": "B-U-S",
+          "image_hint": "bus"
+        },
+        {
+          "question_id": "Q367",
+          "instruction": "Which spelling is correct for this animal? (picture of a hen)",
+          "source_test": "custom",
+          "sub_domain": "spelling",
+          "scaffolding_hint": "Sound it out: Huh-Eh-Nnn",
+          "options": [
+            "Hen",
+            "Han",
+            "Hin",
+            "Hun"
+          ],
+          "correct_answer": "Hen",
+          "image_hint": "bird"
         }
       ]
     },
     "6": {
-      "name": "Main Idea",
-      "name_zh": "中心思想",
-      "task_type": "read_passage",
+      "name": "Word Families",
+      "name_zh": "词族",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Read: 'Sarah stared out the window at the falling rain. She missed her grandmother's warm kitchen and the smell of fresh cookies.' How does Sarah feel?",
-          "question_id": "Q288",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"The author doesn't say directly — use clues from the words\"",
-          "options": [
-            "Lonely and homesick",
-            "Excited and happy",
-            "Angry and frustrated",
-            "Calm and peaceful"
-          ],
-          "correct_answer": "Lonely and homesick",
-          "image_hint": "book",
-          "passage": "Read the passage. What can you infer about the character's feelings?"
-        },
-        {
-          "question_id": "Q309",
-          "instruction": "Read: 'Jake walked slowly to school, dragging his feet. He sighed deeply.' How does Jake probably feel?",
+          "question_id": "Q368",
+          "instruction": "Which word belongs to the '-at' word family? (cat, hat, mat...)",
           "source_test": "custom",
-          "sub_domain": "inference",
-          "scaffolding_hint": "Think about why someone walks slowly and sighs",
+          "sub_domain": "word_families",
+          "scaffolding_hint": "All '-at' words end with the same sound",
           "options": [
-            "Reluctant or sad",
-            "Excited",
-            "Angry",
-            "Happy"
+            "Bat",
+            "Bed",
+            "Bug",
+            "Box"
           ],
-          "correct_answer": "Reluctant or sad",
+          "correct_answer": "Bat",
           "image_hint": "book"
         },
         {
-          "question_id": "Q310",
-          "instruction": "Read: 'The puppy wagged its tail and jumped up when it saw its owner.' How does the puppy feel?",
+          "question_id": "Q369",
+          "instruction": "Which word belongs to the '-ig' word family? (big, dig, pig...)",
           "source_test": "custom",
-          "sub_domain": "inference",
-          "scaffolding_hint": "What do dogs do when they are happy?",
+          "sub_domain": "word_families",
+          "scaffolding_hint": "All '-ig' words end with the same sound",
           "options": [
-            "Happy and excited",
-            "Scared",
-            "Angry",
-            "Sleepy"
+            "Wig",
+            "Wag",
+            "Win",
+            "Web"
           ],
-          "correct_answer": "Happy and excited",
+          "correct_answer": "Wig",
           "image_hint": "book"
+        },
+        {
+          "question_id": "Q370",
+          "instruction": "Which word belongs to the '-op' word family? (hop, mop, top...)",
+          "source_test": "custom",
+          "sub_domain": "word_families",
+          "scaffolding_hint": "All '-op' words end with the same sound",
+          "options": [
+            "Pop",
+            "Pup",
+            "Pen",
+            "Pad"
+          ],
+          "correct_answer": "Pop",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q371",
+          "instruction": "If you change the first letter of 'cat' to 'b', what word do you get?",
+          "source_test": "custom",
+          "sub_domain": "word_families",
+          "scaffolding_hint": "Replace C with B: B-A-T",
+          "options": [
+            "Bat",
+            "Bit",
+            "But",
+            "Bot"
+          ],
+          "correct_answer": "Bat",
+          "image_hint": "cat"
         }
       ]
     },
     "7": {
-      "name": "Character Analysis",
-      "name_zh": "角色分析",
-      "task_type": "read_passage",
+      "name": "Beginning & Ending Sounds",
+      "name_zh": "首尾音识别",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Read the argument. What is the author's main claim?",
-          "question_id": "Q289",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"The claim is the main point the author is trying to prove\"",
+          "question_id": "Q372",
+          "instruction": "Which word starts with the same sound as Ball?",
+          "source_test": "custom",
+          "sub_domain": "beginning_sounds",
+          "scaffolding_hint": "Ball starts with 'buh' sound",
           "options": [
-            "Correct claim",
-            "Evidence",
-            "Counter-argument",
-            "Conclusion"
+            "Bear",
+            "Cat",
+            "Dog",
+            "Fish"
           ],
-          "correct_answer": "Correct claim",
-          "image_hint": "book",
-          "passage": "Read the argument. What is the author's main claim?"
+          "correct_answer": "Bear",
+          "image_hint": "ball"
         },
         {
-          "question_id": "Q311",
-          "instruction": "Read the argument: 'Schools should start later because students learn better when they are well-rested.' What is the claim?",
+          "question_id": "Q373",
+          "instruction": "Which word ends with the same sound as Cup?",
           "source_test": "custom",
-          "sub_domain": "argument_analysis",
-          "scaffolding_hint": "What is the main point the author is making?",
+          "sub_domain": "ending_sounds",
+          "scaffolding_hint": "Cup ends with a 'puh' sound",
           "options": [
-            "Schools should start later",
-            "Students are lazy",
-            "Sleep is not important",
-            "Teachers need rest too"
+            "Top",
+            "Cat",
+            "Bed",
+            "Sun"
           ],
-          "correct_answer": "Schools should start later",
-          "image_hint": "book"
+          "correct_answer": "Top",
+          "image_hint": "cup"
         },
         {
-          "question_id": "Q312",
-          "instruction": "Read: 'Video games can teach problem-solving skills, but too much screen time is harmful.' What is the author's view?",
+          "question_id": "Q374",
+          "instruction": "Which word starts with the same sound as Sun?",
           "source_test": "custom",
-          "sub_domain": "argument_analysis",
-          "scaffolding_hint": "The author sees both sides",
+          "sub_domain": "beginning_sounds",
+          "scaffolding_hint": "Sun starts with 'sss' sound",
           "options": [
-            "Games have benefits but need limits",
-            "Games are always bad",
-            "Games are always good",
-            "Screen time does not matter"
+            "Sit",
+            "Bat",
+            "Cup",
+            "Dog"
           ],
-          "correct_answer": "Games have benefits but need limits",
-          "image_hint": "book"
+          "correct_answer": "Sit",
+          "image_hint": "sun"
+        },
+        {
+          "question_id": "Q375",
+          "instruction": "What is the first sound in the word Fish?",
+          "source_test": "custom",
+          "sub_domain": "beginning_sounds",
+          "scaffolding_hint": "Say the word slowly: Fff-ish",
+          "options": [
+            "F",
+            "S",
+            "P",
+            "H"
+          ],
+          "correct_answer": "F",
+          "image_hint": "fish"
         }
       ]
     },
     "8": {
-      "name": "Argument Analysis",
-      "name_zh": "论证分析",
-      "task_type": "read_passage",
+      "name": "Spelling (CVCC/CCVC)",
+      "name_zh": "拼写（复杂词）",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Read: 'Life is a winding road with unexpected turns.' What figurative language is used and what does it mean?",
-          "question_id": "Q290",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"Figurative language uses comparison or exaggeration to make a point\"",
+          "question_id": "Q376",
+          "instruction": "How do you spell this word? (picture of a frog)",
+          "source_test": "custom",
+          "sub_domain": "spelling_advanced",
+          "scaffolding_hint": "Sound it out: Fr-O-G",
           "options": [
-            "Metaphor — comparing life to a journey",
-            "Simile — using 'like' or 'as'",
-            "Personification — giving human traits to objects",
-            "Hyperbole — extreme exaggeration"
+            "Frog",
+            "Fog",
+            "Forg",
+            "Frag"
           ],
-          "correct_answer": "Metaphor — comparing life to a journey",
-          "image_hint": "book",
-          "passage": "Read the passage. Identify the figurative language and explain its meaning."
+          "correct_answer": "Frog",
+          "image_hint": "frog"
         },
         {
-          "question_id": "Q313",
-          "instruction": "Read: 'Time is a thief that steals our youth.' What figurative language is this?",
+          "question_id": "Q377",
+          "instruction": "How do you spell this word? (picture of a drum)",
           "source_test": "custom",
-          "sub_domain": "figurative_language",
-          "scaffolding_hint": "Is time really a thief?",
+          "sub_domain": "spelling_advanced",
+          "scaffolding_hint": "Sound it out: Dr-U-M",
           "options": [
-            "Metaphor",
-            "Simile",
-            "Hyperbole",
-            "Alliteration"
+            "Drum",
+            "Dram",
+            "Drm",
+            "Dum"
           ],
-          "correct_answer": "Metaphor",
+          "correct_answer": "Drum",
+          "image_hint": "drum"
+        },
+        {
+          "question_id": "Q378",
+          "instruction": "Fill in the missing letter: _OOK (a thing you read)",
+          "source_test": "custom",
+          "sub_domain": "spelling_advanced",
+          "scaffolding_hint": "What do you read? A b___",
+          "options": [
+            "B",
+            "L",
+            "C",
+            "H"
+          ],
+          "correct_answer": "B",
           "image_hint": "book"
         },
         {
-          "question_id": "Q314",
-          "instruction": "Read: 'She was as brave as a lion.' What figurative language is this?",
+          "question_id": "Q379",
+          "instruction": "Fill in the missing letter: STA_ (a shape in the sky)",
           "source_test": "custom",
-          "sub_domain": "figurative_language",
-          "scaffolding_hint": "Look for 'as...as' comparison",
+          "sub_domain": "spelling_advanced",
+          "scaffolding_hint": "What twinkles in the sky? A sta_",
           "options": [
-            "Simile",
-            "Metaphor",
-            "Personification",
-            "Onomatopoeia"
+            "R",
+            "N",
+            "T",
+            "P"
           ],
-          "correct_answer": "Simile",
-          "image_hint": "book"
+          "correct_answer": "R",
+          "image_hint": "star"
         }
       ]
     },
     "9": {
-      "name": "Advanced Literacy",
-      "name_zh": "高级读写",
-      "task_type": "read_passage",
+      "name": "Word Reading & Vocabulary",
+      "name_zh": "单词阅读与词汇",
+      "task_type": "match_word_image",
       "tasks": [
         {
-          "instruction": "Read: 'The author paints a vivid picture of despair through stark imagery and fragmented sentences.' What literary technique is this analysis describing?",
-          "question_id": "Q282",
+          "question_id": "Q380",
+          "instruction": "Read this word and pick the matching picture: APPLE",
           "source_test": "custom",
-          "sub_domain": "literary_analysis",
-          "scaffolding_hint": "Think about how authors use writing techniques to convey emotion",
+          "sub_domain": "word_reading",
+          "scaffolding_hint": "Sound it out: Ah-Pull",
           "options": [
-            "Style analysis",
-            "Plot summary",
-            "Character sketch",
-            "Setting description"
+            "Apple",
+            "Ball",
+            "Car",
+            "Dog"
           ],
-          "correct_answer": "Style analysis",
-          "image_hint": "book",
-          "passage": "Read: 'The author paints a vivid picture of despair through stark imagery and fragmented sentences.' What literary technique is this analysis describing?"
+          "correct_answer": "Apple",
+          "image_hint": "apple"
         },
         {
-          "instruction": "Read the two passages with opposing views. What is the key point of disagreement?",
-          "question_id": "Q291",
-          "source_test": "WJ-III",
-          "sub_domain": "Reading Comprehension",
-          "scaffolding_hint": "Say: \"Look past the examples — what fundamental idea do they disagree on?\"",
+          "question_id": "Q381",
+          "instruction": "Read this word and pick the matching picture: HOUSE",
+          "source_test": "custom",
+          "sub_domain": "word_reading",
+          "scaffolding_hint": "Sound it out: H-Ow-S",
           "options": [
-            "Core point of disagreement",
-            "Surface-level differences"
+            "House",
+            "Horse",
+            "Hat",
+            "Hand"
           ],
-          "correct_answer": "Core point of disagreement",
-          "image_hint": "book",
-          "passage": "Read the two passages with opposing views. What is the key point of disagreement?"
+          "correct_answer": "House",
+          "image_hint": "house"
+        },
+        {
+          "question_id": "Q382",
+          "instruction": "Which word means the opposite of BIG?",
+          "source_test": "custom",
+          "sub_domain": "vocabulary",
+          "scaffolding_hint": "Big means large. What means the opposite?",
+          "options": [
+            "Small",
+            "Tall",
+            "Fast",
+            "Red"
+          ],
+          "correct_answer": "Small",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q383",
+          "instruction": "Which word means the opposite of HOT?",
+          "source_test": "custom",
+          "sub_domain": "vocabulary",
+          "scaffolding_hint": "Hot means very warm. What means the opposite?",
+          "options": [
+            "Cold",
+            "Fast",
+            "Big",
+            "Wet"
+          ],
+          "correct_answer": "Cold",
+          "image_hint": "book"
         }
       ]
     }
