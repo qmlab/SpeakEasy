@@ -65,7 +65,7 @@ class TestProfileManagement:
         engine = AdaptiveEngine(db)
         engine.get_or_create_profiles(player.id)
         updated = engine.update_profile_level(
-            player.id, DevelopmentalDimension.OBJECT_COGNITION.value, 10
+            player.id, DevelopmentalDimension.OBJECT_COGNITION.value, 20
         )
         assert updated.level == MAX_LEVEL
 

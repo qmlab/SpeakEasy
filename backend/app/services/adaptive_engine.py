@@ -45,7 +45,7 @@ CEILING_WINDOW = 5  # Window size for ceiling detection
 BASAL_STREAK = 5  # 5 successes in a row at a level → basal (floor)
 CONSECUTIVE_FAIL_LIMIT = 3  # Legacy confidence rebuild threshold
 
-MAX_LEVEL = 9  # Levels 0-9 (mapped from research bank levels 1-10)
+MAX_LEVEL = 16  # Levels 0-16 (language_comprehension goes up to 16)
 MIN_LEVEL = 0
 
 
