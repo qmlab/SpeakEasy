@@ -59,6 +59,9 @@ struct LearningSessionView: View {
     @State private var categoryFrames: [String: CGRect] = [:]
     /// Position anchor for unsorted items pool
     @State private var unsortedPoolFrame: CGRect = .zero
+    /// Visual tap feedback state for multi-tap tasks
+    @State private var tapRippleScale: CGFloat = 1.0
+    @State private var tapRippleOpacity: Double = 0.0
 
     var body: some View {
         NavigationStack {
@@ -806,7 +809,22 @@ struct LearningSessionView: View {
                 withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
                     multiTapCount += 1
                 }
+                // Visual ripple feedback
+                tapRippleScale = 0.92
+                tapRippleOpacity = 0.4
+                withAnimation(.easeOut(duration: 0.15)) {
+                    tapRippleScale = 1.0
+                }
+                withAnimation(.easeOut(duration: 0.35)) {
+                    tapRippleOpacity = 0.0
+                }
             }
+            .scaleEffect(tapRippleScale)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(dimension.color.opacity(tapRippleOpacity))
+                    .allowsHitTesting(false)
+            )
 
             // Step counter
             if !animationFinished {
@@ -945,7 +963,22 @@ struct LearningSessionView: View {
             withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
                 multiTapCount += 1
             }
+            // Visual ripple feedback
+            tapRippleScale = 0.92
+            tapRippleOpacity = 0.4
+            withAnimation(.easeOut(duration: 0.15)) {
+                tapRippleScale = 1.0
+            }
+            withAnimation(.easeOut(duration: 0.35)) {
+                tapRippleOpacity = 0.0
+            }
         }
+        .scaleEffect(tapRippleScale)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(dimension.color.opacity(tapRippleOpacity))
+                .allowsHitTesting(false)
+        )
         .onAppear {
             // Guard: do NOT restart if the flash already completed.
             // When flashCompleted flips to true the layout switches from
@@ -1369,10 +1402,15 @@ struct LearningSessionView: View {
                         // Drop zone with placed items
                         VStack(spacing: 4) {
                             if bucketItems.isEmpty {
-                                Text("Drop here")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .frame(maxWidth: .infinity, minHeight: 60)
+                                VStack(spacing: 6) {
+                                    Image(systemName: "arrow.down.circle")
+                                        .font(.title3)
+                                        .foregroundColor(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.8 : 0.3))
+                                    Text("Drop here")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 70)
                             } else {
                                 ForEach(bucketItems, id: \.self) { item in
                                     HStack(spacing: 6) {
@@ -2342,6 +2380,26 @@ struct LearningSessionView: View {
         // Inline-image tasks always show thumbnails regardless of level
         if task.content.inlineImages == true { return true }
         if task.level >= 3 { return false }
+        // Skip image for multi-word phrases — they won't have matching SVGs
+        // and would just show a broken questionmark.circle fallback.
+        let words = option.split(separator: " ")
+        if words.count > 2 { return false }
+        if words.count == 2 {
+            // Allow two-word options only if they look like concrete objects
+            // (e.g. "Blue squares", "Red triangles") rather than action phrases.
+            let actionVerbs: Set<String> = [
+                "ask", "say", "tell", "walk", "run", "get", "go", "give",
+                "take", "make", "find", "help", "wait", "push", "pull",
+                "listen", "watch", "ignore", "blame", "share", "offer",
+                "explain", "calm", "shake", "raise", "dial", "pick",
+                "answer", "argue", "arrive", "assign", "cheat", "change",
+                "discuss", "express", "review", "start", "state", "thank",
+                "encourage", "congratulate", "apologize", "complain",
+                "confront", "criticize", "respond", "refuse", "hug"
+            ]
+            let firstWord = String(words[0]).lowercased()
+            if actionVerbs.contains(firstWord) { return false }
+        }
         if task.level >= 1, let imageHint = task.content.imageHint {
             let optionKey = option.lowercased().replacingOccurrences(of: " ", with: "_")
             if optionKey == imageHint.lowercased() { return false }
@@ -2814,7 +2872,7 @@ struct LearningSessionView: View {
                     HStack(spacing: 4) {
                         ForEach(0..<min(result.streak, 5), id: \.self) { _ in
                             Image(systemName: "star.fill")
-                                .font(.title3)
+                                .font(.caption)
                                 .foregroundColor(.yellow)
                         }
                     }
@@ -2936,7 +2994,7 @@ struct LearningSessionView: View {
             Spacer()
 
             Image(systemName: "star.circle.fill")
-                .font(.system(size: 72))
+                .font(.system(size: 48))
                 .foregroundStyle(.yellow)
 
             Text("Great Session!")

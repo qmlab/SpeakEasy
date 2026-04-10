@@ -10,8 +10,9 @@ from app.models.adaptive import (
 from app.services.adaptive_engine import (
     AdaptiveEngine,
     CONSECUTIVE_FAIL_LIMIT,
-    MAX_LEVEL,
+    DEFAULT_MAX_LEVEL,
     MIN_LEVEL,
+    max_level_for,
 )
 
 
@@ -64,10 +65,11 @@ class TestProfileManagement:
     def test_update_profile_level_clamped_max(self, db, player):
         engine = AdaptiveEngine(db)
         engine.get_or_create_profiles(player.id)
+        dim = DevelopmentalDimension.OBJECT_COGNITION.value
         updated = engine.update_profile_level(
-            player.id, DevelopmentalDimension.OBJECT_COGNITION.value, 10
+            player.id, dim, 20
         )
-        assert updated.level == MAX_LEVEL
+        assert updated.level == max_level_for(dim)
 
     def test_update_profile_level_clamped_min(self, db, player):
         engine = AdaptiveEngine(db)

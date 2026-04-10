@@ -45,8 +45,21 @@ CEILING_WINDOW = 5  # Window size for ceiling detection
 BASAL_STREAK = 5  # 5 successes in a row at a level → basal (floor)
 CONSECUTIVE_FAIL_LIMIT = 3  # Legacy confidence rebuild threshold
 
-MAX_LEVEL = 9  # Levels 0-9 (mapped from research bank levels 1-10)
+# Per-dimension max levels — derived from the highest level with tasks
+# in the corresponding expanded JSON files.  Dimensions not listed
+# default to DEFAULT_MAX_LEVEL.
+DEFAULT_MAX_LEVEL = 9  # Most dimensions have levels 0-9
+DIMENSION_MAX_LEVELS: dict[str, int] = {
+    "language_comprehension": 16,  # levels 10-16 have reading comprehension tasks
+}
 MIN_LEVEL = 0
+
+
+def max_level_for(dimension: str | None) -> int:
+    """Return the maximum level for a given dimension."""
+    if dimension is None:
+        return DEFAULT_MAX_LEVEL
+    return DIMENSION_MAX_LEVELS.get(dimension, DEFAULT_MAX_LEVEL)
 
 
 class AdaptiveEngine:
@@ -105,7 +118,7 @@ class AdaptiveEngine:
             profile = next(p for p in profiles if p.dimension == dimension)
 
         # Respect ceiling: do not advance beyond ceiling_level
-        capped = max(MIN_LEVEL, min(MAX_LEVEL, new_level))
+        capped = max(MIN_LEVEL, min(max_level_for(dimension), new_level))
         if profile.ceiling_level is not None and capped > profile.ceiling_level:
             capped = profile.ceiling_level
         profile.level = capped
@@ -236,7 +249,7 @@ class AdaptiveEngine:
             # Try adjacent levels if no task found at target level at all
             for offset in [1, -1, 2, -2]:
                 alt_level = target_level + offset
-                if MIN_LEVEL <= alt_level <= MAX_LEVEL:
+                if MIN_LEVEL <= alt_level <= max_level_for(dimension):
                     task = self._select_task(
                         dimension=dimension,
                         level=alt_level,
@@ -401,7 +414,7 @@ class AdaptiveEngine:
                 )
 
             # Apply advance/retreat (ceiling caps upward movement)
-            if should_level_up and profile.level < MAX_LEVEL:
+            if should_level_up and profile.level < max_level_for(dimension):
                 new_level = profile.level + 1
                 if (
                     profile.ceiling_level is not None

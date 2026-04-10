@@ -949,6 +949,32 @@
           ],
           "correct_answer": "Circle",
           "inline_images": true
+        },
+        {
+          "instruction": "Listen carefully: 'First touch the biggest shape, then touch the blue one.'",
+          "question_id": "Q400",
+          "source_test": "WJ-III",
+          "sub_domain": "Following Directions",
+          "scaffolding_hint": "Do the steps in order: first biggest, then blue",
+          "options": [
+            "Large square, then blue circle",
+            "Blue circle only",
+            "Small triangle only",
+            "Any shape"
+          ],
+          "correct_answer": "Large square, then blue circle"
+        },
+        {
+          "instruction": "What is silly? 'The firefighter used a garden hose to put out a forest fire.'",
+          "question_id": "Q401",
+          "source_test": "SB5",
+          "sub_domain": "Verbal Absurdities",
+          "scaffolding_hint": "Think about what firefighters really use for big fires",
+          "options": [
+            "A garden hose is too small for a forest fire",
+            "Nothing is wrong"
+          ],
+          "correct_answer": "A garden hose is too small for a forest fire"
         }
       ]
     },
@@ -982,6 +1008,34 @@
             "Yellow star"
           ],
           "correct_answer": "Green triangle"
+        },
+        {
+          "instruction": "If all dogs have tails and Buddy is a dog, what can you say about Buddy?",
+          "question_id": "Q402",
+          "source_test": "SB5",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "If ALL dogs have something, and Buddy IS a dog...",
+          "options": [
+            "Buddy has a tail",
+            "Buddy can fly",
+            "Buddy is a cat",
+            "We cannot tell"
+          ],
+          "correct_answer": "Buddy has a tail"
+        },
+        {
+          "instruction": "Listen: 'Amy is taller than Ben. Ben is taller than Carl.' Who is the shortest?",
+          "question_id": "Q403",
+          "source_test": "SB5",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "Put them in order from tallest to shortest",
+          "options": [
+            "Carl",
+            "Ben",
+            "Amy",
+            "They are all the same"
+          ],
+          "correct_answer": "Carl"
         }
       ]
     },
@@ -1014,6 +1068,34 @@
             "blue squares"
           ],
           "correct_answer": "Red circles, blue triangles"
+        },
+        {
+          "instruction": "What does 'Don't count your chickens before they hatch' mean?",
+          "question_id": "Q404",
+          "source_test": "SB5",
+          "sub_domain": "Figurative Language",
+          "scaffolding_hint": "This is a saying. Think about what it means in everyday life.",
+          "options": [
+            "Don't assume something will happen before it does",
+            "You should count your chickens every day",
+            "Chickens are hard to count",
+            "Eggs always hatch"
+          ],
+          "correct_answer": "Don't assume something will happen before it does"
+        },
+        {
+          "instruction": "If it takes 3 workers 6 hours to paint a fence, how long would it take 6 workers?",
+          "question_id": "Q405",
+          "source_test": "WJ-III",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "More workers means less time. If you double the workers...",
+          "options": [
+            "3 hours",
+            "6 hours",
+            "12 hours",
+            "1 hour"
+          ],
+          "correct_answer": "3 hours"
         }
       ]
     },
@@ -1047,6 +1129,390 @@
             "Yellow star"
           ],
           "correct_answer": "Small red triangle"
+        },
+        {
+          "instruction": "Read: 'Some birds can fly. Penguins are birds. Can all penguins fly?'",
+          "question_id": "Q406",
+          "source_test": "SB5",
+          "sub_domain": "Logical Reasoning",
+          "scaffolding_hint": "The sentence says SOME birds, not ALL birds",
+          "options": [
+            "No — 'some' doesn't mean 'all'",
+            "Yes — all birds fly",
+            "Penguins are not birds",
+            "We cannot tell"
+          ],
+          "correct_answer": "No — 'some' doesn't mean 'all'"
+        },
+        {
+          "instruction": "What is the difference between a fact and an opinion? 'Water boils at 100 degrees Celsius' vs 'Summer is the best season.'",
+          "question_id": "Q407",
+          "source_test": "WJ-III",
+          "sub_domain": "Critical Thinking",
+          "scaffolding_hint": "A fact can be proven. An opinion is what someone thinks.",
+          "options": [
+            "The first is a fact and the second is an opinion",
+            "Both are facts",
+            "Both are opinions",
+            "The first is an opinion and the second is a fact"
+          ],
+          "correct_answer": "The first is a fact and the second is an opinion"
+        }
+      ]
+    },
+    "10": {
+      "name": "Simple Reading Comprehension",
+      "name_zh": "简单阅读理解",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Listen to the story: 'Ben had 5 toys. He gave 2 to his sister.' How many does Ben have now?",
+          "question_id": "Q285",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "He started with 5 and gave away 2",
+          "correct_answer": "3",
+          "image_hint": "book",
+          "passage": "Ben had 5 toys. He gave 2 to his sister.",
+          "options": [
+            "3",
+            "5",
+            "2",
+            "7"
+          ],
+          "input_mode": "number"
+        },
+        {
+          "question_id": "Q303",
+          "instruction": "Listen to the story: 'The cat sat on the mat. The dog sat on the rug.' Where did the cat sit?",
+          "source_test": "custom",
+          "sub_domain": "simple_reading",
+          "scaffolding_hint": "Think about where the cat was",
+          "options": [
+            "On the mat",
+            "On the rug",
+            "On the bed",
+            "On the floor"
+          ],
+          "correct_answer": "On the mat",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q304",
+          "instruction": "Read: 'The sun is hot.' Which word means very warm?",
+          "source_test": "custom",
+          "sub_domain": "vocabulary",
+          "scaffolding_hint": "Think about what 'hot' means",
+          "options": [
+            "Hot",
+            "Sun",
+            "Is",
+            "The"
+          ],
+          "correct_answer": "Hot",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "11": {
+      "name": "Reading Comprehension",
+      "name_zh": "阅读理解",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'The old house creaked in the wind. No one had lived there for years.' What is the mood?",
+          "question_id": "Q286",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "What feeling do the words 'creaked' and 'no one' give you?",
+          "options": [
+            "Eerie/Mysterious",
+            "Happy",
+            "Exciting",
+            "Funny"
+          ],
+          "correct_answer": "Eerie/Mysterious",
+          "image_hint": "book",
+          "passage": "The old house creaked in the wind. No one had lived there for years."
+        },
+        {
+          "question_id": "Q305",
+          "instruction": "Read: 'The children laughed and splashed in the pool on the hot summer day.' What season is it?",
+          "source_test": "custom",
+          "sub_domain": "reading_comprehension",
+          "scaffolding_hint": "Look for clues about the weather",
+          "options": [
+            "Summer",
+            "Winter",
+            "Spring",
+            "Fall"
+          ],
+          "correct_answer": "Summer",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q306",
+          "instruction": "Read: 'The leaves turned red and gold. Birds flew south.' What time of year is this?",
+          "source_test": "custom",
+          "sub_domain": "reading_comprehension",
+          "scaffolding_hint": "Think about when leaves change color",
+          "options": [
+            "Autumn/Fall",
+            "Summer",
+            "Winter",
+            "Spring"
+          ],
+          "correct_answer": "Autumn/Fall",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "12": {
+      "name": "Main Idea & Inference",
+      "name_zh": "中心思想与推断",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'Plants need sunlight, water, and soil to grow. Without sunlight, they cannot make food.' What is the main idea?",
+          "question_id": "Q287",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "The main idea is what the whole paragraph is mostly about",
+          "options": [
+            "Plants need sunlight to grow",
+            "The sky is blue",
+            "Dogs are friendly",
+            "Water is wet"
+          ],
+          "correct_answer": "Plants need sunlight to grow",
+          "image_hint": "book",
+          "passage": "Plants need sunlight, water, and soil to grow. Without sunlight, they cannot make food."
+        },
+        {
+          "question_id": "Q307",
+          "instruction": "Read: 'Bees are important because they help flowers grow by carrying pollen.' What is the main idea?",
+          "source_test": "custom",
+          "sub_domain": "main_idea",
+          "scaffolding_hint": "What is the most important point?",
+          "options": [
+            "Bees help flowers grow",
+            "Flowers are pretty",
+            "Pollen is yellow",
+            "Bees can sting"
+          ],
+          "correct_answer": "Bees help flowers grow",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q308",
+          "instruction": "Read: 'Recycling helps our planet. We can recycle paper, plastic, and glass.' Why should we recycle?",
+          "source_test": "custom",
+          "sub_domain": "main_idea",
+          "scaffolding_hint": "Think about why recycling matters",
+          "options": [
+            "To help our planet",
+            "To make money",
+            "To have fun",
+            "To save time"
+          ],
+          "correct_answer": "To help our planet",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "13": {
+      "name": "Character Inference",
+      "name_zh": "角色推断",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'Sarah stared out the window at the falling rain. She missed her grandmother's warm kitchen and the smell of fresh cookies.' How does Sarah feel?",
+          "question_id": "Q288",
+          "source_test": "WJ-III",
+          "sub_domain": "Reading Comprehension",
+          "scaffolding_hint": "The author doesn't say directly — use clues from the words",
+          "options": [
+            "Lonely and homesick",
+            "Excited and happy",
+            "Angry and frustrated",
+            "Calm and peaceful"
+          ],
+          "correct_answer": "Lonely and homesick",
+          "image_hint": "book",
+          "passage": "Sarah stared out the window at the falling rain. She missed her grandmother's warm kitchen and the smell of fresh cookies."
+        },
+        {
+          "question_id": "Q309",
+          "instruction": "Read: 'Jake walked slowly to school, dragging his feet. He sighed deeply.' How does Jake probably feel?",
+          "source_test": "custom",
+          "sub_domain": "inference",
+          "scaffolding_hint": "Think about why someone walks slowly and sighs",
+          "options": [
+            "Reluctant or sad",
+            "Excited",
+            "Angry",
+            "Happy"
+          ],
+          "correct_answer": "Reluctant or sad",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q310",
+          "instruction": "Read: 'The puppy wagged its tail and jumped up when it saw its owner.' How does the puppy feel?",
+          "source_test": "custom",
+          "sub_domain": "inference",
+          "scaffolding_hint": "What do dogs do when they are happy?",
+          "options": [
+            "Happy and excited",
+            "Scared",
+            "Angry",
+            "Sleepy"
+          ],
+          "correct_answer": "Happy and excited",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "14": {
+      "name": "Argument Analysis",
+      "name_zh": "论证分析",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read the argument: 'Schools should start later because students learn better when they are well-rested.' What is the claim?",
+          "question_id": "Q311",
+          "source_test": "custom",
+          "sub_domain": "argument_analysis",
+          "scaffolding_hint": "What is the main point the author is making?",
+          "options": [
+            "Schools should start later",
+            "Students are lazy",
+            "Sleep is not important",
+            "Teachers need rest too"
+          ],
+          "correct_answer": "Schools should start later",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q312",
+          "instruction": "Read: 'Video games can teach problem-solving skills, but too much screen time is harmful.' What is the author's view?",
+          "source_test": "custom",
+          "sub_domain": "argument_analysis",
+          "scaffolding_hint": "The author sees both sides",
+          "options": [
+            "Games have benefits but need limits",
+            "Games are always bad",
+            "Games are always good",
+            "Screen time does not matter"
+          ],
+          "correct_answer": "Games have benefits but need limits",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q289",
+          "instruction": "Read the argument: 'Exercise is essential for children because it builds strong bones and improves focus in school.' What evidence supports the claim?",
+          "source_test": "WJ-III",
+          "sub_domain": "argument_analysis",
+          "scaffolding_hint": "The claim is the main point the author is trying to prove",
+          "options": [
+            "Builds strong bones and improves focus",
+            "Children like playing",
+            "Schools have gyms",
+            "Exercise is fun"
+          ],
+          "correct_answer": "Builds strong bones and improves focus",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "15": {
+      "name": "Figurative Language",
+      "name_zh": "修辞手法",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "instruction": "Read: 'Life is a winding road with unexpected turns.' What figurative language is used?",
+          "question_id": "Q290",
+          "source_test": "WJ-III",
+          "sub_domain": "figurative_language",
+          "scaffolding_hint": "Figurative language uses comparison or exaggeration to make a point",
+          "options": [
+            "Metaphor — comparing life to a journey",
+            "Simile — using 'like' or 'as'",
+            "Personification — giving human traits to objects",
+            "Hyperbole — extreme exaggeration"
+          ],
+          "correct_answer": "Metaphor — comparing life to a journey",
+          "image_hint": "book",
+          "passage": "Life is a winding road with unexpected turns."
+        },
+        {
+          "question_id": "Q313",
+          "instruction": "Read: 'Time is a thief that steals our youth.' What figurative language is this?",
+          "source_test": "custom",
+          "sub_domain": "figurative_language",
+          "scaffolding_hint": "Is time really a thief?",
+          "options": [
+            "Metaphor",
+            "Simile",
+            "Hyperbole",
+            "Alliteration"
+          ],
+          "correct_answer": "Metaphor",
+          "image_hint": "book"
+        },
+        {
+          "question_id": "Q314",
+          "instruction": "Read: 'She was as brave as a lion.' What figurative language is this?",
+          "source_test": "custom",
+          "sub_domain": "figurative_language",
+          "scaffolding_hint": "Look for 'as...as' comparison",
+          "options": [
+            "Simile",
+            "Metaphor",
+            "Personification",
+            "Onomatopoeia"
+          ],
+          "correct_answer": "Simile",
+          "image_hint": "book"
+        }
+      ]
+    },
+    "16": {
+      "name": "Literary Analysis",
+      "name_zh": "文学分析",
+      "task_type": "read_passage",
+      "tasks": [
+        {
+          "question_id": "Q282",
+          "instruction": "Read: 'The author paints a vivid picture of despair through stark imagery and fragmented sentences.' What literary technique is this analysis describing?",
+          "source_test": "custom",
+          "sub_domain": "literary_analysis",
+          "scaffolding_hint": "Think about how authors use writing techniques to convey emotion",
+          "options": [
+            "Style analysis",
+            "Plot summary",
+            "Character sketch",
+            "Setting description"
+          ],
+          "correct_answer": "Style analysis",
+          "image_hint": "book",
+          "passage": "The author paints a vivid picture of despair through stark imagery and fragmented sentences."
+        },
+        {
+          "question_id": "Q291",
+          "instruction": "Two people disagree about screen time for kids. One says it helps learning, the other says it harms development. What is the key disagreement?",
+          "source_test": "WJ-III",
+          "sub_domain": "literary_analysis",
+          "scaffolding_hint": "Look past the examples — what fundamental idea do they disagree on?",
+          "options": [
+            "Whether screen time helps or harms children",
+            "Whether screens exist",
+            "Whether children like screens",
+            "Whether schools use screens"
+          ],
+          "correct_answer": "Whether screen time helps or harms children",
+          "image_hint": "book"
         }
       ]
     }

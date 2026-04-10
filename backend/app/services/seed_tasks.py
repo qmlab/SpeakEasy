@@ -1262,39 +1262,26 @@ def seed_literacy_tasks(db: Session) -> int:
         ]
     )
 
-    # ---- Level 1: Word-Image Matching ----
+    # ---- Level 1: Letter-Sound Match ----
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=1,
                 task_type=TaskType.MATCH_WORD_IMAGE.value,
-                modalities=[Modality.TOUCH.value, Modality.TEXT.value],
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Find the picture that matches the word.",
-                    "instruction_text": "Find the picture for this word.",
-                    "word": "Cat",
+                    "instruction_audio": "Which letter makes the 'sss' sound?",
+                    "instruction_text": "Which letter makes the 'sss' sound?",
+                    "target_word": "S",
+                    "image_hint": "letter",
+                    "options": ["S", "T", "M", "B"],
+                    "correct_answer": "S",
                     "choices": [
-                        {"image_name": "Dog", "is_correct": False},
-                        {"image_name": "Cat", "is_correct": True},
-                        {"image_name": "Bird", "is_correct": False},
-                    ],
-                },
-                is_assessment=False,
-            ),
-            AdaptiveTask(
-                dimension=DevelopmentalDimension.LITERACY.value,
-                level=1,
-                task_type=TaskType.MATCH_WORD_IMAGE.value,
-                modalities=[Modality.TOUCH.value, Modality.TEXT.value],
-                content={
-                    "instruction_audio": "Find the picture that matches the word.",
-                    "instruction_text": "Find the picture for this word.",
-                    "word": "Sun",
-                    "choices": [
-                        {"image_name": "Moon", "is_correct": False},
-                        {"image_name": "Star", "is_correct": False},
-                        {"image_name": "Sun", "is_correct": True},
+                        {"name": "S", "is_correct": True},
+                        {"name": "T", "is_correct": False},
+                        {"name": "M", "is_correct": False},
+                        {"name": "B", "is_correct": False},
                     ],
                 },
                 is_assessment=False,
@@ -1303,15 +1290,19 @@ def seed_literacy_tasks(db: Session) -> int:
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=1,
                 task_type=TaskType.MATCH_WORD_IMAGE.value,
-                modalities=[Modality.TOUCH.value, Modality.TEXT.value],
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Find the picture that matches the word.",
-                    "instruction_text": "Find the picture for this word.",
-                    "word": "Cup",
+                    "instruction_audio": "Which letter makes the 'mmm' sound?",
+                    "instruction_text": "Which letter makes the 'mmm' sound?",
+                    "target_word": "M",
+                    "image_hint": "letter",
+                    "options": ["M", "N", "W", "V"],
+                    "correct_answer": "M",
                     "choices": [
-                        {"image_name": "Cup", "is_correct": True},
-                        {"image_name": "Plate", "is_correct": False},
-                        {"image_name": "Spoon", "is_correct": False},
+                        {"name": "M", "is_correct": True},
+                        {"name": "N", "is_correct": False},
+                        {"name": "W", "is_correct": False},
+                        {"name": "V", "is_correct": False},
                     ],
                 },
                 is_assessment=False,
@@ -1319,113 +1310,117 @@ def seed_literacy_tasks(db: Session) -> int:
         ]
     )
 
-    # ---- Level 2: Read Word ----
+    # ---- Level 2: Rhyme & Phonics ----
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=2,
-                task_type=TaskType.READ_WORD.value,
-                modalities=[Modality.VOICE.value, Modality.TEXT.value],
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Read this word out loud.",
-                    "instruction_text": "Read this word.",
-                    "target_word": "Dog",
-                    "accept_threshold": 0.6,
+                    "instruction_audio": "Which word rhymes with Cat?",
+                    "instruction_text": "Which word rhymes with Cat?",
+                    "image_hint": "cat",
+                    "options": ["Hat", "Dog", "Car", "Sun"],
+                    "correct_answer": "Hat",
+                    "choices": [
+                        {"name": "Hat", "is_correct": True},
+                        {"name": "Dog", "is_correct": False},
+                        {"name": "Car", "is_correct": False},
+                        {"name": "Sun", "is_correct": False},
+                    ],
                 },
                 is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=2,
-                task_type=TaskType.READ_WORD.value,
-                modalities=[Modality.VOICE.value, Modality.TEXT.value],
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Read this word out loud.",
-                    "instruction_text": "Read this word.",
-                    "target_word": "Apple",
-                    "accept_threshold": 0.6,
-                },
-                is_assessment=False,
-            ),
-            AdaptiveTask(
-                dimension=DevelopmentalDimension.LITERACY.value,
-                level=2,
-                task_type=TaskType.READ_WORD.value,
-                modalities=[Modality.VOICE.value, Modality.TEXT.value],
-                content={
-                    "instruction_audio": "Read this word out loud.",
-                    "instruction_text": "Read this word.",
-                    "target_word": "Ball",
-                    "accept_threshold": 0.6,
+                    "instruction_audio": "Which word rhymes with Dog?",
+                    "instruction_text": "Which word rhymes with Dog?",
+                    "image_hint": "book",
+                    "options": ["Log", "Cat", "Pen", "Bed"],
+                    "correct_answer": "Log",
+                    "choices": [
+                        {"name": "Log", "is_correct": True},
+                        {"name": "Cat", "is_correct": False},
+                        {"name": "Pen", "is_correct": False},
+                        {"name": "Bed", "is_correct": False},
+                    ],
                 },
                 is_assessment=False,
             ),
         ]
     )
 
-    # ---- Level 3: Read Sentence ----
+    # ---- Level 3: CVC Word Building ----
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=3,
-                task_type=TaskType.READ_SENTENCE.value,
-                modalities=[Modality.VOICE.value, Modality.TEXT.value],
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Read this sentence out loud.",
-                    "instruction_text": "Read this sentence.",
-                    "target_sentence": "I see a dog.",
-                    "accept_threshold": 0.5,
+                    "instruction_audio": "What word do these letters make? C - A - T",
+                    "instruction_text": "What word do these letters make? C - A - T",
+                    "image_hint": "cat",
+                    "options": ["Cat", "Car", "Cup", "Cow"],
+                    "correct_answer": "Cat",
+                    "choices": [
+                        {"name": "Cat", "is_correct": True},
+                        {"name": "Car", "is_correct": False},
+                        {"name": "Cup", "is_correct": False},
+                        {"name": "Cow", "is_correct": False},
+                    ],
                 },
                 is_assessment=False,
             ),
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=3,
-                task_type=TaskType.READ_SENTENCE.value,
-                modalities=[Modality.VOICE.value, Modality.TEXT.value],
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Read this sentence out loud.",
-                    "instruction_text": "Read this sentence.",
-                    "target_sentence": "The cat is big.",
-                    "accept_threshold": 0.5,
-                },
-                is_assessment=False,
-            ),
-            AdaptiveTask(
-                dimension=DevelopmentalDimension.LITERACY.value,
-                level=3,
-                task_type=TaskType.READ_SENTENCE.value,
-                modalities=[Modality.VOICE.value, Modality.TEXT.value],
-                content={
-                    "instruction_audio": "Read this sentence out loud.",
-                    "instruction_text": "Read this sentence.",
-                    "target_sentence": "I like apples.",
-                    "accept_threshold": 0.5,
+                    "instruction_audio": "What word do these letters make? D - O - G",
+                    "instruction_text": "What word do these letters make? D - O - G",
+                    "image_hint": "dog",
+                    "options": ["Dog", "Dig", "Dug", "Dot"],
+                    "correct_answer": "Dog",
+                    "choices": [
+                        {"name": "Dog", "is_correct": True},
+                        {"name": "Dig", "is_correct": False},
+                        {"name": "Dug", "is_correct": False},
+                        {"name": "Dot", "is_correct": False},
+                    ],
                 },
                 is_assessment=False,
             ),
         ]
     )
 
-    # ---- Level 4: Passage Reading ----
+    # ---- Level 4: Sight Words ----
     tasks.extend(
         [
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=4,
-                task_type=TaskType.READ_PASSAGE.value,
-                modalities=[Modality.TEXT.value, Modality.TOUCH.value],
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Read the story, then answer the question.",
-                    "instruction_text": "Read the story, then answer the question.",
-                    "passage": "Tom has a red ball. He plays with it every day. Today it is raining, so Tom plays inside.",
-                    "question": "Where does Tom play today?",
+                    "instruction_audio": "What does this word say? THE",
+                    "instruction_text": "What does this word say? THE",
+                    "image_hint": "book",
+                    "options": ["The", "Then", "They", "That"],
+                    "correct_answer": "The",
                     "choices": [
-                        {"text": "Outside", "is_correct": False},
-                        {"text": "Inside", "is_correct": True},
-                        {"text": "At school", "is_correct": False},
+                        {"name": "The", "is_correct": True},
+                        {"name": "Then", "is_correct": False},
+                        {"name": "They", "is_correct": False},
+                        {"name": "That", "is_correct": False},
                     ],
                 },
                 is_assessment=False,
@@ -1433,35 +1428,19 @@ def seed_literacy_tasks(db: Session) -> int:
             AdaptiveTask(
                 dimension=DevelopmentalDimension.LITERACY.value,
                 level=4,
-                task_type=TaskType.READ_PASSAGE.value,
-                modalities=[Modality.TEXT.value, Modality.TOUCH.value],
+                task_type=TaskType.MATCH_WORD_IMAGE.value,
+                modalities=[Modality.TOUCH.value],
                 content={
-                    "instruction_audio": "Read the story, then answer the question.",
-                    "instruction_text": "Read the story, then answer the question.",
-                    "passage": "Lily has a cat. The cat likes to sleep on the bed. Lily gives the cat milk every morning.",
-                    "question": "What does the cat like to do?",
+                    "instruction_audio": "What does this word say? AND",
+                    "instruction_text": "What does this word say? AND",
+                    "image_hint": "book",
+                    "options": ["And", "An", "At", "Am"],
+                    "correct_answer": "And",
                     "choices": [
-                        {"text": "Run", "is_correct": False},
-                        {"text": "Sleep on the bed", "is_correct": True},
-                        {"text": "Play outside", "is_correct": False},
-                    ],
-                },
-                is_assessment=False,
-            ),
-            AdaptiveTask(
-                dimension=DevelopmentalDimension.LITERACY.value,
-                level=4,
-                task_type=TaskType.READ_PASSAGE.value,
-                modalities=[Modality.TEXT.value, Modality.TOUCH.value],
-                content={
-                    "instruction_audio": "Read the story, then answer the question.",
-                    "instruction_text": "Read the story, then answer the question.",
-                    "passage": "Ben goes to school by bus. He sits next to his friend Amy. They talk about their favorite animals.",
-                    "question": "How does Ben go to school?",
-                    "choices": [
-                        {"text": "By car", "is_correct": False},
-                        {"text": "By bike", "is_correct": False},
-                        {"text": "By bus", "is_correct": True},
+                        {"name": "And", "is_correct": True},
+                        {"name": "An", "is_correct": False},
+                        {"name": "At", "is_correct": False},
+                        {"name": "Am", "is_correct": False},
                     ],
                 },
                 is_assessment=False,
