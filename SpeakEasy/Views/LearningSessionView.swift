@@ -2072,6 +2072,16 @@ struct LearningSessionView: View {
     /// "Tap star only" or "Miss or false alarm" — those fall back to
     /// the standard text-button layout.
     private func isImageGridTask(_ task: AdaptiveTask) -> Bool {
+        // Inline-image tasks always use image grid — the backend explicitly
+        // marks these tasks so both A and B objects are shown as tappable
+        // image cards (e.g. go/no-go tasks like "Tap the dog. Do not tap the cat."
+        // or shape/color tasks like "Touch the red circle").  This check must
+        // come BEFORE the dimension overrides below because inline-image tasks
+        // in language comprehension (e.g. Q048) need their color/shape images.
+        if task.content.inlineImages == true && task.content.displayOptions.count >= 2 {
+            return true
+        }
+
         // Literacy tasks NEVER use image grid — the whole point of literacy
         // is reading text (letters, words, spelling).  Showing images for
         // options turns it into picture-matching instead of reading practice.
@@ -2081,13 +2091,6 @@ struct LearningSessionView: View {
         // not matching pictures.  Force text-only options so the child relies
         // on the spoken/written clue rather than visual image matching.
         if dimension == .languageComprehension { return false }
-
-        // Inline-image tasks always use image grid — the backend explicitly
-        // marks these tasks so both A and B objects are shown as tappable
-        // image cards (e.g. go/no-go tasks like "Tap the dog. Do not tap the cat.").
-        if task.content.inlineImages == true && task.content.displayOptions.count >= 2 {
-            return true
-        }
         // Pattern tasks use image grid only when all options are image-compatible
         // names (single words, no bare numbers).  Tasks like Q091 ("5 apples"),
         // Q094 ("5"), Q099 ("162") fall through to text buttons instead.
@@ -2393,14 +2396,16 @@ struct LearningSessionView: View {
     ///   `imageHint` so the child cannot simply match pictures.
     /// - **Level 3+** (hardest): hide all option images — text only.
     private func shouldShowOptionImage(task: AdaptiveTask, option: String) -> Bool {
+        // Inline-image tasks always show thumbnails regardless of level or
+        // dimension — these shape/color tasks (e.g. "Touch the red circle")
+        // need their images to be solvable.
+        if task.content.inlineImages == true { return true }
         // Literacy tasks: NEVER show option images — children must read the
         // text (letters, words, spellings), not match pictures.
         if dimension == .literacy { return false }
         // Language comprehension: NEVER show option images — children must
         // understand the language clue, not visually match objects.
         if dimension == .languageComprehension { return false }
-        // Inline-image tasks always show thumbnails regardless of level
-        if task.content.inlineImages == true { return true }
         if task.level >= 3 { return false }
         // Skip image for multi-word phrases — they won't have matching SVGs
         // and would just show a broken questionmark.circle fallback.
