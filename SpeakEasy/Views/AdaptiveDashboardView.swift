@@ -58,6 +58,9 @@ struct AdaptiveDashboardView: View {
 
     private var overviewContent: some View {
         VStack(spacing: 20) {
+            // My Development overview (merged from Home)
+            myDevelopmentSection
+
             // Stats cards
             if let dash = learningManager.dashboard {
                 statsCards(dashboard: dash)
@@ -71,6 +74,53 @@ struct AdaptiveDashboardView: View {
                 recentSessionsSection(sessions: dash.recentSessions)
             }
         }
+    }
+
+    // MARK: - My Development
+
+    private var myDevelopmentSection: some View {
+        VStack(spacing: 15) {
+            HStack {
+                Text("My Development")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .foregroundColor(.purple)
+                Spacer()
+                Text("Level \(String(format: "%.1f", learningManager.overallLevel))")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundColor(.orange)
+            }
+
+            // Mini dimension indicators
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                ForEach(DevelopmentalDimension.allCases) { dimension in
+                    VStack(spacing: 6) {
+                        Image(systemName: dimension.icon)
+                            .font(.title2)
+                            .foregroundColor(dimension.color)
+
+                        Text("Lv.\(learningManager.level(for: dimension))")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(dimension.color)
+
+                        // Mini level dots
+                        HStack(spacing: 3) {
+                            ForEach(0..<5, id: \.self) { i in
+                                Circle()
+                                    .fill(i < learningManager.level(for: dimension) ? dimension.color : Color(.systemGray4))
+                                    .frame(width: 6, height: 6)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemBackground))
+                .shadow(color: .gray.opacity(0.2), radius: 10)
+        )
+        .padding(.horizontal)
     }
 
     // MARK: - Stats Cards

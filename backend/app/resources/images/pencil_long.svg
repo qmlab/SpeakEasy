@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+<!-- Long pencil: fills most of the vertical space -->
+<rect x="55" y="15" width="10" height="72" rx="2" fill="#FDD835"/>
+<polygon points="55,87 60,100 65,87" fill="#FFCC80"/>
+<rect x="55" y="15" width="10" height="8" rx="2" fill="#E91E63"/>
+<line x1="60" y1="95" x2="60" y2="100" stroke="#333" stroke-width="1"/>
+</svg>

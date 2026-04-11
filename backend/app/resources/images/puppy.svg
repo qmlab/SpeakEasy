@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
+<!-- Puppy: smaller face, bigger eyes (baby proportions), floppy ears, rounder -->
+<ellipse cx="60" cy="70" rx="18" ry="16" fill="#BCAAA4"/>
+<!-- Big puppy eyes (baby-like) -->
+<circle cx="50" cy="64" r="5" fill="#fff"/><circle cx="70" cy="64" r="5" fill="#fff"/>
+<circle cx="51" cy="63" r="2.5" fill="#333"/><circle cx="71" cy="63" r="2.5" fill="#333"/>
+<!-- Eye shine -->
+<circle cx="52.5" cy="61.5" r="1" fill="#fff"/><circle cx="72.5" cy="61.5" r="1" fill="#fff"/>
+<!-- Small nose -->
+<ellipse cx="60" cy="72" rx="4" ry="2.5" fill="#333"/>
+<!-- Smile -->
+<path d="M54 76 Q60 81 66 76" stroke="#333" stroke-width="1.5" fill="none"/>
+<!-- Floppy ears (drooping down, unlike adult dog's upright ears) -->
+<ellipse cx="38" cy="62" rx="10" ry="16" fill="#8D6E63" transform="rotate(20 38 62)"/>
+<ellipse cx="82" cy="62" rx="10" ry="16" fill="#8D6E63" transform="rotate(-20 82 62)"/>
+<!-- Tongue sticking out -->
+<ellipse cx="60" cy="80" rx="3" ry="4" fill="#FF8A80"/>
+</svg>

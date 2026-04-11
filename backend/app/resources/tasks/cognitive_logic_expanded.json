@@ -284,15 +284,15 @@
           "sub_domain": "Quantitative Reasoning",
           "scaffolding_hint": "Compare the lengths from end to end",
           "sequence": [
-            "pencil",
-            "crayon"
+            "pencil_long",
+            "crayon_short"
           ],
           "options": [
-            "pencil",
-            "crayon"
+            "Pencil",
+            "Crayon"
           ],
-          "correct_answer": "pencil",
-          "image_hint": "pencil"
+          "correct_answer": "Pencil",
+          "image_hint": "pencil_long"
         },
         {
           "instruction": "Dog is to puppy as cat is to ___?",
@@ -307,6 +307,7 @@
             "cat",
             "?"
           ],
+          "inline_images": true,
           "options": [
             "kitten",
             "cub",

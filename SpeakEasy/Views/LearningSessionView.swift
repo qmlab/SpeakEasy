@@ -22,7 +22,6 @@ struct LearningSessionView: View {
     @State private var showSessionSummary: Bool = false
     @State private var animateReward: Bool = false
     @State private var animateFeedback: Bool = false
-    @State private var showCameraView: Bool = false
     /// Ordered selections for sorting/sequencing tasks
     @State private var orderedSelections: [String] = []
     /// Whether the hint/clue is currently revealed
@@ -293,8 +292,10 @@ struct LearningSessionView: View {
            !suppressImage {
             return true
         }
-        // instructionCard renders a targetWord display
-        if let tw = task.content.targetWord, !tw.isEmpty { return true }
+        // instructionCard renders a targetWord display (unless suppressed for
+        // language_expression non-imitate tasks to avoid answer leaks)
+        let suppressTarget = (dimension == .languageExpression && task.taskType != "imitate")
+        if let tw = task.content.targetWord, !tw.isEmpty, !suppressTarget { return true }
         // contentArea renders flash / animation / pattern / story / passage / sentence
         if isFlashTask(task) || isAnimatedTask(task) || isPatternTask(task) { return true }
         if let s = task.content.story, !s.isEmpty { return true }
@@ -456,8 +457,13 @@ struct LearningSessionView: View {
                 .cornerRadius(16)
             }
 
-            // Target word display with speaker icon so kid can tap to hear it
-            if let target = task.content.targetWord, !target.isEmpty {
+            // Target word display with speaker icon so kid can tap to hear it.
+            // For language_expression tasks that are NOT imitate type, hide
+            // the target word to avoid leaking the answer (e.g. "describe"
+            // and "conversation" tasks where the child must produce the answer).
+            let isImitateTask = task.taskType == "imitate"
+            let suppressTarget = (dimension == .languageExpression && !isImitateTask)
+            if let target = task.content.targetWord, !target.isEmpty, !suppressTarget {
                 Button {
                     speechService.speak(target)
                 } label: {
@@ -1746,20 +1752,9 @@ struct LearningSessionView: View {
 
     // MARK: - Interaction Area
 
-    /// Whether this task supports camera-based interaction (object cognition with target word)
-    private func taskSupportsCamera(_ task: AdaptiveTask) -> Bool {
-        dimension == .objectCognition &&
-        task.content.targetWord != nil &&
-        !task.content.targetWord!.isEmpty
-    }
 
     @ViewBuilder
     private func interactionArea(task: AdaptiveTask) -> some View {
-        // Camera button for object cognition tasks
-        if taskSupportsCamera(task) {
-            cameraButton(task: task)
-        }
-
         // Drag-to-arrange shape tasks
         if isDragArrangeTask(task) {
             dragArrangeArea(task: task)
@@ -1802,7 +1797,7 @@ struct LearningSessionView: View {
         }
 
         // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
             simpleResponseButtons(task: task)
         }
 
@@ -2021,50 +2016,6 @@ struct LearningSessionView: View {
         }
     }
 
-    // MARK: - Camera Button
-
-    private func cameraButton(task: AdaptiveTask) -> some View {
-        Button {
-            showCameraView = true
-        } label: {
-            HStack(spacing: 12) {
-                Image(systemName: "camera.viewfinder")
-                    .font(.title2)
-                Text("Find with Camera")
-                    .font(.headline)
-            }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(
-                        LinearGradient(
-                            colors: [dimension.color, .green],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-            )
-        }
-        .disabled(learningManager.isSubmitting)
-        .fullScreenCover(isPresented: $showCameraView) {
-            CameraLearningView(
-                task: task,
-                dimension: dimension
-            ) { isCorrect, score in
-                showCameraView = false
-                Task {
-                    await learningManager.submitAttempt(
-                        isCorrect: isCorrect,
-                        score: score,
-                        dimension: dimension
-                    )
-                }
-            }
-        }
-    }
-
     // MARK: - Option Buttons
 
     /// Whether this task should display options as a visual image grid
@@ -2090,11 +2041,6 @@ struct LearningSessionView: View {
         // is reading text (letters, words, spelling).  Showing images for
         // options turns it into picture-matching instead of reading practice.
         if dimension == .literacy { return false }
-
-        // Language comprehension tasks should focus on understanding language,
-        // not matching pictures.  Force text-only options so the child relies
-        // on the spoken/written clue rather than visual image matching.
-        if dimension == .languageComprehension { return false }
         // Pattern tasks use image grid only when all options are image-compatible
         // names (single words, no bare numbers).  Tasks like Q091 ("5 apples"),
         // Q094 ("5"), Q099 ("162") fall through to text buttons instead.
@@ -2407,9 +2353,6 @@ struct LearningSessionView: View {
         // Literacy tasks: NEVER show option images — children must read the
         // text (letters, words, spellings), not match pictures.
         if dimension == .literacy { return false }
-        // Language comprehension: NEVER show option images — children must
-        // understand the language clue, not visually match objects.
-        if dimension == .languageComprehension { return false }
         if task.level >= 3 { return false }
         // Skip image for multi-word phrases — they won't have matching SVGs
         // and would just show a broken questionmark.circle fallback.

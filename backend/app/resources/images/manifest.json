@@ -6,7 +6,8 @@
   "categories": {
     "animals": [
       "dog", "cat", "bird", "fish", "rabbit", "butterfly", "duck",
-      "elephant", "penguin", "frog", "bear", "whale", "dolphin"
+      "elephant", "penguin", "frog", "bear", "whale", "dolphin",
+      "puppy", "kitten"
     ],
     "food": [
       "apple", "banana", "orange", "grape", "strawberry", "watermelon",
@@ -21,7 +22,8 @@
     ],
     "household": [
       "cup", "spoon", "plate", "book", "pencil", "scissors", "clock",
-      "lamp", "umbrella", "key", "chair", "bed", "house"
+      "lamp", "umbrella", "key", "chair", "bed", "house",
+      "pencil_long", "crayon_short"
     ],
     "clothing": [
       "hat", "shoe", "shirt"
@@ -60,7 +62,9 @@
     "banana": "banana",
     "apple": "apple",
     "dog": "dog",
+    "puppy": "puppy",
     "cat": "cat",
+    "kitten": "kitten",
     "ball": "ball",
     "car": "car",
     "cup": "cup",
@@ -111,6 +115,7 @@
     "spoon": "spoon",
     "plate": "plate",
     "pencil": "pencil",
+    "pencil_long": "pencil_long",
     "pen": "pencil",
     "scissors": "scissors",
     "clock": "clock",
@@ -158,6 +163,7 @@
     "flashlight": "flashlight",
     "chopsticks": "chopsticks",
     "crayon": "crayon",
+    "crayon_short": "crayon_short",
     "cloud": "cloud",
     "rainbow": "rainbow",
     "rain": "rain",
@@ -178,5 +184,5 @@
     "lightbulb": "lightbulb",
     "color_palette": "color_palette"
   },
-  "total_images": 107
+  "total_images": 112
 }
