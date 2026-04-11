@@ -20,8 +20,7 @@
             "Cat"
           ],
           "correct_answer": "Dog",
-          "target_name": "Dog",
-          "question_image": "dog_alt"
+          "target_name": "Dog"
         },
         {
           "instruction": "Touch the ball.",
@@ -34,8 +33,7 @@
             "Shoe"
           ],
           "correct_answer": "Ball",
-          "target_name": "Ball",
-          "question_image": "ball_alt"
+          "target_name": "Ball"
         },
         {
           "instruction": "Show me the apple.",
@@ -48,8 +46,7 @@
             "Car"
           ],
           "correct_answer": "Apple",
-          "target_name": "Apple",
-          "question_image": "apple_alt"
+          "target_name": "Apple"
         },
         {
           "instruction": "Where is the cup?",
@@ -63,8 +60,7 @@
             "Book"
           ],
           "correct_answer": "Cup",
-          "target_name": "Cup",
-          "question_image": "cup_alt"
+          "target_name": "Cup"
         },
         {
           "instruction": "Touch the bird.",
@@ -78,8 +74,7 @@
             "Cat"
           ],
           "correct_answer": "Bird",
-          "target_name": "Bird",
-          "question_image": "bird_alt"
+          "target_name": "Bird"
         },
         {
           "instruction": "Show me the chair.",
@@ -93,8 +88,7 @@
             "Bed"
           ],
           "correct_answer": "Chair",
-          "target_name": "Chair",
-          "question_image": "chair_alt"
+          "target_name": "Chair"
         },
         {
           "instruction": "Select all the animals.",
@@ -180,8 +174,7 @@
             "Door"
           ],
           "correct_answer": "Clock",
-          "target_name": "Clock",
-          "question_image": "clock_alt"
+          "target_name": "Clock"
         },
         {
           "instruction": "Show me the train.",
@@ -196,8 +189,7 @@
             "Car"
           ],
           "correct_answer": "Train",
-          "target_name": "Train",
-          "question_image": "train_alt"
+          "target_name": "Train"
         },
         {
           "instruction": "Touch the hat.",
@@ -212,8 +204,7 @@
             "Glove"
           ],
           "correct_answer": "Hat",
-          "target_name": "Hat",
-          "question_image": "hat_alt"
+          "target_name": "Hat"
         },
         {
           "instruction": "Where is the bridge?",
@@ -228,8 +219,7 @@
             "Island"
           ],
           "correct_answer": "Bridge",
-          "target_name": "Bridge",
-          "question_image": "bridge_alt"
+          "target_name": "Bridge"
         },
         {
           "instruction": "Select all the vehicles.",
@@ -319,8 +309,7 @@
             "Piano"
           ],
           "correct_answer": "Guitar",
-          "target_name": "Guitar",
-          "question_image": "guitar_alt"
+          "target_name": "Guitar"
         },
         {
           "instruction": "Show me the camera.",
@@ -336,8 +325,7 @@
             "Magnifier"
           ],
           "correct_answer": "Camera",
-          "target_name": "Camera",
-          "question_image": "camera_alt"
+          "target_name": "Camera"
         },
         {
           "instruction": "Touch the planet.",
@@ -353,8 +341,7 @@
             "Rocket"
           ],
           "correct_answer": "Planet",
-          "target_name": "Planet",
-          "question_image": "planet_alt"
+          "target_name": "Planet"
         },
         {
           "instruction": "Where is the compass?",
@@ -370,8 +357,7 @@
             "Calculator"
           ],
           "correct_answer": "Compass",
-          "target_name": "Compass",
-          "question_image": "compass_alt"
+          "target_name": "Compass"
         },
         {
           "instruction": "Which ones are musical instruments?",
@@ -484,8 +470,7 @@
             "Timer"
           ],
           "correct_answer": "Thermometer",
-          "target_name": "Thermometer",
-          "question_image": "thermometer_alt"
+          "target_name": "Thermometer"
         },
         {
           "instruction": "Show me the pendulum.",
@@ -501,8 +486,7 @@
             "Spring"
           ],
           "correct_answer": "Pendulum",
-          "target_name": "Pendulum",
-          "question_image": "pendulum_alt"
+          "target_name": "Pendulum"
         },
         {
           "instruction": "Touch the fossil.",
@@ -518,8 +502,7 @@
             "Rock"
           ],
           "correct_answer": "Fossil",
-          "target_name": "Fossil",
-          "question_image": "fossil_alt"
+          "target_name": "Fossil"
         },
         {
           "instruction": "Where is the blueprint?",
@@ -535,8 +518,7 @@
             "Chart"
           ],
           "correct_answer": "Blueprint",
-          "target_name": "Blueprint",
-          "question_image": "blueprint_alt"
+          "target_name": "Blueprint"
         },
         {
           "instruction": "Which ones are mammals?",
@@ -650,8 +632,7 @@
             "Frost"
           ],
           "correct_answer": "Glacier",
-          "target_name": "Glacier",
-          "question_image": "glacier_alt"
+          "target_name": "Glacier"
         },
         {
           "instruction": "Show me the satellite.",
@@ -667,8 +648,7 @@
             "Probe"
           ],
           "correct_answer": "Satellite",
-          "target_name": "Satellite",
-          "question_image": "satellite_alt"
+          "target_name": "Satellite"
         },
         {
           "instruction": "Touch the constellation.",
@@ -684,8 +664,7 @@
             "Asteroid"
           ],
           "correct_answer": "Constellation",
-          "target_name": "Constellation",
-          "question_image": "constellation_alt"
+          "target_name": "Constellation"
         },
         {
           "instruction": "Where is the hemisphere?",
@@ -701,8 +680,7 @@
             "Latitude"
           ],
           "correct_answer": "Hemisphere",
-          "target_name": "Hemisphere",
-          "question_image": "hemisphere_alt"
+          "target_name": "Hemisphere"
         },
         {
           "instruction": "Which ones are renewable energy sources?",
@@ -816,8 +794,7 @@
             "Mineral"
           ],
           "correct_answer": "Stalactite",
-          "target_name": "Stalactite",
-          "question_image": "stalactite_alt"
+          "target_name": "Stalactite"
         },
         {
           "instruction": "Show me the barometer.",
@@ -833,8 +810,7 @@
             "Altimeter"
           ],
           "correct_answer": "Barometer",
-          "target_name": "Barometer",
-          "question_image": "barometer_alt"
+          "target_name": "Barometer"
         },
         {
           "instruction": "Which are invertebrates?",
