@@ -281,12 +281,16 @@ struct LearningSessionView: View {
     /// `false` the instruction card is short text only, so pinning the
     /// options at the bottom would leave an ugly empty gap.
     private func hasVisualContentAboveOptions(_ task: AdaptiveTask) -> Bool {
+        // Language comprehension suppresses question images and image hints
+        // in instructionCard, so they don't count as visual content here.
+        let suppressImage = (dimension == .languageComprehension)
         // instructionCard renders a large image from questionImage
-        if let qi = task.content.questionImage, !qi.isEmpty { return true }
+        if let qi = task.content.questionImage, !qi.isEmpty, !suppressImage { return true }
         // instructionCard renders a large image from imageHint (unless suppressed)
         if let ih = task.content.imageHint, !ih.isEmpty,
            !isImageGridTask(task), !isPatternTask(task),
-           task.content.inlineImages != true {
+           task.content.inlineImages != true,
+           !suppressImage {
             return true
         }
         // instructionCard renders a targetWord display
