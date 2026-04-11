@@ -1,62 +1,65 @@
-# Testing Backend Task Data Changes
-
-This skill covers how to verify backend task JSON data changes (image_hints, instructions, options, multi-select flags) for the Rising Star Kid adaptive learning platform.
+# Testing SpeakEasy Backend Tasks & SVG Assets
 
 ## Environment Setup
 
-1. Start the local backend from the PR branch:
+1. Start the backend:
    ```bash
-   cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+   cd backend && poetry run python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
    ```
-2. Force reseed with updated task data:
+2. Reseed the database after any task data changes:
    ```bash
-   curl -s -X POST "http://localhost:8000/tasks/seed?force=true"
+   curl -X POST "http://localhost:8000/tasks/seed?force=true"
    ```
-   This replaces all existing tasks with the data from the JSON files in the current branch.
 
-## Key API Endpoints
+## SVG Assets
 
-- `GET /tasks/?dimension={dim}&limit=100` — List all tasks for a dimension
-- `GET /tasks/{task_id}` — Get a specific task by ID
-- `POST /tasks/seed?force=true` — Force reseed all tasks from JSON files
-- `GET /tasks/stats/expanded` — Get task count statistics
+- SVG files are stored at `backend/app/resources/images/*.svg`
+- They are served via the backend at `/task-images/{name}.svg`
+- To verify an SVG renders, open `http://localhost:8000/task-images/{name}.svg` in a browser
+- Option names containing `/` (e.g. `shy/anxious`) are saved with `_` substitution (`shy_anxious.svg`)
+- The iOS app must apply the same `/ -> _` sanitization when constructing image URLs
 
-## Task Data Structure
+## Task Data Verification
 
-Tasks are stored with a `content` JSON column that includes:
-- `instruction_text` / `instruction_audio` — Task instructions
-- `image_hint` — Maps to SVG images on Cloudinary and locally
-- `options` / `correct_answer` — Answer choices
-- `multi_select` — Boolean flag for multi-select tasks
-- `instruction_zh` — Chinese translation of instructions
+### Checking image_hints via API
+```bash
+curl -s "http://localhost:8000/tasks/?dimension=social_behavior&limit=200" | python3 -c "
+import json, sys
+tasks = json.load(sys.stdin)
+for t in tasks:
+    hint = t['content'].get('image_hint', 'NONE')
+    instr = t['content'].get('instruction_text', '')[:60]
+    print(f'hint={hint:30s} instr={instr}')
+"
+```
 
-## Testing Checklist
+### Cross-checking option SVGs exist
+```bash
+curl -s "http://localhost:8000/tasks/?limit=1000" | python3 -c "
+import json, sys, os
+tasks = json.load(sys.stdin)
+img_dir = 'backend/app/resources/images'
+all_svgs = set(f[:-4] for f in os.listdir(img_dir) if f.endswith('.svg'))
+missing = set()
+for t in tasks:
+    for opt in t['content'].get('options', []):
+        if isinstance(opt, str) and len(opt.split()) <= 2:
+            key = opt.lower().replace(' ', '_').replace('/', '_')
+            if key not in all_svgs:
+                missing.add(opt)
+print(f'Missing: {len(missing)}')
+for m in sorted(missing): print(f'  - {m}')
+"
+```
 
-### For image_hint changes:
-1. Query tasks via API and verify `content.image_hint` values are correct
-2. Verify Cloudinary images are accessible: `curl -o /dev/null -w "%{http_code}" "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/{image_hint}"`
-3. Verify local SVG files exist in `backend/app/resources/images/`
-4. Verify `manifest.json` has matching aliases in `image_hint_aliases`
+## Key Rules
 
-### For instruction wording changes:
-1. Query tasks and check `content.instruction_text` matches expected wording
-2. Verify no old wording patterns remain (e.g., "in the box" for multi-select tasks)
-
-### For multi-select changes:
-1. Filter tasks where `content.multi_select == true`
-2. Verify `correct_answer` contains comma-separated values
-3. Verify each correct answer item exists in `options` array
-
-## Important Notes
-
-- The **deployed backend** (Fly.io) runs from `main` branch. PR branch changes won't appear there until merged + force reseeded.
-- After merging, you must POST to `https://risingstar-backend-zclkfobb.fly.dev/tasks/seed?force=true` to update the deployed DB.
-- Some tasks legitimately use "hat" as image_hint (tasks about actual hats). Don't flag these as errors.
-- The `seed_expanded.py` file reads task JSONs and builds the `content` dict via `_build_content()`. Image hints flow from JSON → `_build_content()` → DB `content` column → API response.
-- Cloudinary base URL: `https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/`
+1. **All task option SVGs must exist** — no "?" placeholders allowed. Single-word and two-word options trigger image grid display on iOS.
+2. **Social behavior images must match question context** — show the actual scenario (e.g. friend crying, gift exchange), not generic objects (hat, star, clock).
+3. **Language comprehension tasks should NOT have image_hint** for expanded tasks where the image would give away the listening comprehension answer. Exception: "Touch the X" tasks that need the image to show what to touch.
+4. **`instructionReferencesPicture()` in LearningSessionView.swift** determines when to show the image_hint above options. Be careful with phrases like "point to the" which can leak answers for identify-type tasks.
+5. **`pendingSilenceWork` in SpeechService.swift** must be accessed on the main queue (inside `DispatchQueue.main.async`) to avoid data races.
 
 ## Devin Secrets Needed
 
-- `CLOUDINARY_API_KEY` — For uploading new images to Cloudinary
-- `CLOUDINARY_API_SECRET` — For uploading new images to Cloudinary
-- No secrets needed for read-only API testing
+No secrets needed for backend testing. The backend runs locally without authentication.
