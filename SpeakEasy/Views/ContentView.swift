@@ -28,40 +28,26 @@ struct ContentView: View {
     
     private var mainTabView: some View {
         TabView(selection: $selectedTab) {
-            HomeView(selectedTab: $selectedTab)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-                .tag(0)
-            
             DimensionHubView()
                 .tabItem {
                     Image(systemName: "sparkles")
                     Text("Learn")
                 }
-                .tag(1)
-            
-            CameraRecognitionView()
-                .tabItem {
-                    Image(systemName: "camera.fill")
-                    Text("Camera")
-                }
-                .tag(2)
+                .tag(0)
             
             AdaptiveDashboardView()
                 .tabItem {
                     Image(systemName: "chart.bar.fill")
                     Text("Progress")
                 }
-                .tag(3)
+                .tag(1)
             
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
                     Text("Settings")
                 }
-                .tag(4)
+                .tag(2)
         }
         .accentColor(.purple)
         .overlay(
