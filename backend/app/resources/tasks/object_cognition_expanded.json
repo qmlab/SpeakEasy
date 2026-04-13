@@ -115,6 +115,294 @@
           ],
           "tap_target": "Star",
           "no_tap_target": "Circle, Square, Triangle"
+        },
+        {
+          "instruction": "Tap the apple. Do not tap the carrot.",
+          "question_id": "Q151",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the apple!\"",
+          "options": [
+            "Apple",
+            "Carrot"
+          ],
+          "correct_answer": "Apple",
+          "image_hint": "apple",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the bird. Do not tap the rock.",
+          "question_id": "Q152",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the bird!\"",
+          "options": [
+            "Bird",
+            "Rock"
+          ],
+          "correct_answer": "Bird",
+          "image_hint": "bird",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the fish. Do not tap the chair.",
+          "question_id": "Q153",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the fish!\"",
+          "options": [
+            "Fish",
+            "Chair"
+          ],
+          "correct_answer": "Fish",
+          "image_hint": "fish",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the dog. Do not tap the table.",
+          "question_id": "Q154",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the dog!\"",
+          "options": [
+            "Dog",
+            "Table"
+          ],
+          "correct_answer": "Dog",
+          "image_hint": "dog",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the cat. Do not tap the lamp.",
+          "question_id": "Q155",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the cat!\"",
+          "options": [
+            "Cat",
+            "Lamp"
+          ],
+          "correct_answer": "Cat",
+          "image_hint": "cat",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the flower. Do not tap the key.",
+          "question_id": "Q156",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the flower!\"",
+          "options": [
+            "Flower",
+            "Key"
+          ],
+          "correct_answer": "Flower",
+          "image_hint": "flower",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the sun. Do not tap the lock.",
+          "question_id": "Q157",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the sun!\"",
+          "options": [
+            "Sun",
+            "Lock"
+          ],
+          "correct_answer": "Sun",
+          "image_hint": "sun",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the butterfly. Do not tap the box.",
+          "question_id": "Q158",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the butterfly!\"",
+          "options": [
+            "Butterfly",
+            "Box"
+          ],
+          "correct_answer": "Butterfly",
+          "image_hint": "butterfly",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the tree. Do not tap the hammer.",
+          "question_id": "Q159",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the tree!\"",
+          "options": [
+            "Tree",
+            "Hammer"
+          ],
+          "correct_answer": "Tree",
+          "image_hint": "tree",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the rabbit. Do not tap the pencil.",
+          "question_id": "Q160",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the rabbit!\"",
+          "options": [
+            "Rabbit",
+            "Pencil"
+          ],
+          "correct_answer": "Rabbit",
+          "image_hint": "rabbit",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the duck. Do not tap the book.",
+          "question_id": "Q161",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the duck!\"",
+          "options": [
+            "Duck",
+            "Book"
+          ],
+          "correct_answer": "Duck",
+          "image_hint": "duck",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the frog. Do not tap the clock.",
+          "question_id": "Q162",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the frog!\"",
+          "options": [
+            "Frog",
+            "Clock"
+          ],
+          "correct_answer": "Frog",
+          "image_hint": "frog",
+          "inline_images": true
+        },
+        {
+          "instruction": "Watch! What did you see? Tap the right one.",
+          "question_id": "Q163",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Flash the image again briefly",
+          "options": [
+            "Banana",
+            "Apple",
+            "Grape"
+          ],
+          "correct_answer": "Banana",
+          "image_hint": "banana",
+          "inline_images": true,
+          "flash_image": "banana"
+        },
+        {
+          "instruction": "Watch! What did you see? Tap the right one.",
+          "question_id": "Q164",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Flash the image again briefly",
+          "options": [
+            "Car",
+            "Bus",
+            "Train"
+          ],
+          "correct_answer": "Car",
+          "image_hint": "car",
+          "inline_images": true,
+          "flash_image": "car"
+        },
+        {
+          "instruction": "Watch! What did you see? Tap the right one.",
+          "question_id": "Q165",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Flash the image again briefly",
+          "options": [
+            "Hat",
+            "Shoe",
+            "Sock"
+          ],
+          "correct_answer": "Hat",
+          "image_hint": "hat",
+          "inline_images": true,
+          "flash_image": "hat"
+        },
+        {
+          "instruction": "Watch! What did you see? Tap the right one.",
+          "question_id": "Q166",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Flash the image again briefly",
+          "options": [
+            "Moon",
+            "Sun",
+            "Star"
+          ],
+          "correct_answer": "Moon",
+          "image_hint": "moon",
+          "inline_images": true,
+          "flash_image": "moon"
+        },
+        {
+          "instruction": "Tap the cow. Do not tap the scissors.",
+          "question_id": "Q262",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the cow!\"",
+          "options": [
+            "Cow",
+            "Scissors"
+          ],
+          "correct_answer": "Cow",
+          "image_hint": "cow",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the horse. Do not tap the ruler.",
+          "question_id": "Q263",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the horse!\"",
+          "options": [
+            "Horse",
+            "Ruler"
+          ],
+          "correct_answer": "Horse",
+          "image_hint": "horse",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the penguin. Do not tap the phone.",
+          "question_id": "Q264",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the penguin!\"",
+          "options": [
+            "Penguin",
+            "Phone"
+          ],
+          "correct_answer": "Penguin",
+          "image_hint": "penguin",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the dolphin. Do not tap the camera.",
+          "question_id": "Q265",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the dolphin!\"",
+          "options": [
+            "Dolphin",
+            "Camera"
+          ],
+          "correct_answer": "Dolphin",
+          "image_hint": "dolphin",
+          "inline_images": true
         }
       ]
     },
@@ -259,6 +547,229 @@
           ],
           "tap_target": "Blue",
           "no_tap_target": "Red, Green, Yellow"
+        },
+        {
+          "instruction": "Tap the elephant. Do not tap anything else.",
+          "question_id": "Q167",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the elephant!\"",
+          "options": [
+            "Elephant",
+            "Bear",
+            "Chair",
+            "Lamp"
+          ],
+          "correct_answer": "Elephant",
+          "image_hint": "elephant",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the horse. Do not tap the others.",
+          "question_id": "Q168",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the horse!\"",
+          "options": [
+            "Horse",
+            "Cow",
+            "Bus",
+            "Phone"
+          ],
+          "correct_answer": "Horse",
+          "image_hint": "horse",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the penguin. Do not tap anything else.",
+          "question_id": "Q169",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the penguin!\"",
+          "options": [
+            "Penguin",
+            "Fox",
+            "Drum",
+            "Pen"
+          ],
+          "correct_answer": "Penguin",
+          "image_hint": "penguin",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the whale. Do not tap the others.",
+          "question_id": "Q170",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the whale!\"",
+          "options": [
+            "Whale",
+            "Crab",
+            "Gift",
+            "Soap"
+          ],
+          "correct_answer": "Whale",
+          "image_hint": "whale",
+          "inline_images": true
+        },
+        {
+          "instruction": "Tap the eagle. Do not tap the others.",
+          "question_id": "Q171",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Only tap the eagle!\"",
+          "options": [
+            "Eagle",
+            "Scissors",
+            "Spoon",
+            "Door"
+          ],
+          "correct_answer": "Eagle",
+          "image_hint": "eagle",
+          "inline_images": true
+        },
+        {
+          "instruction": "Sort: Animals go left, Objects go right. [Cat]",
+          "question_id": "Q172",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it an animal or an object?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "cat"
+        },
+        {
+          "instruction": "Sort: Animals go left, Objects go right. [Hammer]",
+          "question_id": "Q173",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it an animal or an object?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "hammer"
+        },
+        {
+          "instruction": "Sort: Animals go left, Objects go right. [Bird]",
+          "question_id": "Q174",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it an animal or an object?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "bird"
+        },
+        {
+          "instruction": "Sort: Animals go left, Objects go right. [Clock]",
+          "question_id": "Q175",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it an animal or an object?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "clock"
+        },
+        {
+          "instruction": "Sort: Animals go left, Objects go right. [Frog]",
+          "question_id": "Q176",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it an animal or an object?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "frog"
+        },
+        {
+          "instruction": "Sort: Food go left, Clothing go right. [Cake]",
+          "question_id": "Q266",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or clothing?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "cake"
+        },
+        {
+          "instruction": "Sort: Food go left, Clothing go right. [Shoe]",
+          "question_id": "Q267",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or clothing?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "shoe"
+        },
+        {
+          "instruction": "Sort: Food go left, Clothing go right. [Bread]",
+          "question_id": "Q268",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or clothing?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "bread"
+        },
+        {
+          "instruction": "Sort: Food go left, Clothing go right. [Hat]",
+          "question_id": "Q269",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or clothing?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "hat"
+        },
+        {
+          "instruction": "Sort: Food go left, Clothing go right. [Pizza]",
+          "question_id": "Q270",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or clothing?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "pizza"
+        },
+        {
+          "instruction": "Sort: Food go left, Clothing go right. [Boot]",
+          "question_id": "Q271",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or clothing?\"",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "boot"
         }
       ]
     },
@@ -443,6 +954,318 @@
           ],
           "tap_target": "Circle-Circle pair",
           "no_tap_target": "Others"
+        },
+        {
+          "instruction": "Tap when you see a vehicle. Do not tap for animals.",
+          "question_id": "Q177",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "car",
+          "tap_count": 3,
+          "animation_frames": [
+            "car",
+            "dog",
+            "bus",
+            "cat",
+            "train",
+            "bear"
+          ],
+          "options": [
+            "Car",
+            "Dog",
+            "Bus",
+            "Cat",
+            "Train",
+            "Bear"
+          ],
+          "slide_items": [
+            "Car",
+            "Dog",
+            "Bus",
+            "Cat",
+            "Train",
+            "Bear"
+          ],
+          "tap_target": "Car, Bus, Train",
+          "no_tap_target": "Dog, Cat, Bear"
+        },
+        {
+          "instruction": "Tap when you see food. Do not tap for tools.",
+          "question_id": "Q178",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "apple",
+          "tap_count": 3,
+          "animation_frames": [
+            "apple",
+            "hammer",
+            "cake",
+            "saw",
+            "pizza",
+            "wrench"
+          ],
+          "options": [
+            "Apple",
+            "Hammer",
+            "Cake",
+            "Saw",
+            "Pizza",
+            "Wrench"
+          ],
+          "slide_items": [
+            "Apple",
+            "Hammer",
+            "Cake",
+            "Saw",
+            "Pizza",
+            "Wrench"
+          ],
+          "tap_target": "Apple, Cake, Pizza",
+          "no_tap_target": "Hammer, Saw, Wrench"
+        },
+        {
+          "instruction": "Tap when you see clothing. Do not tap for furniture.",
+          "question_id": "Q179",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "shirt",
+          "tap_count": 3,
+          "animation_frames": [
+            "shirt",
+            "chair",
+            "hat",
+            "table",
+            "sock",
+            "bed"
+          ],
+          "options": [
+            "Shirt",
+            "Chair",
+            "Hat",
+            "Table",
+            "Sock",
+            "Bed"
+          ],
+          "slide_items": [
+            "Shirt",
+            "Chair",
+            "Hat",
+            "Table",
+            "Sock",
+            "Bed"
+          ],
+          "tap_target": "Shirt, Hat, Sock",
+          "no_tap_target": "Chair, Table, Bed"
+        },
+        {
+          "instruction": "Tap when you see an instrument. Do not tap for animals.",
+          "question_id": "Q180",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "guitar",
+          "tap_count": 3,
+          "animation_frames": [
+            "guitar",
+            "cat",
+            "drum",
+            "dog",
+            "piano",
+            "bird"
+          ],
+          "options": [
+            "Guitar",
+            "Cat",
+            "Drum",
+            "Dog",
+            "Piano",
+            "Bird"
+          ],
+          "slide_items": [
+            "Guitar",
+            "Cat",
+            "Drum",
+            "Dog",
+            "Piano",
+            "Bird"
+          ],
+          "tap_target": "Guitar, Drum, Piano",
+          "no_tap_target": "Cat, Dog, Bird"
+        },
+        {
+          "instruction": "Remember: Cat, Ball. Tap the things you heard.",
+          "question_id": "Q181",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Cat",
+            "Ball",
+            "Dog",
+            "Car"
+          ],
+          "correct_answer": "Cat, Ball",
+          "image_hint": "cat",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Fish, Tree. Tap the things you heard.",
+          "question_id": "Q182",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Fish",
+            "Tree",
+            "Bird",
+            "Rock"
+          ],
+          "correct_answer": "Fish, Tree",
+          "image_hint": "fish",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Hat, Shoe. Tap the things you heard.",
+          "question_id": "Q183",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Hat",
+            "Shoe",
+            "Sock",
+            "Glove"
+          ],
+          "correct_answer": "Hat, Shoe",
+          "image_hint": "hat",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Apple, Cake. Tap the things you heard.",
+          "question_id": "Q184",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Apple",
+            "Cake",
+            "Bread",
+            "Milk"
+          ],
+          "correct_answer": "Apple, Cake",
+          "image_hint": "apple",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Star, Moon. Tap the things you heard.",
+          "question_id": "Q185",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Star",
+            "Moon",
+            "Sun",
+            "Cloud"
+          ],
+          "correct_answer": "Star, Moon",
+          "image_hint": "star",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Elephant, Whale. Tap the things you heard.",
+          "question_id": "Q186",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Elephant",
+            "Whale",
+            "Dog",
+            "Cat"
+          ],
+          "correct_answer": "Elephant, Whale",
+          "image_hint": "elephant",
+          "multi_select": true
+        },
+        {
+          "instruction": "Tap when you see something in the sky. Do not tap for ground things.",
+          "question_id": "Q272",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "cloud",
+          "tap_count": 3,
+          "animation_frames": [
+            "cloud",
+            "rock",
+            "rainbow",
+            "chair",
+            "moon",
+            "table"
+          ],
+          "options": [
+            "Cloud",
+            "Rock",
+            "Rainbow",
+            "Chair",
+            "Moon",
+            "Table"
+          ],
+          "slide_items": [
+            "Cloud",
+            "Rock",
+            "Rainbow",
+            "Chair",
+            "Moon",
+            "Table"
+          ],
+          "tap_target": "Cloud, Rainbow, Moon",
+          "no_tap_target": "Rock, Chair, Table"
+        },
+        {
+          "instruction": "Tap when you see a fruit. Do not tap for other food.",
+          "question_id": "Q273",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "grape",
+          "tap_count": 3,
+          "animation_frames": [
+            "grape",
+            "bread",
+            "strawberry",
+            "pizza",
+            "pear",
+            "cake"
+          ],
+          "options": [
+            "Grape",
+            "Bread",
+            "Strawberry",
+            "Pizza",
+            "Pear",
+            "Cake"
+          ],
+          "slide_items": [
+            "Grape",
+            "Bread",
+            "Strawberry",
+            "Pizza",
+            "Pear",
+            "Cake"
+          ],
+          "tap_target": "Grape, Strawberry, Pear",
+          "no_tap_target": "Bread, Pizza, Cake"
         }
       ]
     },
@@ -622,6 +1445,234 @@
           ],
           "tap_target": "Red",
           "no_tap_target": "Blue, Green"
+        },
+        {
+          "instruction": "Sort: Fruits go left, Vegetables go right. [Apple]",
+          "question_id": "Q187",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "apple"
+        },
+        {
+          "instruction": "Sort: Fruits go left, Vegetables go right. [Carrot]",
+          "question_id": "Q188",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "carrot"
+        },
+        {
+          "instruction": "Sort: Fruits go left, Vegetables go right. [Banana]",
+          "question_id": "Q189",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "banana"
+        },
+        {
+          "instruction": "Sort: Fruits go left, Vegetables go right. [Broccoli]",
+          "question_id": "Q190",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "broccoli"
+        },
+        {
+          "instruction": "Sort: Things that fly go left, Things that swim go right. [Bird]",
+          "question_id": "Q191",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "bird"
+        },
+        {
+          "instruction": "Sort: Things that fly go left, Things that swim go right. [Fish]",
+          "question_id": "Q192",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "fish"
+        },
+        {
+          "instruction": "Sort: Things that fly go left, Things that swim go right. [Butterfly]",
+          "question_id": "Q193",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "butterfly"
+        },
+        {
+          "instruction": "Sort: Things that fly go left, Things that swim go right. [Whale]",
+          "question_id": "Q194",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the category",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "whale"
+        },
+        {
+          "instruction": "Tap when you see something from the sky. Do not tap for land things.",
+          "question_id": "Q195",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "sun",
+          "tap_count": 3,
+          "animation_frames": [
+            "sun",
+            "dog",
+            "moon",
+            "chair",
+            "star",
+            "table"
+          ],
+          "options": [
+            "Sun",
+            "Dog",
+            "Moon",
+            "Chair",
+            "Star",
+            "Table"
+          ],
+          "slide_items": [
+            "Sun",
+            "Dog",
+            "Moon",
+            "Chair",
+            "Star",
+            "Table"
+          ],
+          "tap_target": "Sun, Moon, Star",
+          "no_tap_target": "Dog, Chair, Table"
+        },
+        {
+          "instruction": "Tap when you see a water animal. Do not tap for land animals.",
+          "question_id": "Q196",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "fish",
+          "tap_count": 3,
+          "animation_frames": [
+            "fish",
+            "dog",
+            "dolphin",
+            "cat",
+            "whale",
+            "horse"
+          ],
+          "options": [
+            "Fish",
+            "Dog",
+            "Dolphin",
+            "Cat",
+            "Whale",
+            "Horse"
+          ],
+          "slide_items": [
+            "Fish",
+            "Dog",
+            "Dolphin",
+            "Cat",
+            "Whale",
+            "Horse"
+          ],
+          "tap_target": "Fish, Dolphin, Whale",
+          "no_tap_target": "Dog, Cat, Horse"
+        },
+        {
+          "instruction": "Sort: Nature go left, Man-made go right. [Rain]",
+          "question_id": "Q274",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "rain"
+        },
+        {
+          "instruction": "Sort: Nature go left, Man-made go right. [Lock]",
+          "question_id": "Q275",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "lock"
+        },
+        {
+          "instruction": "Sort: Nature go left, Man-made go right. [Wind]",
+          "question_id": "Q276",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "wind"
+        },
+        {
+          "instruction": "Sort: Nature go left, Man-made go right. [Gear]",
+          "question_id": "Q277",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "gear"
         }
       ]
     },
@@ -797,6 +1848,228 @@
           ],
           "tap_target": "Increasing numbers",
           "no_tap_target": "Decreasing numbers"
+        },
+        {
+          "instruction": "Sort: Things with legs go left, Things without legs go right. [Dog]",
+          "question_id": "Q197",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the property",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "dog"
+        },
+        {
+          "instruction": "Sort: Things with legs go left, Things without legs go right. [Fish]",
+          "question_id": "Q198",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the property",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "fish"
+        },
+        {
+          "instruction": "Sort: Things with legs go left, Things without legs go right. [Elephant]",
+          "question_id": "Q199",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the property",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "elephant"
+        },
+        {
+          "instruction": "Sort: Things with legs go left, Things without legs go right. [Whale]",
+          "question_id": "Q200",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the property",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "whale"
+        },
+        {
+          "instruction": "Sort: Hot things go left, Cold things go right. [Sun]",
+          "question_id": "Q201",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the property",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "sun"
+        },
+        {
+          "instruction": "Sort: Hot things go left, Cold things go right. [Ice cream]",
+          "question_id": "Q202",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the property",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "ice_cream"
+        },
+        {
+          "instruction": "Remember: Grape, Pear, Orange. Tap all the things you heard.",
+          "question_id": "Q203",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Grape",
+            "Pear",
+            "Orange",
+            "Apple",
+            "Banana"
+          ],
+          "correct_answer": "Grape, Pear, Orange",
+          "image_hint": "grape",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Drum, Guitar, Piano. Tap all the instruments you heard.",
+          "question_id": "Q204",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Drum",
+            "Guitar",
+            "Piano",
+            "Violin",
+            "Trumpet"
+          ],
+          "correct_answer": "Drum, Guitar, Piano",
+          "image_hint": "drum",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Car, Bus, Train. Tap all the vehicles you heard.",
+          "question_id": "Q205",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Car",
+            "Bus",
+            "Train",
+            "Plane",
+            "Bicycle"
+          ],
+          "correct_answer": "Car, Bus, Train",
+          "image_hint": "car",
+          "multi_select": true
+        },
+        {
+          "instruction": "Remember: Dog, Cat, Bird, Fish. Tap the animals that can fly.",
+          "question_id": "Q206",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Repeat the words once",
+          "options": [
+            "Dog",
+            "Cat",
+            "Bird",
+            "Fish"
+          ],
+          "correct_answer": "Bird",
+          "image_hint": "bird"
+        },
+        {
+          "instruction": "Tap when you see something with wheels. Do not tap for other things.",
+          "question_id": "Q207",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "4",
+          "image_hint": "car",
+          "tap_count": 4,
+          "animation_frames": [
+            "car",
+            "dog",
+            "bus",
+            "tree",
+            "bicycle",
+            "bird",
+            "truck",
+            "fish"
+          ],
+          "options": [
+            "Car",
+            "Dog",
+            "Bus",
+            "Tree",
+            "Bicycle",
+            "Bird",
+            "Truck",
+            "Fish"
+          ],
+          "slide_items": [
+            "Car",
+            "Dog",
+            "Bus",
+            "Tree",
+            "Bicycle",
+            "Bird",
+            "Truck",
+            "Fish"
+          ],
+          "tap_target": "Car, Bus, Bicycle, Truck",
+          "no_tap_target": "Dog, Tree, Bird, Fish"
+        },
+        {
+          "instruction": "Tap when you see a tool. Do not tap for toys.",
+          "question_id": "Q208",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say the category name before starting",
+          "correct_answer": "3",
+          "image_hint": "hammer",
+          "tap_count": 3,
+          "animation_frames": [
+            "hammer",
+            "ball",
+            "saw",
+            "doll",
+            "wrench",
+            "teddy_bear"
+          ],
+          "options": [
+            "Hammer",
+            "Ball",
+            "Saw",
+            "Doll",
+            "Wrench",
+            "Teddy bear"
+          ],
+          "slide_items": [
+            "Hammer",
+            "Ball",
+            "Saw",
+            "Doll",
+            "Wrench",
+            "Teddy bear"
+          ],
+          "tap_target": "Hammer, Saw, Wrench",
+          "no_tap_target": "Ball, Doll, Teddy bear"
         }
       ]
     },
@@ -960,6 +2233,243 @@
           ],
           "tap_target": "Same as 2 steps before",
           "no_tap_target": "Different from 2 steps before"
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q209",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Apple",
+            "Banana",
+            "Grape",
+            "Chair"
+          ],
+          "correct_answer": "Chair",
+          "image_hint": "apple",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q210",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Dog",
+            "Cat",
+            "Bird",
+            "Hammer"
+          ],
+          "correct_answer": "Hammer",
+          "image_hint": "dog",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q211",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Car",
+            "Bus",
+            "Train",
+            "Flower"
+          ],
+          "correct_answer": "Flower",
+          "image_hint": "car",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q212",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Shirt",
+            "Hat",
+            "Sock",
+            "Rock"
+          ],
+          "correct_answer": "Rock",
+          "image_hint": "shirt",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q213",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Guitar",
+            "Drum",
+            "Piano",
+            "Tree"
+          ],
+          "correct_answer": "Tree",
+          "image_hint": "guitar",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q214",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Sun",
+            "Moon",
+            "Star",
+            "Shoe"
+          ],
+          "correct_answer": "Shoe",
+          "image_hint": "sun",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q215",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Scissors",
+            "Hammer",
+            "Wrench",
+            "Cake"
+          ],
+          "correct_answer": "Cake",
+          "image_hint": "scissors",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q216",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Frog",
+            "Fish",
+            "Dolphin",
+            "Pencil"
+          ],
+          "correct_answer": "Pencil",
+          "image_hint": "frog",
+          "inline_images": true
+        },
+        {
+          "instruction": "Remember: Elephant, Dog, Cat. Tap the Biggest animal.",
+          "question_id": "Q217",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the sizes or speeds",
+          "options": [
+            "Elephant",
+            "Dog",
+            "Cat"
+          ],
+          "correct_answer": "Elephant",
+          "image_hint": "elephant",
+          "inline_images": true
+        },
+        {
+          "instruction": "Remember: Ant, Bear, Whale. Tap the Smallest animal.",
+          "question_id": "Q218",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the sizes or speeds",
+          "options": [
+            "Ant",
+            "Bear",
+            "Whale"
+          ],
+          "correct_answer": "Ant",
+          "image_hint": "ant",
+          "inline_images": true
+        },
+        {
+          "instruction": "Remember: Train, Bicycle, Plane. Tap the Fastest one.",
+          "question_id": "Q219",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the sizes or speeds",
+          "options": [
+            "Train",
+            "Bicycle",
+            "Plane"
+          ],
+          "correct_answer": "Plane",
+          "image_hint": "plane",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q278",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Whale",
+            "Dolphin",
+            "Fish",
+            "Car"
+          ],
+          "correct_answer": "Car",
+          "image_hint": "whale",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q279",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Bed",
+            "Chair",
+            "Table",
+            "Banana"
+          ],
+          "correct_answer": "Banana",
+          "image_hint": "bed",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q280",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Boot",
+            "Sandal",
+            "Shoe",
+            "Apple"
+          ],
+          "correct_answer": "Apple",
+          "image_hint": "boot",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q281",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Rain",
+            "Cloud",
+            "Wind",
+            "Hammer"
+          ],
+          "correct_answer": "Hammer",
+          "image_hint": "rain",
+          "inline_images": true
         }
       ]
     },
@@ -1002,6 +2512,222 @@
           "instruction_zh": "听故事，每次听到角色名字时点击。",
           "tap_count": 5,
           "story": "Tom went to the park. He saw his friend Lisa. Tom and Lisa played on the swings. Then Tom went home."
+        },
+        {
+          "instruction": "Sort: Big animals go left, Small animals go right. [Elephant]",
+          "question_id": "Q220",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "elephant"
+        },
+        {
+          "instruction": "Sort: Big animals go left, Small animals go right. [Ant]",
+          "question_id": "Q221",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "ant"
+        },
+        {
+          "instruction": "Sort: Big animals go left, Small animals go right. [Whale]",
+          "question_id": "Q222",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "whale"
+        },
+        {
+          "instruction": "Sort: Big animals go left, Small animals go right. [Bug]",
+          "question_id": "Q223",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "bug"
+        },
+        {
+          "instruction": "Now switch! Things you eat go left, Things you ride go right. [Pizza]",
+          "question_id": "Q224",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "pizza"
+        },
+        {
+          "instruction": "Things you eat go left, Things you ride go right. [Bus]",
+          "question_id": "Q225",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "bus"
+        },
+        {
+          "instruction": "Things you eat go left, Things you ride go right. [Cake]",
+          "question_id": "Q226",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "cake"
+        },
+        {
+          "instruction": "Things you eat go left, Things you ride go right. [Bicycle]",
+          "question_id": "Q227",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "bicycle"
+        },
+        {
+          "instruction": "Remember: Fox, Lamp, Banana. Which one is an animal?",
+          "question_id": "Q228",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the categories",
+          "options": [
+            "Fox",
+            "Lamp",
+            "Banana"
+          ],
+          "correct_answer": "Fox",
+          "image_hint": "fox",
+          "inline_images": true
+        },
+        {
+          "instruction": "Remember: Key, Eagle, Pizza. Which one can fly?",
+          "question_id": "Q229",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the categories",
+          "options": [
+            "Key",
+            "Eagle",
+            "Pizza"
+          ],
+          "correct_answer": "Eagle",
+          "image_hint": "eagle",
+          "inline_images": true
+        },
+        {
+          "instruction": "Remember: Whale, Rock, Sock. Which one lives in water?",
+          "question_id": "Q230",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the categories",
+          "options": [
+            "Whale",
+            "Rock",
+            "Sock"
+          ],
+          "correct_answer": "Whale",
+          "image_hint": "whale",
+          "inline_images": true
+        },
+        {
+          "instruction": "Remember: Pen, Dolphin, Hat. Which one is alive?",
+          "question_id": "Q231",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Think about the categories",
+          "options": [
+            "Pen",
+            "Dolphin",
+            "Hat"
+          ],
+          "correct_answer": "Dolphin",
+          "image_hint": "dolphin",
+          "inline_images": true
+        },
+        {
+          "instruction": "Sort: Things you wear go left, Things you eat go right. [Jacket]",
+          "question_id": "Q282",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "jacket"
+        },
+        {
+          "instruction": "Sort: Things you wear go left, Things you eat go right. [Strawberry]",
+          "question_id": "Q283",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "strawberry"
+        },
+        {
+          "instruction": "Sort: Things you wear go left, Things you eat go right. [Glove]",
+          "question_id": "Q284",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "glove"
+        },
+        {
+          "instruction": "Sort: Things you wear go left, Things you eat go right. [Watermelon]",
+          "question_id": "Q285",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "watermelon"
         }
       ]
     },
@@ -1068,6 +2794,228 @@
             "number_7",
             "number_6"
           ]
+        },
+        {
+          "instruction": "Tap for things you can find in a kitchen. Do not tap for outdoor things.",
+          "question_id": "Q232",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Think carefully about the category",
+          "correct_answer": "3",
+          "image_hint": "cup",
+          "tap_count": 3,
+          "animation_frames": [
+            "cup",
+            "tree",
+            "spoon",
+            "flower",
+            "plate",
+            "rock"
+          ],
+          "options": [
+            "Cup",
+            "Tree",
+            "Spoon",
+            "Flower",
+            "Plate",
+            "Rock"
+          ],
+          "slide_items": [
+            "Cup",
+            "Tree",
+            "Spoon",
+            "Flower",
+            "Plate",
+            "Rock"
+          ],
+          "tap_target": "Cup, Spoon, Plate",
+          "no_tap_target": "Tree, Flower, Rock"
+        },
+        {
+          "instruction": "Tap for things smaller than your hand. Do not tap for bigger things.",
+          "question_id": "Q233",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Think carefully about the category",
+          "correct_answer": "3",
+          "image_hint": "key",
+          "tap_count": 3,
+          "animation_frames": [
+            "key",
+            "elephant",
+            "pen",
+            "bus",
+            "soap",
+            "house"
+          ],
+          "options": [
+            "Key",
+            "Elephant",
+            "Pen",
+            "Bus",
+            "Soap",
+            "House"
+          ],
+          "slide_items": [
+            "Key",
+            "Elephant",
+            "Pen",
+            "Bus",
+            "Soap",
+            "House"
+          ],
+          "tap_target": "Key, Pen, Soap",
+          "no_tap_target": "Elephant, Bus, House"
+        },
+        {
+          "instruction": "Tap for things that make sound. Do not tap for quiet things.",
+          "question_id": "Q234",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Think carefully about the category",
+          "correct_answer": "4",
+          "image_hint": "drum",
+          "tap_count": 4,
+          "animation_frames": [
+            "drum",
+            "rock",
+            "guitar",
+            "chair",
+            "trumpet",
+            "lamp",
+            "piano",
+            "book"
+          ],
+          "options": [
+            "Drum",
+            "Rock",
+            "Guitar",
+            "Chair",
+            "Trumpet",
+            "Lamp",
+            "Piano",
+            "Book"
+          ],
+          "slide_items": [
+            "Drum",
+            "Rock",
+            "Guitar",
+            "Chair",
+            "Trumpet",
+            "Lamp",
+            "Piano",
+            "Book"
+          ],
+          "tap_target": "Drum, Guitar, Trumpet, Piano",
+          "no_tap_target": "Rock, Chair, Lamp, Book"
+        },
+        {
+          "instruction": "Sort: Things that need electricity go left, Things that don't go right. [Lamp]",
+          "question_id": "Q235",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think: does it need to be plugged in or use batteries?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "lamp"
+        },
+        {
+          "instruction": "Sort: Things that need electricity go left, Things that don't go right. [Hammer]",
+          "question_id": "Q236",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think: does it need to be plugged in or use batteries?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "hammer"
+        },
+        {
+          "instruction": "Sort: Things that need electricity go left, Things that don't go right. [Phone]",
+          "question_id": "Q237",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think: does it need to be plugged in or use batteries?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "phone"
+        },
+        {
+          "instruction": "Sort: Things that need electricity go left, Things that don't go right. [Spoon]",
+          "question_id": "Q238",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think: does it need to be plugged in or use batteries?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "spoon"
+        },
+        {
+          "instruction": "Sort: Things that need electricity go left, Things that don't go right. [Camera]",
+          "question_id": "Q239",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think: does it need to be plugged in or use batteries?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "camera"
+        },
+        {
+          "instruction": "Sort: Things that need electricity go left, Things that don't go right. [Pencil]",
+          "question_id": "Q240",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think: does it need to be plugged in or use batteries?",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "pencil"
+        },
+        {
+          "instruction": "Remember: Dog, Cat, Fish, Bird, Frog. How many are pets?",
+          "question_id": "Q241",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Count the items that match",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct_answer": "3",
+          "image_hint": "dog"
+        },
+        {
+          "instruction": "Remember: Car, Plane, Bicycle, Boat, Train. How many travel on land?",
+          "question_id": "Q242",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Count the items that match",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct_answer": "3",
+          "image_hint": "car"
         }
       ]
     },
@@ -1118,6 +3066,170 @@
           "instruction_zh": "读段落。每次看到'happy'的同义词就点击。",
           "tap_count": 6,
           "story": "The joyful girl ran through the field. She felt glad to see the cheerful flowers. Her delighted friend waved. They were both pleased and merry to play together."
+        },
+        {
+          "instruction": "Remember this story: 'Amy has 2 dogs and 3 cats.' How many pets does Amy have in total?",
+          "question_id": "Q243",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Add the numbers together",
+          "correct_answer": "5",
+          "image_hint": "dog",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Remember this story: 'The farm has 4 horses and 2 cows.' How many animals are on the farm?",
+          "question_id": "Q244",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Add the numbers together",
+          "correct_answer": "6",
+          "image_hint": "horse",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Remember: 'Sam ate 3 apples and 2 bananas for lunch.' How many fruits did Sam eat?",
+          "question_id": "Q245",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Add the numbers together",
+          "correct_answer": "5",
+          "image_hint": "apple",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Remember: 'The garage has 2 cars, 1 truck, and 3 bicycles.' How many vehicles are there?",
+          "question_id": "Q246",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Add the numbers together",
+          "correct_answer": "6",
+          "image_hint": "car",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Sort: Positive words go left, Negative words go right. [Gift]",
+          "question_id": "Q247",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "gift"
+        },
+        {
+          "instruction": "Sort: Positive words go left, Negative words go right. [Sad]",
+          "question_id": "Q248",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "sad_face"
+        },
+        {
+          "instruction": "Sort: Positive words go left, Negative words go right. [Rainbow]",
+          "question_id": "Q249",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "rainbow"
+        },
+        {
+          "instruction": "Sort: Positive words go left, Negative words go right. [Scared]",
+          "question_id": "Q250",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "scared_face"
+        },
+        {
+          "instruction": "Sort: Man-made go left, Natural go right. [Car]",
+          "question_id": "Q251",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "car"
+        },
+        {
+          "instruction": "Sort: Man-made go left, Natural go right. [Tree]",
+          "question_id": "Q252",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "tree"
+        },
+        {
+          "instruction": "Sort: Man-made go left, Natural go right. [Phone]",
+          "question_id": "Q253",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Left",
+          "image_hint": "phone"
+        },
+        {
+          "instruction": "Sort: Man-made go left, Natural go right. [Flower]",
+          "question_id": "Q254",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Think about the sorting rule carefully",
+          "options": [
+            "Left",
+            "Right"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "flower"
+        },
+        {
+          "instruction": "Remember: 'The park has 3 dogs, 2 cats, and 1 bird.' How many animals have tails?",
+          "question_id": "Q286",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Dogs and cats have tails, but birds don't typically",
+          "correct_answer": "5",
+          "image_hint": "dog",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Remember: 'Maya saw 2 butterflies, 1 frog, and 3 birds.' How many can fly?",
+          "question_id": "Q287",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Butterflies and birds can fly",
+          "correct_answer": "5",
+          "image_hint": "butterfly",
+          "input_mode": "number"
         }
       ]
     },
@@ -1169,6 +3281,146 @@
             "letter_c",
             "letter_b"
           ]
+        },
+        {
+          "instruction": "Remember: 'The zoo has 5 elephants, 3 penguins, and 2 eagles.' How many animals have 4 legs?",
+          "question_id": "Q255",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Only elephants have 4 legs",
+          "correct_answer": "5",
+          "image_hint": "elephant",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Remember: 'In the toy box there are 4 balls, 2 dolls, and 3 puzzles.' How many round toys are there?",
+          "question_id": "Q256",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Only balls are round",
+          "correct_answer": "4",
+          "image_hint": "ball",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Remember: 'The shelf has a book, a clock, a phone, and a lamp.' How many need electricity?",
+          "question_id": "Q257",
+          "source_test": "Custom",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Clock, phone, and lamp need electricity",
+          "correct_answer": "3",
+          "image_hint": "lamp",
+          "input_mode": "number"
+        },
+        {
+          "instruction": "Tap when you see something that can carry people. Do not tap for others.",
+          "question_id": "Q258",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Think carefully about each item",
+          "correct_answer": "4",
+          "image_hint": "bus",
+          "tap_count": 4,
+          "animation_frames": [
+            "bus",
+            "rock",
+            "plane",
+            "pencil",
+            "boat",
+            "lamp",
+            "train",
+            "dog"
+          ],
+          "options": [
+            "Bus",
+            "Rock",
+            "Plane",
+            "Pencil",
+            "Boat",
+            "Lamp",
+            "Train",
+            "Dog"
+          ],
+          "slide_items": [
+            "Bus",
+            "Rock",
+            "Plane",
+            "Pencil",
+            "Boat",
+            "Lamp",
+            "Train",
+            "Dog"
+          ],
+          "tap_target": "Bus, Plane, Boat, Train",
+          "no_tap_target": "Rock, Pencil, Lamp, Dog"
+        },
+        {
+          "instruction": "Tap when you see something you can read. Do not tap for others.",
+          "question_id": "Q259",
+          "source_test": "Custom",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Think carefully about each item",
+          "correct_answer": "3",
+          "image_hint": "book",
+          "tap_count": 3,
+          "animation_frames": [
+            "book",
+            "hammer",
+            "letter",
+            "ball",
+            "map",
+            "spoon"
+          ],
+          "options": [
+            "Book",
+            "Hammer",
+            "Letter",
+            "Ball",
+            "Map",
+            "Spoon"
+          ],
+          "slide_items": [
+            "Book",
+            "Hammer",
+            "Letter",
+            "Ball",
+            "Map",
+            "Spoon"
+          ],
+          "tap_target": "Book, Letter, Map",
+          "no_tap_target": "Hammer, Ball, Spoon"
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q260",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Violin",
+            "Guitar",
+            "Trumpet",
+            "Umbrella"
+          ],
+          "correct_answer": "Umbrella",
+          "image_hint": "violin",
+          "inline_images": true
+        },
+        {
+          "instruction": "Which one does NOT belong? Tap the odd one out.",
+          "question_id": "Q261",
+          "source_test": "Custom",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Which one is different from the others?\"",
+          "options": [
+            "Hammer",
+            "Saw",
+            "Wrench",
+            "Cookie"
+          ],
+          "correct_answer": "Cookie",
+          "image_hint": "hammer",
+          "inline_images": true
         }
       ]
     }
