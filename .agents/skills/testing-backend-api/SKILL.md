@@ -10,6 +10,12 @@ cd backend
 poetry run uvicorn app.main:app --reload --port 8000
 ```
 
+For isolated testing with a fresh database:
+```bash
+cd backend
+rm -f test.db && DATABASE_URL="sqlite:///./test.db" uvicorn app.main:app --host 0.0.0.0 --port 8200
+```
+
 ## Re-seeding After Changes
 After any changes to seed files (`seed_expanded.py`, `seed_tasks.py`, task JSON files), you must re-seed:
 ```bash
@@ -19,10 +25,27 @@ curl -X POST https://risingstar-backend-zclkfobb.fly.dev/tasks/seed?force=true
 ```
 
 ## Key API Endpoints for Testing
-- `GET /cms/tasks?dimension=cognitive_logic&page_size=100` — List all cognitive logic tasks
-- `POST /adaptive/sessions/start` with body `{"player_id": "...", "dimension": "cognitive_logic"}` — Start adaptive session
-- `GET /adaptive/sessions/{session_id}/next-task?player_id={pid}&dimension=cognitive_logic` — Get next task
-- `POST /adaptive/sessions/{session_id}/submit-answer` — Submit answer
+- `POST /auth/guest` with body `{"device_id": "test-xxx"}` — Create guest player
+- `POST /tasks/seed` — Seed all tasks into DB
+- `GET /tasks/?dimension=object_cognition&limit=500` — List tasks with filters
+- `POST /adaptive/sessions/start` with body `{"player_id": "...", "session_type": "practice", "dimension": "object_cognition"}` — Start adaptive session
+- `GET /adaptive/sessions/{session_id}/next-task?player_id={pid}&dimension=object_cognition` — Get next task
+- `POST /adaptive/attempts` with body `{"session_id": "...", "task_id": "...", "player_id": "...", "is_correct": true, "score": 1, "response_time_ms": 2000}` — Submit attempt
+- `POST /adaptive/sessions/{session_id}/end` — End session
+
+## Testing Repeat-Prevention Logic
+The adaptive engine has smart repeat-prevention:
+- **Correctly answered today**: excluded from selection for rest of day (UTC midnight boundary, cross-session)
+- **Incorrectly answered**: excluded for 3-question cooldown (session-scoped), then eligible again
+
+Test flow:
+1. Create guest player → seed tasks → start session
+2. Get task, submit correct → verify task never reappears in subsequent draws
+3. Get task, submit incorrect → verify task doesn't appear in next 3 draws
+4. Submit 3 filler correct answers → verify incorrect task can reappear (probabilistic)
+5. End session, start new → verify correct exclusion persists, incorrect cooldown resets
+
+Note: Tests 3-5 involve random selection, so the "can reappear" check is probabilistic. With ~30 eligible tasks, a task may not appear in 30 random draws ~34% of the time. The deterministic checks (task excluded during cooldown, correct exclusion persists cross-session) are the reliable assertions.
 
 ## Testing Cognitive Task Transformations
 For backend-only changes to task transformation logic (`seed_expanded.py`), API-level testing is sufficient because:
@@ -45,7 +68,7 @@ For tasks with `options_zh`, verify positional correspondence:
 - This is achieved via `zip` + `shuffle` pattern in seed code
 
 ## Expanded vs Base Tasks
-- Expanded tasks: from `cognitive_logic_expanded.json` (40 tasks, 8 per level)
+- Expanded tasks: from `*_expanded.json` files
 - Base tasks: from `seed_tasks.py` (older, may have different data patterns)
 - When testing PR changes to expanded task logic, filter by task names or check task counts to distinguish
 
