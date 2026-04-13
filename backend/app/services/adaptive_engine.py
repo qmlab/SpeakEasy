@@ -302,13 +302,59 @@ class AdaptiveEngine:
         return task
 
     def _get_recent_task_ids(self, session_id: str) -> list[str]:
-        """Get task IDs already used in this session to avoid immediate repeats."""
-        attempts = (
+        """Get task IDs to exclude from next-task selection.
+
+        Rules:
+        - Tasks answered correctly today → always excluded (no repeat today).
+        - Tasks answered incorrectly → excluded only for a short cooldown
+          (the most recent INCORRECT_COOLDOWN attempts) so the child sees
+          other questions before retrying.
+        """
+        return self._get_exclude_task_ids(session_id)
+
+    # Number of intervening tasks before an incorrectly-answered question
+    # can reappear.
+    INCORRECT_COOLDOWN = 3
+
+    def _get_exclude_task_ids(self, session_id: str) -> list[str]:
+        """Build the exclusion set for task selection."""
+        # 1) All tasks answered correctly today (across any session)
+        session = (
+            self.db.query(LearningSession)
+            .filter(LearningSession.id == session_id)
+            .first()
+        )
+        if not session:
+            return []
+
+        player_id = session.player_id
+        today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+
+        correct_today = (
             self.db.query(TaskAttempt.task_id)
-            .filter(TaskAttempt.session_id == session_id)
+            .filter(
+                TaskAttempt.player_id == player_id,
+                TaskAttempt.is_correct == True,  # noqa: E712
+                TaskAttempt.created_at >= today_start,
+            )
+            .distinct()
             .all()
         )
-        return [a.task_id for a in attempts if a.task_id]
+        exclude = {a.task_id for a in correct_today if a.task_id}
+
+        # 2) Recently incorrect tasks in THIS session — cooldown window
+        session_attempts = (
+            self.db.query(TaskAttempt)
+            .filter(TaskAttempt.session_id == session_id)
+            .order_by(desc(TaskAttempt.created_at))
+            .limit(self.INCORRECT_COOLDOWN)
+            .all()
+        )
+        for attempt in session_attempts:
+            if attempt.task_id and not attempt.is_correct:
+                exclude.add(attempt.task_id)
+
+        return list(exclude)
 
     # ---- Attempt Processing ----
 
