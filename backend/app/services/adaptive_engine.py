@@ -328,7 +328,9 @@ class AdaptiveEngine:
             return []
 
         player_id = session.player_id
-        today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        today_start = datetime.utcnow().replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
 
         correct_today = (
             self.db.query(TaskAttempt.task_id)
