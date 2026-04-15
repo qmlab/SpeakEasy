@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E0F7FA" stroke="#006064" stroke-width="3"/>
-<path d="M25 70 L35 85 L85 85 L95 70Z" fill="#795548"/><rect x="55" y="40" width="5" height="30" fill="#795548"/><polygon points="60,40 60,65 85,65" fill="#fff" stroke="#E0E0E0" stroke-width="1"/><path d="M20 90 Q40 82 60 90 Q80 82 100 90" fill="none" stroke="#4DD0E1" stroke-width="3"/></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<path d="M18 66 L30 82 L90 82 L102 66Z" fill="#8D6E63"/>
+<path d="M20 66 Q60 60 100 66" fill="none" stroke="#A1887F" stroke-width="1.5"/>
+<rect x="58" y="32" width="4" height="34" rx="1" fill="#795548"/>
+<path d="M62 34 L62 62 L88 62Z" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<path d="M62 38 L62 58 L82 58Z" fill="#E3F2FD" opacity="0.5"/>
+<path d="M58 40 L32 62 L58 62Z" fill="#E53935"/>
+<path d="M15 88 Q30 82 45 88 Q60 94 75 88 Q90 82 105 88" fill="none" stroke="#42A5F5" stroke-width="2" opacity="0.5"/>
+</svg>

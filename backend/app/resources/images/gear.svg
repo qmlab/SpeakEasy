@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#ECEFF1" rx="20"/><circle cx="100" cy="100" r="30" fill="#78909C"/><circle cx="100" cy="100" r="15" fill="#ECEFF1"/><rect x="95" y="55" width="10" height="20" fill="#78909C"/><rect x="95" y="125" width="10" height="20" fill="#78909C"/><rect x="55" y="95" width="20" height="10" fill="#78909C"/><rect x="125" y="95" width="20" height="10" fill="#78909C"/><rect x="66" y="66" width="10" height="20" fill="#78909C" transform="rotate(45,71,76)"/><rect x="124" y="66" width="10" height="20" fill="#78909C" transform="rotate(-45,129,76)"/><rect x="66" y="114" width="10" height="20" fill="#78909C" transform="rotate(-45,71,124)"/><rect x="124" y="114" width="10" height="20" fill="#78909C" transform="rotate(45,129,124)"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
+
+<path d="M54 20 L66 20 L68 28 L76 32 L84 26 L92 34 L86 42 L90 50 L98 52 L98 64 L90 66 L86 74 L92 82 L84 90 L76 84 L68 88 L66 96 L54 96 L52 88 L44 84 L36 90 L28 82 L34 74 L30 66 L22 64 L22 52 L30 50 L34 42 L28 34 L36 26 L44 32 L52 28Z" fill="#78909C"/>
+<circle cx="60" cy="58" r="16" fill="#546E7A"/>
+<circle cx="60" cy="58" r="10" fill="#607D8B"/>
+<circle cx="60" cy="58" r="4" fill="#78909C"/>
+<ellipse cx="54" cy="52" rx="4" ry="3" fill="#90A4AE" opacity="0.3"/>
+</svg>

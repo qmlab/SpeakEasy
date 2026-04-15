@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#FF6F00" stroke-width="3"/>
-<polygon points="60,25 68,50 95,50 73,65 80,90 60,75 40,90 47,65 25,50 52,50" fill="#FDD835" stroke="#FF6F00" stroke-width="2"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+
+<path d="M60 18 L68 44 L96 44 L74 60 L82 86 L60 70 L38 86 L46 60 L24 44 L52 44Z" fill="#FDD835"/>
+<path d="M60 18 L68 44 L96 44 L74 60 L82 86 L60 70 L38 86 L46 60 L24 44 L52 44Z" fill="none" stroke="#F9A825" stroke-width="2"/>
+<path d="M60 24 L56 44 L52 44 L60 52Z" fill="#FFF176" opacity="0.5"/>
+<path d="M60 70 L56 60 L46 60 L38 86Z" fill="#FBC02D" opacity="0.3"/>
+</svg>

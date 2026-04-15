@@ -1,1 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E8F5E9" rx="20"/><ellipse cx="100" cy="110" rx="40" ry="30" fill="#4CAF50"/><circle cx="78" cy="82" r="14" fill="#4CAF50"/><circle cx="122" cy="82" r="14" fill="#4CAF50"/><circle cx="78" cy="80" r="8" fill="white"/><circle cx="122" cy="80" r="8" fill="white"/><circle cx="78" cy="80" r="4" fill="#1A237E"/><circle cx="122" cy="80" r="4" fill="#1A237E"/><path d="M80 120 Q100 135 120 120" fill="none" stroke="#2E7D32" stroke-width="3"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="68" rx="26" ry="20" fill="#4CAF50"/>
+<!-- Belly -->
+<ellipse cx="60" cy="72" rx="18" ry="14" fill="#C8E6C9"/>
+<!-- Head -->
+<ellipse cx="60" cy="48" rx="22" ry="14" fill="#66BB6A"/>
+<!-- Eye bumps -->
+<circle cx="44" cy="36" r="10" fill="#66BB6A"/>
+<circle cx="76" cy="36" r="10" fill="#66BB6A"/>
+<!-- Eyes -->
+<circle cx="44" cy="34" r="7" fill="white"/>
+<circle cx="76" cy="34" r="7" fill="white"/>
+<circle cx="45" cy="34" r="4" fill="black"/>
+<circle cx="75" cy="34" r="4" fill="black"/>
+<circle cx="44" cy="33" r="1.5" fill="white"/>
+<circle cx="74" cy="33" r="1.5" fill="white"/>
+<!-- Nostrils -->
+<circle cx="54" cy="48" r="1.5" fill="#2E7D32"/>
+<circle cx="66" cy="48" r="1.5" fill="#2E7D32"/>
+<!-- Mouth -->
+<path d="M38 54 Q60 62 82 54" fill="none" stroke="#2E7D32" stroke-width="1.5"/>
+<!-- Front legs -->
+<path d="M36 70 L22 82 L18 80 M22 82 L20 86 M22 82 L24 86" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+<path d="M84 70 L98 82 L102 80 M98 82 L100 86 M98 82 L96 86" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+<!-- Back legs -->
+<path d="M40 80 Q30 90 34 96 L28 96 M34 96 L32 100 M34 96 L38 98" fill="none" stroke="#4CAF50" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M80 80 Q90 90 86 96 L92 96 M86 96 L88 100 M86 96 L82 98" fill="none" stroke="#4CAF50" stroke-width="3.5" stroke-linecap="round"/>
+<!-- Spots -->
+<circle cx="48" cy="65" r="3" fill="#388E3C" opacity="0.3"/>
+<circle cx="70" cy="62" r="2.5" fill="#388E3C" opacity="0.3"/>
+<circle cx="58" cy="74" r="2" fill="#388E3C" opacity="0.3"/>
+</svg>

@@ -1,1 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="12" fill="#E8F5E9"/><ellipse cx="50" cy="50" rx="28" ry="18" fill="#8D6E63"/><ellipse cx="25" cy="38" rx="10" ry="14" fill="#8D6E63"/><circle cx="22" cy="34" r="2.5" fill="#333"/><path d="M18 42 L12 44 L18 46" fill="#FFCC80"/><path d="M20 25 L18 18 L24 24" fill="#5D4037"/><path d="M28 25 L30 18 L26 24" fill="#5D4037"/><path d="M35 34 Q45 28 55 34" fill="#5D4037" opacity="0.6"/><rect x="35" y="65" width="4" height="18" rx="2" fill="#5D4037"/><rect x="45" y="65" width="4" height="18" rx="2" fill="#5D4037"/><rect x="55" y="65" width="4" height="18" rx="2" fill="#5D4037"/><rect x="65" y="65" width="4" height="18" rx="2" fill="#5D4037"/><path d="M75 45 Q85 50 80 60 Q78 55 75 52" fill="#5D4037"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="56" cy="62" rx="28" ry="18" fill="#8D6E63"/>
+<!-- Legs -->
+<rect x="34" y="76" width="5" height="18" rx="2" fill="#795548"/>
+<rect x="44" y="76" width="5" height="18" rx="2" fill="#795548"/>
+<rect x="68" y="76" width="5" height="18" rx="2" fill="#795548"/>
+<rect x="78" y="76" width="5" height="18" rx="2" fill="#795548"/>
+<!-- Hooves -->
+<rect x="33" y="92" width="7" height="3" rx="1" fill="#3E2723"/>
+<rect x="43" y="92" width="7" height="3" rx="1" fill="#3E2723"/>
+<rect x="67" y="92" width="7" height="3" rx="1" fill="#3E2723"/>
+<rect x="77" y="92" width="7" height="3" rx="1" fill="#3E2723"/>
+<!-- Neck -->
+<path d="M78 55 Q82 40 80 30" fill="none" stroke="#8D6E63" stroke-width="14"/>
+<!-- Head -->
+<ellipse cx="84" cy="28" rx="12" ry="10" fill="#A1887F" transform="rotate(-10 84 28)"/>
+<!-- Ear -->
+<path d="M82 18 L80 10 L86 16Z" fill="#A1887F"/>
+<!-- Eye -->
+<circle cx="88" cy="26" r="3" fill="black"/>
+<circle cx="87" cy="25" r="1" fill="white"/>
+<!-- Nostril -->
+<circle cx="94" cy="30" r="1.5" fill="#5D4037"/>
+<!-- Mouth line -->
+<path d="M90 32 L96 34" fill="none" stroke="#5D4037" stroke-width="1"/>
+<!-- Mane -->
+<path d="M76 20 Q72 24 74 30 Q70 26 72 34 Q68 30 70 38 Q66 36 68 44 Q64 40 68 50" fill="none" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
+<!-- Tail -->
+<path d="M28 58 Q18 52 16 60 Q14 68 20 70 Q16 64 22 62" fill="none" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,1 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E3F2FD" rx="20"/><ellipse cx="100" cy="100" rx="60" ry="25" fill="#F48FB1"/><polygon points="155,100 180,80 180,120" fill="#EC407A"/><circle cx="60" cy="93" r="4" fill="#1A237E"/><path d="M90 80 Q100 70 110 80" fill="none" stroke="#EC407A" stroke-width="2"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<!-- Body -->
+<path d="M20 58 Q20 44 45 40 Q70 38 88 48 Q98 54 88 62 Q70 72 45 70 Q20 70 20 58Z" fill="#EF9A9A"/>
+<!-- Belly -->
+<path d="M24 60 Q30 68 50 68 Q70 68 86 60 Q72 70 50 70 Q28 68 24 60Z" fill="#FFCDD2"/>
+<!-- Head detail -->
+<path d="M20 58 Q18 54 20 50" fill="none" stroke="#E57373" stroke-width="1"/>
+<!-- Eye -->
+<circle cx="28" cy="52" r="4" fill="white"/>
+<circle cx="29" cy="52" r="2.5" fill="black"/>
+<circle cx="28" cy="51" r="1" fill="white"/>
+<!-- Mouth -->
+<path d="M18 56 Q20 58 18 60" fill="none" stroke="#C62828" stroke-width="1.5"/>
+<!-- Dorsal fin -->
+<path d="M55 40 Q58 28 65 32 Q62 36 60 42Z" fill="#E57373"/>
+<!-- Tail -->
+<path d="M88 54 L102 42 Q106 40 104 44 L96 52" fill="#E57373"/>
+<path d="M88 60 L102 72 Q106 74 104 70 L96 62" fill="#E57373"/>
+<!-- Spots -->
+<circle cx="40" cy="50" r="2" fill="#C62828" opacity="0.3"/>
+<circle cx="52" cy="48" r="1.5" fill="#C62828" opacity="0.3"/>
+<circle cx="64" cy="50" r="2" fill="#C62828" opacity="0.3"/>
+<circle cx="48" cy="56" r="1.5" fill="#C62828" opacity="0.2"/>
+<!-- Scale hints -->
+<path d="M40 54 Q44 52 48 54" fill="none" stroke="#E57373" stroke-width="0.8" opacity="0.3"/>
+<path d="M52 54 Q56 52 60 54" fill="none" stroke="#E57373" stroke-width="0.8" opacity="0.3"/>
+<path d="M64 54 Q68 52 72 54" fill="none" stroke="#E57373" stroke-width="0.8" opacity="0.3"/>
+</svg>

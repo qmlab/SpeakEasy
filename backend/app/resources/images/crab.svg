@@ -1,1 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E0F7FA" rx="20"/><ellipse cx="100" cy="110" rx="40" ry="30" fill="#E53935"/><circle cx="85" cy="95" r="6" fill="white"/><circle cx="115" cy="95" r="6" fill="white"/><circle cx="85" cy="95" r="3" fill="#1A237E"/><circle cx="115" cy="95" r="3" fill="#1A237E"/><ellipse cx="55" cy="85" rx="12" ry="8" fill="#C62828" transform="rotate(-20,55,85)"/><ellipse cx="145" cy="85" rx="12" ry="8" fill="#C62828" transform="rotate(20,145,85)"/><line x1="60" y1="120" x2="45" y2="140" stroke="#E53935" stroke-width="4"/><line x1="75" y1="130" x2="65" y2="150" stroke="#E53935" stroke-width="4"/><line x1="125" y1="130" x2="135" y2="150" stroke="#E53935" stroke-width="4"/><line x1="140" y1="120" x2="155" y2="140" stroke="#E53935" stroke-width="4"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFEBEE" stroke="#C62828" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="60" rx="22" ry="16" fill="#E53935"/>
+<!-- Shell pattern -->
+<path d="M44 56 Q52 50 60 56" fill="none" stroke="#C62828" stroke-width="1.5" opacity="0.5"/>
+<path d="M60 56 Q68 50 76 56" fill="none" stroke="#C62828" stroke-width="1.5" opacity="0.5"/>
+<!-- Eyes on stalks -->
+<line x1="50" y1="46" x2="46" y2="36" stroke="#E53935" stroke-width="3"/>
+<line x1="70" y1="46" x2="74" y2="36" stroke="#E53935" stroke-width="3"/>
+<circle cx="46" cy="34" r="4" fill="white"/>
+<circle cx="74" cy="34" r="4" fill="white"/>
+<circle cx="47" cy="34" r="2" fill="black"/>
+<circle cx="73" cy="34" r="2" fill="black"/>
+<!-- Claws -->
+<path d="M38 56 L24 48 Q18 44 20 50 L26 54 Q18 54 16 58 Q18 62 24 60 L38 58Z" fill="#EF5350"/>
+<path d="M82 56 L96 48 Q102 44 100 50 L94 54 Q102 54 104 58 Q102 62 96 60 L82 58Z" fill="#EF5350"/>
+<!-- Legs -->
+<path d="M42 68 L32 78 L28 82" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M46 70 L38 82 L34 86" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M54 72 L48 84 L46 88" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M78 68 L88 78 L92 82" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M74 70 L82 82 L86 86" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M66 72 L72 84 L74 88" fill="none" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+<!-- Mouth -->
+<path d="M55 64 Q60 66 65 64" fill="none" stroke="#B71C1C" stroke-width="1"/>
+</svg>

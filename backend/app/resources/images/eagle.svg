@@ -1,1 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E3F2FD" rx="20"/><ellipse cx="100" cy="100" rx="25" ry="20" fill="#5D4037"/><circle cx="100" cy="80" r="16" fill="white"/><circle cx="95" cy="77" r="3" fill="#1A237E"/><polygon points="110,80 130,78 110,84" fill="#FF8F00"/><path d="M75 95 Q40 70 25 100 Q50 90 75 100Z" fill="#4E342E"/><path d="M125 95 Q160 70 175 100 Q150 90 125 100Z" fill="#4E342E"/><line x1="95" y1="120" x2="90" y2="145" stroke="#FF8F00" stroke-width="3"/><line x1="105" y1="120" x2="110" y2="145" stroke="#FF8F00" stroke-width="3"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<!-- Wings spread -->
+<path d="M60 50 Q30 30 12 35 Q18 40 22 38 Q14 42 10 48 Q20 44 26 42 L60 55Z" fill="#5D4037"/>
+<path d="M60 50 Q90 30 108 35 Q102 40 98 38 Q106 42 110 48 Q100 44 94 42 L60 55Z" fill="#5D4037"/>
+<!-- Body -->
+<ellipse cx="60" cy="65" rx="14" ry="18" fill="#795548"/>
+<!-- Belly -->
+<ellipse cx="60" cy="68" rx="8" ry="12" fill="#8D6E63"/>
+<!-- Head -->
+<circle cx="60" cy="40" r="12" fill="white"/>
+<!-- Eye -->
+<circle cx="56" cy="38" r="3" fill="#FDD835"/>
+<circle cx="56" cy="38" r="1.5" fill="black"/>
+<circle cx="64" cy="38" r="3" fill="#FDD835"/>
+<circle cx="64" cy="38" r="1.5" fill="black"/>
+<!-- Beak -->
+<path d="M56 44 L60 52 L64 44Z" fill="#FF9800"/>
+<path d="M58 44 L60 50 L62 44Z" fill="#EF6C00"/>
+<!-- Tail feathers -->
+<path d="M52 82 L48 96 L54 90 L56 96 L60 88 L64 96 L66 90 L72 96 L68 82Z" fill="#5D4037"/>
+<!-- Talons -->
+<path d="M52 82 L48 88 L44 90 M48 88 L48 92 M48 88 L52 90" fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+<path d="M68 82 L72 88 L76 90 M72 88 L72 92 M72 88 L68 90" fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+</svg>

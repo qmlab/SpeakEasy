@@ -1,1 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#F1F8E9" rx="20"/><path d="M40 120 Q60 80 80 110 Q100 140 120 100 Q140 60 160 100" fill="none" stroke="#E91E63" stroke-width="12" stroke-linecap="round"/><circle cx="160" cy="100" r="10" fill="#E91E63"/><circle cx="156" cy="96" r="3" fill="white"/><circle cx="164" cy="96" r="3" fill="white"/><circle cx="156" cy="96" r="1.5" fill="#1A237E"/><circle cx="164" cy="96" r="1.5" fill="#1A237E"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
+
+<!-- Worm body segments -->
+<path d="M30 60 Q40 40 55 50 Q70 60 75 45 Q80 30 90 40 Q100 50 92 60" fill="none" stroke="#E91E63" stroke-width="10" stroke-linecap="round"/>
+<path d="M30 60 Q40 40 55 50 Q70 60 75 45 Q80 30 90 40 Q100 50 92 60" fill="none" stroke="#F48FB1" stroke-width="6" stroke-linecap="round"/>
+<!-- Segment lines -->
+<line x1="38" y1="47" x2="40" y2="53" stroke="#C2185B" stroke-width="1" opacity="0.4"/>
+<line x1="48" y1="48" x2="50" y2="54" stroke="#C2185B" stroke-width="1" opacity="0.4"/>
+<line x1="58" y1="52" x2="60" y2="58" stroke="#C2185B" stroke-width="1" opacity="0.4"/>
+<line x1="68" y1="52" x2="70" y2="46" stroke="#C2185B" stroke-width="1" opacity="0.4"/>
+<line x1="78" y1="38" x2="80" y2="44" stroke="#C2185B" stroke-width="1" opacity="0.4"/>
+<line x1="88" y1="40" x2="90" y2="46" stroke="#C2185B" stroke-width="1" opacity="0.4"/>
+<!-- Face on head (leftmost) -->
+<circle cx="26" cy="62" r="7" fill="#E91E63"/>
+<circle cx="24" cy="60" r="2.5" fill="white"/>
+<circle cx="30" cy="60" r="2.5" fill="white"/>
+<circle cx="24" cy="60" r="1.5" fill="black"/>
+<circle cx="30" cy="60" r="1.5" fill="black"/>
+<!-- Mouth -->
+<path d="M24 66 Q27 68 30 66" fill="none" stroke="#880E4F" stroke-width="1"/>
+<!-- Cheeks -->
+<circle cx="22" cy="64" r="2" fill="#F8BBD0" opacity="0.5"/>
+<circle cx="32" cy="64" r="2" fill="#F8BBD0" opacity="0.5"/>
+<!-- Ground -->
+<path d="M20 80 Q40 78 60 80 Q80 82 100 80" fill="none" stroke="#8D6E63" stroke-width="1.5" opacity="0.3"/>
+</svg>

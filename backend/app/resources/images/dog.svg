@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
-<ellipse cx="60" cy="68" rx="22" ry="20" fill="#8D6E63"/><circle cx="52" cy="62" r="3" fill="#fff"/><circle cx="68" cy="62" r="3" fill="#fff"/><circle cx="52" cy="62" r="1.5" fill="#333"/><circle cx="68" cy="62" r="1.5" fill="#333"/><ellipse cx="60" cy="72" rx="5" ry="3" fill="#333"/><ellipse cx="42" cy="50" rx="8" ry="14" fill="#6D4C41" transform="rotate(-15 42 50)"/><ellipse cx="78" cy="50" rx="8" ry="14" fill="#6D4C41" transform="rotate(15 78 50)"/><path d="M55 78 Q60 83 65 78" stroke="#333" stroke-width="2" fill="none"/></svg>
+<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="74" rx="24" ry="18" fill="#8D6E63"/>
+<!-- Head -->
+<circle cx="60" cy="46" r="20" fill="#A1887F"/>
+<!-- Ears - floppy -->
+<path d="M40 42 Q32 38 28 48 Q26 56 34 56 Q38 54 42 48Z" fill="#795548"/>
+<path d="M80 42 Q88 38 92 48 Q94 56 86 56 Q82 54 78 48Z" fill="#795548"/>
+<!-- Eyes -->
+<circle cx="52" cy="44" r="5" fill="white"/>
+<circle cx="68" cy="44" r="5" fill="white"/>
+<circle cx="53" cy="44" r="3" fill="#4E342E"/>
+<circle cx="67" cy="44" r="3" fill="#4E342E"/>
+<circle cx="52" cy="43" r="1" fill="white"/>
+<circle cx="66" cy="43" r="1" fill="white"/>
+<!-- Nose -->
+<ellipse cx="60" cy="52" rx="5" ry="3.5" fill="#3E2723"/>
+<ellipse cx="59" cy="51" rx="1.5" ry="1" fill="#5D4037" opacity="0.5"/>
+<!-- Mouth -->
+<path d="M60 55 L60 58 Q56 62 52 60" fill="none" stroke="#5D4037" stroke-width="1.2" stroke-linecap="round"/>
+<path d="M60 58 Q64 62 68 60" fill="none" stroke="#5D4037" stroke-width="1.2" stroke-linecap="round"/>
+<!-- Tongue -->
+<path d="M58 58 Q60 64 62 58" fill="#E91E63"/>
+<!-- Paws -->
+<ellipse cx="44" cy="90" rx="8" ry="4" fill="#A1887F"/>
+<ellipse cx="76" cy="90" rx="8" ry="4" fill="#A1887F"/>
+<!-- Tail -->
+<path d="M84 72 Q94 62 92 50" fill="none" stroke="#8D6E63" stroke-width="5" stroke-linecap="round"/>
+<!-- Collar -->
+<path d="M42 58 Q60 64 78 58" fill="none" stroke="#E53935" stroke-width="3"/>
+<circle cx="60" cy="62" r="3" fill="#FDD835"/>
+</svg>

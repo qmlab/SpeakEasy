@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E8EAF6" stroke="#283593" stroke-width="3"/>
-<ellipse cx="60" cy="65" rx="20" ry="25" fill="#37474F"/><ellipse cx="60" cy="70" rx="13" ry="18" fill="#fff"/><circle cx="53" cy="52" r="2.5" fill="#fff"/><circle cx="67" cy="52" r="2.5" fill="#fff"/><circle cx="53" cy="52" r="1.2" fill="#333"/><circle cx="67" cy="52" r="1.2" fill="#333"/><polygon points="57,58 60,63 63,58" fill="#FF9800"/><path d="M40 60 Q35 70 42 80" stroke="#37474F" stroke-width="4" fill="none"/><path d="M80 60 Q85 70 78 80" stroke="#37474F" stroke-width="4" fill="none"/><path d="M52 88 L48 93 L58 93 Z" fill="#FF9800"/><path d="M68 88 L62 93 L72 93 Z" fill="#FF9800"/></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="64" rx="22" ry="28" fill="#37474F"/>
+<!-- Belly -->
+<ellipse cx="60" cy="68" rx="14" ry="22" fill="white"/>
+<!-- Head -->
+<circle cx="60" cy="36" r="16" fill="#263238"/>
+<!-- Eye patches -->
+<ellipse cx="52" cy="36" rx="6" ry="5" fill="white"/>
+<ellipse cx="68" cy="36" rx="6" ry="5" fill="white"/>
+<!-- Eyes -->
+<circle cx="52" cy="36" r="3" fill="black"/>
+<circle cx="68" cy="36" r="3" fill="black"/>
+<circle cx="51" cy="35" r="1" fill="white"/>
+<circle cx="67" cy="35" r="1" fill="white"/>
+<!-- Beak -->
+<path d="M56 42 L60 48 L64 42Z" fill="#FF9800"/>
+<!-- Wings/flippers -->
+<path d="M38 54 Q30 64 28 76 Q30 78 34 74 Q36 66 40 58Z" fill="#37474F"/>
+<path d="M82 54 Q90 64 92 76 Q90 78 86 74 Q84 66 80 58Z" fill="#37474F"/>
+<!-- Feet -->
+<path d="M48 90 L42 96 L54 96Z" fill="#FF9800"/>
+<path d="M72 90 L66 96 L78 96Z" fill="#FF9800"/>
+<!-- Belly gradient -->
+<ellipse cx="60" cy="60" rx="10" ry="8" fill="#FFF9C4" opacity="0.3"/>
+</svg>

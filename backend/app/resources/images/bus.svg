@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-<rect x="25" y="45" width="70" height="32" rx="6" fill="#FDD835"/><rect x="30" y="50" width="14" height="12" rx="2" fill="#BBDEFB"/><rect x="48" y="50" width="14" height="12" rx="2" fill="#BBDEFB"/><rect x="66" y="50" width="14" height="12" rx="2" fill="#BBDEFB"/><circle cx="38" cy="80" r="6" fill="#333"/><circle cx="38" cy="80" r="3" fill="#666"/><circle cx="82" cy="80" r="6" fill="#333"/><circle cx="82" cy="80" r="3" fill="#666"/></svg>
+
+<rect x="16" y="34" width="88" height="44" rx="6" fill="#FDD835"/>
+<rect x="16" y="34" width="88" height="10" rx="6" fill="#F9A825"/>
+<rect x="22" y="46" width="16" height="14" rx="2" fill="#BBDEFB"/>
+<rect x="42" y="46" width="16" height="14" rx="2" fill="#BBDEFB"/>
+<rect x="62" y="46" width="16" height="14" rx="2" fill="#BBDEFB"/>
+<rect x="82" y="46" width="16" height="14" rx="2" fill="#BBDEFB"/>
+<circle cx="32" cy="82" r="7" fill="#424242"/>
+<circle cx="32" cy="82" r="4" fill="#757575"/>
+<circle cx="88" cy="82" r="7" fill="#424242"/>
+<circle cx="88" cy="82" r="4" fill="#757575"/>
+<rect x="16" y="66" width="88" height="4" fill="#F9A825"/>
+<rect x="96" y="50" width="6" height="8" rx="1" fill="#EF5350"/>
+<rect x="18" y="50" width="6" height="8" rx="1" fill="#FDD835"/>
+</svg>

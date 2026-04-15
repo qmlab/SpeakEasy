@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#E65100" stroke-width="3"/>
-<circle cx="60" cy="60" r="25" fill="#fff" stroke="#333" stroke-width="3"/><circle cx="60" cy="60" r="2" fill="#333"/><line x1="60" y1="60" x2="60" y2="42" stroke="#333" stroke-width="2.5"/><line x1="60" y1="60" x2="75" y2="60" stroke="#333" stroke-width="2"/><text x="60" y="42" text-anchor="middle" font-size="7" fill="#333">12</text><text x="82" y="63" text-anchor="middle" font-size="7" fill="#333">3</text><text x="60" y="83" text-anchor="middle" font-size="7" fill="#333">6</text><text x="38" y="63" text-anchor="middle" font-size="7" fill="#333">9</text></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<circle cx="60" cy="60" r="30" fill="white" stroke="#1565C0" stroke-width="3"/>
+<circle cx="60" cy="60" r="27" fill="white" stroke="#90CAF9" stroke-width="1"/>
+<line x1="60" y1="34" x2="60" y2="38" stroke="#1565C0" stroke-width="2"/>
+<line x1="60" y1="82" x2="60" y2="86" stroke="#1565C0" stroke-width="2"/>
+<line x1="34" y1="60" x2="38" y2="60" stroke="#1565C0" stroke-width="2"/>
+<line x1="82" y1="60" x2="86" y2="60" stroke="#1565C0" stroke-width="2"/>
+<text x="57" y="42" font-size="8" fill="#1565C0" font-family="sans-serif">12</text>
+<text x="77" y="63" font-size="8" fill="#1565C0" font-family="sans-serif">3</text>
+<text x="58" y="84" font-size="8" fill="#1565C0" font-family="sans-serif">6</text>
+<text x="36" y="63" font-size="8" fill="#1565C0" font-family="sans-serif">9</text>
+<line x1="60" y1="60" x2="60" y2="40" stroke="#1565C0" stroke-width="3" stroke-linecap="round"/>
+<line x1="60" y1="60" x2="74" y2="54" stroke="#1565C0" stroke-width="2" stroke-linecap="round"/>
+<line x1="60" y1="60" x2="72" y2="68" stroke="#E53935" stroke-width="1" stroke-linecap="round"/>
+<circle cx="60" cy="60" r="3" fill="#1565C0"/>
+</svg>

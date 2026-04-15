@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#546E7A" stroke-width="3"/>
-<ellipse cx="60" cy="65" rx="25" ry="22" fill="#90A4AE"/><circle cx="48" cy="55" r="3" fill="#fff"/><circle cx="48" cy="55" r="1.5" fill="#333"/><path d="M75 60 Q85 65 80 80 Q78 85 75 80 Q72 75 74 65" fill="#90A4AE" stroke="#546E7A" stroke-width="1.5"/><ellipse cx="40" cy="58" rx="10" ry="12" fill="#78909C"/><ellipse cx="80" cy="58" rx="10" ry="12" fill="#78909C"/></svg>
+<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="55" cy="62" rx="28" ry="22" fill="#90A4AE"/>
+<!-- Legs -->
+<rect x="32" y="78" width="10" height="16" rx="4" fill="#78909C"/>
+<rect x="46" y="78" width="10" height="16" rx="4" fill="#78909C"/>
+<rect x="60" y="78" width="10" height="16" rx="4" fill="#78909C"/>
+<rect x="74" y="78" width="10" height="16" rx="4" fill="#78909C"/>
+<!-- Head -->
+<circle cx="60" cy="38" r="18" fill="#B0BEC5"/>
+<!-- Ears -->
+<path d="M42 34 Q28 26 26 40 Q28 52 40 48Z" fill="#90A4AE"/>
+<path d="M42 36 Q32 30 30 40 Q32 48 40 46Z" fill="#CFD8DC"/>
+<path d="M78 34 Q92 26 94 40 Q92 52 80 48Z" fill="#90A4AE"/>
+<path d="M78 36 Q88 30 90 40 Q88 48 80 46Z" fill="#CFD8DC"/>
+<!-- Eyes -->
+<circle cx="50" cy="36" r="3.5" fill="white"/>
+<circle cx="70" cy="36" r="3.5" fill="white"/>
+<circle cx="51" cy="36" r="2" fill="black"/>
+<circle cx="69" cy="36" r="2" fill="black"/>
+<circle cx="50" cy="35" r="0.8" fill="white"/>
+<circle cx="68" cy="35" r="0.8" fill="white"/>
+<!-- Trunk -->
+<path d="M60 48 Q60 60 55 68 Q52 74 48 78 Q44 82 42 80 Q44 78 46 76 Q50 72 52 66 Q56 58 56 50" fill="#B0BEC5" stroke="#90A4AE" stroke-width="1.5"/>
+<!-- Tusks -->
+<path d="M52 52 Q48 58 50 62" fill="none" stroke="#FAFAFA" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M68 52 Q72 58 70 62" fill="none" stroke="#FAFAFA" stroke-width="2.5" stroke-linecap="round"/>
+<!-- Tail -->
+<path d="M28 60 Q22 56 20 62 L18 66" fill="none" stroke="#78909C" stroke-width="2" stroke-linecap="round"/>
+</svg>

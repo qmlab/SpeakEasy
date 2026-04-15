@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M20 20 L90 20 L90 50 Q80 60 90 70 L90 100 L20 100 Z" fill="#42A5F5" stroke="#1565C0" stroke-width="2"/><path d="M90 20 L180 20 L180 100 L110 100 L110 70 Q120 60 110 50 L110 20 Z" fill="#66BB6A" stroke="#2E7D32" stroke-width="2"/><path d="M20 100 L90 100 L90 130 Q80 140 90 150 L90 180 L20 180 Z" fill="#FFA726" stroke="#E65100" stroke-width="2"/><path d="M90 100 L180 100 L180 180 L90 180 L90 150 Q100 140 90 130 Z" fill="#EF5350" stroke="#C62828" stroke-width="2"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+
+<path d="M30 30 L55 30 Q55 24 60 24 Q65 24 65 30 L90 30 L90 55 Q96 55 96 60 Q96 65 90 65 L90 90 L65 90 Q65 96 60 96 Q55 96 55 90 L30 90 L30 65 Q24 65 24 60 Q24 55 30 55Z" fill="#42A5F5"/>
+<path d="M30 30 L55 30 Q55 24 60 24 Q65 24 65 30 L90 30 L90 55 Q96 55 96 60 Q96 65 90 65 L90 90 L65 90 Q65 96 60 96 Q55 96 55 90 L30 90 L30 65 Q24 65 24 60 Q24 55 30 55Z" fill="none" stroke="#1E88E5" stroke-width="2"/>
+<line x1="60" y1="30" x2="60" y2="90" stroke="#1E88E5" stroke-width="1.5" opacity="0.3"/>
+<line x1="30" y1="60" x2="90" y2="60" stroke="#1E88E5" stroke-width="1.5" opacity="0.3"/>
+</svg>

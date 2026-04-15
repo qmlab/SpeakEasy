@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-<!-- Sole -->
-<path d="M15 82 Q15 78 20 76 L95 76 Q105 76 107 80 L107 84 Q107 88 100 88 L22 88 Q15 88 15 82Z" fill="#424242"/>
-<!-- Shoe body - classic sneaker shape -->
-<path d="M20 76 L20 62 Q20 52 30 48 L45 44 Q55 42 60 42 L60 52 Q60 56 65 56 L95 56 Q102 56 104 62 L105 76 Z" fill="#1E88E5"/>
-<!-- Toe cap -->
-<path d="M95 56 Q102 56 104 62 L105 76 L95 76 L95 56Z" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="0.5"/>
-<!-- Ankle collar -->
-<path d="M20 62 Q20 52 30 48 L45 44 Q50 43 55 43 L55 50 Q45 50 38 54 Q28 60 25 62 Z" fill="#1565C0"/>
-<!-- Shoe opening -->
-<ellipse cx="37" cy="48" rx="15" ry="5" fill="#0D47A1" opacity="0.5"/>
-<!-- Laces -->
-<line x1="50" y1="48" x2="62" y2="48" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-<line x1="48" y1="52" x2="63" y2="52" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-<line x1="47" y1="56" x2="64" y2="56" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-<!-- Stripe -->
-<path d="M55 60 Q70 55 85 60 Q90 62 90 68 L88 74 Q80 68 65 66 Q55 65 50 68 Z" fill="white" opacity="0.8"/>
-<!-- Sole detail line -->
-<line x1="20" y1="80" x2="105" y2="80" stroke="#616161" stroke-width="1"/>
+<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
+
+<path d="M20 68 L20 78 Q20 86 30 88 L80 88 Q95 88 98 78 Q100 72 95 68 L70 68 Q68 58 60 55 Q52 52 45 55 Q38 58 35 68Z" fill="#1565C0"/>
+<path d="M35 68 Q38 62 45 58 Q52 55 60 58 Q66 60 68 68" fill="none" stroke="#0D47A1" stroke-width="1.5"/>
+<path d="M22 78 L92 78" fill="none" stroke="#0D47A1" stroke-width="1" opacity="0.3"/>
+<path d="M20 78 Q20 84 28 86 L82 86 Q96 86 97 78" fill="#1A237E" opacity="0.3"/>
+<path d="M40 62 L48 58 M44 64 L52 60 M48 66 L56 62 M52 68 L60 64" fill="none" stroke="white" stroke-width="1.2"/>
+<circle cx="42" cy="60" r="1.5" fill="#BDBDBD"/>
+<circle cx="46" cy="58" r="1.5" fill="#BDBDBD"/>
+<circle cx="50" cy="56" r="1.5" fill="#BDBDBD"/>
+<path d="M20 68 L20 78 Q20 86 30 88 L80 88 Q95 88 98 78 Q100 72 95 68" fill="none" stroke="#5D4037" stroke-width="2.5"/>
 </svg>

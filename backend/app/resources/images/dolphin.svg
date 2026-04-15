@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E1F5FE" stroke="#01579B" stroke-width="3"/>
-<path d="M30 65 Q45 45 70 50 Q90 55 95 60 Q90 65 85 62 Q75 75 50 75 Q35 75 30 65Z" fill="#4FC3F7"/><circle cx="45" cy="58" r="2" fill="#333"/><path d="M80 50 Q85 40 90 48" fill="#4FC3F7"/></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<!-- Body -->
+<path d="M25 55 Q30 42 50 38 Q70 36 85 45 Q95 52 90 60 Q85 68 65 72 Q45 74 30 68 Q20 64 25 55Z" fill="#42A5F5"/>
+<!-- Belly -->
+<path d="M30 62 Q45 70 65 68 Q80 65 88 58 Q82 66 65 70 Q45 72 30 66Z" fill="#BBDEFB"/>
+<!-- Snout -->
+<path d="M25 55 Q18 52 14 54 Q18 56 25 58Z" fill="#42A5F5"/>
+<!-- Eye -->
+<circle cx="38" cy="50" r="3.5" fill="white"/>
+<circle cx="39" cy="50" r="2" fill="black"/>
+<circle cx="38" cy="49" r="0.8" fill="white"/>
+<!-- Dorsal fin -->
+<path d="M60 38 Q62 24 68 26 Q65 32 64 40Z" fill="#1E88E5"/>
+<!-- Tail -->
+<path d="M88 52 L102 42 Q106 40 104 44 L96 52" fill="#1E88E5"/>
+<path d="M88 56 L102 66 Q106 68 104 64 L96 56" fill="#1E88E5"/>
+<!-- Flippers -->
+<path d="M45 62 Q42 72 38 74 Q40 68 42 64Z" fill="#1E88E5"/>
+<!-- Mouth -->
+<path d="M16 55 Q22 58 30 56" fill="none" stroke="#1565C0" stroke-width="1"/>
+</svg>

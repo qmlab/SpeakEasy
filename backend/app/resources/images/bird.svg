@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-<ellipse cx="60" cy="65" rx="18" ry="16" fill="#64B5F6"/><circle cx="53" cy="60" r="2.5" fill="#fff"/><circle cx="53" cy="60" r="1.2" fill="#333"/><polygon points="65,62 80,58 65,66" fill="#FF9800"/><path d="M42 65 Q30 55 25 65" stroke="#1565C0" stroke-width="2.5" fill="#42A5F5"/><path d="M55 80 L60 88 L65 80" fill="#FF9800"/></svg>
+
+<!-- Body -->
+<ellipse cx="60" cy="62" rx="18" ry="20" fill="#42A5F5"/>
+<!-- Wing -->
+<path d="M42 58 Q28 52 22 60 Q28 62 36 60 Q30 66 26 72 Q36 68 42 64Z" fill="#1E88E5"/>
+<!-- Head -->
+<circle cx="68" cy="40" r="14" fill="#64B5F6"/>
+<!-- Eye -->
+<circle cx="74" cy="38" r="4" fill="white"/>
+<circle cx="75" cy="38" r="2.5" fill="black"/>
+<circle cx="74" cy="37" r="0.8" fill="white"/>
+<!-- Beak -->
+<path d="M82 42 L92 40 L82 44Z" fill="#FF9800"/>
+<line x1="82" y1="42" x2="90" y2="42" stroke="#EF6C00" stroke-width="0.5"/>
+<!-- Tail feathers -->
+<path d="M42 72 L28 82 L32 74 L24 80 L30 72 L22 76 L34 70Z" fill="#1565C0"/>
+<!-- Legs -->
+<line x1="55" y1="80" x2="52" y2="94" stroke="#FF9800" stroke-width="2"/>
+<line x1="65" y1="80" x2="68" y2="94" stroke="#FF9800" stroke-width="2"/>
+<!-- Feet -->
+<path d="M46 94 L52 94 L58 94" fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+<path d="M62 94 L68 94 L74 94" fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+<!-- Breast highlight -->
+<ellipse cx="62" cy="65" rx="8" ry="10" fill="#90CAF9" opacity="0.5"/>
+</svg>

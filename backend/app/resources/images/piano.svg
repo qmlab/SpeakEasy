@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#ECEFF1" rx="20"/><rect x="30" y="60" width="140" height="100" rx="4" fill="#FAFAFA" stroke="#455A64" stroke-width="2"/><line x1="50" y1="60" x2="50" y2="160" stroke="#CFD8DC" stroke-width="1"/><line x1="70" y1="60" x2="70" y2="160" stroke="#CFD8DC" stroke-width="1"/><line x1="90" y1="60" x2="90" y2="160" stroke="#CFD8DC" stroke-width="1"/><line x1="110" y1="60" x2="110" y2="160" stroke="#CFD8DC" stroke-width="1"/><line x1="130" y1="60" x2="130" y2="160" stroke="#CFD8DC" stroke-width="1"/><line x1="150" y1="60" x2="150" y2="160" stroke="#CFD8DC" stroke-width="1"/><rect x="43" y="60" width="12" height="60" rx="2" fill="#263238"/><rect x="63" y="60" width="12" height="60" rx="2" fill="#263238"/><rect x="103" y="60" width="12" height="60" rx="2" fill="#263238"/><rect x="123" y="60" width="12" height="60" rx="2" fill="#263238"/><rect x="143" y="60" width="12" height="60" rx="2" fill="#263238"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
+
+<rect x="20" y="34" width="80" height="52" rx="4" fill="#212121"/>
+<rect x="24" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="34" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="44" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="54" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="64" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="74" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="84" y="38" width="9" height="44" rx="1" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<rect x="31" y="38" width="6" height="28" rx="1" fill="#212121"/>
+<rect x="41" y="38" width="6" height="28" rx="1" fill="#212121"/>
+<rect x="61" y="38" width="6" height="28" rx="1" fill="#212121"/>
+<rect x="71" y="38" width="6" height="28" rx="1" fill="#212121"/>
+<rect x="81" y="38" width="6" height="28" rx="1" fill="#212121"/>
+</svg>

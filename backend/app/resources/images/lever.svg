@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#ECEFF1" rx="20"/><polygon points="100,120 85,155 115,155" fill="#78909C"/><line x1="40" y1="110" x2="160" y2="130" stroke="#5D4037" stroke-width="6" stroke-linecap="round"/><circle cx="40" cy="110" r="8" fill="#FF7043"/><circle cx="160" cy="130" r="8" fill="#42A5F5"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
+
+<line x1="30" y1="80" x2="90" y2="40" stroke="#9E9E9E" stroke-width="6" stroke-linecap="round"/>
+<line x1="30" y1="80" x2="90" y2="40" stroke="#BDBDBD" stroke-width="3" stroke-linecap="round"/>
+<path d="M24 84 L36 84 L30 92Z" fill="#757575"/>
+<circle cx="90" cy="40" r="6" fill="#E53935"/>
+<circle cx="90" cy="40" r="3" fill="#EF5350"/>
+</svg>

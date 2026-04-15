@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFFDE7" stroke="#F9A825" stroke-width="3"/>
-<ellipse cx="60" cy="68" rx="22" ry="18" fill="#FFD54F"/><circle cx="55" cy="52" r="14" fill="#FFD54F"/><circle cx="50" cy="49" r="2.5" fill="#333"/><polygon points="40,55 25,52 40,58" fill="#FF9800"/><path d="M70 80 L75 90 M55 82 L52 92" stroke="#FF9800" stroke-width="3"/></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<!-- Water -->
+<path d="M15 82 Q30 78 45 82 Q60 86 75 82 Q90 78 105 82 L105 100 L15 100Z" fill="#90CAF9" opacity="0.4"/>
+<!-- Body -->
+<ellipse cx="55" cy="68" rx="26" ry="18" fill="#FDD835"/>
+<!-- Wing -->
+<path d="M40 60 Q45 52 55 56 Q62 58 60 65 Q50 62 40 65Z" fill="#FBC02D"/>
+<!-- Neck -->
+<path d="M75 62 Q80 50 78 40" fill="none" stroke="#FDD835" stroke-width="12"/>
+<!-- Head -->
+<circle cx="78" cy="36" r="12" fill="#FDD835"/>
+<!-- Eye -->
+<circle cx="82" cy="34" r="3" fill="black"/>
+<circle cx="81" cy="33" r="1" fill="white"/>
+<!-- Beak -->
+<path d="M88 38 L100 36 L88 42Z" fill="#FF9800"/>
+<line x1="88" y1="40" x2="98" y2="38" stroke="#EF6C00" stroke-width="0.5"/>
+<!-- Tail -->
+<path d="M30 62 L22 54 L26 60 L20 56 L28 64Z" fill="#FBC02D"/>
+<!-- Water ripples -->
+<path d="M30 84 Q40 80 50 84" fill="none" stroke="#64B5F6" stroke-width="1" opacity="0.5"/>
+<path d="M55 86 Q65 82 75 86" fill="none" stroke="#64B5F6" stroke-width="1" opacity="0.5"/>
+</svg>
