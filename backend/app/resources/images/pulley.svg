@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
-
-<circle cx="60" cy="40" r="16" fill="#9E9E9E" stroke="#757575" stroke-width="2"/>
-<circle cx="60" cy="40" r="10" fill="#BDBDBD"/>
-<circle cx="60" cy="40" r="4" fill="#757575"/>
-<line x1="60" y1="18" x2="60" y2="14" stroke="#5D4037" stroke-width="3"/>
-<line x1="50" y1="14" x2="70" y2="14" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
-<path d="M44 46 L44 90" stroke="#8D6E63" stroke-width="3"/>
-<path d="M76 46 L76 70" stroke="#8D6E63" stroke-width="3"/>
-<rect x="68" y="70" width="16" height="16" rx="2" fill="#FDD835" stroke="#F9A825" stroke-width="1"/>
+<circle cx="60" cy="60" r="56" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
+<!-- Ceiling/support -->
+<rect x="20" y="14" width="80" height="6" rx="2" fill="#795548"/>
+<!-- Hook from ceiling -->
+<path d="M60 20 L60 28" fill="none" stroke="#9E9E9E" stroke-width="3"/>
+<!-- Pulley wheel housing -->
+<rect x="46" y="28" width="28" height="8" rx="2" fill="#78909C"/>
+<!-- Pulley wheel -->
+<circle cx="60" cy="40" r="14" fill="#B0BEC5" stroke="#78909C" stroke-width="3"/>
+<circle cx="60" cy="40" r="8" fill="#90A4AE"/>
+<circle cx="60" cy="40" r="3" fill="#607D8B"/>
+<!-- Groove in wheel -->
+<circle cx="60" cy="40" r="12" fill="none" stroke="#78909C" stroke-width="1" stroke-dasharray="2,2"/>
+<!-- Rope on left going down -->
+<path d="M48 40 L48 95" fill="none" stroke="#8D6E63" stroke-width="3"/>
+<!-- Rope on right going down with weight -->
+<path d="M72 40 L72 70" fill="none" stroke="#8D6E63" stroke-width="3"/>
+<!-- Rope going over wheel -->
+<path d="M48 40 Q48 28 60 28 Q72 28 72 40" fill="none" stroke="#8D6E63" stroke-width="3"/>
+<!-- Weight/load on right -->
+<rect x="62" y="70" width="20" height="20" rx="3" fill="#1565C0"/>
+<rect x="64" y="72" width="16" height="6" rx="1" fill="#1E88E5" opacity="0.4"/>
+<!-- Hand pulling left rope -->
+<path d="M42 92 Q44 88 48 88 Q52 88 52 92" fill="#FFCC80" stroke="#E65100" stroke-width="1"/>
+<!-- Arrow showing pull direction -->
+<path d="M42 80 L42 90" fill="none" stroke="#4CAF50" stroke-width="2"/>
+<path d="M39 88 L42 94 L45 88Z" fill="#4CAF50"/>
 </svg>

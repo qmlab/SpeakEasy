@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
-
-<ellipse cx="58" cy="38" rx="14" ry="18" fill="#BDBDBD"/>
-<ellipse cx="58" cy="38" rx="10" ry="14" fill="#E0E0E0"/>
-<ellipse cx="56" cy="34" rx="4" ry="6" fill="white" opacity="0.3"/>
-<path d="M58 56 Q60 70 62 90 Q63 96 60 96 Q57 96 58 90" fill="#BDBDBD" stroke="#9E9E9E" stroke-width="1"/>
+<!-- Handle -->
+<rect x="56" y="55" width="8" height="48" rx="3" fill="#B0BEC5"/>
+<rect x="58" y="57" width="4" height="44" rx="2" fill="#CFD8DC" opacity="0.5"/>
+<!-- Bowl of spoon -->
+<ellipse cx="60" cy="40" rx="20" ry="18" fill="#B0BEC5"/>
+<ellipse cx="60" cy="38" rx="17" ry="14" fill="#CFD8DC"/>
+<!-- Inner bowl reflection -->
+<ellipse cx="56" cy="36" rx="8" ry="6" fill="#E0E0E0" opacity="0.6"/>
+<!-- Rim highlight -->
+<path d="M42 36 Q48 24 60 22 Q72 24 78 36" fill="none" stroke="#E0E0E0" stroke-width="1.5" opacity="0.5"/>
+<!-- Handle end -->
+<ellipse cx="60" cy="100" rx="5" ry="3" fill="#90A4AE"/>
+<!-- Shadow -->
+<ellipse cx="62" cy="42" rx="12" ry="8" fill="#90A4AE" opacity="0.2"/>
 </svg>

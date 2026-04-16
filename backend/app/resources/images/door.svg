@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
-
-<rect x="32" y="22" width="56" height="74" rx="3" fill="#8D6E63"/>
-<rect x="35" y="25" width="50" height="68" rx="2" fill="#A1887F"/>
-<rect x="38" y="28" width="20" height="28" rx="1" fill="#795548" opacity="0.3"/>
-<rect x="62" y="28" width="20" height="28" rx="1" fill="#795548" opacity="0.3"/>
-<rect x="38" y="60" width="20" height="28" rx="1" fill="#795548" opacity="0.3"/>
-<rect x="62" y="60" width="20" height="28" rx="1" fill="#795548" opacity="0.3"/>
-<circle cx="78" cy="62" r="3" fill="#FDD835"/>
-<circle cx="78" cy="62" r="1.5" fill="#F9A825"/>
+<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
+<!-- Door frame -->
+<rect x="28" y="18" width="64" height="90" rx="2" fill="#5D4037"/>
+<!-- Door panel -->
+<rect x="32" y="22" width="56" height="82" rx="2" fill="#8D6E63"/>
+<!-- Upper panel inset -->
+<rect x="38" y="28" width="44" height="28" rx="2" fill="#795548"/>
+<rect x="40" y="30" width="40" height="24" rx="1" fill="#8D6E63" stroke="#6D4C41" stroke-width="1"/>
+<!-- Lower panel inset -->
+<rect x="38" y="62" width="44" height="34" rx="2" fill="#795548"/>
+<rect x="40" y="64" width="40" height="30" rx="1" fill="#8D6E63" stroke="#6D4C41" stroke-width="1"/>
+<!-- Wood grain -->
+<path d="M42 32 L42 52" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<path d="M50 30 L50 54" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<path d="M60 32 L60 52" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<path d="M70 30 L70 54" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<path d="M42 66 L42 92" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<path d="M60 66 L60 92" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<path d="M70 66 L70 92" fill="none" stroke="#7B5B3A" stroke-width="0.5" opacity="0.3"/>
+<!-- Door knob -->
+<circle cx="78" cy="60" r="5" fill="#FFD54F" stroke="#F9A825" stroke-width="1"/>
+<circle cx="78" cy="60" r="2" fill="#FFF176"/>
+<!-- Keyhole -->
+<circle cx="78" cy="67" r="1.5" fill="#5D4037"/>
+<rect x="77" y="67" width="2" height="4" fill="#5D4037"/>
+<!-- Light reflection on knob -->
+<circle cx="76" cy="58" r="1.5" fill="white" opacity="0.5"/>
+<!-- Frame shadow -->
+<rect x="28" y="18" width="3" height="90" fill="#4E342E" opacity="0.3"/>
 </svg>

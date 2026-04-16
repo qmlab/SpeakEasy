@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
-
-<path d="M60 35 C42 35 28 50 28 68 C28 86 42 98 60 98 C78 98 92 86 92 68 C92 50 78 35 60 35Z" fill="#E53935"/>
-<path d="M60 35 C50 35 40 42 36 55 C40 42 50 37 60 35Z" fill="#EF5350" opacity="0.8"/>
-<path d="M55 40 C48 42 42 50 40 60 C44 48 50 42 55 40Z" fill="#FF8A80" opacity="0.6"/>
-<path d="M52 38 Q56 42 60 38 Q64 42 68 38" fill="none" stroke="#C62828" stroke-width="1"/>
-<path d="M60 38 Q58 28 56 22" fill="none" stroke="#5D4037" stroke-width="3" stroke-linecap="round"/>
-<path d="M56 24 C62 18 72 18 76 22 C72 20 64 20 58 26Z" fill="#43A047"/>
-<path d="M56 24 C60 20 66 19 70 20" fill="none" stroke="#2E7D32" stroke-width="0.8"/>
-<path d="M57 26 C52 20 46 20 44 24 C48 22 52 22 56 28Z" fill="#66BB6A"/>
-<path d="M50 88 Q60 92 70 88" fill="none" stroke="#C62828" stroke-width="1" opacity="0.5"/>
+<circle cx="60" cy="60" r="56" fill="#FFEBEE" stroke="#C62828" stroke-width="3"/>
+<!-- Apple left half -->
+<path d="M60 38 C48 36 34 42 28 56 C22 70 26 86 38 94 C48 100 56 98 60 94Z" fill="#E53935"/>
+<!-- Apple right half (slightly different shade for depth) -->
+<path d="M60 38 C72 36 86 42 92 56 C98 70 94 86 82 94 C72 100 64 98 60 94Z" fill="#D32F2F"/>
+<!-- Top indentation -->
+<path d="M48 40 Q54 48 60 38 Q66 48 72 40" fill="#C62828" opacity="0.3"/>
+<!-- Highlight on left cheek -->
+<ellipse cx="42" cy="58" rx="10" ry="14" fill="#EF5350" opacity="0.6" transform="rotate(-15 42 58)"/>
+<!-- Bright specular highlight -->
+<ellipse cx="40" cy="52" rx="5" ry="8" fill="#FF8A80" opacity="0.5" transform="rotate(-20 40 52)"/>
+<!-- Small white shine spot -->
+<ellipse cx="38" cy="48" rx="2.5" ry="4" fill="white" opacity="0.4" transform="rotate(-20 38 48)"/>
+<!-- Subtle shadow on right -->
+<path d="M80 60 Q86 70 82 84 Q76 94 68 96 Q78 88 82 76 Q84 66 80 60Z" fill="#B71C1C" opacity="0.3"/>
+<!-- Bottom dimple -->
+<path d="M52 92 Q56 96 60 94 Q64 96 68 92" fill="none" stroke="#B71C1C" stroke-width="1.2"/>
+<!-- Center crease line -->
+<path d="M60 42 Q59 60 60 94" fill="none" stroke="#C62828" stroke-width="0.8" opacity="0.3"/>
+<!-- Stem -->
+<path d="M60 38 Q59 30 57 22" fill="none" stroke="#5D4037" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M59 38 Q58 30 56.5 23" fill="none" stroke="#795548" stroke-width="1.5" stroke-linecap="round"/>
+<!-- Leaf right -->
+<path d="M58 26 C64 18 76 16 82 22 C76 18 66 18 60 28Z" fill="#43A047"/>
+<path d="M60 26 C66 20 74 18 80 20" fill="none" stroke="#2E7D32" stroke-width="0.8"/>
+<path d="M62 24 L72 20 M64 25 L70 22" fill="none" stroke="#388E3C" stroke-width="0.5" opacity="0.6"/>
+<!-- Leaf left (smaller) -->
+<path d="M57 28 C50 22 42 22 40 26 C44 23 50 24 56 30Z" fill="#66BB6A"/>
+<path d="M56 28 C50 24 44 23 42 25" fill="none" stroke="#388E3C" stroke-width="0.6"/>
 </svg>

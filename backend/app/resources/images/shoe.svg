@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
-
-<path d="M20 68 L20 78 Q20 86 30 88 L80 88 Q95 88 98 78 Q100 72 95 68 L70 68 Q68 58 60 55 Q52 52 45 55 Q38 58 35 68Z" fill="#1565C0"/>
-<path d="M35 68 Q38 62 45 58 Q52 55 60 58 Q66 60 68 68" fill="none" stroke="#0D47A1" stroke-width="1.5"/>
-<path d="M22 78 L92 78" fill="none" stroke="#0D47A1" stroke-width="1" opacity="0.3"/>
-<path d="M20 78 Q20 84 28 86 L82 86 Q96 86 97 78" fill="#1A237E" opacity="0.3"/>
-<path d="M40 62 L48 58 M44 64 L52 60 M48 66 L56 62 M52 68 L60 64" fill="none" stroke="white" stroke-width="1.2"/>
-<circle cx="42" cy="60" r="1.5" fill="#BDBDBD"/>
-<circle cx="46" cy="58" r="1.5" fill="#BDBDBD"/>
-<circle cx="50" cy="56" r="1.5" fill="#BDBDBD"/>
-<path d="M20 68 L20 78 Q20 86 30 88 L80 88 Q95 88 98 78 Q100 72 95 68" fill="none" stroke="#5D4037" stroke-width="2.5"/>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+<!-- Sole - thick rubber sole with tread -->
+<path d="M16 82 Q14 78 18 76 L96 76 Q106 76 108 80 L108 84 Q108 90 100 90 L24 90 Q14 90 16 82Z" fill="#37474F"/>
+<path d="M20 84 L100 84" fill="none" stroke="#546E7A" stroke-width="1"/>
+<path d="M22 87 L28 87 M32 87 L38 87 M42 87 L48 87 M52 87 L58 87 M62 87 L68 87 M72 87 L78 87 M82 87 L88 87 M92 87 L98 87" fill="none" stroke="#455A64" stroke-width="1.5"/>
+<!-- Midsole - white strip -->
+<path d="M18 76 L96 76 Q104 76 106 78 L106 80 Q106 82 100 82 L22 82 Q16 82 16 78Z" fill="#ECEFF1"/>
+<path d="M18 79 L104 79" fill="none" stroke="#CFD8DC" stroke-width="0.5"/>
+<!-- Shoe body - sneaker profile with curved toe -->
+<path d="M22 76 L22 58 Q22 48 32 44 L48 40 Q56 38 62 40 L62 50 Q62 54 68 56 L96 56 Q104 56 106 64 L106 76Z" fill="#1E88E5"/>
+<!-- Darker blue panel on heel -->
+<path d="M22 76 L22 58 Q22 50 30 46 L36 44 L36 76Z" fill="#1565C0"/>
+<!-- Toe box - lighter front -->
+<path d="M96 56 Q104 56 106 64 L106 76 L88 76 L88 56Z" fill="#42A5F5"/>
+<!-- Collar / ankle opening -->
+<ellipse cx="38" cy="44" rx="14" ry="6" fill="#0D47A1" opacity="0.4"/>
+<!-- Tongue -->
+<path d="M42 44 Q46 34 52 32 Q56 30 58 34 L60 42" fill="#2196F3"/>
+<path d="M42 44 Q46 36 52 34" fill="none" stroke="#1565C0" stroke-width="0.8"/>
+<!-- Lace holes -->
+<circle cx="46" cy="44" r="1.8" fill="#BBDEFB" stroke="#0D47A1" stroke-width="0.5"/>
+<circle cx="50" cy="40" r="1.8" fill="#BBDEFB" stroke="#0D47A1" stroke-width="0.5"/>
+<circle cx="54" cy="38" r="1.8" fill="#BBDEFB" stroke="#0D47A1" stroke-width="0.5"/>
+<circle cx="56" cy="44" r="1.8" fill="#BBDEFB" stroke="#0D47A1" stroke-width="0.5"/>
+<circle cx="58" cy="40" r="1.8" fill="#BBDEFB" stroke="#0D47A1" stroke-width="0.5"/>
+<!-- Laces -->
+<line x1="46" y1="44" x2="56" y2="44" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="50" y1="40" x2="58" y2="40" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="54" y1="38" x2="58" y2="40" stroke="white" stroke-width="1" stroke-linecap="round"/>
+<!-- Swoosh stripe -->
+<path d="M40 68 Q55 58 75 60 Q90 62 96 66 L94 70 Q85 66 70 64 Q55 64 42 72Z" fill="white" opacity="0.85"/>
+<!-- Toe cap stitching -->
+<path d="M88 56 Q92 56 96 58 Q100 60 102 64" fill="none" stroke="#1565C0" stroke-width="1" stroke-dasharray="2,2"/>
+<!-- Outline for definition -->
+<path d="M22 76 L22 58 Q22 48 32 44 L48 40 Q56 38 62 40 L62 50 Q62 54 68 56 L96 56 Q104 56 106 64 L106 76" fill="none" stroke="#0D47A1" stroke-width="2"/>
 </svg>

@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-
-<path d="M25 65 L25 80 Q25 88 35 88 L85 88 Q95 88 95 80 L95 65 Z" fill="#D4A24E"/>
-<path d="M25 65 Q25 40 60 40 Q95 40 95 65 Z" fill="#E6B55A"/>
-<path d="M35 62 Q35 48 60 45 Q72 44 80 50" fill="none" stroke="#EEC97A" stroke-width="2" opacity="0.5"/>
-<path d="M40 52 Q50 48 60 52" fill="none" stroke="#C49340" stroke-width="1.5" opacity="0.6"/>
-<path d="M55 48 Q65 44 75 50" fill="none" stroke="#C49340" stroke-width="1.5" opacity="0.6"/>
-<path d="M28 85 L92 85" fill="none" stroke="#A67C3D" stroke-width="1" opacity="0.3"/>
-<circle cx="45" cy="50" r="1" fill="white" opacity="0.4"/>
-<circle cx="55" cy="46" r="0.8" fill="white" opacity="0.4"/>
-<circle cx="68" cy="48" r="1" fill="white" opacity="0.3"/>
+<!-- Loaf body -->
+<path d="M20 72 L20 80 Q20 90 30 90 L90 90 Q100 90 100 80 L100 72Z" fill="#C68A2E"/>
+<!-- Loaf top dome -->
+<path d="M20 72 Q20 38 60 38 Q100 38 100 72Z" fill="#DCA03A"/>
+<!-- Golden crust top highlight -->
+<path d="M30 68 Q30 45 60 42 Q90 45 90 68" fill="none" stroke="#E6B955" stroke-width="3" opacity="0.5"/>
+<!-- Score marks on top -->
+<path d="M35 55 Q45 48 55 55" fill="none" stroke="#C49340" stroke-width="2" opacity="0.7"/>
+<path d="M50 50 Q60 43 70 50" fill="none" stroke="#C49340" stroke-width="2" opacity="0.7"/>
+<path d="M65 55 Q75 48 85 55" fill="none" stroke="#C49340" stroke-width="2" opacity="0.7"/>
+<!-- Side shadow -->
+<path d="M20 72 L20 80 Q20 90 30 90 L90 90 Q100 90 100 80 L100 72" fill="#B07A28" opacity="0.3"/>
+<!-- Bottom line -->
+<path d="M24 87 L96 87" fill="none" stroke="#A67C3D" stroke-width="1" opacity="0.4"/>
+<!-- Top highlights -->
+<ellipse cx="50" cy="48" rx="8" ry="4" fill="#EEC97A" opacity="0.4"/>
+<ellipse cx="72" cy="50" rx="6" ry="3" fill="#EEC97A" opacity="0.3"/>
+<!-- Flour spots -->
+<circle cx="42" cy="52" r="1.5" fill="white" opacity="0.35"/>
+<circle cx="60" cy="44" r="1.2" fill="white" opacity="0.3"/>
+<circle cx="78" cy="52" r="1" fill="white" opacity="0.35"/>
 </svg>

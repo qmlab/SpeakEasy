@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-
-<path d="M18 66 L30 82 L90 82 L102 66Z" fill="#8D6E63"/>
-<path d="M20 66 Q60 60 100 66" fill="none" stroke="#A1887F" stroke-width="1.5"/>
-<rect x="58" y="32" width="4" height="34" rx="1" fill="#795548"/>
-<path d="M62 34 L62 62 L88 62Z" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
-<path d="M62 38 L62 58 L82 58Z" fill="#E3F2FD" opacity="0.5"/>
-<path d="M58 40 L32 62 L58 62Z" fill="#E53935"/>
-<path d="M15 88 Q30 82 45 88 Q60 94 75 88 Q90 82 105 88" fill="none" stroke="#42A5F5" stroke-width="2" opacity="0.5"/>
+<!-- Water -->
+<path d="M8 80 Q20 76 30 80 Q40 84 50 80 Q60 76 70 80 Q80 84 90 80 Q100 76 112 80 L112 112 L8 112Z" fill="#42A5F5" opacity="0.4"/>
+<path d="M8 86 Q20 82 30 86 Q40 90 50 86 Q60 82 70 86 Q80 90 90 86 Q100 82 112 86" fill="none" stroke="#1E88E5" stroke-width="1" opacity="0.3"/>
+<!-- Hull -->
+<path d="M15 75 L30 90 L90 90 L105 75Z" fill="#E53935"/>
+<path d="M20 78 L32 88 L88 88 L100 78" fill="#C62828" opacity="0.3"/>
+<!-- Deck line -->
+<path d="M18 76 L102 76" fill="none" stroke="#B71C1C" stroke-width="1.5"/>
+<!-- Cabin -->
+<rect x="35" y="55" width="35" height="21" rx="2" fill="white" stroke="#90A4AE" stroke-width="1"/>
+<!-- Cabin windows -->
+<rect x="40" y="60" width="8" height="8" rx="1" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
+<rect x="52" y="60" width="8" height="8" rx="1" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
+<!-- Cabin roof -->
+<rect x="33" y="53" width="39" height="4" rx="1" fill="#CFD8DC"/>
+<!-- Mast -->
+<line x1="80" y1="20" x2="80" y2="75" stroke="#5D4037" stroke-width="3"/>
+<!-- Sail -->
+<path d="M82 24 L100 50 L82 60Z" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+<!-- Flag -->
+<path d="M80 20 L94 26 L80 32" fill="#E53935"/>
+<!-- Porthole on hull -->
+<circle cx="50" cy="82" r="3" fill="#29B6F6" stroke="white" stroke-width="1"/>
+<circle cx="65" cy="82" r="3" fill="#29B6F6" stroke="white" stroke-width="1"/>
 </svg>

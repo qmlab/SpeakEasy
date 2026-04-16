@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFFDE7" stroke="#F9A825" stroke-width="3"/>
-
-<path d="M30 75 C30 55 40 35 55 28 C65 24 75 28 78 35 C72 30 64 30 56 35 C44 42 36 60 38 78 Z" fill="#FFD54F"/>
-<path d="M34 72 C36 55 44 38 56 32 C64 28 72 30 76 35" fill="none" stroke="#FBC02D" stroke-width="2"/>
-<path d="M32 70 C32 52 40 36 54 29" fill="none" stroke="#FFF176" stroke-width="2" opacity="0.6"/>
-<path d="M55 28 C57 26 58 24 56 22 C54 24 54 26 55 28Z" fill="#795548"/>
-<path d="M36 78 C34 80 35 82 38 82 C37 80 36 78 36 78Z" fill="#795548"/>
-<circle cx="50" cy="45" r="1.5" fill="#8D6E63" opacity="0.3"/>
-<circle cx="45" cy="55" r="1" fill="#8D6E63" opacity="0.3"/>
-<circle cx="55" cy="52" r="1.2" fill="#8D6E63" opacity="0.2"/>
+<!-- Banana body - thick crescent shape -->
+<path d="M28 88 C22 78 20 60 28 42 C36 26 52 18 68 22 C78 24 86 32 88 40 C82 34 72 28 60 30 C46 32 34 44 30 62 C28 72 30 82 34 90Z" fill="#FFD54F"/>
+<!-- Inner edge darker -->
+<path d="M34 86 C30 76 28 62 32 46 C38 30 52 22 66 24 C74 26 82 32 86 38" fill="none" stroke="#F9A825" stroke-width="2.5"/>
+<!-- Outer highlight -->
+<path d="M26 84 C22 72 20 56 26 40 C32 26 46 20 60 20" fill="none" stroke="#FFF176" stroke-width="2.5" opacity="0.6"/>
+<!-- Brown spots -->
+<circle cx="42" cy="50" r="2" fill="#8D6E63" opacity="0.35"/>
+<circle cx="50" cy="42" r="1.5" fill="#8D6E63" opacity="0.3"/>
+<circle cx="38" cy="64" r="1.8" fill="#8D6E63" opacity="0.25"/>
+<circle cx="48" cy="56" r="1.2" fill="#8D6E63" opacity="0.3"/>
+<!-- Stem top -->
+<path d="M68 22 C72 18 76 16 78 18 C76 20 72 22 68 22Z" fill="#8D6E63"/>
+<!-- Bottom tip -->
+<path d="M28 88 C26 92 28 94 32 92 C30 90 28 88 28 88Z" fill="#8D6E63"/>
+<!-- Center ridge line -->
+<path d="M32 80 C30 66 32 50 40 36 C48 26 58 22 68 24" fill="none" stroke="#FBC02D" stroke-width="1" opacity="0.5"/>
 </svg>

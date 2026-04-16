@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-
-<path d="M32 38 L38 88 Q40 94 60 94 Q80 94 82 88 L88 38Z" fill="white" stroke="#BDBDBD" stroke-width="1.5"/>
-<path d="M34 42 L40 86 Q42 90 60 90 Q78 90 80 86 L86 42Z" fill="#90CAF9" opacity="0.4"/>
-<path d="M88 48 Q98 48 100 58 Q100 68 88 68" fill="none" stroke="#BDBDBD" stroke-width="3"/>
-<ellipse cx="60" cy="38" rx="28" ry="4" fill="white" stroke="#BDBDBD" stroke-width="1"/>
-<path d="M40 50 Q50 46 60 50 Q70 54 80 50" fill="none" stroke="#64B5F6" stroke-width="1" opacity="0.5"/>
+<circle cx="60" cy="60" r="56" fill="#E0F7FA" stroke="#00838F" stroke-width="3"/>
+<!-- Cup body -->
+<path d="M30 40 L35 90 Q35 96 55 96 L65 96 Q85 96 85 90 L90 40Z" fill="#4FC3F7"/>
+<!-- Cup inner rim -->
+<ellipse cx="60" cy="40" rx="30" ry="8" fill="#29B6F6"/>
+<!-- Liquid inside -->
+<ellipse cx="60" cy="42" rx="26" ry="6" fill="#1565C0" opacity="0.3"/>
+<!-- Cup highlight -->
+<path d="M36 44 L40 86 Q42 90 48 90" fill="none" stroke="#81D4FA" stroke-width="3" opacity="0.5"/>
+<!-- Cup shadow right -->
+<path d="M82 44 L78 86 Q76 92 70 94" fill="none" stroke="#0288D1" stroke-width="1.5" opacity="0.3"/>
+<!-- Handle -->
+<path d="M90 50 Q108 50 108 65 Q108 80 90 80" fill="none" stroke="#4FC3F7" stroke-width="6"/>
+<path d="M90 50 Q106 50 106 65 Q106 78 90 78" fill="none" stroke="#81D4FA" stroke-width="2"/>
+<!-- Steam wisps -->
+<path d="M45 34 Q43 26 47 20" fill="none" stroke="#B0BEC5" stroke-width="1.5" opacity="0.4"/>
+<path d="M55 32 Q53 22 57 16" fill="none" stroke="#B0BEC5" stroke-width="1.5" opacity="0.4"/>
+<path d="M65 34 Q63 26 67 20" fill="none" stroke="#B0BEC5" stroke-width="1.5" opacity="0.4"/>
 </svg>

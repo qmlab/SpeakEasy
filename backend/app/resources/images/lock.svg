@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
-
-<path d="M42 55 Q42 35 60 35 Q78 35 78 55" fill="none" stroke="#9E9E9E" stroke-width="6" stroke-linecap="round"/>
-<path d="M42 55 Q42 38 60 38 Q78 38 78 55" fill="none" stroke="#BDBDBD" stroke-width="3" stroke-linecap="round"/>
-<rect x="32" y="55" width="56" height="38" rx="5" fill="#FDD835"/>
-<rect x="32" y="55" width="56" height="38" rx="5" fill="none" stroke="#F9A825" stroke-width="2"/>
-<circle cx="60" cy="72" r="6" fill="#F57F17"/>
-<path d="M60 78 L56 88 L64 88Z" fill="#F57F17"/>
-<rect x="34" y="57" width="52" height="4" rx="1" fill="#FFE082" opacity="0.5"/>
+<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
+<!-- Shackle (U-shaped top) -->
+<path d="M38 52 L38 36 Q38 18 60 18 Q82 18 82 36 L82 52" fill="none" stroke="#FFA726" stroke-width="8" stroke-linecap="round"/>
+<path d="M40 52 L40 38 Q40 22 60 22 Q80 22 80 38 L80 52" fill="none" stroke="#FFB74D" stroke-width="4" stroke-linecap="round"/>
+<!-- Lock body -->
+<rect x="30" y="50" width="60" height="44" rx="6" fill="#FFA726"/>
+<rect x="32" y="52" width="56" height="40" rx="5" fill="#FF9800"/>
+<!-- Body highlight -->
+<rect x="34" y="54" width="20" height="36" rx="4" fill="#FFB74D" opacity="0.4"/>
+<!-- Keyhole -->
+<circle cx="60" cy="68" r="6" fill="#5D4037"/>
+<path d="M57 72 L57 82 L63 82 L63 72Z" fill="#5D4037"/>
+<!-- Keyhole inner -->
+<circle cx="60" cy="68" r="3" fill="#3E2723"/>
+<!-- Lock face plate -->
+<circle cx="60" cy="68" r="9" fill="none" stroke="#E65100" stroke-width="1.5"/>
+<!-- Screws -->
+<circle cx="38" cy="58" r="2" fill="#E65100"/>
+<circle cx="82" cy="58" r="2" fill="#E65100"/>
+<circle cx="38" cy="86" r="2" fill="#E65100"/>
+<circle cx="82" cy="86" r="2" fill="#E65100"/>
+<!-- Metal shine -->
+<path d="M34 56 L50 56" fill="none" stroke="#FFCC80" stroke-width="1.5" opacity="0.5"/>
 </svg>

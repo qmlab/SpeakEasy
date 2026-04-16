@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FCE4EC" stroke="#C2185B" stroke-width="3"/>
-
-<rect x="20" y="50" width="80" height="35" rx="3" fill="#8D6E63"/>
-<rect x="22" y="42" width="76" height="12" rx="2" fill="#BBDEFB"/>
-<rect x="22" y="54" width="76" height="28" rx="2" fill="#E3F2FD"/>
-<path d="M22 54 Q40 48 60 54 Q80 60 98 54" fill="none" stroke="#90CAF9" stroke-width="1"/>
-<rect x="18" y="40" width="8" height="50" rx="3" fill="#5D4037"/>
-<rect x="94" y="55" width="8" height="35" rx="3" fill="#5D4037"/>
-<rect x="22" y="42" width="30" height="10" rx="4" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
-<rect x="58" y="42" width="30" height="10" rx="4" fill="white" stroke="#BDBDBD" stroke-width="0.5"/>
+<!-- Bed frame - wooden base -->
+<rect x="15" y="58" width="90" height="30" rx="3" fill="#8D6E63"/>
+<!-- Wood grain -->
+<path d="M18 68 L102 68" fill="none" stroke="#795548" stroke-width="0.5" opacity="0.5"/>
+<path d="M18 75 L102 75" fill="none" stroke="#795548" stroke-width="0.5" opacity="0.5"/>
+<!-- Mattress -->
+<rect x="18" y="52" width="84" height="20" rx="4" fill="white" stroke="#E0E0E0" stroke-width="0.5"/>
+<!-- Blanket/duvet folded down -->
+<path d="M18 55 L102 55 L102 72 Q102 76 98 76 L22 76 Q18 76 18 72Z" fill="#E91E63" opacity="0.8"/>
+<!-- Blanket fold line -->
+<path d="M20 58 L100 58" fill="none" stroke="#C2185B" stroke-width="1"/>
+<!-- Blanket pattern - subtle stripes -->
+<path d="M22 62 L98 62" fill="none" stroke="#F06292" stroke-width="0.8" opacity="0.5"/>
+<path d="M22 66 L98 66" fill="none" stroke="#F06292" stroke-width="0.8" opacity="0.5"/>
+<path d="M22 70 L98 70" fill="none" stroke="#F06292" stroke-width="0.8" opacity="0.5"/>
+<!-- Headboard -->
+<path d="M12 38 L12 88 L20 88 L20 50 L20 38Z" fill="#5D4037" rx="3"/>
+<rect x="12" y="38" width="8" height="50" rx="3" fill="#5D4037"/>
+<!-- Headboard decorative top -->
+<path d="M10 38 Q16 30 22 38" fill="#5D4037"/>
+<!-- Footboard -->
+<rect x="100" y="55" width="8" height="33" rx="3" fill="#5D4037"/>
+<!-- Pillows -->
+<rect x="22" y="44" width="26" height="12" rx="5" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+<rect x="52" y="44" width="26" height="12" rx="5" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+<!-- Pillow shadows -->
+<ellipse cx="35" cy="52" rx="10" ry="2" fill="#F5F5F5"/>
+<ellipse cx="65" cy="52" rx="10" ry="2" fill="#F5F5F5"/>
+<!-- Pillow creases -->
+<path d="M28 50 Q35 48 42 50" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
+<path d="M58 50 Q65 48 72 50" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
+<!-- Legs -->
+<rect x="14" y="86" width="5" height="6" rx="1" fill="#4E342E"/>
+<rect x="101" y="86" width="5" height="6" rx="1" fill="#4E342E"/>
 </svg>

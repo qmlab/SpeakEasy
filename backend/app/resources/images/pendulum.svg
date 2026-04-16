@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-
-<line x1="40" y1="18" x2="80" y2="18" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
-<line x1="60" y1="18" x2="38" y2="78" stroke="#9E9E9E" stroke-width="2"/>
-<circle cx="38" cy="82" r="8" fill="#E53935"/>
-<circle cx="38" cy="80" r="3" fill="#EF5350" opacity="0.5"/>
-<line x1="60" y1="18" x2="60" y2="80" stroke="#BDBDBD" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
-<circle cx="60" cy="84" r="6" fill="#BDBDBD" opacity="0.3"/>
+<circle cx="60" cy="60" r="56" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="3"/>
+<!-- Frame - A-frame stand -->
+<path d="M30 95 L50 20 L70 20 L90 95" fill="none" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
+<!-- Cross bar -->
+<line x1="38" y1="70" x2="82" y2="70" stroke="#5D4037" stroke-width="3"/>
+<!-- Top bar -->
+<line x1="48" y1="22" x2="72" y2="22" stroke="#5D4037" stroke-width="3"/>
+<!-- String -->
+<line x1="60" y1="22" x2="78" y2="72" stroke="#9E9E9E" stroke-width="1.5"/>
+<!-- Bob (weight) - swung to the right -->
+<circle cx="78" cy="72" r="10" fill="#FF9800"/>
+<circle cx="78" cy="72" r="10" fill="none" stroke="#E65100" stroke-width="1.5"/>
+<!-- Bob highlight -->
+<circle cx="75" cy="69" r="3" fill="#FFB74D" opacity="0.6"/>
+<!-- Motion arc (dashed) -->
+<path d="M42 72 Q60 82 78 72" fill="none" stroke="#9E9E9E" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<!-- Ghost position of bob -->
+<circle cx="42" cy="72" r="8" fill="#FF9800" opacity="0.15" stroke="#E65100" stroke-width="0.5"/>
 </svg>
