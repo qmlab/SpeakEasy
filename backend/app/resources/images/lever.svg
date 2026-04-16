@@ -1,1 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#ECEFF1" rx="20"/><polygon points="100,120 85,155 115,155" fill="#78909C"/><line x1="40" y1="110" x2="160" y2="130" stroke="#5D4037" stroke-width="6" stroke-linecap="round"/><circle cx="40" cy="110" r="8" fill="#FF7043"/><circle cx="160" cy="130" r="8" fill="#42A5F5"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
+<!-- Ground line -->
+<line x1="10" y1="90" x2="110" y2="90" stroke="#795548" stroke-width="2"/>
+<!-- Fulcrum (triangle) -->
+<path d="M50 90 L60 74 L70 90Z" fill="#FF9800" stroke="#E65100" stroke-width="2"/>
+<!-- Beam/plank tilted -->
+<rect x="15" y="68" width="90" height="8" rx="3" fill="#8D6E63" transform="rotate(-8 60 72)"/>
+<!-- Weight on low end (right, heavier) -->
+<rect x="84" y="66" width="16" height="12" rx="2" fill="#1565C0" transform="rotate(-8 60 72)"/>
+<rect x="86" y="68" width="12" height="3" rx="1" fill="#1E88E5" opacity="0.5" transform="rotate(-8 60 72)"/>
+<!-- Small weight on high end (left) -->
+<circle cx="24" cy="62" r="6" fill="#E53935"/>
+<circle cx="22" cy="60" r="2" fill="#EF5350" opacity="0.5"/>
+<!-- Arrow showing motion -->
+<path d="M20 52 L20 42" fill="none" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrowhead)"/>
+<path d="M100 82 L100 92" fill="none" stroke="#4CAF50" stroke-width="2"/>
+<!-- Arrowhead as triangle -->
+<path d="M17 44 L20 36 L23 44Z" fill="#4CAF50"/>
+<path d="M97 90 L100 98 L103 90Z" fill="#4CAF50"/>
+</svg>

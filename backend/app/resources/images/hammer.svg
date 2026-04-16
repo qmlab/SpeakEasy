@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="90" y="80" width="20" height="110" rx="3" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/><rect x="40" y="40" width="120" height="45" rx="8" fill="#78909C" stroke="#455A64" stroke-width="3"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
+<!-- Handle - wooden, angled -->
+<path d="M40 95 L55 45 L62 47 L47 97Z" fill="#A1887F"/>
+<path d="M42 93 L56 47 L60 48 L46 95Z" fill="#8D6E63"/>
+<!-- Handle wood grain -->
+<path d="M44 90 L57 48" fill="none" stroke="#795548" stroke-width="0.6" opacity="0.5"/>
+<path d="M46 88 L58 48" fill="none" stroke="#795548" stroke-width="0.6" opacity="0.4"/>
+<!-- Handle highlight -->
+<path d="M43 92 L56.5 47.5" fill="none" stroke="#BCAAA4" stroke-width="1.5" opacity="0.4"/>
+<!-- Hammer head - metal -->
+<rect x="38" y="30" width="50" height="20" rx="3" fill="#78909C" transform="rotate(-5 63 40)"/>
+<!-- Face (striking end) -->
+<rect x="78" y="30" width="12" height="20" rx="2" fill="#607D8B" transform="rotate(-5 63 40)"/>
+<!-- Claw end -->
+<path d="M38 32 L28 22 L32 20 L38 28" fill="#607D8B" transform="rotate(-5 63 40)"/>
+<path d="M38 38 L30 30 L34 28 L38 34" fill="#607D8B" transform="rotate(-5 63 40)"/>
+<!-- V notch in claw -->
+<path d="M30 24 L34 28 L28 22" fill="#EFEBE9"/>
+<!-- Metal shine -->
+<rect x="42" y="33" width="30" height="4" rx="1" fill="#90A4AE" opacity="0.5" transform="rotate(-5 63 40)"/>
+<!-- Metal edge highlight -->
+<path d="M80 32 L90 32" fill="none" stroke="#B0BEC5" stroke-width="1" opacity="0.6" transform="rotate(-5 63 40)"/>
+</svg>

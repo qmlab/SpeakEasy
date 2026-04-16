@@ -1,1 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="12" ry="18" fill="#333"/><circle cx="50" cy="38" r="10" fill="#555"/><circle cx="44" cy="35" r="3" fill="#C62828"/><circle cx="56" cy="35" r="3" fill="#C62828"/><ellipse cx="32" cy="42" rx="15" ry="8" fill="#B3E5FC" opacity="0.7" transform="rotate(-30 32 42)"/><ellipse cx="68" cy="42" rx="15" ry="8" fill="#B3E5FC" opacity="0.7" transform="rotate(30 68 42)"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="62" rx="10" ry="16" fill="#424242"/>
+<!-- Thorax -->
+<circle cx="60" cy="46" r="8" fill="#616161"/>
+<!-- Head -->
+<circle cx="60" cy="36" r="7" fill="#424242"/>
+<!-- Compound eyes -->
+<circle cx="54" cy="34" r="5" fill="#C62828"/>
+<circle cx="66" cy="34" r="5" fill="#C62828"/>
+<circle cx="53" cy="33" r="1.5" fill="#EF9A9A" opacity="0.4"/>
+<circle cx="65" cy="33" r="1.5" fill="#EF9A9A" opacity="0.4"/>
+<!-- Wings -->
+<ellipse cx="38" cy="48" rx="18" ry="8" fill="#B3E5FC" opacity="0.6" transform="rotate(-20 38 48)"/>
+<ellipse cx="82" cy="48" rx="18" ry="8" fill="#B3E5FC" opacity="0.6" transform="rotate(20 82 48)"/>
+<!-- Wing veins -->
+<path d="M28 44 L44 48" fill="none" stroke="#90CAF9" stroke-width="0.5"/>
+<path d="M32 50 L44 48" fill="none" stroke="#90CAF9" stroke-width="0.5"/>
+<path d="M76 48 L92 44" fill="none" stroke="#90CAF9" stroke-width="0.5"/>
+<path d="M76 48 L88 50" fill="none" stroke="#90CAF9" stroke-width="0.5"/>
+<!-- Legs -->
+<path d="M54 52 L42 60 L38 66" fill="none" stroke="#424242" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M56 56 L44 68 L40 74" fill="none" stroke="#424242" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M58 60 L48 76 L46 82" fill="none" stroke="#424242" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M66 52 L78 60 L82 66" fill="none" stroke="#424242" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M64 56 L76 68 L80 74" fill="none" stroke="#424242" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M62 60 L72 76 L74 82" fill="none" stroke="#424242" stroke-width="1.5" stroke-linecap="round"/>
+<!-- Proboscis -->
+<path d="M60 42 L60 44" fill="none" stroke="#424242" stroke-width="1"/>
+</svg>

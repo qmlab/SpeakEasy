@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFEBEE" stroke="#C62828" stroke-width="3"/>
-<circle cx="60" cy="60" r="24" fill="#F44336"/><path d="M42 48 Q60 38 78 48" fill="none" stroke="#E53935" stroke-width="3"/><path d="M42 72 Q60 82 78 72" fill="none" stroke="#E53935" stroke-width="3"/><path d="M50 45 Q50 60 50 75" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.3"/><path d="M70 45 Q70 60 70 75" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.3"/></svg>
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<circle cx="60" cy="60" r="28" fill="#E53935"/>
+<path d="M36 48 Q60 38 84 48" fill="none" stroke="#C62828" stroke-width="2"/>
+<path d="M36 72 Q60 82 84 72" fill="none" stroke="#C62828" stroke-width="2"/>
+<path d="M48 34 Q38 60 48 86" fill="none" stroke="#C62828" stroke-width="2"/>
+<path d="M72 34 Q82 60 72 86" fill="none" stroke="#C62828" stroke-width="2"/>
+<ellipse cx="48" cy="48" rx="8" ry="6" fill="#EF5350" opacity="0.5"/>
+<path d="M60 32 L60 88" fill="none" stroke="#C62828" stroke-width="1" opacity="0.3"/>
+</svg>

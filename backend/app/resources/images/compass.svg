@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="85" fill="#FFF3E0" stroke="#795548" stroke-width="3"/><circle cx="100" cy="100" r="75" fill="none" stroke="#BCAAA4" stroke-width="1"/><polygon points="100,30 108,90 100,100 92,90" fill="#E53935"/><polygon points="100,170 108,110 100,100 92,110" fill="#1E88E5"/><text x="100" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#E53935">N</text><text x="100" y="192" text-anchor="middle" font-size="16" font-weight="bold" fill="#1E88E5">S</text><text x="185" y="105" text-anchor="middle" font-size="14" fill="#666">E</text><text x="15" y="105" text-anchor="middle" font-size="14" fill="#666">W</text></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<circle cx="60" cy="60" r="28" fill="white" stroke="#1565C0" stroke-width="2.5"/>
+<circle cx="60" cy="60" r="24" fill="#F5F5F5"/>
+<text x="57" y="40" font-size="8" fill="#C62828" font-family="sans-serif" font-weight="bold">N</text>
+<text x="57" y="88" font-size="8" fill="#1565C0" font-family="sans-serif">S</text>
+<text x="80" y="64" font-size="8" fill="#1565C0" font-family="sans-serif">E</text>
+<text x="36" y="64" font-size="8" fill="#1565C0" font-family="sans-serif">W</text>
+<path d="M60 36 L56 60 L60 56 L64 60Z" fill="#E53935"/>
+<path d="M60 84 L56 60 L60 64 L64 60Z" fill="#BDBDBD"/>
+<circle cx="60" cy="60" r="3" fill="#1565C0"/>
+</svg>

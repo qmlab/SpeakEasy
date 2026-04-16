@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-<circle cx="45" cy="55" r="12" fill="none" stroke="#FDD835" stroke-width="5"/><rect x="55" y="52" width="30" height="6" rx="2" fill="#FDD835"/><rect x="78" y="52" width="5" height="12" rx="1" fill="#FDD835"/><rect x="72" y="52" width="5" height="10" rx="1" fill="#FDD835"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F9A825" stroke-width="3"/>
+<!-- Key bow (head) - ornate ring -->
+<circle cx="40" cy="45" r="18" fill="#FFD54F" stroke="#F9A825" stroke-width="3"/>
+<circle cx="40" cy="45" r="12" fill="#FFF8E1" stroke="#FBC02D" stroke-width="2"/>
+<circle cx="40" cy="45" r="7" fill="#FFD54F"/>
+<!-- Key shaft -->
+<rect x="55" y="42" width="40" height="7" rx="2" fill="#FFD54F" stroke="#F9A825" stroke-width="1.5"/>
+<!-- Key teeth (bits) -->
+<rect x="86" y="49" width="5" height="8" rx="1" fill="#FFD54F" stroke="#F9A825" stroke-width="1"/>
+<rect x="78" y="49" width="5" height="10" rx="1" fill="#FFD54F" stroke="#F9A825" stroke-width="1"/>
+<rect x="70" y="49" width="5" height="6" rx="1" fill="#FFD54F" stroke="#F9A825" stroke-width="1"/>
+<!-- Highlight on bow -->
+<path d="M30 38 Q36 32 44 34" fill="none" stroke="#FFF176" stroke-width="2" opacity="0.6"/>
+<!-- Shaft groove -->
+<line x1="58" y1="45.5" x2="90" y2="45.5" stroke="#FBC02D" stroke-width="1"/>
+<!-- Shadow -->
+<ellipse cx="60" cy="70" rx="30" ry="4" fill="#5D4037" opacity="0.1"/>
+</svg>

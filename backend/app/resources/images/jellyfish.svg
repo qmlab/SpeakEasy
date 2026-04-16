@@ -1,1 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M40 100 A60 60 0 0 1 160 100" fill="#CE93D8" stroke="#7B1FA2" stroke-width="2"/><path d="M60 100 Q65 130 55 160" fill="none" stroke="#BA68C8" stroke-width="3" stroke-linecap="round"/><path d="M80 100 Q85 140 75 170" fill="none" stroke="#BA68C8" stroke-width="3" stroke-linecap="round"/><path d="M100 100 Q100 145 95 175" fill="none" stroke="#BA68C8" stroke-width="3" stroke-linecap="round"/><path d="M120 100 Q115 140 125 170" fill="none" stroke="#BA68C8" stroke-width="3" stroke-linecap="round"/><path d="M140 100 Q135 130 145 160" fill="none" stroke="#BA68C8" stroke-width="3" stroke-linecap="round"/><circle cx="80" cy="75" r="6" fill="#333"/><circle cx="120" cy="75" r="6" fill="#333"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+
+<!-- Bell/dome -->
+<path d="M30 55 Q30 28 60 28 Q90 28 90 55 Q75 60 60 58 Q45 60 30 55Z" fill="#CE93D8" opacity="0.8"/>
+<!-- Bell pattern -->
+<path d="M40 40 Q50 36 60 40 Q70 36 80 40" fill="none" stroke="#BA68C8" stroke-width="1.5" opacity="0.5"/>
+<path d="M36 48 Q48 44 60 48 Q72 44 84 48" fill="none" stroke="#BA68C8" stroke-width="1" opacity="0.4"/>
+<!-- Highlight -->
+<ellipse cx="50" cy="40" rx="8" ry="6" fill="white" opacity="0.3"/>
+<!-- Tentacles -->
+<path d="M38 58 Q36 68 38 78 Q40 88 36 96" fill="none" stroke="#CE93D8" stroke-width="2.5" opacity="0.7"/>
+<path d="M48 58 Q52 70 48 80 Q44 90 48 98" fill="none" stroke="#AB47BC" stroke-width="2" opacity="0.6"/>
+<path d="M58 58 Q56 72 58 82 Q60 92 56 100" fill="none" stroke="#CE93D8" stroke-width="2.5" opacity="0.7"/>
+<path d="M68 58 Q72 70 68 80 Q64 90 68 98" fill="none" stroke="#AB47BC" stroke-width="2" opacity="0.6"/>
+<path d="M78 58 Q76 68 78 78 Q80 88 76 96" fill="none" stroke="#CE93D8" stroke-width="2.5" opacity="0.7"/>
+<!-- Eyes -->
+<circle cx="50" cy="46" r="3" fill="white" opacity="0.8"/>
+<circle cx="70" cy="46" r="3" fill="white" opacity="0.8"/>
+<circle cx="51" cy="46" r="1.5" fill="#4A148C"/>
+<circle cx="69" cy="46" r="1.5" fill="#4A148C"/>
+</svg>

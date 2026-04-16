@@ -1,1 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="55" r="30" fill="#FFCC80"/><polygon points="25,35 30,10 42,30" fill="#FFCC80" stroke="#E65100" stroke-width="1"/><polygon points="75,35 70,10 58,30" fill="#FFCC80" stroke="#E65100" stroke-width="1"/><circle cx="38" cy="48" r="4" fill="#333"/><circle cx="62" cy="48" r="4" fill="#333"/><ellipse cx="50" cy="58" rx="4" ry="3" fill="#FF7043"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FCE4EC" stroke="#C2185B" stroke-width="3"/>
+
+<!-- Body - small and round -->
+<ellipse cx="60" cy="74" rx="18" ry="14" fill="#BDBDBD"/>
+<!-- Head - big relative to body -->
+<circle cx="60" cy="48" r="20" fill="#E0E0E0"/>
+<!-- Ears -->
+<path d="M42 38 L36 18 L52 30Z" fill="#E0E0E0"/>
+<path d="M78 38 L84 18 L68 30Z" fill="#E0E0E0"/>
+<path d="M44 36 L39 22 L50 31Z" fill="#F48FB1"/>
+<path d="M76 36 L81 22 L70 31Z" fill="#F48FB1"/>
+<!-- Big eyes -->
+<circle cx="50" cy="46" r="7" fill="#4FC3F7"/>
+<circle cx="70" cy="46" r="7" fill="#4FC3F7"/>
+<circle cx="52" cy="44" r="4" fill="black"/>
+<circle cx="68" cy="44" r="4" fill="black"/>
+<circle cx="50" cy="43" r="2" fill="white"/>
+<circle cx="66" cy="43" r="2" fill="white"/>
+<!-- Nose -->
+<path d="M58 54 L60 56 L62 54Z" fill="#F48FB1"/>
+<!-- Mouth -->
+<path d="M60 56 Q57 58 56 57" fill="none" stroke="#9E9E9E" stroke-width="0.8"/>
+<path d="M60 56 Q63 58 64 57" fill="none" stroke="#9E9E9E" stroke-width="0.8"/>
+<!-- Whiskers -->
+<line x1="34" y1="52" x2="48" y2="54" stroke="#BDBDBD" stroke-width="0.6"/>
+<line x1="34" y1="56" x2="48" y2="56" stroke="#BDBDBD" stroke-width="0.6"/>
+<line x1="72" y1="54" x2="86" y2="52" stroke="#BDBDBD" stroke-width="0.6"/>
+<line x1="72" y1="56" x2="86" y2="56" stroke="#BDBDBD" stroke-width="0.6"/>
+<!-- Paws -->
+<ellipse cx="48" cy="86" rx="6" ry="3" fill="#E0E0E0"/>
+<ellipse cx="72" cy="86" rx="6" ry="3" fill="#E0E0E0"/>
+<!-- Tail -->
+<path d="M78 74 Q88 68 90 60" fill="none" stroke="#BDBDBD" stroke-width="4" stroke-linecap="round"/>
+</svg>

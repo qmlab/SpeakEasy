@@ -1,1 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFF8E1" rx="20"/><ellipse cx="100" cy="110" rx="35" ry="30" fill="#E65100"/><ellipse cx="100" cy="120" rx="20" ry="15" fill="white"/><circle cx="88" cy="100" r="5" fill="#1A237E"/><circle cx="112" cy="100" r="5" fill="#1A237E"/><polygon points="70,100 60,60 85,85" fill="#E65100"/><polygon points="130,100 140,60 115,85" fill="#E65100"/><polygon points="70,100 60,60 78,78" fill="#FFB74D"/><polygon points="130,100 140,60 122,78" fill="#FFB74D"/><ellipse cx="100" cy="125" rx="5" ry="3" fill="#1A237E"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="72" rx="22" ry="16" fill="#FF7043"/>
+<!-- Head -->
+<circle cx="60" cy="46" r="18" fill="#FF8A65"/>
+<!-- Ears - pointy -->
+<path d="M42 38 L34 18 L50 32Z" fill="#FF8A65"/>
+<path d="M78 38 L86 18 L70 32Z" fill="#FF8A65"/>
+<!-- Inner ears -->
+<path d="M43 36 L38 22 L48 33Z" fill="white"/>
+<path d="M77 36 L82 22 L72 33Z" fill="white"/>
+<!-- White face mask -->
+<path d="M48 44 Q52 38 60 36 Q68 38 72 44 Q68 54 60 58 Q52 54 48 44Z" fill="white"/>
+<!-- Eyes -->
+<path d="M50 42 L54 40 L52 44Z" fill="#FF6F00"/>
+<path d="M70 42 L66 40 L68 44Z" fill="#FF6F00"/>
+<circle cx="52" cy="42" r="2" fill="black"/>
+<circle cx="68" cy="42" r="2" fill="black"/>
+<!-- Nose -->
+<ellipse cx="60" cy="50" rx="3" ry="2" fill="black"/>
+<!-- Mouth -->
+<path d="M60 52 L60 54 Q57 56 55 55" fill="none" stroke="#5D4037" stroke-width="0.8"/>
+<path d="M60 54 Q63 56 65 55" fill="none" stroke="#5D4037" stroke-width="0.8"/>
+<!-- Paws -->
+<ellipse cx="44" cy="86" rx="6" ry="3" fill="#3E2723"/>
+<ellipse cx="76" cy="86" rx="6" ry="3" fill="#3E2723"/>
+<!-- Tail - bushy -->
+<path d="M82 70 Q94 62 96 68 Q98 74 92 76 Q96 78 94 82 Q90 84 86 78" fill="#FF7043"/>
+<path d="M92 76 Q94 80 92 82 Q88 84 86 80" fill="white"/>
+</svg>

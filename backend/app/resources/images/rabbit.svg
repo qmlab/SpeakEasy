@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-<ellipse cx="60" cy="72" rx="18" ry="16" fill="#FFF9C4"/><ellipse cx="50" cy="40" rx="7" ry="22" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.5"/><ellipse cx="70" cy="40" rx="7" ry="22" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.5"/><ellipse cx="50" cy="40" rx="4" ry="16" fill="#FFCDD2"/><ellipse cx="70" cy="40" rx="4" ry="16" fill="#FFCDD2"/><circle cx="53" cy="66" r="2.5" fill="#333"/><circle cx="67" cy="66" r="2.5" fill="#333"/><ellipse cx="60" cy="74" rx="3" ry="2" fill="#E91E63"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FCE4EC" stroke="#C2185B" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="60" cy="72" rx="22" ry="20" fill="white"/>
+<!-- Head -->
+<circle cx="60" cy="48" r="16" fill="white"/>
+<!-- Ears -->
+<path d="M48 40 Q44 14 40 10 Q36 14 42 40Z" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+<path d="M72 40 Q76 14 80 10 Q84 14 78 40Z" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+<!-- Inner ears -->
+<path d="M47 38 Q44 18 42 14 Q40 18 44 38Z" fill="#F48FB1"/>
+<path d="M73 38 Q76 18 78 14 Q80 18 76 38Z" fill="#F48FB1"/>
+<!-- Eyes -->
+<circle cx="52" cy="46" r="4" fill="black"/>
+<circle cx="68" cy="46" r="4" fill="black"/>
+<circle cx="51" cy="45" r="1.5" fill="white"/>
+<circle cx="67" cy="45" r="1.5" fill="white"/>
+<!-- Nose -->
+<path d="M58 52 L60 54 L62 52Z" fill="#F48FB1"/>
+<!-- Mouth -->
+<path d="M60 54 L60 56 Q57 58 55 57" fill="none" stroke="#9E9E9E" stroke-width="0.8"/>
+<path d="M60 56 Q63 58 65 57" fill="none" stroke="#9E9E9E" stroke-width="0.8"/>
+<!-- Whiskers -->
+<line x1="35" y1="50" x2="50" y2="52" stroke="#BDBDBD" stroke-width="0.6"/>
+<line x1="35" y1="54" x2="50" y2="54" stroke="#BDBDBD" stroke-width="0.6"/>
+<line x1="70" y1="52" x2="85" y2="50" stroke="#BDBDBD" stroke-width="0.6"/>
+<line x1="70" y1="54" x2="85" y2="54" stroke="#BDBDBD" stroke-width="0.6"/>
+<!-- Cheeks -->
+<circle cx="48" cy="54" r="4" fill="#F8BBD0" opacity="0.4"/>
+<circle cx="72" cy="54" r="4" fill="#F8BBD0" opacity="0.4"/>
+<!-- Paws -->
+<ellipse cx="46" cy="90" rx="7" ry="4" fill="white" stroke="#E0E0E0" stroke-width="0.5"/>
+<ellipse cx="74" cy="90" rx="7" ry="4" fill="white" stroke="#E0E0E0" stroke-width="0.5"/>
+<!-- Fluffy tail -->
+<circle cx="82" cy="78" r="6" fill="white" stroke="#E0E0E0" stroke-width="0.5"/>
+</svg>

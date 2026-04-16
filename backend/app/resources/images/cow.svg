@@ -1,1 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="12" fill="#E8F5E9"/><ellipse cx="50" cy="50" rx="28" ry="22" fill="#FFF"/><ellipse cx="50" cy="62" rx="14" ry="10" fill="#FFCCBC"/><circle cx="45" cy="58" r="2" fill="#333"/><circle cx="55" cy="58" r="2" fill="#333"/><circle cx="40" cy="44" r="4" fill="#333"/><circle cx="60" cy="44" r="4" fill="#333"/><circle cx="40" cy="44" r="2" fill="#FFF"/><circle cx="60" cy="44" r="2" fill="#FFF"/><ellipse cx="30" cy="36" rx="8" ry="5" fill="#FFF" transform="rotate(-20 30 36)"/><ellipse cx="70" cy="36" rx="8" ry="5" fill="#FFF" transform="rotate(20 70 36)"/><ellipse cx="35" cy="50" rx="8" ry="6" fill="#333" opacity="0.5"/><ellipse cx="60" cy="42" rx="6" ry="8" fill="#333" opacity="0.5"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
+
+<!-- Body -->
+<ellipse cx="58" cy="68" rx="28" ry="18" fill="white"/>
+<!-- Spots -->
+<ellipse cx="45" cy="62" rx="8" ry="6" fill="#212121" opacity="0.7" transform="rotate(-15 45 62)"/>
+<ellipse cx="70" cy="66" rx="7" ry="5" fill="#212121" opacity="0.7" transform="rotate(10 70 66)"/>
+<ellipse cx="55" cy="74" rx="6" ry="5" fill="#212121" opacity="0.7"/>
+<!-- Head -->
+<circle cx="60" cy="40" r="16" fill="white"/>
+<!-- Horns -->
+<path d="M46 30 Q40 20 38 24 Q40 28 46 32Z" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1"/>
+<path d="M74 30 Q80 20 82 24 Q80 28 74 32Z" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1"/>
+<!-- Eyes -->
+<circle cx="52" cy="38" r="3.5" fill="black"/>
+<circle cx="68" cy="38" r="3.5" fill="black"/>
+<circle cx="51" cy="37" r="1.2" fill="white"/>
+<circle cx="67" cy="37" r="1.2" fill="white"/>
+<!-- Snout -->
+<ellipse cx="60" cy="48" rx="10" ry="6" fill="#FFCC80"/>
+<!-- Nostrils -->
+<ellipse cx="56" cy="48" rx="2" ry="1.5" fill="#795548"/>
+<ellipse cx="64" cy="48" rx="2" ry="1.5" fill="#795548"/>
+<!-- Udder -->
+<ellipse cx="58" cy="86" rx="8" ry="5" fill="#FFCC80"/>
+<!-- Legs -->
+<rect x="36" y="82" width="6" height="14" rx="2" fill="white"/>
+<rect x="50" y="82" width="6" height="14" rx="2" fill="white"/>
+<rect x="64" y="82" width="6" height="14" rx="2" fill="white"/>
+<rect x="78" y="82" width="6" height="14" rx="2" fill="white"/>
+<!-- Hooves -->
+<rect x="36" y="93" width="6" height="3" rx="1" fill="#5D4037"/>
+<rect x="50" y="93" width="6" height="3" rx="1" fill="#5D4037"/>
+<rect x="64" y="93" width="6" height="3" rx="1" fill="#5D4037"/>
+<rect x="78" y="93" width="6" height="3" rx="1" fill="#5D4037"/>
+<!-- Ears -->
+<path d="M44 34 Q38 30 36 36 Q40 38 44 36Z" fill="white"/>
+<path d="M76 34 Q82 30 84 36 Q80 38 76 36Z" fill="white"/>
+</svg>

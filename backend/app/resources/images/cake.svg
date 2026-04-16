@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#FF6F00" stroke-width="3"/>
-<rect x="35" y="60" width="50" height="25" rx="5" fill="#FFCC80"/><rect x="32" y="55" width="56" height="10" rx="5" fill="#FF7043"/><rect x="35" y="50" width="50" height="8" rx="4" fill="#FFAB91"/><rect x="57" y="30" width="6" height="22" rx="3" fill="#FFD54F"/><ellipse cx="60" cy="28" rx="4" ry="5" fill="#FF9800"/><circle cx="60" cy="25" r="2" fill="#FFEB3B"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FCE4EC" stroke="#C2185B" stroke-width="3"/>
+
+<rect x="28" y="62" width="64" height="28" rx="4" fill="#FFCC80"/>
+<rect x="28" y="55" width="64" height="12" rx="3" fill="#F48FB1"/>
+<path d="M32 67 Q32 72 34 72 Q36 72 36 67" fill="#F48FB1"/>
+<path d="M48 67 Q48 74 50 74 Q52 74 52 67" fill="#F48FB1"/>
+<path d="M64 67 Q64 72 66 72 Q68 72 68 67" fill="#F48FB1"/>
+<path d="M78 67 Q78 74 80 74 Q82 74 82 67" fill="#F48FB1"/>
+<path d="M28 55 Q30 50 40 52 Q50 48 60 52 Q70 48 80 52 Q90 50 92 55" fill="#F48FB1"/>
+<rect x="44" y="35" width="3" height="18" rx="1" fill="#42A5F5"/>
+<rect x="57" y="35" width="3" height="18" rx="1" fill="#66BB6A"/>
+<rect x="70" y="35" width="3" height="18" rx="1" fill="#FFA726"/>
+<path d="M45.5 35 Q44 30 45.5 26 Q47 30 45.5 35Z" fill="#FDD835"/>
+<path d="M58.5 35 Q57 30 58.5 26 Q60 30 58.5 35Z" fill="#FDD835"/>
+<path d="M71.5 35 Q70 30 71.5 26 Q73 30 71.5 35Z" fill="#FDD835"/>
+<line x1="35" y1="56" x2="37" y2="54" stroke="#42A5F5" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="50" y1="54" x2="52" y2="52" stroke="#66BB6A" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="62" y1="56" x2="64" y2="54" stroke="#FFA726" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="76" y1="54" x2="78" y2="52" stroke="#EF5350" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

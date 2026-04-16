@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFF3E0" rx="20"/><rect x="30" y="90" width="100" height="8" fill="#90A4AE"/><polygon points="30,90 40,80 50,90 60,80 70,90 80,80 90,90 100,80 110,90 120,80 130,90 130,98 30,98" fill="#B0BEC5"/><rect x="130" y="75" width="40" height="45" rx="6" fill="#795548"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+
+<path d="M20 50 L22 56 L26 50 L28 56 L32 50 L34 56 L38 50 L40 56 L44 50 L46 56 L50 50 L52 56 L56 50 L58 56 L62 50 L64 56 L68 50 L70 56 L74 50 L76 56 L80 50 L80 46 L20 46Z" fill="#BDBDBD"/>
+<path d="M20 46 L80 46" fill="none" stroke="#9E9E9E" stroke-width="1.5"/>
+<rect x="80" y="38" width="22" height="20" rx="4" fill="#8D6E63"/>
+<rect x="82" y="42" width="18" height="12" rx="2" fill="#795548"/>
+<ellipse cx="91" cy="48" rx="4" ry="4" fill="none" stroke="#6D4C41" stroke-width="1.5"/>
+</svg>

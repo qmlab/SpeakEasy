@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="50" y1="10" x2="50" y2="85" stroke="#90A4AE" stroke-width="3"/><circle cx="50" cy="15" r="5" fill="none" stroke="#90A4AE" stroke-width="2"/><polygon points="47,85 50,95 53,85" fill="#90A4AE"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="3"/>
+<!-- Needle body - angled for visibility -->
+<path d="M42 18 L46 18 L64 96 L60 96Z" fill="#B0BEC5"/>
+<path d="M43 20 L45 20 L62 92 L60 92Z" fill="#CFD8DC" opacity="0.5"/>
+<!-- Needle point -->
+<path d="M60 96 L62 104 L64 96Z" fill="#78909C"/>
+<!-- Eye of needle (oval hole near top) -->
+<ellipse cx="44" cy="26" rx="3" ry="5" fill="#F3E5F5" stroke="#78909C" stroke-width="1.5"/>
+<!-- Thread through eye -->
+<path d="M30 20 Q38 18 44 22 Q48 25 44 30 Q40 34 36 30" fill="none" stroke="#E91E63" stroke-width="2" stroke-linecap="round"/>
+<path d="M36 30 Q32 28 28 32 Q24 38 20 42" fill="none" stroke="#E91E63" stroke-width="2" stroke-linecap="round"/>
+<!-- Needle shine line -->
+<path d="M43 22 L61 94" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+<!-- Shadow -->
+<path d="M46 20 L66 98" fill="none" stroke="#78909C" stroke-width="0.5" opacity="0.3"/>
+</svg>

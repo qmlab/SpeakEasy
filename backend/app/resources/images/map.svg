@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFF8E1" rx="20"/><rect x="35" y="45" width="130" height="110" rx="4" fill="#FFECB3" stroke="#795548" stroke-width="2"/><path d="M50 70 L80 60 L110 80 L150 55" fill="none" stroke="#E53935" stroke-width="2" stroke-dasharray="5,3"/><circle cx="150" cy="55" r="5" fill="#E53935"/><path d="M60 100 Q90 120 120 95 Q140 80 155 100" fill="none" stroke="#42A5F5" stroke-width="2"/><rect x="70" y="110" width="15" height="10" fill="#66BB6A" opacity="0.5"/><rect x="110" y="100" width="20" height="15" fill="#66BB6A" opacity="0.5"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+
+<path d="M22 28 L42 34 L62 26 L82 32 L98 24 L98 88 L82 92 L62 84 L42 92 L22 86Z" fill="#FFF9C4"/>
+<path d="M22 28 L42 34 L62 26 L82 32 L98 24 L98 88 L82 92 L62 84 L42 92 L22 86Z" fill="none" stroke="#F9A825" stroke-width="1.5"/>
+<line x1="42" y1="34" x2="42" y2="92" stroke="#FBC02D" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="62" y1="26" x2="62" y2="84" stroke="#FBC02D" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="82" y1="32" x2="82" y2="92" stroke="#FBC02D" stroke-width="1" stroke-dasharray="3,2"/>
+<path d="M30 50 Q40 45 50 55 Q55 60 65 55 Q75 50 85 58" fill="none" stroke="#42A5F5" stroke-width="2"/>
+<circle cx="72" cy="44" r="3" fill="#E53935"/>
+<path d="M72 44 L72 38 L76 42Z" fill="#E53935"/>
+<path d="M35 70 Q45 65 55 72" fill="none" stroke="#66BB6A" stroke-width="2" opacity="0.5"/>
+</svg>

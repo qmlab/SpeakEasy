@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#FF6F00" stroke-width="3"/>
-<circle cx="60" cy="60" r="18" fill="#FDD835"/><line x1="60" y1="30" x2="60" y2="20" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="60" y1="100" x2="60" y2="90" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="30" y1="60" x2="20" y2="60" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="60" x2="90" y2="60" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="38" y1="38" x2="31" y2="31" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="82" y1="38" x2="89" y2="31" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="38" y1="82" x2="31" y2="89" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/><line x1="82" y1="82" x2="89" y2="89" stroke="#FDD835" stroke-width="4" stroke-linecap="round"/></svg>
+<circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
+
+<circle cx="60" cy="60" r="20" fill="#FDD835"/>
+<circle cx="60" cy="60" r="16" fill="#FFEE58"/>
+<ellipse cx="54" cy="54" rx="6" ry="4" fill="#FFF9C4" opacity="0.5"/>
+<line x1="60" y1="30" x2="60" y2="20" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="60" y1="90" x2="60" y2="100" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="30" y1="60" x2="20" y2="60" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="90" y1="60" x2="100" y2="60" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="39" y1="39" x2="32" y2="32" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="81" y1="39" x2="88" y2="32" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="39" y1="81" x2="32" y2="88" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+<line x1="81" y1="81" x2="88" y2="88" stroke="#FFB300" stroke-width="3" stroke-linecap="round"/>
+</svg>
