@@ -224,6 +224,7 @@ struct AssessmentGameView: View {
                                     .fill(Color.purple.opacity(0.12))
                             )
                     }
+                    .disabled(isListening)
 
                     Text(activity.content.instruction)
                         .font(.title2)
@@ -364,7 +365,7 @@ struct AssessmentGameView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
-            .disabled(selectedOption != nil || isListening)
+            .disabled(selectedOption != nil || isListening || isEvaluating)
         }
     }
 
