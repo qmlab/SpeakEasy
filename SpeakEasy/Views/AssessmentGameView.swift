@@ -30,6 +30,12 @@ struct AssessmentGameView: View {
 
     @State private var activityStartTime: Date?
 
+    // Voice input state
+    @State private var isListening: Bool = false
+    @State private var spokenText: String = ""
+    @State private var hasRecording: Bool = false
+    @State private var isEvaluating: Bool = false
+
     @StateObject private var speechService = SpeechService()
     private let api = AdaptiveAPIService()
 
@@ -254,7 +260,7 @@ struct AssessmentGameView: View {
                         optionButtons(options, activity: activity, imageHint: activity.content.imageHint)
                     }
 
-                    // Voice interaction fallback: show "I said it!" button
+                    // Voice interaction: real speech recognition
                     if activity.content.interactionType == "voice" {
                         voiceActivitySection(activity: activity)
                     }
@@ -267,38 +273,89 @@ struct AssessmentGameView: View {
     // MARK: - Voice Activity Section
 
     private func voiceActivitySection(activity: AssessmentActivity) -> some View {
-        VStack(spacing: 16) {
+        let targetWord = activity.content.targetWord ?? activity.content.correctAnswer ?? ""
+
+        return VStack(spacing: 16) {
             Text("Say it out loud!")
                 .font(.headline)
                 .foregroundColor(.purple)
 
+            // Show recognized text
+            if !spokenText.isEmpty {
+                HStack {
+                    Image(systemName: "quote.bubble.fill")
+                        .foregroundColor(.purple)
+                    Text("You said: \"\(spokenText)\"")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal)
+            }
+
+            // Live transcription while listening
+            if isListening && !speechService.recognizedText.isEmpty {
+                Text(speechService.recognizedText)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(.secondarySystemBackground))
+                    )
+            }
+
+            // Evaluating indicator
+            if isEvaluating {
+                HStack {
+                    ProgressView()
+                    Text("Checking...")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            // Main mic button
             Button {
-                // For assessment, treat voice attempt as correct (simplified)
-                let target = activity.content.correctAnswer ?? activity.content.targetWord ?? ""
-                Task {
-                    await submitResponse(activity: activity, selected: target)
+                if isEvaluating { return }
+
+                if isListening {
+                    speechService.stopAndEvaluate()
+                } else {
+                    startListeningForAssessment(activity: activity, targetWord: targetWord)
                 }
             } label: {
-                HStack {
-                    Image(systemName: "mic.fill")
-                        .font(.title2)
-                    Text("I said it!")
-                        .font(.title3)
-                        .fontWeight(.bold)
+                HStack(spacing: 12) {
+                    Image(systemName: isListening ? "stop.circle.fill" : "mic.circle.fill")
+                        .font(.title)
+                    Text(assessmentMicLabel)
+                        .font(.headline)
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
+                .padding()
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.green.gradient)
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(isListening ? Color.red : (hasRecording ? Color.orange : Color.purple))
                 )
             }
-            .disabled(selectedOption != nil)
+            .disabled(selectedOption != nil || isEvaluating)
             .padding(.horizontal, 24)
 
+            // Help: hear target word again
+            if !targetWord.isEmpty {
+                Button {
+                    speechService.speak(targetWord)
+                } label: {
+                    Label("Hear Again", systemImage: "speaker.wave.2")
+                        .font(.subheadline)
+                        .foregroundColor(.purple)
+                }
+                .disabled(isListening)
+            }
+
+            // Skip button
             Button {
-                // Skip / can't say it
                 Task {
                     await submitResponse(activity: activity, selected: "")
                 }
@@ -307,7 +364,47 @@ struct AssessmentGameView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
-            .disabled(selectedOption != nil)
+            .disabled(selectedOption != nil || isListening)
+        }
+    }
+
+    /// Mic button label for assessment voice tasks
+    private var assessmentMicLabel: String {
+        if isListening {
+            return "Listening..."
+        } else if hasRecording {
+            return "Say It Again"
+        } else {
+            return "Say It"
+        }
+    }
+
+    /// Start speech recognition for an assessment voice activity
+    private func startListeningForAssessment(activity: AssessmentActivity, targetWord: String) {
+        if speechService.isSpeaking {
+            speechService.onSpeechFinished = nil
+            speechService.stop()
+        }
+        isListening = true
+        spokenText = ""
+
+        speechService.startListening(targetWord: targetWord) { rating in
+            isListening = false
+            spokenText = speechService.recognizedText
+
+            if rating > 0 {
+                hasRecording = true
+                let isCorrect = rating >= 3.0
+                let submittedText = isCorrect ? (activity.content.correctAnswer ?? targetWord) : spokenText
+                isEvaluating = true
+                Task {
+                    await submitResponse(activity: activity, selected: submittedText)
+                    isEvaluating = false
+                }
+            } else {
+                hasRecording = false
+                spokenText = "Could not hear clearly. Try again!"
+            }
         }
     }
 
@@ -643,7 +740,26 @@ struct AssessmentGameView: View {
                 selectedOption = nil
                 activityStartTime = Date()
             }
-            // Auto-speak the instruction
+            // Reset voice state for new activity
+            hasRecording = false
+            isEvaluating = false
+            spokenText = ""
+            if isListening {
+                speechService.stopListening()
+                isListening = false
+            }
+            speechService.onSpeechFinished = nil
+
+            // Auto-speak the instruction, then auto-listen for voice tasks
+            if activity.content.interactionType == "voice" {
+                let target = activity.content.targetWord ?? activity.content.correctAnswer ?? ""
+                if !target.isEmpty {
+                    speechService.onSpeechFinished = { [self] in
+                        speechService.onSpeechFinished = nil
+                        startListeningForAssessment(activity: activity, targetWord: target)
+                    }
+                }
+            }
             speechService.speak(activity.content.instruction)
         } catch let error as AdaptiveAPIError {
             if case .httpError(let statusCode, _) = error, statusCode == 404 {
