@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-
-<path d="M25 68 Q25 60 35 58 L85 58 Q95 58 95 68 Q95 78 85 80 L35 80 Q25 80 25 68Z" fill="#D4A24E"/>
-<path d="M30 68 Q30 62 38 60 L82 60 Q90 60 90 68" fill="none" stroke="#B8860B" stroke-width="1"/>
-<path d="M40 58 Q42 48 52 46 Q60 44 68 46 Q78 48 80 58" fill="none" stroke="#8D6E63" stroke-width="4" stroke-linecap="round"/>
-<path d="M60 46 L60 58" fill="none" stroke="#8D6E63" stroke-width="4" stroke-linecap="round"/>
-<ellipse cx="60" cy="70" rx="28" ry="2" fill="#B8860B" opacity="0.2"/>
+<!-- Sole - flip flop shape -->
+<path d="M28 52 Q22 52 20 60 Q18 68 20 76 Q22 84 30 86 L70 90 Q82 90 86 82 Q90 74 88 64 Q86 54 78 52Z" fill="#D4A24E"/>
+<!-- Sole edge shadow -->
+<path d="M22 62 Q20 70 22 78 Q24 84 30 86 L70 90 Q80 90 84 82 Q88 74 86 64" fill="none" stroke="#B8860B" stroke-width="1.5"/>
+<!-- Sole top surface lighter -->
+<path d="M30 54 Q24 54 22 62 Q20 70 22 76 Q24 82 30 84 L68 88 Q78 88 82 80 Q86 72 84 62 Q82 56 76 54Z" fill="#DEB050" opacity="0.5"/>
+<!-- Foot bed texture -->
+<ellipse cx="50" cy="68" rx="22" ry="12" fill="#C8973E" opacity="0.2"/>
+<!-- Y-strap thong -->
+<path d="M52 52 Q50 44 46 40" fill="none" stroke="#8D6E63" stroke-width="4.5" stroke-linecap="round"/>
+<path d="M52 52 Q54 44 58 40" fill="none" stroke="#8D6E63" stroke-width="4.5" stroke-linecap="round"/>
+<!-- Center strap -->
+<path d="M52 52 L52 70" fill="none" stroke="#8D6E63" stroke-width="4.5" stroke-linecap="round"/>
+<!-- Strap highlight -->
+<path d="M52 54 L52 68" fill="none" stroke="#A1887F" stroke-width="1.5" opacity="0.5"/>
+<!-- Toe post knot -->
+<circle cx="52" cy="52" r="3" fill="#795548"/>
+<circle cx="52" cy="52" r="1.5" fill="#A1887F" opacity="0.5"/>
+<!-- Cross strap -->
+<path d="M30 64 Q52 58 76 64" fill="none" stroke="#8D6E63" stroke-width="4" stroke-linecap="round"/>
+<path d="M32 64 Q52 59 74 64" fill="none" stroke="#A1887F" stroke-width="1.2" opacity="0.4"/>
+<!-- Sole bottom edge -->
+<path d="M20 78 Q22 86 30 88 L70 92 Q82 92 86 84" fill="none" stroke="#A67C3D" stroke-width="2"/>
 </svg>

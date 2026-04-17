@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-<!-- Sky clouds background -->
-<ellipse cx="30" cy="85" rx="20" ry="8" fill="white" opacity="0.3"/>
-<ellipse cx="90" cy="90" rx="15" ry="6" fill="white" opacity="0.3"/>
+<!-- Wispy clouds -->
+<ellipse cx="22" cy="86" rx="14" ry="5" fill="white" opacity="0.4"/>
+<ellipse cx="95" cy="82" rx="10" ry="3.5" fill="white" opacity="0.35"/>
+<ellipse cx="55" cy="92" rx="18" ry="4" fill="white" opacity="0.3"/>
 <!-- Fuselage -->
-<path d="M15 60 Q15 50 30 48 L90 48 Q105 50 108 58 Q108 62 105 64 L90 66 L30 66 Q15 66 15 60Z" fill="#ECEFF1"/>
-<!-- Fuselage bottom shadow -->
-<path d="M20 62 L100 62 Q105 63 104 64 L88 66 L28 66 Q18 65 20 62Z" fill="#B0BEC5" opacity="0.4"/>
-<!-- Cockpit windows -->
-<path d="M98 52 Q104 54 106 58 Q104 60 98 60Z" fill="#29B6F6"/>
-<path d="M98 52 Q102 54 104 56" fill="none" stroke="#0288D1" stroke-width="0.8"/>
-<!-- Windows row -->
-<circle cx="35" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="42" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="49" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="56" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="63" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="70" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="77" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<circle cx="84" cy="56" r="2.5" fill="#29B6F6" stroke="#90A4AE" stroke-width="0.5"/>
-<!-- Wing -->
-<path d="M45 62 L30 90 L80 90 L65 62Z" fill="#CFD8DC"/>
-<path d="M48 62 L35 86 L75 86 L64 62Z" fill="#B0BEC5" opacity="0.3"/>
-<!-- Tail fin vertical -->
-<path d="M22 48 L18 28 L28 28 L30 48Z" fill="#E53935"/>
-<!-- Tail fin horizontal -->
-<path d="M18 40 L8 34 L28 34 L32 40Z" fill="#CFD8DC"/>
-<!-- Stripe on fuselage -->
-<path d="M25 60 L95 60" fill="none" stroke="#E53935" stroke-width="2.5"/>
-<!-- Engine under wing -->
-<ellipse cx="50" cy="70" rx="6" ry="4" fill="#90A4AE"/>
-<ellipse cx="65" cy="70" rx="6" ry="4" fill="#90A4AE"/>
+<path d="M16 58 Q16 48 30 46 L88 46 Q100 47 104 54 Q106 58 104 62 Q100 67 88 68 L30 68 Q16 66 16 58Z" fill="#E0E0E0"/>
+<!-- Fuselage top highlight -->
+<path d="M30 46 L88 46 Q98 47 102 52" fill="none" stroke="#F5F5F5" stroke-width="2.5" opacity="0.6"/>
+<!-- Fuselage belly shadow -->
+<path d="M20 62 L98 62 Q102 64 100 66 L86 68 L28 68 Q18 66 20 62Z" fill="#BDBDBD" opacity="0.45"/>
+<!-- Cockpit windshield -->
+<path d="M96 50 Q103 52 105 56 Q103 60 96 60Z" fill="#4FC3F7"/>
+<path d="M97 51 Q101 53 103 55" fill="none" stroke="white" stroke-width="0.7" opacity="0.5"/>
+<path d="M96 50 Q103 52 105 56" fill="none" stroke="#0277BD" stroke-width="0.8"/>
+<!-- Passenger windows -->
+<circle cx="34" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="41" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="48" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="55" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="62" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="69" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="76" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<circle cx="83" cy="55" r="2.2" fill="#4FC3F7" stroke="#9E9E9E" stroke-width="0.5"/>
+<!-- Main wing -->
+<path d="M40 64 L24 94 L82 94 L66 64Z" fill="#CFD8DC"/>
+<path d="M43 64 L30 90 L76 90 L64 64Z" fill="#B0BEC5" opacity="0.35"/>
+<!-- Vertical tail stabilizer -->
+<path d="M22 46 L16 24 L28 24 L30 46Z" fill="#E53935"/>
+<path d="M18 26 L26 26" fill="none" stroke="#EF5350" stroke-width="1.5"/>
+<!-- Horizontal tail stabilizer -->
+<path d="M16 38 L6 32 L28 32 L32 38Z" fill="#CFD8DC"/>
+<!-- Red fuselage stripe -->
+<path d="M24 60 L96 60" fill="none" stroke="#E53935" stroke-width="2"/>
+<!-- Engine nacelles -->
+<ellipse cx="46" cy="74" rx="5" ry="3.5" fill="#78909C" stroke="#546E7A" stroke-width="0.5"/>
+<ellipse cx="46" cy="74" rx="2.5" ry="1.8" fill="#90A4AE"/>
+<ellipse cx="64" cy="74" rx="5" ry="3.5" fill="#78909C" stroke="#546E7A" stroke-width="0.5"/>
+<ellipse cx="64" cy="74" rx="2.5" ry="1.8" fill="#90A4AE"/>
+<line x1="46" y1="70" x2="46" y2="64" stroke="#78909C" stroke-width="1.5"/>
+<line x1="64" y1="70" x2="64" y2="64" stroke="#78909C" stroke-width="1.5"/>
 </svg>

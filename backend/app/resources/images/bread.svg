@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-<!-- Loaf body -->
-<path d="M20 72 L20 80 Q20 90 30 90 L90 90 Q100 90 100 80 L100 72Z" fill="#C68A2E"/>
+<!-- Loaf body sides -->
+<path d="M18 70 L18 82 Q18 94 30 94 L90 94 Q102 94 102 82 L102 70Z" fill="#B8782A"/>
 <!-- Loaf top dome -->
-<path d="M20 72 Q20 38 60 38 Q100 38 100 72Z" fill="#DCA03A"/>
-<!-- Golden crust top highlight -->
-<path d="M30 68 Q30 45 60 42 Q90 45 90 68" fill="none" stroke="#E6B955" stroke-width="3" opacity="0.5"/>
-<!-- Score marks on top -->
-<path d="M35 55 Q45 48 55 55" fill="none" stroke="#C49340" stroke-width="2" opacity="0.7"/>
-<path d="M50 50 Q60 43 70 50" fill="none" stroke="#C49340" stroke-width="2" opacity="0.7"/>
-<path d="M65 55 Q75 48 85 55" fill="none" stroke="#C49340" stroke-width="2" opacity="0.7"/>
+<path d="M18 70 Q18 34 60 34 Q102 34 102 70Z" fill="#D4952E"/>
+<!-- Golden crust gradient layers -->
+<path d="M24 68 Q24 40 60 38 Q96 40 96 68" fill="#DCA63A" opacity="0.6"/>
+<path d="M30 66 Q32 44 60 42 Q88 44 90 66" fill="#E6B84D" opacity="0.5"/>
+<!-- Score marks - diagonal cuts on top -->
+<path d="M32 56 Q42 46 54 54" fill="none" stroke="#C49028" stroke-width="2.5" opacity="0.7"/>
+<path d="M44 50 Q56 40 68 50" fill="none" stroke="#C49028" stroke-width="2.5" opacity="0.7"/>
+<path d="M60 54 Q72 44 84 54" fill="none" stroke="#C49028" stroke-width="2.5" opacity="0.7"/>
+<!-- Score mark inner shadows -->
+<path d="M34 57 Q44 48 54 55" fill="none" stroke="#A87428" stroke-width="1" opacity="0.4"/>
+<path d="M46 51 Q56 42 68 51" fill="none" stroke="#A87428" stroke-width="1" opacity="0.4"/>
+<path d="M62 55 Q72 46 84 55" fill="none" stroke="#A87428" stroke-width="1" opacity="0.4"/>
 <!-- Side shadow -->
-<path d="M20 72 L20 80 Q20 90 30 90 L90 90 Q100 90 100 80 L100 72" fill="#B07A28" opacity="0.3"/>
-<!-- Bottom line -->
-<path d="M24 87 L96 87" fill="none" stroke="#A67C3D" stroke-width="1" opacity="0.4"/>
-<!-- Top highlights -->
-<ellipse cx="50" cy="48" rx="8" ry="4" fill="#EEC97A" opacity="0.4"/>
-<ellipse cx="72" cy="50" rx="6" ry="3" fill="#EEC97A" opacity="0.3"/>
-<!-- Flour spots -->
-<circle cx="42" cy="52" r="1.5" fill="white" opacity="0.35"/>
-<circle cx="60" cy="44" r="1.2" fill="white" opacity="0.3"/>
-<circle cx="78" cy="52" r="1" fill="white" opacity="0.35"/>
+<path d="M18 74 L18 82 Q18 94 30 94 L90 94 Q102 94 102 82 L102 74" fill="#9E6A20" opacity="0.25"/>
+<!-- Bottom edge line -->
+<path d="M22 90 L98 90" fill="none" stroke="#8B5E1A" stroke-width="1" opacity="0.35"/>
+<!-- Top highlights - glossy crust -->
+<ellipse cx="46" cy="46" rx="10" ry="5" fill="#EEC97A" opacity="0.45"/>
+<ellipse cx="74" cy="48" rx="8" ry="4" fill="#EEC97A" opacity="0.35"/>
+<ellipse cx="60" cy="40" rx="6" ry="3" fill="#F5DDA0" opacity="0.3"/>
+<!-- Flour dusting -->
+<circle cx="38" cy="52" r="1.8" fill="white" opacity="0.4"/>
+<circle cx="56" cy="42" r="1.5" fill="white" opacity="0.35"/>
+<circle cx="72" cy="50" r="1.3" fill="white" opacity="0.35"/>
+<circle cx="48" cy="58" r="1" fill="white" opacity="0.3"/>
+<circle cx="80" cy="54" r="1.2" fill="white" opacity="0.3"/>
 </svg>

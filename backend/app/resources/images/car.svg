@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-
-<path d="M24 62 L30 48 Q38 38 52 38 L68 38 Q82 38 90 48 L96 62Z" fill="#E53935"/>
-<rect x="20" y="62" width="80" height="20" rx="4" fill="#C62828"/>
-<rect x="34" y="42" width="20" height="18" rx="2" fill="#BBDEFB"/>
-<rect x="58" y="42" width="24" height="18" rx="2" fill="#BBDEFB"/>
-<circle cx="36" cy="84" r="8" fill="#424242"/>
-<circle cx="36" cy="84" r="5" fill="#757575"/>
-<circle cx="36" cy="84" r="2" fill="#BDBDBD"/>
-<circle cx="84" cy="84" r="8" fill="#424242"/>
-<circle cx="84" cy="84" r="5" fill="#757575"/>
-<circle cx="84" cy="84" r="2" fill="#BDBDBD"/>
-<rect x="88" y="64" width="8" height="4" rx="1" fill="#FDD835"/>
-<rect x="24" y="64" width="8" height="4" rx="1" fill="#FDD835"/>
-<path d="M36 42 Q42 40 50 42" fill="none" stroke="#90CAF9" stroke-width="0.8" opacity="0.5"/>
+<!-- Shadow under car -->
+<ellipse cx="60" cy="92" rx="36" ry="3" fill="#90A4AE" opacity="0.2"/>
+<!-- Car body lower -->
+<rect x="14" y="58" width="92" height="24" rx="6" fill="#C62828"/>
+<!-- Car body upper (cabin) -->
+<path d="M28 58 L36 38 Q40 32 50 32 L70 32 Q80 32 84 38 L92 58Z" fill="#E53935"/>
+<!-- Roof highlight -->
+<path d="M40 36 Q50 32 70 32 Q78 32 82 36" fill="none" stroke="#EF5350" stroke-width="2" opacity="0.5"/>
+<!-- Windshield -->
+<path d="M36 56 L42 38 Q44 34 50 34 L56 34 L56 56Z" fill="#BBDEFB"/>
+<path d="M38 54 L43 39" fill="none" stroke="#90CAF9" stroke-width="0.8" opacity="0.5"/>
+<!-- Rear window -->
+<path d="M64 56 L64 34 L70 34 Q76 34 78 38 L84 56Z" fill="#BBDEFB"/>
+<path d="M66 54 L77 39" fill="none" stroke="#90CAF9" stroke-width="0.8" opacity="0.5"/>
+<!-- Window divider (B-pillar) -->
+<rect x="56" y="34" width="8" height="24" fill="#C62828"/>
+<!-- Door line -->
+<path d="M56 58 L56 80" fill="none" stroke="#B71C1C" stroke-width="1"/>
+<!-- Door handle -->
+<rect x="45" y="66" width="6" height="2" rx="1" fill="#E57373"/>
+<rect x="68" y="66" width="6" height="2" rx="1" fill="#E57373"/>
+<!-- Headlights -->
+<rect x="96" y="62" width="8" height="6" rx="2" fill="#FFF9C4"/>
+<rect x="97" y="63" width="6" height="4" rx="1" fill="#FFEE58" opacity="0.7"/>
+<!-- Tail lights -->
+<rect x="16" y="62" width="6" height="6" rx="2" fill="#FF5252"/>
+<rect x="17" y="63" width="4" height="4" rx="1" fill="#FF8A80" opacity="0.5"/>
+<!-- Front bumper -->
+<rect x="92" y="74" width="12" height="4" rx="2" fill="#B71C1C"/>
+<!-- Rear bumper -->
+<rect x="16" y="74" width="10" height="4" rx="2" fill="#B71C1C"/>
+<!-- Grille -->
+<rect x="100" y="68" width="4" height="6" rx="1" fill="#424242"/>
+<path d="M101 69 L103 69 M101 71 L103 71 M101 73 L103 73" fill="none" stroke="#616161" stroke-width="0.5"/>
+<!-- Front wheel -->
+<circle cx="82" cy="82" r="10" fill="#424242"/>
+<circle cx="82" cy="82" r="7" fill="#616161"/>
+<circle cx="82" cy="82" r="4" fill="#9E9E9E"/>
+<circle cx="82" cy="82" r="1.5" fill="#BDBDBD"/>
+<!-- Front wheel spokes -->
+<path d="M82 75 L82 78 M82 86 L82 89 M75 82 L78 82 M86 82 L89 82" fill="none" stroke="#757575" stroke-width="1"/>
+<!-- Rear wheel -->
+<circle cx="34" cy="82" r="10" fill="#424242"/>
+<circle cx="34" cy="82" r="7" fill="#616161"/>
+<circle cx="34" cy="82" r="4" fill="#9E9E9E"/>
+<circle cx="34" cy="82" r="1.5" fill="#BDBDBD"/>
+<!-- Rear wheel spokes -->
+<path d="M34 75 L34 78 M34 86 L34 89 M27 82 L30 82 M38 82 L41 82" fill="none" stroke="#757575" stroke-width="1"/>
+<!-- Side mirror -->
+<rect x="92" y="52" width="4" height="6" rx="1" fill="#C62828"/>
 </svg>

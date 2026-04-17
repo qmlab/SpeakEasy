@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
-<!-- Handle - wooden with texture -->
-<rect x="50" y="20" width="20" height="45" rx="4" fill="#A1887F"/>
-<rect x="52" y="22" width="16" height="41" rx="3" fill="#8D6E63"/>
-<!-- Wood grain on handle -->
-<path d="M55 25 L55 60" fill="none" stroke="#795548" stroke-width="0.8" opacity="0.5"/>
-<path d="M60 24 L60 62" fill="none" stroke="#795548" stroke-width="0.5" opacity="0.4"/>
-<path d="M65 25 L65 60" fill="none" stroke="#795548" stroke-width="0.8" opacity="0.5"/>
+<!-- Handle cap (mushroom top) -->
+<path d="M46 18 Q46 12 60 12 Q74 12 74 18 L72 22 L48 22Z" fill="#6D4C41"/>
+<path d="M50 14 Q60 12 70 14" fill="none" stroke="#8D6E63" stroke-width="1" opacity="0.5"/>
+<!-- Handle body -->
+<rect x="48" y="22" width="24" height="40" rx="5" fill="#A1887F"/>
+<rect x="50" y="24" width="20" height="36" rx="4" fill="#8D6E63"/>
+<!-- Wood grain -->
+<path d="M54 26 L54 58" fill="none" stroke="#795548" stroke-width="0.8" opacity="0.5"/>
+<path d="M60 25 L60 59" fill="none" stroke="#795548" stroke-width="0.5" opacity="0.35"/>
+<path d="M66 26 L66 58" fill="none" stroke="#795548" stroke-width="0.8" opacity="0.5"/>
 <!-- Handle highlight -->
-<rect x="54" y="24" width="4" height="38" rx="2" fill="#BCAAA4" opacity="0.4"/>
-<!-- Metal ferrule (ring where blade meets handle) -->
-<rect x="48" y="62" width="24" height="8" rx="2" fill="#9E9E9E"/>
-<rect x="48" y="62" width="24" height="3" rx="1" fill="#BDBDBD"/>
-<path d="M50 66 L70 66" fill="none" stroke="#757575" stroke-width="0.8"/>
-<!-- Blade - flat chisel blade tapering -->
-<path d="M50 70 L48 90 L60 98 L72 90 L70 70Z" fill="#B0BEC5"/>
-<!-- Blade highlight -->
-<path d="M52 72 L50 88 L60 94" fill="#CFD8DC" opacity="0.6"/>
-<!-- Blade edge - sharp bottom -->
-<path d="M48 90 L60 98 L72 90" fill="none" stroke="#78909C" stroke-width="2"/>
-<!-- Cutting edge shine -->
-<path d="M52 92 L60 96 L68 92" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
-<!-- Handle cap -->
-<rect x="52" y="18" width="16" height="5" rx="2" fill="#6D4C41"/>
+<rect x="52" y="26" width="5" height="32" rx="2" fill="#BCAAA4" opacity="0.4"/>
+<!-- Handle grip rings -->
+<path d="M50 30 L70 30" fill="none" stroke="#795548" stroke-width="1" opacity="0.3"/>
+<path d="M50 50 L70 50" fill="none" stroke="#795548" stroke-width="1" opacity="0.3"/>
+<!-- Metal ferrule -->
+<rect x="46" y="60" width="28" height="10" rx="2" fill="#9E9E9E"/>
+<rect x="46" y="60" width="28" height="4" rx="1" fill="#BDBDBD"/>
+<path d="M48 66 L72 66" fill="none" stroke="#757575" stroke-width="1"/>
+<path d="M48 62 L72 62" fill="none" stroke="#E0E0E0" stroke-width="0.5" opacity="0.5"/>
+<!-- Blade - flat chisel with taper -->
+<path d="M48 70 L44 92 L60 102 L76 92 L72 70Z" fill="#B0BEC5"/>
+<!-- Blade bevel highlight -->
+<path d="M50 72 L46 90 L60 98" fill="#CFD8DC" opacity="0.6"/>
+<!-- Blade shadow side -->
+<path d="M70 72 L74 90 L60 98" fill="#90A4AE" opacity="0.3"/>
+<!-- Cutting edge -->
+<path d="M44 92 L60 102 L76 92" fill="none" stroke="#78909C" stroke-width="2.5"/>
+<!-- Edge shine -->
+<path d="M48 94 L60 100 L72 94" fill="none" stroke="white" stroke-width="1.2" opacity="0.5"/>
+<!-- Center line on blade -->
+<path d="M60 72 L60 98" fill="none" stroke="#90A4AE" stroke-width="0.6" opacity="0.3"/>
 </svg>

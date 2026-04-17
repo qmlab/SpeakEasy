@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
-
-<rect x="24" y="36" width="26" height="46" rx="10" fill="#37474F"/>
-<rect x="70" y="36" width="26" height="46" rx="10" fill="#37474F"/>
-<rect x="48" y="48" width="24" height="14" rx="4" fill="#455A64"/>
-<circle cx="37" cy="78" r="10" fill="#263238" stroke="#37474F" stroke-width="2"/>
-<circle cx="83" cy="78" r="10" fill="#263238" stroke="#37474F" stroke-width="2"/>
-<circle cx="37" cy="78" r="6" fill="#90CAF9" opacity="0.3"/>
-<circle cx="83" cy="78" r="6" fill="#90CAF9" opacity="0.3"/>
-<circle cx="37" cy="40" r="8" fill="#455A64"/>
-<circle cx="83" cy="40" r="8" fill="#455A64"/>
+<!-- Left barrel -->
+<rect x="18" y="32" width="28" height="48" rx="12" fill="#37474F"/>
+<rect x="20" y="34" width="24" height="44" rx="10" fill="#455A64"/>
+<!-- Right barrel -->
+<rect x="74" y="32" width="28" height="48" rx="12" fill="#37474F"/>
+<rect x="76" y="34" width="24" height="44" rx="10" fill="#455A64"/>
+<!-- Bridge connecting barrels -->
+<rect x="44" y="44" width="32" height="18" rx="6" fill="#546E7A"/>
+<rect x="46" y="46" width="28" height="14" rx="5" fill="#607D8B" opacity="0.5"/>
+<!-- Left objective lens (front) -->
+<circle cx="32" cy="80" r="12" fill="#263238" stroke="#37474F" stroke-width="2.5"/>
+<circle cx="32" cy="80" r="9" fill="#1B5E20" opacity="0.15"/>
+<circle cx="32" cy="80" r="7" fill="#90CAF9" opacity="0.25"/>
+<circle cx="30" cy="77" r="2.5" fill="white" opacity="0.3"/>
+<!-- Right objective lens (front) -->
+<circle cx="88" cy="80" r="12" fill="#263238" stroke="#37474F" stroke-width="2.5"/>
+<circle cx="88" cy="80" r="9" fill="#1B5E20" opacity="0.15"/>
+<circle cx="88" cy="80" r="7" fill="#90CAF9" opacity="0.25"/>
+<circle cx="86" cy="77" r="2.5" fill="white" opacity="0.3"/>
+<!-- Left eyepiece (top) -->
+<circle cx="32" cy="34" r="9" fill="#455A64" stroke="#37474F" stroke-width="1.5"/>
+<circle cx="32" cy="34" r="6" fill="#546E7A"/>
+<circle cx="32" cy="34" r="3" fill="#37474F"/>
+<!-- Right eyepiece (top) -->
+<circle cx="88" cy="34" r="9" fill="#455A64" stroke="#37474F" stroke-width="1.5"/>
+<circle cx="88" cy="34" r="6" fill="#546E7A"/>
+<circle cx="88" cy="34" r="3" fill="#37474F"/>
+<!-- Focus wheel -->
+<rect x="56" y="38" width="8" height="10" rx="3" fill="#78909C"/>
+<path d="M58 40 L58 46 M60 40 L60 46 M62 40 L62 46" fill="none" stroke="#90A4AE" stroke-width="0.8"/>
+<!-- Barrel highlights -->
+<path d="M24 38 L24 72" fill="none" stroke="#607D8B" stroke-width="2" opacity="0.4"/>
+<path d="M80 38 L80 72" fill="none" stroke="#607D8B" stroke-width="2" opacity="0.4"/>
+<!-- Rubber grip texture -->
+<path d="M22 50 L42 50 M22 54 L42 54 M22 58 L42 58" fill="none" stroke="#263238" stroke-width="0.6" opacity="0.3"/>
+<path d="M78 50 L98 50 M78 54 L98 54 M78 58 L98 58" fill="none" stroke="#263238" stroke-width="0.6" opacity="0.3"/>
 </svg>

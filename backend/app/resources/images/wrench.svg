@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#ECEFF1" stroke="#607D8B" stroke-width="3"/>
-
-<path d="M32 30 Q22 38 28 48 L30 48 L30 42 Q32 36 38 34 L82 34 Q90 36 92 44 Q94 52 88 58 L78 58 L78 50 Q76 44 70 42 L60 42 L38 42 Q32 44 30 50 L30 48" fill="#9E9E9E"/>
-<path d="M32 34 L70 34 L70 42 L32 42Z" fill="#BDBDBD" opacity="0.3"/>
-<path d="M78 34 Q86 36 88 42" fill="none" stroke="#BDBDBD" stroke-width="1.5" opacity="0.5"/>
+<!-- Wrench shaft - long handle -->
+<rect x="38" y="52" width="50" height="14" rx="4" fill="#9E9E9E"/>
+<!-- Shaft highlight -->
+<rect x="40" y="54" width="46" height="4" rx="2" fill="#BDBDBD" opacity="0.5"/>
+<!-- Shaft shadow -->
+<rect x="40" y="62" width="46" height="2" rx="1" fill="#757575" opacity="0.3"/>
+<!-- Open jaw end (left) - adjustable wrench head -->
+<path d="M20 46 L38 46 L38 72 L20 72 L20 64 L30 64 L30 54 L20 54Z" fill="#9E9E9E"/>
+<!-- Upper jaw -->
+<path d="M14 44 L38 44 L38 52 L14 52Z" fill="#78909C" rx="2"/>
+<rect x="14" y="44" width="24" height="8" rx="2" fill="#78909C"/>
+<!-- Lower jaw -->
+<rect x="14" y="66" width="24" height="8" rx="2" fill="#78909C"/>
+<!-- Jaw opening (gap) -->
+<rect x="14" y="52" width="16" height="14" rx="0" fill="#ECEFF1"/>
+<!-- Jaw teeth/serrations -->
+<path d="M14 52 L14 54 L16 54 L16 56 L14 56 L14 58 L16 58 L16 60 L14 60 L14 62 L16 62 L16 64 L14 64 L14 66" fill="none" stroke="#607D8B" stroke-width="1"/>
+<path d="M30 52 L30 54 L28 54 L28 56 L30 56 L30 58 L28 58 L28 60 L30 60 L30 62 L28 62 L28 64 L30 64 L30 66" fill="none" stroke="#607D8B" stroke-width="1"/>
+<!-- Jaw highlight -->
+<path d="M16 46 L36 46" fill="none" stroke="#B0BEC5" stroke-width="1.5" opacity="0.5"/>
+<path d="M16 68 L36 68" fill="none" stroke="#B0BEC5" stroke-width="1.5" opacity="0.5"/>
+<!-- Adjustment wheel/worm gear -->
+<rect x="32" y="50" width="8" height="18" rx="3" fill="#78909C" stroke="#607D8B" stroke-width="0.8"/>
+<path d="M34 52 L38 52 M34 55 L38 55 M34 58 L38 58 M34 61 L38 61 M34 64 L38 64" fill="none" stroke="#546E7A" stroke-width="0.8" opacity="0.6"/>
+<!-- Handle end -->
+<path d="M86 52 Q94 52 96 56 Q98 60 96 62 Q94 66 86 66" fill="#78909C"/>
+<!-- Handle end hole -->
+<circle cx="90" cy="59" r="3" fill="#ECEFF1"/>
+<circle cx="90" cy="59" r="3" fill="none" stroke="#607D8B" stroke-width="0.8"/>
+<!-- Overall metal texture -->
+<path d="M42 56 L84 56" fill="none" stroke="#B0BEC5" stroke-width="0.6" opacity="0.3"/>
 </svg>
