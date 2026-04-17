@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFF3E0" stroke="#E65100" stroke-width="3"/>
-<!-- Body -->
-<ellipse cx="58" cy="62" rx="28" ry="18" fill="#8D6E63"/>
-<!-- Neck -->
-<path d="M78 52 Q82 36 80 26 Q78 20 74 18 L68 22 Q72 26 72 36 L70 50Z" fill="#8D6E63"/>
-<!-- Head -->
-<path d="M74 18 Q82 14 86 18 Q90 22 88 28 Q86 32 80 32 L72 28 Q70 24 74 18Z" fill="#A1887F"/>
-<!-- Snout -->
-<path d="M86 22 Q92 22 94 26 Q92 30 88 28Z" fill="#BCAAA4"/>
+<!-- Body - muscular barrel -->
+<ellipse cx="56" cy="60" rx="30" ry="18" fill="#8D6E63"/>
+<!-- Body shading -->
+<ellipse cx="56" cy="66" rx="26" ry="8" fill="#795548" opacity="0.3"/>
+<ellipse cx="50" cy="56" rx="14" ry="8" fill="#A1887F" opacity="0.3"/>
+<!-- Neck - strong and arched -->
+<path d="M78 50 Q84 36 82 24 Q80 16 74 14 L66 20 Q72 24 74 34 L72 48Z" fill="#8D6E63"/>
+<!-- Neck highlight -->
+<path d="M76 48 Q80 36 78 26" fill="none" stroke="#A1887F" stroke-width="2" opacity="0.4"/>
+<!-- Head - elegant long face -->
+<path d="M74 14 Q84 10 90 14 Q96 20 94 28 Q92 34 86 36 L78 32 Q74 26 74 14Z" fill="#A1887F"/>
+<!-- Snout/muzzle -->
+<path d="M90 20 Q98 20 100 26 Q98 32 94 30Z" fill="#BCAAA4"/>
 <!-- Nostril -->
-<circle cx="90" cy="25" r="1.5" fill="#5D4037"/>
-<!-- Eye -->
-<circle cx="82" cy="22" r="2" fill="#3E2723"/>
-<circle cx="81.5" cy="21.5" r="0.8" fill="white"/>
-<!-- Ear -->
-<path d="M76 16 L78 8 L82 14Z" fill="#8D6E63" stroke="#795548" stroke-width="0.8"/>
-<!-- Mane -->
-<path d="M74 18 Q72 14 70 18 Q68 14 66 20 Q64 16 62 22 Q60 18 58 24 Q56 20 56 26" fill="#5D4037"/>
-<!-- Front legs -->
-<rect x="72" y="76" width="6" height="18" rx="2" fill="#795548"/>
-<rect x="66" y="76" width="6" height="18" rx="2" fill="#8D6E63"/>
-<!-- Back legs -->
-<rect x="38" y="76" width="6" height="18" rx="2" fill="#795548"/>
-<rect x="44" y="76" width="6" height="18" rx="2" fill="#8D6E63"/>
-<!-- Hooves -->
-<rect x="72" y="92" width="6" height="4" rx="1" fill="#3E2723"/>
-<rect x="66" y="92" width="6" height="4" rx="1" fill="#3E2723"/>
-<rect x="38" y="92" width="6" height="4" rx="1" fill="#3E2723"/>
-<rect x="44" y="92" width="6" height="4" rx="1" fill="#3E2723"/>
-<!-- Tail -->
-<path d="M30 54 Q22 52 18 58 Q16 64 20 70 Q24 74 28 72" fill="none" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
-<!-- Body shadow -->
-<ellipse cx="56" cy="72" rx="24" ry="6" fill="#795548" opacity="0.3"/>
+<ellipse cx="96" cy="24" rx="2" ry="1.5" fill="#5D4037"/>
+<ellipse cx="96" cy="26" rx="1.5" ry="1" fill="#5D4037" opacity="0.5"/>
+<!-- Eye - large and expressive -->
+<circle cx="84" cy="20" r="3" fill="white"/>
+<circle cx="85" cy="20" r="2" fill="#3E2723"/>
+<circle cx="84" cy="19" r="0.8" fill="white"/>
+<!-- Ear - pointed and alert -->
+<path d="M78 12 L80 4 L86 10Z" fill="#8D6E63" stroke="#795548" stroke-width="0.8"/>
+<path d="M80 10 L82 6 L84 10Z" fill="#A1887F" opacity="0.5"/>
+<!-- Mane - flowing along neck -->
+<path d="M74 14 Q70 10 68 16 Q66 10 64 18 Q62 12 60 20 Q58 14 56 22 Q54 16 54 24 Q52 20 52 28" fill="#5D4037"/>
+<!-- Mane on forehead (forelock) -->
+<path d="M78 12 Q76 8 74 12 Q72 8 72 14" fill="#5D4037"/>
+<!-- Front legs with proper joints -->
+<path d="M76 74 L76 88 L74 92 L76 92 L78 88 L78 74" fill="#795548"/>
+<path d="M68 74 L68 88 L66 92 L68 92 L70 88 L70 74" fill="#8D6E63"/>
+<!-- Back legs with proper joints -->
+<path d="M40 74 L40 82 L38 88 L36 92 L38 92 L42 86 L42 74" fill="#795548"/>
+<path d="M46 74 L46 82 L44 88 L42 92 L44 92 L48 86 L48 74" fill="#8D6E63"/>
+<!-- Hooves - solid blocks -->
+<rect x="73" y="90" width="5" height="5" rx="1" fill="#3E2723"/>
+<rect x="65" y="90" width="5" height="5" rx="1" fill="#3E2723"/>
+<rect x="35" y="90" width="5" height="5" rx="1" fill="#3E2723"/>
+<rect x="41" y="90" width="5" height="5" rx="1" fill="#3E2723"/>
+<!-- Tail - flowing -->
+<path d="M26 52 Q18 48 14 54 Q12 62 16 70 Q20 78 26 76 Q22 72 18 64 Q16 56 20 52Z" fill="#5D4037"/>
+<path d="M26 54 Q20 50 16 56 Q14 62 18 70" fill="none" stroke="#4E342E" stroke-width="1.5" opacity="0.5"/>
+<!-- Jaw line -->
+<path d="M80 32 Q86 34 92 30" fill="none" stroke="#8D6E63" stroke-width="1" opacity="0.4"/>
 </svg>

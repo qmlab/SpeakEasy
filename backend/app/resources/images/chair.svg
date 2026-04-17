@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#FFF8E1" stroke="#F57F17" stroke-width="3"/>
-
-<rect x="35" y="30" width="50" height="8" rx="2" fill="#8D6E63"/>
-<rect x="35" y="30" width="6" height="65" rx="2" fill="#795548"/>
-<rect x="79" y="30" width="6" height="65" rx="2" fill="#795548"/>
-<rect x="35" y="55" width="50" height="8" rx="2" fill="#A1887F"/>
-<rect x="38" y="55" width="44" height="6" rx="1" fill="#BCAAA4"/>
-<rect x="37" y="62" width="5" height="30" rx="2" fill="#795548"/>
-<rect x="78" y="62" width="5" height="30" rx="2" fill="#795548"/>
-<path d="M38 38 L38 52" fill="none" stroke="#6D4C41" stroke-width="1" opacity="0.3"/>
-<path d="M82 38 L82 52" fill="none" stroke="#6D4C41" stroke-width="1" opacity="0.3"/>
+<!-- Back legs (behind) -->
+<rect x="30" y="28" width="5" height="68" rx="2" fill="#6D4C41"/>
+<rect x="85" y="28" width="5" height="68" rx="2" fill="#6D4C41"/>
+<!-- Backrest -->
+<rect x="30" y="26" width="60" height="6" rx="3" fill="#8D6E63"/>
+<rect x="30" y="26" width="60" height="4" rx="2" fill="#A1887F" opacity="0.5"/>
+<!-- Backrest vertical slats -->
+<rect x="40" y="32" width="5" height="26" rx="2" fill="#795548"/>
+<rect x="52" y="32" width="5" height="26" rx="2" fill="#795548"/>
+<rect x="64" y="32" width="5" height="26" rx="2" fill="#795548"/>
+<rect x="76" y="32" width="5" height="26" rx="2" fill="#795548"/>
+<!-- Slat highlights -->
+<rect x="41" y="33" width="2" height="24" rx="1" fill="#8D6E63" opacity="0.4"/>
+<rect x="53" y="33" width="2" height="24" rx="1" fill="#8D6E63" opacity="0.4"/>
+<rect x="65" y="33" width="2" height="24" rx="1" fill="#8D6E63" opacity="0.4"/>
+<rect x="77" y="33" width="2" height="24" rx="1" fill="#8D6E63" opacity="0.4"/>
+<!-- Seat -->
+<rect x="28" y="56" width="64" height="8" rx="3" fill="#A1887F"/>
+<rect x="30" y="56" width="60" height="6" rx="2" fill="#BCAAA4"/>
+<!-- Seat front edge highlight -->
+<path d="M30 62 L88 62" fill="none" stroke="#8D6E63" stroke-width="1"/>
+<!-- Front legs -->
+<rect x="30" y="62" width="5" height="32" rx="2" fill="#795548"/>
+<rect x="85" y="62" width="5" height="32" rx="2" fill="#795548"/>
+<!-- Leg highlights -->
+<rect x="31" y="64" width="2" height="28" rx="1" fill="#8D6E63" opacity="0.3"/>
+<rect x="86" y="64" width="2" height="28" rx="1" fill="#8D6E63" opacity="0.3"/>
+<!-- Cross brace between front legs -->
+<rect x="35" y="78" width="50" height="3" rx="1" fill="#6D4C41"/>
+<!-- Shadow under seat -->
+<path d="M32 64 L88 64" fill="none" stroke="#5D4037" stroke-width="0.8" opacity="0.3"/>
 </svg>

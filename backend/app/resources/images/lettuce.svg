@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
-
-<path d="M30 70 C30 50 40 38 60 38 C80 38 90 50 90 70 C90 82 78 90 60 90 C42 90 30 82 30 70Z" fill="#8BC34A"/>
-<path d="M35 68 C35 52 44 42 60 42 C76 42 85 52 85 68 C85 78 75 84 60 84 C45 84 35 78 35 68Z" fill="#9CCC65"/>
-<path d="M40 66 C40 54 48 46 60 46 C72 46 80 54 80 66 C80 74 72 78 60 78 C48 78 40 74 40 66Z" fill="#AED581"/>
-<path d="M46 64 C46 56 52 50 60 50 C68 50 74 56 74 64 C74 70 68 74 60 74 C52 74 46 70 46 64Z" fill="#C5E1A5"/>
-<path d="M60 42 L60 84" fill="none" stroke="#7CB342" stroke-width="1" opacity="0.4"/>
-<path d="M60 50 L45 70" fill="none" stroke="#7CB342" stroke-width="0.8" opacity="0.3"/>
-<path d="M60 50 L75 70" fill="none" stroke="#7CB342" stroke-width="0.8" opacity="0.3"/>
+<!-- Outer leaves - ruffled edges -->
+<path d="M24 72 C20 60 22 46 36 36 Q44 30 52 34 Q48 42 30 56 Q26 64 28 74Z" fill="#7CB342"/>
+<path d="M96 72 C100 60 98 46 84 36 Q76 30 68 34 Q72 42 90 56 Q94 64 92 74Z" fill="#7CB342"/>
+<path d="M30 82 C22 74 20 60 32 48 Q42 40 56 38 Q48 50 36 62 Q28 72 32 84Z" fill="#8BC34A"/>
+<path d="M90 82 C98 74 100 60 88 48 Q78 40 64 38 Q72 50 84 62 Q92 72 88 84Z" fill="#8BC34A"/>
+<!-- Middle leaves -->
+<path d="M36 78 C32 66 36 50 48 42 Q56 38 62 42 Q54 50 44 60 Q38 68 38 80Z" fill="#9CCC65"/>
+<path d="M84 78 C88 66 84 50 72 42 Q64 38 58 42 Q66 50 76 60 Q82 68 82 80Z" fill="#9CCC65"/>
+<!-- Inner leaves - lighter -->
+<path d="M42 76 C40 66 42 54 52 46 Q58 42 64 46 Q56 52 50 62 Q44 70 44 78Z" fill="#AED581"/>
+<path d="M78 76 C80 66 78 54 68 46 Q62 42 56 46 Q64 52 70 62 Q76 70 76 78Z" fill="#AED581"/>
+<!-- Heart/core -->
+<path d="M48 72 C46 64 50 54 58 50 Q60 48 62 50 Q70 54 74 64 Q76 72 72 78 Q60 82 48 78Z" fill="#C5E1A5"/>
+<ellipse cx="60" cy="62" rx="8" ry="10" fill="#DCEDC8"/>
+<!-- Leaf veins - outer -->
+<path d="M32 50 Q40 46 48 52" fill="none" stroke="#689F38" stroke-width="0.8" opacity="0.4"/>
+<path d="M88 50 Q80 46 72 52" fill="none" stroke="#689F38" stroke-width="0.8" opacity="0.4"/>
+<!-- Leaf veins - inner -->
+<path d="M56 50 Q58 56 56 66" fill="none" stroke="#7CB342" stroke-width="0.6" opacity="0.4"/>
+<path d="M64 50 Q62 56 64 66" fill="none" stroke="#7CB342" stroke-width="0.6" opacity="0.4"/>
+<path d="M60 52 L54 64" fill="none" stroke="#7CB342" stroke-width="0.5" opacity="0.3"/>
+<path d="M60 52 L66 64" fill="none" stroke="#7CB342" stroke-width="0.5" opacity="0.3"/>
+<!-- Ruffled leaf edges highlights -->
+<path d="M26 68 Q28 64 32 66 Q34 62 38 64" fill="none" stroke="#8BC34A" stroke-width="1" opacity="0.5"/>
+<path d="M94 68 Q92 64 88 66 Q86 62 82 64" fill="none" stroke="#8BC34A" stroke-width="1" opacity="0.5"/>
+<!-- Bottom base -->
+<path d="M50 82 Q60 86 70 82" fill="none" stroke="#689F38" stroke-width="1.5" opacity="0.4"/>
+<!-- Dew drops -->
+<circle cx="38" cy="58" r="1.2" fill="white" opacity="0.5"/>
+<circle cx="78" cy="56" r="1" fill="white" opacity="0.45"/>
 </svg>

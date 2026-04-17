@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
 <circle cx="60" cy="60" r="56" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
-
-<ellipse cx="60" cy="54" rx="36" ry="10" fill="#BDBDBD"/>
-<path d="M24 54 Q20 50 24 48 L30 48 L36 54Z" fill="#9E9E9E"/>
-<path d="M96 54 Q100 46 94 44 L88 46Z" fill="#9E9E9E"/>
-<path d="M50 54 L40 30 L54 44Z" fill="#42A5F5"/>
-<path d="M70 54 L80 30 L66 44Z" fill="#42A5F5"/>
-<path d="M36 54 L30 70 L42 58Z" fill="#42A5F5"/>
-<path d="M84 54 L90 70 L78 58Z" fill="#42A5F5"/>
-<rect x="42" y="46" width="6" height="6" rx="1" fill="#BBDEFB"/>
-<rect x="52" y="46" width="6" height="6" rx="1" fill="#BBDEFB"/>
-<rect x="62" y="46" width="6" height="6" rx="1" fill="#BBDEFB"/>
-<rect x="72" y="46" width="6" height="6" rx="1" fill="#BBDEFB"/>
-<ellipse cx="60" cy="52" rx="32" ry="4" fill="#E0E0E0" opacity="0.3"/>
+<!-- Small propeller plane / biplane style -->
+<!-- Fuselage - compact body -->
+<ellipse cx="60" cy="56" rx="32" ry="10" fill="#BDBDBD"/>
+<!-- Fuselage top highlight -->
+<ellipse cx="60" cy="52" rx="28" ry="4" fill="#E0E0E0" opacity="0.5"/>
+<!-- Fuselage bottom shadow -->
+<ellipse cx="60" cy="60" rx="28" ry="4" fill="#9E9E9E" opacity="0.3"/>
+<!-- Cockpit canopy -->
+<path d="M56 48 Q60 40 64 48" fill="#4FC3F7" stroke="#0288D1" stroke-width="0.8"/>
+<path d="M58 46 Q60 42 62 46" fill="none" stroke="white" stroke-width="0.6" opacity="0.5"/>
+<!-- Nose cone -->
+<path d="M92 56 Q98 52 100 56 Q98 60 92 56Z" fill="#9E9E9E"/>
+<!-- Propeller disc -->
+<circle cx="100" cy="56" r="2" fill="#424242"/>
+<!-- Propeller blades -->
+<path d="M100 56 L100 38 Q102 36 104 38 L100 56" fill="#616161" opacity="0.7"/>
+<path d="M100 56 L100 74 Q98 76 96 74 L100 56" fill="#616161" opacity="0.7"/>
+<!-- Propeller spin blur -->
+<ellipse cx="100" cy="56" rx="3" ry="18" fill="#9E9E9E" opacity="0.15"/>
+<!-- Upper wing -->
+<path d="M34 42 L86 42 Q90 42 90 44 L90 46 Q90 48 86 48 L34 48 Q30 48 30 46 L30 44 Q30 42 34 42Z" fill="#42A5F5"/>
+<!-- Upper wing struts -->
+<line x1="42" y1="48" x2="42" y2="56" stroke="#78909C" stroke-width="1.5"/>
+<line x1="78" y1="48" x2="78" y2="56" stroke="#78909C" stroke-width="1.5"/>
+<!-- Lower wing -->
+<path d="M38 62 L82 62 Q86 62 86 64 L86 66 Q86 68 82 68 L38 68 Q34 68 34 66 L34 64 Q34 62 38 62Z" fill="#42A5F5"/>
+<!-- Wing markings -->
+<circle cx="40" cy="45" r="3" fill="white" opacity="0.6"/>
+<circle cx="80" cy="45" r="3" fill="white" opacity="0.6"/>
+<circle cx="40" cy="45" r="2" fill="#E53935" opacity="0.6"/>
+<circle cx="80" cy="45" r="2" fill="#E53935" opacity="0.6"/>
+<!-- Tail section -->
+<path d="M28 56 Q24 52 24 48 L28 48 L30 56Z" fill="#9E9E9E"/>
+<!-- Vertical tail fin -->
+<path d="M24 48 L20 32 L28 32 L28 48Z" fill="#42A5F5"/>
+<path d="M22 34 L26 34" fill="none" stroke="#1E88E5" stroke-width="1"/>
+<!-- Horizontal tail fins -->
+<path d="M18 42 L12 38 L26 38 L28 42Z" fill="#42A5F5"/>
+<!-- Landing gear -->
+<line x1="48" y1="68" x2="46" y2="78" stroke="#424242" stroke-width="2"/>
+<line x1="72" y1="68" x2="74" y2="78" stroke="#424242" stroke-width="2"/>
+<circle cx="44" cy="80" r="3" fill="#424242"/>
+<circle cx="44" cy="80" r="1.5" fill="#616161"/>
+<circle cx="76" cy="80" r="3" fill="#424242"/>
+<circle cx="76" cy="80" r="1.5" fill="#616161"/>
+<!-- Axle -->
+<line x1="44" y1="80" x2="76" y2="80" stroke="#424242" stroke-width="1"/>
+<!-- Exhaust trails -->
+<path d="M28 58 Q22 60 16 58" fill="none" stroke="#E0E0E0" stroke-width="1" opacity="0.3"/>
 </svg>
