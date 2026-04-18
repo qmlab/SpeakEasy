@@ -22,6 +22,9 @@ from app.routers import (
 )
 from app.config import UPLOAD_DIR
 from app.services import cloudinary_service
+from app.services.seed_tasks import seed_all_tasks
+from app.services.seed_expanded import seed_expanded_tasks
+from app.database import SessionLocal
 
 Base.metadata.create_all(bind=engine)
 
@@ -104,6 +107,15 @@ def run_migrations():
 
 
 run_migrations()
+
+# Auto-seed tasks on startup so the full question bank is always available.
+# Both functions are idempotent — they skip seeding when tasks already exist.
+_seed_db = SessionLocal()
+try:
+    seed_all_tasks(_seed_db)
+    seed_expanded_tasks(_seed_db)
+finally:
+    _seed_db.close()
 
 app = FastAPI(
     title="Rising Star Kid API",
