@@ -11,6 +11,7 @@ Key behaviors:
 - Engagement drop -> switch activity type or trigger reward
 """
 
+import random
 from datetime import datetime, timedelta
 from typing import Optional
 from sqlalchemy.orm import Session
@@ -264,17 +265,47 @@ class AdaptiveEngine:
         if not task:
             return None
 
+        # Shuffle options at serve time so the correct answer isn't always
+        # in the same position.  Preserve the same permutation for the
+        # parallel options_zh array when it exists.
+        content = dict(task.content) if task.content else {}
+        self._shuffle_options(content)
+
         return {
             "task_id": task.id,
             "dimension": task.dimension,
             "level": task.level,
             "task_type": task.task_type,
             "modalities": task.modalities,
-            "content": task.content,
+            "content": content,
             "prompt_level": prompt_level,
             "session_id": session_id,
             "confidence_rebuild": confidence_rebuild,
         }
+
+    @staticmethod
+    def _shuffle_options(content: dict) -> None:
+        """Shuffle the options array in-place so the correct answer position
+        varies each time a task is served.  If a parallel ``options_zh``
+        array exists, it is shuffled with the same permutation."""
+        options = content.get("options")
+        if not options or len(options) <= 1:
+            return
+
+        options_zh = content.get("options_zh")
+        has_zh = isinstance(options_zh, list) and len(options_zh) == len(options)
+
+        if has_zh:
+            # Zip, shuffle together, unzip
+            combined = list(zip(options, options_zh))
+            random.shuffle(combined)
+            content["options"], content["options_zh"] = [
+                list(t) for t in zip(*combined)
+            ]
+        else:
+            options_copy = list(options)
+            random.shuffle(options_copy)
+            content["options"] = options_copy
 
     def _select_task(
         self,
