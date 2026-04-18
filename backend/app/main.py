@@ -24,6 +24,7 @@ from app.config import UPLOAD_DIR
 from app.services import cloudinary_service
 from app.services.seed_tasks import seed_all_tasks
 from app.services.seed_expanded import seed_expanded_tasks
+from app.database import SessionLocal
 
 Base.metadata.create_all(bind=engine)
 
@@ -109,8 +110,6 @@ run_migrations()
 
 # Auto-seed tasks on startup so the full question bank is always available.
 # Both functions are idempotent — they skip seeding when tasks already exist.
-from app.database import SessionLocal
-
 _seed_db = SessionLocal()
 try:
     seed_all_tasks(_seed_db)
