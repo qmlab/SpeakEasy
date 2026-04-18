@@ -389,22 +389,43 @@ struct AssessmentGameView: View {
         isListening = true
         spokenText = ""
 
-        speechService.startListening(targetWord: targetWord) { rating in
-            isListening = false
-            spokenText = speechService.recognizedText
+        if targetWord.isEmpty {
+            // No target word — use manual listening and accept any speech
+            speechService.startListeningManual(targetWord: "") { _ in
+                isListening = false
+                let recognized = speechService.recognizedText
+                spokenText = recognized
 
-            if rating > 0 {
-                hasRecording = true
-                let isCorrect = rating >= 3.0
-                let submittedText = isCorrect ? (activity.content.correctAnswer ?? targetWord) : spokenText
-                isEvaluating = true
-                Task {
-                    await submitResponse(activity: activity, selected: submittedText)
-                    isEvaluating = false
+                if !recognized.isEmpty {
+                    hasRecording = true
+                    isEvaluating = true
+                    Task {
+                        await submitResponse(activity: activity, selected: recognized)
+                        isEvaluating = false
+                    }
+                } else {
+                    hasRecording = false
+                    spokenText = "Could not hear clearly. Try again!"
                 }
-            } else {
-                hasRecording = false
-                spokenText = "Could not hear clearly. Try again!"
+            }
+        } else {
+            speechService.startListening(targetWord: targetWord) { rating in
+                isListening = false
+                spokenText = speechService.recognizedText
+
+                if rating > 0 {
+                    hasRecording = true
+                    let isCorrect = rating >= 3.0
+                    let submittedText = isCorrect ? (activity.content.correctAnswer ?? targetWord) : spokenText
+                    isEvaluating = true
+                    Task {
+                        await submitResponse(activity: activity, selected: submittedText)
+                        isEvaluating = false
+                    }
+                } else {
+                    hasRecording = false
+                    spokenText = "Could not hear clearly. Try again!"
+                }
             }
         }
     }
@@ -754,14 +775,15 @@ struct AssessmentGameView: View {
             // Auto-speak the instruction, then auto-listen for voice tasks
             if activity.content.interactionType == "voice" {
                 let target = activity.content.targetWord ?? activity.content.correctAnswer ?? ""
-                if !target.isEmpty {
-                    speechService.onSpeechFinished = { [self] in
-                        speechService.onSpeechFinished = nil
-                        startListeningForAssessment(activity: activity, targetWord: target)
-                    }
+                speechService.onSpeechFinished = { [self] in
+                    speechService.onSpeechFinished = nil
+                    startListeningForAssessment(activity: activity, targetWord: target)
                 }
             }
-            speechService.speak(activity.content.instruction)
+            // Small delay before speaking to let the UI settle
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                speechService.speak(activity.content.instruction)
+            }
         } catch let error as AdaptiveAPIError {
             if case .httpError(let statusCode, _) = error, statusCode == 404 {
                 // No more activities — complete the assessment
