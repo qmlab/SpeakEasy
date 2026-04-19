@@ -237,7 +237,7 @@ class StoryEngine:
         story = _load_story(story_id)
         scenes = story["scenes"]
 
-        if scene_index >= len(scenes):
+        if scene_index < 0 or scene_index >= len(scenes):
             raise ValueError(f"Invalid scene index: {scene_index}")
 
         scene = scenes[scene_index]
