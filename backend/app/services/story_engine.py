@@ -180,13 +180,22 @@ class StoryEngine:
 
         options = list(test.get("options", []))
         options_zh = list(test.get("options_zh", []))
+        image_hints = list(test.get("image_hints", []))
         correct = test["correct_answer"]
 
         if len(options) > 1:
-            if len(options_zh) == len(options):
+            if len(options_zh) == len(options) and len(image_hints) == len(options):
+                combined = list(zip(options, options_zh, image_hints))
+                random.shuffle(combined)
+                options, options_zh, image_hints = [list(t) for t in zip(*combined)]
+            elif len(options_zh) == len(options):
                 combined = list(zip(options, options_zh))
                 random.shuffle(combined)
                 options, options_zh = [list(t) for t in zip(*combined)]
+            elif len(image_hints) == len(options):
+                combined = list(zip(options, image_hints))
+                random.shuffle(combined)
+                options, image_hints = [list(t) for t in zip(*combined)]
             else:
                 random.shuffle(options)
 
@@ -206,7 +215,7 @@ class StoryEngine:
                 "modality": test.get("modality", "touch"),
                 "dimension": test["dimension"],
                 "level": test["level"],
-                "image_hints": test.get("image_hints", []),
+                "image_hints": image_hints,
             },
             "is_fallback": is_fallback,
             "is_last": current_index >= len(scenes) - 1,
