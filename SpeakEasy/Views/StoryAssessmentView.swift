@@ -723,9 +723,23 @@ struct StoryAssessmentView: View {
             withAnimation(.spring()) {
                 phase = .scene
             }
+        } catch let apiError as AdaptiveAPIError {
+            // 404 means no more scenes — complete the story
+            if case .httpError(let statusCode, _) = apiError, statusCode == 404 {
+                await completeStoryAssessment()
+            } else {
+                isLoading = false
+                errorMessage = "Could not load next scene: \(apiError.localizedDescription)"
+                withAnimation(.spring()) {
+                    phase = .intro
+                }
+            }
         } catch {
-            // No more scenes — complete
-            await completeStoryAssessment()
+            isLoading = false
+            errorMessage = "Could not load next scene: \(error.localizedDescription)"
+            withAnimation(.spring()) {
+                phase = .intro
+            }
         }
     }
 

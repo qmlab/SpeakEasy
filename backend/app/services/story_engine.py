@@ -39,9 +39,14 @@ _STORIES_DIR = Path(__file__).parent.parent / "resources" / "stories"
 
 def _load_story(story_id: str) -> dict:
     """Load a story definition from its JSON file."""
+    # Sanitize story_id to prevent path traversal
+    if not all(c.isalnum() or c in ("_", "-") for c in story_id):
+        raise ValueError(f"Invalid story ID: {story_id}")
     path = _STORIES_DIR / f"{story_id}.json"
+    if not path.resolve().parent == _STORIES_DIR.resolve():
+        raise ValueError(f"Invalid story ID: {story_id}")
     if not path.exists():
-        raise FileNotFoundError(f"Story file not found: {path}")
+        raise FileNotFoundError(f"Story not found: {story_id}")
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
