@@ -439,4 +439,4 @@ class StoryEngine:
             return True
         common = sum(1 for a, b in zip(target, spoken) if a == b)
         similarity = common / max(len(target), len(spoken), 1)
-        return similarity >= 0.5
+        return similarity >= 0.6

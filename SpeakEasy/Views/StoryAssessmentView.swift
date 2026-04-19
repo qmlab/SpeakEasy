@@ -137,8 +137,27 @@ struct StoryAssessmentView: View {
 
                 Spacer()
 
+                // Error banner (visible when returning to intro after fetchNextScene failure)
+                if let error = errorMessage {
+                    HStack(spacing: 8) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.orange)
+                        Text(error)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.orange.opacity(0.1))
+                    )
+                    .padding(.horizontal, 32)
+                }
+
                 // Start button
                 Button {
+                    errorMessage = nil
                     speechService.speak(story.introNarration)
                     withAnimation(.spring()) {
                         phase = .scene
@@ -148,7 +167,7 @@ struct StoryAssessmentView: View {
                     }
                 } label: {
                     HStack {
-                        Text("Let's Go!")
+                        Text(errorMessage != nil ? "Try Again" : "Let's Go!")
                             .font(.title2)
                             .fontWeight(.bold)
                         Image(systemName: "play.fill")
