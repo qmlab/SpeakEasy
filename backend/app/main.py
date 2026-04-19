@@ -19,6 +19,7 @@ from app.routers import (
     ai_router,
     assessment_router,
     cms_router,
+    story_router,
 )
 from app.config import UPLOAD_DIR
 from app.services import cloudinary_service
@@ -152,6 +153,7 @@ app.include_router(tasks_router)
 app.include_router(ai_router)
 app.include_router(assessment_router)
 app.include_router(cms_router)
+app.include_router(story_router)
 
 
 @app.get("/")
@@ -167,6 +169,7 @@ def root():
             "Feature 5: Parent/therapist dashboard",
             "Feature 6: AI-powered personalization (social stories, behavior guidance, progress summaries)",
             "Feature 7: Gamified initial assessment with animal character guides",
+            "Feature 8: Story-based assessment with interactive narratives",
         ],
     }
 

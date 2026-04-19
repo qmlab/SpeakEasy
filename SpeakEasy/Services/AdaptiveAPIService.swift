@@ -170,6 +170,29 @@ class AdaptiveAPIService {
     func completeAssessment(assessmentId: String) async throws -> AssessmentCompleteResponse {
         try await postNoBody("/assessment/\(assessmentId)/complete")
     }
+
+    // MARK: - Story-Based Assessment
+
+    func listStories() async throws -> StoryListResponse {
+        try await get("/story/list")
+    }
+
+    func startStory(playerId: String, storyId: String) async throws -> StoryStartResponse {
+        let body = StoryStartRequest(storyId: storyId)
+        return try await post("/story/start/\(playerId)", body: body)
+    }
+
+    func getNextScene(assessmentId: String) async throws -> SceneResponse {
+        try await get("/story/\(assessmentId)/next-scene")
+    }
+
+    func respondToScene(assessmentId: String, body: SceneRespondRequest) async throws -> SceneRespondResponse {
+        try await post("/story/\(assessmentId)/respond", body: body)
+    }
+
+    func completeStory(assessmentId: String) async throws -> StoryCompleteResponse {
+        try await postNoBody("/story/\(assessmentId)/complete")
+    }
 }
 
 // MARK: - Error

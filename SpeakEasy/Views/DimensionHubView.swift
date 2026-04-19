@@ -12,6 +12,7 @@ struct DimensionHubView: View {
     @ObservedObject private var authService = AuthenticationService.shared
     @State private var selectedDimension: DevelopmentalDimension?
     @State private var showAssessment: Bool = false
+    @State private var showStoryAssessment: Bool = false
     @State private var showSignOutAlert: Bool = false
 
     let columns = [
@@ -26,9 +27,9 @@ struct DimensionHubView: View {
                     // Header
                     overallProgressHeader
 
-                    // Assessment prompt (when not yet assessed)
+                    // Story-based assessment prompt (when not yet assessed)
                     if learningManager.needsInitialAssessment && !learningManager.isLoadingProfiles {
-                        assessmentPromptBanner
+                        storyAssessmentBanner
                     }
 
                     // Dimension Grid
@@ -89,6 +90,10 @@ struct DimensionHubView: View {
                 AssessmentGameView()
                     .environmentObject(learningManager)
             }
+            .fullScreenCover(isPresented: $showStoryAssessment) {
+                StoryAssessmentView(storyId: "bunny_birthday")
+                    .environmentObject(learningManager)
+            }
             .task {
                 await learningManager.seedTasksIfNeeded()
                 await learningManager.loadProfiles()
@@ -99,7 +104,7 @@ struct DimensionHubView: View {
         }
     }
 
-    // MARK: - Assessment Prompt Banner
+    // MARK: - Assessment Prompt Banner (legacy)
 
     private var assessmentPromptBanner: some View {
         VStack(spacing: 16) {
@@ -141,6 +146,52 @@ struct DimensionHubView: View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(.systemBackground))
                 .shadow(color: .purple.opacity(0.15), radius: 8, y: 4)
+        )
+        .padding(.horizontal)
+    }
+
+    // MARK: - Story Assessment Banner
+
+    private var storyAssessmentBanner: some View {
+        VStack(spacing: 16) {
+            HStack(spacing: 12) {
+                Text("🐰")
+                    .font(.system(size: 44))
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Bunny's Birthday Party")
+                        .font(.headline)
+                        .fontWeight(.bold)
+
+                    Text("Help Bunny prepare the birthday party! A fun story with activities inside.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineSpacing(2)
+                }
+            }
+
+            Button {
+                showStoryAssessment = true
+            } label: {
+                HStack {
+                    Image(systemName: "book.fill")
+                    Text("Start Story")
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.orange.gradient)
+                )
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemBackground))
+                .shadow(color: .orange.opacity(0.15), radius: 8, y: 4)
         )
         .padding(.horizontal)
     }

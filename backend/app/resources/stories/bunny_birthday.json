@@ -1,0 +1,234 @@
+{
+  "story_id": "bunny_birthday",
+  "title": "Bunny's Birthday Party",
+  "title_zh": "小兔子的生日派对",
+  "character": "Bunny",
+  "character_emoji": "🐰",
+  "estimated_minutes": 4,
+  "intro": {
+    "narration": "Today is Bunny's birthday! Bunny is so excited and needs your help to get the party ready. Let's go help Bunny!",
+    "narration_zh": "今天是小兔子的生日！小兔子好开心，需要你帮忙准备派对。我们一起去帮小兔子吧！",
+    "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s1_kitchen_find_apple"
+  },
+  "scenes": [
+    {
+      "scene_id": "s1_find_apple",
+      "narration": "Bunny wants to make a yummy birthday cake! Can you help find the apple for the cake?",
+      "narration_zh": "小兔子想做一个好吃的生日蛋糕！你能帮忙找到苹果吗？",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s1_kitchen_find_apple",
+      "test": {
+        "dimension": "object_cognition",
+        "level": 0,
+        "task_type": "identify",
+        "instruction": "Which one is the apple? Bunny needs it for the cake!",
+        "instruction_zh": "哪个是苹果？小兔子做蛋糕需要它！",
+        "options": ["Apple", "Car", "Shoe"],
+        "options_zh": ["苹果", "小汽车", "鞋子"],
+        "correct_answer": "Apple",
+        "modality": "touch",
+        "image_hints": ["apple", "car", "shoe"]
+      },
+      "feedback_correct": "Yay! You found the apple! Now let's make the cake!",
+      "feedback_correct_zh": "太棒了！你找到苹果了！现在我们来做蛋糕吧！",
+      "feedback_incorrect": "That's not the apple. The apple is the red fruit! Let's keep going!",
+      "feedback_incorrect_zh": "那不是苹果哦。苹果是那个红色的水果！我们继续吧！",
+      "requires_correct": null
+    },
+    {
+      "scene_id": "s2_find_spoon",
+      "narration": "Bunny is mixing the cake batter! Oh no, Bunny dropped the spoon. Can you find it?",
+      "narration_zh": "小兔子在搅拌蛋糕糊！哎呀，小兔子把勺子弄掉了。你能找到勺子吗？",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s2_mixing_cake",
+      "test": {
+        "dimension": "language_comprehension",
+        "level": 0,
+        "task_type": "follow_instruction",
+        "instruction": "Touch the spoon so Bunny can stir the cake!",
+        "instruction_zh": "点一下勺子，这样小兔子就能搅蛋糕了！",
+        "options": ["Spoon", "Key", "Balloon"],
+        "options_zh": ["勺子", "钥匙", "气球"],
+        "correct_answer": "Spoon",
+        "modality": "touch",
+        "image_hints": ["spoon", "key", "balloon"]
+      },
+      "feedback_correct": "Great job! Bunny stirs the cake batter. It smells yummy!",
+      "feedback_correct_zh": "做得好！小兔子搅拌蛋糕糊。闻起来好香！",
+      "feedback_incorrect": "That's not the spoon. The spoon is for stirring! Let's keep making the cake!",
+      "feedback_incorrect_zh": "那不是勺子哦。勺子是用来搅拌的！我们继续做蛋糕吧！",
+      "requires_correct": null
+    },
+    {
+      "scene_id": "s3_pick_balloon",
+      "narration": "The cake is in the oven! Now let's decorate with balloons! Which balloon is the biggest?",
+      "narration_zh": "蛋糕放进烤箱了！现在我们用气球来装饰吧！哪个气球最大？",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s3_balloons",
+      "test": {
+        "dimension": "object_cognition",
+        "level": 1,
+        "task_type": "compare",
+        "instruction": "Which balloon is the biggest? Pick the biggest one for Bunny!",
+        "instruction_zh": "哪个气球最大？帮小兔子选最大的那个！",
+        "options": ["The big pink one", "The small blue one", "The medium yellow one"],
+        "options_zh": ["大的粉色气球", "小的蓝色气球", "中等的黄色气球"],
+        "correct_answer": "The big pink one",
+        "modality": "touch",
+        "image_hints": []
+      },
+      "feedback_correct": "Wow, what a big beautiful balloon! Bunny loves it!",
+      "feedback_correct_zh": "哇，好大好漂亮的气球！小兔子好喜欢！",
+      "feedback_incorrect": "That's a nice balloon too! Let's keep decorating!",
+      "feedback_incorrect_zh": "这个气球也很好看！我们继续装饰吧！",
+      "requires_correct": "s1_find_apple",
+      "fallback": {
+        "instruction": "Can you find a balloon? Touch any balloon!",
+        "instruction_zh": "你能找到气球吗？点一下任何一个气球！",
+        "options": ["Balloon", "Star", "Heart"],
+        "options_zh": ["气球", "星星", "爱心"],
+        "correct_answer": "Balloon",
+        "dimension": "object_cognition",
+        "level": 0,
+        "image_hints": ["balloon"]
+      }
+    },
+    {
+      "scene_id": "s4_fox_hello",
+      "narration": "Ding dong! Someone is at the door! It's Fox! Fox is waving hello!",
+      "narration_zh": "叮咚！有人来了！是小狐狸！小狐狸在招手打招呼！",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s4_fox_arrives",
+      "test": {
+        "dimension": "social_behavior",
+        "level": 0,
+        "task_type": "social_response",
+        "instruction": "Fox is saying hello! What should you do?",
+        "instruction_zh": "小狐狸在打招呼！你应该怎么做？",
+        "options": ["Wave hello!", "Turn away", "Close the door"],
+        "options_zh": ["挥手说你好！", "转过身去", "关上门"],
+        "correct_answer": "Wave hello!",
+        "modality": "touch",
+        "image_hints": []
+      },
+      "feedback_correct": "Fox is so happy to see you! You're a great friend!",
+      "feedback_correct_zh": "小狐狸看到你好开心！你真是个好朋友！",
+      "feedback_incorrect": "Fox wants to be friends! Let's say hello next time!",
+      "feedback_incorrect_zh": "小狐狸想和你做朋友！下次我们跟它打招呼吧！",
+      "requires_correct": null
+    },
+    {
+      "scene_id": "s5_count_plates",
+      "narration": "All friends are here! Bunny, Fox, Bear, and Panda are sitting at the table. Let's get enough plates for everyone!",
+      "narration_zh": "所有朋友都到了！小兔子、小狐狸、小熊和熊猫都坐在桌子旁。我们给每个人都准备一个盘子吧！",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s5_party_table",
+      "test": {
+        "dimension": "cognitive_logic",
+        "level": 0,
+        "task_type": "count",
+        "instruction": "How many friends are sitting at the table? Count them!",
+        "instruction_zh": "桌子旁坐了几个朋友？数一数！",
+        "options": ["3", "4", "5"],
+        "options_zh": ["3个", "4个", "5个"],
+        "correct_answer": "4",
+        "modality": "touch",
+        "image_hints": []
+      },
+      "feedback_correct": "That's right! There are 4 friends! Let's sing happy birthday!",
+      "feedback_correct_zh": "答对了！有4个朋友！我们来唱生日歌吧！",
+      "feedback_incorrect": "Let's count again: Bunny, Fox, Bear, Panda — that's 4! Time to sing!",
+      "feedback_incorrect_zh": "我们再数一次：小兔子、小狐狸、小熊、熊猫 — 一共4个！该唱生日歌了！",
+      "requires_correct": null
+    },
+    {
+      "scene_id": "s6_sing_birthday",
+      "narration": "The cake is ready with a candle on top! Let's sing Happy Birthday to Bunny! Can you say it?",
+      "narration_zh": "蛋糕做好了，上面还插着蜡烛！我们一起给小兔子唱生日快乐歌！你能说出来吗？",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s5_party_table",
+      "test": {
+        "dimension": "language_expression",
+        "level": 0,
+        "task_type": "imitate",
+        "instruction": "Say: Happy Birthday, Bunny!",
+        "instruction_zh": "说：生日快乐，小兔子！",
+        "options": [],
+        "options_zh": [],
+        "correct_answer": "Happy Birthday",
+        "modality": "voice",
+        "image_hints": []
+      },
+      "feedback_correct": "Beautiful! Bunny heard you singing! Bunny is so happy!",
+      "feedback_correct_zh": "唱得真好听！小兔子听到你唱歌了！小兔子好开心！",
+      "feedback_incorrect": "That was a great try! Bunny loved hearing your voice!",
+      "feedback_incorrect_zh": "唱得不错！小兔子喜欢听你的声音！",
+      "requires_correct": null
+    },
+    {
+      "scene_id": "s7_open_presents",
+      "narration": "Now it's time to open presents! Bunny got a big present and a small present. Can you help?",
+      "narration_zh": "现在是拆礼物的时间！小兔子收到了一个大礼物和一个小礼物。你能帮忙吗？",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s6_opening_presents",
+      "test": {
+        "dimension": "language_comprehension",
+        "level": 1,
+        "task_type": "follow_instruction",
+        "instruction": "Touch the biggest present first!",
+        "instruction_zh": "先点最大的礼物！",
+        "options": ["Big present", "Small present", "Medium present"],
+        "options_zh": ["大礼物", "小礼物", "中等礼物"],
+        "correct_answer": "Big present",
+        "modality": "touch",
+        "image_hints": []
+      },
+      "feedback_correct": "Yay! You found the biggest one! I wonder what's inside!",
+      "feedback_correct_zh": "太棒了！你找到最大的了！不知道里面是什么呢！",
+      "feedback_incorrect": "That's a present too! Let's see what Bunny got!",
+      "feedback_incorrect_zh": "那也是个礼物！我们看看小兔子收到了什么！",
+      "requires_correct": "s2_find_spoon",
+      "fallback": {
+        "instruction": "Can you touch any present for Bunny?",
+        "instruction_zh": "你能帮小兔子点一个礼物吗？",
+        "options": ["Present", "Cake", "Balloon"],
+        "options_zh": ["礼物", "蛋糕", "气球"],
+        "correct_answer": "Present",
+        "dimension": "language_comprehension",
+        "level": 0,
+        "image_hints": []
+      }
+    },
+    {
+      "scene_id": "s8_thank_you",
+      "narration": "What a wonderful party! All the friends had so much fun together. Bunny wants to say thank you!",
+      "narration_zh": "多么棒的派对！所有朋友都玩得好开心。小兔子想说谢谢！",
+      "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s7_group_hug",
+      "test": {
+        "dimension": "social_behavior",
+        "level": 1,
+        "task_type": "social_response",
+        "instruction": "Bunny gave you a special thank-you card! What should you say?",
+        "instruction_zh": "小兔子给了你一张感谢卡！你应该说什么？",
+        "options": ["Thank you, Bunny!", "Give me more!", "I don't want it"],
+        "options_zh": ["谢谢你，小兔子！", "再给我一个！", "我不要"],
+        "correct_answer": "Thank you, Bunny!",
+        "modality": "touch",
+        "image_hints": []
+      },
+      "feedback_correct": "You're so polite! Bunny loves you! What a great party!",
+      "feedback_correct_zh": "你真有礼貌！小兔子好喜欢你！多棒的派对啊！",
+      "feedback_incorrect": "Bunny still thinks you're great! See you next time!",
+      "feedback_incorrect_zh": "小兔子还是觉得你很棒！下次再见！",
+      "requires_correct": "s4_fox_hello",
+      "fallback": {
+        "instruction": "Bunny is smiling at you! How do you feel?",
+        "instruction_zh": "小兔子在对你笑！你感觉怎么样？",
+        "options": ["Happy!", "Sad", "Angry"],
+        "options_zh": ["开心！", "伤心", "生气"],
+        "correct_answer": "Happy!",
+        "dimension": "social_behavior",
+        "level": 0,
+        "image_hints": []
+      }
+    }
+  ],
+  "outro": {
+    "narration": "You're such an amazing friend! Bunny had the best birthday ever, all because of you! See you next time!",
+    "narration_zh": "你真是太棒了！因为有你，小兔子度过了最棒的生日！下次再见！",
+    "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s7_group_hug"
+  }
+}
