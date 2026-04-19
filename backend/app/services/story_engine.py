@@ -336,9 +336,7 @@ class StoryEngine:
             total_tested += total
 
             # Update developmental profile
-            self._update_profile(
-                assessment.player_id, dim, assessed_level
-            )
+            self._update_profile(assessment.player_id, dim, assessed_level)
 
             dimensions.append(
                 {
