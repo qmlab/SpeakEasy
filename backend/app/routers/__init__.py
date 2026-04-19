@@ -9,6 +9,7 @@ from app.routers.tasks import router as tasks_router
 from app.routers.ai import router as ai_router
 from app.routers.assessment import router as assessment_router
 from app.routers.cms import router as cms_router
+from app.routers.story import router as story_router
 
 __all__ = [
     "players_router",
@@ -22,4 +23,5 @@ __all__ = [
     "ai_router",
     "assessment_router",
     "cms_router",
+    "story_router",
 ]

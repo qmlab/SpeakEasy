@@ -931,6 +931,207 @@ struct AssessmentCompleteResponse: Codable {
     }
 }
 
+// MARK: - Story-Based Assessment Models
+
+struct StoryInfo: Codable, Identifiable {
+    let storyId: String
+    let title: String
+    let titleZh: String
+    let character: String
+    let characterEmoji: String
+    let estimatedMinutes: Int
+    let sceneCount: Int
+    let imageUrl: String?
+
+    var id: String { storyId }
+
+    enum CodingKeys: String, CodingKey {
+        case storyId = "story_id"
+        case title
+        case titleZh = "title_zh"
+        case character
+        case characterEmoji = "character_emoji"
+        case estimatedMinutes = "estimated_minutes"
+        case sceneCount = "scene_count"
+        case imageUrl = "image_url"
+    }
+}
+
+struct StoryListResponse: Codable {
+    let stories: [StoryInfo]
+}
+
+struct StoryStartRequest: Codable {
+    let storyId: String
+
+    enum CodingKeys: String, CodingKey {
+        case storyId = "story_id"
+    }
+}
+
+struct StoryCharacter: Codable {
+    let name: String
+    let emoji: String
+}
+
+struct StoryStartResponse: Codable {
+    let assessmentId: String
+    let storyId: String
+    let playerId: String
+    let title: String
+    let titleZh: String
+    let character: StoryCharacter
+    let introNarration: String
+    let introNarrationZh: String
+    let introImageUrl: String?
+    let totalScenes: Int
+
+    enum CodingKeys: String, CodingKey {
+        case assessmentId = "assessment_id"
+        case storyId = "story_id"
+        case playerId = "player_id"
+        case title
+        case titleZh = "title_zh"
+        case character
+        case introNarration = "intro_narration"
+        case introNarrationZh = "intro_narration_zh"
+        case introImageUrl = "intro_image_url"
+        case totalScenes = "total_scenes"
+    }
+}
+
+struct SceneTest: Codable {
+    let instruction: String
+    let instructionZh: String
+    let options: [String]
+    let optionsZh: [String]
+    let correctAnswer: String
+    let modality: String
+    let dimension: String
+    let level: Int
+    let imageHints: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case instruction
+        case instructionZh = "instruction_zh"
+        case options
+        case optionsZh = "options_zh"
+        case correctAnswer = "correct_answer"
+        case modality
+        case dimension
+        case level
+        case imageHints = "image_hints"
+    }
+}
+
+struct SceneResponse: Codable {
+    let sceneIndex: Int
+    let totalScenes: Int
+    let sceneId: String
+    let narration: String
+    let narrationZh: String
+    let imageUrl: String?
+    let test: SceneTest
+    let isFallback: Bool
+    let isLast: Bool
+    let character: StoryCharacter
+    let progress: Double
+
+    enum CodingKeys: String, CodingKey {
+        case sceneIndex = "scene_index"
+        case totalScenes = "total_scenes"
+        case sceneId = "scene_id"
+        case narration
+        case narrationZh = "narration_zh"
+        case imageUrl = "image_url"
+        case test
+        case isFallback = "is_fallback"
+        case isLast = "is_last"
+        case character
+        case progress
+    }
+}
+
+struct SceneRespondRequest: Codable {
+    let sceneIndex: Int
+    let selectedOption: String?
+    let spokenText: String?
+    let responseTimeMs: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case sceneIndex = "scene_index"
+        case selectedOption = "selected_option"
+        case spokenText = "spoken_text"
+        case responseTimeMs = "response_time_ms"
+    }
+}
+
+struct SceneRespondResponse: Codable {
+    let isCorrect: Bool
+    let feedback: String
+    let feedbackZh: String
+    let shouldContinue: Bool
+    let progress: Double
+
+    enum CodingKeys: String, CodingKey {
+        case isCorrect = "is_correct"
+        case feedback
+        case feedbackZh = "feedback_zh"
+        case shouldContinue = "should_continue"
+        case progress
+    }
+}
+
+struct StoryDimensionResult: Codable, Identifiable {
+    let dimension: String
+    let assessedLevel: Int
+    let correctCount: Int
+    let totalCount: Int
+    let accuracy: Double
+
+    var id: String { dimension }
+
+    var dimensionEnum: DevelopmentalDimension? {
+        DevelopmentalDimension(rawValue: dimension)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case dimension
+        case assessedLevel = "assessed_level"
+        case correctCount = "correct_count"
+        case totalCount = "total_count"
+        case accuracy
+    }
+}
+
+struct StoryCompleteResponse: Codable {
+    let assessmentId: String
+    let storyId: String
+    let playerId: String
+    let dimensions: [StoryDimensionResult]
+    let totalCorrect: Int
+    let totalTested: Int
+    let overallAccuracy: Double
+    let character: StoryCharacter
+    let outroNarration: String
+    let outroNarrationZh: String
+    let outroImageUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case assessmentId = "assessment_id"
+        case storyId = "story_id"
+        case playerId = "player_id"
+        case dimensions
+        case totalCorrect = "total_correct"
+        case totalTested = "total_tested"
+        case overallAccuracy = "overall_accuracy"
+        case character
+        case outroNarration = "outro_narration"
+        case outroNarrationZh = "outro_narration_zh"
+        case outroImageUrl = "outro_image_url"
+    }
+}
+
 // MARK: - AnyCodableValue (for flexible dict values)
 
 enum AnyCodableValue: Codable {
