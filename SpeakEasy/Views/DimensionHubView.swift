@@ -11,7 +11,6 @@ struct DimensionHubView: View {
     @EnvironmentObject var learningManager: AdaptiveLearningManager
     @ObservedObject private var authService = AuthenticationService.shared
     @State private var selectedDimension: DevelopmentalDimension?
-    @State private var showAssessment: Bool = false
     @State private var showStoryAssessment: Bool = false
     @State private var showSignOutAlert: Bool = false
 
@@ -27,10 +26,8 @@ struct DimensionHubView: View {
                     // Header
                     overallProgressHeader
 
-                    // Story-based assessment prompt (when not yet assessed)
-                    if learningManager.needsInitialAssessment && !learningManager.isLoadingProfiles {
-                        storyAssessmentBanner
-                    }
+                    // Story Mode section
+                    storyModeSection
 
                     // Dimension Grid
                     LazyVGrid(columns: columns, spacing: 16) {
@@ -86,10 +83,6 @@ struct DimensionHubView: View {
                 LearningSessionView(dimension: dimension)
                     .environmentObject(learningManager)
             }
-            .fullScreenCover(isPresented: $showAssessment) {
-                AssessmentGameView()
-                    .environmentObject(learningManager)
-            }
             .fullScreenCover(isPresented: $showStoryAssessment) {
                 StoryAssessmentView(storyId: "bunny_birthday")
                     .environmentObject(learningManager)
@@ -104,96 +97,128 @@ struct DimensionHubView: View {
         }
     }
 
-    // MARK: - Assessment Prompt Banner (legacy)
+    // MARK: - Story Mode Section
 
-    private var assessmentPromptBanner: some View {
-        VStack(spacing: 16) {
-            HStack(spacing: 12) {
-                Text("🐰")
-                    .font(.system(size: 44))
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Let's Play a Game!")
-                        .font(.headline)
-                        .fontWeight(.bold)
-
-                    Text("A friendly animal will guide you through fun activities to find the best starting point.")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .lineSpacing(2)
-                }
+    private var storyModeSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: "book.fill")
+                    .font(.title3)
+                    .foregroundColor(.orange)
+                Text("Story Mode")
+                    .font(.title3)
+                    .fontWeight(.bold)
             }
+            .padding(.horizontal)
 
-            Button {
-                showAssessment = true
-            } label: {
-                HStack {
-                    Image(systemName: "play.fill")
-                    Text("Start Adventure")
-                        .fontWeight(.bold)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    storyCard(
+                        title: "Bunny's Birthday Party",
+                        titleZh: "小兔子的生日派对",
+                        emoji: "🐰",
+                        description: "Help Bunny prepare a birthday party! Find items, decorate, and greet friends.",
+                        sceneCount: 8,
+                        estimatedMinutes: 4,
+                        imageUrl: "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s1_kitchen_find_apple"
+                    ) {
+                        showStoryAssessment = true
+                    }
                 }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.purple.gradient)
-                )
+                .padding(.horizontal)
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(.systemBackground))
-                .shadow(color: .purple.opacity(0.15), radius: 8, y: 4)
-        )
-        .padding(.horizontal)
     }
 
-    // MARK: - Story Assessment Banner
+    // MARK: - Story Card
 
-    private var storyAssessmentBanner: some View {
-        VStack(spacing: 16) {
-            HStack(spacing: 12) {
-                Text("🐰")
-                    .font(.system(size: 44))
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Bunny's Birthday Party")
-                        .font(.headline)
-                        .fontWeight(.bold)
-
-                    Text("Help Bunny prepare the birthday party! A fun story with activities inside.")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .lineSpacing(2)
+    private func storyCard(
+        title: String,
+        titleZh: String,
+        emoji: String,
+        description: String,
+        sceneCount: Int,
+        estimatedMinutes: Int,
+        imageUrl: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 12) {
+                // Story cover image
+                AsyncImage(url: URL(string: imageUrl)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 150)
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+                        .cornerRadius(16)
+                } placeholder: {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.orange.opacity(0.1))
+                        .frame(height: 150)
+                        .overlay(
+                            Text(emoji)
+                                .font(.system(size: 48))
+                        )
                 }
-            }
 
-            Button {
-                showStoryAssessment = true
-            } label: {
+                // Title row
+                HStack(spacing: 8) {
+                    Text(emoji)
+                        .font(.title2)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(title)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        Text(titleZh)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+
+                // Description
+                Text(description)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(2)
+                    .lineSpacing(2)
+
+                // Metadata
+                HStack(spacing: 12) {
+                    Label("\(sceneCount) scenes", systemImage: "film")
+                        .font(.caption2)
+                        .foregroundColor(.orange)
+                    Label("~\(estimatedMinutes) min", systemImage: "clock")
+                        .font(.caption2)
+                        .foregroundColor(.orange)
+                }
+
+                // Play button
                 HStack {
-                    Image(systemName: "book.fill")
-                    Text("Start Story")
+                    Image(systemName: "play.fill")
+                    Text("Play Story")
                         .fontWeight(.bold)
                 }
+                .font(.subheadline)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
+                .padding(.vertical, 12)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: 14)
                         .fill(Color.orange.gradient)
                 )
             }
+            .padding(16)
+            .frame(width: 280)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(.systemBackground))
+                    .shadow(color: .orange.opacity(0.15), radius: 8, y: 4)
+            )
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(.systemBackground))
-                .shadow(color: .orange.opacity(0.15), radius: 8, y: 4)
-        )
-        .padding(.horizontal)
+        .buttonStyle(.plain)
     }
 
     // MARK: - Overall Progress Header
