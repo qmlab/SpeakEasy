@@ -800,7 +800,11 @@ struct StoryAssessmentView: View {
                 await completeStoryAssessment()
             }
         } catch {
-            errorMessage = "Error: \(error.localizedDescription)"
+            // Reset UI state so buttons are re-enabled, then advance
+            selectedOption = nil
+            isEvaluating = false
+            spokenText = ""
+            await fetchNextScene()
         }
     }
 
