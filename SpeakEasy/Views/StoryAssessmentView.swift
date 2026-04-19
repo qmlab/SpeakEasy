@@ -593,6 +593,43 @@ struct StoryAssessmentView: View {
                     }
                     .padding(.horizontal, 40)
                     .padding(.vertical, 24)
+                } else {
+                    // Error fallback — ensure user can always exit
+                    VStack(spacing: 24) {
+                        Spacer()
+
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 48))
+                            .foregroundColor(.orange)
+
+                        Text("Something went wrong")
+                            .font(.title2)
+                            .fontWeight(.bold)
+
+                        Text("The story couldn't be completed, but your progress has been saved.")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 32)
+
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Go Back")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.orange.gradient)
+                                )
+                        }
+                        .padding(.horizontal, 40)
+
+                        Spacer()
+                    }
                 }
             }
         }
