@@ -188,21 +188,16 @@ class StoryEngine:
         image_hints = list(test.get("image_hints", []))
         correct = test["correct_answer"]
 
+        # Pad shorter arrays to match options length so shuffle keeps alignment
+        while len(options_zh) < len(options):
+            options_zh.append("")
+        while len(image_hints) < len(options):
+            image_hints.append("")
+
         if len(options) > 1:
-            if len(options_zh) == len(options) and len(image_hints) == len(options):
-                combined = list(zip(options, options_zh, image_hints))
-                random.shuffle(combined)
-                options, options_zh, image_hints = [list(t) for t in zip(*combined)]
-            elif len(options_zh) == len(options):
-                combined = list(zip(options, options_zh))
-                random.shuffle(combined)
-                options, options_zh = [list(t) for t in zip(*combined)]
-            elif len(image_hints) == len(options):
-                combined = list(zip(options, image_hints))
-                random.shuffle(combined)
-                options, image_hints = [list(t) for t in zip(*combined)]
-            else:
-                random.shuffle(options)
+            combined = list(zip(options, options_zh, image_hints))
+            random.shuffle(combined)
+            options, options_zh, image_hints = [list(t) for t in zip(*combined)]
 
         return {
             "scene_index": current_index,
@@ -423,7 +418,8 @@ class StoryEngine:
             )
             self.db.add(profile)
         else:
-            profile.level = assessed_level
+            if assessed_level > profile.level:
+                profile.level = assessed_level
             profile.assessed = True
             profile.last_assessed_at = datetime.utcnow()
             profile.updated_at = datetime.utcnow()
