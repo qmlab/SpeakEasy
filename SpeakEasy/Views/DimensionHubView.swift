@@ -149,13 +149,14 @@ struct DimensionHubView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 260, height: 150)
+                        .frame(height: 150)
+                        .frame(maxWidth: .infinity)
                         .clipped()
                         .cornerRadius(16)
                 } placeholder: {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(Color.orange.opacity(0.1))
-                        .frame(width: 260, height: 150)
+                        .frame(height: 150)
                         .overlay(
                             Text(emoji)
                                 .font(.system(size: 48))
