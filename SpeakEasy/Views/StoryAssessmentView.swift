@@ -650,7 +650,7 @@ struct StoryAssessmentView: View {
     // MARK: - API Calls
 
     private func startStory() async {
-        guard let playerId = learningManager.currentPlayerId else {
+        guard let playerId = learningManager.playerId else {
             errorMessage = "No player found"
             return
         }
