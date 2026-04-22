@@ -1000,6 +1000,14 @@ struct StoryStartResponse: Codable {
     }
 }
 
+/// A tappable hotspot on the scene image (normalised 0-1 coordinates).
+struct TapRegion: Codable {
+    let label: String   // option value this region maps to
+    let x: Double       // centre-x, normalised 0-1
+    let y: Double       // centre-y, normalised 0-1
+    let radius: Double  // tap radius, normalised 0-1
+}
+
 struct SceneTest: Codable {
     let instruction: String
     let instructionZh: String
@@ -1010,6 +1018,7 @@ struct SceneTest: Codable {
     let dimension: String
     let level: Int
     let imageHints: [String]
+    let tapRegions: [TapRegion]
 
     enum CodingKeys: String, CodingKey {
         case instruction
@@ -1021,6 +1030,21 @@ struct SceneTest: Codable {
         case dimension
         case level
         case imageHints = "image_hints"
+        case tapRegions = "tap_regions"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        instruction = try container.decode(String.self, forKey: .instruction)
+        instructionZh = try container.decode(String.self, forKey: .instructionZh)
+        options = try container.decode([String].self, forKey: .options)
+        optionsZh = try container.decode([String].self, forKey: .optionsZh)
+        correctAnswer = try container.decode(String.self, forKey: .correctAnswer)
+        modality = try container.decode(String.self, forKey: .modality)
+        dimension = try container.decode(String.self, forKey: .dimension)
+        level = try container.decode(Int.self, forKey: .level)
+        imageHints = try container.decodeIfPresent([String].self, forKey: .imageHints) ?? []
+        tapRegions = try container.decodeIfPresent([TapRegion].self, forKey: .tapRegions) ?? []
     }
 }
 
