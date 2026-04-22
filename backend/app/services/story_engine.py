@@ -186,6 +186,7 @@ class StoryEngine:
         options = list(test.get("options", []))
         options_zh = list(test.get("options_zh", []))
         image_hints = list(test.get("image_hints", []))
+        tap_regions = list(test.get("tap_regions", []))
         correct = test["correct_answer"]
 
         # Pad shorter arrays to match options length so shuffle keeps alignment
@@ -194,10 +195,17 @@ class StoryEngine:
         while len(image_hints) < len(options):
             image_hints.append("")
 
+        # Build a label→region lookup so we can pair them back after shuffle
+        region_by_label = {r["label"]: r for r in tap_regions}
+
         if len(options) > 1:
             combined = list(zip(options, options_zh, image_hints))
             random.shuffle(combined)
             options, options_zh, image_hints = [list(t) for t in zip(*combined)]
+
+        # Re-order tap_regions to match shuffled options (if any)
+        if tap_regions:
+            tap_regions = [region_by_label[opt] for opt in options if opt in region_by_label]
 
         return {
             "scene_index": current_index,
@@ -216,6 +224,7 @@ class StoryEngine:
                 "dimension": test["dimension"],
                 "level": test["level"],
                 "image_hints": image_hints,
+                "tap_regions": tap_regions,
             },
             "is_fallback": is_fallback,
             "is_last": current_index >= len(scenes) - 1,

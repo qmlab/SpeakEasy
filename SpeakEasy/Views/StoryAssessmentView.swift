@@ -30,6 +30,10 @@ struct StoryAssessmentView: View {
 
     @State private var sceneStartTime: Date?
 
+    // Tap-on-image state
+    @State private var tappedRegionLabel: String?
+    @State private var showTapHint: Bool = false
+
     // Voice input state
     @State private var isListening: Bool = false
     @State private var spokenText: String = ""
@@ -249,22 +253,29 @@ struct StoryAssessmentView: View {
 
             ScrollView {
                 VStack(spacing: 20) {
-                    // Scene illustration
+                    let hasTapRegions = !scene.test.tapRegions.isEmpty
+
+                    // Scene illustration — tappable overlay when tap_regions exist
                     if let url = scene.imageUrl, !url.isEmpty {
-                        AsyncImage(url: URL(string: url)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxHeight: 240)
-                                .cornerRadius(20)
-                                .shadow(color: .black.opacity(0.1), radius: 8, y: 4)
-                        } placeholder: {
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.orange.opacity(0.1))
-                                .frame(height: 180)
-                                .overlay(ProgressView())
+                        if hasTapRegions {
+                            tappableImageOverlay(url: url, scene: scene)
+                                .padding(.horizontal, 16)
+                        } else {
+                            AsyncImage(url: URL(string: url)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(maxHeight: 240)
+                                    .cornerRadius(20)
+                                    .shadow(color: .black.opacity(0.1), radius: 8, y: 4)
+                            } placeholder: {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.orange.opacity(0.1))
+                                    .frame(height: 180)
+                                    .overlay(ProgressView())
+                            }
+                            .padding(.horizontal, 24)
                         }
-                        .padding(.horizontal, 24)
                     }
 
                     // Narration bubble
@@ -293,8 +304,8 @@ struct StoryAssessmentView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
 
-                    // Options (touch tasks)
-                    if scene.test.modality == "touch" && !scene.test.options.isEmpty {
+                    // Options (touch tasks) — only show buttons when no tap regions
+                    if scene.test.modality == "touch" && !scene.test.options.isEmpty && !hasTapRegions {
                         sceneOptionButtons(scene)
                     }
 
@@ -346,6 +357,94 @@ struct StoryAssessmentView: View {
             Spacer()
         }
         .padding(.horizontal)
+    }
+
+    // MARK: - Tappable Image Overlay
+
+    /// Renders the scene image with invisible tap-region hotspots.
+    /// Children tap directly on objects in the picture instead of
+    /// choosing from a list of text buttons.
+    @ViewBuilder
+    private func tappableImageOverlay(url: String, scene: SceneResponse) -> some View {
+        let regions = scene.test.tapRegions
+
+        AsyncImage(url: URL(string: url)) { phase in
+            switch phase {
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .overlay(
+                        GeometryReader { geo in
+                            ZStack {
+                                // Subtle pulsing ring on each region so kids know where to tap
+                                ForEach(Array(regions.enumerated()), id: \.offset) { _, region in
+                                    let cx = geo.size.width * region.x
+                                    let cy = geo.size.height * region.y
+                                    let r = geo.size.width * region.radius
+
+                                    // Tap target (invisible)
+                                    Circle()
+                                        .fill(Color.white.opacity(0.001))
+                                        .frame(width: r * 2, height: r * 2)
+                                        .position(x: cx, y: cy)
+                                        .onTapGesture {
+                                            guard tappedRegionLabel == nil && selectedOption == nil else { return }
+                                            tappedRegionLabel = region.label
+                                            speechService.speak(textForSpeech(region.label))
+                                            Task {
+                                                await submitSceneResponse(scene: scene, selected: region.label)
+                                            }
+                                        }
+
+                                    // Visual feedback — green/orange ring after tap
+                                    if tappedRegionLabel == region.label {
+                                        Circle()
+                                            .stroke(Color.orange, lineWidth: 3)
+                                            .frame(width: r * 2 + 8, height: r * 2 + 8)
+                                            .position(x: cx, y: cy)
+                                            .transition(.scale.combined(with: .opacity))
+                                    }
+
+                                    // Gentle pulsing hint ring (before any tap)
+                                    if tappedRegionLabel == nil && showTapHint {
+                                        Circle()
+                                            .stroke(Color.white.opacity(0.6), lineWidth: 2)
+                                            .frame(width: r * 2 + 4, height: r * 2 + 4)
+                                            .position(x: cx, y: cy)
+                                            .transition(.opacity)
+                                    }
+                                }
+                            }
+                        }
+                    )
+                    .cornerRadius(20)
+                    .shadow(color: .black.opacity(0.1), radius: 8, y: 4)
+                    .onAppear {
+                        // Show pulsing hints after a short delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                                showTapHint = true
+                            }
+                        }
+                    }
+            case .failure:
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.orange.opacity(0.1))
+                    .frame(height: 280)
+                    .overlay(
+                        Image(systemName: "photo")
+                            .font(.largeTitle)
+                            .foregroundColor(.orange.opacity(0.4))
+                    )
+            default:
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.orange.opacity(0.1))
+                    .frame(height: 280)
+                    .overlay(ProgressView())
+            }
+        }
+        .frame(maxHeight: 340)
     }
 
     // MARK: - Option Buttons
@@ -767,6 +866,8 @@ struct StoryAssessmentView: View {
             currentScene = scene
             progress = scene.progress
             selectedOption = nil
+            tappedRegionLabel = nil
+            showTapHint = false
             spokenText = ""
             hasRecording = false
             isListening = false
@@ -837,6 +938,7 @@ struct StoryAssessmentView: View {
         } catch {
             // Reset UI state so buttons are re-enabled, then advance
             selectedOption = nil
+            tappedRegionLabel = nil
             isEvaluating = false
             spokenText = ""
             await fetchNextScene()

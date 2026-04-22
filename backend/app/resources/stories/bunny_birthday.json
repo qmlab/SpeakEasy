@@ -26,7 +26,12 @@
         "options_zh": ["苹果", "小汽车", "鞋子"],
         "correct_answer": "Apple",
         "modality": "touch",
-        "image_hints": ["apple", "car", "shoe"]
+        "image_hints": ["apple", "car", "shoe"],
+        "tap_regions": [
+          {"label": "Apple", "x": 0.24, "y": 0.67, "radius": 0.08},
+          {"label": "Car",   "x": 0.66, "y": 0.73, "radius": 0.08},
+          {"label": "Shoe",  "x": 0.80, "y": 0.57, "radius": 0.07}
+        ]
       },
       "feedback_correct": "Yay! You found the apple! Now let's make the cake!",
       "feedback_correct_zh": "太棒了！你找到苹果了！现在我们来做蛋糕吧！",
@@ -49,7 +54,12 @@
         "options_zh": ["勺子", "钥匙", "气球"],
         "correct_answer": "Spoon",
         "modality": "touch",
-        "image_hints": ["spoon", "key", "balloon"]
+        "image_hints": ["spoon", "key", "balloon"],
+        "tap_regions": [
+          {"label": "Spoon",   "x": 0.28, "y": 0.88, "radius": 0.08},
+          {"label": "Key",     "x": 0.68, "y": 0.87, "radius": 0.07},
+          {"label": "Balloon", "x": 0.17, "y": 0.30, "radius": 0.08}
+        ]
       },
       "feedback_correct": "Great job! Bunny stirs the cake batter. It smells yummy!",
       "feedback_correct_zh": "做得好！小兔子搅拌蛋糕糊。闻起来好香！",
@@ -59,23 +69,28 @@
     },
     {
       "scene_id": "s3_pick_balloon",
-      "narration": "The cake is in the oven! Now let's decorate with balloons! Bunny wants the red balloon!",
-      "narration_zh": "蛋糕放进烤箱了！现在我们用气球来装饰吧！小兔子想要红色的气球！",
+      "narration": "The cake is in the oven! Now let's decorate with balloons! Bunny wants the heart balloon!",
+      "narration_zh": "蛋糕放进烤箱了！现在我们用气球来装饰吧！小兔子想要那个爱心气球！",
       "image_url": "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s3_balloons",
       "test": {
         "dimension": "object_cognition",
         "level": 1,
         "task_type": "identify",
-        "instruction": "Can you find the red balloon for Bunny?",
-        "instruction_zh": "你能帮小兔子找到红色的气球吗？",
-        "options": ["Red balloon", "Blue balloon", "Yellow balloon"],
-        "options_zh": ["红色气球", "蓝色气球", "黄色气球"],
-        "correct_answer": "Red balloon",
+        "instruction": "Can you find the heart balloon for Bunny? Tap it!",
+        "instruction_zh": "你能帮小兔子找到爱心气球吗？点一下它！",
+        "options": ["Heart balloon", "Blue balloon", "Yellow balloon"],
+        "options_zh": ["爱心气球", "蓝色气球", "黄色气球"],
+        "correct_answer": "Heart balloon",
         "modality": "touch",
-        "image_hints": []
+        "image_hints": [],
+        "tap_regions": [
+          {"label": "Heart balloon",  "x": 0.28, "y": 0.57, "radius": 0.07},
+          {"label": "Blue balloon",   "x": 0.12, "y": 0.50, "radius": 0.07},
+          {"label": "Yellow balloon", "x": 0.40, "y": 0.18, "radius": 0.07}
+        ]
       },
-      "feedback_correct": "Yay! You found the red balloon! Bunny loves it!",
-      "feedback_correct_zh": "太棒了！你找到红色气球了！小兔子好喜欢！",
+      "feedback_correct": "Yay! You found the heart balloon! Bunny loves it!",
+      "feedback_correct_zh": "太棒了！你找到爱心气球了！小兔子好喜欢！",
       "feedback_incorrect": "That's a nice balloon too! Let's keep decorating!",
       "feedback_incorrect_zh": "这个气球也很好看！我们继续装饰吧！",
       "requires_correct": "s1_find_apple",
@@ -174,7 +189,12 @@
         "options_zh": ["大礼物", "小礼物", "中等礼物"],
         "correct_answer": "Big present",
         "modality": "touch",
-        "image_hints": []
+        "image_hints": [],
+        "tap_regions": [
+          {"label": "Big present",    "x": 0.48, "y": 0.72, "radius": 0.12},
+          {"label": "Small present",  "x": 0.78, "y": 0.78, "radius": 0.07},
+          {"label": "Medium present", "x": 0.22, "y": 0.55, "radius": 0.09}
+        ]
       },
       "feedback_correct": "Yay! You found the biggest one! I wonder what's inside!",
       "feedback_correct_zh": "太棒了！你找到最大的了！不知道里面是什么呢！",

@@ -45,6 +45,14 @@ class StoryStartResponse(BaseModel):
 # -- Scene --
 
 
+class TapRegion(BaseModel):
+    """A tappable hotspot on the scene image (normalised 0-1 coordinates)."""
+    label: str = Field(description="Option value this region maps to")
+    x: float = Field(description="Centre-x, normalised 0-1")
+    y: float = Field(description="Centre-y, normalised 0-1")
+    radius: float = Field(default=0.08, description="Tap radius, normalised 0-1")
+
+
 class SceneTest(BaseModel):
     instruction: str
     instruction_zh: str
@@ -55,6 +63,7 @@ class SceneTest(BaseModel):
     dimension: str
     level: int
     image_hints: list[str] = []
+    tap_regions: list[TapRegion] = []
 
 
 class SceneResponse(BaseModel):
