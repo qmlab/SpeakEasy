@@ -2,7 +2,7 @@
 //  DimensionHubView.swift
 //  RisingStarKid
 //
-//  Grid of 6 developmental dimensions. Tap a dimension to start a learning session.
+//  Grid of 6 developmental dimensions with Story Mode. Tap a dimension to start a learning session.
 //
 
 import SwiftUI
