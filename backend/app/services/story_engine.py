@@ -205,7 +205,9 @@ class StoryEngine:
 
         # Re-order tap_regions to match shuffled options (if any)
         if tap_regions:
-            tap_regions = [region_by_label[opt] for opt in options if opt in region_by_label]
+            tap_regions = [
+                region_by_label[opt] for opt in options if opt in region_by_label
+            ]
 
         return {
             "scene_index": current_index,

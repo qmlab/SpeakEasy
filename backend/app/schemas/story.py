@@ -47,6 +47,7 @@ class StoryStartResponse(BaseModel):
 
 class TapRegion(BaseModel):
     """A tappable hotspot on the scene image (normalised 0-1 coordinates)."""
+
     label: str = Field(description="Option value this region maps to")
     x: float = Field(description="Centre-x, normalised 0-1")
     y: float = Field(description="Centre-y, normalised 0-1")
