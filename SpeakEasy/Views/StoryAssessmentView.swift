@@ -356,45 +356,63 @@ struct StoryAssessmentView: View {
             let imageHints = scene.test.imageHints
 
             ForEach(Array(options.enumerated()), id: \.offset) { idx, option in
-                Button {
-                    selectedOption = option
-                    speechService.speak(option)
-                    Task {
-                        await submitSceneResponse(scene: scene, selected: option)
-                    }
-                } label: {
-                    HStack(spacing: 12) {
-                        // Show image hint if available
-                        if idx < imageHints.count && !imageHints[idx].isEmpty {
-                            RemoteImageView(
-                                objectName: imageHints[idx],
-                                imageType: .thumbnail,
-                                fallbackIcon: "questionmark.circle",
-                                iconColor: .orange,
-                                size: 44
+                HStack(spacing: 8) {
+                    // Speaker button — lets non-readers hear the option before selecting
+                    Button {
+                        speechService.speak(option)
+                    } label: {
+                        Image(systemName: "speaker.wave.2.fill")
+                            .font(.body)
+                            .foregroundColor(.orange)
+                            .frame(width: 36, height: 36)
+                            .background(
+                                Circle()
+                                    .fill(Color.orange.opacity(0.12))
                             )
-                            .cornerRadius(10)
-                        }
-
-                        Text(option)
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                        Spacer()
-                        if selectedOption == option {
-                            ProgressView()
-                                .tint(.white)
-                        }
                     }
-                    .foregroundColor(selectedOption == option ? .white : .primary)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(selectedOption == option ? Color.orange : Color(.systemBackground))
-                            .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
-                    )
+                    .disabled(selectedOption != nil)
+
+                    // Main option button
+                    Button {
+                        selectedOption = option
+                        speechService.speak(option)
+                        Task {
+                            await submitSceneResponse(scene: scene, selected: option)
+                        }
+                    } label: {
+                        HStack(spacing: 12) {
+                            // Show image hint if available
+                            if idx < imageHints.count && !imageHints[idx].isEmpty {
+                                RemoteImageView(
+                                    objectName: imageHints[idx],
+                                    imageType: .thumbnail,
+                                    fallbackIcon: "questionmark.circle",
+                                    iconColor: .orange,
+                                    size: 44
+                                )
+                                .cornerRadius(10)
+                            }
+
+                            Text(option)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            if selectedOption == option {
+                                ProgressView()
+                                    .tint(.white)
+                            }
+                        }
+                        .foregroundColor(selectedOption == option ? .white : .primary)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(selectedOption == option ? Color.orange : Color(.systemBackground))
+                                .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
+                        )
+                    }
+                    .disabled(selectedOption != nil)
                 }
-                .disabled(selectedOption != nil)
             }
         }
         .padding(.horizontal, 24)
