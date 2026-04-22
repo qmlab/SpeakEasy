@@ -350,6 +350,23 @@ struct StoryAssessmentView: View {
 
     // MARK: - Option Buttons
 
+    /// Strip emoji characters from text so TTS reads only words
+    private func textForSpeech(_ text: String) -> String {
+        text.unicodeScalars.filter { scalar in
+            // Keep basic ASCII, Latin, CJK, and common punctuation — drop emoji blocks
+            !(
+                (scalar.value >= 0x1F600 && scalar.value <= 0x1F64F) || // Emoticons
+                (scalar.value >= 0x1F300 && scalar.value <= 0x1F5FF) || // Misc Symbols & Pictographs
+                (scalar.value >= 0x1F680 && scalar.value <= 0x1F6FF) || // Transport & Map
+                (scalar.value >= 0x1F900 && scalar.value <= 0x1F9FF) || // Supplemental Symbols
+                (scalar.value >= 0x2600 && scalar.value <= 0x26FF) ||   // Misc Symbols
+                (scalar.value >= 0x2700 && scalar.value <= 0x27BF) ||   // Dingbats
+                (scalar.value >= 0xFE00 && scalar.value <= 0xFE0F) ||   // Variation Selectors
+                (scalar.value >= 0x200D && scalar.value <= 0x200D)      // Zero-Width Joiner
+            )
+        }.map { String($0) }.joined().trimmingCharacters(in: .whitespaces)
+    }
+
     private func sceneOptionButtons(_ scene: SceneResponse) -> some View {
         VStack(spacing: 12) {
             let options = scene.test.options
@@ -359,7 +376,7 @@ struct StoryAssessmentView: View {
                 HStack(spacing: 8) {
                     // Speaker button — lets non-readers hear the option before selecting
                     Button {
-                        speechService.speak(option)
+                        speechService.speak(textForSpeech(option))
                     } label: {
                         Image(systemName: "speaker.wave.2.fill")
                             .font(.body)
@@ -375,7 +392,7 @@ struct StoryAssessmentView: View {
                     // Main option button
                     Button {
                         selectedOption = option
-                        speechService.speak(option)
+                        speechService.speak(textForSpeech(option))
                         Task {
                             await submitSceneResponse(scene: scene, selected: option)
                         }
