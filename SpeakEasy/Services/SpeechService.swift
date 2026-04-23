@@ -129,6 +129,26 @@ class SpeechService: NSObject, ObservableObject {
         isSpeaking = true
         synthesizer.speak(utterance)
     }
+
+    /// Speak with a warm, storytelling tone for children — slower pace, higher pitch.
+    func speakStorytelling(_ text: String) {
+        setupAudioSession(forPlayback: true)
+
+        if synthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+        }
+
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.rate = 0.35                  // slower for dramatic pacing
+        utterance.pitchMultiplier = 1.25       // warmer, more child-friendly
+        utterance.volume = 1.0
+        utterance.preUtteranceDelay = 0.15     // brief pause before speaking
+        utterance.postUtteranceDelay = 0.3     // pause after for effect
+        utterance.voice = AVSpeechSynthesisVoice(language: currentLanguage.rawValue)
+
+        isSpeaking = true
+        synthesizer.speak(utterance)
+    }
     
     func stop() {
         synthesizer.stopSpeaking(at: .immediate)

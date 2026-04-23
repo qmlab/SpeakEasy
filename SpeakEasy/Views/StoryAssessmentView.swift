@@ -162,7 +162,7 @@ struct StoryAssessmentView: View {
                 // Start button
                 Button {
                     errorMessage = nil
-                    speechService.speak(story.introNarration)
+                    speechService.speakStorytelling(story.introNarration)
                     withAnimation(.spring()) {
                         phase = .scene
                     }
@@ -283,7 +283,7 @@ struct StoryAssessmentView: View {
 
                     // Hear Again button
                     Button {
-                        speechService.speak(scene.test.instruction)
+                        speechService.speakStorytelling(scene.test.instruction)
                     } label: {
                         Label("Hear Again", systemImage: "speaker.wave.2.fill")
                             .font(.subheadline.weight(.semibold))
@@ -319,14 +319,14 @@ struct StoryAssessmentView: View {
         }
         .onAppear {
             sceneStartTime = Date()
-            // Auto-speak narration then instruction
+            // Auto-speak narration (storytelling style) then instruction
             speechService.onSpeechFinished = {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.speechService.onSpeechFinished = nil
-                    self.speechService.speak(scene.test.instruction)
+                    self.speechService.speakStorytelling(scene.test.instruction)
                 }
             }
-            speechService.speak(scene.narration)
+            speechService.speakStorytelling(scene.narration)
         }
     }
 
@@ -391,7 +391,7 @@ struct StoryAssessmentView: View {
                                         .onTapGesture {
                                             guard tappedRegionLabel == nil && selectedOption == nil else { return }
                                             tappedRegionLabel = region.label
-                                            speechService.speak(textForSpeech(region.label))
+                                            // Do NOT speak the label — that would give away the answer
                                             Task {
                                                 await submitSceneResponse(scene: scene, selected: region.label)
                                             }
@@ -466,12 +466,36 @@ struct StoryAssessmentView: View {
         }.map { String($0) }.joined().trimmingCharacters(in: .whitespaces)
     }
 
+    /// Extract leading emoji from a string, returning (emoji, remainingText).
+    private func extractLeadingEmoji(_ text: String) -> (String, String)? {
+        guard let first = text.unicodeScalars.first else { return nil }
+        // Check if the first character is in common emoji ranges
+        let v = first.value
+        let isEmoji = (v >= 0x1F600 && v <= 0x1F64F) ||
+                      (v >= 0x1F300 && v <= 0x1F5FF) ||
+                      (v >= 0x1F680 && v <= 0x1F6FF) ||
+                      (v >= 0x1F900 && v <= 0x1F9FF) ||
+                      (v >= 0x2600 && v <= 0x26FF) ||
+                      (v >= 0x2700 && v <= 0x27BF)
+        guard isEmoji else { return nil }
+        // Walk past the emoji (may be multi-scalar)
+        var idx = text.startIndex
+        // Move past the first Character (which may be a multi-scalar emoji)
+        idx = text.index(after: idx)
+        let emoji = String(text[text.startIndex..<idx])
+        let rest = String(text[idx...]).trimmingCharacters(in: .whitespaces)
+        return (emoji, rest)
+    }
+
     private func sceneOptionButtons(_ scene: SceneResponse) -> some View {
         VStack(spacing: 12) {
             let options = scene.test.options
             let imageHints = scene.test.imageHints
 
             ForEach(Array(options.enumerated()), id: \.offset) { idx, option in
+                let emojiParts = extractLeadingEmoji(option)
+                let hasImageHint = idx < imageHints.count && !imageHints[idx].isEmpty
+
                 HStack(spacing: 8) {
                     // Speaker button — lets non-readers hear the option before selecting
                     Button {
@@ -498,7 +522,7 @@ struct StoryAssessmentView: View {
                     } label: {
                         HStack(spacing: 12) {
                             // Show image hint if available
-                            if idx < imageHints.count && !imageHints[idx].isEmpty {
+                            if hasImageHint {
                                 RemoteImageView(
                                     objectName: imageHints[idx],
                                     imageType: .thumbnail,
@@ -507,11 +531,23 @@ struct StoryAssessmentView: View {
                                     size: 44
                                 )
                                 .cornerRadius(10)
+                            } else if let parts = emojiParts {
+                                // Large emoji as visual cue for non-readers
+                                Text(parts.0)
+                                    .font(.system(size: 36))
+                                    .frame(width: 48, height: 48)
                             }
 
-                            Text(option)
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                            if let parts = emojiParts, !hasImageHint {
+                                // Show only the text part (emoji already displayed large)
+                                Text(parts.1)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                            } else {
+                                Text(option)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                            }
                             Spacer()
                             if selectedOption == option {
                                 ProgressView()
@@ -921,7 +957,7 @@ struct StoryAssessmentView: View {
             )
 
             // Speak feedback
-            speechService.speak(response.feedback)
+            speechService.speakStorytelling(response.feedback)
 
             withAnimation(.spring()) {
                 phase = .feedback
@@ -953,7 +989,7 @@ struct StoryAssessmentView: View {
             completionResult = result
 
             // Speak outro
-            speechService.speak(result.outroNarration)
+            speechService.speakStorytelling(result.outroNarration)
 
             withAnimation(.spring()) {
                 phase = .completed
