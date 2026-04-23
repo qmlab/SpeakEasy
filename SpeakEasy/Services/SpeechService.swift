@@ -179,22 +179,28 @@ class SpeechService: NSObject, ObservableObject {
             let isQuestion    = trimmed.hasSuffix("?") || trimmed.hasSuffix("\u{FF1F}")
 
             if isExclamation {
-                // Excited / happy — higher pitch, slightly faster
-                utterance.rate = 0.38
-                utterance.pitchMultiplier = Float.random(in: 1.35...1.45)
+                // Excited / happy — much higher pitch, energetic pace
+                utterance.rate = Float.random(in: 0.40...0.45)
+                utterance.pitchMultiplier = Float.random(in: 1.50...1.70)
             } else if isQuestion {
-                // Curious / inviting — moderate pitch, slower
-                utterance.rate = 0.33
-                utterance.pitchMultiplier = Float.random(in: 1.15...1.25)
+                // Curious / inviting — lower pitch, slower and drawn-out
+                utterance.rate = Float.random(in: 0.28...0.32)
+                utterance.pitchMultiplier = Float.random(in: 1.05...1.20)
             } else {
-                // Narrative — gentle variation around a warm baseline
-                utterance.rate = 0.35
-                utterance.pitchMultiplier = Float.random(in: 1.20...1.30)
+                // Narrative — alternate between slightly fast and slightly slow
+                // for a natural rise-and-fall cadence
+                let isEvenSentence = index % 2 == 0
+                utterance.rate = isEvenSentence
+                    ? Float.random(in: 0.33...0.37)
+                    : Float.random(in: 0.37...0.42)
+                utterance.pitchMultiplier = isEvenSentence
+                    ? Float.random(in: 1.15...1.30)
+                    : Float.random(in: 1.30...1.45)
             }
 
-            // Pauses between sentences give a storytelling rhythm
-            utterance.preUtteranceDelay  = index == 0 ? 0.1 : 0.25
-            utterance.postUtteranceDelay = 0.15
+            // Longer pauses between sentences for dramatic storytelling rhythm
+            utterance.preUtteranceDelay  = index == 0 ? 0.15 : 0.35
+            utterance.postUtteranceDelay = 0.20
 
             synthesizer.speak(utterance)
         }
