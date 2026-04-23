@@ -47,6 +47,11 @@ class SpeechService: NSObject, ObservableObject {
     /// `onSpeechFinished` fires only when this reaches zero.
     private var pendingUtteranceCount: Int = 0
 
+    /// Monotonically increasing generation counter.
+    /// Incremented every time a new speech session starts (`speak`, `speakStorytelling`, `stop`).
+    /// Delegate callbacks capture this value and ignore stale invocations.
+    private var speechGeneration: Int = 0
+
     enum SpeechLanguage: String, CaseIterable {
         case english = "en-US"
         case chinese = "zh-CN"
@@ -125,6 +130,7 @@ class SpeechService: NSObject, ObservableObject {
         }
         
         pendingUtteranceCount = 0  // single utterance, no multi-queue
+        speechGeneration += 1
         let utterance = AVSpeechUtterance(string: text)
         utterance.rate = speechRate
         utterance.pitchMultiplier = 1.1
@@ -151,6 +157,7 @@ class SpeechService: NSObject, ObservableObject {
         let sentences = splitIntoSentences(text)
         guard !sentences.isEmpty else { return }
 
+        speechGeneration += 1
         pendingUtteranceCount = sentences.count
         isSpeaking = true
 
@@ -202,10 +209,18 @@ class SpeechService: NSObject, ObservableObject {
         if let regex = try? NSRegularExpression(pattern: pattern) {
             let nsText = text as NSString
             let matches = regex.matches(in: text, range: NSRange(location: 0, length: nsText.length))
+            var lastMatchEnd = 0
             for match in matches {
                 let s = nsText.substring(with: match.range)
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 if !s.isEmpty { results.append(s) }
+                lastMatchEnd = match.range.location + match.range.length
+            }
+            // Append any trailing text after the last punctuation-terminated sentence
+            if lastMatchEnd < nsText.length {
+                let trailing = nsText.substring(from: lastMatchEnd)
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trailing.isEmpty { results.append(trailing) }
             }
         }
         // If regex produced nothing (no punctuation), speak the whole text as one piece
@@ -216,6 +231,7 @@ class SpeechService: NSObject, ObservableObject {
     }
     
     func stop() {
+        speechGeneration += 1
         pendingUtteranceCount = 0
         synthesizer.stopSpeaking(at: .immediate)
         isSpeaking = false
@@ -581,7 +597,10 @@ class SpeechService: NSObject, ObservableObject {
 
 extension SpeechService: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        let gen = self.speechGeneration
         DispatchQueue.main.async {
+            // Ignore callbacks from a previous speech session
+            guard gen == self.speechGeneration else { return }
             // For storytelling multi-utterance sequences, only fire
             // onSpeechFinished after the very last utterance completes.
             if self.pendingUtteranceCount > 0 {
@@ -595,7 +614,10 @@ extension SpeechService: AVSpeechSynthesizerDelegate {
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        let gen = self.speechGeneration
         DispatchQueue.main.async {
+            // Ignore stale cancellation from a previous session
+            guard gen == self.speechGeneration else { return }
             self.pendingUtteranceCount = 0
             self.isSpeaking = false
         }
