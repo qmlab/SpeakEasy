@@ -43,6 +43,10 @@ class SpeechService: NSObject, ObservableObject {
     /// The view uses this to auto-start listening after the instruction is read.
     var onSpeechFinished: (() -> Void)?
 
+    /// Number of queued storytelling utterances still pending.
+    /// `onSpeechFinished` fires only when this reaches zero.
+    private var pendingUtteranceCount: Int = 0
+
     enum SpeechLanguage: String, CaseIterable {
         case english = "en-US"
         case chinese = "zh-CN"
@@ -120,6 +124,7 @@ class SpeechService: NSObject, ObservableObject {
             synthesizer.stopSpeaking(at: .immediate)
         }
         
+        pendingUtteranceCount = 0  // single utterance, no multi-queue
         let utterance = AVSpeechUtterance(string: text)
         utterance.rate = speechRate
         utterance.pitchMultiplier = 1.1
@@ -130,7 +135,11 @@ class SpeechService: NSObject, ObservableObject {
         synthesizer.speak(utterance)
     }
 
-    /// Speak with a warm, storytelling tone for children — slower pace, higher pitch.
+    /// Speak with a lively, storytelling tone for children.
+    ///
+    /// Splits the text into sentences and speaks each one with varied
+    /// pitch and rate so the narration sounds animated rather than flat.
+    /// Exclamatory sentences get higher pitch; questions dip lower.
     func speakStorytelling(_ text: String) {
         setupAudioSession(forPlayback: true)
 
@@ -138,19 +147,76 @@ class SpeechService: NSObject, ObservableObject {
             synthesizer.stopSpeaking(at: .immediate)
         }
 
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.rate = 0.35                  // slower for dramatic pacing
-        utterance.pitchMultiplier = 1.25       // warmer, more child-friendly
-        utterance.volume = 1.0
-        utterance.preUtteranceDelay = 0.15     // brief pause before speaking
-        utterance.postUtteranceDelay = 0.3     // pause after for effect
-        utterance.voice = AVSpeechSynthesisVoice(language: currentLanguage.rawValue)
+        // Split into sentences (handles . ! ? and Chinese 。！？)
+        let sentences = splitIntoSentences(text)
+        guard !sentences.isEmpty else { return }
 
+        pendingUtteranceCount = sentences.count
         isSpeaking = true
-        synthesizer.speak(utterance)
+
+        let voice = AVSpeechSynthesisVoice(language: currentLanguage.rawValue)
+
+        for (index, sentence) in sentences.enumerated() {
+            let trimmed = sentence.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmed.isEmpty else {
+                pendingUtteranceCount -= 1
+                continue
+            }
+
+            let utterance = AVSpeechUtterance(string: trimmed)
+            utterance.voice = voice
+            utterance.volume = 1.0
+
+            // Vary parameters per sentence for natural intonation
+            let isExclamation = trimmed.hasSuffix("!") || trimmed.hasSuffix("\u{FF01}")
+            let isQuestion    = trimmed.hasSuffix("?") || trimmed.hasSuffix("\u{FF1F}")
+
+            if isExclamation {
+                // Excited / happy — higher pitch, slightly faster
+                utterance.rate = 0.38
+                utterance.pitchMultiplier = Float.random(in: 1.35...1.45)
+            } else if isQuestion {
+                // Curious / inviting — moderate pitch, slower
+                utterance.rate = 0.33
+                utterance.pitchMultiplier = Float.random(in: 1.15...1.25)
+            } else {
+                // Narrative — gentle variation around a warm baseline
+                utterance.rate = 0.35
+                utterance.pitchMultiplier = Float.random(in: 1.20...1.30)
+            }
+
+            // Pauses between sentences give a storytelling rhythm
+            utterance.preUtteranceDelay  = index == 0 ? 0.1 : 0.25
+            utterance.postUtteranceDelay = 0.15
+
+            synthesizer.speak(utterance)
+        }
+    }
+
+    /// Split text into individual sentences for storytelling cadence.
+    private func splitIntoSentences(_ text: String) -> [String] {
+        var results: [String] = []
+        // Use NSLinguisticTagger-free approach: split on sentence-ending punctuation
+        // while keeping the punctuation attached to the sentence.
+        let pattern = "[^.!?\u{3002}\u{FF01}\u{FF1F}]+[.!?\u{3002}\u{FF01}\u{FF1F}]+"
+        if let regex = try? NSRegularExpression(pattern: pattern) {
+            let nsText = text as NSString
+            let matches = regex.matches(in: text, range: NSRange(location: 0, length: nsText.length))
+            for match in matches {
+                let s = nsText.substring(with: match.range)
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !s.isEmpty { results.append(s) }
+            }
+        }
+        // If regex produced nothing (no punctuation), speak the whole text as one piece
+        if results.isEmpty && !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            results.append(text.trimmingCharacters(in: .whitespacesAndNewlines))
+        }
+        return results
     }
     
     func stop() {
+        pendingUtteranceCount = 0
         synthesizer.stopSpeaking(at: .immediate)
         isSpeaking = false
     }
@@ -516,13 +582,21 @@ class SpeechService: NSObject, ObservableObject {
 extension SpeechService: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         DispatchQueue.main.async {
-            self.isSpeaking = false
-            self.onSpeechFinished?()
+            // For storytelling multi-utterance sequences, only fire
+            // onSpeechFinished after the very last utterance completes.
+            if self.pendingUtteranceCount > 0 {
+                self.pendingUtteranceCount -= 1
+            }
+            if self.pendingUtteranceCount <= 0 {
+                self.isSpeaking = false
+                self.onSpeechFinished?()
+            }
         }
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         DispatchQueue.main.async {
+            self.pendingUtteranceCount = 0
             self.isSpeaking = false
         }
     }
