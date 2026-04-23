@@ -16,6 +16,12 @@ cd backend
 rm -f test.db && DATABASE_URL="sqlite:///./test.db" uvicorn app.main:app --host 0.0.0.0 --port 8200
 ```
 
+If the venv is missing, recreate it:
+```bash
+cd backend
+python3 -m venv .venv && source .venv/bin/activate && pip install poetry && poetry install --no-root
+```
+
 ## Re-seeding After Changes
 After any changes to seed files (`seed_expanded.py`, `seed_tasks.py`, task JSON files), you must re-seed:
 ```bash
@@ -26,12 +32,50 @@ curl -X POST https://risingstar-backend-zclkfobb.fly.dev/tasks/seed?force=true
 
 ## Key API Endpoints for Testing
 - `POST /auth/guest` with body `{"device_id": "test-xxx"}` — Create guest player
+- `POST /players/` with body `{"name": "TestChild", "birth_date": "2022-01-01"}` — Create player
 - `POST /tasks/seed` — Seed all tasks into DB
 - `GET /tasks/?dimension=object_cognition&limit=500` — List tasks with filters
 - `POST /adaptive/sessions/start` with body `{"player_id": "...", "session_type": "practice", "dimension": "object_cognition"}` — Start adaptive session
 - `GET /adaptive/sessions/{session_id}/next-task?player_id={pid}&dimension=object_cognition` — Get next task
 - `POST /adaptive/attempts` with body `{"session_id": "...", "task_id": "...", "player_id": "...", "is_correct": true, "score": 1, "response_time_ms": 2000}` — Submit attempt
 - `POST /adaptive/sessions/{session_id}/end` — End session
+
+## Story Assessment API Endpoints
+Story-based assessment embeds questions within a narrative (e.g., Bunny's Birthday Party).
+
+- `GET /story/list` — List available stories
+- `POST /story/start/{player_id}` with body `{"story_id": "bunny_birthday"}` — Start story, returns `assessment_id`
+- `GET /story/{assessment_id}/next-scene` — Get next scene (includes test with options, tap_regions, etc.)
+- `POST /story/{assessment_id}/respond` with body `{"scene_index": 0, "selected_option": "Apple"}` — Submit response
+- `POST /story/{assessment_id}/complete` — Complete story and get results
+
+### Testing tap_regions
+Some scenes have `tap_regions` (normalised 0-1 coordinates) for tap-on-image interaction. Key things to verify:
+
+1. **Presence**: Scenes s1, s2, s3, s7 in bunny_birthday have tap_regions; s4, s5, s6, s8 do not
+2. **Alignment after shuffle**: `tap_regions[i].label` must equal `options[i]` for all i — the engine shuffles options and re-orders tap_regions to match
+3. **Coordinate range**: All x, y, radius values must be in (0, 1)
+4. **Fallback scenes**: When adaptive branching triggers a fallback (e.g., s1 wrong → s3 gets fallback), the fallback test has no tap_regions
+5. **Label submission**: iOS sends `tap_regions[i].label` as `selected_option` — verify correct/incorrect evaluation works
+
+To test shuffle alignment across multiple sessions:
+```bash
+for i in 1 2 3 4 5; do
+  AID=$(curl -s -X POST "http://localhost:8000/story/start/${PLAYER_ID}" -H 'Content-Type: application/json' -d '{"story_id":"bunny_birthday"}' | python3 -c "import sys,json; print(json.load(sys.stdin)['assessment_id'])")
+  curl -s "http://localhost:8000/story/${AID}/next-scene" | python3 -c "
+import sys,json; d=json.load(sys.stdin); t=d['test']
+print([r['label'] for r in t['tap_regions']])
+print(t['options'])
+print('Aligned:', all(t['tap_regions'][j]['label']==t['options'][j] for j in range(len(t['options']))))"
+done
+```
+
+### Testing Adaptive Branching
+Some scenes have `requires_correct` pointing to a prerequisite scene. If the prerequisite was answered incorrectly, the engine serves a `fallback` test instead:
+- s3_pick_balloon requires s1_find_apple correct
+- s7_open_presents requires s2_find_spoon correct
+
+To trigger fallback: answer the prerequisite scene wrong, then advance to the dependent scene. Check `is_fallback: true` in response.
 
 ## Testing Repeat-Prevention Logic
 The adaptive engine has smart repeat-prevention:
@@ -71,6 +115,12 @@ For tasks with `options_zh`, verify positional correspondence:
 - Expanded tasks: from `*_expanded.json` files
 - Base tasks: from `seed_tasks.py` (older, may have different data patterns)
 - When testing PR changes to expanded task logic, filter by task names or check task counts to distinguish
+
+## Important Notes
+- The iOS app is native Swift — UI testing (tap overlays, animations) requires on-device testing or Appetize
+- Story JSON changes require backend redeployment to Fly.io for production
+- tap_region coordinates are normalized 0-1 and were estimated visually — may need on-device tuning
+- The backend uses SQLite by default; deployed uses persistent volume at /data/app.db
 
 ## Devin Secrets Needed
 - No secrets needed for API testing (backend is publicly accessible)
