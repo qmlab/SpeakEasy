@@ -377,28 +377,43 @@ struct StoryAssessmentView: View {
                     .overlay(
                         GeometryReader { geo in
                             ZStack {
-                                // Subtle pulsing ring on each region so kids know where to tap
+                                // Single tap gesture on the whole image — find the
+                                // closest region center so overlapping circles always
+                                // resolve to the nearest object.
+                                Color.clear
+                                    .contentShape(Rectangle())
+                                    .onTapGesture { location in
+                                        guard tappedRegionLabel == nil && selectedOption == nil else { return }
+                                        // Find the region whose center is closest to the tap
+                                        var bestRegion: TapRegion?
+                                        var bestDist: CGFloat = .greatestFiniteMagnitude
+                                        for region in regions {
+                                            let cx = geo.size.width * region.x
+                                            let cy = geo.size.height * region.y
+                                            let r = max(geo.size.width * region.radius, 22)
+                                            let dx = location.x - cx
+                                            let dy = location.y - cy
+                                            let dist = sqrt(dx * dx + dy * dy)
+                                            // Only consider taps within the region's radius
+                                            if dist <= r && dist < bestDist {
+                                                bestDist = dist
+                                                bestRegion = region
+                                            }
+                                        }
+                                        guard let tapped = bestRegion else { return }
+                                        tappedRegionLabel = tapped.label
+                                        Task {
+                                            await submitSceneResponse(scene: scene, selected: tapped.label)
+                                        }
+                                    }
+
+                                // Visual overlays (feedback rings + hint rings)
                                 ForEach(Array(regions.enumerated()), id: \.offset) { _, region in
                                     let cx = geo.size.width * region.x
                                     let cy = geo.size.height * region.y
-                                    // Ensure a minimum 44pt tap target (Apple HIG)
                                     let r = max(geo.size.width * region.radius, 22)
 
-                                    // Tap target (invisible)
-                                    Circle()
-                                        .fill(Color.white.opacity(0.001))
-                                        .frame(width: r * 2, height: r * 2)
-                                        .position(x: cx, y: cy)
-                                        .onTapGesture {
-                                            guard tappedRegionLabel == nil && selectedOption == nil else { return }
-                                            tappedRegionLabel = region.label
-                                            // Do NOT speak the label — that would give away the answer
-                                            Task {
-                                                await submitSceneResponse(scene: scene, selected: region.label)
-                                            }
-                                        }
-
-                                    // Visual feedback — green/orange ring after tap
+                                    // Visual feedback — orange ring after tap
                                     if tappedRegionLabel == region.label {
                                         Circle()
                                             .stroke(Color.orange, lineWidth: 3)
