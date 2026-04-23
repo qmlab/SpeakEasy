@@ -538,7 +538,7 @@ struct StoryAssessmentView: View {
                                     .frame(width: 48, height: 48)
                             }
 
-                            if let parts = emojiParts {
+                            if let parts = emojiParts, !hasImageHint {
                                 // Show only the text part (emoji already displayed large)
                                 Text(parts.1)
                                     .font(.title3)
