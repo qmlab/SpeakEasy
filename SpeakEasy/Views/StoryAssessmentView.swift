@@ -381,7 +381,8 @@ struct StoryAssessmentView: View {
                                 ForEach(Array(regions.enumerated()), id: \.offset) { _, region in
                                     let cx = geo.size.width * region.x
                                     let cy = geo.size.height * region.y
-                                    let r = geo.size.width * region.radius
+                                    // Ensure a minimum 44pt tap target (Apple HIG)
+                                    let r = max(geo.size.width * region.radius, 22)
 
                                     // Tap target (invisible)
                                     Circle()
