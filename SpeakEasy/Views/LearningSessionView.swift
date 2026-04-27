@@ -362,15 +362,79 @@ struct LearningSessionView: View {
     // MARK: - Task Progress Bar
 
     private var taskProgressBar: some View {
-        HStack {
-            Text("Task \(learningManager.sessionTaskCount + 1)")
-                .font(.caption)
-                .foregroundColor(.secondary)
-            Spacer()
-            if let result = learningManager.lastAttemptResult {
-                Text("Accuracy: \(Int(result.accuracy * 100))%")
+        VStack(spacing: 6) {
+            HStack {
+                Text("Task \(learningManager.sessionTaskCount + 1)")
                     .font(.caption)
-                    .foregroundColor(result.accuracy >= 0.8 ? .green : .orange)
+                    .foregroundColor(.secondary)
+                Spacer()
+                if let result = learningManager.lastAttemptResult {
+                    Text("Accuracy: \(Int(result.accuracy * 100))%")
+                        .font(.caption)
+                        .foregroundColor(result.accuracy >= 0.8 ? .green : .orange)
+                }
+            }
+
+            // Visual progress bar
+            sessionProgressBarView
+        }
+    }
+
+    /// A visual progress bar showing session completion.
+    private var sessionProgressBarView: some View {
+        let taskCount = learningManager.sessionTaskCount
+        let totalExpected = max(10, taskCount + 1)
+        let progress = min(1.0, Double(taskCount) / Double(totalExpected))
+        let accuracy = learningManager.lastAttemptResult?.accuracy ?? 0.0
+        let barColor: Color = accuracy >= 0.8 ? .green : (accuracy >= 0.5 ? .orange : dimension.color)
+
+        return VStack(spacing: 4) {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    // Background track
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(Color(.systemGray5))
+                        .frame(height: 12)
+
+                    // Filled portion
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(
+                            LinearGradient(
+                                colors: [barColor.opacity(0.8), barColor],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .frame(width: max(12, geometry.size.width * progress), height: 12)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.7), value: progress)
+
+                    // Star markers at milestones
+                    HStack(spacing: 0) {
+                        ForEach(0..<5, id: \.self) { i in
+                            let milestone = Double(i + 1) / 5.0
+                            let reached = progress >= milestone
+                            Spacer()
+                            Image(systemName: reached ? "star.fill" : "star")
+                                .font(.system(size: 8))
+                                .foregroundColor(reached ? .yellow : .gray.opacity(0.4))
+                        }
+                    }
+                    .frame(height: 12)
+                }
+            }
+            .frame(height: 12)
+
+            // Streak indicator
+            if learningManager.currentStreak >= 2 {
+                HStack(spacing: 2) {
+                    Image(systemName: "flame.fill")
+                        .font(.system(size: 10))
+                        .foregroundColor(.orange)
+                    Text("\(learningManager.currentStreak) streak!")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundColor(.orange)
+                }
+                .transition(.scale.combined(with: .opacity))
             }
         }
     }
@@ -423,7 +487,7 @@ struct LearningSessionView: View {
             // Use smaller images when options are pinned at the bottom
             // to keep the question area compact and avoid hiding the options.
             let isPinned = isPinnedInteractionTask(task)
-            let imageSize: CGFloat = isPinned ? 160 : 200
+            let imageSize: CGFloat = isPinned ? 200 : 280
             let instructionRefsPicture = instructionReferencesPicture(task)
 
             // Language comprehension: suppress question images so the child
@@ -1122,7 +1186,7 @@ struct LearningSessionView: View {
                                 imageType: .flashcard,
                                 fallbackIcon: "questionmark.circle",
                                 iconColor: dimension.color,
-                                size: 80
+                                size: 100
                             )
                             .cornerRadius(12)
                             Text(item.replacingOccurrences(of: "_", with: " ").capitalized)
@@ -1931,7 +1995,7 @@ struct LearningSessionView: View {
                                             imageType: .flashcard,
                                             fallbackIcon: "questionmark.circle",
                                             iconColor: dimension.color,
-                                            size: 80
+                                            size: 100
                                         )
                                         .cornerRadius(12)
                                         Text(option)
@@ -2373,6 +2437,7 @@ struct LearningSessionView: View {
     /// Shared handler for tapping an option (used by both image grid and text buttons).
     private func handleOptionTap(option: String, task: AdaptiveTask) {
         selectedOption = option
+        SoundEffectService.shared.playTap()
         speechService.onSpeechFinished = nil
         speechService.speak(option)
         if isListening {
@@ -2502,6 +2567,10 @@ struct LearningSessionView: View {
                 }
             }
         } else {
+            // For non-object-cognition dimensions, lower the acceptance
+            // threshold so approximate answers are accepted
+            let useRelaxedMatching = dimension != .objectCognition
+
             speechService.startListening(targetWord: targetWord) { rating in
                 isListening = false
                 spokenText = speechService.recognizedText
@@ -2515,7 +2584,9 @@ struct LearningSessionView: View {
 
                 if rating > 0 {
                     hasRecording = true
-                    let isCorrect = rating >= 3.0
+                    // For non-object-cognition, accept lower ratings
+                    let threshold: Double = useRelaxedMatching ? 2.0 : 3.0
+                    let isCorrect = rating >= threshold
                     if isCorrect {
                         isEvaluating = true
                         Task {
@@ -2524,6 +2595,14 @@ struct LearningSessionView: View {
                                 score: Int(rating),
                                 dimension: dimension
                             )
+                            isEvaluating = false
+                        }
+                    } else if useRelaxedMatching && !spokenText.isEmpty {
+                        // Try AI fuzzy matching as fallback for non-object tasks
+                        hasRecording = true
+                        isEvaluating = true
+                        Task {
+                            await evaluateFuzzyVoiceAnswer(spoken: spokenText, targetWord: targetWord)
                             isEvaluating = false
                         }
                     } else {
@@ -2537,6 +2616,14 @@ struct LearningSessionView: View {
                             )
                             isEvaluating = false
                         }
+                    }
+                } else if useRelaxedMatching && !spokenText.isEmpty {
+                    // Even with rating 0, try AI matching for non-object tasks
+                    hasRecording = true
+                    isEvaluating = true
+                    Task {
+                        await evaluateFuzzyVoiceAnswer(spoken: spokenText, targetWord: targetWord)
+                        isEvaluating = false
                     }
                 } else {
                     hasRecording = false
@@ -2573,6 +2660,39 @@ struct LearningSessionView: View {
             await learningManager.submitAttempt(
                 isCorrect: fallbackCorrect,
                 score: fallbackCorrect ? 3 : 0,
+                dimension: dimension
+            )
+        }
+    }
+
+    /// AI fuzzy matching for voice answers in non-object-cognition tasks.
+    private func evaluateFuzzyVoiceAnswer(spoken: String, targetWord: String) async {
+        guard let task = learningManager.currentTask else { return }
+        let question = task.content.instruction ?? ""
+        let options = task.content.options?.compactMap { $0.text } ?? []
+
+        do {
+            let result = try await learningManager.api.evaluateAnswer(
+                question: question,
+                givenAnswer: spoken,
+                correctAnswer: targetWord,
+                options: options,
+                dimension: dimension.rawValue
+            )
+
+            await learningManager.submitAttempt(
+                isCorrect: result.isAccepted,
+                score: result.isAccepted ? Int(result.score * 5.0) : 0,
+                dimension: dimension
+            )
+        } catch {
+            // Fallback: do a simple contains check locally
+            let spokenLower = spoken.lowercased()
+            let targetLower = targetWord.lowercased()
+            let fuzzyMatch = spokenLower.contains(targetLower) || targetLower.contains(spokenLower)
+            await learningManager.submitAttempt(
+                isCorrect: fuzzyMatch,
+                score: fuzzyMatch ? 3 : 0,
                 dimension: dimension
             )
         }
@@ -2925,6 +3045,17 @@ struct LearningSessionView: View {
         .allowsHitTesting(false)
         .onAppear {
             animateFeedback = false
+
+            // Play sound effect
+            if result.isCorrect {
+                SoundEffectService.shared.playCorrect()
+                if result.streak >= 3 {
+                    SoundEffectService.shared.playStreakBonus()
+                }
+            } else {
+                SoundEffectService.shared.playIncorrect()
+            }
+
             withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
                 animateFeedback = true
             }
@@ -3000,6 +3131,9 @@ struct LearningSessionView: View {
                     .shadow(color: dimension.color.opacity(0.4), radius: 20, y: 10)
             )
             .padding(.horizontal, 40)
+        }
+        .onAppear {
+            SoundEffectService.shared.playLevelUp()
         }
         .onTapGesture {
             learningManager.showLevelUp = false

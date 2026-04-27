@@ -27,9 +27,9 @@ struct RemoteImageView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: size, height: size)
-                .clipped()
-        } else if let url = remoteImageURL {
-            // 2. Fall back to Cloudinary (PNG via cloud transform)
+                .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
+        } else if let url = resolvedImageURL {
+            // 2. Fall back to remote image (real photo or Cloudinary SVG)
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .empty:
@@ -40,9 +40,25 @@ struct RemoteImageView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: size, height: size)
-                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
                 case .failure:
-                    fallbackImage
+                    // If real photo failed, try Cloudinary SVG fallback
+                    if realPhotoURL != nil {
+                        AsyncImage(url: cloudinarySVGURL) { svgPhase in
+                            switch svgPhase {
+                            case .success(let img):
+                                img
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: size, height: size)
+                                    .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
+                            default:
+                                fallbackImage
+                            }
+                        }
+                    } else {
+                        fallbackImage
+                    }
                 @unknown default:
                     fallbackImage
                 }
@@ -53,14 +69,32 @@ struct RemoteImageView: View {
         }
     }
 
-    private var remoteImageURL: URL? {
+    /// The primary URL to try: real photo first, then Cloudinary SVG.
+    private var resolvedImageURL: URL? {
         // Direct URL takes priority (e.g. full https:// URL from backend)
         if let directURL = directURL,
            let url = URL(string: directURL),
            url.scheme != nil {
             return url
         }
-        // Construct Cloudinary URL — request PNG format for AsyncImage compatibility
+        // Try real photo URL from cache
+        if let photoURL = realPhotoURL {
+            return photoURL
+        }
+        // Fall back to Cloudinary SVG
+        return cloudinarySVGURL
+    }
+
+    /// Real photo URL from the cached photo URL mapping.
+    private var realPhotoURL: URL? {
+        if let urlString = RealPhotoURLCache.shared.photoURL(for: normalizedName) {
+            return URL(string: urlString)
+        }
+        return nil
+    }
+
+    /// Original Cloudinary SVG URL (PNG-rendered).
+    private var cloudinarySVGURL: URL? {
         let urlString = "\(Self.cloudinaryBaseURL)/f_png/risingstar/task_images/\(normalizedName)"
         return URL(string: urlString)
     }
@@ -70,6 +104,39 @@ struct RemoteImageView: View {
             .font(.system(size: size * 0.5))
             .foregroundColor(iconColor)
             .frame(width: size, height: size)
+    }
+}
+
+/// Caches real photo URLs fetched from the backend.
+@MainActor
+class RealPhotoURLCache: ObservableObject {
+    static let shared = RealPhotoURLCache()
+
+    private var photoURLs: [String: String] = [:]
+    private var isLoaded = false
+    private var isLoading = false
+
+    func photoURL(for name: String) -> String? {
+        if !isLoaded && !isLoading {
+            isLoading = true
+            Task { await loadPhotoURLs() }
+        }
+        return photoURLs[name]
+    }
+
+    private func loadPhotoURLs() async {
+        guard let url = URL(string: "https://risingstar-backend-zclkfobb.fly.dev/adaptive/photo-urls") else { return }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let photos = json["photos"] as? [String: String] {
+                photoURLs = photos
+            }
+        } catch {
+            print("[RealPhotoURLCache] Failed to load photo URLs: \(error)")
+        }
+        isLoaded = true
+        isLoading = false
     }
 }
 
@@ -83,7 +150,7 @@ struct RemoteImageView_Previews: PreviewProvider {
                 iconColor: .red,
                 size: 80
             )
-            
+
             RemoteImageView(
                 objectName: "Dog",
                 imageType: .flashcard,

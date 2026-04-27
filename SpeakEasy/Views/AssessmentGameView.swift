@@ -239,7 +239,7 @@ struct AssessmentGameView: View {
                             imageType: .flashcard,
                             fallbackIcon: "photo",
                             iconColor: .orange,
-                            size: 160
+                            size: 240
                         )
                         .cornerRadius(16)
                     }
@@ -565,6 +565,15 @@ struct AssessmentGameView: View {
             Spacer()
         }
         .transition(.scale.combined(with: .opacity))
+        .onAppear {
+            if let feedback = lastFeedback {
+                if feedback.isCorrect {
+                    SoundEffectService.shared.playCorrect()
+                } else {
+                    SoundEffectService.shared.playIncorrect()
+                }
+            }
+        }
     }
 
     // MARK: - Completed View

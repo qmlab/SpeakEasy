@@ -55,6 +55,11 @@ def evaluate_speech(
     # SequenceMatcher gives a ratio in [0, 1]
     similarity = SequenceMatcher(None, target_lower, spoken_lower).ratio()
 
+    # Also check if the spoken text contains the target as a substring
+    # (e.g. child says "it's an apple" for target "apple")
+    if target_lower in spoken_lower or spoken_lower in target_lower:
+        similarity = max(similarity, 0.85)
+
     # Determine feedback tier
     if similarity >= 0.9:
         feedback = "excellent"
@@ -100,13 +105,21 @@ def _keyword_fallback(
             "evaluation_method": "keyword_fallback",
         }
 
-    # Check keyword match
+    # Check keyword match — also check partial matches (keyword
+    # contained within a spoken word, e.g. "apples" matches "apple")
     spoken_words = set(spoken_lower.split())
     keywords_lower = [k.lower() for k in keywords]
     matched_keywords = spoken_words & set(keywords_lower)
 
+    # Partial keyword matching: "apples" contains "apple"
+    if not matched_keywords:
+        for spoken_word in spoken_words:
+            for kw in keywords_lower:
+                if kw in spoken_word or spoken_word in kw:
+                    matched_keywords.add(kw)
+                    break
+
     if matched_keywords:
-        # Spoken text contains a relevant keyword — accept
         return {
             "is_accepted": True,
             "score": 0.8,
@@ -114,13 +127,14 @@ def _keyword_fallback(
             "evaluation_method": "keyword_fallback",
         }
 
-    # Check similarity against example answers
+    # Check similarity against example answers — lowered threshold
+    # for young children who may give approximate answers
     best_sim = 0.0
     for example in example_answers:
         sim = SequenceMatcher(None, spoken_lower, example.lower()).ratio()
         best_sim = max(best_sim, sim)
 
-    if best_sim >= 0.4:
+    if best_sim >= 0.3:
         return {
             "is_accepted": True,
             "score": round(0.5 + best_sim * 0.5, 2),
@@ -128,9 +142,13 @@ def _keyword_fallback(
             "evaluation_method": "keyword_fallback",
         }
 
-    # If the child said at least two words, give benefit of the doubt
-    # for very young children who may use unconventional phrasing
-    if len(spoken_lower.split()) >= 2:
+    # If the child said at least one meaningful word, give benefit
+    # of the doubt for very young children who may use
+    # unconventional phrasing or single-word answers
+    word_count = len(spoken_lower.split())
+    filler_words = {"um", "uh", "ah", "hmm", "hm", "oh", "a", "the", "i"}
+    meaningful_words = spoken_words - filler_words
+    if meaningful_words and word_count >= 1:
         return {
             "is_accepted": True,
             "score": 0.6,

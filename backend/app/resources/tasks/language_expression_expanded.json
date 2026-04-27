@@ -19,6 +19,13 @@
           "image_hint": "dog",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Dog"
+          ],
+          "keywords": [
+            "dog"
           ]
         },
         {
@@ -31,6 +38,13 @@
           "image_hint": "cat",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Cat"
+          ],
+          "keywords": [
+            "cat"
           ]
         },
         {
@@ -43,6 +57,13 @@
           "image_hint": "ball",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Ball"
+          ],
+          "keywords": [
+            "ball"
           ]
         },
         {
@@ -55,6 +76,13 @@
           "image_hint": "eating",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Eat"
+          ],
+          "keywords": [
+            "eat"
           ]
         },
         {
@@ -67,7 +95,14 @@
           "modalities": [
             "voice"
           ],
-          "image_hint": "waving"
+          "image_hint": "waving",
+          "open_ended": true,
+          "example_answers": [
+            "Go"
+          ],
+          "keywords": [
+            "go"
+          ]
         }
       ]
     },
@@ -86,6 +121,13 @@
           "image_hint": "apple",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Apple"
+          ],
+          "keywords": [
+            "apple"
           ]
         },
         {
@@ -98,6 +140,13 @@
           "image_hint": "car",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Car"
+          ],
+          "keywords": [
+            "car"
           ]
         },
         {
@@ -110,6 +159,13 @@
           "image_hint": "cup",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Cup"
+          ],
+          "keywords": [
+            "cup"
           ]
         },
         {
@@ -122,6 +178,13 @@
           "image_hint": "butterfly",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Butterfly"
+          ],
+          "keywords": [
+            "butterfly"
           ]
         },
         {
@@ -134,6 +197,13 @@
           "image_hint": "rainbow",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "Rainbow"
+          ],
+          "keywords": [
+            "rainbow"
           ]
         }
       ]
@@ -153,6 +223,14 @@
           "image_hint": "ball",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "red ball"
+          ],
+          "keywords": [
+            "red",
+            "ball"
           ]
         },
         {
@@ -165,6 +243,14 @@
           "image_hint": "cat",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "white cat"
+          ],
+          "keywords": [
+            "white",
+            "cat"
           ]
         },
         {
@@ -177,6 +263,14 @@
           "image_hint": "cloud",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "blue sky"
+          ],
+          "keywords": [
+            "blue",
+            "sky"
           ]
         },
         {
@@ -189,6 +283,14 @@
           "image_hint": "flower",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "yellow flower"
+          ],
+          "keywords": [
+            "yellow",
+            "flower"
           ]
         },
         {
@@ -201,6 +303,14 @@
           "image_hint": "dog",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "brown dog"
+          ],
+          "keywords": [
+            "brown",
+            "dog"
           ]
         }
       ]
@@ -220,6 +330,15 @@
           "image_hint": "dog",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The dog is big"
+          ],
+          "keywords": [
+            "the",
+            "dog",
+            "is"
           ]
         },
         {
@@ -232,6 +351,15 @@
           "image_hint": "apple",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "I like apples"
+          ],
+          "keywords": [
+            "i",
+            "like",
+            "apples"
           ]
         },
         {
@@ -244,6 +372,15 @@
           "image_hint": "cat",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The cat is sleeping"
+          ],
+          "keywords": [
+            "the",
+            "cat",
+            "is"
           ]
         },
         {
@@ -256,6 +393,15 @@
           "image_hint": "banana",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "She is eating a banana"
+          ],
+          "keywords": [
+            "she",
+            "is",
+            "eating"
           ]
         },
         {
@@ -268,6 +414,15 @@
           "image_hint": "ice_cream",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "I like ice cream"
+          ],
+          "keywords": [
+            "i",
+            "like",
+            "ice"
           ]
         }
       ]
@@ -285,7 +440,8 @@
           "scaffolding_hint": "Think about animals you like. Do you like dogs? Cats?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What did you eat for breakfast?",
@@ -295,7 +451,8 @@
           "scaffolding_hint": "Think about what you had to eat this morning",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What do you like to play with?",
@@ -305,7 +462,8 @@
           "scaffolding_hint": "Think about your favorite toy or game",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What is your favorite color?",
@@ -315,7 +473,8 @@
           "scaffolding_hint": "Look around. What colors do you see that you like?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Tell me about your family!",
@@ -325,7 +484,8 @@
           "scaffolding_hint": "Who lives in your house? Do you have brothers or sisters?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         }
       ]
     },
@@ -344,6 +504,15 @@
           "image_hint": "happy_face",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The boy is running"
+          ],
+          "keywords": [
+            "the",
+            "boy",
+            "is"
           ]
         },
         {
@@ -356,6 +525,15 @@
           "image_hint": "book",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The girl is reading a book"
+          ],
+          "keywords": [
+            "the",
+            "girl",
+            "is"
           ]
         },
         {
@@ -368,6 +546,15 @@
           "image_hint": "dog",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The dog is playing with a ball"
+          ],
+          "keywords": [
+            "the",
+            "dog",
+            "is"
           ]
         },
         {
@@ -380,6 +567,15 @@
           "image_hint": "happy_face",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The children are playing outside"
+          ],
+          "keywords": [
+            "the",
+            "children",
+            "are"
           ]
         },
         {
@@ -392,6 +588,15 @@
           "image_hint": "apple",
           "modalities": [
             "voice"
+          ],
+          "open_ended": true,
+          "example_answers": [
+            "The boy is eating an apple"
+          ],
+          "keywords": [
+            "the",
+            "boy",
+            "is"
           ]
         }
       ]
@@ -410,7 +615,8 @@
           "image_hint": "happy_face",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Tell me about a time you went to the park!",
@@ -420,7 +626,8 @@
           "scaffolding_hint": "What did you do at the park? Who was with you?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What happens when it rains? Tell me about it!",
@@ -430,7 +637,8 @@
           "scaffolding_hint": "What do you need? What do you wear?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Tell me about your favorite day!",
@@ -440,7 +648,8 @@
           "scaffolding_hint": "What made it special? Where were you?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Look at this picture. What do you think happened before this? What will happen next?",
@@ -451,7 +660,8 @@
           "image_hint": "sad_face",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         }
       ]
     },
@@ -468,7 +678,8 @@
           "scaffolding_hint": "What do you do first? Then what?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Why do we wear a coat when it is cold?",
@@ -478,7 +689,8 @@
           "scaffolding_hint": "What happens if you go outside without a coat?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "How do you make a sandwich?",
@@ -488,7 +700,8 @@
           "scaffolding_hint": "What do you need? What do you do first?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Tell me about your favorite game. How do you play it?",
@@ -498,7 +711,8 @@
           "scaffolding_hint": "What are the rules? How do you win?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Why is it important to say please and thank you?",
@@ -508,7 +722,8 @@
           "scaffolding_hint": "How does it make other people feel?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         }
       ]
     },
@@ -525,7 +740,8 @@
           "scaffolding_hint": "Think about what each animal can do. Which do you like more?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "If you could have any superpower, what would it be? Why?",
@@ -535,7 +751,8 @@
           "scaffolding_hint": "Think about what you would like to do that you cannot do now",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What would you do if you found a lost puppy? Why?",
@@ -545,7 +762,8 @@
           "scaffolding_hint": "The puppy looks scared. How would you help it?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Should children have homework? Tell me what you think!",
@@ -555,7 +773,8 @@
           "scaffolding_hint": "Think about good things and bad things about homework",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What is the most important thing about being a good friend?",
@@ -565,7 +784,8 @@
           "scaffolding_hint": "Think about your friends. What do they do that makes you happy?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         }
       ]
     },
@@ -582,7 +802,8 @@
           "scaffolding_hint": "Think about a time you did something well. How did it feel?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "If you could change one thing about your school, what would it be? Why?",
@@ -592,7 +813,8 @@
           "scaffolding_hint": "What would make school better for you and your friends?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Tell me about a book or movie you really liked. What was it about?",
@@ -602,7 +824,8 @@
           "scaffolding_hint": "Who were the characters? What happened in the story?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "What do you think happens when we dream? Why do we dream?",
@@ -612,7 +835,8 @@
           "scaffolding_hint": "Have you had any interesting dreams? What were they about?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         },
         {
           "instruction": "Imagine you are a teacher for a day. What would you teach? How would you make it fun?",
@@ -622,7 +846,8 @@
           "scaffolding_hint": "What subject do you like? How would you help your students learn?",
           "modalities": [
             "voice"
-          ]
+          ],
+          "open_ended": true
         }
       ]
     }
