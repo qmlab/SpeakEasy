@@ -137,7 +137,7 @@ def _keyword_fallback(
         sim = SequenceMatcher(None, spoken_lower, example.lower()).ratio()
         best_sim = max(best_sim, sim)
 
-    if best_sim >= 0.3:
+    if best_sim >= 0.4:
         return {
             "is_accepted": True,
             "score": round(0.5 + best_sim * 0.5, 2),
