@@ -353,7 +353,33 @@ def evaluate_answer_fuzzy(request: dict):
         question=question or f"Select the correct answer: {correct_answer}",
         spoken=given_answer,
         example_answers=[correct_answer],
-        keywords=correct_answer.lower().split()[:3],
+        keywords=[
+            w
+            for w in correct_answer.lower().split()[:5]
+            if w
+            not in {
+                "the",
+                "a",
+                "an",
+                "is",
+                "am",
+                "are",
+                "was",
+                "were",
+                "in",
+                "on",
+                "at",
+                "to",
+                "of",
+                "and",
+                "or",
+                "it",
+                "i",
+            }
+        ][:3]
+        or [correct_answer.lower().strip().split()[0]]
+        if correct_answer.strip()
+        else [],
         strict_mode=True,
     )
 

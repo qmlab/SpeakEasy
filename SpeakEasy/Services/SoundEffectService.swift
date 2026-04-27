@@ -31,7 +31,10 @@ class SoundEffectService: ObservableObject {
 
     private func configureAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            // Use .playAndRecord to match SpeechService — switching between
+            // .playback and .playAndRecord can silently fail on real iPhones,
+            // leaving the mic in a broken state.
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("[SoundEffect] Audio session error: \(error)")
