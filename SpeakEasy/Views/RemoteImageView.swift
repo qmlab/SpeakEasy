@@ -117,14 +117,26 @@ class RealPhotoURLCache: ObservableObject {
     @Published private var photoURLs: [String: String] = [:]
     private var isLoaded = false
     private var isLoading = false
+    private var failureCount = 0
+    private var lastFailureDate: Date?
+    private let maxRetries = 3
     private let api = AdaptiveAPIService()
 
     func photoURL(for name: String) -> String? {
-        if !isLoaded && !isLoading {
+        if !isLoaded && !isLoading && canRetry {
             isLoading = true
             Task { await loadPhotoURLs() }
         }
         return photoURLs[name]
+    }
+
+    private var canRetry: Bool {
+        if failureCount >= maxRetries { return false }
+        if let last = lastFailureDate {
+            let backoff = pow(2.0, Double(failureCount))
+            return Date().timeIntervalSince(last) >= backoff
+        }
+        return true
     }
 
     private func loadPhotoURLs() async {
@@ -132,7 +144,9 @@ class RealPhotoURLCache: ObservableObject {
             photoURLs = try await api.getPhotoURLs()
             isLoaded = true
         } catch {
-            print("[RealPhotoURLCache] Failed to load photo URLs: \(error)")
+            failureCount += 1
+            lastFailureDate = Date()
+            print("[RealPhotoURLCache] Failed to load photo URLs (attempt \(failureCount)): \(error)")
         }
         isLoading = false
     }
