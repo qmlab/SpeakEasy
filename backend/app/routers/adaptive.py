@@ -333,7 +333,6 @@ def evaluate_answer_fuzzy(request: dict):
     question = request.get("question", "")
     given_answer = request.get("given_answer", "")
     correct_answer = request.get("correct_answer", "")
-    options = request.get("options", [])
     dimension = request.get("dimension", "")
 
     if not given_answer or not correct_answer:
@@ -352,8 +351,7 @@ def evaluate_answer_fuzzy(request: dict):
     result = evaluate_open_ended(
         question=question or f"Select the correct answer: {correct_answer}",
         spoken=given_answer,
-        example_answers=[correct_answer]
-        + [o for o in options if o != correct_answer][:2],
+        example_answers=[correct_answer],
         keywords=correct_answer.lower().split()[:3],
     )
 

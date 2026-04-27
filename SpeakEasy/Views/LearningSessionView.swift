@@ -383,7 +383,7 @@ struct LearningSessionView: View {
     /// A visual progress bar showing session completion.
     private var sessionProgressBarView: some View {
         let taskCount = learningManager.sessionTaskCount
-        let totalExpected = max(10, taskCount + 1)
+        let totalExpected = max(10, taskCount)
         let progress = min(1.0, Double(taskCount) / Double(totalExpected))
         let accuracy = learningManager.lastAttemptResult?.accuracy ?? 0.0
         let barColor: Color = accuracy >= 0.8 ? .green : (accuracy >= 0.5 ? .orange : dimension.color)
