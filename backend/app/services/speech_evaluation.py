@@ -220,25 +220,45 @@ def evaluate_open_ended(
             f"- {a}" for a in example_answers
         )
 
-    system_prompt = (
-        "You are evaluating a young child's (age 3-7) spoken response to an "
-        "open-ended question in a language learning app for children with autism. "
-        "The child's speech has been transcribed and may contain errors.\n\n"
-        "Rules:\n"
-        "1. Be VERY lenient — any response that attempts to answer the question "
-        "should be accepted, even if grammar is poor or the answer is unusual.\n"
-        "2. Accept creative or unexpected answers (e.g. 'dinosaur' for favorite "
-        "animal is perfectly fine).\n"
-        "3. Accept partial answers or single words that are relevant.\n"
-        "4. Only reject responses that are completely unrelated to the question, "
-        "or are just noise/filler words like 'um' or 'uh'.\n"
-        "5. Respond ONLY with valid JSON: "
-        '{"is_accepted": true/false, "score": 0.0-1.0, "feedback": "..."}\n'
-        '   - feedback must be one of: "excellent", "good_answer", "good_try", '
-        '"try_again", "no_response"\n'
-        "   - score: 0.9-1.0 for clear relevant answers, 0.6-0.8 for partial/"
-        "unusual but acceptable, 0.0-0.5 for unrelated"
-    )
+    if strict_mode:
+        system_prompt = (
+            "You are evaluating a young child's (age 3-7) spoken response in a "
+            "language learning app. The child's speech has been transcribed and "
+            "may contain pronunciation errors or stuttering.\n\n"
+            "The child must answer with the CORRECT answer. Rules:\n"
+            "1. Accept if the child's response is semantically equivalent to the "
+            "correct answer, even with poor pronunciation or grammar.\n"
+            "2. Accept partial matches: 'doggy' for 'dog', 'kitty' for 'cat'.\n"
+            "3. Accept if the child clearly said the right word but with speech "
+            "errors (e.g. 'daw' for 'dog').\n"
+            "4. REJECT if the child said a completely different word or concept.\n"
+            "5. Respond ONLY with valid JSON: "
+            '{"is_accepted": true/false, "score": 0.0-1.0, "feedback": "..."}\n'
+            '   - feedback must be one of: "excellent", "good_answer", "good_try", '
+            '"try_again", "no_response"\n'
+            "   - score: 0.9-1.0 for clear correct answers, 0.5-0.8 for "
+            "approximate but recognizable, 0.0-0.4 for wrong answers"
+        )
+    else:
+        system_prompt = (
+            "You are evaluating a young child's (age 3-7) spoken response to an "
+            "open-ended question in a language learning app for children with autism. "
+            "The child's speech has been transcribed and may contain errors.\n\n"
+            "Rules:\n"
+            "1. Be VERY lenient — any response that attempts to answer the question "
+            "should be accepted, even if grammar is poor or the answer is unusual.\n"
+            "2. Accept creative or unexpected answers (e.g. 'dinosaur' for favorite "
+            "animal is perfectly fine).\n"
+            "3. Accept partial answers or single words that are relevant.\n"
+            "4. Only reject responses that are completely unrelated to the question, "
+            "or are just noise/filler words like 'um' or 'uh'.\n"
+            "5. Respond ONLY with valid JSON: "
+            '{"is_accepted": true/false, "score": 0.0-1.0, "feedback": "..."}\n'
+            '   - feedback must be one of: "excellent", "good_answer", "good_try", '
+            '"try_again", "no_response"\n'
+            "   - score: 0.9-1.0 for clear relevant answers, 0.6-0.8 for partial/"
+            "unusual but acceptable, 0.0-0.5 for unrelated"
+        )
 
     user_prompt = (
         f'Question asked: "{question}"\nChild\'s response: "{spoken}"{examples_text}'

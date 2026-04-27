@@ -109,7 +109,7 @@ struct RemoteImageView: View {
     }
 }
 
-/// Caches real photo URLs fetched from the backend.
+/// Caches real photo URLs fetched from the backend via AdaptiveAPIService.
 @MainActor
 class RealPhotoURLCache: ObservableObject {
     static let shared = RealPhotoURLCache()
@@ -117,6 +117,7 @@ class RealPhotoURLCache: ObservableObject {
     @Published private var photoURLs: [String: String] = [:]
     private var isLoaded = false
     private var isLoading = false
+    private let api = AdaptiveAPIService()
 
     func photoURL(for name: String) -> String? {
         if !isLoaded && !isLoading {
@@ -127,13 +128,8 @@ class RealPhotoURLCache: ObservableObject {
     }
 
     private func loadPhotoURLs() async {
-        guard let url = URL(string: "https://risingstar-backend-zclkfobb.fly.dev/adaptive/photo-urls") else { return }
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let photos = json["photos"] as? [String: String] {
-                photoURLs = photos
-            }
+            photoURLs = try await api.getPhotoURLs()
         } catch {
             print("[RealPhotoURLCache] Failed to load photo URLs: \(error)")
         }
