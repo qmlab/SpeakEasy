@@ -348,11 +348,13 @@ def evaluate_answer_fuzzy(request: dict):
         }
 
     # For other dimensions, use lenient AI evaluation
+    # strict_mode=True skips the catch-all "any meaningful word" fallback
     result = evaluate_open_ended(
         question=question or f"Select the correct answer: {correct_answer}",
         spoken=given_answer,
         example_answers=[correct_answer],
         keywords=correct_answer.lower().split()[:3],
+        strict_mode=True,
     )
 
     return result

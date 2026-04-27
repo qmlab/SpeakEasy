@@ -57,7 +57,9 @@ def evaluate_speech(
 
     # Also check if the spoken text contains the target as a substring
     # (e.g. child says "it's an apple" for target "apple")
-    if target_lower in spoken_lower or spoken_lower in target_lower:
+    if target_lower in spoken_lower or (
+        spoken_lower in target_lower and len(spoken_lower) >= 3
+    ):
         similarity = max(similarity, 0.85)
 
     # Determine feedback tier
@@ -87,6 +89,7 @@ def _keyword_fallback(
     spoken: str,
     example_answers: list[str],
     keywords: list[str],
+    strict_mode: bool = False,
 ) -> dict:
     """Fallback evaluation when no LLM is available.
 
@@ -143,18 +146,19 @@ def _keyword_fallback(
         }
 
     # If the child said at least one meaningful word, give benefit
-    # of the doubt for very young children who may use
-    # unconventional phrasing or single-word answers
-    word_count = len(spoken_lower.split())
-    filler_words = {"um", "uh", "ah", "hmm", "hm", "oh", "a", "the", "i"}
-    meaningful_words = spoken_words - filler_words
-    if meaningful_words and word_count >= 1:
-        return {
-            "is_accepted": True,
-            "score": 0.6,
-            "feedback": "good_try",
-            "evaluation_method": "keyword_fallback",
-        }
+    # of the doubt — but only for truly open-ended questions, not
+    # when checking against a specific correct answer
+    if not strict_mode:
+        word_count = len(spoken_lower.split())
+        filler_words = {"um", "uh", "ah", "hmm", "hm", "oh", "a", "the", "i"}
+        meaningful_words = spoken_words - filler_words
+        if meaningful_words and word_count >= 1:
+            return {
+                "is_accepted": True,
+                "score": 0.6,
+                "feedback": "good_try",
+                "evaluation_method": "keyword_fallback",
+            }
 
     return {
         "is_accepted": False,
@@ -169,6 +173,7 @@ def evaluate_open_ended(
     spoken: str,
     example_answers: Optional[list[str]] = None,
     keywords: Optional[list[str]] = None,
+    strict_mode: bool = False,
 ) -> dict:
     """Evaluate an open-ended spoken response using AI.
 
@@ -202,6 +207,7 @@ def evaluate_open_ended(
             spoken,
             example_answers or [],
             keywords or [],
+            strict_mode=strict_mode,
         )
 
     # Build LLM prompt
@@ -283,4 +289,5 @@ def evaluate_open_ended(
             spoken,
             example_answers or [],
             keywords or [],
+            strict_mode=strict_mode,
         )
