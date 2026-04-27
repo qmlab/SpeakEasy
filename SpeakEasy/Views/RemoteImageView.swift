@@ -130,10 +130,10 @@ class RealPhotoURLCache: ObservableObject {
     private func loadPhotoURLs() async {
         do {
             photoURLs = try await api.getPhotoURLs()
+            isLoaded = true
         } catch {
             print("[RealPhotoURLCache] Failed to load photo URLs: \(error)")
         }
-        isLoaded = true
         isLoading = false
     }
 }

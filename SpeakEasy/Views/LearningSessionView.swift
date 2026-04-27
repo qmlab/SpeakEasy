@@ -3050,7 +3050,9 @@ struct LearningSessionView: View {
             if result.isCorrect {
                 SoundEffectService.shared.playCorrect()
                 if result.streak >= 3 {
-                    SoundEffectService.shared.playStreakBonus()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        SoundEffectService.shared.playStreakBonus()
+                    }
                 }
             } else {
                 SoundEffectService.shared.playIncorrect()
