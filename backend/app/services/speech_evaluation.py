@@ -120,7 +120,11 @@ def _keyword_fallback(
     if not matched_keywords:
         for spoken_word in spoken_words:
             for kw in keywords_lower:
-                if kw in spoken_word or spoken_word in kw:
+                if (
+                    len(kw) >= 3
+                    and len(spoken_word) >= 3
+                    and (kw in spoken_word or spoken_word in kw)
+                ):
                     matched_keywords.add(kw)
                     break
 
