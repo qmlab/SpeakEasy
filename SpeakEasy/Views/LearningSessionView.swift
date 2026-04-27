@@ -2669,7 +2669,7 @@ struct LearningSessionView: View {
     private func evaluateFuzzyVoiceAnswer(spoken: String, targetWord: String) async {
         guard let task = learningManager.currentTask else { return }
         let question = task.content.instruction ?? ""
-        let options = task.content.options?.compactMap { $0.text } ?? []
+        let options = task.content.options ?? []
 
         do {
             let result = try await learningManager.api.evaluateAnswer(
