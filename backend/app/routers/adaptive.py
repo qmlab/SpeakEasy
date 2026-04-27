@@ -11,7 +11,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.services.speech_evaluation import evaluate_open_ended
 from app.models.adaptive import DevelopmentalDimension
 from app.models.player import Player
 from app.schemas.adaptive import (
