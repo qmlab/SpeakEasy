@@ -14,8 +14,8 @@ import UIKit
 class SoundEffectService: ObservableObject {
     static let shared = SoundEffectService()
 
-    private var audioPlayer: AVAudioPlayer?
-    private var synthesizer: AVAudioEngine?
+    private let engine = AVAudioEngine()
+    private let playerNode = AVAudioPlayerNode()
 
     /// Whether sound effects are enabled (respects user settings).
     @Published var isEnabled: Bool {
@@ -26,18 +26,31 @@ class SoundEffectService: ObservableObject {
 
     init() {
         self.isEnabled = UserDefaults.standard.object(forKey: "soundEffectsEnabled") as? Bool ?? true
-        configureAudioSession()
+        configureAudioEngine()
     }
 
-    private func configureAudioSession() {
+    private func configureAudioEngine() {
         do {
             // Use .playAndRecord to match SpeechService — switching between
             // .playback and .playAndRecord can silently fail on real iPhones,
             // leaving the mic in a broken state.
             try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
             try AVAudioSession.sharedInstance().setActive(true)
+
+            let format = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1)!
+            engine.attach(playerNode)
+            engine.connect(playerNode, to: engine.mainMixerNode, format: format)
+            try engine.start()
         } catch {
-            print("[SoundEffect] Audio session error: \(error)")
+            print("[SoundEffect] Audio engine setup error: \(error)")
+        }
+    }
+
+    private func ensureEngineRunning() {
+        if !engine.isRunning {
+            do { try engine.start() } catch {
+                print("[SoundEffect] Engine restart error: \(error)")
+            }
         }
     }
 
@@ -138,6 +151,8 @@ class SoundEffectService: ObservableObject {
     }
 
     private func playAudioData(_ data: [Float], sampleRate: Double) {
+        ensureEngineRunning()
+
         let format = AVAudioFormat(standardFormatWithSampleRate: sampleRate, channels: 1)!
         let frameCount = AVAudioFrameCount(data.count)
         guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frameCount) else { return }
@@ -148,24 +163,9 @@ class SoundEffectService: ObservableObject {
             channelData[i] = data[i]
         }
 
-        do {
-            let engine = AVAudioEngine()
-            let playerNode = AVAudioPlayerNode()
-            engine.attach(playerNode)
-            engine.connect(playerNode, to: engine.mainMixerNode, format: format)
-
-            try engine.start()
-            playerNode.scheduleBuffer(buffer, at: nil, options: .interrupts)
+        playerNode.scheduleBuffer(buffer, at: nil, options: .interrupts)
+        if !playerNode.isPlaying {
             playerNode.play()
-
-            // Keep engine alive until playback completes
-            let durationMs = Int(Double(data.count) / sampleRate * 1000) + 100
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(durationMs)) {
-                playerNode.stop()
-                engine.stop()
-            }
-        } catch {
-            print("[SoundEffect] Playback error: \(error)")
         }
     }
 }

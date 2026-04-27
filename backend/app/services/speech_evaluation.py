@@ -11,6 +11,7 @@ is no single correct answer (e.g. "What is your favorite animal?").
 
 import logging
 import os
+import re
 from difflib import SequenceMatcher
 from typing import Optional
 
@@ -57,7 +58,8 @@ def evaluate_speech(
 
     # Also check if the spoken text contains the target as a substring
     # (e.g. child says "it's an apple" for target "apple")
-    if target_lower in spoken_lower or (
+    target_pattern = r"\b" + re.escape(target_lower) + r"\b"
+    if (len(target_lower) >= 3 and re.search(target_pattern, spoken_lower)) or (
         spoken_lower in target_lower
         and len(spoken_lower) >= 3
         and len(spoken_lower) / len(target_lower) >= 0.5
