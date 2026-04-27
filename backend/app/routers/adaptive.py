@@ -295,7 +295,9 @@ def update_reinforcement_config(
 
 # ---- Photo URLs ----
 
-_photo_urls_path = Path(__file__).parent.parent / "resources" / "images" / "photo_urls.json"
+_photo_urls_path = (
+    Path(__file__).parent.parent / "resources" / "images" / "photo_urls.json"
+)
 _photo_urls_cache: dict[str, str] | None = None
 
 
@@ -350,7 +352,8 @@ def evaluate_answer_fuzzy(request: dict):
     result = evaluate_open_ended(
         question=question or f"Select the correct answer: {correct_answer}",
         spoken=given_answer,
-        example_answers=[correct_answer] + [o for o in options if o != correct_answer][:2],
+        example_answers=[correct_answer]
+        + [o for o in options if o != correct_answer][:2],
         keywords=correct_answer.lower().split()[:3],
     )
 
