@@ -2689,7 +2689,7 @@ struct LearningSessionView: View {
             // Fallback: do a simple contains check locally
             let spokenLower = spoken.lowercased()
             let targetLower = targetWord.lowercased()
-            let fuzzyMatch = !targetLower.isEmpty && (spokenLower.contains(targetLower) || targetLower.contains(spokenLower))
+            let fuzzyMatch = !targetLower.isEmpty && spokenLower.count >= 3 && (spokenLower.contains(targetLower) || (targetLower.contains(spokenLower) && Double(spokenLower.count) / Double(targetLower.count) >= 0.5))
             await learningManager.submitAttempt(
                 isCorrect: fuzzyMatch,
                 score: fuzzyMatch ? 3 : 0,

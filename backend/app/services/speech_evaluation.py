@@ -58,7 +58,9 @@ def evaluate_speech(
     # Also check if the spoken text contains the target as a substring
     # (e.g. child says "it's an apple" for target "apple")
     if target_lower in spoken_lower or (
-        spoken_lower in target_lower and len(spoken_lower) >= 3
+        spoken_lower in target_lower
+        and len(spoken_lower) >= 3
+        and len(spoken_lower) / len(target_lower) >= 0.5
     ):
         similarity = max(similarity, 0.85)
 
