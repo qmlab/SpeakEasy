@@ -45,6 +45,32 @@ class AdaptiveLearningManager: ObservableObject {
     var currentStreak: Int = 0
     var sessionTaskCount: Int = 0
 
+    // MARK: - Session timer
+
+    @Published var sessionDurationMinutes: Int = 10
+    @Published var sessionStartDate: Date?
+    @Published var sessionTimeRemaining: TimeInterval = 0
+    @Published var sessionTimerExpired: Bool = false
+    private var sessionTimer: Timer?
+
+    var sessionElapsed: TimeInterval {
+        guard let start = sessionStartDate else { return 0 }
+        return Date().timeIntervalSince(start)
+    }
+
+    var sessionDurationSeconds: TimeInterval {
+        TimeInterval(sessionDurationMinutes * 60)
+    }
+
+    // MARK: - Level / Stage tracking
+
+    @Published var currentStageLevel: Int = 1
+    @Published var stagesCompletedToday: [String: Int] = [:]
+
+    func stagesCompleted(for dimension: DevelopmentalDimension) -> Int {
+        stagesCompletedToday[dimension.rawValue] ?? 0
+    }
+
     // MARK: - Dependencies
 
     let api: AdaptiveAPIService
@@ -53,6 +79,22 @@ class AdaptiveLearningManager: ObservableObject {
 
     init(api: AdaptiveAPIService = AdaptiveAPIService()) {
         self.api = api
+        loadStagesFromStorage()
+    }
+
+    private func loadStagesFromStorage() {
+        let today = Calendar.current.startOfDay(for: Date())
+        let savedDate = UserDefaults.standard.object(forKey: "stagesDate") as? Date ?? .distantPast
+        if Calendar.current.isDate(savedDate, inSameDayAs: today) {
+            stagesCompletedToday = UserDefaults.standard.dictionary(forKey: "stagesCompleted") as? [String: Int] ?? [:]
+        } else {
+            stagesCompletedToday = [:]
+        }
+    }
+
+    private func saveStages() {
+        UserDefaults.standard.set(stagesCompletedToday, forKey: "stagesCompleted")
+        UserDefaults.standard.set(Calendar.current.startOfDay(for: Date()), forKey: "stagesDate")
     }
 
     // MARK: - Player ID
@@ -119,16 +161,45 @@ class AdaptiveLearningManager: ObservableObject {
         lastAttemptResult = nil
         currentStreak = 0
         sessionTaskCount = 0
+        sessionTimerExpired = false
+        currentStageLevel = stagesCompleted(for: dimension) + 1
 
         do {
             let session = try await api.startSession(playerId: pid, dimension: dimension.rawValue)
             currentSession = session
             isInSession = true
+
+            // Start the session timer
+            sessionStartDate = Date()
+            sessionTimeRemaining = sessionDurationSeconds
+            startSessionTimer()
+
             await fetchNextTask(dimension: dimension)
         } catch {
             errorMessage = "Failed to start session: \(error.localizedDescription)"
             print("[Adaptive] Start session error: \(error)")
         }
+    }
+
+    private func startSessionTimer() {
+        sessionTimer?.invalidate()
+        sessionTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                let remaining = self.sessionDurationSeconds - self.sessionElapsed
+                self.sessionTimeRemaining = max(0, remaining)
+                if remaining <= 0 {
+                    self.sessionTimerExpired = true
+                    self.sessionTimer?.invalidate()
+                    self.sessionTimer = nil
+                }
+            }
+        }
+    }
+
+    func stopSessionTimer() {
+        sessionTimer?.invalidate()
+        sessionTimer = nil
     }
 
     // MARK: - Fetch Next Task
@@ -219,8 +290,16 @@ class AdaptiveLearningManager: ObservableObject {
 
     // MARK: - End Session
 
-    func endSession() async {
+    func endSession(dimension: DevelopmentalDimension? = nil) async {
         guard let session = currentSession else { return }
+
+        stopSessionTimer()
+
+        // Record stage completion if tasks were done
+        if let dim = dimension, sessionTaskCount > 0 {
+            stagesCompletedToday[dim.rawValue] = (stagesCompletedToday[dim.rawValue] ?? 0) + 1
+            saveStages()
+        }
 
         do {
             let summary = try await api.endSession(sessionId: session.id)
@@ -276,5 +355,9 @@ class AdaptiveLearningManager: ObservableObject {
         showConfidenceRebuild = false
         errorMessage = nil
         dashboard = nil
+        stopSessionTimer()
+        sessionStartDate = nil
+        sessionTimeRemaining = 0
+        sessionTimerExpired = false
     }
 }

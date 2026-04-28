@@ -35,7 +35,8 @@ struct DimensionHubView: View {
                             DimensionCard(
                                 dimension: dimension,
                                 level: learningManager.level(for: dimension),
-                                isAssessed: learningManager.profile(for: dimension)?.assessed ?? false
+                                isAssessed: learningManager.profile(for: dimension)?.assessed ?? false,
+                                stagesCompletedToday: learningManager.stagesCompleted(for: dimension)
                             )
                             .onTapGesture {
                                 selectedDimension = dimension
@@ -278,6 +279,7 @@ struct DimensionCard: View {
     let dimension: DevelopmentalDimension
     let level: Int
     let isAssessed: Bool
+    var stagesCompletedToday: Int = 0
 
     var body: some View {
         VStack(spacing: 12) {
@@ -314,6 +316,22 @@ struct DimensionCard: View {
                     .font(.caption2)
                     .foregroundColor(.secondary)
                     .lineLimit(1)
+            }
+
+            // Stages completed today
+            if stagesCompletedToday > 0 {
+                HStack(spacing: 3) {
+                    ForEach(0..<min(stagesCompletedToday, 5), id: \.self) { _ in
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 8))
+                            .foregroundColor(.yellow)
+                    }
+                    if stagesCompletedToday > 5 {
+                        Text("+\(stagesCompletedToday - 5)")
+                            .font(.system(size: 9))
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
         }
         .padding()

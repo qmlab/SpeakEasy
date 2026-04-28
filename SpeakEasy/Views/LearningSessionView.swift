@@ -62,6 +62,9 @@ struct LearningSessionView: View {
     /// Visual tap feedback state for multi-tap tasks
     @State private var tapRippleScale: CGFloat = 1.0
     @State private var tapRippleOpacity: Double = 0.0
+    /// Session setup state
+    @State private var showSessionSetup: Bool = true
+    @State private var selectedDuration: Int = 10
 
     var body: some View {
         NavigationStack {
@@ -70,7 +73,9 @@ struct LearningSessionView: View {
                 dimension.color.opacity(0.05)
                     .ignoresSafeArea()
 
-                if learningManager.isLoadingTask && learningManager.currentTask == nil {
+                if showSessionSetup {
+                    sessionSetupView
+                } else if learningManager.isLoadingTask && learningManager.currentTask == nil {
                     loadingView
                 } else if let task = learningManager.currentTask {
                     taskContentView(task: task)
@@ -95,7 +100,7 @@ struct LearningSessionView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         Task {
-                            await learningManager.endSession()
+                            await learningManager.endSession(dimension: dimension)
                             showSessionSummary = true
                         }
                     } label: {
@@ -105,11 +110,24 @@ struct LearningSessionView: View {
                     }
                 }
                 ToolbarItem(placement: .principal) {
-                    HStack(spacing: 6) {
-                        Image(systemName: dimension.icon)
-                            .foregroundColor(dimension.color)
-                        Text(dimension.label)
-                            .fontWeight(.semibold)
+                    VStack(spacing: 2) {
+                        HStack(spacing: 6) {
+                            Image(systemName: dimension.icon)
+                                .foregroundColor(dimension.color)
+                            Text(dimension.label)
+                                .fontWeight(.semibold)
+                                .font(.subheadline)
+                        }
+                        if !showSessionSetup && learningManager.isInSession {
+                            HStack(spacing: 4) {
+                                Image(systemName: "clock")
+                                    .font(.system(size: 10))
+                                Text(formattedTimeRemaining)
+                                    .font(.caption.monospacedDigit())
+                                    .fontWeight(.medium)
+                            }
+                            .foregroundColor(learningManager.sessionTimeRemaining < 60 ? .red : .secondary)
+                        }
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -121,8 +139,13 @@ struct LearningSessionView: View {
                     }
                 }
             }
-            .task {
-                await learningManager.startSession(dimension: dimension)
+            .onChange(of: learningManager.sessionTimerExpired) { expired in
+                if expired {
+                    Task {
+                        await learningManager.endSession(dimension: dimension)
+                        showSessionSummary = true
+                    }
+                }
             }
             .onChange(of: learningManager.currentTask?.taskId) { _ in
                 // Reset voice recording state for each new task
@@ -234,6 +257,104 @@ struct LearningSessionView: View {
                 .font(.headline)
                 .foregroundColor(.secondary)
         }
+    }
+
+    // MARK: - Session Setup View
+
+    private var sessionSetupView: some View {
+        VStack(spacing: 28) {
+            Spacer()
+
+            Image(systemName: dimension.icon)
+                .font(.system(size: 56))
+                .foregroundColor(dimension.color)
+
+            Text(dimension.label)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+
+            let stageNum = learningManager.stagesCompleted(for: dimension) + 1
+            Text("Stage \(stageNum)")
+                .font(.title2)
+                .foregroundColor(.secondary)
+
+            // Duration picker
+            VStack(spacing: 12) {
+                Text("Session Duration")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+
+                HStack(spacing: 12) {
+                    ForEach([5, 10, 15, 20], id: \.self) { minutes in
+                        Button {
+                            selectedDuration = minutes
+                        } label: {
+                            Text("\(minutes) min")
+                                .font(.subheadline.weight(.semibold))
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(selectedDuration == minutes ? dimension.color : Color(.systemGray5))
+                                )
+                                .foregroundColor(selectedDuration == minutes ? .white : .primary)
+                        }
+                    }
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemBackground))
+            )
+
+            // Previous stages info
+            if stageNum > 1 {
+                HStack(spacing: 4) {
+                    ForEach(0..<min(stageNum - 1, 5), id: \.self) { _ in
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 14))
+                            .foregroundColor(.yellow)
+                    }
+                    if stageNum - 1 > 5 {
+                        Text("+\(stageNum - 6)")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                Text("\(stageNum - 1) stage\(stageNum - 1 == 1 ? "" : "s") completed today")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+
+            // Start button
+            Button {
+                learningManager.sessionDurationMinutes = selectedDuration
+                showSessionSetup = false
+                Task {
+                    await learningManager.startSession(dimension: dimension)
+                }
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "play.fill")
+                    Text("Start")
+                        .fontWeight(.bold)
+                }
+                .font(.title3)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(dimension.color)
+                )
+            }
+            .padding(.horizontal, 32)
+            .padding(.bottom, 32)
+        }
+        .padding(.horizontal)
     }
 
     // MARK: - Starting View
@@ -359,12 +480,21 @@ struct LearningSessionView: View {
         }
     }
 
+    // MARK: - Formatted Time
+
+    private var formattedTimeRemaining: String {
+        let total = Int(learningManager.sessionTimeRemaining)
+        let mins = total / 60
+        let secs = total % 60
+        return String(format: "%d:%02d", mins, secs)
+    }
+
     // MARK: - Task Progress Bar
 
     private var taskProgressBar: some View {
         VStack(spacing: 6) {
             HStack {
-                Text("Task \(learningManager.sessionTaskCount + 1)")
+                Text("Stage \(learningManager.currentStageLevel) \u{00B7} Task \(learningManager.sessionTaskCount + 1)")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -375,16 +505,27 @@ struct LearningSessionView: View {
                 }
             }
 
-            // Visual progress bar
+            // Time-based progress bar
             sessionProgressBarView
+
+            // Tasks completed count
+            HStack {
+                Text("\(learningManager.sessionTaskCount) completed")
+                    .font(.system(size: 10))
+                    .foregroundColor(.secondary)
+                Spacer()
+                Text(formattedTimeRemaining + " left")
+                    .font(.system(size: 10, weight: .medium).monospacedDigit())
+                    .foregroundColor(learningManager.sessionTimeRemaining < 60 ? .red : .secondary)
+            }
         }
     }
 
-    /// A visual progress bar showing session completion.
+    /// A visual progress bar showing session time progress.
     private var sessionProgressBarView: some View {
-        let taskCount = learningManager.sessionTaskCount
-        let totalExpected = 10
-        let progress = min(1.0, Double(taskCount) / Double(totalExpected))
+        let duration = learningManager.sessionDurationSeconds
+        let elapsed = learningManager.sessionElapsed
+        let timeProgress = duration > 0 ? min(1.0, elapsed / duration) : 0
         let accuracy = learningManager.lastAttemptResult?.accuracy ?? 0.0
         let barColor: Color = accuracy >= 0.8 ? .green : (accuracy >= 0.5 ? .orange : dimension.color)
 
@@ -396,7 +537,7 @@ struct LearningSessionView: View {
                         .fill(Color(.systemGray5))
                         .frame(height: 12)
 
-                    // Filled portion
+                    // Filled portion (time-based)
                     RoundedRectangle(cornerRadius: 6)
                         .fill(
                             LinearGradient(
@@ -405,18 +546,18 @@ struct LearningSessionView: View {
                                 endPoint: .trailing
                             )
                         )
-                        .frame(width: max(12, geometry.size.width * progress), height: 12)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.7), value: progress)
+                        .frame(width: max(12, geometry.size.width * timeProgress), height: 12)
+                        .animation(.linear(duration: 1.0), value: timeProgress)
 
-                    // Star markers at milestones
+                    // Quarter markers
                     HStack(spacing: 0) {
-                        ForEach(0..<5, id: \.self) { i in
-                            let milestone = Double(i + 1) / 5.0
-                            let reached = progress >= milestone
+                        ForEach(0..<4, id: \.self) { i in
+                            let milestone = Double(i + 1) / 4.0
+                            let reached = timeProgress >= milestone
                             Spacer()
-                            Image(systemName: reached ? "star.fill" : "star")
-                                .font(.system(size: 8))
-                                .foregroundColor(reached ? .yellow : .gray.opacity(0.4))
+                            Circle()
+                                .fill(reached ? Color.white : Color.gray.opacity(0.4))
+                                .frame(width: 6, height: 6)
                         }
                     }
                     .frame(height: 12)
@@ -3164,14 +3305,19 @@ struct LearningSessionView: View {
                 .font(.system(size: 48))
                 .foregroundStyle(.yellow)
 
-            Text("Great Session!")
+            Text("Stage Complete!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+
+            Text("Stage \(learningManager.currentStageLevel)")
+                .font(.title3)
+                .foregroundColor(.secondary)
 
             VStack(spacing: 12) {
                 summaryRow(label: "Tasks Completed", value: "\(summary.tasksCompleted)")
                 summaryRow(label: "Correct", value: "\(summary.correctCount) / \(summary.totalCount)")
                 summaryRow(label: "Accuracy", value: "\(Int(summary.accuracy * 100))%")
+                summaryRow(label: "Duration", value: "\(learningManager.sessionDurationMinutes) min")
                 if summary.levelChange > 0 {
                     summaryRow(label: "Level Up!", value: "+\(summary.levelChange)")
                 }
