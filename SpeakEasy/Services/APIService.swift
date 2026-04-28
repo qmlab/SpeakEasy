@@ -9,7 +9,7 @@ import SwiftUI
 class APIService: ObservableObject {
     static let shared = APIService()
     
-    private let baseURL = "https://risingstar-backend-zclkfobb.fly.dev"
+    private let baseURL = "https://risingstar-backend-yojhdcez.fly.dev"
     
     @Published var playerId: String?
     @Published var isLoading = false
