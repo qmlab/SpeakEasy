@@ -1502,7 +1502,7 @@ struct LearningSessionView: View {
             // Unsorted items pool
             if !remaining.isEmpty {
                 VStack(spacing: 8) {
-                    Text("Drag each item to the right group:")
+                    Text(AppLocalization.dragToSort)
                         .font(.caption)
                         .foregroundColor(.secondary)
 
