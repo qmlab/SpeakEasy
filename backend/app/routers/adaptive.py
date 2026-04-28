@@ -40,7 +40,16 @@ router = APIRouter(prefix="/adaptive", tags=["adaptive"])
 def _validate_player(db: Session, player_id: str) -> Player:
     player = db.query(Player).filter(Player.id == player_id).first()
     if not player:
-        raise HTTPException(status_code=404, detail=f"Player {player_id} not found")
+        try:
+            player = Player(id=player_id, name=f"Player_{player_id[:8]}")
+            db.add(player)
+            db.commit()
+            db.refresh(player)
+        except Exception:
+            db.rollback()
+            player = db.query(Player).filter(Player.id == player_id).first()
+            if not player:
+                raise
     return player
 
 
