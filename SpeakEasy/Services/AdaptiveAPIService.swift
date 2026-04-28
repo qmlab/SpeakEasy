@@ -193,6 +193,57 @@ class AdaptiveAPIService {
     func completeStory(assessmentId: String) async throws -> StoryCompleteResponse {
         try await postNoBody("/story/\(assessmentId)/complete")
     }
+
+    // MARK: - Photo URLs
+
+    func getPhotoURLs() async throws -> [String: String] {
+        struct PhotoURLsResponse: Codable {
+            let photos: [String: String]
+        }
+        let response: PhotoURLsResponse = try await get("/adaptive/photo-urls")
+        return response.photos
+    }
+
+    // MARK: - AI Fuzzy Answer Evaluation
+
+    func evaluateAnswer(question: String, givenAnswer: String, correctAnswer: String, options: [String], dimension: String) async throws -> FuzzyAnswerResult {
+        let body = FuzzyAnswerRequest(
+            question: question,
+            givenAnswer: givenAnswer,
+            correctAnswer: correctAnswer,
+            options: options,
+            dimension: dimension
+        )
+        return try await post("/adaptive/evaluate-answer", body: body)
+    }
+}
+
+struct FuzzyAnswerRequest: Codable {
+    let question: String
+    let givenAnswer: String
+    let correctAnswer: String
+    let options: [String]
+    let dimension: String
+
+    enum CodingKeys: String, CodingKey {
+        case question
+        case givenAnswer = "given_answer"
+        case correctAnswer = "correct_answer"
+        case options
+        case dimension
+    }
+}
+
+struct FuzzyAnswerResult: Codable {
+    let isAccepted: Bool
+    let score: Double
+    let feedback: String
+
+    enum CodingKeys: String, CodingKey {
+        case isAccepted = "is_accepted"
+        case score
+        case feedback
+    }
 }
 
 // MARK: - Error

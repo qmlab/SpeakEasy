@@ -196,10 +196,10 @@ struct APIFlashcardDetailView: View {
                     imageType: .flashcard,
                     fallbackIcon: iconForObject(object.name),
                     iconColor: object.color,
-                    size: 180,
+                    size: 240,
                     directURL: object.flashcardUrl
                 )
-                .clipShape(Circle())
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .scaleEffect(speechService.isSpeaking || speechService.isListening ? 1.1 : 1.0)
                 .animation(.spring(), value: speechService.isSpeaking)
                 .animation(.spring(), value: speechService.isListening)

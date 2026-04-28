@@ -4,6 +4,9 @@ Adaptive learning API routes.
 Handles sessions, task selection, attempt processing, and profile management.
 """
 
+import json
+from pathlib import Path
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -288,3 +291,96 @@ def update_reinforcement_config(
     db.commit()
     db.refresh(config)
     return ReinforcementConfigResponse.model_validate(config)
+
+
+# ---- Photo URLs ----
+
+_photo_urls_path = (
+    Path(__file__).parent.parent / "resources" / "images" / "photo_urls.json"
+)
+_photo_urls_cache: dict[str, str] | None = None
+
+
+def _load_photo_urls() -> dict[str, str]:
+    global _photo_urls_cache
+    if _photo_urls_cache is not None:
+        return _photo_urls_cache
+    if _photo_urls_path.exists():
+        data = json.loads(_photo_urls_path.read_text())
+        _photo_urls_cache = data.get("photos", {})
+    else:
+        _photo_urls_cache = {}
+    return _photo_urls_cache
+
+
+@router.get("/photo-urls")
+def get_photo_urls():
+    """Return the full mapping of object names to real photo URLs."""
+    return {"photos": _load_photo_urls()}
+
+
+# ---- AI Fuzzy Answer Matching ----
+
+
+@router.post("/evaluate-answer")
+def evaluate_answer_fuzzy(request: dict):
+    """AI-powered fuzzy answer matching for non-object-cognition tasks.
+
+    Accepts answers that are semantically close to the correct answer,
+    even if not an exact string match. Designed for young children who
+    may give approximate or partial answers.
+    """
+    question = request.get("question", "")
+    given_answer = request.get("given_answer", "")
+    correct_answer = request.get("correct_answer", "")
+    dimension = request.get("dimension", "")
+
+    if not given_answer or not correct_answer:
+        return {"is_accepted": False, "score": 0.0, "feedback": "no_response"}
+
+    # For object_cognition, use strict matching
+    if dimension == "object_cognition":
+        is_correct = given_answer.strip().lower() == correct_answer.strip().lower()
+        return {
+            "is_accepted": is_correct,
+            "score": 1.0 if is_correct else 0.0,
+            "feedback": "correct" if is_correct else "incorrect",
+        }
+
+    # For other dimensions, use lenient AI evaluation
+    # strict_mode=True skips the catch-all "any meaningful word" fallback
+    result = evaluate_open_ended(
+        question=question or f"Select the correct answer: {correct_answer}",
+        spoken=given_answer,
+        example_answers=[correct_answer],
+        keywords=[
+            w
+            for w in correct_answer.lower().split()[:5]
+            if w
+            not in {
+                "the",
+                "a",
+                "an",
+                "is",
+                "am",
+                "are",
+                "was",
+                "were",
+                "in",
+                "on",
+                "at",
+                "to",
+                "of",
+                "and",
+                "or",
+                "it",
+                "i",
+            }
+        ][:3]
+        or [correct_answer.lower().strip().split()[0]]
+        if correct_answer.strip()
+        else [],
+        strict_mode=True,
+    )
+
+    return result
