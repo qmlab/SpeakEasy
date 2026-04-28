@@ -408,7 +408,11 @@ struct TaskContent: Codable {
            let zh = instructionZh, !zh.isEmpty {
             return zh
         }
-        return instructionText ?? instruction ?? prompt ?? question ?? "Complete this task"
+        return englishInstruction
+    }
+
+    var englishInstruction: String {
+        instructionText ?? instruction ?? prompt ?? question ?? "Complete this task"
     }
 
     var displayOptions: [String] {
