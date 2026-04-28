@@ -91,6 +91,8 @@ struct DimensionHubView: View {
             .task {
                 await learningManager.seedTasksIfNeeded()
                 await learningManager.loadProfiles()
+                // Preload photo URL cache so images resolve without flicker
+                _ = RealPhotoURLCache.shared.photoURL(for: "")
             }
             .refreshable {
                 await learningManager.loadProfiles()

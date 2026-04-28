@@ -13,8 +13,6 @@ struct RemoteImageView: View {
     let size: CGFloat
     var directURL: String? = nil
 
-    @ObservedObject private var photoCache = RealPhotoURLCache.shared
-
     private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
 
     /// Normalized asset name used for both xcasset lookup and backend URL construction.
@@ -44,8 +42,8 @@ struct RemoteImageView: View {
                         .frame(width: size, height: size)
                         .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
                 case .failure:
-                    // If real photo failed, try Cloudinary SVG fallback
-                    if realPhotoURL != nil {
+                    // If we were showing a real photo, try Cloudinary SVG fallback
+                    if url != cloudinarySVGURL {
                         AsyncImage(url: cloudinarySVGURL) { svgPhase in
                             switch svgPhase {
                             case .success(let img):
@@ -79,20 +77,14 @@ struct RemoteImageView: View {
            url.scheme != nil {
             return url
         }
-        // Try real photo URL from cache
-        if let photoURL = realPhotoURL {
-            return photoURL
+        // Try real photo URL from cache (non-reactive lookup)
+        let cache = RealPhotoURLCache.shared
+        if let urlString = cache.photoURL(for: normalizedName),
+           let url = URL(string: urlString) {
+            return url
         }
         // Fall back to Cloudinary SVG
         return cloudinarySVGURL
-    }
-
-    /// Real photo URL from the cached photo URL mapping.
-    private var realPhotoURL: URL? {
-        if let urlString = photoCache.photoURL(for: normalizedName) {
-            return URL(string: urlString)
-        }
-        return nil
     }
 
     /// Original Cloudinary SVG URL (PNG-rendered).

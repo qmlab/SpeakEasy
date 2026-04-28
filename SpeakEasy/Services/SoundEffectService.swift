@@ -103,51 +103,62 @@ class SoundEffectService: ObservableObject {
 
     // MARK: - Tone Synthesis
 
-    private func playSystemTone(frequency: Double, duration: Double, secondFrequency: Double? = nil, secondDelay: Double? = nil) {
-        let sampleRate: Double = 44100
+    /// Render a single tone into a sample array.
+    private func renderTone(frequency: Double, duration: Double, sampleRate: Double = 44100) -> [Float] {
         let samples = Int(sampleRate * duration)
-
-        var audioData = [Float](repeating: 0, count: samples)
+        var data = [Float](repeating: 0, count: samples)
         for i in 0..<samples {
             let t = Double(i) / sampleRate
             let envelope = min(1.0, min(t / 0.01, (duration - t) / 0.03))
-            audioData[i] = Float(sin(2.0 * .pi * frequency * t) * envelope * 0.3)
+            data[i] = Float(sin(2.0 * .pi * frequency * t) * envelope * 0.3)
         }
+        return data
+    }
 
-        playAudioData(audioData, sampleRate: sampleRate)
-
-        if let freq2 = secondFrequency, let delay = secondDelay {
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-                self?.playSystemTone(frequency: freq2, duration: duration)
+    /// Pre-render a sequence of notes into a single buffer (no clipping between notes).
+    private func renderSequence(_ notes: [(freq: Double, delay: Double, duration: Double)], sampleRate: Double = 44100) -> [Float] {
+        guard let last = notes.last else { return [] }
+        let totalDuration = last.delay + last.duration
+        let totalSamples = Int(sampleRate * totalDuration)
+        var combined = [Float](repeating: 0, count: totalSamples)
+        for note in notes {
+            let tone = renderTone(frequency: note.freq, duration: note.duration, sampleRate: sampleRate)
+            let offset = Int(sampleRate * note.delay)
+            for i in 0..<tone.count where offset + i < totalSamples {
+                combined[offset + i] += tone[i]
             }
         }
+        return combined
+    }
+
+    private func playSystemTone(frequency: Double, duration: Double, secondFrequency: Double? = nil, secondDelay: Double? = nil) {
+        var notes: [(freq: Double, delay: Double, duration: Double)] = [(frequency, 0.0, duration)]
+        if let freq2 = secondFrequency, let delay = secondDelay {
+            notes.append((freq2, delay, duration))
+        }
+        let data = renderSequence(notes)
+        playAudioData(data, sampleRate: 44100)
     }
 
     private func playLevelUpSequence() {
-        let notes: [(freq: Double, delay: Double)] = [
-            (523.25, 0.0),   // C5
-            (659.25, 0.12),  // E5
-            (783.99, 0.24),  // G5
-            (1046.5, 0.36),  // C6
+        let notes: [(freq: Double, delay: Double, duration: Double)] = [
+            (523.25, 0.0, 0.2),   // C5
+            (659.25, 0.12, 0.2),  // E5
+            (783.99, 0.24, 0.2),  // G5
+            (1046.5, 0.36, 0.2),  // C6
         ]
-        for note in notes {
-            DispatchQueue.main.asyncAfter(deadline: .now() + note.delay) { [weak self] in
-                self?.playSystemTone(frequency: note.freq, duration: 0.2)
-            }
-        }
+        let data = renderSequence(notes)
+        playAudioData(data, sampleRate: 44100)
     }
 
     private func playStreakSequence() {
-        let notes: [(freq: Double, delay: Double)] = [
-            (660, 0.0),
-            (880, 0.08),
-            (1100, 0.16),
+        let notes: [(freq: Double, delay: Double, duration: Double)] = [
+            (660, 0.0, 0.12),
+            (880, 0.08, 0.12),
+            (1100, 0.16, 0.12),
         ]
-        for note in notes {
-            DispatchQueue.main.asyncAfter(deadline: .now() + note.delay) { [weak self] in
-                self?.playSystemTone(frequency: note.freq, duration: 0.12)
-            }
-        }
+        let data = renderSequence(notes)
+        playAudioData(data, sampleRate: 44100)
     }
 
     private func playAudioData(_ data: [Float], sampleRate: Double) {
