@@ -316,6 +316,9 @@ class AdaptiveLearningManager: ObservableObject {
         } catch {
             errorMessage = "Failed to end session: \(error.localizedDescription)"
             print("[Adaptive] End session error: \(error)")
+            // Clean up UI state so the user isn't stuck in a dead session view
+            isInSession = false
+            currentTask = nil
         }
     }
 
