@@ -160,7 +160,7 @@ def _keyword_fallback(
         word_count = len(spoken_lower.split())
         filler_words = {"um", "uh", "ah", "hmm", "hm", "oh", "a", "the", "i"}
         meaningful_words = spoken_words - filler_words
-        if meaningful_words and word_count >= 1:
+        if meaningful_words and word_count >= 2:
             return {
                 "is_accepted": True,
                 "score": 0.6,

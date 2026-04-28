@@ -293,6 +293,10 @@ class AdaptiveLearningManager: ObservableObject {
     func endSession(dimension: DevelopmentalDimension? = nil) async {
         guard let session = currentSession else { return }
 
+        // Nil out immediately to prevent concurrent calls from passing the guard
+        // while the API request is in flight.
+        currentSession = nil
+
         stopSessionTimer()
 
         // Record stage completion if tasks were done
@@ -306,7 +310,6 @@ class AdaptiveLearningManager: ObservableObject {
             sessionSummary = summary
             isInSession = false
             currentTask = nil
-            currentSession = nil
 
             // Refresh profiles after session
             await loadProfiles()
