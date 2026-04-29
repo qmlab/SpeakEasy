@@ -50,6 +50,7 @@ struct CategoriesView: View {
                 await loadCategoryData()
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private func loadCategoryData() async {

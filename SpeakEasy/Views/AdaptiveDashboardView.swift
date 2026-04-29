@@ -20,7 +20,7 @@ struct AdaptiveDashboardView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
                     // Tab picker
@@ -52,6 +52,7 @@ struct AdaptiveDashboardView: View {
                 await learningManager.loadDashboard()
             }
         }
+        .navigationViewStyle(.stack)
     }
 
     // MARK: - Overview Content
@@ -186,7 +187,7 @@ struct AdaptiveDashboardView: View {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.purple.gradient)
+                                .fill(LinearGradient(colors: [.purple, .purple.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                         )
                 }
                 .padding(.horizontal)
@@ -348,7 +349,7 @@ struct DimensionProgressRow: View {
                     .fontWeight(.medium)
 
                 ProgressView(value: Double(level), total: 4.0)
-                    .tint(dimension.color)
+                    .accentColor(dimension.color)
 
                 if level < dimension.levelDescriptions.count {
                     Text(dimension.levelDescriptions[level])

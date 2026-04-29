@@ -38,6 +38,7 @@ struct HomeView: View {
                 await learningManager.loadProfiles()
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private func loadTotalObjectCount() async {

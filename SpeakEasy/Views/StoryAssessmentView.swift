@@ -181,7 +181,7 @@ struct StoryAssessmentView: View {
                     .padding(.vertical, 18)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.orange.gradient)
+                            .fill(LinearGradient(colors: [.orange, .orange.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                     )
                 }
                 .padding(.horizontal, 40)
@@ -201,7 +201,7 @@ struct StoryAssessmentView: View {
                     Task { await startStory() }
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.orange)
+                .accentColor(.orange)
 
                 Spacer()
             } else if isLoading {
@@ -567,7 +567,7 @@ struct StoryAssessmentView: View {
                             Spacer()
                             if selectedOption == option {
                                 ProgressView()
-                                    .tint(.white)
+                                    .accentColor(.white)
                             }
                         }
                         .foregroundColor(selectedOption == option ? .white : .primary)
@@ -690,7 +690,7 @@ struct StoryAssessmentView: View {
                         .frame(height: 8)
 
                     RoundedRectangle(cornerRadius: 6)
-                        .fill(Color.orange.gradient)
+                        .fill(LinearGradient(colors: [.orange, .orange.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                         .frame(width: geo.size.width * progress, height: 8)
                         .animation(.easeInOut(duration: 0.5), value: progress)
                 }
@@ -793,7 +793,7 @@ struct StoryAssessmentView: View {
                             .padding(.vertical, 16)
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.orange.gradient)
+                                    .fill(LinearGradient(colors: [.orange, .orange.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                             )
                     }
                     .padding(.horizontal, 40)
@@ -828,7 +828,7 @@ struct StoryAssessmentView: View {
                                 .padding(.vertical, 16)
                                 .background(
                                     RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.orange.gradient)
+                                        .fill(LinearGradient(colors: [.orange, .orange.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                                 )
                         }
                         .padding(.horizontal, 40)
