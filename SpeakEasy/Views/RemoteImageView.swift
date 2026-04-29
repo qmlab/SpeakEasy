@@ -30,62 +30,62 @@ struct RemoteImageView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: size, height: size)
                 .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
-        } else if let url = resolvedImageURL {
-            // 2. Fall back to remote image (real photo or Cloudinary SVG)
-            AsyncImage(url: url) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: size, height: size)
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size, height: size)
-                        .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
-                case .failure:
-                    // If we were showing a real photo, try Cloudinary SVG fallback
-                    if url != cloudinarySVGURL {
-                        AsyncImage(url: cloudinarySVGURL) { svgPhase in
-                            switch svgPhase {
-                            case .success(let img):
-                                img
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: size, height: size)
-                                    .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
-                            default:
-                                fallbackImage
-                            }
-                        }
-                    } else {
-                        fallbackImage
-                    }
-                @unknown default:
-                    fallbackImage
-                }
-            }
+        } else if let directURL = directURL,
+                  let url = URL(string: directURL),
+                  url.scheme != nil {
+            // 2. Direct URL provided (e.g. full https:// URL from backend)
+            asyncImageView(url: url)
+        } else if let urlString = photoCache.photoURL(for: normalizedName),
+                  let url = URL(string: urlString) {
+            // 3. Real photo URL from cache
+            asyncImageView(url: url)
+        } else if !photoCache.isCacheReady {
+            // 4. Cache still loading — show spinner, NOT SVG fallback
+            ProgressView()
+                .frame(width: size, height: size)
+        } else if let svgURL = cloudinarySVGURL {
+            // 5. Cache loaded but no photo for this item — try Cloudinary SVG
+            asyncImageView(url: svgURL)
         } else {
-            // 3. SF Symbol fallback
+            // 6. SF Symbol fallback
             fallbackImage
         }
     }
 
-    /// The primary URL to try: real photo first, then Cloudinary SVG.
-    private var resolvedImageURL: URL? {
-        // Direct URL takes priority (e.g. full https:// URL from backend)
-        if let directURL = directURL,
-           let url = URL(string: directURL),
-           url.scheme != nil {
-            return url
+    private func asyncImageView(url: URL) -> some View {
+        AsyncImage(url: url) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+                    .frame(width: size, height: size)
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: size, height: size)
+                    .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
+            case .failure:
+                if let svgURL = cloudinarySVGURL, url != svgURL {
+                    AsyncImage(url: svgURL) { svgPhase in
+                        switch svgPhase {
+                        case .success(let img):
+                            img
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: size, height: size)
+                                .clipShape(RoundedRectangle(cornerRadius: size > 100 ? 16 : 8))
+                        default:
+                            fallbackImage
+                        }
+                    }
+                } else {
+                    fallbackImage
+                }
+            @unknown default:
+                fallbackImage
+            }
         }
-        // Try real photo URL from observed cache (reactive — view refreshes when cache loads)
-        if let urlString = photoCache.photoURL(for: normalizedName),
-           let url = URL(string: urlString) {
-            return url
-        }
-        // Fall back to Cloudinary SVG
-        return cloudinarySVGURL
+        .id(url)
     }
 
     /// Original Cloudinary SVG URL (PNG-rendered).
@@ -108,7 +108,7 @@ class RealPhotoURLCache: ObservableObject {
     static let shared = RealPhotoURLCache()
 
     @Published private var photoURLs: [String: String] = [:]
-    private var isLoaded = false
+    @Published private(set) var isCacheReady = false
     private var isLoading = false
     private var failureCount = 0
     private var lastFailureDate: Date?
@@ -116,7 +116,7 @@ class RealPhotoURLCache: ObservableObject {
     private let api = AdaptiveAPIService()
 
     func photoURL(for name: String) -> String? {
-        if !isLoaded && !isLoading && canRetry {
+        if !isCacheReady && !isLoading && canRetry {
             isLoading = true
             Task { await loadPhotoURLs() }
         }
@@ -135,10 +135,13 @@ class RealPhotoURLCache: ObservableObject {
     private func loadPhotoURLs() async {
         do {
             photoURLs = try await api.getPhotoURLs()
-            isLoaded = true
+            isCacheReady = true
         } catch {
             failureCount += 1
             lastFailureDate = Date()
+            if failureCount >= maxRetries {
+                isCacheReady = true
+            }
             print("[RealPhotoURLCache] Failed to load photo URLs (attempt \(failureCount)): \(error)")
         }
         isLoading = false
