@@ -385,6 +385,7 @@ struct StoryAssessmentView: View {
                                     .gesture(
                                         DragGesture(minimumDistance: 0)
                                             .onEnded { value in
+                                                guard abs(value.translation.width) < 10 && abs(value.translation.height) < 10 else { return }
                                                 let location = value.location
                                                 guard tappedRegionLabel == nil && selectedOption == nil else { return }
                                                 var bestRegion: TapRegion?
