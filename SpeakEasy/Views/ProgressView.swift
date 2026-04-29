@@ -39,6 +39,7 @@ struct ProgressTrackerView: View {
                 await loadAllObjects()
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private func loadAllObjects() async {

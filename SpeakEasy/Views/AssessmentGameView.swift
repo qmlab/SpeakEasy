@@ -134,7 +134,7 @@ struct AssessmentGameView: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(.purple)
+                    .accentColor(.purple)
                 } else if isLoading {
                     ProgressView()
                         .scaleEffect(1.5)
@@ -165,7 +165,7 @@ struct AssessmentGameView: View {
                     .padding(.vertical, 18)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.purple.gradient)
+                            .fill(LinearGradient(colors: [.purple, .purple.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                     )
                 }
                 .padding(.horizontal, 40)
@@ -489,7 +489,7 @@ struct AssessmentGameView: View {
                         Spacer()
                         if selectedOption == option {
                             ProgressView()
-                                .tint(.white)
+                                .accentColor(.white)
                         }
                     }
                     .foregroundColor(selectedOption == option ? .white : .primary)
@@ -533,7 +533,7 @@ struct AssessmentGameView: View {
                         .frame(height: 10)
 
                     RoundedRectangle(cornerRadius: 6)
-                        .fill(Color.purple.gradient)
+                        .fill(LinearGradient(colors: [.purple, .purple.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                         .frame(width: geo.size.width * progress, height: 10)
                         .animation(.easeInOut(duration: 0.5), value: progress)
                 }
@@ -645,7 +645,7 @@ struct AssessmentGameView: View {
                             .padding(.vertical, 16)
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.purple.gradient)
+                                    .fill(LinearGradient(colors: [.purple, .purple.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                             )
                     }
                     .padding(.horizontal, 40)

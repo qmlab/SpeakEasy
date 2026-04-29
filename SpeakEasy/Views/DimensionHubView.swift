@@ -23,7 +23,7 @@ struct DimensionHubView: View {
     ]
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack(spacing: 24) {
                     // Header
@@ -101,6 +101,7 @@ struct DimensionHubView: View {
                 await learningManager.loadProfiles()
             }
         }
+        .navigationViewStyle(.stack)
     }
 
     // MARK: - Story Mode Section
@@ -217,7 +218,7 @@ struct DimensionHubView: View {
                 .padding(.vertical, 12)
                 .background(
                     RoundedRectangle(cornerRadius: 14)
-                        .fill(Color.orange.gradient)
+                        .fill(LinearGradient(colors: [.orange, .orange.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                 )
             }
             .padding(16)
@@ -299,7 +300,7 @@ struct DimensionCard: View {
                 .frame(width: 64, height: 64)
                 .background(
                     Circle()
-                        .fill(dimension.color.gradient)
+                        .fill(LinearGradient(colors: [dimension.color, dimension.color.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
                 )
 
             // Label

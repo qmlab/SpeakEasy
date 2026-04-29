@@ -301,7 +301,7 @@ struct CameraFallbackView: View {
                             }
                         }
                         .buttonStyle(.borderedProminent)
-                        .tint(isMatch ? .green : .orange)
+                        .accentColor(isMatch ? .green : .orange)
                     }
                 }
             } else {

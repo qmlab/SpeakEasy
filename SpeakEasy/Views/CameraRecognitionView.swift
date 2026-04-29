@@ -53,6 +53,7 @@ struct CameraRecognitionView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private var backgroundGradient: some View {
@@ -117,7 +118,7 @@ struct CameraRecognitionView: View {
                     VStack(spacing: 15) {
                         ProgressView()
                             .scaleEffect(2)
-                            .tint(.white)
+                            .accentColor(.white)
                         
                         Text("Looking...")
                             .font(.system(size: 20, weight: .bold, design: .rounded))

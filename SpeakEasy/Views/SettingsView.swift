@@ -54,6 +54,7 @@ struct SettingsView: View {
                 Text(AppLocalization.signOutConfirm)
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private var accountSection: some View {

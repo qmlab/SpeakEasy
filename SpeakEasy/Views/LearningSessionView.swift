@@ -67,7 +67,7 @@ struct LearningSessionView: View {
     @State private var selectedDuration: Int = 10
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
                 // Background
                 dimension.color.opacity(0.05)
@@ -245,6 +245,7 @@ struct LearningSessionView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 
     // MARK: - Loading View
@@ -1297,7 +1298,7 @@ struct LearningSessionView: View {
             if let refImage = task.content.questionImage, !refImage.isEmpty {
                 VStack(spacing: 6) {
                     Text("Match this order:")
-                        .font(.subheadline.bold())
+                        .font(Font.subheadline.weight(.bold))
                         .foregroundColor(.secondary)
                     RemoteImageView(
                         objectName: refImage,
@@ -1313,7 +1314,7 @@ struct LearningSessionView: View {
             // Draggable shapes row
             VStack(spacing: 8) {
                 Text("Drag to arrange:")
-                    .font(.subheadline.bold())
+                    .font(Font.subheadline.weight(.bold))
                     .foregroundColor(.secondary)
 
                 HStack(spacing: 16) {
@@ -1523,7 +1524,7 @@ struct LearningSessionView: View {
                                 )
                                 .cornerRadius(8)
                                 Text(item)
-                                    .font(.subheadline.bold())
+                                    .font(Font.subheadline.weight(.bold))
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.7)
                             }
@@ -1697,7 +1698,7 @@ struct LearningSessionView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
                         Text("All sorted!")
-                            .font(.subheadline.bold())
+                            .font(Font.subheadline.weight(.bold))
                             .foregroundColor(.green)
                     }
                 } else {
@@ -1887,8 +1888,7 @@ struct LearningSessionView: View {
                 if isNumber {
                     TextField("Type your answer", text: $textInputValue)
                         .keyboardType(.numberPad)
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(Font.title2.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .padding(12)
                         .background(
@@ -1901,8 +1901,7 @@ struct LearningSessionView: View {
                         )
                 } else {
                     TextField("Type your answer", text: $textInputValue)
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(Font.title2.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .autocapitalization(.words)
                         .disableAutocorrection(true)
@@ -2072,7 +2071,7 @@ struct LearningSessionView: View {
                             ForEach(Array(orderedSelections.enumerated()), id: \.offset) { index, item in
                                 HStack(spacing: 6) {
                                     Text("\(index + 1)")
-                                        .font(.caption2.bold())
+                                        .font(Font.caption2.weight(.bold))
                                         .foregroundColor(.white)
                                         .frame(width: 22, height: 22)
                                         .background(Circle().fill(dimension.color))
@@ -2087,7 +2086,7 @@ struct LearningSessionView: View {
                                         .cornerRadius(4)
                                     }
                                     Text(item)
-                                        .font(.subheadline.bold())
+                                        .font(Font.subheadline.weight(.bold))
                                         .lineLimit(1)
                                 }
                                 .padding(.horizontal, 8)
@@ -2140,7 +2139,7 @@ struct LearningSessionView: View {
                                         )
                                         .cornerRadius(12)
                                         Text(option)
-                                            .font(.subheadline.bold())
+                                            .font(Font.subheadline.weight(.bold))
                                             .lineLimit(1)
                                     }
                                     .foregroundColor(.primary)
@@ -3227,7 +3226,7 @@ struct LearningSessionView: View {
             .padding(32)
             .background(
                 RoundedRectangle(cornerRadius: 24)
-                    .fill(dimension.color.gradient)
+                    .fill(LinearGradient(colors: [dimension.color, dimension.color.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing))
             )
             .scaleEffect(animateReward ? 1 : 0.5)
             .opacity(animateReward ? 1 : 0)
