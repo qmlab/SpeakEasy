@@ -1888,8 +1888,7 @@ struct LearningSessionView: View {
                 if isNumber {
                     TextField("Type your answer", text: $textInputValue)
                         .keyboardType(.numberPad)
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(Font.title2.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .padding(12)
                         .background(
@@ -1902,8 +1901,7 @@ struct LearningSessionView: View {
                         )
                 } else {
                     TextField("Type your answer", text: $textInputValue)
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(Font.title2.weight(.semibold))
                         .multilineTextAlignment(.center)
                         .autocapitalization(.words)
                         .disableAutocorrection(true)

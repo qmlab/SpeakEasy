@@ -382,30 +382,32 @@ struct StoryAssessmentView: View {
                                 // resolve to the nearest object.
                                 Color.clear
                                     .contentShape(Rectangle())
-                                    .onTapGesture { location in
-                                        guard tappedRegionLabel == nil && selectedOption == nil else { return }
-                                        // Find the region whose center is closest to the tap
-                                        var bestRegion: TapRegion?
-                                        var bestDist: CGFloat = .greatestFiniteMagnitude
-                                        for region in regions {
-                                            let cx = geo.size.width * region.x
-                                            let cy = geo.size.height * region.y
-                                            let r = max(geo.size.width * region.radius, 22)
-                                            let dx = location.x - cx
-                                            let dy = location.y - cy
-                                            let dist = sqrt(dx * dx + dy * dy)
-                                            // Only consider taps within the region's radius
-                                            if dist <= r && dist < bestDist {
-                                                bestDist = dist
-                                                bestRegion = region
+                                    .gesture(
+                                        DragGesture(minimumDistance: 0)
+                                            .onEnded { value in
+                                                let location = value.location
+                                                guard tappedRegionLabel == nil && selectedOption == nil else { return }
+                                                var bestRegion: TapRegion?
+                                                var bestDist: CGFloat = .greatestFiniteMagnitude
+                                                for region in regions {
+                                                    let cx = geo.size.width * region.x
+                                                    let cy = geo.size.height * region.y
+                                                    let r = max(geo.size.width * region.radius, 22)
+                                                    let dx = location.x - cx
+                                                    let dy = location.y - cy
+                                                    let dist = sqrt(dx * dx + dy * dy)
+                                                    if dist <= r && dist < bestDist {
+                                                        bestDist = dist
+                                                        bestRegion = region
+                                                    }
+                                                }
+                                                guard let tapped = bestRegion else { return }
+                                                tappedRegionLabel = tapped.label
+                                                Task {
+                                                    await submitSceneResponse(scene: scene, selected: tapped.label)
+                                                }
                                             }
-                                        }
-                                        guard let tapped = bestRegion else { return }
-                                        tappedRegionLabel = tapped.label
-                                        Task {
-                                            await submitSceneResponse(scene: scene, selected: tapped.label)
-                                        }
-                                    }
+                                    )
 
                                 // Visual overlays (feedback rings + hint rings)
                                 ForEach(Array(regions.enumerated()), id: \.offset) { _, region in
