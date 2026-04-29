@@ -13,6 +13,9 @@ struct DimensionHubView: View {
     @State private var selectedDimension: DevelopmentalDimension?
     @State private var showStoryAssessment: Bool = false
     @State private var showSignOutAlert: Bool = false
+    private var isChineseMode: Bool {
+        UserDefaults.standard.string(forKey: "speechLanguage") == "zh-CN"
+    }
 
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -48,7 +51,7 @@ struct DimensionHubView: View {
                 .padding(.bottom, 32)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Learn")
+            .navigationTitle(AppLocalization.learn)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
@@ -63,7 +66,7 @@ struct DimensionHubView: View {
                         Button(role: .destructive) {
                             showSignOutAlert = true
                         } label: {
-                            Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
+                            Label(AppLocalization.signOut, systemImage: "rectangle.portrait.and.arrow.right")
                         }
                     } label: {
                         Image(systemName: "person.crop.circle")
@@ -72,13 +75,13 @@ struct DimensionHubView: View {
                     }
                 }
             }
-            .alert("Sign Out", isPresented: $showSignOutAlert) {
-                Button("Cancel", role: .cancel) {}
-                Button("Sign Out", role: .destructive) {
+            .alert(AppLocalization.signOut, isPresented: $showSignOutAlert) {
+                Button(AppLocalization.cancel, role: .cancel) {}
+                Button(AppLocalization.signOut, role: .destructive) {
                     authService.signOut()
                 }
             } message: {
-                Text("Are you sure you want to sign out?")
+                Text(AppLocalization.signOutConfirm)
             }
             .fullScreenCover(item: $selectedDimension) { dimension in
                 LearningSessionView(dimension: dimension)
@@ -108,7 +111,7 @@ struct DimensionHubView: View {
                 Image(systemName: "book.fill")
                     .font(.title3)
                     .foregroundColor(.orange)
-                Text("Story Mode")
+                Text(AppLocalization.storyMode)
                     .font(.title3)
                     .fontWeight(.bold)
             }
@@ -171,13 +174,17 @@ struct DimensionHubView: View {
                     Text(emoji)
                         .font(.title2)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(title)
+                        Text(isChineseMode ? titleZh : title)
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
-                        Text(titleZh)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        if !isChineseMode {
+                            // Only show Chinese subtitle in English mode is removed
+                        } else {
+                            Text(title)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 
@@ -201,7 +208,7 @@ struct DimensionHubView: View {
                 // Play button
                 HStack {
                     Image(systemName: "play.fill")
-                    Text("Play Story")
+                    Text(AppLocalization.playStory)
                         .fontWeight(.bold)
                 }
                 .font(.subheadline)

@@ -13,6 +13,8 @@ struct RemoteImageView: View {
     let size: CGFloat
     var directURL: String? = nil
 
+    @ObservedObject private var photoCache = RealPhotoURLCache.shared
+
     private static let cloudinaryBaseURL = "https://res.cloudinary.com/dgpir7tqk/image/upload"
 
     /// Normalized asset name used for both xcasset lookup and backend URL construction.
@@ -77,9 +79,8 @@ struct RemoteImageView: View {
            url.scheme != nil {
             return url
         }
-        // Try real photo URL from cache (non-reactive lookup)
-        let cache = RealPhotoURLCache.shared
-        if let urlString = cache.photoURL(for: normalizedName),
+        // Try real photo URL from observed cache (reactive — view refreshes when cache loads)
+        if let urlString = photoCache.photoURL(for: normalizedName),
            let url = URL(string: urlString) {
             return url
         }

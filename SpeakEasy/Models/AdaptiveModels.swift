@@ -404,6 +404,14 @@ struct TaskContent: Codable {
     }
 
     var displayInstruction: String {
+        if UserDefaults.standard.string(forKey: "speechLanguage") == "zh-CN",
+           let zh = instructionZh, !zh.isEmpty {
+            return zh
+        }
+        return englishInstruction
+    }
+
+    var englishInstruction: String {
         instructionText ?? instruction ?? prompt ?? question ?? "Complete this task"
     }
 

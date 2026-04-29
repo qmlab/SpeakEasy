@@ -36,22 +36,22 @@ struct SettingsView: View {
                 )
                 .ignoresSafeArea()
             )
-            .navigationTitle("Settings")
-            .alert("Reset Progress", isPresented: $showResetAlert) {
-                Button("Cancel", role: .cancel) {}
-                Button("Reset", role: .destructive) {
+            .navigationTitle(AppLocalization.settings)
+            .alert(AppLocalization.resetProgress, isPresented: $showResetAlert) {
+                Button(AppLocalization.cancel, role: .cancel) {}
+                Button(AppLocalization.reset, role: .destructive) {
                     progressManager.resetProgress()
                 }
             } message: {
-                Text("Are you sure you want to reset all progress? This cannot be undone.")
+                Text(AppLocalization.resetProgressConfirm)
             }
-            .alert("Sign Out", isPresented: $showSignOutAlert) {
-                Button("Cancel", role: .cancel) {}
-                Button("Sign Out", role: .destructive) {
+            .alert(AppLocalization.signOut, isPresented: $showSignOutAlert) {
+                Button(AppLocalization.cancel, role: .cancel) {}
+                Button(AppLocalization.signOut, role: .destructive) {
                     authService.signOut()
                 }
             } message: {
-                Text("Are you sure you want to sign out?")
+                Text(AppLocalization.signOutConfirm)
             }
         }
     }
@@ -63,7 +63,7 @@ struct SettingsView: View {
                     .foregroundColor(.green)
                     .font(.title2)
                 
-                Text("Account")
+                Text(AppLocalization.account)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
             }
@@ -89,7 +89,7 @@ struct SettingsView: View {
             }) {
                 HStack(spacing: 10) {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
-                    Text("Sign Out")
+                    Text(AppLocalization.signOut)
                 }
                 .font(.system(size: 16, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
@@ -116,14 +116,14 @@ struct SettingsView: View {
                     .foregroundColor(.blue)
                     .font(.title2)
                 
-                Text("Speech Settings")
+                Text(AppLocalization.speechSettings)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
             }
             
             VStack(alignment: .leading, spacing: 15) {
                 // Language selector
-                Text("Language")
+                Text(AppLocalization.language)
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundColor(.gray)
 
@@ -139,7 +139,7 @@ struct SettingsView: View {
 
                 Divider()
 
-                Text("Speech Speed")
+                Text(AppLocalization.speechSpeed)
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundColor(.gray)
                 
@@ -166,7 +166,7 @@ struct SettingsView: View {
                     }) {
                         HStack(spacing: 8) {
                             Image(systemName: "play.fill")
-                            Text("Test Voice")
+                            Text(AppLocalization.testVoice)
                         }
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .foregroundColor(.white)

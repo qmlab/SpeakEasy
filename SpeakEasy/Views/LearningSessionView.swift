@@ -695,7 +695,7 @@ struct LearningSessionView: View {
     /// When true, the image_hint must be shown even for image grid tasks
     /// because the image IS the question (e.g. "What is in this picture?").
     private func instructionReferencesPicture(_ task: AdaptiveTask) -> Bool {
-        let text = task.content.displayInstruction.lowercased()
+        let text = task.content.englishInstruction.lowercased()
         let phrases = [
             // Picture / image references
             "this picture", "the picture", "this image", "the image",
@@ -1502,7 +1502,7 @@ struct LearningSessionView: View {
             // Unsorted items pool
             if !remaining.isEmpty {
                 VStack(spacing: 8) {
-                    Text("Drag each item to the right group:")
+                    Text(AppLocalization.dragToSort)
                         .font(.caption)
                         .foregroundColor(.secondary)
 
