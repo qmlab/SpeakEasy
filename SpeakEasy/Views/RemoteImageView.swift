@@ -139,10 +139,16 @@ class RealPhotoURLCache: ObservableObject {
         } catch {
             failureCount += 1
             lastFailureDate = Date()
+            print("[RealPhotoURLCache] Failed to load photo URLs (attempt \(failureCount)): \(error)")
             if failureCount >= maxRetries {
                 isCacheReady = true
+            } else {
+                let backoffSeconds = pow(2.0, Double(failureCount))
+                isLoading = false
+                try? await Task.sleep(nanoseconds: UInt64(backoffSeconds * 1_000_000_000))
+                objectWillChange.send()
+                return
             }
-            print("[RealPhotoURLCache] Failed to load photo URLs (attempt \(failureCount)): \(error)")
         }
         isLoading = false
     }
