@@ -1812,7 +1812,8 @@ struct LearningSessionView: View {
         case "blue": return ("", "circle.fill")
         case "big": return ("elephant", "arrow.up.circle.fill")
         case "small": return ("ant", "arrow.down.circle.fill")
-        case "fruit", "not fruit": return ("apple", "leaf.fill")
+        case "fruit": return ("apple", "leaf.fill")
+        case "not fruit": return ("", "xmark.circle.fill")
         case "things that don't": return ("", "xmark.circle.fill")
         default: return ("", "square.grid.2x2.fill")
         }
