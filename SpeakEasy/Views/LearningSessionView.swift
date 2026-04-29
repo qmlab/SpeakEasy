@@ -1523,10 +1523,6 @@ struct LearningSessionView: View {
                                     size: 44
                                 )
                                 .cornerRadius(8)
-                                Text(item)
-                                    .font(Font.subheadline.weight(.bold))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.7)
                             }
                             .frame(maxWidth: .infinity)
                             .padding(10)
@@ -1538,9 +1534,15 @@ struct LearningSessionView: View {
                             .scaleEffect(isDragging ? 1.1 : 1.0)
                             .offset(isDragging ? dragSortOffset : .zero)
                             .zIndex(isDragging ? 10 : 0)
+                            .onTapGesture {
+                                speechService.speak(item)
+                            }
                             .gesture(
                                 DragGesture(coordinateSpace: .global)
                                     .onChanged { value in
+                                        if dragSortItem != item {
+                                            speechService.speak(item)
+                                        }
                                         dragSortItem = item
                                         dragSortOffset = value.translation
                                     }
@@ -1604,16 +1606,33 @@ struct LearningSessionView: View {
                 ForEach(categories, id: \.self) { category in
                     let bucketItems = categorySortBuckets[category] ?? []
                     VStack(spacing: 6) {
-                        // Category label
-                        Text(category)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(colorForCategory(category, categories: categories))
-                            )
+                        // Category label — show representative image instead of text
+                        let rep = representativeImage(for: category)
+                        HStack(spacing: 6) {
+                            if !rep.objectName.isEmpty {
+                                RemoteImageView(
+                                    objectName: rep.objectName,
+                                    imageType: .thumbnail,
+                                    fallbackIcon: rep.fallback,
+                                    iconColor: .white,
+                                    size: 28
+                                )
+                                .cornerRadius(6)
+                            } else {
+                                Image(systemName: rep.fallback)
+                                    .font(.title3)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(colorForCategory(category, categories: categories))
+                        )
+                        .onTapGesture {
+                            speechService.speak(category)
+                        }
 
                         // Drop zone with placed items
                         VStack(spacing: 4) {
@@ -1622,7 +1641,7 @@ struct LearningSessionView: View {
                                     Image(systemName: "arrow.down.circle")
                                         .font(.title3)
                                         .foregroundColor(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.8 : 0.3))
-                                    Text("Drop here")
+                                    Text(AppLocalization.localized("Drop here", zh: "放这里"))
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
@@ -1638,9 +1657,6 @@ struct LearningSessionView: View {
                                             size: 24
                                         )
                                         .cornerRadius(4)
-                                        Text(item)
-                                            .font(.caption)
-                                            .lineLimit(1)
                                         Spacer()
                                         // Remove button
                                         Button {
@@ -1697,7 +1713,7 @@ struct LearningSessionView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
-                        Text("All sorted!")
+                        Text(AppLocalization.localized("All sorted!", zh: "全部分好了！"))
                             .font(Font.subheadline.weight(.bold))
                             .foregroundColor(.green)
                     }
@@ -1712,7 +1728,7 @@ struct LearningSessionView: View {
                             )
                         }
                     } label: {
-                        Text("Done!")
+                        Text(AppLocalization.done)
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -1735,7 +1751,7 @@ struct LearningSessionView: View {
                         }
                     }
                 } label: {
-                    Label("Start Over", systemImage: "arrow.counterclockwise")
+                    Label(AppLocalization.localized("Start Over", zh: "重新开始"), systemImage: "arrow.counterclockwise")
                         .font(.subheadline)
                         .foregroundColor(.orange)
                 }
@@ -1763,6 +1779,43 @@ struct LearningSessionView: View {
         let colors: [Color] = [.blue, .orange, .green, .purple, .pink, .teal]
         guard let index = categories.firstIndex(of: category) else { return .gray }
         return colors[index % colors.count]
+    }
+
+    /// Representative photo name for a sort category, used as the visual label.
+    private func representativeImage(for category: String) -> (objectName: String, fallback: String) {
+        let key = category.lowercased()
+        switch key {
+        case "animals", "big animals": return ("elephant", "pawprint.fill")
+        case "small animals": return ("ant", "ant.fill")
+        case "food", "things you eat": return ("apple", "fork.knife")
+        case "fruits": return ("apple", "leaf.fill")
+        case "vegetables": return ("carrot", "leaf.fill")
+        case "nature", "natural": return ("tree", "leaf.fill")
+        case "clothing", "things you wear": return ("shirt", "tshirt.fill")
+        case "vehicles": return ("car", "car.fill")
+        case "tools": return ("hammer", "wrench.fill")
+        case "toys": return ("ball", "gamecontroller.fill")
+        case "instruments": return ("drum", "music.note")
+        case "stationery": return ("pencil", "pencil")
+        case "living things": return ("dog", "hare.fill")
+        case "non-living things", "man-made", "objects": return ("chair", "cube.fill")
+        case "things that fly": return ("bird", "bird.fill")
+        case "things that swim": return ("fish", "fish.fill")
+        case "things with legs": return ("dog", "pawprint.fill")
+        case "things without legs": return ("worm", "circle.fill")
+        case "things that need electricity": return ("lightbulb", "bolt.fill")
+        case "hot things": return ("fire", "flame.fill")
+        case "cold things": return ("ice", "snowflake")
+        case "positive words": return ("", "hand.thumbsup.fill")
+        case "negative words": return ("", "hand.thumbsdown.fill")
+        case "red": return ("", "circle.fill")
+        case "blue": return ("", "circle.fill")
+        case "big": return ("elephant", "arrow.up.circle.fill")
+        case "small": return ("ant", "arrow.down.circle.fill")
+        case "fruit", "not fruit": return ("apple", "leaf.fill")
+        case "things that don't": return ("", "xmark.circle.fill")
+        default: return ("", "square.grid.2x2.fill")
+        }
     }
 
     // MARK: - Multi-Tap Counting
@@ -2192,7 +2245,7 @@ struct LearningSessionView: View {
                 Button {
                     orderedSelections = []
                 } label: {
-                    Label("Start Over", systemImage: "arrow.counterclockwise")
+                    Label(AppLocalization.localized("Start Over", zh: "重新开始"), systemImage: "arrow.counterclockwise")
                         .font(.subheadline)
                         .foregroundColor(.orange)
                 }
