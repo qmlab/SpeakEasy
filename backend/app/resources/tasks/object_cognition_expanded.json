@@ -4524,6 +4524,516 @@
       "task_type": "identify",
       "tasks": [
         {
+          "instruction": "Tap the car.",
+          "question_id": "Q2001",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the car.",
+          "options": [
+            "Car",
+            "Banana",
+            "Ruler",
+            "Clock"
+          ],
+          "correct_answer": "Car",
+          "image_hint": "car",
+          "inline_images": true,
+          "instruction_zh": "点击汽车。"
+        },
+        {
+          "instruction": "Tap the cat.",
+          "question_id": "Q2002",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the cat.",
+          "options": [
+            "Cat",
+            "Car",
+            "Book",
+            "Ruler"
+          ],
+          "correct_answer": "Cat",
+          "image_hint": "cat",
+          "inline_images": true,
+          "instruction_zh": "点击猫。"
+        },
+        {
+          "instruction": "Tap the bird.",
+          "question_id": "Q2003",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the bird.",
+          "options": [
+            "Bird",
+            "Pizza",
+            "Ruler",
+            "Violin"
+          ],
+          "correct_answer": "Bird",
+          "image_hint": "bird",
+          "inline_images": true,
+          "instruction_zh": "点击鸟。"
+        },
+        {
+          "instruction": "Tap the jacket.",
+          "question_id": "Q2004",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the jacket.",
+          "options": [
+            "Jacket",
+            "Bicycle",
+            "Key",
+            "Eagle"
+          ],
+          "correct_answer": "Jacket",
+          "image_hint": "jacket",
+          "inline_images": true,
+          "instruction_zh": "点击夹克。"
+        },
+        {
+          "instruction": "Tap the ball.",
+          "question_id": "Q2005",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the ball.",
+          "options": [
+            "Ball",
+            "Banana",
+            "Bird",
+            "Car"
+          ],
+          "correct_answer": "Ball",
+          "image_hint": "ball",
+          "inline_images": true,
+          "instruction_zh": "点击球。"
+        },
+        {
+          "instruction": "Tap the clock.",
+          "question_id": "Q2006",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the clock.",
+          "options": [
+            "Clock",
+            "Guitar",
+            "Lamp",
+            "Banana"
+          ],
+          "correct_answer": "Clock",
+          "image_hint": "clock",
+          "inline_images": true,
+          "instruction_zh": "点击钟。"
+        },
+        {
+          "instruction": "Tap the pencil.",
+          "question_id": "Q2007",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the pencil.",
+          "options": [
+            "Pencil",
+            "Cake",
+            "Rainbow",
+            "Penguin"
+          ],
+          "correct_answer": "Pencil",
+          "image_hint": "pencil",
+          "inline_images": true,
+          "instruction_zh": "点击铅笔。"
+        },
+        {
+          "instruction": "Tap the spoon.",
+          "question_id": "Q2008",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the spoon.",
+          "options": [
+            "Spoon",
+            "Hat",
+            "Duck",
+            "Car"
+          ],
+          "correct_answer": "Spoon",
+          "image_hint": "spoon",
+          "inline_images": true,
+          "instruction_zh": "点击勺子。"
+        },
+        {
+          "instruction": "Tap the guitar.",
+          "question_id": "Q2009",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the guitar.",
+          "options": [
+            "Guitar",
+            "Key",
+            "Chair",
+            "Strawberry"
+          ],
+          "correct_answer": "Guitar",
+          "image_hint": "guitar",
+          "inline_images": true,
+          "instruction_zh": "点击吉他。"
+        },
+        {
+          "instruction": "Tap the apple.",
+          "question_id": "Q2010",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the apple.",
+          "options": [
+            "Apple",
+            "Shirt",
+            "Strawberry",
+            "Butterfly"
+          ],
+          "correct_answer": "Apple",
+          "image_hint": "apple",
+          "inline_images": true,
+          "instruction_zh": "点击苹果。"
+        },
+        {
+          "instruction": "Tap the table.",
+          "question_id": "Q2011",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the table.",
+          "options": [
+            "Table",
+            "Eagle",
+            "Cup",
+            "Chair"
+          ],
+          "correct_answer": "Table",
+          "image_hint": "table",
+          "inline_images": true,
+          "instruction_zh": "点击桌子。"
+        },
+        {
+          "instruction": "Tap the cake.",
+          "question_id": "Q2012",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the cake.",
+          "options": [
+            "Cake",
+            "Car",
+            "Box",
+            "Shirt"
+          ],
+          "correct_answer": "Cake",
+          "image_hint": "cake",
+          "inline_images": true,
+          "instruction_zh": "点击蛋糕。"
+        },
+        {
+          "instruction": "Tap the elephant.",
+          "question_id": "Q2013",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the elephant.",
+          "options": [
+            "Elephant",
+            "Bird",
+            "Bicycle",
+            "Door"
+          ],
+          "correct_answer": "Elephant",
+          "image_hint": "elephant",
+          "inline_images": true,
+          "instruction_zh": "点击大象。"
+        },
+        {
+          "instruction": "Tap the brush.",
+          "question_id": "Q2014",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the brush.",
+          "options": [
+            "Brush",
+            "Doll",
+            "Tree",
+            "Lamp"
+          ],
+          "correct_answer": "Brush",
+          "image_hint": "brush",
+          "inline_images": true,
+          "instruction_zh": "点击刷子。"
+        },
+        {
+          "instruction": "Tap the door.",
+          "question_id": "Q2015",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the door.",
+          "options": [
+            "Door",
+            "Strawberry",
+            "Ball",
+            "Rocket"
+          ],
+          "correct_answer": "Door",
+          "image_hint": "door",
+          "inline_images": true,
+          "instruction_zh": "点击门。"
+        },
+        {
+          "instruction": "Tap the penguin.",
+          "question_id": "Q2016",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the penguin.",
+          "options": [
+            "Penguin",
+            "Hat",
+            "Boat",
+            "Timer"
+          ],
+          "correct_answer": "Penguin",
+          "image_hint": "penguin",
+          "inline_images": true,
+          "instruction_zh": "点击企鹅。"
+        },
+        {
+          "instruction": "Tap the horse.",
+          "question_id": "Q2017",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the horse.",
+          "options": [
+            "Horse",
+            "Bicycle",
+            "House",
+            "Clock"
+          ],
+          "correct_answer": "Horse",
+          "image_hint": "horse",
+          "inline_images": true,
+          "instruction_zh": "点击马。"
+        },
+        {
+          "instruction": "Tap the umbrella.",
+          "question_id": "Q2018",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the umbrella.",
+          "options": [
+            "Umbrella",
+            "Lamp",
+            "Truck",
+            "Tree"
+          ],
+          "correct_answer": "Umbrella",
+          "image_hint": "umbrella",
+          "inline_images": true,
+          "instruction_zh": "点击雨伞。"
+        },
+        {
+          "instruction": "Tap the hat.",
+          "question_id": "Q2019",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the hat.",
+          "options": [
+            "Hat",
+            "Jacket",
+            "Cake",
+            "Rainbow"
+          ],
+          "correct_answer": "Hat",
+          "image_hint": "hat",
+          "inline_images": true,
+          "instruction_zh": "点击帽子。"
+        },
+        {
+          "instruction": "Tap the boat.",
+          "question_id": "Q2020",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the boat.",
+          "options": [
+            "Boat",
+            "Ball",
+            "Phone",
+            "Carrot"
+          ],
+          "correct_answer": "Boat",
+          "image_hint": "boat",
+          "inline_images": true,
+          "instruction_zh": "点击船。"
+        },
+        {
+          "instruction": "Tap the fish.",
+          "question_id": "Q2021",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the fish.",
+          "options": [
+            "Fish",
+            "Bicycle",
+            "Tree",
+            "Car"
+          ],
+          "correct_answer": "Fish",
+          "image_hint": "fish",
+          "inline_images": true,
+          "instruction_zh": "点击鱼。"
+        },
+        {
+          "instruction": "Tap the butterfly.",
+          "question_id": "Q2022",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the butterfly.",
+          "options": [
+            "Butterfly",
+            "Drum",
+            "Clock",
+            "Flower"
+          ],
+          "correct_answer": "Butterfly",
+          "image_hint": "butterfly",
+          "inline_images": true,
+          "instruction_zh": "点击蝴蝶。"
+        },
+        {
+          "instruction": "Tap the box.",
+          "question_id": "Q2023",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the box.",
+          "options": [
+            "Box",
+            "Sun",
+            "Doll",
+            "Bus"
+          ],
+          "correct_answer": "Box",
+          "image_hint": "box",
+          "inline_images": true,
+          "instruction_zh": "点击箱子。"
+        },
+        {
+          "instruction": "Tap the moon.",
+          "question_id": "Q2024",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the moon.",
+          "options": [
+            "Moon",
+            "Dog",
+            "Camera",
+            "Phone"
+          ],
+          "correct_answer": "Moon",
+          "image_hint": "moon",
+          "inline_images": true,
+          "instruction_zh": "点击月亮。"
+        },
+        {
+          "instruction": "Tap the flower.",
+          "question_id": "Q2025",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the flower.",
+          "options": [
+            "Flower",
+            "Rabbit",
+            "Fly",
+            "Pizza"
+          ],
+          "correct_answer": "Flower",
+          "image_hint": "flower",
+          "inline_images": true,
+          "instruction_zh": "点击花。"
+        },
+        {
+          "instruction": "Tap the book.",
+          "question_id": "Q2026",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the book.",
+          "options": [
+            "Book",
+            "Lamp",
+            "Pencil",
+            "Butterfly"
+          ],
+          "correct_answer": "Book",
+          "image_hint": "book",
+          "inline_images": true,
+          "instruction_zh": "点击书。"
+        },
+        {
+          "instruction": "Tap the whale.",
+          "question_id": "Q2027",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the whale.",
+          "options": [
+            "Whale",
+            "Rainbow",
+            "Carrot",
+            "Bus"
+          ],
+          "correct_answer": "Whale",
+          "image_hint": "whale",
+          "inline_images": true,
+          "instruction_zh": "点击鲸鱼。"
+        },
+        {
+          "instruction": "Tap the strawberry.",
+          "question_id": "Q2028",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the strawberry.",
+          "options": [
+            "Strawberry",
+            "Door",
+            "Chair",
+            "Fly"
+          ],
+          "correct_answer": "Strawberry",
+          "image_hint": "strawberry",
+          "inline_images": true,
+          "instruction_zh": "点击草莓。"
+        },
+        {
+          "instruction": "Tap the timer.",
+          "question_id": "Q2029",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the timer.",
+          "options": [
+            "Timer",
+            "Car",
+            "Phone",
+            "Cow"
+          ],
+          "correct_answer": "Timer",
+          "image_hint": "timer",
+          "inline_images": true,
+          "instruction_zh": "点击计时器。"
+        },
+        {
+          "instruction": "Tap the bicycle.",
+          "question_id": "Q2030",
+          "source_test": "Custom",
+          "sub_domain": "Object Recognition",
+          "scaffolding_hint": "Look for the bicycle.",
+          "options": [
+            "Bicycle",
+            "Carrot",
+            "Sun",
+            "Ball"
+          ],
+          "correct_answer": "Bicycle",
+          "image_hint": "bicycle",
+          "inline_images": true,
+          "instruction_zh": "点击自行车。"
+        },
+        {
           "instruction": "Tap when you see a fruit.",
           "question_id": "Q105",
           "source_test": "BRIEF",
@@ -7655,6 +8165,431 @@
       "task_type": "identify",
       "tasks": [
         {
+          "instruction": "Tap the moon.",
+          "question_id": "Q2031",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the moon.",
+          "options": [
+            "Moon",
+            "Drum",
+            "Chair",
+            "Bed"
+          ],
+          "correct_answer": "Moon",
+          "image_hint": "moon",
+          "inline_images": true,
+          "instruction_zh": "点击月亮。"
+        },
+        {
+          "instruction": "Tap the camera.",
+          "question_id": "Q2032",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the camera.",
+          "options": [
+            "Camera",
+            "Whale",
+            "Block",
+            "Jacket"
+          ],
+          "correct_answer": "Camera",
+          "image_hint": "camera",
+          "inline_images": true,
+          "instruction_zh": "点击相机。"
+        },
+        {
+          "instruction": "Tap the violin.",
+          "question_id": "Q2033",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the violin.",
+          "options": [
+            "Violin",
+            "Rabbit",
+            "Cow",
+            "Camera"
+          ],
+          "correct_answer": "Violin",
+          "image_hint": "violin",
+          "inline_images": true,
+          "instruction_zh": "点击小提琴。"
+        },
+        {
+          "instruction": "Tap the phone.",
+          "question_id": "Q2034",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the phone.",
+          "options": [
+            "Phone",
+            "Frog",
+            "Drum",
+            "Umbrella"
+          ],
+          "correct_answer": "Phone",
+          "image_hint": "phone",
+          "inline_images": true,
+          "instruction_zh": "点击手机。"
+        },
+        {
+          "instruction": "Tap the box.",
+          "question_id": "Q2035",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the box.",
+          "options": [
+            "Box",
+            "Pencil",
+            "Fish",
+            "Brush"
+          ],
+          "correct_answer": "Box",
+          "image_hint": "box",
+          "inline_images": true,
+          "instruction_zh": "点击箱子。"
+        },
+        {
+          "instruction": "Tap the chair.",
+          "question_id": "Q2036",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the chair.",
+          "options": [
+            "Chair",
+            "Book",
+            "Carrot",
+            "Ruler"
+          ],
+          "correct_answer": "Chair",
+          "image_hint": "chair",
+          "inline_images": true,
+          "instruction_zh": "点击椅子。"
+        },
+        {
+          "instruction": "Tap the jacket.",
+          "question_id": "Q2037",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the jacket.",
+          "options": [
+            "Jacket",
+            "Hat",
+            "Cat",
+            "Ruler"
+          ],
+          "correct_answer": "Jacket",
+          "image_hint": "jacket",
+          "inline_images": true,
+          "instruction_zh": "点击夹克。"
+        },
+        {
+          "instruction": "Tap the pencil.",
+          "question_id": "Q2038",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the pencil.",
+          "options": [
+            "Pencil",
+            "Eagle",
+            "Violin",
+            "Jacket"
+          ],
+          "correct_answer": "Pencil",
+          "image_hint": "pencil",
+          "inline_images": true,
+          "instruction_zh": "点击铅笔。"
+        },
+        {
+          "instruction": "Tap the eagle.",
+          "question_id": "Q2039",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the eagle.",
+          "options": [
+            "Eagle",
+            "Doll",
+            "Car",
+            "Book"
+          ],
+          "correct_answer": "Eagle",
+          "image_hint": "eagle",
+          "inline_images": true,
+          "instruction_zh": "点击鹰。"
+        },
+        {
+          "instruction": "Tap the horse.",
+          "question_id": "Q2040",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the horse.",
+          "options": [
+            "Horse",
+            "Frog",
+            "Bicycle",
+            "Shirt"
+          ],
+          "correct_answer": "Horse",
+          "image_hint": "horse",
+          "inline_images": true,
+          "instruction_zh": "点击马。"
+        },
+        {
+          "instruction": "Tap the bear.",
+          "question_id": "Q2041",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the bear.",
+          "options": [
+            "Bear",
+            "Truck",
+            "Book",
+            "Bus"
+          ],
+          "correct_answer": "Bear",
+          "image_hint": "bear",
+          "inline_images": true,
+          "instruction_zh": "点击熊。"
+        },
+        {
+          "instruction": "Tap the shirt.",
+          "question_id": "Q2042",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the shirt.",
+          "options": [
+            "Shirt",
+            "Bus",
+            "Spoon",
+            "Phone"
+          ],
+          "correct_answer": "Shirt",
+          "image_hint": "shirt",
+          "inline_images": true,
+          "instruction_zh": "点击衬衫。"
+        },
+        {
+          "instruction": "Tap the frog.",
+          "question_id": "Q2043",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the frog.",
+          "options": [
+            "Frog",
+            "Lamp",
+            "Bed",
+            "Door"
+          ],
+          "correct_answer": "Frog",
+          "image_hint": "frog",
+          "inline_images": true,
+          "instruction_zh": "点击青蛙。"
+        },
+        {
+          "instruction": "Tap the elephant.",
+          "question_id": "Q2044",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the elephant.",
+          "options": [
+            "Elephant",
+            "Lamp",
+            "Flower",
+            "Hat"
+          ],
+          "correct_answer": "Elephant",
+          "image_hint": "elephant",
+          "inline_images": true,
+          "instruction_zh": "点击大象。"
+        },
+        {
+          "instruction": "Tap the cookie.",
+          "question_id": "Q2045",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the cookie.",
+          "options": [
+            "Cookie",
+            "Timer",
+            "House",
+            "Truck"
+          ],
+          "correct_answer": "Cookie",
+          "image_hint": "cookie",
+          "inline_images": true,
+          "instruction_zh": "点击饼干。"
+        },
+        {
+          "instruction": "Tap the apple.",
+          "question_id": "Q2046",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the apple.",
+          "options": [
+            "Apple",
+            "Pizza",
+            "Rocket",
+            "Book"
+          ],
+          "correct_answer": "Apple",
+          "image_hint": "apple",
+          "inline_images": true,
+          "instruction_zh": "点击苹果。"
+        },
+        {
+          "instruction": "Tap the umbrella.",
+          "question_id": "Q2047",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the umbrella.",
+          "options": [
+            "Umbrella",
+            "Truck",
+            "Hat",
+            "Ruler"
+          ],
+          "correct_answer": "Umbrella",
+          "image_hint": "umbrella",
+          "inline_images": true,
+          "instruction_zh": "点击雨伞。"
+        },
+        {
+          "instruction": "Tap the dog.",
+          "question_id": "Q2048",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the dog.",
+          "options": [
+            "Dog",
+            "Shoe",
+            "Penguin",
+            "Cup"
+          ],
+          "correct_answer": "Dog",
+          "image_hint": "dog",
+          "inline_images": true,
+          "instruction_zh": "点击狗。"
+        },
+        {
+          "instruction": "Tap the brush.",
+          "question_id": "Q2049",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the brush.",
+          "options": [
+            "Brush",
+            "Cookie",
+            "Elephant",
+            "Butterfly"
+          ],
+          "correct_answer": "Brush",
+          "image_hint": "brush",
+          "inline_images": true,
+          "instruction_zh": "点击刷子。"
+        },
+        {
+          "instruction": "Tap the pizza.",
+          "question_id": "Q2050",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the pizza.",
+          "options": [
+            "Pizza",
+            "Apple",
+            "Box",
+            "Rocket"
+          ],
+          "correct_answer": "Pizza",
+          "image_hint": "pizza",
+          "inline_images": true,
+          "instruction_zh": "点击披萨。"
+        },
+        {
+          "instruction": "Tap the doll.",
+          "question_id": "Q2051",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the doll.",
+          "options": [
+            "Doll",
+            "Timer",
+            "Guitar",
+            "Shirt"
+          ],
+          "correct_answer": "Doll",
+          "image_hint": "doll",
+          "inline_images": true,
+          "instruction_zh": "点击娃娃。"
+        },
+        {
+          "instruction": "Tap the carrot.",
+          "question_id": "Q2052",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the carrot.",
+          "options": [
+            "Carrot",
+            "Guitar",
+            "Whale",
+            "Bird"
+          ],
+          "correct_answer": "Carrot",
+          "image_hint": "carrot",
+          "inline_images": true,
+          "instruction_zh": "点击胡萝卜。"
+        },
+        {
+          "instruction": "Tap the block.",
+          "question_id": "Q2053",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the block.",
+          "options": [
+            "Block",
+            "Cookie",
+            "Sun",
+            "Moon"
+          ],
+          "correct_answer": "Block",
+          "image_hint": "block",
+          "inline_images": true,
+          "instruction_zh": "点击积木。"
+        },
+        {
+          "instruction": "Tap the spoon.",
+          "question_id": "Q2054",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the spoon.",
+          "options": [
+            "Spoon",
+            "Key",
+            "Cake",
+            "Brush"
+          ],
+          "correct_answer": "Spoon",
+          "image_hint": "spoon",
+          "inline_images": true,
+          "instruction_zh": "点击勺子。"
+        },
+        {
+          "instruction": "Tap the house.",
+          "question_id": "Q2055",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Look for the house.",
+          "options": [
+            "House",
+            "Shirt",
+            "Bus",
+            "Hat"
+          ],
+          "correct_answer": "House",
+          "image_hint": "house",
+          "inline_images": true,
+          "instruction_zh": "点击房子。"
+        },
+        {
           "instruction": "Tap words that rhyme with 'cat': Hat, Dog, Bat, Car, Mat, Sun.",
           "question_id": "Q107",
           "source_test": "BRIEF",
@@ -10644,6 +11579,276 @@
       "name_zh": "中级注意力",
       "task_type": "identify",
       "tasks": [
+        {
+          "instruction": "Tap the apple.",
+          "question_id": "Q2056",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the apple.",
+          "options": [
+            "Apple",
+            "Lamp",
+            "Cup",
+            "Globe",
+            "Ball"
+          ],
+          "correct_answer": "Apple",
+          "image_hint": "apple",
+          "inline_images": true,
+          "instruction_zh": "点击苹果。"
+        },
+        {
+          "instruction": "Tap the book.",
+          "question_id": "Q2057",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the book.",
+          "options": [
+            "Book",
+            "Fly",
+            "Door",
+            "Umbrella",
+            "Table"
+          ],
+          "correct_answer": "Book",
+          "image_hint": "book",
+          "inline_images": true,
+          "instruction_zh": "点击书。"
+        },
+        {
+          "instruction": "Tap the sun.",
+          "question_id": "Q2058",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the sun.",
+          "options": [
+            "Sun",
+            "Cookie",
+            "Carrot",
+            "Bear",
+            "Umbrella"
+          ],
+          "correct_answer": "Sun",
+          "image_hint": "sun",
+          "inline_images": true,
+          "instruction_zh": "点击太阳。"
+        },
+        {
+          "instruction": "Tap the key.",
+          "question_id": "Q2059",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the key.",
+          "options": [
+            "Key",
+            "Block",
+            "Bicycle",
+            "Rocket",
+            "Frog"
+          ],
+          "correct_answer": "Key",
+          "image_hint": "key",
+          "inline_images": true,
+          "instruction_zh": "点击钥匙。"
+        },
+        {
+          "instruction": "Tap the truck.",
+          "question_id": "Q2060",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the truck.",
+          "options": [
+            "Truck",
+            "Bed",
+            "Timer",
+            "Ruler",
+            "Hat"
+          ],
+          "correct_answer": "Truck",
+          "image_hint": "truck",
+          "inline_images": true,
+          "instruction_zh": "点击卡车。"
+        },
+        {
+          "instruction": "Tap the strawberry.",
+          "question_id": "Q2061",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the strawberry.",
+          "options": [
+            "Strawberry",
+            "Book",
+            "Penguin",
+            "Flower",
+            "Block"
+          ],
+          "correct_answer": "Strawberry",
+          "image_hint": "strawberry",
+          "inline_images": true,
+          "instruction_zh": "点击草莓。"
+        },
+        {
+          "instruction": "Tap the jacket.",
+          "question_id": "Q2062",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the jacket.",
+          "options": [
+            "Jacket",
+            "Bus",
+            "Cat",
+            "Guitar",
+            "Truck"
+          ],
+          "correct_answer": "Jacket",
+          "image_hint": "jacket",
+          "inline_images": true,
+          "instruction_zh": "点击夹克。"
+        },
+        {
+          "instruction": "Tap the penguin.",
+          "question_id": "Q2063",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the penguin.",
+          "options": [
+            "Penguin",
+            "Eagle",
+            "Box",
+            "Camera",
+            "Fly"
+          ],
+          "correct_answer": "Penguin",
+          "image_hint": "penguin",
+          "inline_images": true,
+          "instruction_zh": "点击企鹅。"
+        },
+        {
+          "instruction": "Tap the house.",
+          "question_id": "Q2064",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the house.",
+          "options": [
+            "House",
+            "Shirt",
+            "Rocket",
+            "Rabbit",
+            "Cake"
+          ],
+          "correct_answer": "House",
+          "image_hint": "house",
+          "inline_images": true,
+          "instruction_zh": "点击房子。"
+        },
+        {
+          "instruction": "Tap the spoon.",
+          "question_id": "Q2065",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the spoon.",
+          "options": [
+            "Spoon",
+            "Cookie",
+            "Drum",
+            "Penguin",
+            "Pencil"
+          ],
+          "correct_answer": "Spoon",
+          "image_hint": "spoon",
+          "inline_images": true,
+          "instruction_zh": "点击勺子。"
+        },
+        {
+          "instruction": "Tap the drum.",
+          "question_id": "Q2066",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the drum.",
+          "options": [
+            "Drum",
+            "Fish",
+            "Violin",
+            "Hat",
+            "Boat"
+          ],
+          "correct_answer": "Drum",
+          "image_hint": "drum",
+          "inline_images": true,
+          "instruction_zh": "点击鼓。"
+        },
+        {
+          "instruction": "Tap the chair.",
+          "question_id": "Q2067",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the chair.",
+          "options": [
+            "Chair",
+            "Car",
+            "Bed",
+            "Dog",
+            "Banana"
+          ],
+          "correct_answer": "Chair",
+          "image_hint": "chair",
+          "inline_images": true,
+          "instruction_zh": "点击椅子。"
+        },
+        {
+          "instruction": "Tap the rabbit.",
+          "question_id": "Q2068",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the rabbit.",
+          "options": [
+            "Rabbit",
+            "Horse",
+            "Car",
+            "Jacket",
+            "Apple"
+          ],
+          "correct_answer": "Rabbit",
+          "image_hint": "rabbit",
+          "inline_images": true,
+          "instruction_zh": "点击兔子。"
+        },
+        {
+          "instruction": "Tap the bicycle.",
+          "question_id": "Q2069",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the bicycle.",
+          "options": [
+            "Bicycle",
+            "Rainbow",
+            "Pencil",
+            "Bear",
+            "Carrot"
+          ],
+          "correct_answer": "Bicycle",
+          "image_hint": "bicycle",
+          "inline_images": true,
+          "instruction_zh": "点击自行车。"
+        },
+        {
+          "instruction": "Tap the bird.",
+          "question_id": "Q2070",
+          "source_test": "Custom",
+          "sub_domain": "Intermediate Attention",
+          "scaffolding_hint": "Look for the bird.",
+          "options": [
+            "Bird",
+            "Violin",
+            "Ball",
+            "Truck",
+            "Dog"
+          ],
+          "correct_answer": "Bird",
+          "image_hint": "bird",
+          "inline_images": true,
+          "instruction_zh": "点击鸟。"
+        },
         {
           "instruction": "Tap for living things.",
           "question_id": "Q109",
