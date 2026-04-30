@@ -341,25 +341,25 @@
           "animation_frames": [
             "hat",
             "dog",
-            "mat",
-            "car",
             "bat",
+            "car",
+            "mat",
             "sun"
           ],
           "options": [
             "Hat",
             "Dog",
-            "Mat",
-            "Car",
             "Bat",
+            "Car",
+            "Mat",
             "Sun"
           ],
           "slide_items": [
             "Hat",
             "Dog",
-            "Mat",
-            "Car",
             "Bat",
+            "Car",
+            "Mat",
             "Sun"
           ],
           "tap_target": "Hat, Bat, Mat",
