@@ -219,7 +219,7 @@
             "House",
             "Tree"
           ],
-          "instruction_zh": "我会说3个词。然后，告诉我Middle word: Cat, House, Tree。"
+          "instruction_zh": "我会说3个词。之后，告诉我中间的词：Cat, House, Tree。"
         }
       ]
     },
@@ -336,7 +336,7 @@
           "scaffolding_hint": "Say: \"Rhymes end with the same sound as cat\"",
           "correct_answer": "3",
           "image_hint": "cat",
-          "instruction_zh": "听单词。听到和CAT押韵的词就点击。",
+          "instruction_zh": "点击和\"cat\"押韵的词：Hat, Dog, Bat, Car, Mat, Sun。",
           "tap_count": 3,
           "animation_frames": [
             "hat",
@@ -489,7 +489,7 @@
           ],
           "correct_answer": "Right",
           "image_hint": "elephant",
-          "instruction_zh": "按边数分类：of Syllables: 1 syllable放左边，2+ syllables放右边。[Elephant]"
+          "instruction_zh": "按音节数分类：1个音节放左边，2个以上音节放右边。[Elephant]"
         }
       ]
     },
@@ -673,7 +673,7 @@
           "scaffolding_hint": "Say: \"Synonyms mean the same thing as happy\"",
           "correct_answer": "6",
           "image_hint": "happy_face",
-          "instruction_zh": "读段落。每次看到'happy'的同义词就点击。",
+          "instruction_zh": "读这段文字。每次看到\"happy\"的同义词就点击。",
           "tap_count": 6,
           "story": "The joyful girl ran through the field. She felt glad to see the cheerful flowers. Her delighted friend waved. They were both pleased and merry to play together."
         }
