@@ -113,7 +113,7 @@ struct LearningSessionView: View {
                         .cornerRadius(16)
                         Text(itemName)
                             .font(Font.title2.weight(.bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                     }
                     .padding(32)
                     .background(
@@ -199,6 +199,7 @@ struct LearningSessionView: View {
                 dragSortItem = nil
                 dragSortOffset = .zero
                 categoryFrames = [:]
+                enlargedItem = nil
                 // Reset flash state
                 flashVisible = false
                 flashPhase = 0
