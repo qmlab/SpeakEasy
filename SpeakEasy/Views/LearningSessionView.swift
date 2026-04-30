@@ -59,6 +59,8 @@ struct LearningSessionView: View {
     @State private var categoryFrames: [String: CGRect] = [:]
     /// Position anchor for unsorted items pool
     @State private var unsortedPoolFrame: CGRect = .zero
+    /// Enlarged image preview for sort items
+    @State private var enlargedItem: String?
     /// Visual tap feedback state for multi-tap tasks
     @State private var tapRippleScale: CGFloat = 1.0
     @State private var tapRippleOpacity: Double = 0.0
@@ -93,6 +95,35 @@ struct LearningSessionView: View {
                 // Level up overlay
                 if learningManager.showLevelUp {
                     levelUpOverlay
+                }
+
+                // Enlarged image overlay
+                if let itemName = enlargedItem {
+                    Color.black.opacity(0.5)
+                        .ignoresSafeArea()
+                        .onTapGesture { enlargedItem = nil }
+                    VStack(spacing: 16) {
+                        RemoteImageView(
+                            objectName: itemName.lowercased().replacingOccurrences(of: " ", with: "_"),
+                            imageType: .flashcard,
+                            fallbackIcon: "photo",
+                            iconColor: .gray,
+                            size: 200
+                        )
+                        .cornerRadius(16)
+                        Text(itemName)
+                            .font(Font.title2.weight(.bold))
+                            .foregroundColor(.white)
+                    }
+                    .padding(32)
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(Color(.systemBackground))
+                            .shadow(radius: 20)
+                    )
+                    .onTapGesture { enlargedItem = nil }
+                    .transition(.scale)
+                    .zIndex(100)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -1520,12 +1551,16 @@ struct LearningSessionView: View {
                                     imageType: .thumbnail,
                                     fallbackIcon: "questionmark.circle",
                                     iconColor: dimension.color,
-                                    size: 44
+                                    size: 80
                                 )
-                                .cornerRadius(8)
+                                .cornerRadius(10)
+                                Text(item)
+                                    .font(.caption2)
+                                    .foregroundColor(.primary)
+                                    .lineLimit(1)
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(10)
+                            .padding(8)
                             .background(
                                 RoundedRectangle(cornerRadius: 14)
                                     .fill(isDragging ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
@@ -1535,6 +1570,7 @@ struct LearningSessionView: View {
                             .offset(isDragging ? dragSortOffset : .zero)
                             .zIndex(isDragging ? 10 : 0)
                             .onTapGesture {
+                                enlargedItem = item
                                 speechService.speak(item)
                             }
                             .gesture(
@@ -1615,12 +1651,12 @@ struct LearningSessionView: View {
                                     imageType: .thumbnail,
                                     fallbackIcon: rep.fallback,
                                     iconColor: .white,
-                                    size: 28
+                                    size: 36
                                 )
-                                .cornerRadius(6)
+                                .cornerRadius(8)
                             } else {
                                 Image(systemName: rep.fallback)
-                                    .font(.title3)
+                                    .font(.title2)
                                     .foregroundColor(.white)
                             }
                         }
@@ -1648,17 +1684,24 @@ struct LearningSessionView: View {
                                 .frame(maxWidth: .infinity, minHeight: 70)
                             } else {
                                 ForEach(bucketItems, id: \.self) { item in
-                                    HStack(spacing: 6) {
+                                    HStack(spacing: 8) {
                                         RemoteImageView(
                                             objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
                                             imageType: .thumbnail,
                                             fallbackIcon: "circle.fill",
                                             iconColor: colorForCategory(category, categories: categories),
-                                            size: 24
+                                            size: 40
                                         )
-                                        .cornerRadius(4)
+                                        .cornerRadius(6)
+                                        .onTapGesture {
+                                            enlargedItem = item
+                                            speechService.speak(item)
+                                        }
+                                        Text(item)
+                                            .font(.caption2)
+                                            .foregroundColor(.primary)
+                                            .lineLimit(1)
                                         Spacer()
-                                        // Remove button
                                         Button {
                                             withAnimation {
                                                 categorySortBuckets[category]?.removeAll { $0 == item }
@@ -1670,7 +1713,7 @@ struct LearningSessionView: View {
                                         }
                                     }
                                     .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
+                                    .padding(.vertical, 6)
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
                                             .fill(colorForCategory(category, categories: categories).opacity(0.1))

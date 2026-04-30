@@ -205,6 +205,21 @@
           "keywords": [
             "rainbow"
           ]
+        },
+        {
+          "instruction": "I will say 3 words. After, tell me the Middle word: Cat, House, Tree.",
+          "question_id": "LE_Q120",
+          "source_test": "WJ-III",
+          "sub_domain": "Working Memory",
+          "scaffolding_hint": "Say: \"The middle word is the second one you heard\"",
+          "correct_answer": "House",
+          "image_hint": "cat",
+          "options": [
+            "Cat",
+            "House",
+            "Tree"
+          ],
+          "instruction_zh": "我会说3个词。然后，告诉我Middle word: Cat, House, Tree。"
         }
       ]
     },
@@ -312,6 +327,43 @@
             "brown",
             "dog"
           ]
+        },
+        {
+          "instruction": "Tap words that rhyme with 'cat': Hat, Dog, Bat, Car, Mat, Sun.",
+          "question_id": "LE_Q107",
+          "source_test": "BRIEF",
+          "sub_domain": "Inhibitory Control",
+          "scaffolding_hint": "Say: \"Rhymes end with the same sound as cat\"",
+          "correct_answer": "3",
+          "image_hint": "cat",
+          "instruction_zh": "听单词。听到和CAT押韵的词就点击。",
+          "tap_count": 3,
+          "animation_frames": [
+            "hat",
+            "dog",
+            "mat",
+            "car",
+            "bat",
+            "sun"
+          ],
+          "options": [
+            "Hat",
+            "Dog",
+            "Mat",
+            "Car",
+            "Bat",
+            "Sun"
+          ],
+          "slide_items": [
+            "Hat",
+            "Dog",
+            "Mat",
+            "Car",
+            "Bat",
+            "Sun"
+          ],
+          "tap_target": "Hat, Bat, Mat",
+          "no_tap_target": "Dog, Car, Sun"
         }
       ]
     },
@@ -424,6 +476,20 @@
             "like",
             "ice"
           ]
+        },
+        {
+          "instruction": "Now sort by Number of Syllables: 1 syllable goes left, 2+ syllables goes right. [Elephant]",
+          "question_id": "LE_Q138",
+          "source_test": "BRIEF",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"El-e-phant has 3 syllables — more than 1\"",
+          "options": [
+            "Right",
+            "Left"
+          ],
+          "correct_answer": "Right",
+          "image_hint": "elephant",
+          "instruction_zh": "按边数分类：of Syllables: 1 syllable放左边，2+ syllables放右边。[Elephant]"
         }
       ]
     },
@@ -598,6 +664,18 @@
             "boy",
             "is"
           ]
+        },
+        {
+          "instruction": "Read the paragraph. Tap every time you see a word that is a synonym of 'happy'.",
+          "question_id": "LE_Q149",
+          "source_test": "Brown ADD",
+          "sub_domain": "Sustained Attention",
+          "scaffolding_hint": "Say: \"Synonyms mean the same thing as happy\"",
+          "correct_answer": "6",
+          "image_hint": "happy_face",
+          "instruction_zh": "读段落。每次看到'happy'的同义词就点击。",
+          "tap_count": 6,
+          "story": "The joyful girl ran through the field. She felt glad to see the cheerful flowers. Her delighted friend waved. They were both pleased and merry to play together."
         }
       ]
     },
