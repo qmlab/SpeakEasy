@@ -193,6 +193,11 @@
     "wig": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423328/risingstar/photos/wig.png",
     "wind": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423329/risingstar/photos/wind.png",
     "worm": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777446524/risingstar/photos/worm.png",
-    "wrench": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362078/risingstar/photos/wrench.png"
+    "wrench": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362078/risingstar/photos/wrench.png",
+    "block": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530367/risingstar/photos/block.png",
+    "box": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530368/risingstar/photos/box.png",
+    "fly": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530370/risingstar/photos/fly.png",
+    "timer": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530370/risingstar/photos/timer.png",
+    "chart": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530373/risingstar/photos/chart.png"
   }
 }
