@@ -1652,17 +1652,17 @@ struct LearningSessionView: View {
                                     imageType: .thumbnail,
                                     fallbackIcon: rep.fallback,
                                     iconColor: .white,
-                                    size: 36
+                                    size: 56
                                 )
-                                .cornerRadius(8)
+                                .cornerRadius(10)
                             } else {
                                 Image(systemName: rep.fallback)
-                                    .font(.title2)
+                                    .font(.system(size: 32))
                                     .foregroundColor(.white)
                             }
                         }
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 10)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(colorForCategory(category, categories: categories))
