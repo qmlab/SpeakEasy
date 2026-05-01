@@ -198,6 +198,9 @@
     "box": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530368/risingstar/photos/box.png",
     "fly": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530370/risingstar/photos/fly.png",
     "timer": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530370/risingstar/photos/timer.png",
-    "chart": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530373/risingstar/photos/chart.png"
+    "chart": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777530373/risingstar/photos/chart.png",
+    "basketball": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777658369/risingstar/photos/basketball.png",
+    "orange": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777658369/risingstar/photos/orange.png",
+    "star": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777658371/risingstar/photos/star.png"
   }
 }
