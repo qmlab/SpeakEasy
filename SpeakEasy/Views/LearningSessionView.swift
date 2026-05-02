@@ -1377,7 +1377,7 @@ struct LearningSessionView: View {
                         .zIndex(isDragging ? 10 : 0)
                         .offset(isDragging ? dragOffset : .zero)
                         .gesture(
-                            DragGesture()
+                            DragGesture(minimumDistance: 0)
                                 .onChanged { value in
                                     if draggedItem == nil {
                                         draggedItem = item
@@ -1570,12 +1570,8 @@ struct LearningSessionView: View {
                             .scaleEffect(isDragging ? 1.1 : 1.0)
                             .offset(isDragging ? dragSortOffset : .zero)
                             .zIndex(isDragging ? 10 : 0)
-                            .onTapGesture {
-                                enlargedItem = item
-                                speechService.speak(item)
-                            }
                             .gesture(
-                                DragGesture(coordinateSpace: .global)
+                                DragGesture(minimumDistance: 0, coordinateSpace: .global)
                                     .onChanged { value in
                                         if dragSortItem != item {
                                             speechService.speak(item)
@@ -1584,6 +1580,15 @@ struct LearningSessionView: View {
                                         dragSortOffset = value.translation
                                     }
                                     .onEnded { value in
+                                        let distance = sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2))
+                                        // Short drag = tap: show enlarged image
+                                        if distance < 10 {
+                                            dragSortItem = nil
+                                            dragSortOffset = .zero
+                                            enlargedItem = item
+                                            speechService.speak(item)
+                                            return
+                                        }
                                         // Check which category bucket the item was dropped on
                                         let dropPoint = value.location
                                         var placed = false
@@ -1598,7 +1603,6 @@ struct LearningSessionView: View {
                                             }
                                         }
                                         if !placed {
-                                            // Snap back with animation
                                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                                 dragSortItem = nil
                                                 dragSortOffset = .zero
