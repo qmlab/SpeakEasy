@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-<circle cx="60" cy="60" r="56" fill="#E0F7FA" stroke="#00838F" stroke-width="3"/>
-<ellipse cx="58" cy="60" rx="25" ry="15" fill="#4DD0E1"/><polygon points="82,60 98,45 98,75" fill="#26C6DA"/><circle cx="45" cy="56" r="3" fill="#fff"/><circle cx="45" cy="56" r="1.5" fill="#333"/><path d="M60 65 Q65 70 70 65" stroke="#00838F" stroke-width="1.5" fill="none"/></svg>
