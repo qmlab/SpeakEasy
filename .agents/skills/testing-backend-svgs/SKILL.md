@@ -12,16 +12,18 @@ The SpeakEasy backend serves SVG images for task illustrations at `/task-images/
 - Image files location: `backend/app/resources/images/`
 - Photo URL mapping: `backend/app/resources/images/photo_urls.json`
 - Manifest: `backend/app/resources/images/manifest.json`
+- Deployed backend: `https://risingstar-backend-yojhdcez.fly.dev`
 
 ## Real Photo PNG System
 
 ### Architecture
-- 205 object photos hosted on Cloudinary as 400x400 PNGs under `risingstar/photos/`
-- Photos also uploaded to `risingstar/task_images/` path (SVG fallback path) so even old iOS builds get real photos
+- 206 object photos hosted on Cloudinary as 400x400 PNGs
+- **Primary path**: `risingstar/photos/{name}` — canonical photo URLs stored in `photo_urls.json`
+- **Fallback path**: `risingstar/task_images/{name}` — also contains real photos (replaced original SVGs)
 - Sources: Unsplash (primary) and Pexels (fallback) — free license photos
 - Served via `GET /adaptive/photo-urls` endpoint (cached in-memory on backend)
 - **Important**: The photo URL cache is loaded once at startup from `photo_urls.json`. After updating the JSON file, the backend must be restarted to pick up changes.
-- iOS `RemoteImageView` fallback chain: bundled xcasset → real photo URL → Cloudinary SVG → SF Symbol
+- iOS `RemoteImageView` fallback chain: bundled xcasset → real photo URL → Cloudinary fallback (`task_images/`) → SF Symbol
 - Deployed backend: `https://risingstar-backend-yojhdcez.fly.dev`
 
 ### Critical: Bundled SVG Override Issue
@@ -47,7 +49,7 @@ import urllib.request, json
 # 1. Verify endpoint returns all photos
 resp = urllib.request.urlopen('http://localhost:8200/adaptive/photo-urls')
 data = json.loads(resp.read())
-assert len(data['photos']) == 205
+assert len(data['photos']) == 206  # current count as of PR #158
 assert all('cloudinary' in u and u.endswith('.png') for u in data['photos'].values())
 assert all('dgpir7tqk' in u for u in data['photos'].values())  # correct cloud_name
 
@@ -102,6 +104,7 @@ Key items to always spot-check (these have had quality issues in the past):
 - `hen` — should show a clear chicken close-up (was previously too small)
 - `pencil` — should show a recognizable pencil (was previously yellow blob)
 - `screwdriver` — should show 1-2 screwdrivers (not 20+ tools)
+- `binoculars` — should show person using binoculars (was previously Mount Fuji)
 
 ### Updating Photos
 To replace/update individual photos:
@@ -121,13 +124,44 @@ Cloudinary CDN may cache old versions. When replacing photos:
 - If stale images persist, destroy the old resource first: `cloudinary.uploader.destroy(public_id, invalidate=True)` then re-upload
 - Verify by fetching with `f_png` format param: `https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/{name}`
 
+**Fix procedure:**
+```python
+import cloudinary, cloudinary.uploader
+
+# 1. Destroy the old resource first
+cloudinary.uploader.destroy(f"risingstar/task_images/{name}", invalidate=True)
+
+# 2. Re-upload from local file (not URL — URL-based upload might hit the same CDN cache)
+result = cloudinary.uploader.upload(
+    local_file_path,
+    public_id=f"risingstar/task_images/{name}",
+    overwrite=True,
+    resource_type="image",
+    format="png",
+    invalidate=True
+)
+
+# 3. Wait ~30 seconds for CDN propagation
+# 4. Verify with: curl -s -o /dev/null -w "%{size_download}" \
+#    "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/{name}"
+# Size should be >20KB (real photo), not 2-5KB (cached SVG)
+```
+
+**Key points:**
+- Always download the source photo to a local file first, then upload from local — URL-based uploads might resolve to the cached CDN version
+- `invalidate=True` on both destroy and upload is required
+- CDN propagation takes ~30 seconds after destroy+re-upload
+- Verify using the `f_png` URL format (not raw `.png`) since that's what iOS uses
+
 ### Common Pitfalls
 - **Bundled SVG override**: If users report seeing SVGs despite backend having real photos, check `Assets.xcassets/TaskImages/` for bundled SVG imagesets. Delete any that have real photo equivalents.
 - **Stale cache**: If you start the backend before pulling latest code, the in-memory cache will have old photo URLs. Always restart after code changes.
+- **CDN cache**: Cloudinary CDN caches `f_png` transformations separately. See "CDN Cache Invalidation" section above.
 - **Photo quality**: Unsplash `?fit=crop` may crop important parts of the object. Always visually verify downloaded photos before uploading to Cloudinary.
 - **Pexels/Unsplash rate limiting**: Both services may block automated downloads. Use browser to find correct photo IDs, then download with direct URLs. Wikimedia Commons blocks after ~5 requests.
 - **Duplicate photos**: When downloading many photos at once, verify with MD5 hashing that no two objects share the same image file.
 - **Abstract vs physical**: Not all task images need real photos — shapes, colors, numbers, letters, arrows, and emotions should remain as SVGs.
+- **Upload from local files**: When batch-uploading to task_images/, always download to local first then upload from file path. URL-based uploads may hit CDN cache and upload the old cached version.
 
 ## Auditing Missing SVGs
 
@@ -174,8 +208,4 @@ Open representative SVGs in browser to verify they render as recognizable icons:
 - SVGs use 100x100 viewBox with simple shapes
 - Concrete objects: circular icon with background circle (`cx=50 cy=50 r=46`)
 - Geometric shapes: no background circle, just the shapes
-- Use consistent color palette from existing SVGs
-
-## Devin Secrets Needed
-- `Cloudinary_SpeakEasy_Dev` — API key:secret for uploading photos to Cloudinary (format: `api_key:api_secret`)
-- No other secrets needed for read-only API testing
+- Color palette: `#FF6B6B` (red), `#4ECDC4` (teal), `#45B7D1` (blue), `#FFA07A` (salmon), `#98D8C8` (mint), `#F7DC6F` (yellow), `#BB8FCE` (purple)
