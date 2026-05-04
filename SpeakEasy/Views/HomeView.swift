@@ -32,7 +32,7 @@ struct HomeView: View {
                 )
                 .ignoresSafeArea()
             )
-            .navigationTitle("Rising Star Kid")
+            .navigationTitle(AppLocalization.appTitle)
             .task {
                 await loadTotalObjectCount()
                 await learningManager.loadProfiles()
@@ -58,28 +58,28 @@ struct HomeView: View {
                 .foregroundColor(.yellow)
                 .shadow(color: .orange.opacity(0.5), radius: 10)
             
-            Text("Hello, \(learningManager.playerName.isEmpty ? "Star" : learningManager.playerName)!")
+            Text("\(AppLocalization.hello), \(learningManager.playerName.isEmpty ? "⭐" : learningManager.playerName)!")
                 .font(.system(size: 36, weight: .bold, design: .rounded))
                 .foregroundColor(.purple)
             
-            Text("Let's learn together!")
+            Text(AppLocalization.letsLearnTogether)
                 .font(.system(size: 20, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
         }
         .padding(.vertical, 20)
         .onTapGesture {
-            speechService.speak("Hello! Let's learn together!")
+            speechService.speak(AppLocalization.isChineseMode ? "你好！一起来学习吧！" : "Hello! Let's learn together!")
         }
     }
     
     private var dimensionOverviewSection: some View {
         VStack(spacing: 15) {
             HStack {
-                Text("My Development")
+                Text(AppLocalization.myDevelopment)
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundColor(.purple)
                 Spacer()
-                Text("Level \(String(format: "%.1f", learningManager.overallLevel))")
+                Text("\(AppLocalization.level) \(String(format: "%.1f", learningManager.overallLevel))")
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundColor(.orange)
             }
@@ -118,14 +118,14 @@ struct HomeView: View {
     
     private var quickStartSection: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text("Quick Start")
+            Text(AppLocalization.quickStart)
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundColor(.purple)
             
             HStack(spacing: 15) {
                 QuickStartButton(
                     icon: "sparkles",
-                    title: "Learn",
+                    title: AppLocalization.learn,
                     color: .blue
                 ) {
                     selectedTab = 1
@@ -133,7 +133,7 @@ struct HomeView: View {
                 
                 QuickStartButton(
                     icon: "camera.fill",
-                    title: "Camera",
+                    title: AppLocalization.camera,
                     color: .green
                 ) {
                     selectedTab = 2
@@ -141,7 +141,7 @@ struct HomeView: View {
                 
                 QuickStartButton(
                     icon: "chart.bar.fill",
-                    title: "Progress",
+                    title: AppLocalization.progress,
                     color: .orange
                 ) {
                     selectedTab = 3

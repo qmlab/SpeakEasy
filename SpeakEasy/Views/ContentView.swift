@@ -31,21 +31,21 @@ struct ContentView: View {
             DimensionHubView()
                 .tabItem {
                     Image(systemName: "sparkles")
-                    Text("Learn")
+                    Text(AppLocalization.learn)
                 }
                 .tag(0)
             
             AdaptiveDashboardView()
                 .tabItem {
                     Image(systemName: "chart.bar.fill")
-                    Text("Progress")
+                    Text(AppLocalization.progress)
                 }
                 .tag(1)
             
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
-                    Text("Settings")
+                    Text(AppLocalization.settings)
                 }
                 .tag(2)
         }
