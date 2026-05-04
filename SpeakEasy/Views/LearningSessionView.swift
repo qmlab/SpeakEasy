@@ -99,12 +99,13 @@ struct LearningSessionView: View {
 
                 // Enlarged image overlay
                 if let itemName = enlargedItem {
+                    let englishItemName = learningManager.currentTask?.content.englishName(for: itemName) ?? itemName
                     Color.black.opacity(0.5)
                         .ignoresSafeArea()
                         .onTapGesture { enlargedItem = nil }
                     VStack(spacing: 16) {
                         RemoteImageView(
-                            objectName: itemName.lowercased().replacingOccurrences(of: " ", with: "_"),
+                            objectName: englishItemName.lowercased().replacingOccurrences(of: " ", with: "_"),
                             imageType: .flashcard,
                             fallbackIcon: "photo",
                             iconColor: .gray,
@@ -1351,7 +1352,7 @@ struct LearningSessionView: View {
 
                 HStack(spacing: 16) {
                     ForEach(Array(dragArrangeItems.enumerated()), id: \.element) { index, item in
-                        let imageKey = item.lowercased().replacingOccurrences(of: " ", with: "_")
+                        let imageKey = task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_")
                         let isDragging = draggedItem == item
 
                         VStack(spacing: 4) {
@@ -1548,7 +1549,7 @@ struct LearningSessionView: View {
                             let isDragging = dragSortItem == item
                             VStack(spacing: 4) {
                                 RemoteImageView(
-                                    objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                    objectName: task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_"),
                                     imageType: .thumbnail,
                                     fallbackIcon: "questionmark.circle",
                                     iconColor: dimension.color,
@@ -1691,7 +1692,7 @@ struct LearningSessionView: View {
                                 ForEach(bucketItems, id: \.self) { item in
                                     HStack(spacing: 8) {
                                         RemoteImageView(
-                                            objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                            objectName: task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_"),
                                             imageType: .thumbnail,
                                             fallbackIcon: "circle.fill",
                                             iconColor: colorForCategory(category, categories: categories),
@@ -1814,7 +1815,9 @@ struct LearningSessionView: View {
     private func checkDragSortCorrectness(task: AdaptiveTask, itemCategoryMap: [String: String]) -> Bool {
         for (category, items) in categorySortBuckets {
             for item in items {
-                if itemCategoryMap[item] != category {
+                // Map display name back to English for lookup in itemCategoryMap
+                let englishItem = task.content.englishName(for: item)
+                if itemCategoryMap[englishItem] != category {
                     return false
                 }
             }
@@ -2021,9 +2024,9 @@ struct LearningSessionView: View {
 
             Button {
                 let answer = textInputValue.trimmingCharacters(in: .whitespacesAndNewlines)
-                let expected = (task.content.correctAnswer ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+                let expected = (task.content.displayCorrectAnswer ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
                 let isCorrect = answer.lowercased() == expected.lowercased()
-                speechService.speak(isCorrect ? "Correct!" : "The answer is \(expected)")
+                speechService.speak(isCorrect ? AppLocalization.correct : "\(AppLocalization.localized("The answer is", zh: "答案是")) \(expected)")
                 Task {
                     await learningManager.submitAttempt(
                         isCorrect: isCorrect,
@@ -2179,7 +2182,7 @@ struct LearningSessionView: View {
                                         .background(Circle().fill(dimension.color))
                                     if useImageGrid {
                                         RemoteImageView(
-                                            objectName: item.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                            objectName: task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_"),
                                             imageType: .thumbnail,
                                             fallbackIcon: "questionmark.circle",
                                             iconColor: dimension.color,
@@ -2216,7 +2219,7 @@ struct LearningSessionView: View {
             // Remaining options to pick from
             if !remaining.isEmpty {
                 VStack(spacing: 8) {
-                    Text(orderedSelections.isEmpty ? "Tap in order:" : "Next:")
+                    Text(orderedSelections.isEmpty ? AppLocalization.localized("Tap in order:", zh: "按顺序点击：") : AppLocalization.localized("Next:", zh: "下一个："))
                         .font(.caption)
                         .foregroundColor(.secondary)
 
@@ -2233,7 +2236,7 @@ struct LearningSessionView: View {
                                 } label: {
                                     VStack(spacing: 6) {
                                         RemoteImageView(
-                                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                            objectName: task.content.englishName(for: option).lowercased().replacingOccurrences(of: " ", with: "_"),
                                             imageType: .flashcard,
                                             fallbackIcon: "questionmark.circle",
                                             iconColor: dimension.color,
@@ -2263,7 +2266,7 @@ struct LearningSessionView: View {
                             } label: {
                                 HStack(spacing: 12) {
                                     RemoteImageView(
-                                        objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                        objectName: task.content.englishName(for: option).lowercased().replacingOccurrences(of: " ", with: "_"),
                                         imageType: .thumbnail,
                                         fallbackIcon: "questionmark.circle",
                                         iconColor: dimension.color,
@@ -2312,9 +2315,11 @@ struct LearningSessionView: View {
         if orderedSelections.count == options.count {
             let isCorrect: Bool
             if let correctItems = task.content.items, correctItems.count == orderedSelections.count {
-                isCorrect = zip(orderedSelections, correctItems).allSatisfy { $0.lowercased() == $1.lowercased() }
+                // Map display selections back to English for comparison with correct items
+                let englishSelections = orderedSelections.map { task.content.englishName(for: $0) }
+                isCorrect = zip(englishSelections, correctItems).allSatisfy { $0.lowercased() == $1.lowercased() }
             } else {
-                let correctFirst = task.content.correctAnswer ?? ""
+                let correctFirst = task.content.displayCorrectAnswer ?? ""
                 isCorrect = orderedSelections.first?.lowercased() == correctFirst.lowercased()
             }
             Task {
@@ -2466,7 +2471,7 @@ struct LearningSessionView: View {
                 } label: {
                     VStack(spacing: 6) {
                         RemoteImageView(
-                            objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                            objectName: task.content.englishName(for: option).lowercased().replacingOccurrences(of: " ", with: "_"),
                             imageType: .flashcard,
                             fallbackIcon: "questionmark.circle",
                             iconColor: dimension.color,
@@ -2510,7 +2515,7 @@ struct LearningSessionView: View {
                     HStack(spacing: 12) {
                         if shouldShowOptionImage(task: task, option: option) {
                             RemoteImageView(
-                                objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                objectName: task.content.englishName(for: option).lowercased().replacingOccurrences(of: " ", with: "_"),
                                 imageType: .thumbnail,
                                 fallbackIcon: "questionmark.circle",
                                 iconColor: dimension.color,
@@ -2571,7 +2576,7 @@ struct LearningSessionView: View {
                         } label: {
                             VStack(spacing: 6) {
                                 RemoteImageView(
-                                    objectName: option.lowercased().replacingOccurrences(of: " ", with: "_"),
+                                    objectName: task.content.englishName(for: option).lowercased().replacingOccurrences(of: " ", with: "_"),
                                     imageType: .flashcard,
                                     fallbackIcon: "questionmark.circle",
                                     iconColor: dimension.color,
@@ -2663,9 +2668,10 @@ struct LearningSessionView: View {
     /// Submit the multi-select answer: compare selected set vs correct set.
     private func submitMultiSelect(task: AdaptiveTask, correctParts: Set<String>) {
         let selectedSet = Set(orderedSelections.map { $0.trimmingCharacters(in: .whitespaces) })
-        let correctSet = Set(correctParts.map { $0.lowercased() })
+        // Translate correct parts to display language so comparison works in both modes
+        let correctDisplay = Set(correctParts.map { task.content.displayName(for: $0).lowercased() })
         let selectedLower = Set(selectedSet.map { $0.lowercased() })
-        let isCorrect = selectedLower == correctSet
+        let isCorrect = selectedLower == correctDisplay
         Task {
             await learningManager.submitAttempt(
                 isCorrect: isCorrect,
@@ -2686,7 +2692,7 @@ struct LearningSessionView: View {
             speechService.stopListening()
             isListening = false
         }
-        let isCorrect = option.lowercased() == (task.content.correctAnswer ?? "").lowercased()
+        let isCorrect = option.lowercased() == (task.content.displayCorrectAnswer ?? "").lowercased()
         Task {
             await learningManager.submitAttempt(
                 isCorrect: isCorrect,

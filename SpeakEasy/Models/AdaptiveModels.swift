@@ -491,6 +491,37 @@ struct TaskContent: Codable {
         }
         return cats.map { AppLocalization.translateOption($0) }
     }
+
+    /// Returns the original English option name for a given display option.
+    func englishName(for displayOption: String) -> String {
+        guard AppLocalization.isChineseMode else { return displayOption }
+        let opts = options ?? []
+        let dispOpts = displayOptions
+        if let idx = dispOpts.firstIndex(of: displayOption), idx < opts.count {
+            return opts[idx]
+        }
+        return displayOption
+    }
+
+    /// Returns the localized display name for an English option.
+    func displayName(for englishOption: String) -> String {
+        guard AppLocalization.isChineseMode else { return englishOption }
+        let opts = options ?? []
+        if let idx = opts.firstIndex(where: { $0.lowercased() == englishOption.lowercased() }) {
+            let dispOpts = displayOptions
+            if idx < dispOpts.count {
+                return dispOpts[idx]
+            }
+        }
+        return AppLocalization.translateOption(englishOption)
+    }
+
+    /// The correct answer in the display (localized) language.
+    var displayCorrectAnswer: String? {
+        guard let answer = correctAnswer else { return nil }
+        guard AppLocalization.isChineseMode else { return answer }
+        return displayName(for: answer)
+    }
 }
 
 // MARK: - Attempt Models

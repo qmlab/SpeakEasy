@@ -42,7 +42,7 @@ struct AdaptiveDashboardView: View {
                 .padding(.bottom, 32)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Progress")
+            .navigationTitle(AppLocalization.progress)
             .task {
                 await learningManager.loadProfiles()
                 await learningManager.loadDashboard()

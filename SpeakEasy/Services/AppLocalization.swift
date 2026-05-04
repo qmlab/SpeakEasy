@@ -43,6 +43,15 @@ enum AppLocalization {
     }
     static var resetAllData: String { localized("Reset All Data", zh: "重置所有数据") }
 
+    // MARK: - Tab Bar & Home
+
+    static var progress: String { localized("Progress", zh: "进度") }
+    static var camera: String { localized("Camera", zh: "相机") }
+    static var appTitle: String { localized("Rising Star Kid", zh: "启明星") }
+    static var letsLearnTogether: String { localized("Let's learn together!", zh: "一起来学习吧！") }
+    static var myDevelopment: String { localized("My Development", zh: "我的发展") }
+    static var quickStart: String { localized("Quick Start", zh: "快速开始") }
+
     // MARK: - Dimension Hub
 
     static var learn: String { localized("Learn", zh: "学习") }
