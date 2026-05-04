@@ -219,7 +219,12 @@
             "House",
             "Tree"
           ],
-          "instruction_zh": "我会说3个词。之后，告诉我中间的词：Cat, House, Tree。"
+          "instruction_zh": "我会说3个词。之后，告诉我中间的词：Cat, House, Tree。",
+          "options_zh": [
+            "猫",
+            "房子",
+            "树"
+          ]
         }
       ]
     },
@@ -363,7 +368,15 @@
             "Sun"
           ],
           "tap_target": "Hat, Bat, Mat",
-          "no_tap_target": "Dog, Car, Sun"
+          "no_tap_target": "Dog, Car, Sun",
+          "options_zh": [
+            "帽子",
+            "狗",
+            "蝙蝠",
+            "汽车",
+            "Mat",
+            "太阳"
+          ]
         }
       ]
     },
@@ -489,7 +502,11 @@
           ],
           "correct_answer": "Right",
           "image_hint": "elephant",
-          "instruction_zh": "按音节数分类：1个音节放左边，2个以上音节放右边。[Elephant]"
+          "instruction_zh": "按音节数分类：1个音节放左边，2个以上音节放右边。[Elephant]",
+          "options_zh": [
+            "右",
+            "左"
+          ]
         }
       ]
     },

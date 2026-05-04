@@ -170,7 +170,13 @@
             "Sun"
           ],
           "correct_answer": "Hat",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "options_zh": [
+            "帽子",
+            "狗",
+            "汽车",
+            "太阳"
+          ]
         },
         {
           "instruction": "Which word rhymes with Dog?",
@@ -185,7 +191,13 @@
             "Bed"
           ],
           "correct_answer": "Log",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "Log",
+            "猫",
+            "钢笔",
+            "床"
+          ]
         },
         {
           "question_id": "Q354",
@@ -200,7 +212,13 @@
             "Big"
           ],
           "correct_answer": "Fun",
-          "image_hint": "sun"
+          "image_hint": "sun",
+          "options_zh": [
+            "Fun",
+            "Sit",
+            "地图",
+            "大"
+          ]
         },
         {
           "question_id": "Q355",
@@ -215,7 +233,13 @@
             "Box"
           ],
           "correct_answer": "Red",
-          "image_hint": "bed"
+          "image_hint": "bed",
+          "options_zh": [
+            "红色",
+            "大",
+            "杯子",
+            "盒子"
+          ]
         }
       ]
     },
@@ -237,7 +261,13 @@
             "Cow"
           ],
           "correct_answer": "Cat",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "options_zh": [
+            "猫",
+            "汽车",
+            "杯子",
+            "牛"
+          ]
         },
         {
           "question_id": "Q357",
@@ -252,7 +282,13 @@
             "Dot"
           ],
           "correct_answer": "Dog",
-          "image_hint": "dog"
+          "image_hint": "dog",
+          "options_zh": [
+            "狗",
+            "Dig",
+            "Dug",
+            "Dot"
+          ]
         },
         {
           "question_id": "Q358",
@@ -267,7 +303,13 @@
             "Sad"
           ],
           "correct_answer": "Sun",
-          "image_hint": "sun"
+          "image_hint": "sun",
+          "options_zh": [
+            "太阳",
+            "Sit",
+            "Son",
+            "伤心"
+          ]
         },
         {
           "question_id": "Q359",
@@ -282,7 +324,13 @@
             "Hut"
           ],
           "correct_answer": "Hat",
-          "image_hint": "hat"
+          "image_hint": "hat",
+          "options_zh": [
+            "帽子",
+            "热的",
+            "Hit",
+            "Hut"
+          ]
         }
       ]
     },
@@ -349,7 +397,13 @@
             "See"
           ],
           "correct_answer": "Said",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "Said",
+            "伤心",
+            "Sit",
+            "See"
+          ]
         }
       ]
     },
@@ -416,7 +470,13 @@
             "Hun"
           ],
           "correct_answer": "Hen",
-          "image_hint": "bird"
+          "image_hint": "bird",
+          "options_zh": [
+            "母鸡",
+            "Han",
+            "Hin",
+            "Hun"
+          ]
         }
       ]
     },
@@ -438,7 +498,13 @@
             "Box"
           ],
           "correct_answer": "Bat",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "蝙蝠",
+            "床",
+            "虫子",
+            "盒子"
+          ]
         },
         {
           "question_id": "Q369",
@@ -468,7 +534,13 @@
             "Pad"
           ],
           "correct_answer": "Pop",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "Pop",
+            "Pup",
+            "钢笔",
+            "Pad"
+          ]
         },
         {
           "question_id": "Q371",
@@ -483,7 +555,13 @@
             "Bot"
           ],
           "correct_answer": "Bat",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "options_zh": [
+            "蝙蝠",
+            "Bit",
+            "But",
+            "Bot"
+          ]
         }
       ]
     },
@@ -505,7 +583,13 @@
             "Fish"
           ],
           "correct_answer": "Bear",
-          "image_hint": "ball"
+          "image_hint": "ball",
+          "options_zh": [
+            "熊",
+            "猫",
+            "狗",
+            "鱼"
+          ]
         },
         {
           "question_id": "Q373",
@@ -520,7 +604,13 @@
             "Sun"
           ],
           "correct_answer": "Top",
-          "image_hint": "cup"
+          "image_hint": "cup",
+          "options_zh": [
+            "Top",
+            "猫",
+            "床",
+            "太阳"
+          ]
         },
         {
           "question_id": "Q374",
@@ -535,7 +625,13 @@
             "Dog"
           ],
           "correct_answer": "Sit",
-          "image_hint": "sun"
+          "image_hint": "sun",
+          "options_zh": [
+            "Sit",
+            "蝙蝠",
+            "杯子",
+            "狗"
+          ]
         },
         {
           "question_id": "Q375",
@@ -572,7 +668,13 @@
             "Frag"
           ],
           "correct_answer": "Frog",
-          "image_hint": "frog"
+          "image_hint": "frog",
+          "options_zh": [
+            "青蛙",
+            "雾",
+            "Forg",
+            "Frag"
+          ]
         },
         {
           "question_id": "Q377",
@@ -587,7 +689,13 @@
             "Dum"
           ],
           "correct_answer": "Drum",
-          "image_hint": "drum"
+          "image_hint": "drum",
+          "options_zh": [
+            "鼓",
+            "Dram",
+            "Drm",
+            "Dum"
+          ]
         },
         {
           "question_id": "Q378",
@@ -639,7 +747,13 @@
             "Dog"
           ],
           "correct_answer": "Apple",
-          "image_hint": "apple"
+          "image_hint": "apple",
+          "options_zh": [
+            "苹果",
+            "球",
+            "汽车",
+            "狗"
+          ]
         },
         {
           "question_id": "Q381",
@@ -654,7 +768,13 @@
             "Hand"
           ],
           "correct_answer": "House",
-          "image_hint": "house"
+          "image_hint": "house",
+          "options_zh": [
+            "房子",
+            "马",
+            "帽子",
+            "手"
+          ]
         },
         {
           "question_id": "Q382",
@@ -669,7 +789,13 @@
             "Red"
           ],
           "correct_answer": "Small",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "小",
+            "高",
+            "Fast",
+            "红色"
+          ]
         },
         {
           "question_id": "Q383",
@@ -684,7 +810,13 @@
             "Wet"
           ],
           "correct_answer": "Cold",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "冷的",
+            "Fast",
+            "大",
+            "Wet"
+          ]
         }
       ]
     }

@@ -22,12 +22,12 @@ enum DevelopmentalDimension: String, Codable, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .objectCognition: return "Object Cognition"
-        case .languageExpression: return "Language Expression"
-        case .languageComprehension: return "Language Comprehension"
-        case .literacy: return "Literacy"
-        case .socialBehavior: return "Social Behavior"
-        case .cognitiveLogic: return "Cognitive Logic"
+        case .objectCognition: return AppLocalization.dimObjectCognition
+        case .languageExpression: return AppLocalization.dimLanguageExpression
+        case .languageComprehension: return AppLocalization.dimLanguageComprehension
+        case .literacy: return AppLocalization.dimLiteracy
+        case .socialBehavior: return AppLocalization.dimSocialBehavior
+        case .cognitiveLogic: return AppLocalization.dimCognitiveLogic
         }
     }
 
@@ -54,6 +54,7 @@ enum DevelopmentalDimension: String, Codable, CaseIterable, Identifiable {
     }
 
     var levelDescriptions: [String] {
+        if AppLocalization.isChineseMode { return levelDescriptionsZh }
         switch self {
         case .objectCognition:
             return [
@@ -97,6 +98,54 @@ enum DevelopmentalDimension: String, Codable, CaseIterable, Identifiable {
                 "Sequencing", "Basic Reasoning",
                 "Pattern Recognition", "Logical Deduction",
                 "Abstract Reasoning", "Multi-Step Logic", "Expert Problem Solving"
+            ]
+        }
+    }
+
+    private var levelDescriptionsZh: [String] {
+        switch self {
+        case .objectCognition:
+            return [
+                "基础配对", "物体辨认", "分类",
+                "功能理解", "抽象关系",
+                "复杂分类", "多特征排序",
+                "概念分组", "类比推理", "高级抽象"
+            ]
+        case .languageExpression:
+            return [
+                "模仿声音", "命名物体", "简单描述",
+                "组建句子", "基础对话",
+                "详细描述", "复杂句子",
+                "讲故事", "说服表达", "高级表达"
+            ]
+        case .languageComprehension:
+            return [
+                "基础听辨", "中级听辨",
+                "高级听辨", "语义理解(基础)",
+                "语义理解(进阶)", "复杂指令",
+                "推理理解", "抽象语言",
+                "批判性听力", "高级推理"
+            ]
+        case .literacy:
+            return [
+                "图像识别", "图文配对", "常见字",
+                "简单句子", "短篇阅读",
+                "段落阅读", "故事理解",
+                "信息文本", "批判性阅读", "高级读写"
+            ]
+        case .socialBehavior:
+            return [
+                "共同注意", "情绪识别", "社交参照",
+                "轮流", "换位思考",
+                "冲突解决", "群体互动",
+                "共情支持", "社交问题解决", "领导力"
+            ]
+        case .cognitiveLogic:
+            return [
+                "基础配对", "简单排序", "因果关系",
+                "排序", "基础推理",
+                "规律识别", "逻辑推断",
+                "抽象推理", "多步逻辑", "高级问题解决"
             ]
         }
     }
@@ -266,7 +315,9 @@ struct TaskContent: Codable {
     let flashImage: String?
     let flashSequence: [String]?
     let interactionMode: String?
+    let optionsZh: [String]?
     let sortCategories: [String]?
+    let sortCategoriesZh: [String]?
     let itemCategories: [String: String]?
     let multiSelect: Bool?
 
@@ -301,7 +352,9 @@ struct TaskContent: Codable {
         case flashImage = "flash_image"
         case flashSequence = "flash_sequence"
         case interactionMode = "interaction_mode"
+        case optionsZh = "options_zh"
         case sortCategories = "sort_categories"
+        case sortCategoriesZh = "sort_categories_zh"
         case itemCategories = "item_categories"
         case multiSelect = "multi_select"
     }
@@ -334,7 +387,9 @@ struct TaskContent: Codable {
         flashImage = try container.decodeIfPresent(String.self, forKey: .flashImage)
         flashSequence = try container.decodeIfPresent([String].self, forKey: .flashSequence)
         interactionMode = try container.decodeIfPresent(String.self, forKey: .interactionMode)
+        optionsZh = try container.decodeIfPresent([String].self, forKey: .optionsZh)
         sortCategories = try container.decodeIfPresent([String].self, forKey: .sortCategories)
+        sortCategoriesZh = try container.decodeIfPresent([String].self, forKey: .sortCategoriesZh)
         itemCategories = try container.decodeIfPresent([String: String].self, forKey: .itemCategories)
         multiSelect = try container.decodeIfPresent(Bool.self, forKey: .multiSelect)
 
@@ -398,7 +453,9 @@ struct TaskContent: Codable {
         try container.encodeIfPresent(flashImage, forKey: .flashImage)
         try container.encodeIfPresent(flashSequence, forKey: .flashSequence)
         try container.encodeIfPresent(interactionMode, forKey: .interactionMode)
+        try container.encodeIfPresent(optionsZh, forKey: .optionsZh)
         try container.encodeIfPresent(sortCategories, forKey: .sortCategories)
+        try container.encodeIfPresent(sortCategoriesZh, forKey: .sortCategoriesZh)
         try container.encodeIfPresent(itemCategories, forKey: .itemCategories)
         try container.encodeIfPresent(multiSelect, forKey: .multiSelect)
     }
@@ -416,7 +473,23 @@ struct TaskContent: Codable {
     }
 
     var displayOptions: [String] {
-        options ?? []
+        let opts = options ?? []
+        guard AppLocalization.isChineseMode else { return opts }
+        // Use explicit options_zh from backend if available and matching length
+        if let zh = optionsZh, zh.count == opts.count {
+            return zh
+        }
+        // Fallback: translate each option using the dictionary
+        return opts.map { AppLocalization.translateOption($0) }
+    }
+
+    var displaySortCategories: [String] {
+        let cats = sortCategories ?? []
+        guard AppLocalization.isChineseMode else { return cats }
+        if let zh = sortCategoriesZh, zh.count == cats.count {
+            return zh
+        }
+        return cats.map { AppLocalization.translateOption($0) }
     }
 }
 

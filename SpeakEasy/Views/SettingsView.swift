@@ -72,16 +72,16 @@ struct SettingsView: View {
             if let user = authService.currentUser {
                 VStack(alignment: .leading, spacing: 15) {
                     if let name = user.name {
-                        AboutRow(icon: "person.fill", color: .blue, title: "Name", value: name)
+                        AboutRow(icon: "person.fill", color: .blue, title: AppLocalization.name, value: name)
                         Divider()
                     }
                     
                     if let email = user.email {
-                        AboutRow(icon: "envelope.fill", color: .purple, title: "Email", value: email)
+                        AboutRow(icon: "envelope.fill", color: .purple, title: AppLocalization.email, value: email)
                         Divider()
                     }
                     
-                    AboutRow(icon: "checkmark.seal.fill", color: .green, title: "Signed in with", value: "Apple")
+                    AboutRow(icon: "checkmark.seal.fill", color: .green, title: AppLocalization.signedInWith, value: "Apple")
                 }
             }
             
@@ -198,24 +198,24 @@ struct SettingsView: View {
                     .foregroundColor(.purple)
                     .font(.title2)
                 
-                Text("About Rising Star Kid")
+                Text(AppLocalization.aboutApp)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
             }
             
             VStack(alignment: .leading, spacing: 15) {
-                AboutRow(icon: "star.fill", color: .yellow, title: "Version", value: "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"))")
+                AboutRow(icon: "star.fill", color: .yellow, title: AppLocalization.version, value: "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"))")
                 
                 Divider()
                 
-                AboutRow(icon: "heart.fill", color: .red, title: "Made with", value: "Love")
+                AboutRow(icon: "heart.fill", color: .red, title: AppLocalization.madeWith, value: AppLocalization.love)
                 
                 Divider()
                 
-                AboutRow(icon: "person.3.fill", color: .blue, title: "For", value: "Special Kids")
+                AboutRow(icon: "person.3.fill", color: .blue, title: AppLocalization.forKids, value: AppLocalization.specialKids)
             }
             
-            Text("Rising Star Kid helps autistic children develop across 6 dimensions with adaptive learning, ABA-based reinforcement, and personalized content.")
+            Text(AppLocalization.aboutDescription)
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
                 .padding(.top, 10)
@@ -235,12 +235,12 @@ struct SettingsView: View {
                     .foregroundColor(.red)
                     .font(.title2)
                 
-                Text("Reset")
+                Text(AppLocalization.resetSection)
                     .font(.system(size: 22, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
             }
             
-            Text("Reset all progress and start fresh. This will remove all learned objects and stars.")
+            Text(AppLocalization.resetDescription)
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
             
@@ -249,7 +249,7 @@ struct SettingsView: View {
             }) {
                 HStack(spacing: 10) {
                     Image(systemName: "trash.fill")
-                    Text("Reset All Progress")
+                    Text(AppLocalization.resetAllProgress)
                 }
                 .font(.system(size: 16, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
