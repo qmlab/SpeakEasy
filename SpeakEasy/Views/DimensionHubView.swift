@@ -57,7 +57,7 @@ struct DimensionHubView: View {
                     Menu {
                         if let user = authService.currentUser {
                             Section {
-                                Label(user.name ?? "Player", systemImage: "person.fill")
+                                Label(user.name ?? AppLocalization.player, systemImage: "person.fill")
                                 if let email = user.email {
                                     Label(email, systemImage: "envelope.fill")
                                 }
@@ -121,10 +121,10 @@ struct DimensionHubView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     storyCard(
-                        title: "Bunny's Birthday Party",
+                        title: AppLocalization.bunnyStoryTitle,
                         titleZh: "小兔子的生日派对",
                         emoji: "🐰",
-                        description: "Help Bunny prepare a birthday party! Find items, decorate, and greet friends.",
+                        description: AppLocalization.bunnyStoryDesc,
                         sceneCount: 8,
                         estimatedMinutes: 4,
                         imageUrl: "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/stories/story_s1_kitchen_find_apple"
@@ -198,10 +198,10 @@ struct DimensionHubView: View {
 
                 // Metadata
                 HStack(spacing: 12) {
-                    Label("\(sceneCount) scenes", systemImage: "film")
+                    Label("\(sceneCount) \(AppLocalization.scenes)", systemImage: "film")
                         .font(.caption2)
                         .foregroundColor(.orange)
-                    Label("~\(estimatedMinutes) min", systemImage: "clock")
+                    Label("~\(estimatedMinutes) \(AppLocalization.minutesUnit)", systemImage: "clock")
                         .font(.caption2)
                         .foregroundColor(.orange)
                 }
@@ -237,17 +237,17 @@ struct DimensionHubView: View {
     private var overallProgressHeader: some View {
         VStack(spacing: 12) {
             if learningManager.isLoadingProfiles {
-                ProgressView("Loading...")
+                ProgressView(AppLocalization.loading)
                     .frame(maxWidth: .infinity)
                     .padding()
             } else {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Hello, \(learningManager.playerName.isEmpty ? "Star" : learningManager.playerName)!")
+                        Text("\(AppLocalization.hello), \(learningManager.playerName.isEmpty ? "⭐" : learningManager.playerName)!")
                             .font(.title2)
                             .fontWeight(.bold)
 
-                        Text("Choose an area to practice")
+                        Text(AppLocalization.chooseArea)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -258,7 +258,7 @@ struct DimensionHubView: View {
                     VStack {
                         Text("⭐")
                             .font(.title)
-                        Text("Level \(String(format: "%.1f", learningManager.overallLevel))")
+                        Text("\(AppLocalization.level) \(String(format: "%.1f", learningManager.overallLevel))")
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(.orange)

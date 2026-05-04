@@ -29,7 +29,13 @@
             "star"
           ],
           "correct_answer": "circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "options_zh": [
+            "圆形",
+            "正方形",
+            "三角形",
+            "星星"
+          ]
         },
         {
           "instruction": "The colors take turns! What comes next?",
@@ -227,7 +233,13 @@
             "triangle"
           ],
           "correct_answer": "filled_square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "options_zh": [
+            "filled_square",
+            "正方形",
+            "filled_circle",
+            "三角形"
+          ]
         },
         {
           "instruction": "Look at the grid! The shapes get smaller. What is missing?",
@@ -274,7 +286,11 @@
           ],
           "correct_answer": "square",
           "image_hint": "square",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "正方形",
+            "圆形"
+          ]
         },
         {
           "instruction": "Which is Longer?",
@@ -292,7 +308,11 @@
             "crayon"
           ],
           "correct_answer": "pencil",
-          "image_hint": "pencil"
+          "image_hint": "pencil",
+          "options_zh": [
+            "铅笔",
+            "蜡笔"
+          ]
         },
         {
           "instruction": "Dog is to puppy as cat is to ___?",
@@ -314,7 +334,13 @@
             "lamb"
           ],
           "correct_answer": "kitten",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "options_zh": [
+            "kitten",
+            "cub",
+            "foal",
+            "小羊"
+          ]
         }
       ]
     },
@@ -441,7 +467,13 @@
             "sandal"
           ],
           "correct_answer": "sock",
-          "image_hint": "shoe"
+          "image_hint": "shoe",
+          "options_zh": [
+            "袜子",
+            "鞋子",
+            "boot",
+            "sandal"
+          ]
         }
       ]
     },
@@ -470,7 +502,13 @@
             "circle"
           ],
           "correct_answer": "hexagon",
-          "image_hint": "hexagon"
+          "image_hint": "hexagon",
+          "options_zh": [
+            "六边形",
+            "三角形",
+            "正方形",
+            "圆形"
+          ]
         },
         {
           "instruction": "Each shape flips! What does this shape look like flipped?",
@@ -513,7 +551,11 @@
           ],
           "correct_answer": "square",
           "image_hint": "square",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "正方形",
+            "三角形"
+          ]
         },
         {
           "instruction": "Which is bigger: half a pie or a quarter?",
@@ -553,7 +595,13 @@
             "hammer"
           ],
           "correct_answer": "chisel",
-          "image_hint": "hammer"
+          "image_hint": "hammer",
+          "options_zh": [
+            "chisel",
+            "钢笔",
+            "针",
+            "锤子"
+          ]
         }
       ]
     },
@@ -603,7 +651,11 @@
           ],
           "correct_answer": "circle_with_dot",
           "image_hint": "circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "circle_with_dot",
+            "正方形"
+          ]
         },
         {
           "instruction": "A train goes 60 miles each hour. How far in 2 hours?",
@@ -841,7 +893,13 @@
           ],
           "correct_answer": "circle",
           "image_hint": "circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "圆形",
+            "red_circle",
+            "big_square",
+            "small_triangle"
+          ]
         },
         {
           "instruction": "If a rectangle has area 24 and width 4, what is its length?",
@@ -949,7 +1007,12 @@
           ],
           "correct_answer": "pentagon",
           "image_hint": "pentagon",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "五边形",
+            "三角形",
+            "正方形"
+          ]
         },
         {
           "instruction": "Syntax is to grammar as melody is to ___?",
@@ -1034,7 +1097,13 @@
             "Lung"
           ],
           "correct_answer": "Heart",
-          "image_hint": "heart"
+          "image_hint": "heart",
+          "options_zh": [
+            "心脏",
+            "大脑",
+            "肝脏",
+            "Lung"
+          ]
         }
       ]
     },
@@ -1062,7 +1131,11 @@
           ],
           "correct_answer": "circle",
           "image_hint": "circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "圆形",
+            "三角形"
+          ]
         },
         {
           "instruction": "If boys to girls is 3:5 and there are 40 students, how many boys?",

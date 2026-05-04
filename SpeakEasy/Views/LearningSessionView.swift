@@ -286,7 +286,7 @@ struct LearningSessionView: View {
         VStack(spacing: 16) {
             ProgressView()
                 .scaleEffect(1.5)
-            Text("Getting ready...")
+            Text(AppLocalization.gettingReady)
                 .font(.headline)
                 .foregroundColor(.secondary)
         }
@@ -307,13 +307,13 @@ struct LearningSessionView: View {
                 .fontWeight(.bold)
 
             let stageNum = learningManager.stagesCompleted(for: dimension) + 1
-            Text("Stage \(stageNum)")
+            Text("\(AppLocalization.stage) \(stageNum)")
                 .font(.title2)
                 .foregroundColor(.secondary)
 
             // Duration picker
             VStack(spacing: 12) {
-                Text("Session Duration")
+                Text(AppLocalization.sessionDuration)
                     .font(.headline)
                     .foregroundColor(.secondary)
 
@@ -322,7 +322,7 @@ struct LearningSessionView: View {
                         Button {
                             selectedDuration = minutes
                         } label: {
-                            Text("\(minutes) min")
+                            Text("\(minutes) \(AppLocalization.minutesUnit)")
                                 .font(.subheadline.weight(.semibold))
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 10)
@@ -355,7 +355,7 @@ struct LearningSessionView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                Text("\(stageNum - 1) stage\(stageNum - 1 == 1 ? "" : "s") completed today")
+                Text("\(stageNum - 1) \(AppLocalization.stagesCompletedToday)")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -372,7 +372,7 @@ struct LearningSessionView: View {
             } label: {
                 HStack(spacing: 8) {
                     Image(systemName: "play.fill")
-                    Text("Start")
+                    Text(AppLocalization.start)
                         .fontWeight(.bold)
                 }
                 .font(.title3)
@@ -396,7 +396,7 @@ struct LearningSessionView: View {
         VStack(spacing: 16) {
             ProgressView()
                 .scaleEffect(1.5)
-            Text("Starting session...")
+            Text(AppLocalization.startingSession)
                 .font(.headline)
                 .foregroundColor(.secondary)
         }
@@ -527,12 +527,12 @@ struct LearningSessionView: View {
     private var taskProgressBar: some View {
         VStack(spacing: 6) {
             HStack {
-                Text("Stage \(learningManager.currentStageLevel) \u{00B7} Task \(learningManager.sessionTaskCount + 1)")
+                Text("\(AppLocalization.stage) \(learningManager.currentStageLevel) \u{00B7} \(AppLocalization.task) \(learningManager.sessionTaskCount + 1)")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
                 if let result = learningManager.lastAttemptResult {
-                    Text("Accuracy: \(Int(result.accuracy * 100))%")
+                    Text("\(AppLocalization.accuracy): \(Int(result.accuracy * 100))%")
                         .font(.caption)
                         .foregroundColor(result.accuracy >= 0.8 ? .green : .orange)
                 }
@@ -543,11 +543,11 @@ struct LearningSessionView: View {
 
             // Tasks completed count
             HStack {
-                Text("\(learningManager.sessionTaskCount) completed")
+                Text("\(learningManager.sessionTaskCount) \(AppLocalization.completed)")
                     .font(.system(size: 10))
                     .foregroundColor(.secondary)
                 Spacer()
-                Text(formattedTimeRemaining + " left")
+                Text(formattedTimeRemaining + " \(AppLocalization.left)")
                     .font(.system(size: 10, weight: .medium).monospacedDigit())
                     .foregroundColor(learningManager.sessionTimeRemaining < 60 ? .red : .secondary)
             }
@@ -604,7 +604,7 @@ struct LearningSessionView: View {
                     Image(systemName: "flame.fill")
                         .font(.system(size: 10))
                         .foregroundColor(.orange)
-                    Text("\(learningManager.currentStreak) streak!")
+                    Text("\(learningManager.currentStreak) \(AppLocalization.streak)!")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.orange)
                 }
@@ -625,7 +625,7 @@ struct LearningSessionView: View {
                     Image(systemName: "speaker.wave.2.fill")
                         .font(.title2)
                         .foregroundColor(.white)
-                    Text("Hear Again")
+                    Text(AppLocalization.hearAgain)
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -884,7 +884,7 @@ struct LearningSessionView: View {
         let layout = task.content.gridLayout  // e.g. [3, 3] for a 3x3 grid
 
         return VStack(spacing: 12) {
-            Text("🔍 Find the pattern!")
+            Text(AppLocalization.findPattern)
                 .font(.headline)
                 .foregroundColor(dimension.color)
 
@@ -976,7 +976,7 @@ struct LearningSessionView: View {
             HStack {
                 Image(systemName: animationFinished ? "checkmark.circle.fill" : "play.circle.fill")
                     .font(.title3)
-                Text(animationFinished ? "Now answer!" : "Watch carefully!")
+                Text(animationFinished ? AppLocalization.localized("Now answer!", zh: "现在回答！") : AppLocalization.localized("Watch carefully!", zh: "仔细看！"))
                     .font(.headline)
             }
             .foregroundColor(dimension.color)
@@ -1042,7 +1042,7 @@ struct LearningSessionView: View {
 
                         // Tap hint for multi-tap tasks
                         if isTappable {
-                            Text("Tap here when you see the target!")
+                            Text(AppLocalization.tapHere)
                                 .font(.caption)
                                 .foregroundColor(dimension.color.opacity(0.7))
                         }
@@ -1076,7 +1076,7 @@ struct LearningSessionView: View {
 
             // Step counter
             if !animationFinished {
-                Text("Step \(min(animationFrameIndex + 1, totalFrames)) of \(totalFrames)")
+                Text("\(min(animationFrameIndex + 1, totalFrames)) / \(totalFrames)")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -1145,7 +1145,7 @@ struct LearningSessionView: View {
                 if flashPhase < images.count && flashVisible {
                     let currentImage = images[flashPhase]
                     VStack(spacing: 8) {
-                        Text("👀 Watch carefully!")
+                        Text(AppLocalization.watchCarefully)
                             .font(.headline)
                             .foregroundColor(dimension.color)
 
@@ -1167,7 +1167,7 @@ struct LearningSessionView: View {
 
                         // Tap hint for multi-tap tasks
                         if isTappable {
-                            Text("Tap here when you see the target!")
+                            Text(AppLocalization.tapHere)
                                 .font(.caption)
                                 .foregroundColor(dimension.color.opacity(0.7))
                         }
@@ -1175,7 +1175,7 @@ struct LearningSessionView: View {
                 } else if !flashVisible && !flashCompleted {
                     // Brief blank between flashes or before start
                     VStack(spacing: 8) {
-                        Text("👀 Watch carefully!")
+                        Text(AppLocalization.watchCarefully)
                             .font(.headline)
                             .foregroundColor(dimension.color)
                         ProgressView()
@@ -1188,7 +1188,7 @@ struct LearningSessionView: View {
                     Image(systemName: "brain.head.profile")
                         .font(.system(size: 40))
                         .foregroundColor(dimension.color)
-                    Text("What did you see?")
+                    Text(AppLocalization.whatDidYouSee)
                         .font(.headline)
                         .foregroundColor(dimension.color)
                 }
@@ -1329,7 +1329,7 @@ struct LearningSessionView: View {
             // Reference image showing the correct arrangement
             if let refImage = task.content.questionImage, !refImage.isEmpty {
                 VStack(spacing: 6) {
-                    Text("Match this order:")
+                    Text(AppLocalization.matchThisOrder)
                         .font(Font.subheadline.weight(.bold))
                         .foregroundColor(.secondary)
                     RemoteImageView(
@@ -1345,7 +1345,7 @@ struct LearningSessionView: View {
 
             // Draggable shapes row
             VStack(spacing: 8) {
-                Text("Drag to arrange:")
+                Text(AppLocalization.dragToArrange)
                     .font(Font.subheadline.weight(.bold))
                     .foregroundColor(.secondary)
 
@@ -1441,7 +1441,7 @@ struct LearningSessionView: View {
                     )
                 }
             } label: {
-                Text("Done!")
+                Text(AppLocalization.done)
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -1459,7 +1459,7 @@ struct LearningSessionView: View {
                     initDragArrangeItems(task: task)
                 }
             } label: {
-                Label("Shuffle", systemImage: "shuffle")
+                Label(AppLocalization.localized("Shuffle", zh: "打乱"), systemImage: "shuffle")
                     .font(.subheadline)
                     .foregroundColor(.orange)
             }
@@ -1672,7 +1672,7 @@ struct LearningSessionView: View {
                                 .fill(colorForCategory(category, categories: categories))
                         )
                         .onTapGesture {
-                            speechService.speak(category)
+                            speechService.speak(AppLocalization.translateOption(category))
                         }
 
                         // Drop zone with placed items
@@ -1902,7 +1902,7 @@ struct LearningSessionView: View {
                 Image(systemName: "hand.tap.fill")
                     .font(.title2)
                     .foregroundColor(dimension.color)
-                Text("Taps: \(multiTapCount)")
+                Text("\(AppLocalization.taps): \(multiTapCount)")
                     .font(.system(size: 32, weight: .bold, design: .rounded))
                     .foregroundColor(dimension.color)
             }
@@ -1928,7 +1928,7 @@ struct LearningSessionView: View {
                     VStack(spacing: 8) {
                         Image(systemName: "hand.tap.fill")
                             .font(.system(size: 44))
-                        Text("TAP!")
+                        Text(AppLocalization.tap)
                             .font(.system(size: 24, weight: .bold, design: .rounded))
                     }
                     .foregroundColor(.white)
@@ -1957,7 +1957,7 @@ struct LearningSessionView: View {
                 } label: {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
-                        Text("Done (\(multiTapCount) taps)")
+                        Text("\(AppLocalization.done) (\(multiTapCount))")
                     }
                     .font(.headline)
                     .foregroundColor(.white)
@@ -2035,7 +2035,7 @@ struct LearningSessionView: View {
             } label: {
                 HStack {
                     Image(systemName: "checkmark.circle.fill")
-                    Text("Submit")
+                    Text(AppLocalization.submit)
                 }
                 .font(.headline)
                 .foregroundColor(.white)
@@ -2165,7 +2165,7 @@ struct LearningSessionView: View {
             // Selected items (in order) — horizontal chips for compact display
             if !orderedSelections.isEmpty {
                 VStack(spacing: 8) {
-                    Text("Your order:")
+                    Text(AppLocalization.yourOrder)
                         .font(.caption)
                         .foregroundColor(.secondary)
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -2336,7 +2336,7 @@ struct LearningSessionView: View {
             HStack(spacing: 12) {
                 Image(systemName: "camera.viewfinder")
                     .font(.title2)
-                Text("Find with Camera")
+                Text(AppLocalization.findWithCamera)
                     .font(.headline)
             }
             .foregroundColor(.white)
@@ -2557,7 +2557,7 @@ struct LearningSessionView: View {
             HStack(spacing: 6) {
                 Image(systemName: "hand.tap.fill")
                     .foregroundColor(dimension.color)
-                Text("Pick all that match (\(orderedSelections.count) selected)")
+                Text("\(AppLocalization.pickAllMatch) (\(orderedSelections.count))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -2635,7 +2635,7 @@ struct LearningSessionView: View {
             } label: {
                 HStack {
                     Image(systemName: "checkmark")
-                    Text("Done")
+                    Text(AppLocalization.done)
                 }
                 .font(.headline)
                 .foregroundColor(.white)
@@ -2950,7 +2950,7 @@ struct LearningSessionView: View {
                 HStack {
                     Image(systemName: "quote.bubble.fill")
                         .foregroundColor(dimension.color)
-                    Text("You said: \"\(spokenText)\"")
+                    Text("\(AppLocalization.youSaid) \"\(spokenText)\"")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -3353,12 +3353,12 @@ struct LearningSessionView: View {
                     .foregroundStyle(.white)
                     .shadow(color: .yellow.opacity(0.6), radius: 12)
 
-                Text("Level Up!")
+                Text(AppLocalization.levelUp)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
 
-                Text("Great job! Keep going!")
+                Text(AppLocalization.keepGoing)
                     .font(.headline)
                     .foregroundColor(.white.opacity(0.8))
             }
@@ -3406,23 +3406,23 @@ struct LearningSessionView: View {
                 .font(.system(size: 48))
                 .foregroundStyle(.yellow)
 
-            Text("Stage Complete!")
+            Text(AppLocalization.stageSummary)
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            Text("Stage \(learningManager.currentStageLevel)")
+            Text("\(AppLocalization.stage) \(learningManager.currentStageLevel)")
                 .font(.title3)
                 .foregroundColor(.secondary)
 
             VStack(spacing: 12) {
-                summaryRow(label: "Tasks Completed", value: "\(summary.tasksCompleted)")
-                summaryRow(label: "Correct", value: "\(summary.correctCount) / \(summary.totalCount)")
-                summaryRow(label: "Accuracy", value: "\(Int(summary.accuracy * 100))%")
-                summaryRow(label: "Duration", value: "\(learningManager.sessionDurationMinutes) min")
+                summaryRow(label: AppLocalization.tasksCompleted, value: "\(summary.tasksCompleted)")
+                summaryRow(label: AppLocalization.correctCount, value: "\(summary.correctCount) / \(summary.totalCount)")
+                summaryRow(label: AppLocalization.accuracy, value: "\(Int(summary.accuracy * 100))%")
+                summaryRow(label: AppLocalization.durationLabel, value: "\(learningManager.sessionDurationMinutes) \(AppLocalization.minutesUnit)")
                 if summary.levelChange > 0 {
-                    summaryRow(label: "Level Up!", value: "+\(summary.levelChange)")
+                    summaryRow(label: AppLocalization.levelUp, value: "+\(summary.levelChange)")
                 }
-                summaryRow(label: "Rewards Earned", value: "\(summary.rewardsEarned)")
+                summaryRow(label: AppLocalization.rewardsEarned, value: "\(summary.rewardsEarned)")
             }
             .padding()
             .background(
@@ -3433,7 +3433,7 @@ struct LearningSessionView: View {
             Button {
                 dismiss()
             } label: {
-                Text("Done")
+                Text(AppLocalization.done)
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)

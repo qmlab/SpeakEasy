@@ -20,7 +20,11 @@
             "Cat"
           ],
           "correct_answer": "Dog",
-          "target_name": "Dog"
+          "target_name": "Dog",
+          "options_zh": [
+            "狗",
+            "猫"
+          ]
         },
         {
           "instruction": "Touch the ball.",
@@ -33,7 +37,11 @@
             "Shoe"
           ],
           "correct_answer": "Ball",
-          "target_name": "Ball"
+          "target_name": "Ball",
+          "options_zh": [
+            "球",
+            "鞋子"
+          ]
         },
         {
           "instruction": "Show me the apple.",
@@ -46,7 +54,11 @@
             "Car"
           ],
           "correct_answer": "Apple",
-          "target_name": "Apple"
+          "target_name": "Apple",
+          "options_zh": [
+            "苹果",
+            "汽车"
+          ]
         },
         {
           "instruction": "Where is the cup?",
@@ -60,7 +72,12 @@
             "Book"
           ],
           "correct_answer": "Cup",
-          "target_name": "Cup"
+          "target_name": "Cup",
+          "options_zh": [
+            "杯子",
+            "帽子",
+            "书"
+          ]
         },
         {
           "instruction": "Touch the bird.",
@@ -74,7 +91,12 @@
             "Cat"
           ],
           "correct_answer": "Bird",
-          "target_name": "Bird"
+          "target_name": "Bird",
+          "options_zh": [
+            "鸟",
+            "鱼",
+            "猫"
+          ]
         },
         {
           "instruction": "Show me the chair.",
@@ -88,7 +110,12 @@
             "Bed"
           ],
           "correct_answer": "Chair",
-          "target_name": "Chair"
+          "target_name": "Chair",
+          "options_zh": [
+            "椅子",
+            "桌子",
+            "床"
+          ]
         },
         {
           "instruction": "Select all the animals.",
@@ -113,7 +140,14 @@
             "Car",
             "Ball"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "狗",
+            "汽车",
+            "猫",
+            "球",
+            "鸟"
+          ]
         },
         {
           "instruction": "Find everything you can eat.",
@@ -138,7 +172,14 @@
             "Shoe",
             "Book"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "苹果",
+            "鞋子",
+            "香蕉",
+            "书",
+            "面包"
+          ]
         },
         {
           "instruction": "Touch the red circle.",
@@ -174,7 +215,13 @@
             "Door"
           ],
           "correct_answer": "Clock",
-          "target_name": "Clock"
+          "target_name": "Clock",
+          "options_zh": [
+            "时钟",
+            "刷子",
+            "花",
+            "门"
+          ]
         },
         {
           "instruction": "Show me the train.",
@@ -189,7 +236,13 @@
             "Car"
           ],
           "correct_answer": "Train",
-          "target_name": "Train"
+          "target_name": "Train",
+          "options_zh": [
+            "火车",
+            "Plane",
+            "船",
+            "汽车"
+          ]
         },
         {
           "instruction": "Touch the hat.",
@@ -204,7 +257,13 @@
             "Glove"
           ],
           "correct_answer": "Hat",
-          "target_name": "Hat"
+          "target_name": "Hat",
+          "options_zh": [
+            "帽子",
+            "夹克",
+            "鞋子",
+            "手套"
+          ]
         },
         {
           "instruction": "Where is the bridge?",
@@ -219,7 +278,13 @@
             "Island"
           ],
           "correct_answer": "Bridge",
-          "target_name": "Bridge"
+          "target_name": "Bridge",
+          "options_zh": [
+            "桥",
+            "Road",
+            "Tunnel",
+            "岛"
+          ]
         },
         {
           "instruction": "Select all the vehicles.",
@@ -246,7 +311,15 @@
             "Dog",
             "Chair"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "汽车",
+            "狗",
+            "火车",
+            "椅子",
+            "船",
+            "Plane"
+          ]
         },
         {
           "instruction": "Select all the tools.",
@@ -273,7 +346,15 @@
             "Shoe",
             "Pencil"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "锤子",
+            "苹果",
+            "扳手",
+            "鞋子",
+            "螺丝刀",
+            "铅笔"
+          ]
         },
         {
           "instruction": "Touch the big blue square.",
@@ -309,7 +390,14 @@
             "Piano"
           ],
           "correct_answer": "Guitar",
-          "target_name": "Guitar"
+          "target_name": "Guitar",
+          "options_zh": [
+            "吉他",
+            "小提琴",
+            "小号",
+            "鼓",
+            "钢琴"
+          ]
         },
         {
           "instruction": "Show me the camera.",
@@ -325,7 +413,14 @@
             "Magnifier"
           ],
           "correct_answer": "Camera",
-          "target_name": "Camera"
+          "target_name": "Camera",
+          "options_zh": [
+            "相机",
+            "望远镜",
+            "望远镜",
+            "显微镜",
+            "Magnifier"
+          ]
         },
         {
           "instruction": "Touch the planet.",
@@ -341,7 +436,14 @@
             "Rocket"
           ],
           "correct_answer": "Planet",
-          "target_name": "Planet"
+          "target_name": "Planet",
+          "options_zh": [
+            "行星",
+            "星星",
+            "月亮",
+            "彗星",
+            "火箭"
+          ]
         },
         {
           "instruction": "Where is the compass?",
@@ -357,7 +459,14 @@
             "Calculator"
           ],
           "correct_answer": "Compass",
-          "target_name": "Compass"
+          "target_name": "Compass",
+          "options_zh": [
+            "指南针",
+            "地图",
+            "地球仪",
+            "尺子",
+            "计算器"
+          ]
         },
         {
           "instruction": "Which ones are musical instruments?",
@@ -384,7 +493,15 @@
             "Wrench",
             "Saw"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "吉他",
+            "锤子",
+            "鼓",
+            "扳手",
+            "小提琴",
+            "锯子"
+          ]
         },
         {
           "instruction": "Sort the clothing items.",
@@ -411,7 +528,15 @@
             "Wrench",
             "Drill"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "夹克",
+            "锤子",
+            "帽子",
+            "扳手",
+            "手套",
+            "电钻"
+          ]
         },
         {
           "instruction": "What is silly about this? 'The fish climbed the tree.'",
@@ -470,7 +595,14 @@
             "Timer"
           ],
           "correct_answer": "Thermometer",
-          "target_name": "Thermometer"
+          "target_name": "Thermometer",
+          "options_zh": [
+            "温度计",
+            "Barometer",
+            "指南针",
+            "秤",
+            "计时器"
+          ]
         },
         {
           "instruction": "Show me the pendulum.",
@@ -486,7 +618,14 @@
             "Spring"
           ],
           "correct_answer": "Pendulum",
-          "target_name": "Pendulum"
+          "target_name": "Pendulum",
+          "options_zh": [
+            "钟摆",
+            "杠杆",
+            "Pulley",
+            "Gear",
+            "Spring"
+          ]
         },
         {
           "instruction": "Touch the fossil.",
@@ -502,7 +641,14 @@
             "Rock"
           ],
           "correct_answer": "Fossil",
-          "target_name": "Fossil"
+          "target_name": "Fossil",
+          "options_zh": [
+            "化石",
+            "水晶",
+            "矿物",
+            "Gem",
+            "石头"
+          ]
         },
         {
           "instruction": "Where is the blueprint?",
@@ -518,7 +664,14 @@
             "Chart"
           ],
           "correct_answer": "Blueprint",
-          "target_name": "Blueprint"
+          "target_name": "Blueprint",
+          "options_zh": [
+            "Blueprint",
+            "Diagram",
+            "Sketch",
+            "地图",
+            "图表"
+          ]
         },
         {
           "instruction": "Which ones are mammals?",
@@ -545,7 +698,15 @@
             "Salmon",
             "Frog"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "狗",
+            "鹰",
+            "鲸鱼",
+            "三文鱼",
+            "蝙蝠",
+            "青蛙"
+          ]
         },
         {
           "instruction": "Sort the measuring tools.",
@@ -572,7 +733,15 @@
             "Drill",
             "Saw"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "尺子",
+            "锤子",
+            "秤",
+            "电钻",
+            "温度计",
+            "锯子"
+          ]
         },
         {
           "instruction": "What is silly? 'She put her hat on her foot.'",
@@ -648,7 +817,14 @@
             "Probe"
           ],
           "correct_answer": "Satellite",
-          "target_name": "Satellite"
+          "target_name": "Satellite",
+          "options_zh": [
+            "卫星",
+            "望远镜",
+            "火箭",
+            "Space Station",
+            "Probe"
+          ]
         },
         {
           "instruction": "Touch the constellation.",
@@ -664,7 +840,14 @@
             "Asteroid"
           ],
           "correct_answer": "Constellation",
-          "target_name": "Constellation"
+          "target_name": "Constellation",
+          "options_zh": [
+            "星座",
+            "星系",
+            "Nebula",
+            "彗星",
+            "小行星"
+          ]
         },
         {
           "instruction": "Where is the hemisphere?",
@@ -707,7 +890,15 @@
             "Oil",
             "Gas"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "Solar",
+            "Coal",
+            "风",
+            "Oil",
+            "Hydro",
+            "Gas"
+          ]
         },
         {
           "instruction": "Sort the celestial bodies.",
@@ -734,7 +925,15 @@
             "River",
             "Volcano"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "星星",
+            "山",
+            "行星",
+            "河流",
+            "月亮",
+            "火山"
+          ]
         },
         {
           "instruction": "What is wrong? 'The doctor used a hammer to check the patient's heartbeat.'",
@@ -794,7 +993,13 @@
             "Mineral"
           ],
           "correct_answer": "Stalactite",
-          "target_name": "Stalactite"
+          "target_name": "Stalactite",
+          "options_zh": [
+            "Stalactite",
+            "Stalagmite",
+            "Cavern",
+            "矿物"
+          ]
         },
         {
           "instruction": "Show me the barometer.",
@@ -810,7 +1015,14 @@
             "Altimeter"
           ],
           "correct_answer": "Barometer",
-          "target_name": "Barometer"
+          "target_name": "Barometer",
+          "options_zh": [
+            "Barometer",
+            "温度计",
+            "Hygrometer",
+            "Anemometer",
+            "Altimeter"
+          ]
         },
         {
           "instruction": "Which are invertebrates?",
@@ -837,7 +1049,15 @@
             "Eagle",
             "Whale"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "水母",
+            "狗",
+            "螃蟹",
+            "鹰",
+            "蚯蚓",
+            "鲸鱼"
+          ]
         },
         {
           "instruction": "Sort the abstract concepts.",
@@ -864,7 +1084,15 @@
             "Table",
             "Hammer"
           ],
-          "multi_select": true
+          "multi_select": true,
+          "options_zh": [
+            "Freedom",
+            "椅子",
+            "Justice",
+            "桌子",
+            "Equality",
+            "锤子"
+          ]
         },
         {
           "instruction": "What is wrong? 'The baker used a microscope to bake bread.'",
@@ -924,7 +1152,13 @@
             "Square"
           ],
           "correct_answer": "Circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "圆形",
+            "星星",
+            "三角形",
+            "正方形"
+          ]
         },
         {
           "instruction": "Listen carefully: 'First touch the biggest shape, then touch the blue one.'",
@@ -1186,7 +1420,13 @@
             "The"
           ],
           "correct_answer": "Hot",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "热的",
+            "太阳",
+            "Is",
+            "The"
+          ]
         }
       ]
     },
@@ -1209,7 +1449,13 @@
           ],
           "correct_answer": "Eerie/Mysterious",
           "image_hint": "book",
-          "passage": "The old house creaked in the wind. No one had lived there for years."
+          "passage": "The old house creaked in the wind. No one had lived there for years.",
+          "options_zh": [
+            "Eerie/Mysterious",
+            "开心",
+            "Exciting",
+            "Funny"
+          ]
         },
         {
           "question_id": "Q305",
@@ -1330,7 +1576,13 @@
             "Happy"
           ],
           "correct_answer": "Reluctant or sad",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "Reluctant or sad",
+            "兴奋",
+            "生气",
+            "开心"
+          ]
         },
         {
           "question_id": "Q310",
@@ -1345,7 +1597,13 @@
             "Sleepy"
           ],
           "correct_answer": "Happy and excited",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "Happy and excited",
+            "害怕",
+            "生气",
+            "Sleepy"
+          ]
         }
       ]
     },

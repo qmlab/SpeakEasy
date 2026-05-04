@@ -207,7 +207,7 @@ struct StoryAssessmentView: View {
             } else if isLoading {
                 ProgressView()
                     .scaleEffect(1.5)
-                Text("Loading story...")
+                Text(AppLocalization.localized("Loading story...", zh: "正在加载故事..."))
                     .font(.title3)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -217,7 +217,7 @@ struct StoryAssessmentView: View {
             Button {
                 dismiss()
             } label: {
-                Text("Maybe Later")
+                Text(AppLocalization.localized("Maybe Later", zh: "下次再说"))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -285,7 +285,7 @@ struct StoryAssessmentView: View {
                     Button {
                         speechService.speakStorytelling(scene.test.instruction)
                     } label: {
-                        Label("Hear Again", systemImage: "speaker.wave.2.fill")
+                        Label(AppLocalization.hearAgain, systemImage: "speaker.wave.2.fill")
                             .font(.subheadline.weight(.semibold))
                             .foregroundColor(.orange)
                             .padding(.horizontal, 16)
@@ -595,7 +595,7 @@ struct StoryAssessmentView: View {
         let targetWord = scene.test.correctAnswer
 
         return VStack(spacing: 16) {
-            Text("Say it out loud!")
+            Text(AppLocalization.localized("Say it out loud!", zh: "大声说出来！"))
                 .font(.headline)
                 .foregroundColor(.orange)
 
@@ -603,7 +603,7 @@ struct StoryAssessmentView: View {
                 HStack {
                     Image(systemName: "quote.bubble.fill")
                         .foregroundColor(.orange)
-                    Text("You said: \"\(spokenText)\"")
+                    Text("\(AppLocalization.youSaid) \"\(spokenText)\"")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -624,7 +624,7 @@ struct StoryAssessmentView: View {
             if isEvaluating {
                 HStack {
                     ProgressView()
-                    Text("Checking...")
+                    Text(AppLocalization.localized("Checking...", zh: "检查中..."))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -661,7 +661,7 @@ struct StoryAssessmentView: View {
                 Button {
                     speechService.speak(targetWord)
                 } label: {
-                    Label("Hear Again", systemImage: "speaker.wave.2")
+                    Label(AppLocalization.hearAgain, systemImage: "speaker.wave.2")
                         .font(.subheadline)
                         .foregroundColor(.orange)
                 }
@@ -674,7 +674,7 @@ struct StoryAssessmentView: View {
                     await submitSceneResponse(scene: scene, selected: nil, spoken: "")
                 }
             } label: {
-                Text("Skip")
+                Text(AppLocalization.skip)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -751,7 +751,7 @@ struct StoryAssessmentView: View {
                     Text("🎉")
                         .font(.system(size: 64))
 
-                    Text("Great Job!")
+                    Text(AppLocalization.greatJob)
                         .font(.largeTitle)
                         .fontWeight(.bold)
 
@@ -766,7 +766,7 @@ struct StoryAssessmentView: View {
                         Text("\(result.totalCorrect) / \(result.totalTested)")
                             .font(.system(size: 40, weight: .bold, design: .rounded))
                             .foregroundColor(.orange)
-                        Text("Questions Correct")
+                        Text(AppLocalization.localized("Questions Correct", zh: "答对题目"))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -788,7 +788,7 @@ struct StoryAssessmentView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text("Start Learning!")
+                        Text(AppLocalization.localized("Start Learning!", zh: "开始学习！"))
                             .font(.title3)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -810,11 +810,11 @@ struct StoryAssessmentView: View {
                             .font(.system(size: 48))
                             .foregroundColor(.orange)
 
-                        Text("Something went wrong")
+                        Text(AppLocalization.localized("Something went wrong", zh: "出了点问题"))
                             .font(.title2)
                             .fontWeight(.bold)
 
-                        Text("The story couldn't be completed, but your progress has been saved.")
+                        Text(AppLocalization.localized("The story couldn't be completed, but your progress has been saved.", zh: "故事未能完成，但您的进度已保存。"))
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -823,7 +823,7 @@ struct StoryAssessmentView: View {
                         Button {
                             dismiss()
                         } label: {
-                            Text("Go Back")
+                            Text(AppLocalization.localized("Go Back", zh: "返回"))
                                 .font(.title3)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -860,7 +860,7 @@ struct StoryAssessmentView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
 
-                Text("Level \(dim.assessedLevel) · \(dim.correctCount)/\(dim.totalCount) correct")
+                Text("\(AppLocalization.level) \(dim.assessedLevel) · \(dim.correctCount)/\(dim.totalCount) \(AppLocalization.correctCount)")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

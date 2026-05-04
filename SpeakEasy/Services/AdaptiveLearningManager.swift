@@ -261,7 +261,7 @@ class AdaptiveLearningManager: ObservableObject {
 
             // Handle rewards
             if let reward = result.reward {
-                rewardMessage = reward.message ?? "Great job!"
+                rewardMessage = reward.message ?? AppLocalization.greatJob
                 showReward = true
             }
 
