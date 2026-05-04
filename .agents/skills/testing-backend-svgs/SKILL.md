@@ -12,17 +12,30 @@ The SpeakEasy backend serves SVG images for task illustrations at `/task-images/
 - Image files location: `backend/app/resources/images/`
 - Photo URL mapping: `backend/app/resources/images/photo_urls.json`
 - Manifest: `backend/app/resources/images/manifest.json`
+- Deployed backend: `https://risingstar-backend-yojhdcez.fly.dev`
 
 ## Real Photo PNG System
 
 ### Architecture
-- 192 object photos hosted on Cloudinary as 400x400 PNGs under `risingstar/photos/`
+- 202 object photos hosted on Cloudinary as 400x400 PNGs
+- **Primary path**: `risingstar/photos/{name}` — canonical photo URLs stored in `photo_urls.json`
+- **Fallback path**: `risingstar/task_images/{name}` — also contains real photos (replaced original SVGs)
 - Sources: Unsplash (primary) and Pexels (fallback) — free license photos
 - Served via `GET /adaptive/photo-urls` endpoint (cached in-memory on backend)
 - **Important**: The photo URL cache is loaded once at startup from `photo_urls.json`. After updating the JSON file, the backend must be restarted to pick up changes.
-- iOS `RemoteImageView` fallback chain: bundled xcasset → real photo URL → Cloudinary SVG → SF Symbol
-- The old SVG fallback path uses `risingstar/task_images/` (cartoon-style icons)
+- iOS `RemoteImageView` fallback chain: bundled xcasset → real photo URL → Cloudinary fallback (`task_images/`) → SF Symbol
 - Deployed backend: `https://risingstar-backend-yojhdcez.fly.dev`
+
+### SVG Fallback Path Strategy
+The iOS app's `RemoteImageView` uses a fallback URL pattern:
+```
+https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/{normalizedName}
+```
+This path originally served cartoon SVGs. All 202 real photos have been uploaded to BOTH paths:
+- `risingstar/photos/{name}` (canonical, referenced in photo_urls.json)
+- `risingstar/task_images/{name}` (fallback, so even old iOS builds show real photos)
+
+This means even iOS builds without the `@ObservedObject` cache reactivity fix (PR #151) will display real photos instead of SVGs.
 
 ### Testing Photo URLs
 ```python
@@ -31,7 +44,7 @@ import urllib.request, json
 # 1. Verify endpoint returns all photos
 resp = urllib.request.urlopen('http://localhost:8200/adaptive/photo-urls')
 data = json.loads(resp.read())
-assert len(data['photos']) == 192  # expanded from 106
+assert len(data['photos']) == 202  # current count as of PR #154
 assert all('cloudinary' in u and u.endswith('.png') for u in data['photos'].values())
 assert all('dgpir7tqk' in u for u in data['photos'].values())  # correct cloud_name
 
@@ -55,6 +68,18 @@ failures = [(n, s) for n, s in results if s != '200']
 assert len(failures) == 0, f"Failed URLs: {failures}"
 ```
 
+### Testing SVG Fallback Path (Critical)
+To verify SVGs have been replaced at the fallback path, check file sizes:
+```bash
+# Real photos are typically 50KB-400KB; SVGs rendered as PNG are 2-5KB
+for name in car flower rabbit basketball scissors key frog clock; do
+    result=$(curl -s -o /dev/null -w "%{http_code} %{size_download}" \
+        "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/$name")
+    echo "$name: $result"  # expect HTTP 200, size > 50000
+done
+```
+A file size <20KB at the `task_images/` path indicates the SVG was NOT replaced.
+
 ### Visual Verification
 When verifying photo quality, check that:
 - Images are real photographs (not cartoon SVGs)
@@ -70,6 +95,7 @@ Key items to always spot-check (these have had quality issues in the past):
 - `brush` — should show the full paintbrush (not just bristle close-up)
 - `dog` — should show a recognizable dog (was previously duck-like)
 - `rocket` — should show a rocket (was previously lightning-like)
+- `binoculars` — should show person using binoculars (was previously Mount Fuji)
 
 ### Updating Photos
 To replace/update individual photos:
@@ -77,15 +103,50 @@ To replace/update individual photos:
 2. Download at 400x400 resolution (use `?w=400&h=400&fit=crop` for Unsplash CDN)
 3. Upload to Cloudinary using the API (cloud_name: `dgpir7tqk`, use `Cloudinary_SpeakEasy_Dev` secret for API key:secret)
 4. Use `public_id='risingstar/photos/{object_name}'`, `overwrite=True`, `resource_type='image'`, `format='png'`
-5. Update the URL in `photo_urls.json`
-6. Backend cache clears on restart — redeploy after changes
-7. After deploying, verify via `GET /adaptive/photo-urls` that the new URL is served
+5. **Also upload to fallback path**: `public_id='risingstar/task_images/{object_name}'` with same parameters
+6. Update the URL in `photo_urls.json`
+7. Backend cache clears on restart — redeploy after changes
+8. After deploying, verify via `GET /adaptive/photo-urls` that the new URL is served
+
+### Cloudinary CDN Cache Invalidation (Important)
+When replacing images at `task_images/` path, Cloudinary CDN may cache the old transformed version (especially `f_png` format). Symptoms: the raw `.png` URL serves the new image but `f_png/risingstar/task_images/{name}` still serves the old tiny SVG.
+
+**Fix procedure:**
+```python
+import cloudinary, cloudinary.uploader
+
+# 1. Destroy the old resource first
+cloudinary.uploader.destroy(f"risingstar/task_images/{name}", invalidate=True)
+
+# 2. Re-upload from local file (not URL — URL-based upload might hit the same CDN cache)
+result = cloudinary.uploader.upload(
+    local_file_path,
+    public_id=f"risingstar/task_images/{name}",
+    overwrite=True,
+    resource_type="image",
+    format="png",
+    invalidate=True
+)
+
+# 3. Wait ~30 seconds for CDN propagation
+# 4. Verify with: curl -s -o /dev/null -w "%{size_download}" \
+#    "https://res.cloudinary.com/dgpir7tqk/image/upload/f_png/risingstar/task_images/{name}"
+# Size should be >20KB (real photo), not 2-5KB (cached SVG)
+```
+
+**Key points:**
+- Always download the source photo to a local file first, then upload from local — URL-based uploads might resolve to the cached CDN version
+- `invalidate=True` on both destroy and upload is required
+- CDN propagation takes ~30 seconds after destroy+re-upload
+- Verify using the `f_png` URL format (not raw `.png`) since that's what iOS uses
 
 ### Common Pitfalls
 - **Stale cache**: If you start the backend before pulling latest code, the in-memory cache will have old photo URLs. Always restart after code changes.
+- **CDN cache**: Cloudinary CDN caches `f_png` transformations separately. See "CDN Cache Invalidation" section above.
 - **Photo quality**: Unsplash `?fit=crop` may crop important parts of the object. Always visually verify downloaded photos before uploading to Cloudinary.
 - **Duplicate photos**: When downloading many photos at once, verify with MD5 hashing that no two objects share the same image file.
 - **Abstract vs physical**: Not all task images need real photos — shapes, colors, numbers, letters, arrows, and emotions should remain as SVGs.
+- **Upload from local files**: When batch-uploading to task_images/, always download to local first then upload from file path. URL-based uploads may hit CDN cache and upload the old cached version.
 
 ## Auditing Missing SVGs
 
