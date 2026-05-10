@@ -493,6 +493,19 @@ struct LearningSessionView: View {
                         )
                     }
                 }
+            } else if isDragSortTask(task) || isDragArrangeTask(task) {
+                // Non-scrollable layout for drag tasks — ScrollView steals
+                // the DragGesture causing noticeable delay and drop failures.
+                VStack(spacing: 8) {
+                    taskProgressBar
+                        .padding(.horizontal)
+                    instructionCard(task: task)
+                        .padding(.horizontal)
+                    interactionArea(task: task)
+                        .padding(.horizontal)
+                    Spacer(minLength: 0)
+                }
+                .padding(.vertical, 8)
             } else {
                 // Original scrollable layout for complex interactions
                 ScrollView {
@@ -1374,11 +1387,12 @@ struct LearningSessionView: View {
                                 .fill(isDragging ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
                                 .shadow(color: isDragging ? dimension.color.opacity(0.3) : .clear, radius: 8)
                         )
-                        .scaleEffect(isDragging ? 1.1 : 1.0)
+                        .scaleEffect(isDragging ? 1.08 : 1.0)
                         .zIndex(isDragging ? 10 : 0)
                         .offset(isDragging ? dragOffset : .zero)
+                        .contentShape(Rectangle())
                         .gesture(
-                            DragGesture(minimumDistance: 0)
+                            DragGesture(minimumDistance: 5)
                                 .onChanged { value in
                                     if draggedItem == nil {
                                         draggedItem = item
@@ -1532,47 +1546,48 @@ struct LearningSessionView: View {
         let remaining = unsortedItems(task: task)
         let allPlaced = remaining.isEmpty
 
-        VStack(spacing: 20) {
+        VStack(spacing: 16) {
             // Unsorted items pool
             if !remaining.isEmpty {
-                VStack(spacing: 8) {
+                VStack(spacing: 6) {
                     Text(AppLocalization.dragToSort)
-                        .font(.caption)
+                        .font(.subheadline)
                         .foregroundColor(.secondary)
 
                     let columns = [
-                        GridItem(.flexible(), spacing: 10),
-                        GridItem(.flexible(), spacing: 10)
+                        GridItem(.flexible(), spacing: 12),
+                        GridItem(.flexible(), spacing: 12)
                     ]
-                    LazyVGrid(columns: columns, spacing: 10) {
+                    LazyVGrid(columns: columns, spacing: 12) {
                         ForEach(remaining, id: \.self) { item in
                             let isDragging = dragSortItem == item
                             VStack(spacing: 4) {
                                 RemoteImageView(
                                     objectName: task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_"),
-                                    imageType: .thumbnail,
+                                    imageType: .flashcard,
                                     fallbackIcon: "questionmark.circle",
                                     iconColor: dimension.color,
-                                    size: 80
+                                    size: 120
                                 )
-                                .cornerRadius(10)
+                                .cornerRadius(12)
                                 Text(item)
-                                    .font(.caption2)
+                                    .font(.caption)
                                     .foregroundColor(.primary)
                                     .lineLimit(1)
                             }
                             .frame(maxWidth: .infinity)
-                            .padding(8)
+                            .padding(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 14)
                                     .fill(isDragging ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
                                     .shadow(color: isDragging ? dimension.color.opacity(0.3) : .clear, radius: 6)
                             )
-                            .scaleEffect(isDragging ? 1.1 : 1.0)
+                            .scaleEffect(isDragging ? 1.08 : 1.0)
                             .offset(isDragging ? dragSortOffset : .zero)
                             .zIndex(isDragging ? 10 : 0)
+                            .contentShape(Rectangle())
                             .gesture(
-                                DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                DragGesture(minimumDistance: 5, coordinateSpace: .global)
                                     .onChanged { value in
                                         if dragSortItem != item {
                                             speechService.speak(item)
@@ -1590,11 +1605,13 @@ struct LearningSessionView: View {
                                             speechService.speak(item)
                                             return
                                         }
-                                        // Check which category bucket the item was dropped on
+                                        // Check which category bucket the item was dropped on.
+                                        // Expand hit area by 20pt on each side for forgiving drops.
                                         let dropPoint = value.location
                                         var placed = false
                                         for (cat, frame) in categoryFrames {
-                                            if frame.contains(dropPoint) {
+                                            let expanded = frame.insetBy(dx: -20, dy: -20)
+                                            if expanded.contains(dropPoint) {
                                                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                                     categorySortBuckets[cat, default: []].append(item)
                                                 }
@@ -1641,35 +1658,35 @@ struct LearningSessionView: View {
 
             // Category buckets
             let bucketColumns = [
-                GridItem(.flexible(), spacing: 12),
-                GridItem(.flexible(), spacing: 12)
+                GridItem(.flexible(), spacing: 14),
+                GridItem(.flexible(), spacing: 14)
             ]
-            LazyVGrid(columns: bucketColumns, spacing: 12) {
+            LazyVGrid(columns: bucketColumns, spacing: 14) {
                 ForEach(categories, id: \.self) { category in
                     let bucketItems = categorySortBuckets[category] ?? []
-                    VStack(spacing: 6) {
+                    VStack(spacing: 8) {
                         // Category label — show representative image instead of text
                         let rep = representativeImage(for: category)
-                        HStack(spacing: 6) {
+                        HStack(spacing: 8) {
                             if !rep.objectName.isEmpty {
                                 RemoteImageView(
                                     objectName: rep.objectName,
-                                    imageType: .thumbnail,
+                                    imageType: .flashcard,
                                     fallbackIcon: rep.fallback,
                                     iconColor: .white,
-                                    size: 56
+                                    size: 70
                                 )
-                                .cornerRadius(10)
+                                .cornerRadius(12)
                             } else {
                                 Image(systemName: rep.fallback)
-                                    .font(.system(size: 32))
+                                    .font(.system(size: 36))
                                     .foregroundColor(.white)
                             }
                         }
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 12)
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
+                            RoundedRectangle(cornerRadius: 12)
                                 .fill(colorForCategory(category, categories: categories))
                         )
                         .onTapGesture {
@@ -1677,34 +1694,34 @@ struct LearningSessionView: View {
                         }
 
                         // Drop zone with placed items
-                        VStack(spacing: 4) {
+                        VStack(spacing: 6) {
                             if bucketItems.isEmpty {
                                 VStack(spacing: 6) {
                                     Image(systemName: "arrow.down.circle")
-                                        .font(.title3)
+                                        .font(.title2)
                                         .foregroundColor(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.8 : 0.3))
                                     Text(AppLocalization.localized("Drop here", zh: "放这里"))
-                                        .font(.caption)
+                                        .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
-                                .frame(maxWidth: .infinity, minHeight: 70)
+                                .frame(maxWidth: .infinity, minHeight: 80)
                             } else {
                                 ForEach(bucketItems, id: \.self) { item in
-                                    HStack(spacing: 8) {
+                                    HStack(spacing: 10) {
                                         RemoteImageView(
                                             objectName: task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_"),
                                             imageType: .thumbnail,
                                             fallbackIcon: "circle.fill",
                                             iconColor: colorForCategory(category, categories: categories),
-                                            size: 40
+                                            size: 56
                                         )
-                                        .cornerRadius(6)
+                                        .cornerRadius(8)
                                         .onTapGesture {
                                             enlargedItem = item
                                             speechService.speak(item)
                                         }
                                         Text(item)
-                                            .font(.caption2)
+                                            .font(.caption)
                                             .foregroundColor(.primary)
                                             .lineLimit(1)
                                         Spacer()
@@ -1714,12 +1731,12 @@ struct LearningSessionView: View {
                                             }
                                         } label: {
                                             Image(systemName: "xmark.circle.fill")
-                                                .font(.caption)
+                                                .font(.subheadline)
                                                 .foregroundColor(.secondary)
                                         }
                                     }
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 6)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 8)
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
                                             .fill(colorForCategory(category, categories: categories).opacity(0.1))
@@ -1727,19 +1744,20 @@ struct LearningSessionView: View {
                                 }
                             }
                         }
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .padding(8)
+                        .frame(maxWidth: .infinity, minHeight: 70)
+                        .padding(10)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .strokeBorder(
-                                    colorForCategory(category, categories: categories).opacity(0.4),
-                                    style: StrokeStyle(lineWidth: 2, dash: [6, 3])
+                                    colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.7 : 0.4),
+                                    style: StrokeStyle(lineWidth: dragSortItem != nil ? 3 : 2, dash: [6, 3])
                                 )
                                 .background(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .fill(colorForCategory(category, categories: categories).opacity(0.05))
+                                        .fill(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.12 : 0.05))
                                 )
                         )
+                        .animation(.easeInOut(duration: 0.2), value: dragSortItem != nil)
                         .overlay(
                             GeometryReader { geo in
                                 Color.clear
