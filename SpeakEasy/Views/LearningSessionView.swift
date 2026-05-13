@@ -675,7 +675,7 @@ struct LearningSessionView: View {
             // Use smaller images when options are pinned at the bottom
             // to keep the question area compact and avoid hiding the options.
             let isPinned = isPinnedInteractionTask(task)
-            let imageSize: CGFloat = isPinned ? 200 : 280
+            let imageSize: CGFloat = isPinned ? 240 : 280
             let instructionRefsPicture = instructionReferencesPicture(task)
 
             // Language comprehension: suppress question images so the child
@@ -1268,14 +1268,14 @@ struct LearningSessionView: View {
         flashCompleted = false
         let gen = flashGeneration
 
-        // Small delay before first flash
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        // Wait for the instruction speech to finish before flashing
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             guard flashGeneration == gen else { return }
             showNextFlash(images: images, generation: gen)
         }
     }
 
-    /// Shows the next flash image, waits 1.5s, then either advances or completes.
+    /// Shows the next flash image, waits 3s, then either advances or completes.
     /// The `generation` parameter is compared against `flashGeneration` to bail
     /// out if the task changed while callbacks were pending.
     private func showNextFlash(images: [String], generation: Int) {
@@ -1291,14 +1291,14 @@ struct LearningSessionView: View {
             flashVisible = true
         }
 
-        // Hide after 1.5 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        // Keep visible for 3 seconds so the child can observe
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             guard self.flashGeneration == generation else { return }
             withAnimation(.easeOut(duration: 0.2)) {
                 self.flashVisible = false
             }
             // Brief gap then show next or complete
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 guard self.flashGeneration == generation else { return }
                 self.flashPhase += 1
                 if self.flashPhase < images.count {
@@ -2481,7 +2481,7 @@ struct LearningSessionView: View {
             GridItem(.flexible(), spacing: 12)
         ]
         let options = task.content.displayOptions
-        let gridImageSize: CGFloat = isPinnedInteractionTask(task) ? 80 : 100
+        let gridImageSize: CGFloat = isPinnedInteractionTask(task) ? 130 : 150
         return LazyVGrid(columns: columns, spacing: 12) {
             ForEach(Array(options.enumerated()), id: \.element) { index, option in
                 Button {
@@ -2498,7 +2498,7 @@ struct LearningSessionView: View {
                         .cornerRadius(12)
 
                     }
-                    .padding(10)
+                    .padding(6)
                     .frame(maxWidth: .infinity)
                     .background(
                         RoundedRectangle(cornerRadius: 16)
@@ -2537,9 +2537,9 @@ struct LearningSessionView: View {
                                 imageType: .thumbnail,
                                 fallbackIcon: "questionmark.circle",
                                 iconColor: dimension.color,
-                                size: 48
+                                size: 60
                             )
-                            .cornerRadius(8)
+                            .cornerRadius(10)
                         }
                         Text(option)
                             .font(.headline)
