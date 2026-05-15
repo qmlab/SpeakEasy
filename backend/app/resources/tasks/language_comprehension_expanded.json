@@ -193,7 +193,12 @@
             "green triangle"
           ],
           "correct_answer": "Red circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "红色圆形",
+            "蓝色正方形",
+            "绿色三角形"
+          ]
         }
       ]
     },
@@ -239,7 +244,7 @@
           "target_name": "Train",
           "options_zh": [
             "火车",
-            "Plane",
+            "飞机",
             "船",
             "汽车"
           ]
@@ -281,8 +286,8 @@
           "target_name": "Bridge",
           "options_zh": [
             "桥",
-            "Road",
-            "Tunnel",
+            "马路",
+            "隧道",
             "岛"
           ]
         },
@@ -318,7 +323,7 @@
             "火车",
             "椅子",
             "船",
-            "Plane"
+            "飞机"
           ]
         },
         {
@@ -367,7 +372,12 @@
             "Small blue square",
             "big red square"
           ],
-          "correct_answer": "Big blue square"
+          "correct_answer": "Big blue square",
+          "options_zh": [
+            "大蓝色正方形",
+            "小蓝色正方形",
+            "大红色正方形"
+          ]
         }
       ]
     },
@@ -419,7 +429,7 @@
             "望远镜",
             "望远镜",
             "显微镜",
-            "Magnifier"
+            "放大镜"
           ]
         },
         {
@@ -548,7 +558,11 @@
             "Fish can't climb — they live in water",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Fish can't climb — they live in water"
+          "correct_answer": "Fish can't climb — they live in water",
+          "options_zh": [
+            "鱼不能爬——它们住在水里",
+            "没有问题"
+          ]
         },
         {
           "instruction": "What is wrong here? A boy is reading a shoe.",
@@ -560,7 +574,11 @@
             "You read a book, not a shoe",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "You read a book, not a shoe"
+          "correct_answer": "You read a book, not a shoe",
+          "options_zh": [
+            "你读书，不读鞋子",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch the small red triangle first, then the big blue circle.",
@@ -572,7 +590,11 @@
             "Small red triangle → big blue circle",
             "Big red circle"
           ],
-          "correct_answer": "Small red triangle → big blue circle"
+          "correct_answer": "Small red triangle → big blue circle",
+          "options_zh": [
+            "小红色三角形→大蓝色圆形",
+            "大红色圆形"
+          ]
         }
       ]
     },
@@ -598,7 +620,7 @@
           "target_name": "Thermometer",
           "options_zh": [
             "温度计",
-            "Barometer",
+            "气压计",
             "指南针",
             "秤",
             "计时器"
@@ -622,9 +644,9 @@
           "options_zh": [
             "钟摆",
             "杠杆",
-            "Pulley",
-            "Gear",
-            "Spring"
+            "滑轮",
+            "齿轮",
+            "春天"
           ]
         },
         {
@@ -646,7 +668,7 @@
             "化石",
             "水晶",
             "矿物",
-            "Gem",
+            "宝石",
             "石头"
           ]
         },
@@ -666,9 +688,9 @@
           "correct_answer": "Blueprint",
           "target_name": "Blueprint",
           "options_zh": [
-            "Blueprint",
-            "Diagram",
-            "Sketch",
+            "蓝图",
+            "图表",
+            "素描",
             "地图",
             "图表"
           ]
@@ -753,7 +775,11 @@
             "Hats go on your head, not your foot",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Hats go on your head, not your foot"
+          "correct_answer": "Hats go on your head, not your foot",
+          "options_zh": [
+            "帽子戴在头上，不是脚上",
+            "没有问题"
+          ]
         },
         {
           "instruction": "What is wrong? A man is using an umbrella on a sunny day indoors.",
@@ -765,7 +791,11 @@
             "Umbrellas are for rain, not indoors on a sunny day",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Umbrellas are for rain, not indoors on a sunny day"
+          "correct_answer": "Umbrellas are for rain, not indoors on a sunny day",
+          "options_zh": [
+            "雨伞是下雨用的，不是晴天在室内用",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch all the shapes that are not yellow.",
@@ -778,7 +808,12 @@
             "Yellow star",
             "yellow triangle"
           ],
-          "correct_answer": "Red circle, blue square, green oval"
+          "correct_answer": "Red circle, blue square, green oval",
+          "options_zh": [
+            "红色圆形、蓝色正方形、绿色椭圆形",
+            "黄色星星",
+            "黄色三角形"
+          ]
         }
       ]
     },
@@ -801,7 +836,14 @@
             "Frost"
           ],
           "correct_answer": "Glacier",
-          "target_name": "Glacier"
+          "target_name": "Glacier",
+          "options_zh": [
+            "冰川",
+            "冰山",
+            "雪崩",
+            "暴风雪",
+            "霜"
+          ]
         },
         {
           "instruction": "Show me the satellite.",
@@ -822,8 +864,8 @@
             "卫星",
             "望远镜",
             "火箭",
-            "Space Station",
-            "Probe"
+            "空间站",
+            "探测器"
           ]
         },
         {
@@ -844,7 +886,7 @@
           "options_zh": [
             "星座",
             "星系",
-            "Nebula",
+            "星云",
             "彗星",
             "小行星"
           ]
@@ -863,7 +905,14 @@
             "Latitude"
           ],
           "correct_answer": "Hemisphere",
-          "target_name": "Hemisphere"
+          "target_name": "Hemisphere",
+          "options_zh": [
+            "半球",
+            "大洲",
+            "赤道",
+            "经线",
+            "纬度"
+          ]
         },
         {
           "instruction": "Which ones are renewable energy sources?",
@@ -892,12 +941,12 @@
           ],
           "multi_select": true,
           "options_zh": [
-            "Solar",
-            "Coal",
+            "太阳能的",
+            "煤",
             "风",
-            "Oil",
-            "Hydro",
-            "Gas"
+            "石油",
+            "水力",
+            "气体"
           ]
         },
         {
@@ -945,7 +994,11 @@
             "A stethoscope is used for heartbeats, not a hammer",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "A stethoscope is used for heartbeats, not a hammer"
+          "correct_answer": "A stethoscope is used for heartbeats, not a hammer",
+          "options_zh": [
+            "听诊器用来听心跳，不是锤子",
+            "没有问题"
+          ]
         },
         {
           "instruction": "What is silly? 'The astronaut swam to the moon.'",
@@ -957,7 +1010,11 @@
             "You can't swim to the moon — there is no water in space",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "You can't swim to the moon — there is no water in space"
+          "correct_answer": "You can't swim to the moon — there is no water in space",
+          "options_zh": [
+            "你不能游泳去月球——太空中没有水",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch the shape that is the same color as the sky, but a different shape from a circle.",
@@ -971,7 +1028,13 @@
             "red square",
             "green triangle"
           ],
-          "correct_answer": "Blue square"
+          "correct_answer": "Blue square",
+          "options_zh": [
+            "蓝色正方形",
+            "蓝色圆形",
+            "红色正方形",
+            "绿色三角形"
+          ]
         }
       ]
     },
@@ -995,9 +1058,9 @@
           "correct_answer": "Stalactite",
           "target_name": "Stalactite",
           "options_zh": [
-            "Stalactite",
-            "Stalagmite",
-            "Cavern",
+            "钟乳石",
+            "石笋",
+            "洞穴",
             "矿物"
           ]
         },
@@ -1017,11 +1080,11 @@
           "correct_answer": "Barometer",
           "target_name": "Barometer",
           "options_zh": [
-            "Barometer",
+            "气压计",
             "温度计",
-            "Hygrometer",
-            "Anemometer",
-            "Altimeter"
+            "湿度计",
+            "风速计",
+            "高度计"
           ]
         },
         {
@@ -1086,11 +1149,11 @@
           ],
           "multi_select": true,
           "options_zh": [
-            "Freedom",
+            "自由",
             "椅子",
-            "Justice",
+            "正义",
             "桌子",
-            "Equality",
+            "平等",
             "锤子"
           ]
         },
@@ -1104,7 +1167,11 @@
             "Microscopes are for science labs, not baking",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Microscopes are for science labs, not baking"
+          "correct_answer": "Microscopes are for science labs, not baking",
+          "options_zh": [
+            "显微镜是用在科学实验室的，不是烘焙",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch the second-largest shape.",
@@ -1118,7 +1185,13 @@
             "Small triangle",
             "Tiny star"
           ],
-          "correct_answer": "Medium circle"
+          "correct_answer": "Medium circle",
+          "options_zh": [
+            "中号圆形",
+            "大正方形",
+            "小三角形",
+            "小星星"
+          ]
         }
       ]
     },
@@ -1137,7 +1210,11 @@
             "Submarines travel underwater, not through the sky",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Submarines travel underwater, not through the sky"
+          "correct_answer": "Submarines travel underwater, not through the sky",
+          "options_zh": [
+            "潜艇在水下航行，不是在天上",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch the shape that is between the star and the triangle.",
@@ -1172,7 +1249,13 @@
             "Small triangle only",
             "Any shape"
           ],
-          "correct_answer": "Large square, then blue circle"
+          "correct_answer": "Large square, then blue circle",
+          "options_zh": [
+            "大正方形，然后蓝色圆形",
+            "只有蓝色圆形",
+            "只有小三角形",
+            "任何形状"
+          ]
         },
         {
           "instruction": "What is silly? 'The firefighter used a garden hose to put out a forest fire.'",
@@ -1184,7 +1267,11 @@
             "A garden hose is too small for a forest fire",
             "Nothing is wrong"
           ],
-          "correct_answer": "A garden hose is too small for a forest fire"
+          "correct_answer": "A garden hose is too small for a forest fire",
+          "options_zh": [
+            "花园水管对于森林大火来说太小了",
+            "没有问题"
+          ]
         }
       ]
     },
@@ -1203,7 +1290,11 @@
             "Geologists use hammers and hand lenses, not telescopes",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Geologists use hammers and hand lenses, not telescopes"
+          "correct_answer": "Geologists use hammers and hand lenses, not telescopes",
+          "options_zh": [
+            "地质学家用锤子和放大镜，不用望远镜",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch the shape that is to the right of the red square and above the blue circle.",
@@ -1217,7 +1308,13 @@
             "Blue circle",
             "Yellow star"
           ],
-          "correct_answer": "Green triangle"
+          "correct_answer": "Green triangle",
+          "options_zh": [
+            "绿色三角形",
+            "红色正方形",
+            "蓝色圆形",
+            "黄色星星"
+          ]
         },
         {
           "instruction": "If all dogs have tails and Buddy is a dog, what can you say about Buddy?",
@@ -1231,7 +1328,13 @@
             "Buddy is a cat",
             "We cannot tell"
           ],
-          "correct_answer": "Buddy has a tail"
+          "correct_answer": "Buddy has a tail",
+          "options_zh": [
+            "巴迪有尾巴",
+            "巴迪会飞",
+            "巴迪是猫",
+            "我们无法判断"
+          ]
         },
         {
           "instruction": "Listen: 'Amy is taller than Ben. Ben is taller than Carl.' Who is the shortest?",
@@ -1245,7 +1348,13 @@
             "Amy",
             "They are all the same"
           ],
-          "correct_answer": "Carl"
+          "correct_answer": "Carl",
+          "options_zh": [
+            "卡尔",
+            "本",
+            "艾米",
+            "他们都一样"
+          ]
         }
       ]
     },
@@ -1264,7 +1373,11 @@
             "Barometers measure air pressure; brain activity is measured with EEG",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Barometers measure air pressure; brain activity is measured with EEG"
+          "correct_answer": "Barometers measure air pressure; brain activity is measured with EEG",
+          "options_zh": [
+            "气压计测气压；脑活动用脑电图测量",
+            "没有问题"
+          ]
         },
         {
           "instruction": "Touch all shapes that are either triangles or red, but not both.",
@@ -1277,7 +1390,12 @@
             "Red triangles",
             "blue squares"
           ],
-          "correct_answer": "Red circles, blue triangles"
+          "correct_answer": "Red circles, blue triangles",
+          "options_zh": [
+            "红色圆形、蓝色三角形",
+            "红色三角形",
+            "蓝色正方形"
+          ]
         },
         {
           "instruction": "What does 'Don't count your chickens before they hatch' mean?",
@@ -1291,7 +1409,13 @@
             "Chickens are hard to count",
             "Eggs always hatch"
           ],
-          "correct_answer": "Don't assume something will happen before it does"
+          "correct_answer": "Don't assume something will happen before it does",
+          "options_zh": [
+            "不要在事情发生前就假设它会发生",
+            "你应该每天数你的鸡",
+            "鸡很难数",
+            "鸡蛋总会孵化"
+          ]
         },
         {
           "instruction": "If it takes 3 workers 6 hours to paint a fence, how long would it take 6 workers?",
@@ -1305,7 +1429,13 @@
             "12 hours",
             "1 hour"
           ],
-          "correct_answer": "3 hours"
+          "correct_answer": "3 hours",
+          "options_zh": [
+            "3小时",
+            "6小时",
+            "12小时",
+            "1小时"
+          ]
         }
       ]
     },
@@ -1324,7 +1454,11 @@
             "Centrifuges separate substances; telescopes observe galaxies",
             "\"Nothing is wrong\""
           ],
-          "correct_answer": "Centrifuges separate substances; telescopes observe galaxies"
+          "correct_answer": "Centrifuges separate substances; telescopes observe galaxies",
+          "options_zh": [
+            "离心机分离物质；望远镜观测星系",
+            "没有问题"
+          ]
         },
         {
           "instruction": "The largest shape is blue. Touch the smallest shape.",
@@ -1338,7 +1472,13 @@
             "Medium green square",
             "Yellow star"
           ],
-          "correct_answer": "Small red triangle"
+          "correct_answer": "Small red triangle",
+          "options_zh": [
+            "小红色三角形",
+            "大蓝色圆形",
+            "中号绿色正方形",
+            "黄色星星"
+          ]
         },
         {
           "instruction": "Read: 'Some birds can fly. Penguins are birds. Can all penguins fly?'",
@@ -1352,7 +1492,13 @@
             "Penguins are not birds",
             "We cannot tell"
           ],
-          "correct_answer": "No — 'some' doesn't mean 'all'"
+          "correct_answer": "No — 'some' doesn't mean 'all'",
+          "options_zh": [
+            "不——\"有些\"不等于\"所有\"",
+            "是——所有鸟都会飞",
+            "企鹅不是鸟",
+            "我们无法判断"
+          ]
         },
         {
           "instruction": "What is the difference between a fact and an opinion? 'Water boils at 100 degrees Celsius' vs 'Summer is the best season.'",
@@ -1366,7 +1512,13 @@
             "Both are opinions",
             "The first is an opinion and the second is a fact"
           ],
-          "correct_answer": "The first is a fact and the second is an opinion"
+          "correct_answer": "The first is a fact and the second is an opinion",
+          "options_zh": [
+            "第一个是事实，第二个是观点",
+            "两个都是事实",
+            "两个都是观点",
+            "第一个是观点，第二个是事实"
+          ]
         }
       ]
     },
@@ -1390,7 +1542,13 @@
             "2",
             "7"
           ],
-          "input_mode": "number"
+          "input_mode": "number",
+          "options_zh": [
+            "3",
+            "5",
+            "2",
+            "7"
+          ]
         },
         {
           "question_id": "Q303",
@@ -1405,7 +1563,13 @@
             "On the floor"
           ],
           "correct_answer": "On the mat",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "在垫子上",
+            "在地毯上",
+            "在床上",
+            "在地板上"
+          ]
         },
         {
           "question_id": "Q304",
@@ -1451,10 +1615,10 @@
           "image_hint": "book",
           "passage": "The old house creaked in the wind. No one had lived there for years.",
           "options_zh": [
-            "Eerie/Mysterious",
+            "诡异/神秘的",
             "开心",
-            "Exciting",
-            "Funny"
+            "令人兴奋的",
+            "有趣的"
           ]
         },
         {
@@ -1470,7 +1634,13 @@
             "Fall"
           ],
           "correct_answer": "Summer",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "夏天",
+            "冬天",
+            "春天",
+            "秋天"
+          ]
         },
         {
           "question_id": "Q306",
@@ -1485,7 +1655,13 @@
             "Spring"
           ],
           "correct_answer": "Autumn/Fall",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "秋天",
+            "夏天",
+            "冬天",
+            "春天"
+          ]
         }
       ]
     },
@@ -1508,7 +1684,13 @@
           ],
           "correct_answer": "Plants need sunlight to grow",
           "image_hint": "book",
-          "passage": "Plants need sunlight, water, and soil to grow. Without sunlight, they cannot make food."
+          "passage": "Plants need sunlight, water, and soil to grow. Without sunlight, they cannot make food.",
+          "options_zh": [
+            "植物需要阳光才能生长",
+            "天是蓝的",
+            "狗很友好",
+            "水是湿的"
+          ]
         },
         {
           "question_id": "Q307",
@@ -1523,7 +1705,13 @@
             "Bees can sting"
           ],
           "correct_answer": "Bees help flowers grow",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "蜜蜂帮助花朵生长",
+            "花很漂亮",
+            "花粉是黄色的",
+            "蜜蜂会蛰人"
+          ]
         },
         {
           "question_id": "Q308",
@@ -1538,7 +1726,13 @@
             "To save time"
           ],
           "correct_answer": "To help our planet",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "为了帮助地球",
+            "为了赚钱",
+            "为了好玩",
+            "为了节省时间"
+          ]
         }
       ]
     },
@@ -1561,7 +1755,13 @@
           ],
           "correct_answer": "Lonely and homesick",
           "image_hint": "book",
-          "passage": "Sarah stared out the window at the falling rain. She missed her grandmother's warm kitchen and the smell of fresh cookies."
+          "passage": "Sarah stared out the window at the falling rain. She missed her grandmother's warm kitchen and the smell of fresh cookies.",
+          "options_zh": [
+            "孤独和想家",
+            "兴奋和开心",
+            "生气和沮丧",
+            "平静和平"
+          ]
         },
         {
           "question_id": "Q309",
@@ -1578,7 +1778,7 @@
           "correct_answer": "Reluctant or sad",
           "image_hint": "book",
           "options_zh": [
-            "Reluctant or sad",
+            "不情愿或难过",
             "兴奋",
             "生气",
             "开心"
@@ -1599,10 +1799,10 @@
           "correct_answer": "Happy and excited",
           "image_hint": "book",
           "options_zh": [
-            "Happy and excited",
+            "开心和兴奋",
             "害怕",
             "生气",
-            "Sleepy"
+            "困倦的"
           ]
         }
       ]
@@ -1625,7 +1825,13 @@
             "Teachers need rest too"
           ],
           "correct_answer": "Schools should start later",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "学校应该晚些开课",
+            "学生很懒",
+            "睡眠不重要",
+            "老师也需要休息"
+          ]
         },
         {
           "question_id": "Q312",
@@ -1640,7 +1846,13 @@
             "Screen time does not matter"
           ],
           "correct_answer": "Games have benefits but need limits",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "游戏有益但需要限制",
+            "游戏总是不好的",
+            "游戏总是好的",
+            "屏幕时间无所谓"
+          ]
         },
         {
           "question_id": "Q289",
@@ -1655,7 +1867,13 @@
             "Exercise is fun"
           ],
           "correct_answer": "Builds strong bones and improves focus",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "增强骨骼、提高专注力",
+            "孩子喜欢玩",
+            "学校有体育馆",
+            "运动很有趣"
+          ]
         }
       ]
     },
@@ -1678,7 +1896,13 @@
           ],
           "correct_answer": "Metaphor — comparing life to a journey",
           "image_hint": "book",
-          "passage": "Life is a winding road with unexpected turns."
+          "passage": "Life is a winding road with unexpected turns.",
+          "options_zh": [
+            "隐喻——把人生比作旅程",
+            "明喻——使用\"像\"或\"如\"",
+            "拟人——赋予物品人的特质",
+            "夸张——极端夸大"
+          ]
         },
         {
           "question_id": "Q313",
@@ -1693,7 +1917,13 @@
             "Alliteration"
           ],
           "correct_answer": "Metaphor",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "隐喻",
+            "明喻",
+            "夸张",
+            "头韵"
+          ]
         },
         {
           "question_id": "Q314",
@@ -1708,7 +1938,13 @@
             "Onomatopoeia"
           ],
           "correct_answer": "Simile",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "明喻",
+            "隐喻",
+            "拟人",
+            "拟声词"
+          ]
         }
       ]
     },
@@ -1731,7 +1967,13 @@
           ],
           "correct_answer": "Style analysis",
           "image_hint": "book",
-          "passage": "The author paints a vivid picture of despair through stark imagery and fragmented sentences."
+          "passage": "The author paints a vivid picture of despair through stark imagery and fragmented sentences.",
+          "options_zh": [
+            "风格分析",
+            "情节概要",
+            "人物素描",
+            "场景描写"
+          ]
         },
         {
           "question_id": "Q291",
@@ -1746,7 +1988,13 @@
             "Whether schools use screens"
           ],
           "correct_answer": "Whether screen time helps or harms children",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "屏幕时间对孩子有益还是有害",
+            "屏幕是否存在",
+            "孩子是否喜欢屏幕",
+            "学校是否使用屏幕"
+          ]
         }
       ]
     }

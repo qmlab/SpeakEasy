@@ -58,7 +58,13 @@
             "yellow_circle"
           ],
           "correct_answer": "red_circle",
-          "image_hint": "red_circle"
+          "image_hint": "red_circle",
+          "options_zh": [
+            "红色圆形",
+            "蓝色圆形",
+            "绿色圆形",
+            "黄色圆形"
+          ]
         },
         {
           "instruction": "Look at the shapes! Which group has the red shapes?",
@@ -79,7 +85,11 @@
           ],
           "correct_answer": "red_circle",
           "image_hint": "red_circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "红色圆形",
+            "蓝色正方形"
+          ]
         },
         {
           "instruction": "Which group has More?",
@@ -100,7 +110,11 @@
             "2 apples"
           ],
           "correct_answer": "5 apples",
-          "image_hint": "apple"
+          "image_hint": "apple",
+          "options_zh": [
+            "5个苹果",
+            "2个苹果"
+          ]
         }
       ]
     },
@@ -129,7 +143,13 @@
             "small_square"
           ],
           "correct_answer": "big_square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "options_zh": [
+            "大正方形",
+            "小圆形",
+            "大三角形",
+            "小正方形"
+          ]
         },
         {
           "instruction": "Count the dots! What comes next?",
@@ -151,7 +171,13 @@
             "5_dots"
           ],
           "correct_answer": "4_dots",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "4个点",
+            "2个点",
+            "1个点",
+            "5个点"
+          ]
         },
         {
           "instruction": "Look at the shapes! Which ones are Big?",
@@ -172,7 +198,11 @@
           ],
           "correct_answer": "big_circle",
           "image_hint": "circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "大圆形",
+            "小正方形"
+          ]
         },
         {
           "instruction": "Put the numbers from fewest to most!",
@@ -200,7 +230,13 @@
             "5_dots"
           ],
           "correct_answer": "1_dot",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "1个点",
+            "2个点",
+            "3个点",
+            "5个点"
+          ]
         }
       ]
     },
@@ -235,9 +271,9 @@
           "correct_answer": "filled_square",
           "image_hint": "square",
           "options_zh": [
-            "filled_square",
+            "实心正方形",
             "正方形",
-            "filled_circle",
+            "实心圆",
             "三角形"
           ]
         },
@@ -265,7 +301,13 @@
             "big_star"
           ],
           "correct_answer": "small_heart",
-          "image_hint": "heart"
+          "image_hint": "heart",
+          "options_zh": [
+            "小爱心",
+            "大爱心",
+            "小星星",
+            "大星星"
+          ]
         },
         {
           "instruction": "Which shapes have straight sides?",
@@ -336,9 +378,9 @@
           "correct_answer": "kitten",
           "image_hint": "cat",
           "options_zh": [
-            "kitten",
-            "cub",
-            "foal",
+            "小猫",
+            "幼崽",
+            "小马驹",
             "小羊"
           ]
         }
@@ -378,7 +420,13 @@
             "green_circle"
           ],
           "correct_answer": "green_square",
-          "image_hint": "square"
+          "image_hint": "square",
+          "options_zh": [
+            "绿色正方形",
+            "红色三角形",
+            "蓝色圆形",
+            "绿色圆形"
+          ]
         },
         {
           "instruction": "The shapes are turning! Each one rotates a quarter turn. What comes next?",
@@ -400,7 +448,13 @@
             "arrow_down"
           ],
           "correct_answer": "arrow_left",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "向左箭头",
+            "向上箭头",
+            "向右箭头",
+            "向下箭头"
+          ]
         },
         {
           "instruction": "The rule changed! First sort by shape, now sort by color.",
@@ -421,7 +475,11 @@
           ],
           "correct_answer": "red_circle",
           "image_hint": "red_circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "红色圆形",
+            "蓝色正方形"
+          ]
         },
         {
           "instruction": "You have 3 apples and get 2 more. How many now?",
@@ -441,6 +499,12 @@
           "image_hint": "apple",
           "input_mode": "number",
           "options": [
+            "5",
+            "4",
+            "6",
+            "3"
+          ],
+          "options_zh": [
             "5",
             "4",
             "6",
@@ -471,8 +535,8 @@
           "options_zh": [
             "袜子",
             "鞋子",
-            "boot",
-            "sandal"
+            "靴子",
+            "凉鞋"
           ]
         }
       ]
@@ -530,7 +594,13 @@
             "arrow_down"
           ],
           "correct_answer": "arrow_left",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "向左箭头",
+            "向右箭头",
+            "向上箭头",
+            "向下箭头"
+          ]
         },
         {
           "instruction": "Count the sides! Even-sided shapes go left, odd go right.",
@@ -573,7 +643,11 @@
             "quarter_circle"
           ],
           "correct_answer": "half_circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "options_zh": [
+            "半圆",
+            "四分之一圆"
+          ]
         },
         {
           "instruction": "Painter is to brush as sculptor is to ___?",
@@ -597,7 +671,7 @@
           "correct_answer": "chisel",
           "image_hint": "hammer",
           "options_zh": [
-            "chisel",
+            "凿子",
             "钢笔",
             "针",
             "锤子"
@@ -630,7 +704,13 @@
             "3_dots"
           ],
           "correct_answer": "8_dots",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "8个点",
+            "6个点",
+            "5个点",
+            "3个点"
+          ]
         },
         {
           "instruction": "Look inside the shapes! Which ones have a dot inside?",
@@ -653,7 +733,7 @@
           "image_hint": "circle",
           "inline_images": true,
           "options_zh": [
-            "circle_with_dot",
+            "带点的圆",
             "正方形"
           ]
         },
@@ -672,6 +752,12 @@
             "100 miles",
             "60 miles",
             "180 miles"
+          ],
+          "options_zh": [
+            "120英里",
+            "100英里",
+            "60英里",
+            "180英里"
           ]
         },
         {
@@ -688,7 +774,13 @@
             "Rainfall"
           ],
           "correct_answer": "Air pressure",
-          "image_hint": "thermometer"
+          "image_hint": "thermometer",
+          "options_zh": [
+            "气压",
+            "湿度",
+            "风速",
+            "降雨量"
+          ]
         },
         {
           "instruction": "Look at the grid! Each row changes the inner shape. What is missing?",
@@ -719,7 +811,13 @@
             "triangle_in_circle"
           ],
           "correct_answer": "square_in_circle",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "options_zh": [
+            "圆形中的正方形",
+            "正方形中的正方形",
+            "三角形中的圆",
+            "圆形中的三角形"
+          ]
         }
       ]
     },
@@ -748,7 +846,13 @@
             "1_dot"
           ],
           "correct_answer": "2_dots",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "2个点",
+            "4个点",
+            "3个点",
+            "1个点"
+          ]
         },
         {
           "instruction": "Two rules at once! Which shapes are Both big and red?",
@@ -771,7 +875,13 @@
           ],
           "correct_answer": "big_red_circle",
           "image_hint": "big_red_circle",
-          "inline_images": true
+          "inline_images": true,
+          "options_zh": [
+            "大红色圆形",
+            "小红色正方形",
+            "大蓝色三角形",
+            "小蓝色圆形"
+          ]
         },
         {
           "instruction": "What is 15% of 200?",
@@ -784,6 +894,12 @@
           "image_hint": "calculator",
           "input_mode": "number",
           "options": [
+            "30",
+            "25",
+            "35",
+            "20"
+          ],
+          "options_zh": [
             "30",
             "25",
             "35",
@@ -804,7 +920,13 @@
             "Prime Minister"
           ],
           "correct_answer": "King/Queen",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "国王/女王",
+            "总统",
+            "议会",
+            "首相"
+          ]
         },
         {
           "instruction": "Where shapes overlap, the color changes! What is missing?",
@@ -832,7 +954,13 @@
             "green_circle"
           ],
           "correct_answer": "purple_overlap",
-          "image_hint": "circle"
+          "image_hint": "circle",
+          "options_zh": [
+            "紫色重叠",
+            "红色圆形",
+            "蓝色正方形",
+            "绿色圆形"
+          ]
         }
       ]
     },
@@ -861,7 +989,13 @@
             "arrow_down"
           ],
           "correct_answer": "arrow_left",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "向左箭头",
+            "向右箭头",
+            "向上箭头",
+            "向下箭头"
+          ]
         },
         {
           "instruction": "The rule keeps changing! What comes next?",
@@ -896,9 +1030,9 @@
           "inline_images": true,
           "options_zh": [
             "圆形",
-            "red_circle",
-            "big_square",
-            "small_triangle"
+            "红色圆形",
+            "大正方形",
+            "小三角形"
           ]
         },
         {
@@ -912,6 +1046,12 @@
           "image_hint": "square",
           "input_mode": "number",
           "options": [
+            "6",
+            "4",
+            "8",
+            "5"
+          ],
+          "options_zh": [
             "6",
             "4",
             "8",
@@ -932,7 +1072,13 @@
             "Observation"
           ],
           "correct_answer": "Evidence",
-          "image_hint": "microscope"
+          "image_hint": "microscope",
+          "options_zh": [
+            "证据",
+            "猜测",
+            "问题",
+            "观察"
+          ]
         },
         {
           "instruction": "Each shape rotates and changes size. What comes next?",
@@ -954,7 +1100,13 @@
             "big_arrow_right"
           ],
           "correct_answer": "small_arrow_left",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "小向左箭头",
+            "大向左箭头",
+            "小向上箭头",
+            "大向右箭头"
+          ]
         }
       ]
     },
@@ -985,7 +1137,13 @@
             "7_dots"
           ],
           "correct_answer": "8_dots",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "8个点",
+            "6个点",
+            "4个点",
+            "7个点"
+          ]
         },
         {
           "instruction": "Which shapes have more than 4 sides?",
@@ -1028,7 +1186,13 @@
             "Lyrics"
           ],
           "correct_answer": "Music",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "音乐",
+            "节奏",
+            "和声",
+            "歌词"
+          ]
         },
         {
           "instruction": "What is the next number: 2, 6, 18, 54, ?",
@@ -1046,6 +1210,12 @@
           "image_hint": "calculator",
           "input_mode": "number",
           "options": [
+            "162",
+            "108",
+            "144",
+            "216"
+          ],
+          "options_zh": [
             "162",
             "108",
             "144",
@@ -1081,7 +1251,13 @@
             "green_circle_2lines"
           ],
           "correct_answer": "green_triangle_3lines",
-          "image_hint": "triangle"
+          "image_hint": "triangle",
+          "options_zh": [
+            "绿色三角形(3条线)",
+            "红色三角形(3条线)",
+            "蓝色三角形(1条线)",
+            "绿色圆形(2条线)"
+          ]
         },
         {
           "instruction": "Neuron is to nervous system as cardiomyocyte is to ___?",
@@ -1102,7 +1278,7 @@
             "心脏",
             "大脑",
             "肝脏",
-            "Lung"
+            "肺"
           ]
         }
       ]
@@ -1152,6 +1328,12 @@
             "20",
             "12",
             "25"
+          ],
+          "options_zh": [
+            "15",
+            "20",
+            "12",
+            "25"
           ]
         },
         {
@@ -1183,7 +1365,13 @@
             "square_circle"
           ],
           "correct_answer": "square_triangle",
-          "image_hint": "square"
+          "image_hint": "square",
+          "options_zh": [
+            "正方形和三角形",
+            "三角形和正方形",
+            "圆形和三角形",
+            "正方形和圆形"
+          ]
         },
         {
           "instruction": "Epistemology is to knowledge as ontology is to ___?",
@@ -1199,7 +1387,13 @@
             "Logic"
           ],
           "correct_answer": "Existence",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "存在",
+            "真理",
+            "伦理",
+            "逻辑"
+          ]
         },
         {
           "instruction": "Complex grid: rotation + reflection + color change. What is missing?",
@@ -1230,7 +1424,13 @@
             "blue_arrow_left"
           ],
           "correct_answer": "blue_arrow_up",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "蓝色向上箭头",
+            "红色向上箭头",
+            "绿色向下箭头",
+            "蓝色向左箭头"
+          ]
         }
       ]
     }

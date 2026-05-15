@@ -60,7 +60,12 @@
             "Eating"
           ],
           "correct_answer": "Washing hands",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "洗手",
+            "坐下",
+            "吃东西"
+          ]
         },
         {
           "instruction": "Put these in order: [Waking up, Getting dressed, Sleeping]",
@@ -79,7 +84,12 @@
             "Getting dressed"
           ],
           "correct_answer": "Sleeping",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "睡觉",
+            "起床",
+            "穿衣服"
+          ]
         },
         {
           "instruction": "A friend is crying. What do you do?",
@@ -94,7 +104,13 @@
             "Ignore"
           ],
           "correct_answer": "Hug them",
-          "image_hint": "friend_crying"
+          "image_hint": "friend_crying",
+          "options_zh": [
+            "拥抱他们",
+            "笑",
+            "走开",
+            "忽略"
+          ]
         },
         {
           "instruction": "Someone gives you a gift. What do you say?",
@@ -109,7 +125,13 @@
             "Cry"
           ],
           "correct_answer": "Thank you",
-          "image_hint": "receiving_gift"
+          "image_hint": "receiving_gift",
+          "options_zh": [
+            "谢谢",
+            "什么都没有",
+            "还回去",
+            "哭"
+          ]
         }
       ]
     },
@@ -177,10 +199,10 @@
           "correct_answer": "Get toothbrush",
           "image_hint": "sequence",
           "options_zh": [
-            "Get toothbrush",
-            "Add toothpaste",
+            "拿牙刷",
+            "挤牙膏",
             "刷子",
-            "Rinse"
+            "冲洗"
           ]
         },
         {
@@ -202,7 +224,13 @@
             "Leave"
           ],
           "correct_answer": "Pick item",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "选择商品",
+            "去收银台",
+            "付款",
+            "离开"
+          ]
         },
         {
           "instruction": "Tom has a cookie. He puts it in the red box. Where is the cookie?",
@@ -215,7 +243,11 @@
             "Blue box"
           ],
           "correct_answer": "Red box",
-          "image_hint": "cookie"
+          "image_hint": "cookie",
+          "options_zh": [
+            "红色盒子",
+            "蓝色盒子"
+          ]
         },
         {
           "instruction": "You bump into someone by accident. What do you do?",
@@ -230,7 +262,13 @@
             "Ignore"
           ],
           "correct_answer": "Say sorry",
-          "image_hint": "bumping_sorry"
+          "image_hint": "bumping_sorry",
+          "options_zh": [
+            "道歉",
+            "跑开",
+            "笑",
+            "忽略"
+          ]
         },
         {
           "instruction": "Someone is talking to you. What should you do?",
@@ -245,7 +283,13 @@
             "Talk over them"
           ],
           "correct_answer": "Listen and look at them",
-          "image_hint": "person_talking"
+          "image_hint": "person_talking",
+          "options_zh": [
+            "听他们说并看着他们",
+            "玩手机",
+            "走开",
+            "打断他们说话"
+          ]
         },
         {
           "instruction": "Two people are whispering and laughing. A third person walks by and they go quiet. How does the third person likely feel?",
@@ -263,7 +307,7 @@
           "image_hint": "whispering_exclusion",
           "instruction_zh": "两个人在窃窃私语和笑。第三个人走过，他们安静了。第三个人感觉怎样？",
           "options_zh": [
-            "Left out / uncomfortable",
+            "被排斥/不舒服",
             "开心",
             "生气",
             "兴奋"
@@ -337,7 +381,13 @@
             "Hang up"
           ],
           "correct_answer": "Pick up phone",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "拿起电话",
+            "拨号码",
+            "说话",
+            "挂断"
+          ]
         },
         {
           "instruction": "Order the steps of greeting a new classmate.",
@@ -358,7 +408,13 @@
             "Ask their name"
           ],
           "correct_answer": "Make eye contact",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "眼神交流",
+            "微笑",
+            "打招呼",
+            "问他们的名字"
+          ]
         },
         {
           "instruction": "Sally puts her ball in the basket and leaves. Anne moves it to the box. Where will Sally Look for her ball?",
@@ -388,7 +444,11 @@
             "Candies"
           ],
           "correct_answer": "Pencils",
-          "image_hint": "pencils_box_trick"
+          "image_hint": "pencils_box_trick",
+          "options_zh": [
+            "铅笔",
+            "糖果"
+          ]
         },
         {
           "instruction": "You want to join a game. What do you do?",
@@ -403,7 +463,13 @@
             "Cry"
           ],
           "correct_answer": "Ask politely",
-          "image_hint": "joining_game"
+          "image_hint": "joining_game",
+          "options_zh": [
+            "礼貌地请求",
+            "插队",
+            "等待并观看",
+            "哭"
+          ]
         },
         {
           "instruction": "A classmate gets a better grade than you. What is the best response?",
@@ -418,7 +484,13 @@
             "Cheat next time"
           ],
           "correct_answer": "Congratulate them",
-          "image_hint": "better_grade"
+          "image_hint": "better_grade",
+          "options_zh": [
+            "祝贺他们",
+            "生气",
+            "忽略他们",
+            "下次作弊"
+          ]
         },
         {
           "instruction": "A child is playing alone while others play together. What might this mean?",
@@ -433,7 +505,13 @@
             "Both possibilities valid"
           ],
           "correct_answer": "Both possibilities valid",
-          "image_hint": "child_alone"
+          "image_hint": "child_alone",
+          "options_zh": [
+            "他们很刻薄",
+            "他们生病了",
+            "他们无聊了",
+            "两种可能都合理"
+          ]
         }
       ]
     },
@@ -457,7 +535,7 @@
           "correct_answer": "Disgusted",
           "image_hint": "disgusted_face",
           "options_zh": [
-            "Disgusted",
+            "厌恶的",
             "开心",
             "伤心",
             "生气"
@@ -505,7 +583,14 @@
             "Say thank you"
           ],
           "correct_answer": "Raise hand",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "举手",
+            "等被叫到",
+            "解释问题",
+            "听回答",
+            "说谢谢"
+          ]
         },
         {
           "instruction": "Order the steps of joining a game at recess.",
@@ -528,7 +613,14 @@
             "Thank others"
           ],
           "correct_answer": "Watch the game",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "观看比赛",
+            "请求加入",
+            "等轮到自己",
+            "玩",
+            "感谢别人"
+          ]
         },
         {
           "instruction": "Max is hiding behind the couch. He can see his sister but she can't see him. Does his sister know where he is?",
@@ -559,7 +651,11 @@
             "Sunday"
           ],
           "correct_answer": "Saturday",
-          "image_hint": "party_wrong_day"
+          "image_hint": "party_wrong_day",
+          "options_zh": [
+            "星期六",
+            "星期日"
+          ]
         },
         {
           "instruction": "You disagree with what a friend says. What do you do?",
@@ -574,7 +670,13 @@
             "Walk away"
           ],
           "correct_answer": "Calmly share your view",
-          "image_hint": "disagreeing_friend"
+          "image_hint": "disagreeing_friend",
+          "options_zh": [
+            "平静地分享你的看法",
+            "大喊",
+            "忽略他们",
+            "走开"
+          ]
         },
         {
           "instruction": "You are in a library. Your phone rings. What do you do?",
@@ -588,7 +690,12 @@
             "Ignore it"
           ],
           "correct_answer": "Quickly silence it and step out",
-          "image_hint": "phone_library"
+          "image_hint": "phone_library",
+          "options_zh": [
+            "快速静音然后出去",
+            "大声回答",
+            "忽略它"
+          ]
         },
         {
           "instruction": "A person keeps checking their watch during a conversation. What does this signal?",
@@ -603,7 +710,13 @@
             "They need to leave / are bored"
           ],
           "correct_answer": "They need to leave / are bored",
-          "image_hint": "checking_watch"
+          "image_hint": "checking_watch",
+          "options_zh": [
+            "他们感兴趣",
+            "他们很紧张",
+            "他们生气了",
+            "他们要走了/无聊了"
+          ]
         }
       ]
     },
@@ -651,7 +764,7 @@
             "沮丧",
             "开心",
             "兴奋",
-            "Disgusted"
+            "厌恶的"
           ]
         },
         {
@@ -675,7 +788,14 @@
             "Shake hands"
           ],
           "correct_answer": "Calm down",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "冷静下来",
+            "听朋友说",
+            "分享你的看法",
+            "找到折中方案",
+            "握手"
+          ]
         },
         {
           "instruction": "Order the steps of giving a compliment.",
@@ -698,7 +818,14 @@
             "Wait for response"
           ],
           "correct_answer": "Notice something nice",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "注意到好的地方",
+            "眼神交流",
+            "微笑",
+            "说出赞美",
+            "等待回应"
+          ]
         },
         {
           "instruction": "Jake is sad because he lost his toy. His friend Sam is laughing at a joke. Does Sam know Jake is sad?",
@@ -714,7 +841,7 @@
           "image_hint": "friend_lost_toy",
           "instruction_zh": "小明很伤心因为丢了玩具。朋友小红在笑一个笑话。小红知道小明伤心吗？",
           "options_zh": [
-            "No (unless told)",
+            "不（除非被告知）",
             "是"
           ]
         },
@@ -748,7 +875,12 @@
             "Lie"
           ],
           "correct_answer": "Say you can't share it",
-          "image_hint": "keeping_secret"
+          "image_hint": "keeping_secret",
+          "options_zh": [
+            "说你不能分享",
+            "说出秘密",
+            "说谎"
+          ]
         },
         {
           "instruction": "You notice a classmate is being left out at lunch. What do you do?",
@@ -762,7 +894,12 @@
             "Laugh"
           ],
           "correct_answer": "Invite them to sit with you",
-          "image_hint": "left_out_lunch"
+          "image_hint": "left_out_lunch",
+          "options_zh": [
+            "邀请他们和你一起坐",
+            "忽略它",
+            "笑"
+          ]
         },
         {
           "instruction": "Two people are standing very close and speaking quietly. What kind of conversation is this likely to be?",
@@ -779,10 +916,10 @@
           "correct_answer": "Private / intimate",
           "image_hint": "person_talking",
           "options_zh": [
-            "Public",
+            "公开的",
             "生气",
-            "Professional",
-            "Private / intimate"
+            "职业的",
+            "私人/亲密的"
           ]
         }
       ]
@@ -855,7 +992,14 @@
             "Give the person space"
           ],
           "correct_answer": "Acknowledge the mistake",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "承认错误",
+            "表达遗憾",
+            "解释发生了什么",
+            "承诺做得更好",
+            "给那个人空间"
+          ]
         },
         {
           "instruction": "Order the steps of a job interview.",
@@ -880,7 +1024,15 @@
             "Thank them"
           ],
           "correct_answer": "Prepare",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "准备",
+            "准时到达",
+            "问候面试官",
+            "回答问题",
+            "提问",
+            "感谢他们"
+          ]
         },
         {
           "instruction": "Tom thinks Mary likes him. Mary actually likes Tom's friend. What does Tom Think?",
@@ -893,7 +1045,11 @@
             "Mary likes his friend"
           ],
           "correct_answer": "Mary likes him",
-          "image_hint": "children"
+          "image_hint": "children",
+          "options_zh": [
+            "玛丽喜欢他",
+            "玛丽喜欢他的朋友"
+          ]
         },
         {
           "instruction": "A boy is crying. His mother thinks he is hurt. He is actually crying because he is happy. What does the mother think?",
@@ -906,7 +1062,11 @@
             "He is happy"
           ],
           "correct_answer": "He is hurt",
-          "image_hint": "friend_crying"
+          "image_hint": "friend_crying",
+          "options_zh": [
+            "他受伤了",
+            "他很开心"
+          ]
         },
         {
           "instruction": "You made a mistake that affected your team. What do you do?",
@@ -921,7 +1081,13 @@
             "Acknowledge it, apologize, and offer to fix it"
           ],
           "correct_answer": "Acknowledge it, apologize, and offer to fix it",
-          "image_hint": "team_mistake"
+          "image_hint": "team_mistake",
+          "options_zh": [
+            "责怪别人",
+            "假装没发生",
+            "放弃",
+            "承认、道歉并提出修复"
+          ]
         },
         {
           "instruction": "A new student looks lost and confused. What do you do?",
@@ -936,7 +1102,13 @@
             "Offer to help them find their way"
           ],
           "correct_answer": "Offer to help them find their way",
-          "image_hint": "new_student_lost"
+          "image_hint": "new_student_lost",
+          "options_zh": [
+            "忽略他们",
+            "笑",
+            "走过去",
+            "主动帮他们找路"
+          ]
         },
         {
           "instruction": "A person is nodding but not making eye contact and giving one-word answers. What does this suggest?",
@@ -951,7 +1123,13 @@
             "They are disengaged or uncomfortable"
           ],
           "correct_answer": "They are disengaged or uncomfortable",
-          "image_hint": "nodding_disinterested"
+          "image_hint": "nodding_disinterested",
+          "options_zh": [
+            "他们非常感兴趣",
+            "他们很开心",
+            "他们很专注",
+            "他们不感兴趣或不舒服"
+          ]
         }
       ]
     },
@@ -975,7 +1153,7 @@
           "correct_answer": "Excited (hiding it)",
           "image_hint": "excited_face",
           "options_zh": [
-            "Excited (hiding it)",
+            "兴奋（隐藏着的）",
             "伤心",
             "生气",
             "无聊"
@@ -996,10 +1174,10 @@
           "correct_answer": "Contemptuous",
           "image_hint": "contemptuous_face",
           "options_zh": [
-            "Contemptuous",
+            "轻蔑的",
             "生气",
             "伤心",
-            "Disgusted"
+            "厌恶的"
           ]
         },
         {
@@ -1023,7 +1201,14 @@
             "Offer support"
           ],
           "correct_answer": "Notice they are upset",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "注意到他们不开心",
+            "轻轻靠近",
+            "问他们想不想聊聊",
+            "不打断地倾听",
+            "提供支持"
+          ]
         },
         {
           "instruction": "Order the steps of a difficult conversation.",
@@ -1048,7 +1233,15 @@
             "Agree on next steps"
           ],
           "correct_answer": "Choose right time/place",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "选择合适的时间/地点",
+            "平静地开始",
+            "表达你的感受",
+            "听对方说",
+            "找到共同点",
+            "商定下一步"
+          ]
         },
         {
           "instruction": "Lucy wants the last cookie. She knows if she asks directly, her brother will say no. What might she do instead?",
@@ -1063,7 +1256,13 @@
             "Take it"
           ],
           "correct_answer": "Ask indirectly/distract",
-          "image_hint": "cookie_trick"
+          "image_hint": "cookie_trick",
+          "options_zh": [
+            "间接地问/转移注意力",
+            "礼貌地请求",
+            "哭",
+            "拿走"
+          ]
         },
         {
           "instruction": "A teacher praises a student in front of the class. The student looks down and goes quiet. Why?",
@@ -1100,7 +1299,13 @@
             "Listen respectfully, then politely ask to discuss"
           ],
           "correct_answer": "Listen respectfully, then politely ask to discuss",
-          "image_hint": "teacher_feedback"
+          "image_hint": "teacher_feedback",
+          "options_zh": [
+            "争辩",
+            "忽略",
+            "向别人抱怨",
+            "尊重地倾听，然后礼貌地要求讨论"
+          ]
         },
         {
           "instruction": "A friend is venting about a problem. They haven't asked for advice. What do you do?",
@@ -1115,7 +1320,13 @@
             "Listen and validate their feelings"
           ],
           "correct_answer": "Listen and validate their feelings",
-          "image_hint": "friend_venting"
+          "image_hint": "friend_venting",
+          "options_zh": [
+            "立即给建议",
+            "转移话题",
+            "讲你自己的故事",
+            "倾听并认可他们的感受"
+          ]
         },
         {
           "instruction": "In a meeting, one person always speaks first and others wait. What social dynamic is at play?",
@@ -1130,7 +1341,13 @@
             "Hierarchy / authority dynamic"
           ],
           "correct_answer": "Hierarchy / authority dynamic",
-          "image_hint": "meeting_dominant"
+          "image_hint": "meeting_dominant",
+          "options_zh": [
+            "人人平等",
+            "这是随机的",
+            "他们都是朋友",
+            "等级/权威关系"
+          ]
         }
       ]
     },
@@ -1154,10 +1371,10 @@
           "correct_answer": "Sad/Hiding it",
           "image_hint": "sad_face",
           "options_zh": [
-            "Sad/Hiding it",
+            "难过/隐藏着",
             "开心",
             "兴奋",
-            "Neutral"
+            "中立的"
           ]
         },
         {
@@ -1202,7 +1419,14 @@
             "Encourage them"
           ],
           "correct_answer": "Check if they are hurt",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "检查他们是否受伤",
+            "问他们是否需要帮助",
+            "扶他们起来",
+            "问他们是否需要更多帮助",
+            "鼓励他们"
+          ]
         },
         {
           "instruction": "Order the steps of planning a group project.",
@@ -1227,7 +1451,15 @@
             "Present"
           ],
           "correct_answer": "Form the group",
-          "image_hint": "sequence"
+          "image_hint": "sequence",
+          "options_zh": [
+            "组成小组",
+            "讨论目标",
+            "分配角色",
+            "做各自的部分",
+            "一起复习",
+            "展示"
+          ]
         },
         {
           "instruction": "Two friends argue. One says sorry first. How does the other friend likely feel?",
@@ -1245,8 +1477,8 @@
           "image_hint": "friends_argue_sorry",
           "instruction_zh": "两个朋友吵架了。一个先道歉了。另一个朋友可能感觉怎样？",
           "options_zh": [
-            "Relieved/Grateful",
-            "Angrier",
+            "如释重负/感激",
+            "更生气",
             "伤心",
             "困惑"
           ]
@@ -1266,8 +1498,8 @@
           "correct_answer": "Shy/Anxious",
           "image_hint": "quiet_at_party",
           "options_zh": [
-            "Shy/Anxious",
-            "Rude",
+            "害羞/焦虑",
+            "粗鲁的",
             "无聊",
             "累了"
           ]
@@ -1285,7 +1517,13 @@
             "Calmly say 'I wasn't finished' and continue"
           ],
           "correct_answer": "Calmly say 'I wasn't finished' and continue",
-          "image_hint": "group_interruption"
+          "image_hint": "group_interruption",
+          "options_zh": [
+            "对他们大喊",
+            "沉默",
+            "离开",
+            "平静地说\"我还没说完\"然后继续"
+          ]
         },
         {
           "instruction": "Someone online is being unkind to you. What is the best response?",
@@ -1300,7 +1538,13 @@
             "Block/report and tell a trusted adult"
           ],
           "correct_answer": "Block/report and tell a trusted adult",
-          "image_hint": "online_unkind"
+          "image_hint": "online_unkind",
+          "options_zh": [
+            "愤怒地回应",
+            "广泛分享",
+            "永远忽略",
+            "屏蔽/举报并告诉信任的大人"
+          ]
         },
         {
           "instruction": "A person laughs at their own mistake in front of others. What social function does this serve?",
@@ -1315,7 +1559,13 @@
             "Diffuses tension / shows self-awareness"
           ],
           "correct_answer": "Diffuses tension / shows self-awareness",
-          "image_hint": "laughing_at_mistake"
+          "image_hint": "laughing_at_mistake",
+          "options_zh": [
+            "显示软弱",
+            "不合适",
+            "表达愤怒",
+            "缓解紧张/展示自我认知"
+          ]
         }
       ]
     },
@@ -1339,10 +1589,10 @@
           "correct_answer": "Sad but suppressing it",
           "image_hint": "sad_but_suppressing_it_face",
           "options_zh": [
-            "Sad but suppressing it",
+            "难过但压抑着",
             "生气",
             "开心",
-            "Neutral"
+            "中立的"
           ]
         },
         {
@@ -1360,10 +1610,10 @@
           "correct_answer": "Wistful",
           "image_hint": "wistful_face",
           "options_zh": [
-            "Wistful",
+            "怅然若失的",
             "伤心",
             "开心",
-            "Nostalgic"
+            "怀旧的"
           ]
         },
         {
@@ -1379,7 +1629,13 @@
             "Boredom"
           ],
           "correct_answer": "Learned social scripts / masking",
-          "image_hint": "correct_but_passive"
+          "image_hint": "correct_but_passive",
+          "options_zh": [
+            "学来的社交脚本/伪装",
+            "真正的社交自如",
+            "害羞",
+            "无聊"
+          ]
         },
         {
           "instruction": "A manager gives critical feedback harshly. The employee nods and says 'thank you.' What might the employee actually feel?",
@@ -1396,10 +1652,10 @@
           "correct_answer": "Hurt/Defensive",
           "image_hint": "harsh_feedback",
           "options_zh": [
-            "Hurt/Defensive",
+            "受伤/防御性的",
             "感恩",
             "开心",
-            "Indifferent"
+            "冷漠的"
           ]
         },
         {
@@ -1415,7 +1671,13 @@
             "Ask the other person about themselves"
           ],
           "correct_answer": "Ask the other person about themselves",
-          "image_hint": "talking_too_much"
+          "image_hint": "talking_too_much",
+          "options_zh": [
+            "继续说",
+            "过度道歉",
+            "沉默",
+            "问对方关于他们自己的事"
+          ]
         },
         {
           "instruction": "A colleague takes credit for your idea. What is the most professional response?",
@@ -1430,7 +1692,13 @@
             "Calmly clarify your contribution"
           ],
           "correct_answer": "Calmly clarify your contribution",
-          "image_hint": "takes_credit"
+          "image_hint": "takes_credit",
+          "options_zh": [
+            "公开指责他们",
+            "什么都不做",
+            "放弃",
+            "平静地说明你的贡献"
+          ]
         },
         {
           "instruction": "A child with ASD gives a very detailed, one-sided explanation of their special interest to a new acquaintance who looks increasingly uncomfortable. What is the social mismatch?",
@@ -1445,7 +1713,13 @@
             "Lack of reading the listener's disengagement cues"
           ],
           "correct_answer": "Lack of reading the listener's disengagement cues",
-          "image_hint": "one_sided_talk"
+          "image_hint": "one_sided_talk",
+          "options_zh": [
+            "话题无聊",
+            "孩子没礼貌",
+            "听众没礼貌",
+            "没有读懂听众不感兴趣的信号"
+          ]
         }
       ]
     },
@@ -1469,10 +1743,10 @@
           "correct_answer": "Bitter/Humiliated",
           "image_hint": "bitter_face",
           "options_zh": [
-            "Bitter/Humiliated",
-            "Genuinely happy",
+            "苦涩/屈辱",
+            "真心开心",
             "兴奋",
-            "Relieved"
+            "如释重负的"
           ]
         },
         {
@@ -1490,9 +1764,9 @@
           "correct_answer": "Bittersweet",
           "image_hint": "bittersweet_face",
           "options_zh": [
-            "Bittersweet",
-            "Purely happy",
-            "Purely sad",
+            "苦乐参半",
+            "纯粹开心",
+            "纯粹难过",
             "生气"
           ]
         },
@@ -1509,7 +1783,13 @@
             "Both genuine and self-interested motivations"
           ],
           "correct_answer": "Both genuine and self-interested motivations",
-          "image_hint": "public_donation"
+          "image_hint": "public_donation",
+          "options_zh": [
+            "真正的慷慨",
+            "社会认可/形象",
+            "税收优惠",
+            "既有真诚的也有自利的动机"
+          ]
         },
         {
           "instruction": "A child with autism gives a very literal answer to a sarcastic comment. Why is this a misunderstanding?",
@@ -1523,7 +1803,12 @@
             "They didn't hear"
           ],
           "correct_answer": "Literal interpretation of sarcasm",
-          "image_hint": "sarcasm_literal"
+          "image_hint": "sarcasm_literal",
+          "options_zh": [
+            "字面理解讽刺",
+            "他们很粗鲁",
+            "他们没听到"
+          ]
         },
         {
           "instruction": "You notice a friend's behavior has changed significantly. You are worried. What do you do?",
@@ -1538,7 +1823,13 @@
             "Find a private moment and gently check in"
           ],
           "correct_answer": "Find a private moment and gently check in",
-          "image_hint": "friend_behavior_changed"
+          "image_hint": "friend_behavior_changed",
+          "options_zh": [
+            "告诉所有人",
+            "忽略它",
+            "当众质问他们",
+            "找一个私下的时刻温和地关心"
+          ]
         },
         {
           "instruction": "You are in a cultural setting where norms are different from yours. How do you behave?",
@@ -1554,7 +1845,13 @@
           ],
           "correct_answer": "Observe, ask respectfully, adapt",
           "image_hint": "cultural_setting",
-          "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？"
+          "instruction_zh": "你在一个文化习俗不同的环境中。你该怎么做？",
+          "options_zh": [
+            "强加自己的规范",
+            "拒绝参与",
+            "批评",
+            "观察、尊重地询问、适应"
+          ]
         }
       ]
     }

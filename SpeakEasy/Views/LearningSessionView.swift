@@ -244,17 +244,9 @@ struct LearningSessionView: View {
                 // When TTS finishes, auto-enter listening for voice tasks.
                 if let task = learningManager.currentTask {
                     let targetWord = task.content.targetWord ?? task.content.correctAnswer ?? ""
-                    // Auto-listen after TTS for ALL tasks with a speakable target
-                    // word (not just voice-modality tasks).  Skip sorting/sequencing
-                    // tasks where ordering is the goal, not speaking.
-                    let isSorting = isSortingTask(task)
-                    let isMultiTap = isMultiTapTask(task)
-                    let isTextInput = isTextInputTask(task)
-                    let isFlash = isFlashTask(task)
-                    let isDragArrange = isDragArrangeTask(task)
-                    let isDragSort = isDragSortTask(task)
-                    let isMultiSel = isMultiSelectTask(task)
-                    if !targetWord.isEmpty && !isSorting && !isMultiTap && !isTextInput && !isFlash && !isDragArrange && !isDragSort && !isMultiSel {
+                    // Auto-listen only for language expression tasks where
+                    // speaking IS the required interaction.
+                    if !targetWord.isEmpty && dimension == .languageExpression {
                         speechService.onSpeechFinished = { [self] in
                             // Clear the callback so it doesn't fire again for
                             // "Hear Again" or target-word taps.
@@ -2117,14 +2109,11 @@ struct LearningSessionView: View {
             optionButtons(task: task)
         }
 
-        // Speech input — available for ALL tasks with a speakable target word,
-        // not just tasks whose modalities include "voice".  This lets children
-        // practice pronunciation across every dimension.
-        // Skip for multi-tap tasks — the tap count IS the answer.
-        // Skip for text input tasks — the child types the answer.
-        // Skip for flash tasks — the child should pick visually, not speak.
+        // Speech input — only for language expression tasks where speaking
+        // IS the required interaction.  Other tasks use tap/drag and don't
+        // need a listen button.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
+        if !effectiveTarget.isEmpty && dimension == .languageExpression && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
             speechInputArea(task: task)
         }
 
