@@ -21,7 +21,12 @@
             "C"
           ],
           "correct_answer": "A",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "A",
+            "B",
+            "C"
+          ]
         },
         {
           "question_id": "Q301",
@@ -36,7 +41,13 @@
             "R"
           ],
           "correct_answer": "B",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "B",
+            "D",
+            "P",
+            "R"
+          ]
         },
         {
           "question_id": "Q302",
@@ -51,7 +62,13 @@
             "Q"
           ],
           "correct_answer": "C",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "C",
+            "O",
+            "G",
+            "Q"
+          ]
         },
         {
           "question_id": "Q350",
@@ -66,7 +83,13 @@
             "Q"
           ],
           "correct_answer": "D",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "D",
+            "B",
+            "P",
+            "Q"
+          ]
         },
         {
           "question_id": "Q351",
@@ -81,7 +104,13 @@
             "V"
           ],
           "correct_answer": "M",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "M",
+            "N",
+            "W",
+            "V"
+          ]
         }
       ]
     },
@@ -103,7 +132,13 @@
             "B"
           ],
           "correct_answer": "S",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "S",
+            "T",
+            "M",
+            "B"
+          ]
         },
         {
           "instruction": "Which letter makes the 'mmm' sound?",
@@ -118,7 +153,13 @@
             "V"
           ],
           "correct_answer": "M",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "M",
+            "N",
+            "W",
+            "V"
+          ]
         },
         {
           "question_id": "Q352",
@@ -133,7 +174,13 @@
             "G"
           ],
           "correct_answer": "B",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "B",
+            "D",
+            "P",
+            "G"
+          ]
         },
         {
           "question_id": "Q353",
@@ -148,7 +195,13 @@
             "H"
           ],
           "correct_answer": "F",
-          "image_hint": "letter"
+          "image_hint": "letter",
+          "options_zh": [
+            "F",
+            "V",
+            "P",
+            "H"
+          ]
         }
       ]
     },
@@ -214,7 +267,7 @@
           "correct_answer": "Fun",
           "image_hint": "sun",
           "options_zh": [
-            "Fun",
+            "有趣",
             "Sit",
             "地图",
             "大"
@@ -352,7 +405,13 @@
             "That"
           ],
           "correct_answer": "The",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "The",
+            "Then",
+            "They",
+            "That"
+          ]
         },
         {
           "question_id": "Q361",
@@ -367,7 +426,13 @@
             "Am"
           ],
           "correct_answer": "And",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "And",
+            "An",
+            "At",
+            "Am"
+          ]
         },
         {
           "question_id": "Q362",
@@ -382,7 +447,13 @@
             "If"
           ],
           "correct_answer": "Is",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "Is",
+            "It",
+            "In",
+            "If"
+          ]
         },
         {
           "question_id": "Q363",
@@ -425,7 +496,13 @@
             "C-O-T"
           ],
           "correct_answer": "C-A-T",
-          "image_hint": "cat"
+          "image_hint": "cat",
+          "options_zh": [
+            "C-A-T",
+            "K-A-T",
+            "C-A-D",
+            "C-O-T"
+          ]
         },
         {
           "question_id": "Q365",
@@ -440,7 +517,13 @@
             "D-U-G"
           ],
           "correct_answer": "D-O-G",
-          "image_hint": "dog"
+          "image_hint": "dog",
+          "options_zh": [
+            "D-O-G",
+            "D-A-G",
+            "D-O-K",
+            "D-U-G"
+          ]
         },
         {
           "question_id": "Q366",
@@ -455,7 +538,13 @@
             "B-O-S"
           ],
           "correct_answer": "B-U-S",
-          "image_hint": "bus"
+          "image_hint": "bus",
+          "options_zh": [
+            "B-U-S",
+            "B-A-S",
+            "B-U-Z",
+            "B-O-S"
+          ]
         },
         {
           "question_id": "Q367",
@@ -519,7 +608,13 @@
             "Web"
           ],
           "correct_answer": "Wig",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "假发",
+            "Wag",
+            "Win",
+            "蜘蛛网"
+          ]
         },
         {
           "question_id": "Q370",
@@ -537,7 +632,7 @@
           "image_hint": "book",
           "options_zh": [
             "Pop",
-            "Pup",
+            "小狗",
             "钢笔",
             "Pad"
           ]
@@ -646,7 +741,13 @@
             "H"
           ],
           "correct_answer": "F",
-          "image_hint": "fish"
+          "image_hint": "fish",
+          "options_zh": [
+            "F",
+            "S",
+            "P",
+            "H"
+          ]
         }
       ]
     },
@@ -710,7 +811,13 @@
             "H"
           ],
           "correct_answer": "B",
-          "image_hint": "book"
+          "image_hint": "book",
+          "options_zh": [
+            "B",
+            "L",
+            "C",
+            "H"
+          ]
         },
         {
           "question_id": "Q379",
@@ -725,7 +832,13 @@
             "P"
           ],
           "correct_answer": "R",
-          "image_hint": "star"
+          "image_hint": "star",
+          "options_zh": [
+            "R",
+            "N",
+            "T",
+            "P"
+          ]
         }
       ]
     },
@@ -793,7 +906,7 @@
           "options_zh": [
             "小",
             "高",
-            "Fast",
+            "快",
             "红色"
           ]
         },
@@ -813,7 +926,7 @@
           "image_hint": "book",
           "options_zh": [
             "冷的",
-            "Fast",
+            "快",
             "大",
             "Wet"
           ]
