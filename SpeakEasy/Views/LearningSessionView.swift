@@ -1606,6 +1606,8 @@ struct LearningSessionView: View {
                                             if expanded.contains(dropPoint) {
                                                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                                     categorySortBuckets[cat, default: []].append(item)
+                                                    dragSortItem = nil
+                                                    dragSortOffset = .zero
                                                 }
                                                 speechService.speak(item)
                                                 placed = true
@@ -1617,9 +1619,6 @@ struct LearningSessionView: View {
                                                 dragSortItem = nil
                                                 dragSortOffset = .zero
                                             }
-                                        } else {
-                                            dragSortItem = nil
-                                            dragSortOffset = .zero
                                         }
 
                                         // Auto-submit only when all items placed correctly
