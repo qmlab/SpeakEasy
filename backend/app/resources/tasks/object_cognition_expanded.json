@@ -2893,39 +2893,39 @@
           ]
         },
         {
-          "instruction": "Sort by Color: Red goes left, Blue goes right. [Red square]",
+          "instruction": "Sort by Color: Red or Blue? [Red square]",
           "question_id": "Q128",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"What color is the shape?\"",
           "options": [
-            "Left",
-            "Right"
+            "Red",
+            "Blue"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Red",
           "image_hint": "square",
-          "instruction_zh": "按颜色分类：红色放左边，蓝色放右边。[红色正方形]",
+          "instruction_zh": "按颜色分类：红色还是蓝色？[红色正方形]",
           "options_zh": [
-            "左",
-            "右"
+            "红色",
+            "蓝色"
           ]
         },
         {
-          "instruction": "Sort by Color: Red goes left, Blue goes right. [Blue circle]",
+          "instruction": "Sort by Color: Red or Blue? [Blue circle]",
           "question_id": "Q129",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"What color is the shape?\"",
           "options": [
-            "Right",
-            "Left"
+            "Blue",
+            "Red"
           ],
-          "correct_answer": "Right",
+          "correct_answer": "Blue",
           "image_hint": "circle",
-          "instruction_zh": "按颜色分类：红色放左边，蓝色放右边。[蓝色圆形]",
+          "instruction_zh": "按颜色分类：红色还是蓝色？[蓝色圆形]",
           "options_zh": [
-            "右",
-            "左"
+            "蓝色",
+            "红色"
           ]
         },
         {
@@ -6668,39 +6668,39 @@
           ]
         },
         {
-          "instruction": "Now sort by Shape: Circle goes left, Square goes right. [Red circle]",
+          "instruction": "Now sort by Shape: Circle or Square? [Red circle]",
           "question_id": "Q130",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"The rule changed! Now look at the SHAPE, not the color\"",
           "options": [
-            "Left",
-            "Right"
+            "Circle",
+            "Square"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Circle",
           "image_hint": "circle",
-          "instruction_zh": "按形状分类：圆形放左边，正方形放右边。[红色圆形]",
+          "instruction_zh": "现在按形状分类：圆形还是正方形？[红色圆形]",
           "options_zh": [
-            "左",
-            "右"
+            "圆形",
+            "正方形"
           ]
         },
         {
-          "instruction": "Sort by Shape: Circle goes left, Square goes right. [Blue square]",
+          "instruction": "Sort by Shape: Circle or Square? [Blue square]",
           "question_id": "Q131",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"What shape is it?\"",
           "options": [
-            "Right",
-            "Left"
+            "Square",
+            "Circle"
           ],
-          "correct_answer": "Right",
-          "image_hint": "circle",
-          "instruction_zh": "按形状分类：圆形放左边，正方形放右边。[蓝色正方形]",
+          "correct_answer": "Square",
+          "image_hint": "square",
+          "instruction_zh": "按形状分类：圆形还是正方形？[蓝色正方形]",
           "options_zh": [
-            "右",
-            "左"
+            "正方形",
+            "圆形"
           ]
         },
         {
@@ -11203,39 +11203,39 @@
           ]
         },
         {
-          "instruction": "Sort by Size: Big goes left, Small goes right. [Big red circle]",
+          "instruction": "Sort by Size: Big or Small? [Big red circle]",
           "question_id": "Q132",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"Is it big or small?\"",
           "options": [
-            "Left",
-            "Right"
+            "Big",
+            "Small"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Big",
           "image_hint": "circle",
-          "instruction_zh": "按大小分类：大的放左边，小的放右边。[大红色圆形]",
+          "instruction_zh": "按大小分类：大还是小？[大的红色圆形]",
           "options_zh": [
-            "左",
-            "右"
+            "大",
+            "小"
           ]
         },
         {
-          "instruction": "Now sort by Color again! [Small blue square]",
+          "instruction": "Now sort by Color again! Red or Blue? [Small blue square]",
           "question_id": "Q133",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"The rule switched back to color!\"",
           "options": [
-            "Right",
-            "Left"
+            "Blue",
+            "Red"
           ],
-          "correct_answer": "Right",
+          "correct_answer": "Blue",
           "image_hint": "square",
-          "instruction_zh": "继续分类！",
+          "instruction_zh": "现在重新按颜色分类！红色还是蓝色？[小的蓝色正方形]",
           "options_zh": [
-            "右",
-            "左"
+            "蓝色",
+            "红色"
           ]
         },
         {
@@ -15386,21 +15386,21 @@
           ]
         },
         {
-          "instruction": "Sort by Number of Sides: More than 3 sides goes left, 3 or fewer goes right. [Pentagon]",
+          "instruction": "Sort by Number of Sides: More than 3 or 3 or fewer? [Pentagon]",
           "question_id": "Q134",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"Count the sides of the shape\"",
           "options": [
-            "Left",
-            "Right"
+            "More than 3",
+            "3 or fewer"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "More than 3",
           "image_hint": "pentagon",
-          "instruction_zh": "按边数分类：3条边以上放左边，3条边及以下放右边。[五边形]",
+          "instruction_zh": "按边数分类：多于3条边还是3条或更少？[五边形]",
           "options_zh": [
-            "左",
-            "右"
+            "多于3条边",
+            "3条或更少"
           ]
         },
         {
@@ -19176,39 +19176,39 @@
           ]
         },
         {
-          "instruction": "Sort by Category: Animals go left, Objects go right. [Dog]",
+          "instruction": "Sort by Category: Animal or Object? [Dog]",
           "question_id": "Q135",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"Is a dog an animal or an object?\"",
           "options": [
-            "Left",
-            "Right"
+            "Animal",
+            "Object"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Animal",
           "image_hint": "dog",
-          "instruction_zh": "按类别分类：动物放左边，物品放右边。[狗]",
+          "instruction_zh": "按类别分类：动物还是物品？[狗]",
           "options_zh": [
-            "左",
-            "右"
+            "动物",
+            "物品"
           ]
         },
         {
-          "instruction": "Now sort by First Letter: A-M goes left, N-Z goes right. [Dog]",
+          "instruction": "Now sort by First Letter: A-M or N-Z? [Dog]",
           "question_id": "Q136",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"D comes before M in the alphabet\"",
           "options": [
-            "Left",
-            "Right"
+            "A-M",
+            "N-Z"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "A-M",
           "image_hint": "dog",
-          "instruction_zh": "按首字母分类：A-M放左边，N-Z放右边。[狗]",
+          "instruction_zh": "现在按首字母分类：A-M还是N-Z？[狗]",
           "options_zh": [
-            "左",
-            "右"
+            "A-M",
+            "N-Z"
           ]
         },
         {
@@ -23032,21 +23032,21 @@
           "instruction_zh": "记住这个故事：“汤姆有3辆红色汽车和2辆蓝色汽车。”汤姆一共有几辆汽车？"
         },
         {
-          "instruction": "Sort by Living/Non-Living: Living goes left, Non-living goes right. [Tree]",
+          "instruction": "Sort: Living or Non-living? [Tree]",
           "question_id": "Q137",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"Trees grow and breathe — they are living\"",
           "options": [
-            "Left",
-            "Right"
+            "Living",
+            "Non-living"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Living",
           "image_hint": "tree",
-          "instruction_zh": "按有无生命分类：有生命的放左边，没有生命的放右边。[树]",
+          "instruction_zh": "分类：有生命还是无生命？[树]",
           "options_zh": [
-            "左",
-            "右"
+            "有生命",
+            "无生命"
           ]
         },
         {
@@ -23162,75 +23162,75 @@
           ]
         },
         {
-          "instruction": "Now switch! Things you eat go left, Things you ride go right. [Pizza]",
+          "instruction": "Now switch! Do you eat it or ride it? [Pizza]",
           "question_id": "Q224",
           "source_test": "Custom",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Think about the sorting rule",
           "options": [
-            "Left",
-            "Right"
+            "Eat",
+            "Ride"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Eat",
           "image_hint": "pizza",
-          "instruction_zh": "换一换！吃的东西放左边，骑的东西放右边。[披萨]",
+          "instruction_zh": "现在换规则！可以吃还是可以骑？[披萨]",
           "options_zh": [
-            "左",
-            "右"
+            "可以吃",
+            "可以骑"
           ]
         },
         {
-          "instruction": "Things you eat go left, Things you ride go right. [Bus]",
+          "instruction": "Do you eat it or ride it? [Bus]",
           "question_id": "Q225",
           "source_test": "Custom",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Think about the sorting rule",
           "options": [
-            "Left",
-            "Right"
+            "Ride",
+            "Eat"
           ],
-          "correct_answer": "Right",
+          "correct_answer": "Ride",
           "image_hint": "bus",
-          "instruction_zh": "能吃的东西放左边，能骑的东西放右边。[公共汽车]",
+          "instruction_zh": "可以吃还是可以骑？[公共汽车]",
           "options_zh": [
-            "左",
-            "右"
+            "可以骑",
+            "可以吃"
           ]
         },
         {
-          "instruction": "Things you eat go left, Things you ride go right. [Cake]",
+          "instruction": "Do you eat it or ride it? [Cake]",
           "question_id": "Q226",
           "source_test": "Custom",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Think about the sorting rule",
           "options": [
-            "Left",
-            "Right"
+            "Eat",
+            "Ride"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Eat",
           "image_hint": "cake",
-          "instruction_zh": "能吃的东西放左边，能骑的东西放右边。[蛋糕]",
+          "instruction_zh": "可以吃还是可以骑？[蛋糕]",
           "options_zh": [
-            "左",
-            "右"
+            "可以吃",
+            "可以骑"
           ]
         },
         {
-          "instruction": "Things you eat go left, Things you ride go right. [Bicycle]",
+          "instruction": "Do you eat it or ride it? [Bicycle]",
           "question_id": "Q227",
           "source_test": "Custom",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Think about the sorting rule",
           "options": [
-            "Left",
-            "Right"
+            "Ride",
+            "Eat"
           ],
-          "correct_answer": "Right",
+          "correct_answer": "Ride",
           "image_hint": "bicycle",
-          "instruction_zh": "能吃的东西放左边，能骑的东西放右边。[自行车]",
+          "instruction_zh": "可以吃还是可以骑？[自行车]",
           "options_zh": [
-            "左",
-            "右"
+            "可以骑",
+            "可以吃"
           ]
         },
         {
@@ -30313,21 +30313,21 @@
           ]
         },
         {
-          "instruction": "Sort by Emotional Valence: Positive words go left, Negative words go right. [Happy]",
+          "instruction": "Sort by Emotion: Positive or Negative? [Happy face]",
           "question_id": "Q139",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"Happy is a good feeling — it is positive\"",
           "options": [
-            "Left",
-            "Right"
+            "Positive",
+            "Negative"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Positive",
           "image_hint": "happy_face",
-          "instruction_zh": "按情感色彩分类：积极的词放左边，消极的词放右边。[开心]",
+          "instruction_zh": "按情绪分类：正面还是负面？[开心的脸]",
           "options_zh": [
-            "左",
-            "右"
+            "正面情绪",
+            "负面情绪"
           ]
         },
         {
@@ -33813,21 +33813,21 @@
           "instruction_zh": "记住：“猫坐在旧谷仓旁的蓝色垫子上.”有几个形容词？"
         },
         {
-          "instruction": "Sort by Abstract vs Concrete: Abstract concepts go left, Concrete objects go right. [Justice]",
+          "instruction": "Sort by Type: Abstract or Concrete? [Book]",
           "question_id": "Q140",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"Can you touch justice? No — it is an idea, not a thing\"",
           "options": [
-            "Left",
-            "Right"
+            "Abstract",
+            "Concrete"
           ],
-          "correct_answer": "Left",
+          "correct_answer": "Abstract",
           "image_hint": "book",
-          "instruction_zh": "按抽象vs具体分类：抽象概念放左边，具体物品放右边。[正义]",
+          "instruction_zh": "按类型分类：抽象还是具体？[书]",
           "options_zh": [
-            "左",
-            "右"
+            "抽象",
+            "具体"
           ]
         },
         {

@@ -491,21 +491,21 @@
           ]
         },
         {
-          "instruction": "Now sort by Number of Syllables: 1 syllable goes left, 2+ syllables goes right. [Elephant]",
+          "instruction": "Sort by Syllables: 1 syllable or 2+ syllables? [Elephant]",
           "question_id": "LE_Q138",
           "source_test": "BRIEF",
           "sub_domain": "Cognitive Flexibility",
           "scaffolding_hint": "Say: \"El-e-phant has 3 syllables — more than 1\"",
           "options": [
-            "Right",
-            "Left"
+            "2+ syllables",
+            "1 syllable"
           ],
-          "correct_answer": "Right",
+          "correct_answer": "2+ syllables",
           "image_hint": "elephant",
-          "instruction_zh": "按音节数分类：1个音节放左边，2个以上放右边。[大象]",
+          "instruction_zh": "按音节数分类：1个音节还是2个以上？[大象]",
           "options_zh": [
-            "右",
-            "左"
+            "2个以上音节",
+            "1个音节"
           ]
         }
       ]
