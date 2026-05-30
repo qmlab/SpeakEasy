@@ -76,6 +76,9 @@ enum AppLocalization {
     static var stagesCompletedToday: String { localized("stages completed today", zh: "今日已完成关卡") }
     static var gettingReady: String { localized("Getting ready...", zh: "准备中...") }
     static var startingSession: String { localized("Starting session...", zh: "开始中...") }
+    static var sessionStartFailed: String { localized("Unable to Start", zh: "无法开始") }
+    static var retry: String { localized("Retry", zh: "重试") }
+    static var goBack: String { localized("Go Back", zh: "返回") }
 
     // MARK: - Task Interaction
 
