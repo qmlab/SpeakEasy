@@ -83,6 +83,8 @@ struct LearningSessionView: View {
                     taskContentView(task: task)
                 } else if showSessionSummary, let summary = learningManager.sessionSummary {
                     sessionSummaryView(summary: summary)
+                } else if learningManager.errorMessage != nil {
+                    sessionErrorView
                 } else {
                     startingView
                 }
@@ -131,9 +133,13 @@ struct LearningSessionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        Task {
-                            await learningManager.endSession(dimension: dimension)
-                            showSessionSummary = true
+                        if learningManager.currentSession != nil {
+                            Task {
+                                await learningManager.endSession(dimension: dimension)
+                                showSessionSummary = true
+                            }
+                        } else {
+                            dismiss()
                         }
                     } label: {
                         Image(systemName: "xmark")
@@ -392,6 +398,63 @@ struct LearningSessionView: View {
             Text(AppLocalization.startingSession)
                 .font(.headline)
                 .foregroundColor(.secondary)
+        }
+    }
+
+    // MARK: - Session Error View
+
+    private var sessionErrorView: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 48))
+                .foregroundColor(.orange)
+
+            Text(AppLocalization.sessionStartFailed)
+                .font(.title3)
+                .fontWeight(.bold)
+
+            Text(learningManager.errorMessage ?? "")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+
+            VStack(spacing: 12) {
+                Button {
+                    learningManager.errorMessage = nil
+                    Task {
+                        await learningManager.startSession(dimension: dimension)
+                    }
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "arrow.clockwise")
+                        Text(AppLocalization.retry)
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(dimension.color)
+                    )
+                }
+
+                Button {
+                    dismiss()
+                } label: {
+                    Text(AppLocalization.goBack)
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
+                        )
+                }
+            }
+            .padding(.horizontal, 40)
         }
     }
 
