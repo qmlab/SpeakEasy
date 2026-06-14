@@ -1447,7 +1447,7 @@ struct LearningSessionView: View {
                         .offset(isDragging ? dragOffset : .zero)
                         .contentShape(Rectangle())
                         .gesture(
-                            DragGesture(minimumDistance: 5)
+                            DragGesture(minimumDistance: 0)
                                 .onChanged { value in
                                     if draggedItem == nil {
                                         draggedItem = item
@@ -1642,7 +1642,7 @@ struct LearningSessionView: View {
                             .zIndex(isDragging ? 10 : 0)
                             .contentShape(Rectangle())
                             .gesture(
-                                DragGesture(minimumDistance: 5, coordinateSpace: .global)
+                                DragGesture(minimumDistance: 0, coordinateSpace: .global)
                                     .onChanged { value in
                                         if dragSortItem != item {
                                             speechService.speak(item)
