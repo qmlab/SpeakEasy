@@ -1447,28 +1447,38 @@ struct LearningSessionView: View {
                         .offset(isDragging ? dragOffset : .zero)
                         .contentShape(Rectangle())
                         .gesture(
-                            DragGesture(minimumDistance: 0)
+                            LongPressGesture(minimumDuration: 0.01)
+                                .sequenced(before: DragGesture(minimumDistance: 0))
                                 .onChanged { value in
-                                    if draggedItem == nil {
-                                        draggedItem = item
-                                    }
-                                    dragOffset = CGSize(width: value.translation.width - dragSwapConsumed, height: value.translation.height)
-                                    // Determine swap target based on horizontal drag distance.
-                                    // Use dragSwapConsumed to track offset already used by
-                                    // previous swaps so we don't cascade multiple swaps.
-                                    let threshold: CGFloat = 80
-                                    let effectiveDragX = value.translation.width - dragSwapConsumed
-                                    if abs(effectiveDragX) > threshold, let currentIndex = dragArrangeItems.firstIndex(of: item) {
-                                        let targetIndex = effectiveDragX > 0
-                                            ? min(currentIndex + 1, dragArrangeItems.count - 1)
-                                            : max(currentIndex - 1, 0)
-                                        if targetIndex != currentIndex {
-                                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                                dragArrangeItems.swapAt(currentIndex, targetIndex)
-                                                dragSwapConsumed += effectiveDragX > 0 ? threshold : -threshold
-                                                dragOffset = .zero
+                                    switch value {
+                                    case .first(true):
+                                        // Touch-down recognized instantly — commit to drag
+                                        if draggedItem == nil {
+                                            draggedItem = item
+                                        }
+                                    case .second(true, let drag):
+                                        if let drag = drag {
+                                            if draggedItem == nil {
+                                                draggedItem = item
+                                            }
+                                            dragOffset = CGSize(width: drag.translation.width - dragSwapConsumed, height: drag.translation.height)
+                                            let threshold: CGFloat = 80
+                                            let effectiveDragX = drag.translation.width - dragSwapConsumed
+                                            if abs(effectiveDragX) > threshold, let currentIndex = dragArrangeItems.firstIndex(of: item) {
+                                                let targetIndex = effectiveDragX > 0
+                                                    ? min(currentIndex + 1, dragArrangeItems.count - 1)
+                                                    : max(currentIndex - 1, 0)
+                                                if targetIndex != currentIndex {
+                                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                                        dragArrangeItems.swapAt(currentIndex, targetIndex)
+                                                        dragSwapConsumed += effectiveDragX > 0 ? threshold : -threshold
+                                                        dragOffset = .zero
+                                                    }
+                                                }
                                             }
                                         }
+                                    default:
+                                        break
                                     }
                                 }
                                 .onEnded { _ in
@@ -1481,8 +1491,6 @@ struct LearningSessionView: View {
                                     if dragArrangeItems == correctOrder {
                                         let capturedTaskId = learningManager.currentTask?.taskId
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                            // Guard against double-submit: skip if already
-                                            // submitting or if the task changed since the drag ended.
                                             guard !learningManager.isSubmitting,
                                                   learningManager.currentTask?.taskId == capturedTaskId else { return }
                                             Task {
@@ -1642,16 +1650,35 @@ struct LearningSessionView: View {
                             .zIndex(isDragging ? 10 : 0)
                             .contentShape(Rectangle())
                             .gesture(
-                                DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                LongPressGesture(minimumDuration: 0.01)
+                                    .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .global))
                                     .onChanged { value in
-                                        if dragSortItem != item {
-                                            speechService.speak(item)
+                                        switch value {
+                                        case .first(true):
+                                            // Touch-down — immediately commit to drag
+                                            if dragSortItem != item {
+                                                speechService.speak(item)
+                                            }
+                                            dragSortItem = item
+                                        case .second(true, let drag):
+                                            if let drag = drag {
+                                                if dragSortItem != item {
+                                                    speechService.speak(item)
+                                                }
+                                                dragSortItem = item
+                                                dragSortOffset = drag.translation
+                                            }
+                                        default:
+                                            break
                                         }
-                                        dragSortItem = item
-                                        dragSortOffset = value.translation
                                     }
                                     .onEnded { value in
-                                        let distance = sqrt(pow(value.translation.width, 2) + pow(value.translation.height, 2))
+                                        guard case .second(true, let drag?) = value else {
+                                            dragSortItem = nil
+                                            dragSortOffset = .zero
+                                            return
+                                        }
+                                        let distance = sqrt(pow(drag.translation.width, 2) + pow(drag.translation.height, 2))
                                         // Short drag = tap: show enlarged image
                                         if distance < 10 {
                                             dragSortItem = nil
@@ -1661,8 +1688,7 @@ struct LearningSessionView: View {
                                             return
                                         }
                                         // Check which category bucket the item was dropped on.
-                                        // Expand hit area by 20pt on each side for forgiving drops.
-                                        let dropPoint = value.location
+                                        let dropPoint = drag.location
                                         var placed = false
                                         for (cat, frame) in categoryFrames {
                                             let expanded = frame.insetBy(dx: -20, dy: -20)
