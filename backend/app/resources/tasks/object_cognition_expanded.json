@@ -682,35 +682,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Lock in the right group.",
-          "question_id": "Q295",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Lock"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "lock",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Lock": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把锁放到正确的组里。",
-          "options_zh": [
-            "锁"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ]
-        },
-        {
           "instruction": "Tap the phone.",
           "question_id": "Q296",
           "source_test": "Custom",
@@ -753,31 +724,6 @@
             "青蛙",
             "小猫",
             "鸟"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Piano in the right group.",
-          "question_id": "Q298",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Piano"
-          ],
-          "correct_answer": "Instruments",
-          "image_hint": "piano",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Piano": "Instruments"
-          },
-          "inline_images": true,
-          "instruction_zh": "把钢琴放到正确的组里。",
-          "options_zh": [
-            "钢琴"
           ]
         },
         {
@@ -838,31 +784,6 @@
           "options_zh": [
             "钢琴",
             "房子"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Gear in the right group.",
-          "question_id": "Q302",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
-          "options": [
-            "Gear"
-          ],
-          "correct_answer": "Non-living things",
-          "image_hint": "gear",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Living things",
-            "Non-living things"
-          ],
-          "item_categories": {
-            "Gear": "Non-living things"
-          },
-          "inline_images": true,
-          "instruction_zh": "把齿轮放到正确的组里。",
-          "options_zh": [
-            "齿轮"
           ]
         },
         {
@@ -1063,31 +984,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Dog in the right group.",
-          "question_id": "Q312",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
-          "options": [
-            "Dog"
-          ],
-          "correct_answer": "Living things",
-          "image_hint": "dog",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Living things",
-            "Non-living things"
-          ],
-          "item_categories": {
-            "Dog": "Living things"
-          },
-          "inline_images": true,
-          "instruction_zh": "把狗放到正确的组里。",
-          "options_zh": [
-            "狗"
-          ]
-        },
-        {
           "instruction": "Tap the umbrella.",
           "question_id": "Q313",
           "source_test": "Custom",
@@ -1108,35 +1004,6 @@
             "蚂蚁",
             "太阳",
             "雨伞"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Mountain in the right group.",
-          "question_id": "Q314",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Mountain"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "mountain",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Mountain": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把山放到正确的组里。",
-          "options_zh": [
-            "山"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
           ]
         },
         {
@@ -2021,31 +1888,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Scissors in the right group.",
-          "question_id": "Q355",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
-          "options": [
-            "Scissors"
-          ],
-          "correct_answer": "Non-living things",
-          "image_hint": "scissors",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Living things",
-            "Non-living things"
-          ],
-          "item_categories": {
-            "Scissors": "Non-living things"
-          },
-          "inline_images": true,
-          "instruction_zh": "把剪刀放到正确的组里。",
-          "options_zh": [
-            "剪刀"
-          ]
-        },
-        {
           "instruction": "Sort: Put Worm in the right group.",
           "question_id": "Q356",
           "source_test": "Custom",
@@ -2110,35 +1952,6 @@
           "options_zh": [
             "相机",
             "钢琴"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Pizza in the right group.",
-          "question_id": "Q359",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Pizza"
-          ],
-          "correct_answer": "Food",
-          "image_hint": "pizza",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Pizza": "Food"
-          },
-          "inline_images": true,
-          "instruction_zh": "把披萨放到正确的组里。",
-          "options_zh": [
-            "披萨"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
           ]
         },
         {
@@ -2279,31 +2092,6 @@
             "计时器",
             "尺子",
             "锁"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Salmon in the right group.",
-          "question_id": "Q367",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
-          "options": [
-            "Salmon"
-          ],
-          "correct_answer": "Living things",
-          "image_hint": "salmon",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Living things",
-            "Non-living things"
-          ],
-          "item_categories": {
-            "Salmon": "Living things"
-          },
-          "inline_images": true,
-          "instruction_zh": "把三文鱼放到正确的组里。",
-          "options_zh": [
-            "三文鱼"
           ]
         },
         {
@@ -2473,31 +2261,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Bed in the right group.",
-          "question_id": "Q376",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
-          "options": [
-            "Bed"
-          ],
-          "correct_answer": "Non-living things",
-          "image_hint": "bed",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Living things",
-            "Non-living things"
-          ],
-          "item_categories": {
-            "Bed": "Non-living things"
-          },
-          "inline_images": true,
-          "instruction_zh": "把床放到正确的组里。",
-          "options_zh": [
-            "床"
-          ]
-        },
-        {
           "instruction": "Sort: Put Cow in the right group.",
           "question_id": "Q377",
           "source_test": "Custom",
@@ -2600,35 +2363,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Cookie in the right group.",
-          "question_id": "Q381",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Cookie"
-          ],
-          "correct_answer": "Food",
-          "image_hint": "cookie",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Cookie": "Food"
-          },
-          "inline_images": true,
-          "instruction_zh": "把饼干放到正确的组里。",
-          "options_zh": [
-            "饼干"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
           "instruction": "Sort: Put Pizza in the right group.",
           "question_id": "Q382",
           "source_test": "Custom",
@@ -2677,93 +2411,6 @@
             "假发",
             "放大镜",
             "凉鞋"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Volcano in the right group.",
-          "question_id": "Q384",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Volcano"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "volcano",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Volcano": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把火山放到正确的组里。",
-          "options_zh": [
-            "火山"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Cookie in the right group.",
-          "question_id": "Q385",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Cookie"
-          ],
-          "correct_answer": "Food",
-          "image_hint": "cookie",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Cookie": "Food"
-          },
-          "inline_images": true,
-          "instruction_zh": "把饼干放到正确的组里。",
-          "options_zh": [
-            "饼干"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Table in the right group.",
-          "question_id": "Q386",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Table"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "table",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Table": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把桌子放到正确的组里。",
-          "options_zh": [
-            "桌子"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
           ]
         },
         {
@@ -3491,31 +3138,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Piano in the right group.",
-          "question_id": "Q392",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Piano"
-          ],
-          "correct_answer": "Instruments",
-          "image_hint": "piano",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Piano": "Instruments"
-          },
-          "inline_images": true,
-          "instruction_zh": "把钢琴放到正确的组里。",
-          "options_zh": [
-            "钢琴"
-          ]
-        },
-        {
           "instruction": "Tap the plane.",
           "question_id": "Q393",
           "source_test": "Custom",
@@ -3797,31 +3419,6 @@
             "灯泡",
             "蜡笔",
             "相机"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Guitar in the right group.",
-          "question_id": "Q406",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Guitar"
-          ],
-          "correct_answer": "Instruments",
-          "image_hint": "guitar",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Guitar": "Instruments"
-          },
-          "inline_images": true,
-          "instruction_zh": "把吉他放到正确的组里。",
-          "options_zh": [
-            "吉他"
           ]
         },
         {
@@ -4384,35 +3981,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Bread in the right group.",
-          "question_id": "Q434",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Bread"
-          ],
-          "correct_answer": "Food",
-          "image_hint": "bread",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Bread": "Food"
-          },
-          "inline_images": true,
-          "instruction_zh": "把面包放到正确的组里。",
-          "options_zh": [
-            "面包"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
           "instruction": "Tap the bridge.",
           "question_id": "Q435",
           "source_test": "Custom",
@@ -4493,31 +4061,6 @@
           "options_zh": [
             "靴子",
             "计算器"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Clock in the right group.",
-          "question_id": "Q439",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
-          "options": [
-            "Clock"
-          ],
-          "correct_answer": "Non-living things",
-          "image_hint": "clock",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Living things",
-            "Non-living things"
-          ],
-          "item_categories": {
-            "Clock": "Non-living things"
-          },
-          "inline_images": true,
-          "instruction_zh": "把钟放到正确的组里。",
-          "options_zh": [
-            "时钟"
           ]
         },
         {
@@ -4648,35 +4191,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Ice Cream in the right group.",
-          "question_id": "Q446",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Ice Cream"
-          ],
-          "correct_answer": "Food",
-          "image_hint": "ice_cream",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Ice Cream": "Food"
-          },
-          "inline_images": true,
-          "instruction_zh": "把冰淇淋放到正确的组里。",
-          "options_zh": [
-            "冰淇淋"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
           "instruction": "Watch! What did you see? Tap the right one.",
           "question_id": "Q447",
           "source_test": "Custom",
@@ -4737,35 +4251,6 @@
             "蝙蝠",
             "蝴蝶",
             "吉他"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Scissors in the right group.",
-          "question_id": "Q450",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Scissors"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "scissors",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Scissors": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把剪刀放到正确的组里。",
-          "options_zh": [
-            "剪刀"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
           ]
         },
         {
@@ -5097,35 +4582,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Rainbow in the right group.",
-          "question_id": "Q466",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Rainbow"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "rainbow",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Rainbow": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把彩虹放到正确的组里。",
-          "options_zh": [
-            "彩虹"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
           "instruction": "Tap the water.",
           "question_id": "Q467",
           "source_test": "Custom",
@@ -5267,31 +4723,6 @@
           "options_zh": [
             "滑轮",
             "刷子"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Pen in the right group.",
-          "question_id": "Q474",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Pen"
-          ],
-          "correct_answer": "Stationery",
-          "image_hint": "pen",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Pen": "Stationery"
-          },
-          "inline_images": true,
-          "instruction_zh": "把笔放到正确的组里。",
-          "options_zh": [
-            "钢笔"
           ]
         },
         {
@@ -5481,35 +4912,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Tree in the right group.",
-          "question_id": "Q483",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Tree"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "tree",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Tree": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把树放到正确的组里。",
-          "options_zh": [
-            "树"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
-          ]
-        },
-        {
           "instruction": "Tap the bridge.",
           "question_id": "Q484",
           "source_test": "Custom",
@@ -5576,35 +4978,6 @@
             "冰淇淋",
             "滑轮",
             "小羊"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Rain in the right group.",
-          "question_id": "Q487",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Rain"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "rain",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Rain": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把雨放到正确的组里。",
-          "options_zh": [
-            "雨"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
           ]
         },
         {
@@ -5732,35 +5105,6 @@
             "鳄鱼",
             "星星",
             "锤子"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Moon in the right group.",
-          "question_id": "Q494",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it food or nature?\"",
-          "options": [
-            "Moon"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "moon",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Food",
-            "Nature"
-          ],
-          "item_categories": {
-            "Moon": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把月亮放到正确的组里。",
-          "options_zh": [
-            "月亮"
-          ],
-          "sort_categories_zh": [
-            "食物",
-            "自然"
           ]
         },
         {
@@ -7485,11 +6829,11 @@
           "image_hint": "drill",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Drill": "Non-living things"
+            "Drill": "Things"
           },
           "inline_images": true,
           "instruction_zh": "把钻头放到正确的组里。",
@@ -7944,11 +7288,11 @@
           "image_hint": "pendulum",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Pendulum": "Non-living things"
+            "Pendulum": "Things"
           },
           "inline_images": true,
           "instruction_zh": "把钟摆放到正确的组里。",
@@ -8038,11 +7382,11 @@
           "image_hint": "plate",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Plate": "Non-living things"
+            "Plate": "Things"
           },
           "inline_images": true,
           "instruction_zh": "把盘子放到正确的组里。",
@@ -9274,7 +8618,7 @@
           "interaction_mode": "drag_sort",
           "sort_categories": [
             "Food",
-            "Nature"
+            "Outdoors"
           ],
           "item_categories": {
             "Watermelon": "Food"
@@ -9286,7 +8630,7 @@
           ],
           "sort_categories_zh": [
             "食物",
-            "自然"
+            "户外"
           ]
         },
         {
@@ -10111,35 +9455,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Pendulum in the right group.",
-          "question_id": "Q595",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Pendulum"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "pendulum",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Pendulum": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把钟摆放到正确的组里。",
-          "options_zh": [
-            "钟摆"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ]
-        },
-        {
           "instruction": "Watch! What did you see? Tap the right one.",
           "question_id": "Q596",
           "source_test": "Custom",
@@ -10389,35 +9704,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Screwdriver in the right group.",
-          "question_id": "Q605",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Screwdriver"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "screwdriver",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Screwdriver": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把螺丝刀放到正确的组里。",
-          "options_zh": [
-            "螺丝刀"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ]
-        },
-        {
           "instruction": "Tap when you see a vehicle.",
           "question_id": "Q606",
           "source_test": "Custom",
@@ -10483,6 +9769,446 @@
             "鼓",
             "钥匙",
             "小号"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Gear in the right group.",
+          "question_id": "Q302",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
+          "options": [
+            "Gear"
+          ],
+          "correct_answer": "Non-living things",
+          "image_hint": "gear",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Animals",
+            "Things"
+          ],
+          "item_categories": {
+            "Gear": "Things"
+          },
+          "inline_images": true,
+          "instruction_zh": "把齿轮放到正确的组里。",
+          "options_zh": [
+            "齿轮"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Dog in the right group.",
+          "question_id": "Q312",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
+          "options": [
+            "Dog"
+          ],
+          "correct_answer": "Living things",
+          "image_hint": "dog",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Animals",
+            "Things"
+          ],
+          "item_categories": {
+            "Dog": "Animals"
+          },
+          "inline_images": true,
+          "instruction_zh": "把狗放到正确的组里。",
+          "options_zh": [
+            "狗"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Scissors in the right group.",
+          "question_id": "Q355",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
+          "options": [
+            "Scissors"
+          ],
+          "correct_answer": "Non-living things",
+          "image_hint": "scissors",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Animals",
+            "Things"
+          ],
+          "item_categories": {
+            "Scissors": "Things"
+          },
+          "inline_images": true,
+          "instruction_zh": "把剪刀放到正确的组里。",
+          "options_zh": [
+            "剪刀"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Pizza in the right group.",
+          "question_id": "Q359",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Pizza"
+          ],
+          "correct_answer": "Food",
+          "image_hint": "pizza",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Pizza": "Food"
+          },
+          "inline_images": true,
+          "instruction_zh": "把披萨放到正确的组里。",
+          "options_zh": [
+            "披萨"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Salmon in the right group.",
+          "question_id": "Q367",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
+          "options": [
+            "Salmon"
+          ],
+          "correct_answer": "Living things",
+          "image_hint": "salmon",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Animals",
+            "Things"
+          ],
+          "item_categories": {
+            "Salmon": "Animals"
+          },
+          "inline_images": true,
+          "instruction_zh": "把三文鱼放到正确的组里。",
+          "options_zh": [
+            "三文鱼"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Bed in the right group.",
+          "question_id": "Q376",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
+          "options": [
+            "Bed"
+          ],
+          "correct_answer": "Non-living things",
+          "image_hint": "bed",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Animals",
+            "Things"
+          ],
+          "item_categories": {
+            "Bed": "Things"
+          },
+          "inline_images": true,
+          "instruction_zh": "把床放到正确的组里。",
+          "options_zh": [
+            "床"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Cookie in the right group.",
+          "question_id": "Q381",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Cookie"
+          ],
+          "correct_answer": "Food",
+          "image_hint": "cookie",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Cookie": "Food"
+          },
+          "inline_images": true,
+          "instruction_zh": "把饼干放到正确的组里。",
+          "options_zh": [
+            "饼干"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Volcano in the right group.",
+          "question_id": "Q384",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Volcano"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "volcano",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Volcano": "Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把火山放到正确的组里。",
+          "options_zh": [
+            "火山"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Cookie in the right group.",
+          "question_id": "Q385",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Cookie"
+          ],
+          "correct_answer": "Food",
+          "image_hint": "cookie",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Cookie": "Food"
+          },
+          "inline_images": true,
+          "instruction_zh": "把饼干放到正确的组里。",
+          "options_zh": [
+            "饼干"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Bread in the right group.",
+          "question_id": "Q434",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Bread"
+          ],
+          "correct_answer": "Food",
+          "image_hint": "bread",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Bread": "Food"
+          },
+          "inline_images": true,
+          "instruction_zh": "把面包放到正确的组里。",
+          "options_zh": [
+            "面包"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Clock in the right group.",
+          "question_id": "Q439",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it living things or non-living things?\"",
+          "options": [
+            "Clock"
+          ],
+          "correct_answer": "Non-living things",
+          "image_hint": "clock",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Animals",
+            "Things"
+          ],
+          "item_categories": {
+            "Clock": "Things"
+          },
+          "inline_images": true,
+          "instruction_zh": "把钟放到正确的组里。",
+          "options_zh": [
+            "时钟"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Ice Cream in the right group.",
+          "question_id": "Q446",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Ice Cream"
+          ],
+          "correct_answer": "Food",
+          "image_hint": "ice_cream",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Ice Cream": "Food"
+          },
+          "inline_images": true,
+          "instruction_zh": "把冰淇淋放到正确的组里。",
+          "options_zh": [
+            "冰淇淋"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Rainbow in the right group.",
+          "question_id": "Q466",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Rainbow"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "rainbow",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Rainbow": "Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把彩虹放到正确的组里。",
+          "options_zh": [
+            "彩虹"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Tree in the right group.",
+          "question_id": "Q483",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Tree"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "tree",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Tree": "Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把树放到正确的组里。",
+          "options_zh": [
+            "树"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Rain in the right group.",
+          "question_id": "Q487",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Rain"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "rain",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Rain": "Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把雨放到正确的组里。",
+          "options_zh": [
+            "雨"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Moon in the right group.",
+          "question_id": "Q494",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it food or nature?\"",
+          "options": [
+            "Moon"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "moon",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Food",
+            "Outdoors"
+          ],
+          "item_categories": {
+            "Moon": "Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把月亮放到正确的组里。",
+          "options_zh": [
+            "月亮"
+          ],
+          "sort_categories_zh": [
+            "食物",
+            "户外"
           ]
         }
       ]
@@ -11596,122 +11322,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Rain in the right group.",
-          "question_id": "Q274",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Is it from nature or made by people?",
-          "options": [
-            "Rain"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "rain",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Rain": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把雨放到正确的组里。",
-          "options_zh": [
-            "雨"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Lock in the right group.",
-          "question_id": "Q275",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Is it from nature or made by people?",
-          "options": [
-            "Lock"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "lock",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Lock": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把锁放到正确的组里。",
-          "options_zh": [
-            "锁"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Wind in the right group.",
-          "question_id": "Q276",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Is it from nature or made by people?",
-          "options": [
-            "Wind"
-          ],
-          "correct_answer": "Nature",
-          "image_hint": "wind",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Wind": "Nature"
-          },
-          "inline_images": true,
-          "instruction_zh": "把风放到正确的组里。",
-          "options_zh": [
-            "风"
-          ],
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Gear in the right group.",
-          "question_id": "Q277",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Is it from nature or made by people?",
-          "options": [
-            "Gear"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "gear",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Gear": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把齿轮放到正确的组里。",
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ],
-          "options_zh": [
-            "齿轮"
-          ]
-        },
-        {
           "instruction": "Remember: Brush, Music. Tap the things you heard.",
           "question_id": "Q608",
           "source_test": "Custom",
@@ -11837,11 +11447,11 @@
           "image_hint": "door",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Door": "Non-living things"
+            "Door": "Things"
           },
           "inline_images": true,
           "instruction_zh": "把门放到正确的组里。",
@@ -12071,11 +11681,11 @@
           "image_hint": "penguin",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Penguin": "Living things"
+            "Penguin": "Animals"
           },
           "inline_images": true,
           "instruction_zh": "把企鹅放到正确的组里。",
@@ -12539,11 +12149,11 @@
           "image_hint": "gear",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Gear": "Non-living things"
+            "Gear": "Things"
           },
           "inline_images": true,
           "instruction_zh": "把齿轮放到正确的组里。",
@@ -12701,11 +12311,11 @@
           "image_hint": "penguin",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Penguin": "Living things"
+            "Penguin": "Animals"
           },
           "inline_images": true,
           "instruction_zh": "把企鹅放到正确的组里。",
@@ -13035,35 +12645,6 @@
             "铅笔",
             "钢笔",
             "星星"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Plane in the right group.",
-          "question_id": "Q655",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
-          "options": [
-            "Plane"
-          ],
-          "correct_answer": "Man-made",
-          "image_hint": "plane",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Nature",
-            "Man-made"
-          ],
-          "item_categories": {
-            "Plane": "Man-made"
-          },
-          "inline_images": true,
-          "instruction_zh": "把飞机放到正确的组里。",
-          "sort_categories_zh": [
-            "自然",
-            "Man-made"
-          ],
-          "options_zh": [
-            "飞机"
           ]
         },
         {
@@ -13833,31 +13414,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Violin in the right group.",
-          "question_id": "Q684",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Violin"
-          ],
-          "correct_answer": "Instruments",
-          "image_hint": "violin",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Violin": "Instruments"
-          },
-          "inline_images": true,
-          "instruction_zh": "把小提琴放到正确的组里。",
-          "options_zh": [
-            "小提琴"
-          ]
-        },
-        {
           "instruction": "Which one does not belong? Tap the different one.",
           "question_id": "Q685",
           "source_test": "Custom",
@@ -13939,7 +13495,7 @@
           "interaction_mode": "drag_sort",
           "sort_categories": [
             "Food",
-            "Nature"
+            "Outdoors"
           ],
           "item_categories": {
             "Ice Cream": "Food"
@@ -13951,7 +13507,7 @@
           ],
           "sort_categories_zh": [
             "食物",
-            "自然"
+            "户外"
           ]
         },
         {
@@ -14159,31 +13715,6 @@
           ]
         },
         {
-          "instruction": "Sort: Put Pencil in the right group.",
-          "question_id": "Q695",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Pencil"
-          ],
-          "correct_answer": "Stationery",
-          "image_hint": "pencil",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Pencil": "Stationery"
-          },
-          "inline_images": true,
-          "instruction_zh": "把铅笔放到正确的组里。",
-          "options_zh": [
-            "铅笔"
-          ]
-        },
-        {
           "instruction": "Remember: Door, Strawberry. Tap the things you heard.",
           "question_id": "Q696",
           "source_test": "Custom",
@@ -14241,11 +13772,11 @@
           "image_hint": "train",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Train": "Non-living things"
+            "Train": "Things"
           },
           "inline_images": true,
           "instruction_zh": "把火车放到正确的组里。",
@@ -14562,7 +14093,7 @@
           "interaction_mode": "drag_sort",
           "sort_categories": [
             "Food",
-            "Nature"
+            "Outdoors"
           ],
           "item_categories": {
             "Apple": "Food"
@@ -14574,7 +14105,7 @@
           ],
           "sort_categories_zh": [
             "食物",
-            "自然"
+            "户外"
           ]
         },
         {
@@ -14687,31 +14218,6 @@
             "猫",
             "香蕉",
             "螺丝刀"
-          ]
-        },
-        {
-          "instruction": "Sort: Put Guitar in the right group.",
-          "question_id": "Q712",
-          "source_test": "Custom",
-          "sub_domain": "Cognitive Flexibility",
-          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
-          "options": [
-            "Guitar"
-          ],
-          "correct_answer": "Instruments",
-          "image_hint": "guitar",
-          "interaction_mode": "drag_sort",
-          "sort_categories": [
-            "Instruments",
-            "Stationery"
-          ],
-          "item_categories": {
-            "Guitar": "Instruments"
-          },
-          "inline_images": true,
-          "instruction_zh": "把吉他放到正确的组里。",
-          "options_zh": [
-            "吉他"
           ]
         },
         {
@@ -14839,11 +14345,11 @@
           "image_hint": "cat",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Living things",
-            "Non-living things"
+            "Animals",
+            "Things"
           ],
           "item_categories": {
-            "Cat": "Living things"
+            "Cat": "Animals"
           },
           "inline_images": true,
           "instruction_zh": "把猫放到正确的组里。",
@@ -19047,6 +18553,500 @@
             "显微镜",
             "太阳",
             "地球仪"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Lock in the right group.",
+          "question_id": "Q295",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Lock"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "lock",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Lock": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把锁放到正确的组里。",
+          "options_zh": [
+            "锁"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Piano in the right group.",
+          "question_id": "Q298",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Piano"
+          ],
+          "correct_answer": "Instruments",
+          "image_hint": "piano",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Piano": "Instruments"
+          },
+          "inline_images": true,
+          "instruction_zh": "把钢琴放到正确的组里。",
+          "options_zh": [
+            "钢琴"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Mountain in the right group.",
+          "question_id": "Q314",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Mountain"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "mountain",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Mountain": "From Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把山放到正确的组里。",
+          "options_zh": [
+            "山"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Table in the right group.",
+          "question_id": "Q386",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Table"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "table",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Table": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把桌子放到正确的组里。",
+          "options_zh": [
+            "桌子"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Piano in the right group.",
+          "question_id": "Q392",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Piano"
+          ],
+          "correct_answer": "Instruments",
+          "image_hint": "piano",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Piano": "Instruments"
+          },
+          "inline_images": true,
+          "instruction_zh": "把钢琴放到正确的组里。",
+          "options_zh": [
+            "钢琴"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Guitar in the right group.",
+          "question_id": "Q406",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Guitar"
+          ],
+          "correct_answer": "Instruments",
+          "image_hint": "guitar",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Guitar": "Instruments"
+          },
+          "inline_images": true,
+          "instruction_zh": "把吉他放到正确的组里。",
+          "options_zh": [
+            "吉他"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Scissors in the right group.",
+          "question_id": "Q450",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Scissors"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "scissors",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Scissors": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把剪刀放到正确的组里。",
+          "options_zh": [
+            "剪刀"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Pen in the right group.",
+          "question_id": "Q474",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Pen"
+          ],
+          "correct_answer": "Stationery",
+          "image_hint": "pen",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Pen": "Stationery"
+          },
+          "inline_images": true,
+          "instruction_zh": "把笔放到正确的组里。",
+          "options_zh": [
+            "钢笔"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Pendulum in the right group.",
+          "question_id": "Q595",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Pendulum"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "pendulum",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Pendulum": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把钟摆放到正确的组里。",
+          "options_zh": [
+            "钟摆"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Screwdriver in the right group.",
+          "question_id": "Q605",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Screwdriver"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "screwdriver",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Screwdriver": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把螺丝刀放到正确的组里。",
+          "options_zh": [
+            "螺丝刀"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Rain in the right group.",
+          "question_id": "Q274",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Rain"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "rain",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Rain": "From Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把雨放到正确的组里。",
+          "options_zh": [
+            "雨"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Lock in the right group.",
+          "question_id": "Q275",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Lock"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "lock",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Lock": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把锁放到正确的组里。",
+          "options_zh": [
+            "锁"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Wind in the right group.",
+          "question_id": "Q276",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Wind"
+          ],
+          "correct_answer": "Nature",
+          "image_hint": "wind",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Wind": "From Outdoors"
+          },
+          "inline_images": true,
+          "instruction_zh": "把风放到正确的组里。",
+          "options_zh": [
+            "风"
+          ],
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Gear in the right group.",
+          "question_id": "Q277",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Is it from nature or made by people?",
+          "options": [
+            "Gear"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "gear",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Gear": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把齿轮放到正确的组里。",
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ],
+          "options_zh": [
+            "齿轮"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Plane in the right group.",
+          "question_id": "Q655",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it nature or man-made?\"",
+          "options": [
+            "Plane"
+          ],
+          "correct_answer": "Man-made",
+          "image_hint": "plane",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "From Outdoors",
+            "Made by People"
+          ],
+          "item_categories": {
+            "Plane": "Made by People"
+          },
+          "inline_images": true,
+          "instruction_zh": "把飞机放到正确的组里。",
+          "sort_categories_zh": [
+            "来自户外",
+            "人造的"
+          ],
+          "options_zh": [
+            "飞机"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Violin in the right group.",
+          "question_id": "Q684",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Violin"
+          ],
+          "correct_answer": "Instruments",
+          "image_hint": "violin",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Violin": "Instruments"
+          },
+          "inline_images": true,
+          "instruction_zh": "把小提琴放到正确的组里。",
+          "options_zh": [
+            "小提琴"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Pencil in the right group.",
+          "question_id": "Q695",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Pencil"
+          ],
+          "correct_answer": "Stationery",
+          "image_hint": "pencil",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Pencil": "Stationery"
+          },
+          "inline_images": true,
+          "instruction_zh": "把铅笔放到正确的组里。",
+          "options_zh": [
+            "铅笔"
+          ]
+        },
+        {
+          "instruction": "Sort: Put Guitar in the right group.",
+          "question_id": "Q712",
+          "source_test": "Custom",
+          "sub_domain": "Cognitive Flexibility",
+          "scaffolding_hint": "Say: \"Is it instruments or stationery?\"",
+          "options": [
+            "Guitar"
+          ],
+          "correct_answer": "Instruments",
+          "image_hint": "guitar",
+          "interaction_mode": "drag_sort",
+          "sort_categories": [
+            "Instruments",
+            "Stationery"
+          ],
+          "item_categories": {
+            "Guitar": "Instruments"
+          },
+          "inline_images": true,
+          "instruction_zh": "把吉他放到正确的组里。",
+          "options_zh": [
+            "吉他"
           ]
         }
       ]
@@ -30387,11 +30387,11 @@
           "image_hint": "gift",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Positive words",
-            "Negative words"
+            "Happy words",
+            "Sad words"
           ],
           "item_categories": {
-            "Gift": "Positive words"
+            "Gift": "Happy words"
           },
           "inline_images": true,
           "instruction_zh": "把礼物放到正确的组里。",
@@ -30412,11 +30412,11 @@
           "image_hint": "sad",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Positive words",
-            "Negative words"
+            "Happy words",
+            "Sad words"
           ],
           "item_categories": {
-            "Sad": "Negative words"
+            "Sad": "Sad words"
           },
           "inline_images": true,
           "instruction_zh": "把难过放到正确的组里。",
@@ -30437,11 +30437,11 @@
           "image_hint": "rainbow",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Positive words",
-            "Negative words"
+            "Happy words",
+            "Sad words"
           ],
           "item_categories": {
-            "Rainbow": "Positive words"
+            "Rainbow": "Happy words"
           },
           "inline_images": true,
           "instruction_zh": "把彩虹放到正确的组里。",
@@ -30462,11 +30462,11 @@
           "image_hint": "scared",
           "interaction_mode": "drag_sort",
           "sort_categories": [
-            "Positive words",
-            "Negative words"
+            "Happy words",
+            "Sad words"
           ],
           "item_categories": {
-            "Scared": "Negative words"
+            "Scared": "Sad words"
           },
           "inline_images": true,
           "instruction_zh": "把害怕放到正确的组里。",

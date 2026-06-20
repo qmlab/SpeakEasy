@@ -1308,8 +1308,8 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Starts the timed flash sequence.  Shows each image for 1.5 seconds with
-    /// a 0.4 second blank gap between them.
+    /// Starts the timed flash sequence.  Shows each image for 5 seconds with
+    /// a 0.8 second blank gap between them.
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -1330,7 +1330,7 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Shows the next flash image, waits 3s, then either advances or completes.
+    /// Shows the next flash image, waits 5s, then either advances or completes.
     /// The `generation` parameter is compared against `flashGeneration` to bail
     /// out if the task changed while callbacks were pending.
     private func showNextFlash(images: [String], generation: Int) {
@@ -1346,14 +1346,14 @@ struct LearningSessionView: View {
             flashVisible = true
         }
 
-        // Keep visible for 3 seconds so the child can observe
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        // Keep visible for 5 seconds so the child can observe
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             guard self.flashGeneration == generation else { return }
             withAnimation(.easeOut(duration: 0.2)) {
                 self.flashVisible = false
             }
             // Brief gap then show next or complete
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 guard self.flashGeneration == generation else { return }
                 self.flashPhase += 1
                 if self.flashPhase < images.count {
