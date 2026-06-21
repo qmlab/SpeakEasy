@@ -1,7 +1,12 @@
+---
+name: testing-backend-api
+description: Test the Rising Star Kid backend API end-to-end. Use when verifying backend task seeding, adaptive session flow, sort task categories, image URL integrity, or API endpoint changes.
+---
+
 # Testing Rising Star Kid Backend API
 
 ## Backend URL
-- Deployed: `https://risingstar-backend-zclkfobb.fly.dev`
+- Deployed: `https://risingstar-backend.fly.dev`
 - Local: `http://localhost:8000`
 
 ## Starting Local Backend
@@ -21,8 +26,9 @@ After any changes to seed files (`seed_expanded.py`, `seed_tasks.py`, task JSON 
 ```bash
 curl -X POST http://localhost:8000/tasks/seed?force=true
 # or for deployed:
-curl -X POST https://risingstar-backend-zclkfobb.fly.dev/tasks/seed?force=true
+curl -X POST https://risingstar-backend.fly.dev/tasks/seed?force=true
 ```
+Without `?force=true`, existing tasks are not updated.
 
 ## Key API Endpoints for Testing
 - `POST /auth/guest` with body `{"device_id": "test-xxx"}` — Create guest player
@@ -55,7 +61,7 @@ For backend-only changes to task transformation logic (`seed_expanded.py`), API-
 
 ## Task Types and Expected Formats
 | Type | Level | Expected Fields |
-|------|-------|-----------------|
+|------|-------|------------------|
 | pair | 0 | options (3 items), correct_answer, image_hint, instruction_text "Which goes with X?" |
 | sort | 1 | options (shuffled items), correct_answer (first in order), items |
 | cause_effect | 2 | options (3 items, shuffled), correct_answer (from correct_effect) |
