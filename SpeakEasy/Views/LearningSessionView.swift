@@ -532,12 +532,11 @@ struct LearningSessionView: View {
                             .padding()
                         }
 
-                        // Pinned interaction area at bottom — capped so it
-                        // never pushes the image out of the scroll area.
-                        ScrollView {
-                            VStack(spacing: 12) {
-                                interactionArea(task: task)
-                            }
+                        // Pinned interaction area at bottom — NOT in ScrollView
+                        // so tap gestures fire immediately without scroll-vs-tap
+                        // disambiguation delay.
+                        VStack(spacing: 12) {
+                            interactionArea(task: task)
                         }
                         .frame(maxHeight: maxPinnedHeight)
                         .padding(.horizontal)
@@ -562,15 +561,22 @@ struct LearningSessionView: View {
                 }
                 .padding(.vertical, 8)
             } else {
-                // Original scrollable layout for complex interactions
-                ScrollView {
-                    VStack(spacing: 24) {
-                        taskProgressBar
-                        instructionCard(task: task)
-                        contentArea(task: task)
+                // Content scrolls, interaction area stays outside ScrollView
+                // to avoid tap gesture delay from scroll disambiguation.
+                VStack(spacing: 0) {
+                    ScrollView {
+                        VStack(spacing: 24) {
+                            taskProgressBar
+                            instructionCard(task: task)
+                            contentArea(task: task)
+                        }
+                        .padding()
+                    }
+                    VStack(spacing: 12) {
                         interactionArea(task: task)
                     }
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
                 }
             }
 
@@ -1308,8 +1314,9 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Starts the timed flash sequence.  Shows each image for 5 seconds with
-    /// a 0.8 second blank gap between them.
+    /// Starts the timed flash sequence.  The first image is shown for 8 seconds
+    /// (to allow the instruction audio to finish), subsequent images for 6 seconds,
+    /// with a 1.0 second blank gap between them.
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -1330,7 +1337,10 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Shows the next flash image, waits 5s, then either advances or completes.
+    /// Shows the next flash image, then either advances or completes.
+    /// The first image (flashPhase == 0) stays visible for 8 seconds so the child
+    /// can finish listening to the instruction audio before it disappears.
+    /// Subsequent images stay visible for 6 seconds.
     /// The `generation` parameter is compared against `flashGeneration` to bail
     /// out if the task changed while callbacks were pending.
     private func showNextFlash(images: [String], generation: Int) {
@@ -1342,18 +1352,20 @@ struct LearningSessionView: View {
             return
         }
 
+        let isFirstImage = flashPhase == 0
+        let displayDuration: Double = isFirstImage ? 8.0 : 6.0
+
         withAnimation(.easeIn(duration: 0.2)) {
             flashVisible = true
         }
 
-        // Keep visible for 5 seconds so the child can observe
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + displayDuration) {
             guard self.flashGeneration == generation else { return }
             withAnimation(.easeOut(duration: 0.2)) {
                 self.flashVisible = false
             }
             // Brief gap then show next or complete
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 guard self.flashGeneration == generation else { return }
                 self.flashPhase += 1
                 if self.flashPhase < images.count {
@@ -1745,26 +1757,33 @@ struct LearningSessionView: View {
                 ForEach(categories, id: \.self) { category in
                     let bucketItems = categorySortBuckets[category] ?? []
                     VStack(spacing: 8) {
-                        // Category label — show representative image instead of text
-                        let rep = representativeImage(for: category)
-                        HStack(spacing: 8) {
+                        // Category label — show representative image, excluding
+                        // any image that also appears as a sort item.
+                        let itemSet = Set(task.content.displayOptions)
+                        let rep = representativeImage(for: category, excludeItems: itemSet)
+                        VStack(spacing: 4) {
                             if !rep.objectName.isEmpty {
                                 RemoteImageView(
                                     objectName: rep.objectName,
                                     imageType: .flashcard,
                                     fallbackIcon: rep.fallback,
                                     iconColor: .white,
-                                    size: 70
+                                    size: 56
                                 )
-                                .cornerRadius(12)
+                                .cornerRadius(10)
                             } else {
                                 Image(systemName: rep.fallback)
-                                    .font(.system(size: 36))
+                                    .font(.system(size: 30))
                                     .foregroundColor(.white)
                             }
+                            Text(AppLocalization.translateOption(category))
+                                .font(.caption2.bold())
+                                .foregroundColor(.white)
+                                .lineLimit(2)
+                                .multilineTextAlignment(.center)
                         }
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
+                        .padding(.vertical, 10)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(colorForCategory(category, categories: categories))
@@ -1931,41 +1950,87 @@ struct LearningSessionView: View {
     }
 
     /// Representative photo name for a sort category, used as the visual label.
-    private func representativeImage(for category: String) -> (objectName: String, fallback: String) {
+    /// `excludeItems` prevents using an image that already appears as a sort
+    /// item — otherwise the answer becomes trivially obvious.
+    private func representativeImage(for category: String, excludeItems: Set<String> = []) -> (objectName: String, fallback: String) {
         let key = category.lowercased()
+        // Each category maps to a ranked list of candidate images; the first
+        // candidate whose name is NOT in `excludeItems` is used.
+        let candidates: [(String, String)]
         switch key {
-        case "animals", "big animals": return ("elephant", "pawprint.fill")
-        case "small animals": return ("ant", "ant.fill")
-        case "food", "things you eat": return ("apple", "fork.knife")
-        case "fruits": return ("apple", "leaf.fill")
-        case "vegetables": return ("carrot", "leaf.fill")
-        case "nature", "natural": return ("tree", "leaf.fill")
-        case "clothing", "things you wear": return ("shirt", "tshirt.fill")
-        case "vehicles": return ("car", "car.fill")
-        case "tools": return ("hammer", "wrench.fill")
-        case "toys": return ("ball", "gamecontroller.fill")
-        case "instruments": return ("drum", "music.note")
-        case "stationery": return ("pencil", "pencil")
-        case "living things": return ("dog", "hare.fill")
-        case "non-living things", "man-made", "objects": return ("chair", "cube.fill")
-        case "things that fly": return ("bird", "bird.fill")
-        case "things that swim": return ("fish", "fish.fill")
-        case "things with legs": return ("dog", "pawprint.fill")
-        case "things without legs": return ("worm", "circle.fill")
-        case "things that need electricity": return ("lightbulb", "bolt.fill")
-        case "hot things": return ("fire", "flame.fill")
-        case "cold things": return ("ice", "snowflake")
-        case "positive words": return ("", "hand.thumbsup.fill")
-        case "negative words": return ("", "hand.thumbsdown.fill")
-        case "red": return ("", "circle.fill")
-        case "blue": return ("", "circle.fill")
-        case "big": return ("elephant", "arrow.up.circle.fill")
-        case "small": return ("ant", "arrow.down.circle.fill")
-        case "fruit": return ("apple", "leaf.fill")
-        case "not fruit": return ("", "xmark.circle.fill")
-        case "things that don't": return ("", "xmark.circle.fill")
-        default: return ("", "square.grid.2x2.fill")
+        case "animals", "big animals":
+            candidates = [("elephant", "pawprint.fill"), ("lion", "pawprint.fill"), ("horse", "pawprint.fill")]
+        case "small animals":
+            candidates = [("ant", "ant.fill"), ("butterfly", "ant.fill"), ("ladybug", "ant.fill")]
+        case "food", "things you eat":
+            candidates = [("apple", "fork.knife"), ("bread", "fork.knife"), ("banana", "fork.knife")]
+        case "fruits", "fruit":
+            candidates = [("apple", "leaf.fill"), ("banana", "leaf.fill"), ("orange", "leaf.fill")]
+        case "vegetables":
+            candidates = [("carrot", "leaf.fill"), ("broccoli", "leaf.fill"), ("corn", "leaf.fill")]
+        case "nature", "natural":
+            candidates = [("tree", "leaf.fill"), ("flower", "leaf.fill"), ("mountain", "leaf.fill")]
+        case "clothing", "things you wear":
+            candidates = [("shirt", "tshirt.fill"), ("hat", "tshirt.fill"), ("shoe", "tshirt.fill")]
+        case "vehicles":
+            candidates = [("car", "car.fill"), ("bus", "car.fill"), ("truck", "car.fill")]
+        case "tools":
+            candidates = [("hammer", "wrench.fill"), ("screwdriver", "wrench.fill"), ("wrench", "wrench.fill")]
+        case "toys":
+            candidates = [("ball", "gamecontroller.fill"), ("teddy_bear", "gamecontroller.fill"), ("kite", "gamecontroller.fill")]
+        case "instruments":
+            candidates = [("drum", "music.note"), ("guitar", "music.note"), ("piano", "music.note")]
+        case "stationery":
+            candidates = [("pencil", "pencil"), ("crayon", "pencil"), ("eraser", "pencil")]
+        case "living things":
+            candidates = [("dog", "hare.fill"), ("cat", "hare.fill"), ("rabbit", "hare.fill")]
+        case "non-living things", "man-made", "objects", "things", "made by people":
+            candidates = [("chair", "cube.fill"), ("table", "cube.fill"), ("book", "cube.fill")]
+        case "from outdoors", "outdoors":
+            candidates = [("tree", "leaf.fill"), ("flower", "leaf.fill"), ("mountain", "leaf.fill")]
+        case "things that fly":
+            candidates = [("bird", "bird.fill"), ("airplane", "bird.fill"), ("butterfly", "bird.fill")]
+        case "things that swim":
+            candidates = [("fish", "fish.fill"), ("whale", "fish.fill"), ("turtle", "fish.fill")]
+        case "things with legs":
+            candidates = [("dog", "pawprint.fill"), ("cat", "pawprint.fill"), ("horse", "pawprint.fill")]
+        case "things without legs":
+            candidates = [("worm", "circle.fill"), ("snake", "circle.fill"), ("snail", "circle.fill")]
+        case "things that need electricity":
+            candidates = [("lightbulb", "bolt.fill"), ("tv", "bolt.fill"), ("computer", "bolt.fill")]
+        case "hot things":
+            candidates = [("fire", "flame.fill"), ("sun", "flame.fill")]
+        case "cold things":
+            candidates = [("ice", "snowflake"), ("snowman", "snowflake")]
+        case "positive words", "happy words":
+            candidates = [("", "hand.thumbsup.fill")]
+        case "negative words", "sad words":
+            candidates = [("", "hand.thumbsdown.fill")]
+        case "red":
+            candidates = [("", "circle.fill")]
+        case "blue":
+            candidates = [("", "circle.fill")]
+        case "big":
+            candidates = [("elephant", "arrow.up.circle.fill"), ("whale", "arrow.up.circle.fill")]
+        case "small":
+            candidates = [("ant", "arrow.down.circle.fill"), ("ladybug", "arrow.down.circle.fill")]
+        case "not fruit":
+            candidates = [("", "xmark.circle.fill")]
+        case "things that don't":
+            candidates = [("", "xmark.circle.fill")]
+        default:
+            candidates = [("", "square.grid.2x2.fill")]
         }
+
+        let lowered = excludeItems.map { $0.lowercased().replacingOccurrences(of: " ", with: "_") }
+        let excluded = Set(lowered)
+        for (name, fallback) in candidates {
+            if name.isEmpty || !excluded.contains(name) {
+                return (name, fallback)
+            }
+        }
+        // All image candidates overlap with items — fall back to SF Symbol only
+        return ("", candidates.first?.1 ?? "square.grid.2x2.fill")
     }
 
     // MARK: - Multi-Tap Counting
