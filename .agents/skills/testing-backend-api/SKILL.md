@@ -1,7 +1,7 @@
 # Testing Rising Star Kid Backend API
 
 ## Backend URL
-- Deployed: `https://risingstar-backend-zclkfobb.fly.dev`
+- Deployed: `https://risingstar-backend.fly.dev`
 - Local: `http://localhost:8000`
 
 ## Starting Local Backend
@@ -21,7 +21,7 @@ After any changes to seed files (`seed_expanded.py`, `seed_tasks.py`, task JSON 
 ```bash
 curl -X POST http://localhost:8000/tasks/seed?force=true
 # or for deployed:
-curl -X POST https://risingstar-backend-zclkfobb.fly.dev/tasks/seed?force=true
+curl -X POST https://risingstar-backend.fly.dev/tasks/seed?force=true
 ```
 
 ## Key API Endpoints for Testing
@@ -72,6 +72,100 @@ For tasks with `options_zh`, verify positional correspondence:
 - Base tasks: from `seed_tasks.py` (older, may have different data patterns)
 - When testing PR changes to expanded task logic, filter by task names or check task counts to distinguish
 
+## Testing Sort Task Categories
+Sort tasks use `interaction_mode: "drag_sort"` in the JSON files. To verify category distribution:
+```python
+# Parse from JSON file directly (not via API — API stores categories in content blob)
+import json
+data = json.load(open("backend/app/resources/tasks/object_cognition_expanded.json"))
+levels = data["levels"]  # dict with string keys "0", "1", etc.
+for lvl_key in sorted(levels.keys(), key=lambda x: int(x)):
+    tasks = levels[lvl_key]
+    task_list = tasks if isinstance(tasks, list) else tasks.get("tasks", [])
+    sort_tasks = [t for t in task_list if t.get("interaction_mode") == "drag_sort"]
+    cats = set()
+    for t in sort_tasks:
+        cats.update(t.get("sort_categories", []))
+    if cats:
+        print(f"Level {lvl_key}: {sorted(cats)}")
+```
+
+Via API, sort tasks are identified by searching for "sort" in the stringified task content:
+```bash
+curl -s "https://risingstar-backend.fly.dev/tasks/?dimension=object_cognition&level=0&limit=500" | \
+  python3 -c "import json,sys; tasks=json.load(sys.stdin); print(len([t for t in tasks if 'sort' in str(t)]))"
+```
+
+## Testing Image Replacements
+Verify Cloudinary URLs are accessible and serve valid images:
+```bash
+# Check all URLs in photo_urls.json return HTTP 200 with image content
+python3 -c "
+import json, urllib.request
+data = json.load(open('backend/app/resources/images/photo_urls.json'))
+for name, url in data['photos'].items():
+    req = urllib.request.Request(url, method='HEAD')
+    resp = urllib.request.urlopen(req, timeout=10)
+    ok = resp.status == 200 and 'image/' in resp.headers.get('Content-Type','')
+    if not ok: print(f'FAIL {name}: {resp.status}')
+print('All URLs OK')
+"
+```
+
+Images are uploaded to Cloudinary at TWO paths:
+- `risingstar/photos/{name}` — primary path used by photo_urls.json
+- `risingstar/task_images/{name}` — secondary path used by some task references
+
+Always upload to both paths with `invalidate=True` for CDN cache clearing.
+
+## Re-seeding After Task JSON Changes
+After modifying task JSON files, you MUST re-seed the deployed backend:
+```bash
+curl -s -X POST "https://risingstar-backend.fly.dev/tasks/seed?force=true"
+```
+Without `?force=true`, existing tasks are not updated.
+
+## Testing Sort Category Representative Image Overlap
+The iOS app uses `representativeImage(for:excludeItems:)` to pick a category icon that doesn't match any item being sorted. To verify this works correctly, simulate the Swift logic in Python:
+
+```python
+# Fetch all sort tasks from API and check no item matches the chosen rep image
+import json, urllib.request
+url = "https://risingstar-backend.fly.dev/tasks/?dimension=object_cognition&limit=2000"
+tasks = json.loads(urllib.request.urlopen(url).read())
+sort_tasks = [t for t in tasks if t.get('content', {}).get('sort_categories')]
+# For each task, check that the rep image for each category is NOT in the task's options
+```
+
+Key: the `excludeItems` parameter is populated from `task.content.displayOptions` (which maps to `options` in the API response).
+
+## Testing iOS Layout Changes (Code Review Only)
+Some changes are purely iOS SwiftUI and cannot be tested via API:
+- **Flash timing**: Check `showNextFlash()` in `LearningSessionView.swift` for timing constants
+- **ScrollView layout**: Verify `interactionArea` is NOT inside `ScrollView` in `taskContentView()`
+- **Gesture recognition**: Check for `LongPressGesture.sequenced(before: DragGesture)` pattern
+
+For these, verify code logic + CI (Xcode build) passes. Real-device testing requires TestFlight.
+
+## Guest Auth Response Format
+The `/auth/guest` endpoint returns the player ID in the `id` field (NOT `player_id`):
+```json
+{"id": "uuid-here", "name": "Guest_XXX", "device_id": "...", "is_guest": true}
+```
+
+## Backend Redeployment
+After merging changes to task JSON files, the backend Docker image must be redeployed to Fly.io (not just re-seeded). Re-seeding only reloads from the JSON bundled in the running Docker image. Use:
+```bash
+cd backend && flyctl deploy --remote-only -a risingstar-backend
+curl -s -X POST "https://risingstar-backend.fly.dev/tasks/seed?force=true"
+```
+Requires `FLY_API_TOKEN` environment variable.
+
+## Backend URL
+The current deployed backend URL is `https://risingstar-backend.fly.dev` (migrated from older URLs which no longer exist).
+
 ## Devin Secrets Needed
 - No secrets needed for API testing (backend is publicly accessible)
-- `CLOUDINARY_CLOUD_NAME` (dgpir7tqk) for image URL verification
+- `Cloudinary_SpeakEasy_Dev` — API_KEY:API_SECRET format, for image upload/verification
+- `CLOUDINARY_CLOUD_NAME` is `dgpir7tqk`
+- `FLY_API_TOKEN` — for backend redeployment to Fly.io
