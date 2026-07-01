@@ -26,7 +26,7 @@ jobs:
       DESTINATION: 'platform=iOS Simulator,name=iPhone 17,OS=latest'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
 
@@ -74,7 +74,7 @@ jobs:
           echo "Zipped .app: $(du -h "$GITHUB_WORKSPACE/RisingStarKid.zip" | cut -f1)"
 
       - name: Upload .app artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: RisingStarKid-Simulator
           path: RisingStarKid.zip

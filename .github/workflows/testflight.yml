@@ -19,7 +19,7 @@ jobs:
       BUNDLE_ID: com.mmff.speakeasy
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
 
@@ -135,46 +135,25 @@ jobs:
             | xcpretty
           echo "IPA exported successfully"
           ls -lh $RUNNER_TEMP/export/
+          # Save IPA path for subsequent steps
+          IPA_PATH=$(ls $RUNNER_TEMP/export/*.ipa | head -1)
+          echo "IPA_PATH=$IPA_PATH" >> $GITHUB_ENV
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: RisingStarKid-IPA
           path: ${{ runner.temp }}/export/*.ipa
           retention-days: 30
 
       - name: Upload to TestFlight
-        env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
-        run: |
-          if [ -z "$APP_STORE_CONNECT_API_KEY_ID" ]; then
-            echo "## TestFlight Upload Skipped" >> $GITHUB_STEP_SUMMARY
-            echo "Missing App Store Connect API key secrets." >> $GITHUB_STEP_SUMMARY
-            exit 1
-          fi
-
-          # Write API key to file
-          mkdir -p ~/.private_keys
-          echo -n "$APP_STORE_CONNECT_API_KEY_CONTENT" > ~/.private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8
-
-          # Upload to TestFlight using xcrun altool
-          IPA_PATH=$(ls $RUNNER_TEMP/export/*.ipa | head -1)
-          echo "Uploading $IPA_PATH to TestFlight..."
-
-          xcrun altool --upload-app \
-            --type ios \
-            --file "$IPA_PATH" \
-            --apiKey "$APP_STORE_CONNECT_API_KEY_ID" \
-            --apiIssuer "$APP_STORE_CONNECT_API_ISSUER_ID"
-
-          echo "## TestFlight Upload Successful" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "The app has been uploaded to App Store Connect." >> $GITHUB_STEP_SUMMARY
-          echo "It will appear in TestFlight after Apple processes it (usually 10-30 minutes)." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Open TestFlight on your iPhone to install the latest build." >> $GITHUB_STEP_SUMMARY
+        uses: apple-actions/upload-testflight-build@v4
+        with:
+          app-path: ${{ env.IPA_PATH }}
+          issuer-id: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          api-key-id: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          api-private-key: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          uses-non-exempt-encryption: 'false'
 
       - name: Clean up keychain
         if: always()
