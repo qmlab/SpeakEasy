@@ -1314,9 +1314,8 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Starts the timed flash sequence.  The first image is shown for 8 seconds
-    /// (to allow the instruction audio to finish), subsequent images for 6 seconds,
-    /// with a 2.0 second blank gap between them.
+    /// Starts the timed flash sequence.  Each image is shown for 3 seconds and
+    /// replaced immediately by the next one (no blank gap between images).
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -1338,9 +1337,8 @@ struct LearningSessionView: View {
     }
 
     /// Shows the next flash image, then either advances or completes.
-    /// The first image (flashPhase == 0) stays visible for 8 seconds so the child
-    /// can finish listening to the instruction audio before it disappears.
-    /// Subsequent images stay visible for 6 seconds.
+    /// Each image stays visible for 3 seconds and is immediately replaced by the
+    /// next one (no blank gap), so images change at a steady 3-second cadence.
     /// The `generation` parameter is compared against `flashGeneration` to bail
     /// out if the task changed while callbacks were pending.
     private func showNextFlash(images: [String], generation: Int) {
@@ -1352,8 +1350,7 @@ struct LearningSessionView: View {
             return
         }
 
-        let isFirstImage = flashPhase == 0
-        let displayDuration: Double = isFirstImage ? 8.0 : 6.0
+        let displayDuration: Double = 3.0
 
         withAnimation(.easeIn(duration: 0.2)) {
             flashVisible = true
@@ -1361,19 +1358,15 @@ struct LearningSessionView: View {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + displayDuration) {
             guard self.flashGeneration == generation else { return }
-            withAnimation(.easeOut(duration: 0.2)) {
-                self.flashVisible = false
-            }
-            // Blank gap between images so each is clearly separated
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                guard self.flashGeneration == generation else { return }
-                self.flashPhase += 1
-                if self.flashPhase < images.count {
-                    self.showNextFlash(images: images, generation: generation)
-                } else {
-                    withAnimation {
-                        self.flashCompleted = true
-                    }
+            self.flashPhase += 1
+            if self.flashPhase < images.count {
+                // Advance to the next image without hiding the current one,
+                // so there is no blank gap between images.
+                self.showNextFlash(images: images, generation: generation)
+            } else {
+                withAnimation(.easeOut(duration: 0.2)) {
+                    self.flashVisible = false
+                    self.flashCompleted = true
                 }
             }
         }
