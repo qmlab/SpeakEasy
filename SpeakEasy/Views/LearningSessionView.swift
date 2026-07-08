@@ -1314,9 +1314,9 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Starts the timed flash sequence.  The first image is shown for 16 seconds
-    /// (to allow the instruction audio to finish), subsequent images for 12 seconds,
-    /// with a 1.0 second blank gap between them.
+    /// Starts the timed flash sequence.  The first image is shown for 8 seconds
+    /// (to allow the instruction audio to finish), subsequent images for 6 seconds,
+    /// with a 3.0 second blank gap between them.
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -1338,9 +1338,9 @@ struct LearningSessionView: View {
     }
 
     /// Shows the next flash image, then either advances or completes.
-    /// The first image (flashPhase == 0) stays visible for 16 seconds so the child
+    /// The first image (flashPhase == 0) stays visible for 8 seconds so the child
     /// can finish listening to the instruction audio before it disappears.
-    /// Subsequent images stay visible for 12 seconds.
+    /// Subsequent images stay visible for 6 seconds.
     /// The `generation` parameter is compared against `flashGeneration` to bail
     /// out if the task changed while callbacks were pending.
     private func showNextFlash(images: [String], generation: Int) {
@@ -1353,7 +1353,7 @@ struct LearningSessionView: View {
         }
 
         let isFirstImage = flashPhase == 0
-        let displayDuration: Double = isFirstImage ? 16.0 : 12.0
+        let displayDuration: Double = isFirstImage ? 8.0 : 6.0
 
         withAnimation(.easeIn(duration: 0.2)) {
             flashVisible = true
@@ -1364,8 +1364,8 @@ struct LearningSessionView: View {
             withAnimation(.easeOut(duration: 0.2)) {
                 self.flashVisible = false
             }
-            // Brief gap then show next or complete
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // Blank gap between images so each is clearly separated
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 guard self.flashGeneration == generation else { return }
                 self.flashPhase += 1
                 if self.flashPhase < images.count {
