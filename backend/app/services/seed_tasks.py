@@ -1208,7 +1208,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "Touch the letter A.",
                     "instruction_text": "Touch the letter A.",
                     "target_word": "A",
-                    "image_hint": "letter",
+                    "image_hint": "apple",
                     "options": ["A", "B", "C"],
                     "correct_answer": "A",
                     "choices": [
@@ -1228,7 +1228,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "Touch the letter B.",
                     "instruction_text": "Touch the letter B.",
                     "target_word": "B",
-                    "image_hint": "letter",
+                    "image_hint": "ball",
                     "options": ["B", "D", "P"],
                     "correct_answer": "B",
                     "choices": [
@@ -1248,7 +1248,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "Touch the letter C.",
                     "instruction_text": "Touch the letter C.",
                     "target_word": "C",
-                    "image_hint": "letter",
+                    "image_hint": "cat",
                     "options": ["C", "O", "G"],
                     "correct_answer": "C",
                     "choices": [
@@ -1274,7 +1274,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "Which letter makes the 'sss' sound?",
                     "instruction_text": "Which letter makes the 'sss' sound?",
                     "target_word": "S",
-                    "image_hint": "letter",
+                    "image_hint": "sun",
                     "options": ["S", "T", "M", "B"],
                     "correct_answer": "S",
                     "choices": [
@@ -1295,7 +1295,7 @@ def seed_literacy_tasks(db: Session) -> int:
                     "instruction_audio": "Which letter makes the 'mmm' sound?",
                     "instruction_text": "Which letter makes the 'mmm' sound?",
                     "target_word": "M",
-                    "image_hint": "letter",
+                    "image_hint": "moon",
                     "options": ["M", "N", "W", "V"],
                     "correct_answer": "M",
                     "choices": [
