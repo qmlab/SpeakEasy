@@ -1316,7 +1316,7 @@ struct LearningSessionView: View {
 
     /// Starts the timed flash sequence.  The first image is shown for 8 seconds
     /// (to allow the instruction audio to finish), subsequent images for 6 seconds,
-    /// with a 3.0 second blank gap between them.
+    /// with a 2.0 second blank gap between them.
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -1365,7 +1365,7 @@ struct LearningSessionView: View {
                 self.flashVisible = false
             }
             // Blank gap between images so each is clearly separated
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 guard self.flashGeneration == generation else { return }
                 self.flashPhase += 1
                 if self.flashPhase < images.count {
