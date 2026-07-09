@@ -504,7 +504,7 @@ struct LearningSessionView: View {
             return true
         }
         // instructionCard renders a targetWord display
-        if let tw = task.content.targetWord, !tw.isEmpty { return true }
+        if let tw = task.content.targetWord, !tw.isEmpty, shouldShowTargetWord(task) { return true }
         // contentArea renders flash / animation / pattern / story / passage / sentence
         if isFlashTask(task) || isAnimatedTask(task) || isPatternTask(task) { return true }
         if let s = task.content.story, !s.isEmpty { return true }
@@ -769,8 +769,13 @@ struct LearningSessionView: View {
                 .cornerRadius(16)
             }
 
-            // Target word display with speaker icon so kid can tap to hear it
-            if let target = task.content.targetWord, !target.isEmpty {
+            // Target word display with speaker icon so kid can tap to hear it.
+            // When the target word IS the answer (e.g. letter-recognition
+            // tasks), it is only revealed at the lowest difficulty as a
+            // teaching aid — hidden at higher levels so the task stays
+            // challenging and the big letter can't overlap the options.
+            if let target = task.content.targetWord, !target.isEmpty,
+               shouldShowTargetWord(task) {
                 Button {
                     speechService.speak(target)
                 } label: {
@@ -798,6 +803,21 @@ struct LearningSessionView: View {
     }
 
     // MARK: - Content Area
+
+    /// Whether the large target-word display should be shown for this task.
+    /// If showing it would reveal the correct answer (e.g. "Touch the letter
+    /// C" with target_word "C"), only reveal it at the lowest difficulty
+    /// (level 0) as a teaching aid; hide it at higher levels so the task
+    /// isn't trivial.  Non-answer target words (e.g. "Say: dog") always show.
+    private func shouldShowTargetWord(_ task: AdaptiveTask) -> Bool {
+        guard let target = task.content.targetWord, !target.isEmpty else { return false }
+        let normalizedTarget = target.trimmingCharacters(in: .whitespaces)
+        let revealsAnswer = task.content.correctAnswer?
+            .trimmingCharacters(in: .whitespaces)
+            .caseInsensitiveCompare(normalizedTarget) == .orderedSame
+        if revealsAnswer { return task.level == 0 }
+        return true
+    }
 
     /// Whether the task instruction references looking at a picture or image.
     /// When true, the image_hint must be shown even for image grid tasks

@@ -10,107 +10,550 @@
       "task_type": "match_word_image",
       "tasks": [
         {
+          "question_id": "LTR_A",
           "instruction": "Touch the letter A.",
-          "question_id": "Q058",
-          "source_test": "WJ-III",
-          "sub_domain": "Literacy & Phonics",
-          "scaffolding_hint": "Highlight the A",
+          "instruction_zh": "点一下字母 A。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter A. A is for apple.",
           "options": [
             "A",
-            "B",
-            "C"
+            "V",
+            "H"
+          ],
+          "options_zh": [
+            "A",
+            "V",
+            "H"
           ],
           "correct_answer": "A",
-          "image_hint": "letter",
-          "options_zh": [
-            "A",
-            "B",
-            "C"
-          ]
+          "target_word": "A",
+          "image_hint": "apple"
         },
         {
-          "question_id": "Q301",
+          "question_id": "LTR_B",
           "instruction": "Touch the letter B.",
+          "instruction_zh": "点一下字母 B。",
           "source_test": "custom",
           "sub_domain": "letter_recognition",
-          "scaffolding_hint": "Look for the letter with two bumps",
+          "scaffolding_hint": "Find the letter B. B is for ball.",
           "options": [
             "B",
             "D",
-            "P",
-            "R"
+            "P"
+          ],
+          "options_zh": [
+            "B",
+            "D",
+            "P"
           ],
           "correct_answer": "B",
-          "image_hint": "letter",
-          "options_zh": [
-            "B",
-            "D",
-            "P",
-            "R"
-          ]
+          "target_word": "B",
+          "image_hint": "ball"
         },
         {
-          "question_id": "Q302",
+          "question_id": "LTR_C",
           "instruction": "Touch the letter C.",
+          "instruction_zh": "点一下字母 C。",
           "source_test": "custom",
           "sub_domain": "letter_recognition",
-          "scaffolding_hint": "It looks like a half circle",
+          "scaffolding_hint": "Find the letter C. C is for cat.",
           "options": [
             "C",
-            "O",
             "G",
-            "Q"
+            "O"
+          ],
+          "options_zh": [
+            "C",
+            "G",
+            "O"
           ],
           "correct_answer": "C",
-          "image_hint": "letter",
-          "options_zh": [
-            "C",
-            "O",
-            "G",
-            "Q"
-          ]
+          "target_word": "C",
+          "image_hint": "cat"
         },
         {
-          "question_id": "Q350",
+          "question_id": "LTR_D",
           "instruction": "Touch the letter D.",
+          "instruction_zh": "点一下字母 D。",
           "source_test": "custom",
           "sub_domain": "letter_recognition",
-          "scaffolding_hint": "It has a straight line and a big bump",
+          "scaffolding_hint": "Find the letter D. D is for dog.",
           "options": [
             "D",
             "B",
-            "P",
-            "Q"
+            "P"
+          ],
+          "options_zh": [
+            "D",
+            "B",
+            "P"
           ],
           "correct_answer": "D",
-          "image_hint": "letter",
-          "options_zh": [
-            "D",
-            "B",
-            "P",
-            "Q"
-          ]
+          "target_word": "D",
+          "image_hint": "dog"
         },
         {
-          "question_id": "Q351",
-          "instruction": "Touch the letter M.",
+          "question_id": "LTR_E",
+          "instruction": "Touch the letter E.",
+          "instruction_zh": "点一下字母 E。",
           "source_test": "custom",
           "sub_domain": "letter_recognition",
-          "scaffolding_hint": "It has two humps on top",
+          "scaffolding_hint": "Find the letter E. E is for elephant.",
+          "options": [
+            "E",
+            "F",
+            "L"
+          ],
+          "options_zh": [
+            "E",
+            "F",
+            "L"
+          ],
+          "correct_answer": "E",
+          "target_word": "E",
+          "image_hint": "elephant"
+        },
+        {
+          "question_id": "LTR_F",
+          "instruction": "Touch the letter F.",
+          "instruction_zh": "点一下字母 F。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter F. F is for fish.",
+          "options": [
+            "F",
+            "E",
+            "T"
+          ],
+          "options_zh": [
+            "F",
+            "E",
+            "T"
+          ],
+          "correct_answer": "F",
+          "target_word": "F",
+          "image_hint": "fish"
+        },
+        {
+          "question_id": "LTR_G",
+          "instruction": "Touch the letter G.",
+          "instruction_zh": "点一下字母 G。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter G. G is for grape.",
+          "options": [
+            "G",
+            "C",
+            "O"
+          ],
+          "options_zh": [
+            "G",
+            "C",
+            "O"
+          ],
+          "correct_answer": "G",
+          "target_word": "G",
+          "image_hint": "grape"
+        },
+        {
+          "question_id": "LTR_H",
+          "instruction": "Touch the letter H.",
+          "instruction_zh": "点一下字母 H。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter H. H is for horse.",
+          "options": [
+            "H",
+            "N",
+            "M"
+          ],
+          "options_zh": [
+            "H",
+            "N",
+            "M"
+          ],
+          "correct_answer": "H",
+          "target_word": "H",
+          "image_hint": "horse"
+        },
+        {
+          "question_id": "LTR_I",
+          "instruction": "Touch the letter I.",
+          "instruction_zh": "点一下字母 I。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter I. I is for ice cream.",
+          "options": [
+            "I",
+            "L",
+            "T"
+          ],
+          "options_zh": [
+            "I",
+            "L",
+            "T"
+          ],
+          "correct_answer": "I",
+          "target_word": "I",
+          "image_hint": "ice_cream"
+        },
+        {
+          "question_id": "LTR_J",
+          "instruction": "Touch the letter J.",
+          "instruction_zh": "点一下字母 J。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter J. J is for jellyfish.",
+          "options": [
+            "J",
+            "I",
+            "L"
+          ],
+          "options_zh": [
+            "J",
+            "I",
+            "L"
+          ],
+          "correct_answer": "J",
+          "target_word": "J",
+          "image_hint": "jellyfish"
+        },
+        {
+          "question_id": "LTR_K",
+          "instruction": "Touch the letter K.",
+          "instruction_zh": "点一下字母 K。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter K. K is for key.",
+          "options": [
+            "K",
+            "X",
+            "R"
+          ],
+          "options_zh": [
+            "K",
+            "X",
+            "R"
+          ],
+          "correct_answer": "K",
+          "target_word": "K",
+          "image_hint": "key"
+        },
+        {
+          "question_id": "LTR_L",
+          "instruction": "Touch the letter L.",
+          "instruction_zh": "点一下字母 L。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter L. L is for lamp.",
+          "options": [
+            "L",
+            "I",
+            "E"
+          ],
+          "options_zh": [
+            "L",
+            "I",
+            "E"
+          ],
+          "correct_answer": "L",
+          "target_word": "L",
+          "image_hint": "lamp"
+        },
+        {
+          "question_id": "LTR_M",
+          "instruction": "Touch the letter M.",
+          "instruction_zh": "点一下字母 M。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter M. M is for moon.",
           "options": [
             "M",
             "N",
-            "W",
-            "V"
+            "W"
           ],
-          "correct_answer": "M",
-          "image_hint": "letter",
           "options_zh": [
             "M",
             "N",
+            "W"
+          ],
+          "correct_answer": "M",
+          "target_word": "M",
+          "image_hint": "moon"
+        },
+        {
+          "question_id": "LTR_N",
+          "instruction": "Touch the letter N.",
+          "instruction_zh": "点一下字母 N。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter N. N is for needle.",
+          "options": [
+            "N",
+            "M",
+            "H"
+          ],
+          "options_zh": [
+            "N",
+            "M",
+            "H"
+          ],
+          "correct_answer": "N",
+          "target_word": "N",
+          "image_hint": "needle"
+        },
+        {
+          "question_id": "LTR_O",
+          "instruction": "Touch the letter O.",
+          "instruction_zh": "点一下字母 O。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter O. O is for orange.",
+          "options": [
+            "O",
+            "C",
+            "Q"
+          ],
+          "options_zh": [
+            "O",
+            "C",
+            "Q"
+          ],
+          "correct_answer": "O",
+          "target_word": "O",
+          "image_hint": "orange"
+        },
+        {
+          "question_id": "LTR_P",
+          "instruction": "Touch the letter P.",
+          "instruction_zh": "点一下字母 P。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter P. P is for penguin.",
+          "options": [
+            "P",
+            "B",
+            "R"
+          ],
+          "options_zh": [
+            "P",
+            "B",
+            "R"
+          ],
+          "correct_answer": "P",
+          "target_word": "P",
+          "image_hint": "penguin"
+        },
+        {
+          "question_id": "LTR_Q",
+          "instruction": "Touch the letter Q.",
+          "instruction_zh": "点一下字母 Q。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter Q. Q is for queen.",
+          "options": [
+            "Q",
+            "O",
+            "G"
+          ],
+          "options_zh": [
+            "Q",
+            "O",
+            "G"
+          ],
+          "correct_answer": "Q",
+          "target_word": "Q",
+          "image_hint": "queen"
+        },
+        {
+          "question_id": "LTR_R",
+          "instruction": "Touch the letter R.",
+          "instruction_zh": "点一下字母 R。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter R. R is for rabbit.",
+          "options": [
+            "R",
+            "B",
+            "P"
+          ],
+          "options_zh": [
+            "R",
+            "B",
+            "P"
+          ],
+          "correct_answer": "R",
+          "target_word": "R",
+          "image_hint": "rabbit"
+        },
+        {
+          "question_id": "LTR_S",
+          "instruction": "Touch the letter S.",
+          "instruction_zh": "点一下字母 S。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter S. S is for sun.",
+          "options": [
+            "S",
+            "Z",
+            "C"
+          ],
+          "options_zh": [
+            "S",
+            "Z",
+            "C"
+          ],
+          "correct_answer": "S",
+          "target_word": "S",
+          "image_hint": "sun"
+        },
+        {
+          "question_id": "LTR_T",
+          "instruction": "Touch the letter T.",
+          "instruction_zh": "点一下字母 T。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter T. T is for tree.",
+          "options": [
+            "T",
+            "F",
+            "I"
+          ],
+          "options_zh": [
+            "T",
+            "F",
+            "I"
+          ],
+          "correct_answer": "T",
+          "target_word": "T",
+          "image_hint": "tree"
+        },
+        {
+          "question_id": "LTR_U",
+          "instruction": "Touch the letter U.",
+          "instruction_zh": "点一下字母 U。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter U. U is for umbrella.",
+          "options": [
+            "U",
+            "V",
+            "Y"
+          ],
+          "options_zh": [
+            "U",
+            "V",
+            "Y"
+          ],
+          "correct_answer": "U",
+          "target_word": "U",
+          "image_hint": "umbrella"
+        },
+        {
+          "question_id": "LTR_V",
+          "instruction": "Touch the letter V.",
+          "instruction_zh": "点一下字母 V。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter V. V is for violin.",
+          "options": [
+            "V",
+            "U",
+            "W"
+          ],
+          "options_zh": [
+            "V",
+            "U",
+            "W"
+          ],
+          "correct_answer": "V",
+          "target_word": "V",
+          "image_hint": "violin"
+        },
+        {
+          "question_id": "LTR_W",
+          "instruction": "Touch the letter W.",
+          "instruction_zh": "点一下字母 W。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter W. W is for whale.",
+          "options": [
             "W",
+            "M",
             "V"
-          ]
+          ],
+          "options_zh": [
+            "W",
+            "M",
+            "V"
+          ],
+          "correct_answer": "W",
+          "target_word": "W",
+          "image_hint": "whale"
+        },
+        {
+          "question_id": "LTR_X",
+          "instruction": "Touch the letter X.",
+          "instruction_zh": "点一下字母 X。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter X. X is for xylophone.",
+          "options": [
+            "X",
+            "K",
+            "Y"
+          ],
+          "options_zh": [
+            "X",
+            "K",
+            "Y"
+          ],
+          "correct_answer": "X",
+          "target_word": "X",
+          "image_hint": "xylophone"
+        },
+        {
+          "question_id": "LTR_Y",
+          "instruction": "Touch the letter Y.",
+          "instruction_zh": "点一下字母 Y。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter Y. Y is for yoyo.",
+          "options": [
+            "Y",
+            "V",
+            "X"
+          ],
+          "options_zh": [
+            "Y",
+            "V",
+            "X"
+          ],
+          "correct_answer": "Y",
+          "target_word": "Y",
+          "image_hint": "yoyo"
+        },
+        {
+          "question_id": "LTR_Z",
+          "instruction": "Touch the letter Z.",
+          "instruction_zh": "点一下字母 Z。",
+          "source_test": "custom",
+          "sub_domain": "letter_recognition",
+          "scaffolding_hint": "Find the letter Z. Z is for zebra.",
+          "options": [
+            "Z",
+            "S",
+            "N"
+          ],
+          "options_zh": [
+            "Z",
+            "S",
+            "N"
+          ],
+          "correct_answer": "Z",
+          "target_word": "Z",
+          "image_hint": "zebra"
         }
       ]
     },
@@ -132,7 +575,7 @@
             "B"
           ],
           "correct_answer": "S",
-          "image_hint": "letter",
+          "image_hint": "sun",
           "options_zh": [
             "S",
             "T",
@@ -153,7 +596,7 @@
             "V"
           ],
           "correct_answer": "M",
-          "image_hint": "letter",
+          "image_hint": "moon",
           "options_zh": [
             "M",
             "N",
@@ -174,7 +617,7 @@
             "G"
           ],
           "correct_answer": "B",
-          "image_hint": "letter",
+          "image_hint": "ball",
           "options_zh": [
             "B",
             "D",
@@ -195,7 +638,7 @@
             "H"
           ],
           "correct_answer": "F",
-          "image_hint": "letter",
+          "image_hint": "fish",
           "options_zh": [
             "F",
             "V",
