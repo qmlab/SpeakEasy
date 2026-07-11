@@ -33,6 +33,10 @@ struct LearningSessionView: View {
     @State private var animationTimer: Timer?
     /// Multi-tap counting state (for go/no-go, sustained attention tasks)
     @State private var multiTapCount: Int = 0
+    /// Selected frame indices for "tap every target in the stream" tasks.
+    /// Each flashed card is an individually selectable unit; the child can
+    /// toggle cards on/off (including after the whole stream has played).
+    @State private var selectedFrameIndices: Set<Int> = []
     /// Text/number input state (for counting and fill-in-the-word tasks)
     @State private var textInputValue: String = ""
     /// Flash image state (for visual memory tasks like "Watch the light flash")
@@ -195,6 +199,7 @@ struct LearningSessionView: View {
                 animateFeedback = false
                 showHint = false
                 multiTapCount = 0
+                selectedFrameIndices = []
                 textInputValue = ""
                 // Reset drag arrange state
                 dragArrangeItems = []
@@ -876,8 +881,10 @@ struct LearningSessionView: View {
             flashDisplayView(task: task)
         }
 
-        // Animated slideshow display — shows frames one at a time for attention/memory tasks
-        if isAnimatedTask(task) {
+        // Animated slideshow display — shows frames one at a time for attention/memory tasks.
+        // "Tap every target in the stream" tasks render their frames as a selectable
+        // carousel inside the interaction area instead (see streamCarouselArea), so skip here.
+        if isAnimatedTask(task) && !isSelectableStreamTask(task) {
             animatedSequenceView(task: task)
         }
 
@@ -2070,6 +2077,19 @@ struct LearningSessionView: View {
     /// the counter updates. When done, they press the Done button.
     @ViewBuilder
     private func multiTapArea(task: AdaptiveTask) -> some View {
+        // "Tap every target in the stream" tasks use a selectable card carousel
+        // where each flashed image is an individually tappable unit.
+        if isSelectableStreamTask(task) {
+            streamCarouselArea(task: task)
+        } else {
+            legacyMultiTapArea(task: task)
+        }
+    }
+
+    /// Counting-only multi-tap interaction (story/text tasks and rare stream
+    /// tasks without a per-frame target): a big TAP button + running count.
+    @ViewBuilder
+    private func legacyMultiTapArea(task: AdaptiveTask) -> some View {
         let expectedCount = task.content.tapCount ?? 0
         let hasAnimation = isAnimatedTask(task)
         let hasFlash = isFlashTask(task)
@@ -2150,6 +2170,190 @@ struct LearningSessionView: View {
                 .disabled(learningManager.isSubmitting)
             }
         }
+    }
+
+    // MARK: - Selectable Stream Carousel
+
+    /// Whether this multi-tap task shows a stream of image frames that the child
+    /// should tap individually (e.g. "Tap every time you see a Star").  These get
+    /// the selectable carousel treatment instead of the plain tap-counter.
+    private func isSelectableStreamTask(_ task: AdaptiveTask) -> Bool {
+        isMultiTapTask(task) && isAnimatedTask(task)
+    }
+
+    /// Normalizes a frame / target name the same way `RemoteImageView` does, so
+    /// frame names and the tap target can be compared reliably.
+    private func normalizedName(_ s: String) -> String {
+        s.lowercased().trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: " ", with: "_")
+    }
+
+    /// Indices in the frame stream that match the tap target (the "correct" cards).
+    /// Empty when the task has no explicit `tap_target` (falls back to count grading).
+    private func streamTargetIndices(_ task: AdaptiveTask) -> Set<Int> {
+        guard let target = task.content.tapTarget, !target.isEmpty,
+              let frames = task.content.animationFrames else { return [] }
+        let t = normalizedName(target)
+        var result = Set<Int>()
+        for (idx, frame) in frames.enumerated() where normalizedName(frame) == t {
+            result.insert(idx)
+        }
+        return result
+    }
+
+    /// Whether a given frame index has already been revealed by the stream and is
+    /// therefore tappable.  All cards become tappable once the stream finishes.
+    private func isFrameRevealed(_ idx: Int) -> Bool {
+        animationFinished || idx <= animationFrameIndex
+    }
+
+    private func toggleFrameSelection(_ idx: Int) {
+        if selectedFrameIndices.contains(idx) {
+            selectedFrameIndices.remove(idx)
+        } else {
+            selectedFrameIndices.insert(idx)
+        }
+    }
+
+    /// Selectable card carousel for "tap every target in the stream" tasks.
+    /// Cards are revealed one-by-one on a timer (Stories-style) and auto-scroll
+    /// to the newest, but every already-revealed card stays visible and tappable
+    /// — so the child can go back and select/deselect earlier cards, and after
+    /// the whole stream has played every card is an individually tappable unit.
+    @ViewBuilder
+    private func streamCarouselArea(task: AdaptiveTask) -> some View {
+        let frames = task.content.animationFrames ?? []
+        let expectedCount = task.content.tapCount ?? 0
+        let targetIndices = streamTargetIndices(task)
+        let hasTarget = !targetIndices.isEmpty
+
+        VStack(spacing: 12) {
+            // Header + running selected count
+            HStack(spacing: 10) {
+                Image(systemName: animationFinished ? "hand.tap.fill" : "eye.fill")
+                    .font(.title3)
+                Text(animationFinished
+                     ? AppLocalization.localized("Tap all of them!", zh: "把它们都点出来！")
+                     : AppLocalization.localized("Watch and tap!", zh: "边看边点！"))
+                    .font(.headline)
+                Spacer()
+                Text("\(selectedFrameIndices.count)")
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
+            }
+            .foregroundColor(dimension.color)
+
+            // Horizontal card carousel
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(Array(frames.enumerated()), id: \.offset) { idx, frame in
+                            streamCard(frame: frame, idx: idx)
+                                .id(idx)
+                        }
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                }
+                .onChange(of: animationFrameIndex) { newIdx in
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        proxy.scrollTo(newIdx, anchor: .center)
+                    }
+                }
+            }
+
+            // Done button — available once the whole stream has played
+            if animationFinished {
+                Button {
+                    let isCorrect = hasTarget
+                        ? (selectedFrameIndices == targetIndices)
+                        : (selectedFrameIndices.count == expectedCount)
+                    Task {
+                        await learningManager.submitAttempt(
+                            isCorrect: isCorrect,
+                            score: isCorrect ? 1 : 0,
+                            dimension: dimension
+                        )
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("\(AppLocalization.done) (\(selectedFrameIndices.count))")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 16).fill(Color.green))
+                }
+                .disabled(learningManager.isSubmitting)
+            }
+        }
+        .onAppear {
+            // Drive the reveal timer here since contentArea no longer hosts the
+            // animated slideshow for these tasks.
+            if !animationFinished && animationFrameIndex == 0 {
+                startAnimationSlideshow(frames: frames)
+            }
+        }
+        .onDisappear {
+            animationTimer?.invalidate()
+            animationTimer = nil
+        }
+    }
+
+    /// A single card in the stream carousel.
+    @ViewBuilder
+    private func streamCard(frame: String, idx: Int) -> some View {
+        let revealed = isFrameRevealed(idx)
+        let selected = selectedFrameIndices.contains(idx)
+        Button {
+            guard revealed, !learningManager.isSubmitting else { return }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6)) {
+                toggleFrameSelection(idx)
+            }
+        } label: {
+            ZStack(alignment: .topTrailing) {
+                Group {
+                    if revealed {
+                        RemoteImageView(
+                            objectName: normalizedName(frame),
+                            imageType: .flashcard,
+                            fallbackIcon: "square.dashed",
+                            iconColor: dimension.color,
+                            size: 72
+                        )
+                    } else {
+                        // Not yet shown — keep it hidden so upcoming cards
+                        // aren't a giveaway.
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.tertiarySystemBackground))
+                            Image(systemName: "questionmark")
+                                .font(.title2)
+                                .foregroundColor(.secondary.opacity(0.5))
+                        }
+                        .frame(width: 72, height: 72)
+                    }
+                }
+                .cornerRadius(12)
+
+                if selected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .background(Circle().fill(dimension.color))
+                        .offset(x: 6, y: -6)
+                }
+            }
+            .padding(4)
+            .background(
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(selected ? dimension.color : Color.clear, lineWidth: 3)
+            )
+            .opacity(revealed ? 1 : 0.7)
+        }
+        .buttonStyle(.plain)
+        .disabled(!revealed)
     }
 
     // MARK: - Text / Number Input Area
