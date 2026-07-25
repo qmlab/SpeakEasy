@@ -211,6 +211,11 @@
     "queen": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480921/risingstar/photos/queen.png",
     "xylophone": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480923/risingstar/photos/xylophone.png",
     "yoyo": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480925/risingstar/photos/yoyo.png",
-    "zebra": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480927/risingstar/photos/zebra.png"
+    "zebra": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480927/risingstar/photos/zebra.png",
+    "boy_running": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019457/risingstar/photos/boy_running.png",
+    "girl_reading": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019459/risingstar/photos/girl_reading.png",
+    "dog_playing_ball": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019463/risingstar/photos/dog_playing_ball.png",
+    "children_playing": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019465/risingstar/photos/children_playing.png",
+    "boy_eating_apple": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019467/risingstar/photos/boy_eating_apple.png"
   }
 }
