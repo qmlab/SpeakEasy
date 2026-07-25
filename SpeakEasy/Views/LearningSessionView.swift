@@ -520,10 +520,154 @@ struct LearningSessionView: View {
         return false
     }
 
+    /// Picture-description tasks ("Tell me about this picture!", "What do you
+    /// see?") where the child freely describes the image.  These carry a
+    /// `target_word` like "red ball" that is used only as an open-ended
+    /// speaking prompt — it must NOT be shown as a tip under the picture
+    /// because the descriptor (especially color) often disagrees with the
+    /// actual image and there is no single correct description.
+    private func isPictureDescriptionTask(_ task: AdaptiveTask) -> Bool {
+        task.taskType == "describe"
+    }
+
+    /// Literacy single-select tasks whose choices are single letters or short
+    /// words (e.g. "A"/"V"/"H", "Hat"/"Dog"/"Cat").  These get a compact
+    /// side-by-side layout — image on the left, choice buttons stacked on the
+    /// right — so a one-letter choice doesn't waste a whole row.
+    private func isLiteracyChoiceTask(_ task: AdaptiveTask) -> Bool {
+        guard dimension == .literacy else { return false }
+        let options = task.content.displayOptions
+        guard options.count >= 2, options.count <= 4 else { return false }
+        if isImageGridTask(task) || isMultiSelectTask(task) || isMultiTapTask(task)
+            || isFlashTask(task) || isAnimatedTask(task) || isDragSortTask(task)
+            || isDragArrangeTask(task) || isTextInputTask(task) || isSortingTask(task)
+            || isPatternTask(task) {
+            return false
+        }
+        // Only short choices — long option strings still want full-width rows.
+        return options.allSatisfy { $0.trimmingCharacters(in: .whitespaces).count <= 6 }
+    }
+
+    /// Side-by-side literacy layout: instruction header on top, then the
+    /// question image on the left with the choice buttons stacked on the right.
+    @ViewBuilder
+    private func literacyChoiceLayout(task: AdaptiveTask) -> some View {
+        VStack(spacing: 16) {
+            taskProgressBar
+
+            // Tap-to-speak instruction (audio always carries the full prompt).
+            Button {
+                speechService.speak(task.content.displayInstruction)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "speaker.wave.2.fill")
+                        .font(.title3)
+                    Text(literacyDisplayedInstruction(task: task))
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.leading)
+                }
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.horizontal)
+
+            HStack(alignment: .center, spacing: 20) {
+                if let questionImg = task.content.questionImage, !questionImg.isEmpty {
+                    RemoteImageView(
+                        objectName: questionImg,
+                        imageType: .flashcard,
+                        fallbackIcon: "photo",
+                        iconColor: dimension.color,
+                        size: 180
+                    )
+                    .cornerRadius(16)
+                } else if let imageHint = task.content.imageHint, !imageHint.isEmpty {
+                    RemoteImageView(
+                        objectName: imageHint,
+                        imageType: .flashcard,
+                        fallbackIcon: "photo",
+                        iconColor: dimension.color,
+                        size: 180
+                    )
+                    .cornerRadius(16)
+                }
+
+                literacyOptionColumn(task: task)
+                    .frame(maxWidth: .infinity)
+            }
+            .padding(.horizontal)
+
+            skipButton
+            Spacer(minLength: 0)
+        }
+        .padding()
+    }
+
+    /// Vertical stack of compact letter/short-word choice buttons.
+    private func literacyOptionColumn(task: AdaptiveTask) -> some View {
+        VStack(spacing: 14) {
+            ForEach(task.content.displayOptions, id: \.self) { option in
+                Button {
+                    handleOptionTap(option: option, task: task)
+                } label: {
+                    Text(option)
+                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .foregroundColor(selectedOption == option ? .white : .primary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(selectedOption == option ? dimension.color : Color(.secondarySystemBackground))
+                        )
+                }
+                .disabled(learningManager.isSubmitting)
+            }
+        }
+    }
+
+    /// The instruction text to DISPLAY for literacy tasks.  At the easiest
+    /// level the full prompt is shown (e.g. "Touch the letter A") as a reading
+    /// aid.  As difficulty rises, a single-letter answer is masked in the
+    /// *displayed* text so the child can't read the answer straight from the
+    /// prompt — the spoken audio still carries the full instruction.
+    ///
+    /// Only single-letter answers are masked: masking multi-letter answers
+    /// would break word-building / sight-word tasks whose visible word IS the
+    /// thing the child must read.
+    private func literacyDisplayedInstruction(task: AdaptiveTask) -> String {
+        let instruction = task.content.displayInstruction
+        guard dimension == .literacy, task.level > 0,
+              let answer = task.content.displayCorrectAnswer else { return instruction }
+        let trimmed = answer.trimmingCharacters(in: .whitespaces)
+        guard trimmed.count == 1 else { return instruction }
+        return maskWholeWord(trimmed, in: instruction)
+    }
+
+    /// Replaces standalone (whole-word) occurrences of `word` in `text` with a
+    /// blank, case-insensitively.  Leaves substrings inside longer words alone.
+    private func maskWholeWord(_ word: String, in text: String) -> String {
+        let tokens = text.split(separator: " ", omittingEmptySubsequences: false)
+        let masked = tokens.map { token -> String in
+            let core = token.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+            if core.caseInsensitiveCompare(word) == .orderedSame {
+                return String(token).replacingOccurrences(
+                    of: core, with: "___", options: .caseInsensitive)
+            }
+            return String(token)
+        }
+        return masked.joined(separator: " ")
+    }
+
     @ViewBuilder
     private func taskContentView(task: AdaptiveTask) -> some View {
         ZStack {
-            if isPinnedInteractionTask(task) {
+            if isLiteracyChoiceTask(task) {
+                // Literacy letter/short-word choices: image on the left, the
+                // compact choice buttons stacked on the right, so single-letter
+                // options don't each take a full row.
+                literacyChoiceLayout(task: task)
+            } else if isPinnedInteractionTask(task) {
                 // Pinned layout: question scrolls at top, options fixed at bottom
                 GeometryReader { geo in
                     let maxPinnedHeight = geo.size.height * 0.45
@@ -816,6 +960,11 @@ struct LearningSessionView: View {
     /// isn't trivial.  Non-answer target words (e.g. "Say: dog") always show.
     private func shouldShowTargetWord(_ task: AdaptiveTask) -> Bool {
         guard let target = task.content.targetWord, !target.isEmpty else { return false }
+        // Picture-description tasks: the `target_word` (e.g. "red ball") is an
+        // open-ended speaking prompt, not the truth about the image — its
+        // color/label often disagrees with the actual picture, so never show
+        // it as a tip under the image.
+        if isPictureDescriptionTask(task) { return false }
         let normalizedTarget = target.trimmingCharacters(in: .whitespaces)
         let revealsAnswer = task.content.correctAnswer?
             .trimmingCharacters(in: .whitespaces)
