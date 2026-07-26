@@ -2041,54 +2041,73 @@ struct LearningSessionView: View {
                 }
             }
 
-            // Status / Submit
-            if allPlaced {
-                let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
-                if isCorrect {
-                    HStack(spacing: 12) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                        Text(AppLocalization.localized("All sorted!", zh: "全部分好了！"))
-                            .font(Font.subheadline.weight(.bold))
-                            .foregroundColor(.green)
+            // Status / Submit / Start-Over controls.
+            //
+            // "Start Over" is a full-size button clearly separated from the
+            // "Done" submit button: mis-tapping Done submits the current
+            // (possibly wrong) arrangement, so the child must be able to
+            // reliably hit "Start Over" to fix mistakes instead.
+            VStack(spacing: 16) {
+                if allPlaced {
+                    let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
+                    if isCorrect {
+                        HStack(spacing: 12) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                            Text(AppLocalization.localized("All sorted!", zh: "全部分好了！"))
+                                .font(Font.subheadline.weight(.bold))
+                                .foregroundColor(.green)
+                        }
+                    } else {
+                        // Manual submit button for incorrect sorting
+                        Button {
+                            Task {
+                                await learningManager.submitAttempt(
+                                    isCorrect: false,
+                                    score: 0,
+                                    dimension: dimension
+                                )
+                            }
+                        } label: {
+                            Text(AppLocalization.done)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(dimension.color)
+                                )
+                        }
+                        .disabled(learningManager.isSubmitting)
                     }
-                } else {
-                    // Manual submit button for incorrect sorting
+                }
+
+                // Start Over — big, high-contrast button, placed last so it is
+                // the easiest to reach and hard to confuse with Done.
+                if categorySortBuckets.values.contains(where: { !$0.isEmpty }) {
                     Button {
-                        Task {
-                            await learningManager.submitAttempt(
-                                isCorrect: false,
-                                score: 0,
-                                dimension: dimension
-                            )
+                        withAnimation {
+                            for key in categorySortBuckets.keys {
+                                categorySortBuckets[key] = []
+                            }
                         }
                     } label: {
-                        Text(AppLocalization.done)
+                        Label(AppLocalization.localized("Start Over", zh: "重新开始"), systemImage: "arrow.counterclockwise")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.orange)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .fill(dimension.color)
+                                    .fill(Color.orange.opacity(0.15))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.orange, lineWidth: 2)
                             )
                     }
                     .disabled(learningManager.isSubmitting)
-                }
-            }
-
-            // Reset button
-            if categorySortBuckets.values.contains(where: { !$0.isEmpty }) {
-                Button {
-                    withAnimation {
-                        for key in categorySortBuckets.keys {
-                            categorySortBuckets[key] = []
-                        }
-                    }
-                } label: {
-                    Label(AppLocalization.localized("Start Over", zh: "重新开始"), systemImage: "arrow.counterclockwise")
-                        .font(.subheadline)
-                        .foregroundColor(.orange)
                 }
             }
         }
@@ -2628,16 +2647,20 @@ struct LearningSessionView: View {
             optionButtons(task: task)
         }
 
-        // Speech input — only for language expression tasks where speaking
-        // IS the required interaction.  Other tasks use tap/drag and don't
-        // need a listen button.
+        // Speech input — for language expression tasks where speaking IS the
+        // required interaction.  Open-ended conversation/opinion prompts have
+        // no `target_word`, but the child must still SPEAK an answer: it is
+        // then graded by the AI open-ended evaluator, not by a "Got It" tap.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && dimension == .languageExpression && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
+        let isOpenEndedLanguage = dimension == .languageExpression && task.content.openEnded == true
+        if (!effectiveTarget.isEmpty || isOpenEndedLanguage) && dimension == .languageExpression && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
             speechInputArea(task: task)
         }
 
-        // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
+        // Simple correct/incorrect buttons for tasks without any interactive
+        // input.  Open-ended language tasks are EXCLUDED — they must be spoken
+        // and AI-graded, so a "Got It" tap must not auto-mark them correct.
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !isOpenEndedLanguage && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
             simpleResponseButtons(task: task)
         }
 

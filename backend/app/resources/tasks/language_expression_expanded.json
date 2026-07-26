@@ -584,7 +584,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "Who do you see? What are they doing?",
           "target_word": "The boy is running",
-          "image_hint": "happy_face",
+          "image_hint": "boy_running",
           "modalities": [
             "voice"
           ],
@@ -605,7 +605,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "Look at what the person is holding",
           "target_word": "The girl is reading a book",
-          "image_hint": "book",
+          "image_hint": "girl_reading",
           "modalities": [
             "voice"
           ],
@@ -626,7 +626,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "What is the animal doing?",
           "target_word": "The dog is playing with a ball",
-          "image_hint": "dog",
+          "image_hint": "dog_playing_ball",
           "modalities": [
             "voice"
           ],
@@ -647,7 +647,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "Where are the people? What are they doing together?",
           "target_word": "The children are playing outside",
-          "image_hint": "happy_face",
+          "image_hint": "children_playing",
           "modalities": [
             "voice"
           ],
@@ -668,7 +668,7 @@
           "sub_domain": "Action Description",
           "scaffolding_hint": "What is the person eating?",
           "target_word": "The boy is eating an apple",
-          "image_hint": "apple",
+          "image_hint": "boy_eating_apple",
           "modalities": [
             "voice"
           ],
