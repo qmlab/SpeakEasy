@@ -65,6 +65,9 @@ struct LearningSessionView: View {
     @State private var unsortedPoolFrame: CGRect = .zero
     /// Enlarged image preview for sort items
     @State private var enlargedItem: String?
+    /// Item selected via tap in category sort (tap item, then tap a bucket to place).
+    /// Provides a reliable non-drag path for placing items into categories.
+    @State private var selectedSortItem: String?
     /// Visual tap feedback state for multi-tap tasks
     @State private var tapRippleScale: CGFloat = 1.0
     @State private var tapRippleOpacity: Double = 0.0
@@ -212,6 +215,7 @@ struct LearningSessionView: View {
                 dragSortOffset = .zero
                 categoryFrames = [:]
                 enlargedItem = nil
+                selectedSortItem = nil
                 // Reset flash state
                 flashVisible = false
                 flashPhase = 0
@@ -1599,6 +1603,13 @@ struct LearningSessionView: View {
                     .font(Font.subheadline.weight(.bold))
                     .foregroundColor(.secondary)
 
+                Text(AppLocalization.localized(
+                    "Drag the shapes so their numbers match the picture above.",
+                    zh: "拖动图形，让下面的号码和上面图片里的顺序一致。"))
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+
                 HStack(spacing: 16) {
                     ForEach(Array(dragArrangeItems.enumerated()), id: \.element) { index, item in
                         let imageKey = task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_")
@@ -1613,9 +1624,13 @@ struct LearningSessionView: View {
                                 size: 100
                             )
                             .cornerRadius(12)
-                            Text(item.replacingOccurrences(of: "_", with: " ").capitalized)
-                                .font(.caption2)
-                                .lineLimit(1)
+                            // Position number — maps each slot to the numbered
+                            // reference image so the target order is unambiguous.
+                            Text("\(index + 1)")
+                                .font(.headline.bold())
+                                .foregroundColor(.white)
+                                .frame(width: 28, height: 28)
+                                .background(Circle().fill(dimension.color))
                         }
                         .padding(8)
                         .background(
@@ -1782,6 +1797,31 @@ struct LearningSessionView: View {
         return allItems.filter { !sorted.contains($0) }
     }
 
+    /// Place an item into a category bucket. Shared by drag-drop and the
+    /// tap-to-place path (tap item, then tap a bucket). Handles auto-submit
+    /// once every item has been placed correctly.
+    private func placeSortItem(_ item: String, into category: String, task: AdaptiveTask, itemCategoryMap: [String: String]) {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            categorySortBuckets[category, default: []].append(item)
+            dragSortItem = nil
+            dragSortOffset = .zero
+            selectedSortItem = nil
+        }
+        speechService.speak(item)
+
+        let newRemaining = unsortedItems(task: task)
+        if newRemaining.isEmpty && checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap) {
+            let capturedTaskId = learningManager.currentTask?.taskId
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                guard !learningManager.isSubmitting,
+                      learningManager.currentTask?.taskId == capturedTaskId else { return }
+                Task {
+                    await learningManager.submitAttempt(isCorrect: true, score: 1, dimension: dimension)
+                }
+            }
+        }
+    }
+
     /// Drag-to-category sorting area: items at top, category buckets below.
     @ViewBuilder
     private func dragSortArea(task: AdaptiveTask) -> some View {
@@ -1798,6 +1838,13 @@ struct LearningSessionView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
+                    Text(AppLocalization.localized(
+                        "Tap an item, then tap a group — or drag it.",
+                        zh: "先点物品，再点分类框；也可以拖动。"))
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+
                     let columns = [
                         GridItem(.flexible(), spacing: 12),
                         GridItem(.flexible(), spacing: 12)
@@ -1805,6 +1852,7 @@ struct LearningSessionView: View {
                     LazyVGrid(columns: columns, spacing: 12) {
                         ForEach(remaining, id: \.self) { item in
                             let isDragging = dragSortItem == item
+                            let isSelected = selectedSortItem == item
                             VStack(spacing: 4) {
                                 RemoteImageView(
                                     objectName: task.content.englishName(for: item).lowercased().replacingOccurrences(of: " ", with: "_"),
@@ -1823,10 +1871,14 @@ struct LearningSessionView: View {
                             .padding(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 14)
-                                    .fill(isDragging ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
+                                    .fill(isDragging || isSelected ? dimension.color.opacity(0.2) : Color(.secondarySystemBackground))
                                     .shadow(color: isDragging ? dimension.color.opacity(0.3) : .clear, radius: 6)
                             )
-                            .scaleEffect(isDragging ? 1.08 : 1.0)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 14)
+                                    .stroke(isSelected ? dimension.color : Color.clear, lineWidth: 3)
+                            )
+                            .scaleEffect(isDragging || isSelected ? 1.08 : 1.0)
                             .offset(isDragging ? dragSortOffset : .zero)
                             .zIndex(isDragging ? 10 : 0)
                             .contentShape(Rectangle())
@@ -1860,54 +1912,34 @@ struct LearningSessionView: View {
                                             return
                                         }
                                         let distance = sqrt(pow(drag.translation.width, 2) + pow(drag.translation.height, 2))
-                                        // Short drag = tap: show enlarged image
+                                        // Short drag = tap: select this item so it can be
+                                        // placed by tapping a category bucket (reliable
+                                        // non-drag path).
                                         if distance < 10 {
                                             dragSortItem = nil
                                             dragSortOffset = .zero
-                                            enlargedItem = item
+                                            withAnimation(.easeInOut(duration: 0.15)) {
+                                                selectedSortItem = (selectedSortItem == item) ? nil : item
+                                            }
                                             speechService.speak(item)
                                             return
                                         }
                                         // Check which category bucket the item was dropped on.
                                         let dropPoint = drag.location
-                                        var placed = false
+                                        var dropCategory: String?
                                         for (cat, frame) in categoryFrames {
                                             let expanded = frame.insetBy(dx: -20, dy: -20)
                                             if expanded.contains(dropPoint) {
-                                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                                    categorySortBuckets[cat, default: []].append(item)
-                                                    dragSortItem = nil
-                                                    dragSortOffset = .zero
-                                                }
-                                                speechService.speak(item)
-                                                placed = true
+                                                dropCategory = cat
                                                 break
                                             }
                                         }
-                                        if !placed {
+                                        if let dropCategory = dropCategory {
+                                            placeSortItem(item, into: dropCategory, task: task, itemCategoryMap: itemCategoryMap)
+                                        } else {
                                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                                 dragSortItem = nil
                                                 dragSortOffset = .zero
-                                            }
-                                        }
-
-                                        // Auto-submit only when all items placed correctly
-                                        let newRemaining = unsortedItems(task: task)
-                                        if placed && newRemaining.isEmpty {
-                                            let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
-                                            if isCorrect {
-                                                let capturedTaskId = learningManager.currentTask?.taskId
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                                    guard !learningManager.isSubmitting,
-                                                          learningManager.currentTask?.taskId == capturedTaskId else { return }
-                                                    Task {
-                                                        await learningManager.submitAttempt(
-                                                            isCorrect: true,
-                                                            score: 1,
-                                                            dimension: dimension
-                                                        )
-                                                    }
-                                                }
                                             }
                                         }
                                     }
@@ -1958,17 +1990,24 @@ struct LearningSessionView: View {
                                 .fill(colorForCategory(category, categories: categories))
                         )
                         .onTapGesture {
-                            speechService.speak(AppLocalization.translateOption(category))
+                            if let sel = selectedSortItem {
+                                placeSortItem(sel, into: category, task: task, itemCategoryMap: itemCategoryMap)
+                            } else {
+                                speechService.speak(AppLocalization.translateOption(category))
+                            }
                         }
 
                         // Drop zone with placed items
+                        let awaitingPlacement = dragSortItem != nil || selectedSortItem != nil
                         VStack(spacing: 6) {
                             if bucketItems.isEmpty {
                                 VStack(spacing: 6) {
                                     Image(systemName: "arrow.down.circle")
                                         .font(.title2)
-                                        .foregroundColor(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.8 : 0.3))
-                                    Text(AppLocalization.localized("Drop here", zh: "放这里"))
+                                        .foregroundColor(colorForCategory(category, categories: categories).opacity(awaitingPlacement ? 0.8 : 0.3))
+                                    Text(selectedSortItem != nil
+                                         ? AppLocalization.localized("Tap here", zh: "点这里")
+                                         : AppLocalization.localized("Drop here", zh: "放这里"))
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
@@ -2017,15 +2056,21 @@ struct LearningSessionView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .strokeBorder(
-                                    colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.7 : 0.4),
-                                    style: StrokeStyle(lineWidth: dragSortItem != nil ? 3 : 2, dash: [6, 3])
+                                    colorForCategory(category, categories: categories).opacity(awaitingPlacement ? 0.7 : 0.4),
+                                    style: StrokeStyle(lineWidth: awaitingPlacement ? 3 : 2, dash: [6, 3])
                                 )
                                 .background(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .fill(colorForCategory(category, categories: categories).opacity(dragSortItem != nil ? 0.12 : 0.05))
+                                        .fill(colorForCategory(category, categories: categories).opacity(awaitingPlacement ? 0.12 : 0.05))
                                 )
                         )
-                        .animation(.easeInOut(duration: 0.2), value: dragSortItem != nil)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if let sel = selectedSortItem {
+                                placeSortItem(sel, into: category, task: task, itemCategoryMap: itemCategoryMap)
+                            }
+                        }
+                        .animation(.easeInOut(duration: 0.2), value: awaitingPlacement)
                         .overlay(
                             GeometryReader { geo in
                                 Color.clear
