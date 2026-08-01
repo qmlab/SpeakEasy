@@ -1,6 +1,6 @@
 ---
 name: testing-backend-api
-description: Test the Rising Star Kid backend API endpoints. Use when verifying backend changes, task seeding, or adaptive session flow.
+description: Test the Rising Star Kid backend API end-to-end. Use when verifying backend task seeding, adaptive session flow, sort task categories, image URL integrity, or API endpoint changes.
 ---
 
 # Testing Rising Star Kid Backend API
@@ -28,6 +28,7 @@ curl -X POST http://localhost:8000/tasks/seed?force=true
 # or for deployed:
 curl -X POST https://risingstar-backend.fly.dev/tasks/seed?force=true
 ```
+Without `?force=true`, existing tasks are not updated.
 
 ## Key API Endpoints for Testing
 - `POST /auth/guest` with body `{"device_id": "test-xxx"}` — Create guest player
