@@ -358,11 +358,15 @@ class AdaptiveEngine:
         seeding).  Combines task type, instruction, options and frames."""
         content = task.content if isinstance(task.content, dict) else {}
         instruction = (
-            content.get("instruction")
-            or content.get("instruction_text")
-            or content.get("question")
-            or ""
-        ).strip().lower()
+            (
+                content.get("instruction")
+                or content.get("instruction_text")
+                or content.get("question")
+                or ""
+            )
+            .strip()
+            .lower()
+        )
         options = content.get("options") or []
         frames = content.get("animation_frames") or content.get("frames") or []
         options_key = ",".join(sorted(str(o).lower() for o in options))
