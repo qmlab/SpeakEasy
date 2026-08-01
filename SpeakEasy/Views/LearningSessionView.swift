@@ -33,6 +33,10 @@ struct LearningSessionView: View {
     @State private var animationTimer: Timer?
     /// Multi-tap counting state (for go/no-go, sustained attention tasks)
     @State private var multiTapCount: Int = 0
+    /// Selected frame indices for "tap every target in the stream" tasks.
+    /// Each flashed card is an individually selectable unit; the child can
+    /// toggle cards on/off (including after the whole stream has played).
+    @State private var selectedFrameIndices: Set<Int> = []
     /// Text/number input state (for counting and fill-in-the-word tasks)
     @State private var textInputValue: String = ""
     /// Flash image state (for visual memory tasks like "Watch the light flash")
@@ -195,6 +199,7 @@ struct LearningSessionView: View {
                 animateFeedback = false
                 showHint = false
                 multiTapCount = 0
+                selectedFrameIndices = []
                 textInputValue = ""
                 // Reset drag arrange state
                 dragArrangeItems = []
@@ -504,7 +509,7 @@ struct LearningSessionView: View {
             return true
         }
         // instructionCard renders a targetWord display
-        if let tw = task.content.targetWord, !tw.isEmpty { return true }
+        if let tw = task.content.targetWord, !tw.isEmpty, shouldShowTargetWord(task) { return true }
         // contentArea renders flash / animation / pattern / story / passage / sentence
         if isFlashTask(task) || isAnimatedTask(task) || isPatternTask(task) { return true }
         if let s = task.content.story, !s.isEmpty { return true }
@@ -515,10 +520,154 @@ struct LearningSessionView: View {
         return false
     }
 
+    /// Picture-description tasks ("Tell me about this picture!", "What do you
+    /// see?") where the child freely describes the image.  These carry a
+    /// `target_word` like "red ball" that is used only as an open-ended
+    /// speaking prompt — it must NOT be shown as a tip under the picture
+    /// because the descriptor (especially color) often disagrees with the
+    /// actual image and there is no single correct description.
+    private func isPictureDescriptionTask(_ task: AdaptiveTask) -> Bool {
+        task.taskType == "describe"
+    }
+
+    /// Literacy single-select tasks whose choices are single letters or short
+    /// words (e.g. "A"/"V"/"H", "Hat"/"Dog"/"Cat").  These get a compact
+    /// side-by-side layout — image on the left, choice buttons stacked on the
+    /// right — so a one-letter choice doesn't waste a whole row.
+    private func isLiteracyChoiceTask(_ task: AdaptiveTask) -> Bool {
+        guard dimension == .literacy else { return false }
+        let options = task.content.displayOptions
+        guard options.count >= 2, options.count <= 4 else { return false }
+        if isImageGridTask(task) || isMultiSelectTask(task) || isMultiTapTask(task)
+            || isFlashTask(task) || isAnimatedTask(task) || isDragSortTask(task)
+            || isDragArrangeTask(task) || isTextInputTask(task) || isSortingTask(task)
+            || isPatternTask(task) {
+            return false
+        }
+        // Only short choices — long option strings still want full-width rows.
+        return options.allSatisfy { $0.trimmingCharacters(in: .whitespaces).count <= 6 }
+    }
+
+    /// Side-by-side literacy layout: instruction header on top, then the
+    /// question image on the left with the choice buttons stacked on the right.
+    @ViewBuilder
+    private func literacyChoiceLayout(task: AdaptiveTask) -> some View {
+        VStack(spacing: 16) {
+            taskProgressBar
+
+            // Tap-to-speak instruction (audio always carries the full prompt).
+            Button {
+                speechService.speak(task.content.displayInstruction)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "speaker.wave.2.fill")
+                        .font(.title3)
+                    Text(literacyDisplayedInstruction(task: task))
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.leading)
+                }
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.horizontal)
+
+            HStack(alignment: .center, spacing: 20) {
+                if let questionImg = task.content.questionImage, !questionImg.isEmpty {
+                    RemoteImageView(
+                        objectName: questionImg,
+                        imageType: .flashcard,
+                        fallbackIcon: "photo",
+                        iconColor: dimension.color,
+                        size: 180
+                    )
+                    .cornerRadius(16)
+                } else if let imageHint = task.content.imageHint, !imageHint.isEmpty {
+                    RemoteImageView(
+                        objectName: imageHint,
+                        imageType: .flashcard,
+                        fallbackIcon: "photo",
+                        iconColor: dimension.color,
+                        size: 180
+                    )
+                    .cornerRadius(16)
+                }
+
+                literacyOptionColumn(task: task)
+                    .frame(maxWidth: .infinity)
+            }
+            .padding(.horizontal)
+
+            skipButton
+            Spacer(minLength: 0)
+        }
+        .padding()
+    }
+
+    /// Vertical stack of compact letter/short-word choice buttons.
+    private func literacyOptionColumn(task: AdaptiveTask) -> some View {
+        VStack(spacing: 14) {
+            ForEach(task.content.displayOptions, id: \.self) { option in
+                Button {
+                    handleOptionTap(option: option, task: task)
+                } label: {
+                    Text(option)
+                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .foregroundColor(selectedOption == option ? .white : .primary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(selectedOption == option ? dimension.color : Color(.secondarySystemBackground))
+                        )
+                }
+                .disabled(learningManager.isSubmitting)
+            }
+        }
+    }
+
+    /// The instruction text to DISPLAY for literacy tasks.  At the easiest
+    /// level the full prompt is shown (e.g. "Touch the letter A") as a reading
+    /// aid.  As difficulty rises, a single-letter answer is masked in the
+    /// *displayed* text so the child can't read the answer straight from the
+    /// prompt — the spoken audio still carries the full instruction.
+    ///
+    /// Only single-letter answers are masked: masking multi-letter answers
+    /// would break word-building / sight-word tasks whose visible word IS the
+    /// thing the child must read.
+    private func literacyDisplayedInstruction(task: AdaptiveTask) -> String {
+        let instruction = task.content.displayInstruction
+        guard dimension == .literacy, task.level > 0,
+              let answer = task.content.displayCorrectAnswer else { return instruction }
+        let trimmed = answer.trimmingCharacters(in: .whitespaces)
+        guard trimmed.count == 1 else { return instruction }
+        return maskWholeWord(trimmed, in: instruction)
+    }
+
+    /// Replaces standalone (whole-word) occurrences of `word` in `text` with a
+    /// blank, case-insensitively.  Leaves substrings inside longer words alone.
+    private func maskWholeWord(_ word: String, in text: String) -> String {
+        let tokens = text.split(separator: " ", omittingEmptySubsequences: false)
+        let masked = tokens.map { token -> String in
+            let core = token.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+            if core.caseInsensitiveCompare(word) == .orderedSame {
+                return String(token).replacingOccurrences(
+                    of: core, with: "___", options: .caseInsensitive)
+            }
+            return String(token)
+        }
+        return masked.joined(separator: " ")
+    }
+
     @ViewBuilder
     private func taskContentView(task: AdaptiveTask) -> some View {
         ZStack {
-            if isPinnedInteractionTask(task) {
+            if isLiteracyChoiceTask(task) {
+                // Literacy letter/short-word choices: image on the left, the
+                // compact choice buttons stacked on the right, so single-letter
+                // options don't each take a full row.
+                literacyChoiceLayout(task: task)
+            } else if isPinnedInteractionTask(task) {
                 // Pinned layout: question scrolls at top, options fixed at bottom
                 GeometryReader { geo in
                     let maxPinnedHeight = geo.size.height * 0.45
@@ -532,12 +681,11 @@ struct LearningSessionView: View {
                             .padding()
                         }
 
-                        // Pinned interaction area at bottom — capped so it
-                        // never pushes the image out of the scroll area.
-                        ScrollView {
-                            VStack(spacing: 12) {
-                                interactionArea(task: task)
-                            }
+                        // Pinned interaction area at bottom — NOT in ScrollView
+                        // so tap gestures fire immediately without scroll-vs-tap
+                        // disambiguation delay.
+                        VStack(spacing: 12) {
+                            interactionArea(task: task)
                         }
                         .frame(maxHeight: maxPinnedHeight)
                         .padding(.horizontal)
@@ -562,15 +710,22 @@ struct LearningSessionView: View {
                 }
                 .padding(.vertical, 8)
             } else {
-                // Original scrollable layout for complex interactions
-                ScrollView {
-                    VStack(spacing: 24) {
-                        taskProgressBar
-                        instructionCard(task: task)
-                        contentArea(task: task)
+                // Content scrolls, interaction area stays outside ScrollView
+                // to avoid tap gesture delay from scroll disambiguation.
+                VStack(spacing: 0) {
+                    ScrollView {
+                        VStack(spacing: 24) {
+                            taskProgressBar
+                            instructionCard(task: task)
+                            contentArea(task: task)
+                        }
+                        .padding()
+                    }
+                    VStack(spacing: 12) {
                         interactionArea(task: task)
                     }
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
                 }
             }
 
@@ -763,8 +918,13 @@ struct LearningSessionView: View {
                 .cornerRadius(16)
             }
 
-            // Target word display with speaker icon so kid can tap to hear it
-            if let target = task.content.targetWord, !target.isEmpty {
+            // Target word display with speaker icon so kid can tap to hear it.
+            // When the target word IS the answer (e.g. letter-recognition
+            // tasks), it is only revealed at the lowest difficulty as a
+            // teaching aid — hidden at higher levels so the task stays
+            // challenging and the big letter can't overlap the options.
+            if let target = task.content.targetWord, !target.isEmpty,
+               shouldShowTargetWord(task) {
                 Button {
                     speechService.speak(target)
                 } label: {
@@ -792,6 +952,26 @@ struct LearningSessionView: View {
     }
 
     // MARK: - Content Area
+
+    /// Whether the large target-word display should be shown for this task.
+    /// If showing it would reveal the correct answer (e.g. "Touch the letter
+    /// C" with target_word "C"), only reveal it at the lowest difficulty
+    /// (level 0) as a teaching aid; hide it at higher levels so the task
+    /// isn't trivial.  Non-answer target words (e.g. "Say: dog") always show.
+    private func shouldShowTargetWord(_ task: AdaptiveTask) -> Bool {
+        guard let target = task.content.targetWord, !target.isEmpty else { return false }
+        // Picture-description tasks: the `target_word` (e.g. "red ball") is an
+        // open-ended speaking prompt, not the truth about the image — its
+        // color/label often disagrees with the actual picture, so never show
+        // it as a tip under the image.
+        if isPictureDescriptionTask(task) { return false }
+        let normalizedTarget = target.trimmingCharacters(in: .whitespaces)
+        let revealsAnswer = task.content.correctAnswer?
+            .trimmingCharacters(in: .whitespaces)
+            .caseInsensitiveCompare(normalizedTarget) == .orderedSame
+        if revealsAnswer { return task.level == 0 }
+        return true
+    }
 
     /// Whether the task instruction references looking at a picture or image.
     /// When true, the image_hint must be shown even for image grid tasks
@@ -850,8 +1030,10 @@ struct LearningSessionView: View {
             flashDisplayView(task: task)
         }
 
-        // Animated slideshow display — shows frames one at a time for attention/memory tasks
-        if isAnimatedTask(task) {
+        // Animated slideshow display — shows frames one at a time for attention/memory tasks.
+        // "Tap every target in the stream" tasks render their frames as a selectable
+        // carousel inside the interaction area instead (see streamCarouselArea), so skip here.
+        if isAnimatedTask(task) && !isSelectableStreamTask(task) {
             animatedSequenceView(task: task)
         }
 
@@ -1308,8 +1490,8 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Starts the timed flash sequence.  Shows each image for 5 seconds with
-    /// a 0.8 second blank gap between them.
+    /// Starts the timed flash sequence.  Each image is shown for 3 seconds and
+    /// replaced immediately by the next one (no blank gap between images).
     private func startFlashSequence(images: [String]) {
         guard !images.isEmpty else {
             flashCompleted = true
@@ -1330,7 +1512,9 @@ struct LearningSessionView: View {
         }
     }
 
-    /// Shows the next flash image, waits 5s, then either advances or completes.
+    /// Shows the next flash image, then either advances or completes.
+    /// Each image stays visible for 3 seconds and is immediately replaced by the
+    /// next one (no blank gap), so images change at a steady 3-second cadence.
     /// The `generation` parameter is compared against `flashGeneration` to bail
     /// out if the task changed while callbacks were pending.
     private func showNextFlash(images: [String], generation: Int) {
@@ -1342,26 +1526,23 @@ struct LearningSessionView: View {
             return
         }
 
+        let displayDuration: Double = 3.0
+
         withAnimation(.easeIn(duration: 0.2)) {
             flashVisible = true
         }
 
-        // Keep visible for 5 seconds so the child can observe
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + displayDuration) {
             guard self.flashGeneration == generation else { return }
-            withAnimation(.easeOut(duration: 0.2)) {
-                self.flashVisible = false
-            }
-            // Brief gap then show next or complete
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                guard self.flashGeneration == generation else { return }
-                self.flashPhase += 1
-                if self.flashPhase < images.count {
-                    self.showNextFlash(images: images, generation: generation)
-                } else {
-                    withAnimation {
-                        self.flashCompleted = true
-                    }
+            self.flashPhase += 1
+            if self.flashPhase < images.count {
+                // Advance to the next image without hiding the current one,
+                // so there is no blank gap between images.
+                self.showNextFlash(images: images, generation: generation)
+            } else {
+                withAnimation(.easeOut(duration: 0.2)) {
+                    self.flashVisible = false
+                    self.flashCompleted = true
                 }
             }
         }
@@ -1745,26 +1926,33 @@ struct LearningSessionView: View {
                 ForEach(categories, id: \.self) { category in
                     let bucketItems = categorySortBuckets[category] ?? []
                     VStack(spacing: 8) {
-                        // Category label — show representative image instead of text
-                        let rep = representativeImage(for: category)
-                        HStack(spacing: 8) {
+                        // Category label — show representative image, excluding
+                        // any image that also appears as a sort item.
+                        let itemSet = Set(task.content.displayOptions)
+                        let rep = representativeImage(for: category, excludeItems: itemSet)
+                        VStack(spacing: 4) {
                             if !rep.objectName.isEmpty {
                                 RemoteImageView(
                                     objectName: rep.objectName,
                                     imageType: .flashcard,
                                     fallbackIcon: rep.fallback,
                                     iconColor: .white,
-                                    size: 70
+                                    size: 56
                                 )
-                                .cornerRadius(12)
+                                .cornerRadius(10)
                             } else {
                                 Image(systemName: rep.fallback)
-                                    .font(.system(size: 36))
+                                    .font(.system(size: 30))
                                     .foregroundColor(.white)
                             }
+                            Text(AppLocalization.translateOption(category))
+                                .font(.caption2.bold())
+                                .foregroundColor(.white)
+                                .lineLimit(2)
+                                .multilineTextAlignment(.center)
                         }
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
+                        .padding(.vertical, 10)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(colorForCategory(category, categories: categories))
@@ -1853,54 +2041,73 @@ struct LearningSessionView: View {
                 }
             }
 
-            // Status / Submit
-            if allPlaced {
-                let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
-                if isCorrect {
-                    HStack(spacing: 12) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                        Text(AppLocalization.localized("All sorted!", zh: "全部分好了！"))
-                            .font(Font.subheadline.weight(.bold))
-                            .foregroundColor(.green)
+            // Status / Submit / Start-Over controls.
+            //
+            // "Start Over" is a full-size button clearly separated from the
+            // "Done" submit button: mis-tapping Done submits the current
+            // (possibly wrong) arrangement, so the child must be able to
+            // reliably hit "Start Over" to fix mistakes instead.
+            VStack(spacing: 16) {
+                if allPlaced {
+                    let isCorrect = checkDragSortCorrectness(task: task, itemCategoryMap: itemCategoryMap)
+                    if isCorrect {
+                        HStack(spacing: 12) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                            Text(AppLocalization.localized("All sorted!", zh: "全部分好了！"))
+                                .font(Font.subheadline.weight(.bold))
+                                .foregroundColor(.green)
+                        }
+                    } else {
+                        // Manual submit button for incorrect sorting
+                        Button {
+                            Task {
+                                await learningManager.submitAttempt(
+                                    isCorrect: false,
+                                    score: 0,
+                                    dimension: dimension
+                                )
+                            }
+                        } label: {
+                            Text(AppLocalization.done)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(dimension.color)
+                                )
+                        }
+                        .disabled(learningManager.isSubmitting)
                     }
-                } else {
-                    // Manual submit button for incorrect sorting
+                }
+
+                // Start Over — big, high-contrast button, placed last so it is
+                // the easiest to reach and hard to confuse with Done.
+                if categorySortBuckets.values.contains(where: { !$0.isEmpty }) {
                     Button {
-                        Task {
-                            await learningManager.submitAttempt(
-                                isCorrect: false,
-                                score: 0,
-                                dimension: dimension
-                            )
+                        withAnimation {
+                            for key in categorySortBuckets.keys {
+                                categorySortBuckets[key] = []
+                            }
                         }
                     } label: {
-                        Text(AppLocalization.done)
+                        Label(AppLocalization.localized("Start Over", zh: "重新开始"), systemImage: "arrow.counterclockwise")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.orange)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .fill(dimension.color)
+                                    .fill(Color.orange.opacity(0.15))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.orange, lineWidth: 2)
                             )
                     }
                     .disabled(learningManager.isSubmitting)
-                }
-            }
-
-            // Reset button
-            if categorySortBuckets.values.contains(where: { !$0.isEmpty }) {
-                Button {
-                    withAnimation {
-                        for key in categorySortBuckets.keys {
-                            categorySortBuckets[key] = []
-                        }
-                    }
-                } label: {
-                    Label(AppLocalization.localized("Start Over", zh: "重新开始"), systemImage: "arrow.counterclockwise")
-                        .font(.subheadline)
-                        .foregroundColor(.orange)
                 }
             }
         }
@@ -1931,41 +2138,87 @@ struct LearningSessionView: View {
     }
 
     /// Representative photo name for a sort category, used as the visual label.
-    private func representativeImage(for category: String) -> (objectName: String, fallback: String) {
+    /// `excludeItems` prevents using an image that already appears as a sort
+    /// item — otherwise the answer becomes trivially obvious.
+    private func representativeImage(for category: String, excludeItems: Set<String> = []) -> (objectName: String, fallback: String) {
         let key = category.lowercased()
+        // Each category maps to a ranked list of candidate images; the first
+        // candidate whose name is NOT in `excludeItems` is used.
+        let candidates: [(String, String)]
         switch key {
-        case "animals", "big animals": return ("elephant", "pawprint.fill")
-        case "small animals": return ("ant", "ant.fill")
-        case "food", "things you eat": return ("apple", "fork.knife")
-        case "fruits": return ("apple", "leaf.fill")
-        case "vegetables": return ("carrot", "leaf.fill")
-        case "nature", "natural": return ("tree", "leaf.fill")
-        case "clothing", "things you wear": return ("shirt", "tshirt.fill")
-        case "vehicles": return ("car", "car.fill")
-        case "tools": return ("hammer", "wrench.fill")
-        case "toys": return ("ball", "gamecontroller.fill")
-        case "instruments": return ("drum", "music.note")
-        case "stationery": return ("pencil", "pencil")
-        case "living things": return ("dog", "hare.fill")
-        case "non-living things", "man-made", "objects": return ("chair", "cube.fill")
-        case "things that fly": return ("bird", "bird.fill")
-        case "things that swim": return ("fish", "fish.fill")
-        case "things with legs": return ("dog", "pawprint.fill")
-        case "things without legs": return ("worm", "circle.fill")
-        case "things that need electricity": return ("lightbulb", "bolt.fill")
-        case "hot things": return ("fire", "flame.fill")
-        case "cold things": return ("ice", "snowflake")
-        case "positive words": return ("", "hand.thumbsup.fill")
-        case "negative words": return ("", "hand.thumbsdown.fill")
-        case "red": return ("", "circle.fill")
-        case "blue": return ("", "circle.fill")
-        case "big": return ("elephant", "arrow.up.circle.fill")
-        case "small": return ("ant", "arrow.down.circle.fill")
-        case "fruit": return ("apple", "leaf.fill")
-        case "not fruit": return ("", "xmark.circle.fill")
-        case "things that don't": return ("", "xmark.circle.fill")
-        default: return ("", "square.grid.2x2.fill")
+        case "animals", "big animals":
+            candidates = [("elephant", "pawprint.fill"), ("lion", "pawprint.fill"), ("horse", "pawprint.fill")]
+        case "small animals":
+            candidates = [("ant", "ant.fill"), ("butterfly", "ant.fill"), ("ladybug", "ant.fill")]
+        case "food", "things you eat":
+            candidates = [("apple", "fork.knife"), ("bread", "fork.knife"), ("banana", "fork.knife")]
+        case "fruits", "fruit":
+            candidates = [("apple", "leaf.fill"), ("banana", "leaf.fill"), ("orange", "leaf.fill")]
+        case "vegetables":
+            candidates = [("carrot", "leaf.fill"), ("broccoli", "leaf.fill"), ("corn", "leaf.fill")]
+        case "nature", "natural":
+            candidates = [("tree", "leaf.fill"), ("flower", "leaf.fill"), ("mountain", "leaf.fill")]
+        case "clothing", "things you wear":
+            candidates = [("shirt", "tshirt.fill"), ("hat", "tshirt.fill"), ("shoe", "tshirt.fill")]
+        case "vehicles":
+            candidates = [("car", "car.fill"), ("bus", "car.fill"), ("truck", "car.fill")]
+        case "tools":
+            candidates = [("hammer", "wrench.fill"), ("screwdriver", "wrench.fill"), ("wrench", "wrench.fill")]
+        case "toys":
+            candidates = [("ball", "gamecontroller.fill"), ("teddy_bear", "gamecontroller.fill"), ("kite", "gamecontroller.fill")]
+        case "instruments":
+            candidates = [("drum", "music.note"), ("guitar", "music.note"), ("piano", "music.note")]
+        case "stationery":
+            candidates = [("pencil", "pencil"), ("crayon", "pencil"), ("eraser", "pencil")]
+        case "living things":
+            candidates = [("dog", "hare.fill"), ("cat", "hare.fill"), ("rabbit", "hare.fill")]
+        case "non-living things", "man-made", "objects", "things", "made by people":
+            candidates = [("chair", "cube.fill"), ("table", "cube.fill"), ("book", "cube.fill")]
+        case "from outdoors", "outdoors":
+            candidates = [("tree", "leaf.fill"), ("flower", "leaf.fill"), ("mountain", "leaf.fill")]
+        case "things that fly":
+            candidates = [("bird", "bird.fill"), ("airplane", "bird.fill"), ("butterfly", "bird.fill")]
+        case "things that swim":
+            candidates = [("fish", "fish.fill"), ("whale", "fish.fill"), ("turtle", "fish.fill")]
+        case "things with legs":
+            candidates = [("dog", "pawprint.fill"), ("cat", "pawprint.fill"), ("horse", "pawprint.fill")]
+        case "things without legs":
+            candidates = [("worm", "circle.fill"), ("snake", "circle.fill"), ("snail", "circle.fill")]
+        case "things that need electricity":
+            candidates = [("lightbulb", "bolt.fill"), ("tv", "bolt.fill"), ("computer", "bolt.fill")]
+        case "hot things":
+            candidates = [("fire", "flame.fill"), ("sun", "flame.fill")]
+        case "cold things":
+            candidates = [("ice", "snowflake"), ("snowman", "snowflake")]
+        case "positive words", "happy words":
+            candidates = [("", "hand.thumbsup.fill")]
+        case "negative words", "sad words":
+            candidates = [("", "hand.thumbsdown.fill")]
+        case "red":
+            candidates = [("", "circle.fill")]
+        case "blue":
+            candidates = [("", "circle.fill")]
+        case "big":
+            candidates = [("elephant", "arrow.up.circle.fill"), ("whale", "arrow.up.circle.fill")]
+        case "small":
+            candidates = [("ant", "arrow.down.circle.fill"), ("ladybug", "arrow.down.circle.fill")]
+        case "not fruit":
+            candidates = [("", "xmark.circle.fill")]
+        case "things that don't":
+            candidates = [("", "xmark.circle.fill")]
+        default:
+            candidates = [("", "square.grid.2x2.fill")]
         }
+
+        let lowered = excludeItems.map { $0.lowercased().replacingOccurrences(of: " ", with: "_") }
+        let excluded = Set(lowered)
+        for (name, fallback) in candidates {
+            if name.isEmpty || !excluded.contains(name) {
+                return (name, fallback)
+            }
+        }
+        // All image candidates overlap with items — fall back to SF Symbol only
+        return ("", candidates.first?.1 ?? "square.grid.2x2.fill")
     }
 
     // MARK: - Multi-Tap Counting
@@ -1992,6 +2245,19 @@ struct LearningSessionView: View {
     /// the counter updates. When done, they press the Done button.
     @ViewBuilder
     private func multiTapArea(task: AdaptiveTask) -> some View {
+        // "Tap every target in the stream" tasks use a selectable card carousel
+        // where each flashed image is an individually tappable unit.
+        if isSelectableStreamTask(task) {
+            streamCarouselArea(task: task)
+        } else {
+            legacyMultiTapArea(task: task)
+        }
+    }
+
+    /// Counting-only multi-tap interaction (story/text tasks and rare stream
+    /// tasks without a per-frame target): a big TAP button + running count.
+    @ViewBuilder
+    private func legacyMultiTapArea(task: AdaptiveTask) -> some View {
         let expectedCount = task.content.tapCount ?? 0
         let hasAnimation = isAnimatedTask(task)
         let hasFlash = isFlashTask(task)
@@ -2072,6 +2338,190 @@ struct LearningSessionView: View {
                 .disabled(learningManager.isSubmitting)
             }
         }
+    }
+
+    // MARK: - Selectable Stream Carousel
+
+    /// Whether this multi-tap task shows a stream of image frames that the child
+    /// should tap individually (e.g. "Tap every time you see a Star").  These get
+    /// the selectable carousel treatment instead of the plain tap-counter.
+    private func isSelectableStreamTask(_ task: AdaptiveTask) -> Bool {
+        isMultiTapTask(task) && isAnimatedTask(task)
+    }
+
+    /// Normalizes a frame / target name the same way `RemoteImageView` does, so
+    /// frame names and the tap target can be compared reliably.
+    private func normalizedName(_ s: String) -> String {
+        s.lowercased().trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: " ", with: "_")
+    }
+
+    /// Indices in the frame stream that match the tap target (the "correct" cards).
+    /// Empty when the task has no explicit `tap_target` (falls back to count grading).
+    private func streamTargetIndices(_ task: AdaptiveTask) -> Set<Int> {
+        guard let target = task.content.tapTarget, !target.isEmpty,
+              let frames = task.content.animationFrames else { return [] }
+        let t = normalizedName(target)
+        var result = Set<Int>()
+        for (idx, frame) in frames.enumerated() where normalizedName(frame) == t {
+            result.insert(idx)
+        }
+        return result
+    }
+
+    /// Whether a given frame index has already been revealed by the stream and is
+    /// therefore tappable.  All cards become tappable once the stream finishes.
+    private func isFrameRevealed(_ idx: Int) -> Bool {
+        animationFinished || idx <= animationFrameIndex
+    }
+
+    private func toggleFrameSelection(_ idx: Int) {
+        if selectedFrameIndices.contains(idx) {
+            selectedFrameIndices.remove(idx)
+        } else {
+            selectedFrameIndices.insert(idx)
+        }
+    }
+
+    /// Selectable card carousel for "tap every target in the stream" tasks.
+    /// Cards are revealed one-by-one on a timer (Stories-style) and auto-scroll
+    /// to the newest, but every already-revealed card stays visible and tappable
+    /// — so the child can go back and select/deselect earlier cards, and after
+    /// the whole stream has played every card is an individually tappable unit.
+    @ViewBuilder
+    private func streamCarouselArea(task: AdaptiveTask) -> some View {
+        let frames = task.content.animationFrames ?? []
+        let expectedCount = task.content.tapCount ?? 0
+        let targetIndices = streamTargetIndices(task)
+        let hasTarget = !targetIndices.isEmpty
+
+        VStack(spacing: 12) {
+            // Header + running selected count
+            HStack(spacing: 10) {
+                Image(systemName: animationFinished ? "hand.tap.fill" : "eye.fill")
+                    .font(.title3)
+                Text(animationFinished
+                     ? AppLocalization.localized("Tap all of them!", zh: "把它们都点出来！")
+                     : AppLocalization.localized("Watch and tap!", zh: "边看边点！"))
+                    .font(.headline)
+                Spacer()
+                Text("\(selectedFrameIndices.count)")
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
+            }
+            .foregroundColor(dimension.color)
+
+            // Horizontal card carousel
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(Array(frames.enumerated()), id: \.offset) { idx, frame in
+                            streamCard(frame: frame, idx: idx)
+                                .id(idx)
+                        }
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                }
+                .onChange(of: animationFrameIndex) { newIdx in
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        proxy.scrollTo(newIdx, anchor: .center)
+                    }
+                }
+            }
+
+            // Done button — available once the whole stream has played
+            if animationFinished {
+                Button {
+                    let isCorrect = hasTarget
+                        ? (selectedFrameIndices == targetIndices)
+                        : (selectedFrameIndices.count == expectedCount)
+                    Task {
+                        await learningManager.submitAttempt(
+                            isCorrect: isCorrect,
+                            score: isCorrect ? 1 : 0,
+                            dimension: dimension
+                        )
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("\(AppLocalization.done) (\(selectedFrameIndices.count))")
+                    }
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 16).fill(Color.green))
+                }
+                .disabled(learningManager.isSubmitting)
+            }
+        }
+        .onAppear {
+            // Drive the reveal timer here since contentArea no longer hosts the
+            // animated slideshow for these tasks.
+            if !animationFinished && animationFrameIndex == 0 {
+                startAnimationSlideshow(frames: frames)
+            }
+        }
+        .onDisappear {
+            animationTimer?.invalidate()
+            animationTimer = nil
+        }
+    }
+
+    /// A single card in the stream carousel.
+    @ViewBuilder
+    private func streamCard(frame: String, idx: Int) -> some View {
+        let revealed = isFrameRevealed(idx)
+        let selected = selectedFrameIndices.contains(idx)
+        Button {
+            guard revealed, !learningManager.isSubmitting else { return }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6)) {
+                toggleFrameSelection(idx)
+            }
+        } label: {
+            ZStack(alignment: .topTrailing) {
+                Group {
+                    if revealed {
+                        RemoteImageView(
+                            objectName: normalizedName(frame),
+                            imageType: .flashcard,
+                            fallbackIcon: "square.dashed",
+                            iconColor: dimension.color,
+                            size: 72
+                        )
+                    } else {
+                        // Not yet shown — keep it hidden so upcoming cards
+                        // aren't a giveaway.
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.tertiarySystemBackground))
+                            Image(systemName: "questionmark")
+                                .font(.title2)
+                                .foregroundColor(.secondary.opacity(0.5))
+                        }
+                        .frame(width: 72, height: 72)
+                    }
+                }
+                .cornerRadius(12)
+
+                if selected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .background(Circle().fill(dimension.color))
+                        .offset(x: 6, y: -6)
+                }
+            }
+            .padding(4)
+            .background(
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(selected ? dimension.color : Color.clear, lineWidth: 3)
+            )
+            .opacity(revealed ? 1 : 0.7)
+        }
+        .buttonStyle(.plain)
+        .disabled(!revealed)
     }
 
     // MARK: - Text / Number Input Area
@@ -2197,16 +2647,20 @@ struct LearningSessionView: View {
             optionButtons(task: task)
         }
 
-        // Speech input — only for language expression tasks where speaking
-        // IS the required interaction.  Other tasks use tap/drag and don't
-        // need a listen button.
+        // Speech input — for language expression tasks where speaking IS the
+        // required interaction.  Open-ended conversation/opinion prompts have
+        // no `target_word`, but the child must still SPEAK an answer: it is
+        // then graded by the AI open-ended evaluator, not by a "Got It" tap.
         let effectiveTarget = task.content.targetWord ?? task.content.correctAnswer ?? ""
-        if !effectiveTarget.isEmpty && dimension == .languageExpression && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
+        let isOpenEndedLanguage = dimension == .languageExpression && task.content.openEnded == true
+        if (!effectiveTarget.isEmpty || isOpenEndedLanguage) && dimension == .languageExpression && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isFlashTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) && !isMultiSelectTask(task) {
             speechInputArea(task: task)
         }
 
-        // Simple correct/incorrect buttons for tasks without any interactive input
-        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
+        // Simple correct/incorrect buttons for tasks without any interactive
+        // input.  Open-ended language tasks are EXCLUDED — they must be spoken
+        // and AI-graded, so a "Got It" tap must not auto-mark them correct.
+        if task.content.displayOptions.isEmpty && effectiveTarget.isEmpty && !isOpenEndedLanguage && !taskSupportsCamera(task) && !isSortingTask(task) && !isMultiTapTask(task) && !isTextInputTask(task) && !isDragArrangeTask(task) && !isDragSortTask(task) {
             simpleResponseButtons(task: task)
         }
 

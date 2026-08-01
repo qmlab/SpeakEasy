@@ -1,3 +1,8 @@
+---
+name: backend-deployment
+description: Deploy and manage the Rising Star Kid FastAPI backend on Fly.io. Use when deploying, restarting, or troubleshooting the backend.
+---
+
 # Backend Deployment & Testing
 
 ## Stack
@@ -28,16 +33,37 @@ python -m ruff format app/
 - Use SQLAlchemy `inspect()` for database-agnostic column detection (not SQLite PRAGMA)
 
 ## Deploying to Fly.io
-- Deploy with persistent volume enabled for SQLite storage
-- After deploying, seed the database: `POST /tasks/seed?force=true`
-- Deployed URL: configured per environment
+- App name: `risingstar-backend`
+- Deployed URL: `https://risingstar-backend.fly.dev`
+- Uses `backend/Dockerfile` and `backend/fly.toml` for deployment config
+- Requires `FLY_API_TOKEN` secret (org-level) for `flyctl` authentication
+- Deploy command: `cd backend && flyctl deploy --ha=false`
+- The app uses a persistent volume mounted at `/data` for SQLite storage
+- After deploying, seed the database: `curl -X POST https://risingstar-backend.fly.dev/tasks/seed?force=true`
 - The `force=true` flag deletes and re-seeds expanded tasks with latest JSON data
+- Auto-stop is enabled — machine stops when idle, auto-starts on incoming requests
+
+## Fly.io Management
+```bash
+# Check app status
+flyctl status -a risingstar-backend
+
+# View logs
+flyctl logs -a risingstar-backend
+
+# Restart the app
+flyctl apps restart risingstar-backend
+
+# SSH into the machine
+flyctl ssh console -a risingstar-backend
+```
 
 ## Seeding Tasks
 - Seed endpoint: `POST /tasks/seed?force=true`
 - Loads base tasks + expanded tasks from JSON files in `backend/app/resources/tasks/`
 - Also runs backfill operations for target_words, image_hints, and options
-- Expected ~360 tasks total (300 practice + 60 assessment) across 6 dimensions and levels 0-9
+- Expected ~1,600+ tasks total across 6 dimensions
+- Tasks auto-seed on app startup (idempotent)
 
 ## API Testing
 - Health check: `GET /health`
@@ -52,3 +78,12 @@ python -m ruff format app/
 - literacy
 - social_behavior
 - cognitive_logic
+
+## iOS URL Configuration
+- Backend URL is hardcoded in two Swift files:
+  - `SpeakEasy/Services/APIService.swift` (`baseURL`)
+  - `SpeakEasy/Services/AdaptiveAPIService.swift` (`baseURL` in init)
+- If the Fly.io app name changes, both files must be updated
+
+## Devin Secrets Needed
+- `FLY_API_TOKEN`: Fly.io API token for deployment and management (org-level)

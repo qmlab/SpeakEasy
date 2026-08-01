@@ -25,7 +25,7 @@
     "boot": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362086/risingstar/photos/boot.png",
     "brain": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423256/risingstar/photos/brain.png",
     "bread": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777361992/risingstar/photos/bread.png",
-    "bridge": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423257/risingstar/photos/bridge.png",
+    "bridge": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783671071/risingstar/photos/bridge.png",
     "broccoli": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777361993/risingstar/photos/broccoli.png",
     "brush": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1778985554/risingstar/photos/brush.png",
     "bug": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777854479/risingstar/photos/bug.png",
@@ -141,7 +141,7 @@
     "phone": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777417574/risingstar/photos/phone.png",
     "piano": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362118/risingstar/photos/piano.png",
     "pizza": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777854453/risingstar/photos/pizza.png",
-    "plane": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362120/risingstar/photos/plane.png",
+    "plane": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783479629/risingstar/photos/plane.png",
     "planet": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423308/risingstar/photos/planet.png",
     "plate": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1781925215/risingstar/photos/plate.png",
     "probe": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423309/risingstar/photos/probe.png",
@@ -188,7 +188,7 @@
     "violin": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362072/risingstar/photos/violin.png",
     "volcano": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423324/risingstar/photos/volcano.png",
     "wall": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777671647/risingstar/photos/wall.png",
-    "water": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777417579/risingstar/photos/water.png",
+    "water": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785015866/risingstar/photos/water.png",
     "watermelon": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1778810678/risingstar/photos/watermelon.png",
     "web": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1778985541/risingstar/photos/web.png",
     "whale": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362077/risingstar/photos/whale.png",
@@ -207,6 +207,15 @@
     "airplane": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777671649/risingstar/photos/airplane.png",
     "chopsticks": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777671641/risingstar/photos/chopsticks.png",
     "snowman": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777671642/risingstar/photos/snowman.png",
-    "sofa": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777854462/risingstar/photos/sofa.png"
+    "sofa": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777854462/risingstar/photos/sofa.png",
+    "queen": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480921/risingstar/photos/queen.png",
+    "xylophone": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480923/risingstar/photos/xylophone.png",
+    "yoyo": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480925/risingstar/photos/yoyo.png",
+    "zebra": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1783480927/risingstar/photos/zebra.png",
+    "boy_running": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019457/risingstar/photos/boy_running.png",
+    "girl_reading": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019459/risingstar/photos/girl_reading.png",
+    "dog_playing_ball": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019463/risingstar/photos/dog_playing_ball.png",
+    "children_playing": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019465/risingstar/photos/children_playing.png",
+    "boy_eating_apple": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019467/risingstar/photos/boy_eating_apple.png"
   }
 }
