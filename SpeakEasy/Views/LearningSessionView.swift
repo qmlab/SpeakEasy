@@ -2488,35 +2488,35 @@ struct LearningSessionView: View {
                             imageType: .flashcard,
                             fallbackIcon: "square.dashed",
                             iconColor: dimension.color,
-                            size: 72
+                            size: 180
                         )
                     } else {
                         // Not yet shown — keep it hidden so upcoming cards
                         // aren't a giveaway.
                         ZStack {
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 16)
                                 .fill(Color(.tertiarySystemBackground))
                             Image(systemName: "questionmark")
-                                .font(.title2)
+                                .font(.largeTitle)
                                 .foregroundColor(.secondary.opacity(0.5))
                         }
-                        .frame(width: 72, height: 72)
+                        .frame(width: 180, height: 180)
                     }
                 }
-                .cornerRadius(12)
+                .cornerRadius(16)
 
                 if selected {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.title3)
+                        .font(.largeTitle)
                         .foregroundColor(.white)
                         .background(Circle().fill(dimension.color))
-                        .offset(x: 6, y: -6)
+                        .offset(x: 8, y: -8)
                 }
             }
-            .padding(4)
+            .padding(6)
             .background(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(selected ? dimension.color : Color.clear, lineWidth: 3)
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(selected ? dimension.color : Color.clear, lineWidth: 4)
             )
             .opacity(revealed ? 1 : 0.7)
         }
