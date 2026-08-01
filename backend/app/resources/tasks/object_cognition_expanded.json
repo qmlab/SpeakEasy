@@ -6048,47 +6048,49 @@
           ]
         },
         {
-          "instruction": "Tap every time you see Two circles in a row.",
+          "instruction": "Tap every circle you see.",
           "question_id": "Q143",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
-          "scaffolding_hint": "Say: \"Watch for two circles together\"",
-          "correct_answer": "2",
+          "scaffolding_hint": "Say: \"Watch for circles\"",
+          "correct_answer": "3",
           "image_hint": "circle",
-          "instruction_zh": "每次看到连续两个圆形就点击。",
-          "tap_count": 2,
+          "instruction_zh": "看到圆形就点击。",
+          "tap_count": 3,
           "animation_frames": [
             "ant",
-            "ant",
+            "circle",
             "triangle",
+            "circle",
             "square",
             "ant",
-            "ant",
-            "star",
-            "triangle"
+            "circle",
+            "star"
           ],
           "options": [
+            "Circle",
             "Ant",
-            "Square",
             "Triangle",
+            "Square",
             "Star"
           ],
           "slide_items": [
             "Ant",
-            "Ant",
+            "Circle",
             "Triangle",
+            "Circle",
             "Square",
             "Ant",
-            "Ant",
-            "Star",
-            "Triangle"
+            "Circle",
+            "Star"
           ],
-          "tap_target": "Circle-Circle pair",
+          "tap_target": "Circle",
           "no_tap_target": "Others",
           "options_zh": [
+            "圆形",
             "蚂蚁",
-            "正方形",
             "三角形",
+            "正方形",
             "星星"
           ]
         },
@@ -7845,7 +7847,7 @@
             "milk",
             "hat",
             "glove",
-            "wig"
+            "shirt"
           ],
           "options": [
             "Candies",
@@ -7853,7 +7855,7 @@
             "Milk",
             "Hat",
             "Glove",
-            "Wig"
+            "Shirt"
           ],
           "slide_items": [
             "Candies",
@@ -7861,9 +7863,9 @@
             "Milk",
             "Hat",
             "Glove",
-            "Wig"
+            "Shirt"
           ],
-          "tap_target": "Hat, Glove, Wig",
+          "tap_target": "Hat, Glove, Shirt",
           "no_tap_target": "Candies, Penguin, Milk",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
@@ -7872,7 +7874,7 @@
             "牛奶",
             "帽子",
             "手套",
-            "假发"
+            "衬衫"
           ]
         },
         {
@@ -8031,7 +8033,7 @@
             "apple",
             "hammer",
             "hat",
-            "wig"
+            "shirt"
           ],
           "options": [
             "Jacket",
@@ -8039,7 +8041,7 @@
             "Apple",
             "Hammer",
             "Hat",
-            "Wig"
+            "Shirt"
           ],
           "slide_items": [
             "Jacket",
@@ -8047,9 +8049,9 @@
             "Apple",
             "Hammer",
             "Hat",
-            "Wig"
+            "Shirt"
           ],
-          "tap_target": "Jacket, Wig, Hat",
+          "tap_target": "Jacket, Shirt, Hat",
           "no_tap_target": "Hammer, Gear, Apple",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
@@ -8058,7 +8060,7 @@
             "苹果",
             "锤子",
             "帽子",
-            "假发"
+            "衬衫"
           ]
         },
         {
@@ -8343,7 +8345,7 @@
           "tap_count": 3,
           "animation_frames": [
             "bread",
-            "wig",
+            "shoe",
             "carrot",
             "shirt",
             "boot",
@@ -8351,7 +8353,7 @@
           ],
           "options": [
             "Bread",
-            "Wig",
+            "Shoe",
             "Carrot",
             "Shirt",
             "Boot",
@@ -8359,18 +8361,18 @@
           ],
           "slide_items": [
             "Bread",
-            "Wig",
+            "Shoe",
             "Carrot",
             "Shirt",
             "Boot",
             "Fish"
           ],
-          "tap_target": "Wig, Boot, Shirt",
+          "tap_target": "Shoe, Boot, Shirt",
           "no_tap_target": "Bread, Carrot, Fish",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
             "面包",
-            "假发",
+            "鞋子",
             "胡萝卜",
             "衬衫",
             "靴子",
@@ -8988,7 +8990,7 @@
             "rabbit",
             "sock",
             "shoe",
-            "wig"
+            "shirt"
           ],
           "options": [
             "Lever",
@@ -8996,7 +8998,7 @@
             "Rabbit",
             "Sock",
             "Shoe",
-            "Wig"
+            "Shirt"
           ],
           "slide_items": [
             "Lever",
@@ -9004,9 +9006,9 @@
             "Rabbit",
             "Sock",
             "Shoe",
-            "Wig"
+            "Shirt"
           ],
-          "tap_target": "Wig, Shoe, Sock",
+          "tap_target": "Shirt, Shoe, Sock",
           "no_tap_target": "Rabbit, Lever, Carrot",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
@@ -9015,7 +9017,7 @@
             "兔子",
             "袜子",
             "鞋子",
-            "假发"
+            "衬衫"
           ]
         },
         {
@@ -12704,7 +12706,7 @@
           "animation_frames": [
             "pear",
             "hat",
-            "wig",
+            "shirt",
             "lever",
             "pendulum",
             "jacket"
@@ -12712,7 +12714,7 @@
           "options": [
             "Pear",
             "Hat",
-            "Wig",
+            "Shirt",
             "Lever",
             "Pendulum",
             "Jacket"
@@ -12720,18 +12722,18 @@
           "slide_items": [
             "Pear",
             "Hat",
-            "Wig",
+            "Shirt",
             "Lever",
             "Pendulum",
             "Jacket"
           ],
-          "tap_target": "Jacket, Wig, Hat",
+          "tap_target": "Jacket, Shirt, Hat",
           "no_tap_target": "Pear, Lever, Pendulum",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
             "梨",
             "帽子",
-            "假发",
+            "衬衫",
             "杠杆",
             "钟摆",
             "夹克"
@@ -21164,7 +21166,7 @@
           "animation_frames": [
             "carrot",
             "crab",
-            "wig",
+            "shirt",
             "boot",
             "cookie",
             "jacket"
@@ -21172,7 +21174,7 @@
           "options": [
             "Carrot",
             "Crab",
-            "Wig",
+            "Shirt",
             "Boot",
             "Cookie",
             "Jacket"
@@ -21180,18 +21182,18 @@
           "slide_items": [
             "Carrot",
             "Crab",
-            "Wig",
+            "Shirt",
             "Boot",
             "Cookie",
             "Jacket"
           ],
-          "tap_target": "Boot, Jacket, Wig",
+          "tap_target": "Boot, Jacket, Shirt",
           "no_tap_target": "Crab, Carrot, Cookie",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
             "胡萝卜",
             "螃蟹",
-            "假发",
+            "衬衫",
             "靴子",
             "饼干",
             "夹克"
@@ -22370,7 +22372,7 @@
           "image_hint": "hat",
           "tap_count": 3,
           "animation_frames": [
-            "wig",
+            "boot",
             "shirt",
             "hat",
             "jellyfish",
@@ -22378,7 +22380,7 @@
             "hammer"
           ],
           "options": [
-            "Wig",
+            "Boot",
             "Shirt",
             "Hat",
             "Jellyfish",
@@ -22386,18 +22388,18 @@
             "Hammer"
           ],
           "slide_items": [
-            "Wig",
+            "Boot",
             "Shirt",
             "Hat",
             "Jellyfish",
             "Screwdriver",
             "Hammer"
           ],
-          "tap_target": "Hat, Wig, Shirt",
+          "tap_target": "Hat, Boot, Shirt",
           "no_tap_target": "Hammer, Screwdriver, Jellyfish",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
-            "假发",
+            "靴子",
             "衬衫",
             "帽子",
             "水母",
@@ -25132,7 +25134,7 @@
           "image_hint": "jacket",
           "tap_count": 3,
           "animation_frames": [
-            "wig",
+            "shirt",
             "apple",
             "sandal",
             "jacket",
@@ -25140,7 +25142,7 @@
             "orange"
           ],
           "options": [
-            "Wig",
+            "Shirt",
             "Apple",
             "Sandal",
             "Jacket",
@@ -25148,18 +25150,18 @@
             "Orange"
           ],
           "slide_items": [
-            "Wig",
+            "Shirt",
             "Apple",
             "Sandal",
             "Jacket",
             "Worm",
             "Orange"
           ],
-          "tap_target": "Jacket, Wig, Sandal",
+          "tap_target": "Jacket, Shirt, Sandal",
           "no_tap_target": "Orange, Apple, Worm",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
-            "假发",
+            "衬衫",
             "苹果",
             "凉鞋",
             "夹克",
@@ -25737,7 +25739,7 @@
           "tap_count": 3,
           "animation_frames": [
             "jellyfish",
-            "wig",
+            "shirt",
             "hat",
             "glove",
             "screwdriver",
@@ -25745,7 +25747,7 @@
           ],
           "options": [
             "Jellyfish",
-            "Wig",
+            "Shirt",
             "Hat",
             "Glove",
             "Screwdriver",
@@ -25753,18 +25755,18 @@
           ],
           "slide_items": [
             "Jellyfish",
-            "Wig",
+            "Shirt",
             "Hat",
             "Glove",
             "Screwdriver",
             "Apple"
           ],
-          "tap_target": "Wig, Hat, Glove",
+          "tap_target": "Shirt, Hat, Glove",
           "no_tap_target": "Jellyfish, Screwdriver, Apple",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
             "水母",
-            "假发",
+            "衬衫",
             "帽子",
             "手套",
             "螺丝刀",
@@ -30080,7 +30082,7 @@
             "sock",
             "sandal",
             "jellyfish",
-            "wig",
+            "shirt",
             "pulley",
             "hammer"
           ],
@@ -30088,7 +30090,7 @@
             "Sock",
             "Sandal",
             "Jellyfish",
-            "Wig",
+            "Shirt",
             "Pulley",
             "Hammer"
           ],
@@ -30096,18 +30098,18 @@
             "Sock",
             "Sandal",
             "Jellyfish",
-            "Wig",
+            "Shirt",
             "Pulley",
             "Hammer"
           ],
-          "tap_target": "Wig, Sandal, Sock",
+          "tap_target": "Shirt, Sandal, Sock",
           "no_tap_target": "Jellyfish, Hammer, Pulley",
           "instruction_zh": "看到衣服就点击。",
           "options_zh": [
             "袜子",
             "凉鞋",
             "水母",
-            "假发",
+            "衬衫",
             "滑轮",
             "锤子"
           ]
@@ -33831,24 +33833,25 @@
           ]
         },
         {
-          "instruction": "Watch the letters! Tap every time you see A, B, C appear in a row.",
+          "instruction": "Tap every time you see the letter B.",
           "question_id": "Q150",
           "source_test": "Brown ADD",
           "sub_domain": "Sustained Attention",
-          "scaffolding_hint": "Say: \"You need three specific items in a row\"",
-          "correct_answer": "1",
-          "image_hint": "book",
-          "instruction_zh": "看字母序列。当A-B-C连续出现时点击。",
-          "tap_count": 1,
+          "scaffolding_hint": "Say: \"Watch for the letter B\"",
+          "correct_answer": "3",
+          "image_hint": "letter_b",
+          "instruction_zh": "每次看到字母 B 就点击。",
+          "tap_count": 3,
           "animation_frames": [
             "letter_b",
             "letter_a",
             "letter_c",
-            "letter_a",
             "letter_b",
+            "letter_a",
             "letter_c",
             "letter_b"
-          ]
+          ],
+          "tap_target": "letter_b"
         },
         {
           "instruction": "Remember: 'The zoo has 5 elephants, 3 penguins, and 2 eagles.' How many animals have 4 legs?",
