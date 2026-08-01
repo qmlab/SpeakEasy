@@ -117,7 +117,7 @@
     "lock": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1781925227/risingstar/photos/lock.png",
     "log": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423295/risingstar/photos/log.png",
     "lung": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423295/risingstar/photos/lung.png",
-    "magnifier": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1781925202/risingstar/photos/magnifier.png",
+    "magnifier": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785622376/risingstar/photos/magnifier.png",
     "map": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423297/risingstar/photos/map.png",
     "mat": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423298/risingstar/photos/mat.png",
     "meridian": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423299/risingstar/photos/meridian.png",
@@ -192,7 +192,7 @@
     "watermelon": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1778810678/risingstar/photos/watermelon.png",
     "web": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1778985541/risingstar/photos/web.png",
     "whale": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777362077/risingstar/photos/whale.png",
-    "wig": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423328/risingstar/photos/wig.png",
+    "wig": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785621939/risingstar/photos/wig.png",
     "wind": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777423329/risingstar/photos/wind.png",
     "worm": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777446524/risingstar/photos/worm.png",
     "wrench": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1777854519/risingstar/photos/wrench.png",
@@ -216,6 +216,7 @@
     "girl_reading": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019459/risingstar/photos/girl_reading.png",
     "dog_playing_ball": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019463/risingstar/photos/dog_playing_ball.png",
     "children_playing": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019465/risingstar/photos/children_playing.png",
-    "boy_eating_apple": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019467/risingstar/photos/boy_eating_apple.png"
+    "boy_eating_apple": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785019467/risingstar/photos/boy_eating_apple.png",
+    "yellow": "https://res.cloudinary.com/dgpir7tqk/image/upload/v1785622266/risingstar/photos/yellow.png"
   }
 }

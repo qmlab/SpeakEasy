@@ -346,6 +346,28 @@ class AdaptiveEngine:
     # Number of intervening tasks before an incorrectly-answered question
     # can reappear.
     INCORRECT_COOLDOWN = 3
+    # How many recently-served tasks to guard against repeating (by exact id
+    # AND by identical content) so the child never sees the same question
+    # back-to-back or in the near term.
+    RECENT_WINDOW = 5
+
+    @staticmethod
+    def _task_signature(task: AdaptiveTask) -> str:
+        """A content fingerprint used to detect tasks that are effectively the
+        same question even when stored as distinct rows (e.g. duplicated during
+        seeding).  Combines task type, instruction, options and frames."""
+        content = task.content if isinstance(task.content, dict) else {}
+        instruction = (
+            content.get("instruction")
+            or content.get("instruction_text")
+            or content.get("question")
+            or ""
+        ).strip().lower()
+        options = content.get("options") or []
+        frames = content.get("animation_frames") or content.get("frames") or []
+        options_key = ",".join(sorted(str(o).lower() for o in options))
+        frames_key = ",".join(str(f).lower() for f in frames)
+        return f"{task.task_type}|{instruction}|{options_key}|{frames_key}"
 
     def _get_exclude_task_ids(self, session_id: str) -> list[str]:
         """Build the exclusion set for task selection."""
@@ -386,6 +408,38 @@ class AdaptiveEngine:
         for attempt in session_attempts:
             if attempt.task_id and not attempt.is_correct:
                 exclude.add(attempt.task_id)
+
+        # 3) Never repeat a task — by exact id OR by identical content — that
+        #    was served within the recent window.  This prevents the same
+        #    question (or a duplicate row with identical content) from showing
+        #    up back-to-back or in quick succession.
+        recent_attempts = (
+            self.db.query(TaskAttempt)
+            .filter(TaskAttempt.session_id == session_id)
+            .order_by(desc(TaskAttempt.created_at))
+            .limit(self.RECENT_WINDOW)
+            .all()
+        )
+        recent_ids = [a.task_id for a in recent_attempts if a.task_id]
+        exclude.update(recent_ids)
+
+        if recent_ids:
+            recent_tasks = (
+                self.db.query(AdaptiveTask)
+                .filter(AdaptiveTask.id.in_(recent_ids))
+                .all()
+            )
+            recent_sigs = {self._task_signature(t) for t in recent_tasks}
+            recent_dims = {t.dimension for t in recent_tasks}
+            if recent_sigs and recent_dims:
+                siblings = (
+                    self.db.query(AdaptiveTask)
+                    .filter(AdaptiveTask.dimension.in_(recent_dims))
+                    .all()
+                )
+                for t in siblings:
+                    if self._task_signature(t) in recent_sigs:
+                        exclude.add(t.id)
 
         return list(exclude)
 

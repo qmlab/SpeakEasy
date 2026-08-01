@@ -7,6 +7,7 @@ from app.models.adaptive import (
     SessionStatus,
     PromptLevel,
 )
+from app.models.adaptive import AdaptiveTask
 from app.services.adaptive_engine import (
     AdaptiveEngine,
     CONSECUTIVE_FAIL_LIMIT,
@@ -448,3 +449,66 @@ class TestAssessment:
         )
         assert profile.assessed is True
         assert profile.level == 1
+
+
+class TestDuplicatePrevention:
+    """A completed task must not reappear immediately or in quick succession,
+    and identical-content tasks (even distinct rows) are also suppressed."""
+
+    DIM = DevelopmentalDimension.OBJECT_COGNITION.value
+
+    def _make_task(self, db, content, task_type="identify"):
+        task = AdaptiveTask(
+            dimension=self.DIM,
+            level=0,
+            task_type=task_type,
+            modalities=["touch"],
+            content=content,
+            is_assessment=False,
+        )
+        db.add(task)
+        db.commit()
+        db.refresh(task)
+        return task
+
+    def test_task_signature_matches_identical_content(self, db):
+        engine = AdaptiveEngine(db)
+        content = {"instruction": "Tap the dog.", "options": ["Dog", "Cat"]}
+        a = self._make_task(db, dict(content))
+        b = self._make_task(db, dict(content))
+        c = self._make_task(db, {"instruction": "Tap the cat.", "options": ["Dog", "Cat"]})
+        assert engine._task_signature(a) == engine._task_signature(b)
+        assert engine._task_signature(a) != engine._task_signature(c)
+
+    def test_no_immediate_repeat(self, db, player):
+        engine = AdaptiveEngine(db)
+        self._make_task(db, {"instruction": "A", "options": ["1", "2"]})
+        self._make_task(db, {"instruction": "B", "options": ["3", "4"]})
+        session = engine.start_session(player.id, "practice", self.DIM)
+        first = engine.get_next_task(session.id, player.id, self.DIM)
+        engine.process_attempt(session.id, first["task_id"], player.id, is_correct=False)
+        second = engine.get_next_task(session.id, player.id, self.DIM)
+        assert second["task_id"] != first["task_id"]
+
+    def test_identical_content_task_excluded(self, db, player):
+        engine = AdaptiveEngine(db)
+        content = {"instruction": "Tap the dog.", "options": ["Dog", "Cat"]}
+        t1 = self._make_task(db, dict(content))
+        t2 = self._make_task(db, dict(content))  # duplicate content, different id
+        t3 = self._make_task(db, {"instruction": "Tap the cat.", "options": ["Dog", "Cat"]})
+        session = engine.start_session(player.id, "practice", self.DIM)
+        engine.process_attempt(session.id, t1.id, player.id, is_correct=False)
+        exclude = set(engine._get_exclude_task_ids(session.id))
+        assert t1.id in exclude
+        assert t2.id in exclude
+        assert t3.id not in exclude
+
+    def test_fallback_when_pool_exhausted(self, db, player):
+        engine = AdaptiveEngine(db)
+        self._make_task(db, {"instruction": "only", "options": ["1", "2"]})
+        session = engine.start_session(player.id, "practice", self.DIM)
+        first = engine.get_next_task(session.id, player.id, self.DIM)
+        engine.process_attempt(session.id, first["task_id"], player.id, is_correct=False)
+        # With only one task, selection must degrade gracefully (not dead-end).
+        second = engine.get_next_task(session.id, player.id, self.DIM)
+        assert second is not None
